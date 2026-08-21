@@ -61,46 +61,20 @@ function HeaderContent() {
   };
 
   return (
-    <header className="site-header" style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      background: 'rgba(255, 255, 255, 0.85)',
-      backdropFilter: 'blur(24px) saturate(180%)',
-      WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-      borderBottom: '1px solid rgba(0, 102, 51, 0.12)',
-      boxShadow: '0 4px 24px rgba(0, 102, 51, 0.05)',
-      transform: 'translate3d(0, 0, 0)',
-    }}>
-      <div className="container site-header-inner" style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: '72px',
-        position: 'relative',
-      }}>
+    <header className="site-header">
+      <div className="site-header-inner">
         {/* Left: Brand Logo */}
         <Link href="/" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
+          gap: '8px',
           textDecoration: 'none',
           zIndex: 2,
           flexShrink: 0,
+          minWidth: 0,
         }}>
           {/* 3D Liquid Glass AP Icon */}
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            boxShadow: '0 4px 16px rgba(0, 102, 51, 0.35), 0 0 0 1.5px rgba(255, 255, 255, 0.4)',
-            flexShrink: 0,
-            background: '#02140a',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+          <div className="header-logo-icon">
             <img 
               src="/logo.png?v=ap2" 
               alt="Anime Pakistan (AP) Logo" 
@@ -108,18 +82,18 @@ function HeaderContent() {
             />
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
               <span style={{
-                fontSize: '1.15rem',
+                fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
                 color: 'var(--color-primary)',
               }}>
                 ANIME
               </span>
-              <span style={{
-                fontSize: '1.15rem',
+              <span className="brand-pakistan-text" style={{
+                fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
                 fontWeight: 900,
                 color: 'var(--text-primary)',
               }}>
@@ -127,24 +101,25 @@ function HeaderContent() {
               </span>
               {/* AP Badge with A Green, P White */}
               <span style={{
-                fontSize: '0.68rem',
+                fontSize: '0.62rem',
                 fontWeight: 900,
-                padding: '1px 6px',
-                borderRadius: '5px',
+                padding: '1px 5px',
+                borderRadius: '4px',
                 background: '#02180d',
                 border: '1px solid rgba(0, 204, 102, 0.4)',
                 boxShadow: '0 2px 6px rgba(0, 102, 51, 0.25)',
-                marginLeft: '3px',
+                marginLeft: '2px',
                 display: 'inline-flex',
                 alignItems: 'center',
                 letterSpacing: '0.04em',
+                flexShrink: 0,
               }}>
                 <span style={{ color: '#00ff66' }}>A</span>
                 <span style={{ color: '#ffffff' }}>P</span>
               </span>
             </div>
-            <span className="brand-subtitle" style={{
-              fontSize: '0.65rem',
+            <span className="brand-subtitle-text" style={{
+              fontSize: '0.62rem',
               color: 'var(--text-muted)',
               fontWeight: 600,
               letterSpacing: '0.02em',
@@ -156,12 +131,7 @@ function HeaderContent() {
         </Link>
 
         {/* Center: Desktop Navigation Bar in Center */}
-        <nav className="desktop-center-nav" style={{
-          position: 'absolute',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 1,
-        }}>
+        <nav className="desktop-center-nav">
           <Link 
             href="/" 
             onClick={() => sound.playTabSwitch()}
@@ -200,10 +170,11 @@ function HeaderContent() {
         </nav>
 
         {/* Right: Controls & Language Switcher */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2, flexShrink: 0 }}>
+        <div className="header-right-controls">
           {/* UI Sound Mute/Unmute Toggle */}
           <button
             type="button"
+            className="header-action-btn"
             onClick={() => {
               const nextState = !isSoundOn;
               setIsSoundOn(nextState);
@@ -211,24 +182,15 @@ function HeaderContent() {
               if (nextState) sound.playButton();
             }}
             style={{
-              width: '34px',
-              height: '34px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
               background: isSoundOn ? 'rgba(0, 102, 51, 0.1)' : '#ffffff',
               border: isSoundOn ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
               color: isSoundOn ? 'var(--color-primary)' : 'var(--text-muted)',
               boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              flexShrink: 0,
             }}
             title={isSoundOn ? 'UI Audio: ON (Click to Mute)' : 'UI Audio: OFF (Click to Unmute)'}
             aria-label="Toggle UI Sound"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
               {isSoundOn ? 'volume_up' : 'volume_off'}
             </span>
           </button>
@@ -239,9 +201,10 @@ function HeaderContent() {
             alignItems: 'center',
             background: 'rgba(0, 102, 51, 0.08)',
             padding: '2px',
-            borderRadius: '9px',
+            borderRadius: '8px',
             border: '1px solid var(--glass-border)',
             gap: '2px',
+            flexShrink: 0,
           }}>
             <button
               onClick={() => {
@@ -249,13 +212,13 @@ function HeaderContent() {
                 sound.playTabSwitch();
               }}
               style={{
-                padding: '4px 8px',
-                borderRadius: '6px',
+                padding: '3px 6px',
+                borderRadius: '5px',
                 border: 'none',
                 background: language === 'ur' ? 'var(--color-primary)' : 'transparent',
                 color: language === 'ur' ? '#ffffff' : 'var(--text-secondary)',
                 fontWeight: 800,
-                fontSize: '0.72rem',
+                fontSize: '0.68rem',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
               }}
@@ -269,13 +232,13 @@ function HeaderContent() {
                 sound.playTabSwitch();
               }}
               style={{
-                padding: '4px 8px',
-                borderRadius: '6px',
+                padding: '3px 6px',
+                borderRadius: '5px',
                 border: 'none',
                 background: language === 'en' ? 'var(--color-primary)' : 'transparent',
                 color: language === 'en' ? '#ffffff' : 'var(--text-secondary)',
                 fontWeight: 800,
-                fontSize: '0.72rem',
+                fontSize: '0.68rem',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
               }}
@@ -288,29 +251,21 @@ function HeaderContent() {
           {/* Quick Search Circular Icon Button */}
           <button
             type="button"
+            className="header-action-btn"
             onClick={() => {
               setIsSearchOpen(true);
               sound.playButton();
             }}
             style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
               background: '#ffffff',
               border: '1.5px solid var(--glass-border)',
               color: 'var(--color-primary)',
               boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-              transition: 'all 0.2s ease',
-              flexShrink: 0,
-              cursor: 'pointer',
             }}
             aria-label="Search Anime"
             title="Search Anime"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>search</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>search</span>
           </button>
         </div>
       </div>
