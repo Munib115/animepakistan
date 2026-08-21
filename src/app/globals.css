@@ -60,6 +60,42 @@
   --sar: env(safe-area-inset-right, 0px);
 }
 
+/* --- EYE COMFORT BLUE-LIGHT & NIGHT MODES --- */
+html.eye-comfort-warm {
+  filter: sepia(0.24) hue-rotate(-10deg) saturate(0.92) brightness(0.97);
+  transition: filter 0.3s ease;
+}
+
+html.eye-comfort-night {
+  --bg-primary: #020b05;
+  --bg-secondary: #05140a;
+  --bg-tertiary: #0a2012;
+  --text-primary: #e6f7ec;
+  --text-secondary: #a3ccb4;
+  --text-muted: #6b8f7b;
+  --glass-bg: rgba(5, 20, 10, 0.88);
+  --glass-bg-hover: rgba(10, 32, 18, 0.98);
+  --glass-border: rgba(0, 204, 102, 0.22);
+}
+
+html.eye-comfort-night .site-header {
+  background: rgba(2, 11, 5, 0.92) !important;
+  border-bottom-color: rgba(0, 204, 102, 0.2) !important;
+}
+
+html.eye-comfort-night .glass-panel,
+html.eye-comfort-night .glass-card,
+html.eye-comfort-night .glass-btn-secondary {
+  background: #05140a !important;
+  color: #e6f7ec !important;
+  border-color: rgba(0, 204, 102, 0.2) !important;
+}
+
+html.eye-comfort-night .apple-liquid-glass-dock {
+  background: rgba(5, 20, 10, 0.88) !important;
+  border-color: rgba(0, 204, 102, 0.25) !important;
+}
+
 /* --- BASE & HARDWARE ACCELERATION STYLES --- */
 *, *::before, *::after {
   box-sizing: border-box;

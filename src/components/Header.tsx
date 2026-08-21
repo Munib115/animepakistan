@@ -10,6 +10,7 @@ import { sound } from '@/lib/soundEngine';
 function HeaderContent() {
   const { language, setLanguage, t } = useLanguage();
   const [isSoundOn, setIsSoundOn] = useState(true);
+  const [eyeComfort, setEyeComfort] = useState<'off' | 'warm' | 'night'>('off');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentType = searchParams.get('type');
@@ -18,6 +19,34 @@ function HeaderContent() {
   const [results, setResults] = useState<Array<{ slug: string; type: 'movie' | 'series'; title: string; poster: string; audioLanguages: string[] }>>([]);
   const [isSearching, setIsSearching] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Initialize and apply Eye Comfort mode on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('ap_eye_comfort') as 'off' | 'warm' | 'night';
+      if (saved && (saved === 'warm' || saved === 'night')) {
+        setEyeComfort(saved);
+        if (saved === 'warm') document.documentElement.classList.add('eye-comfort-warm');
+        if (saved === 'night') document.documentElement.classList.add('eye-comfort-night');
+      }
+    } catch (e) {}
+  }, []);
+
+  const cycleEyeComfort = () => {
+    sound.playTabSwitch();
+    let nextMode: 'off' | 'warm' | 'night' = 'off';
+    if (eyeComfort === 'off') nextMode = 'warm';
+    else if (eyeComfort === 'warm') nextMode = 'night';
+    else nextMode = 'off';
+
+    setEyeComfort(nextMode);
+    document.documentElement.classList.remove('eye-comfort-warm', 'eye-comfort-night');
+    if (nextMode === 'warm') document.documentElement.classList.add('eye-comfort-warm');
+    if (nextMode === 'night') document.documentElement.classList.add('eye-comfort-night');
+    try {
+      localStorage.setItem('ap_eye_comfort', nextMode);
+    } catch (e) {}
+  };
 
   const isHome = pathname === '/' && !currentType;
   const isBrowse = pathname === '/browse' && !currentType;
@@ -192,6 +221,46 @@ function HeaderContent() {
           >
             <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
               {isSoundOn ? 'volume_up' : 'volume_off'}
+            </span>
+          </button>
+
+          {/* Professional Eye Comfort Mode Toggle (No AI Icons - Clean Material Eye) */}
+          <button
+            type="button"
+            className="header-action-btn"
+            onClick={cycleEyeComfort}
+            style={{
+              background: eyeComfort === 'warm' 
+                ? 'rgba(217, 119, 6, 0.15)' 
+                : eyeComfort === 'night' 
+                ? 'rgba(0, 204, 102, 0.15)' 
+                : '#ffffff',
+              border: eyeComfort === 'warm' 
+                ? '1.5px solid #d97706' 
+                : eyeComfort === 'night' 
+                ? '1.5px solid var(--color-glow)' 
+                : '1px solid var(--glass-border)',
+              color: eyeComfort === 'warm' 
+                ? '#d97706' 
+                : eyeComfort === 'night' 
+                ? '#00aa55' 
+                : 'var(--text-muted)',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            title={
+              eyeComfort === 'warm'
+                ? 'Eye Comfort: Amber Shield (Click for Night OLED)'
+                : eyeComfort === 'night'
+                ? 'Eye Comfort: Night OLED (Click for Normal)'
+                : 'Eye Comfort: Off (Click for Warm Amber Filter)'
+            }
+            aria-label="Toggle Eye Comfort Mode"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
+              {eyeComfort === 'night' ? 'bedtime' : 'visibility'}
             </span>
           </button>
 
