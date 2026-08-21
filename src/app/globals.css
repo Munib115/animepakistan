@@ -79,8 +79,16 @@ html.eye-comfort-night {
 }
 
 html.eye-comfort-night .site-header {
-  background: rgba(2, 11, 5, 0.92) !important;
-  border-bottom-color: rgba(0, 204, 102, 0.2) !important;
+  background: transparent !important;
+}
+
+html.eye-comfort-night .site-header-inner {
+  background: rgba(3, 16, 8, 0.88) !important;
+  border-color: rgba(0, 204, 102, 0.25) !important;
+  box-shadow: 
+    0 12px 32px -6px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(0, 204, 102, 0.2) !important;
 }
 
 html.eye-comfort-night .glass-panel,
@@ -294,40 +302,53 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* --- SITE HEADER & MOBILE RESPONSIVE NAVBAR --- */
+/* --- SITE HEADER: FLOATING CURVED LIQUID GLASS ISLAND --- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
   width: 100%;
-  padding: 0;
+  padding: 8px 12px 6px;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(0, 102, 51, 0.12);
-  box-shadow: 0 4px 16px rgba(0, 70, 35, 0.05);
+  background: transparent;
+  pointer-events: none;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
 
 .site-header-inner {
+  pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 56px;
   padding: 0 14px;
-  max-width: 1380px;
+  max-width: 1240px;
   margin: 0 auto;
-  gap: 8px;
+  gap: 10px;
   box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+  box-shadow: 
+    0 12px 32px -6px rgba(0, 70, 35, 0.14),
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(0, 102, 51, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (min-width: 768px) {
+  .site-header {
+    padding: 12px 24px 8px;
+  }
+  
   .site-header-inner {
-    height: 70px;
-    padding: 0 24px;
-    gap: 16px;
+    height: 66px;
+    padding: 0 22px;
+    gap: 18px;
   }
 }
 
