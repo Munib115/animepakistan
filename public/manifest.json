@@ -1,12 +1,15 @@
 {
-  "name": "Anime Pakistan - پاک Anime",
-  "short_name": "AP Anime",
+  "id": "/",
+  "name": "Anime Pakistan",
+  "short_name": "Anime Pakistan",
   "description": "Watch your favorite anime series and movies in Urdu & Hindi dubbed in Full HD 1080p.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#020c06",
   "theme_color": "#006633",
   "orientation": "any",
+  "prefer_related_applications": false,
   "categories": ["entertainment", "video"],
   "icons": [
     {
@@ -32,6 +35,23 @@
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse Catalog",
+      "url": "/browse",
+      "description": "Explore all anime series and movies"
+    },
+    {
+      "name": "Anime Series",
+      "url": "/browse?type=series",
+      "description": "Browse Urdu dubbed anime series"
+    },
+    {
+      "name": "Anime Movies",
+      "url": "/browse?type=movies",
+      "description": "Browse Urdu dubbed anime movies"
     }
   ]
 }

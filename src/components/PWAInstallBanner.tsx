@@ -9,12 +9,18 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
 }
 
+declare global {
+  interface Window {
+    _pwaPrompt?: BeforeInstallPromptEvent | null;
+  }
+}
+
 export default function PWAInstallBanner() {
   const { language } = useLanguage();
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showBanner, setShowBanner] = useState(false);
-  const [showIosModal, setShowIosModal] = useState(false);
-  const [isIos, setIsIos] = useState(false);
+  const [showGuideModal, setShowGuideModal] = useState(false);
+  const [platformType, setPlatformType] = useState<'ios' | 'android' | 'desktop'>('desktop');
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -26,32 +32,38 @@ export default function PWAInstallBanner() {
 
     if (isStandalone) return;
 
-    // Check if dismissed previously in the last 7 days
-    const dismissedTime = localStorage.getItem('ap_pwa_banner_dismissed');
-    if (dismissedTime && Date.now() - parseInt(dismissedTime, 10) < 7 * 24 * 60 * 60 * 1000) {
-      return;
+    // Check platform
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(userAgent)) {
+      setPlatformType('ios');
+    } else if (/android/.test(userAgent)) {
+      setPlatformType('android');
+    } else {
+      setPlatformType('desktop');
     }
 
-    // Detect iOS
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    const isAppleDevice = /iphone|ipad|ipod/.test(userAgent);
-    setIsIos(isAppleDevice);
+    // Check if globally captured or attach listener
+    if (window._pwaPrompt) {
+      setDeferredPrompt(window._pwaPrompt);
+      setShowBanner(true);
+    }
 
-    // Listen for Chrome / Android / Desktop PWA install prompt
     const handleBeforeInstall = (e: Event) => {
       e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      const promptEvent = e as BeforeInstallPromptEvent;
+      window._pwaPrompt = promptEvent;
+      setDeferredPrompt(promptEvent);
       setShowBanner(true);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstall);
 
-    // For iOS Safari or when prompt is not immediately fired, show banner after 2.5s on first visit
+    // Show banner after 1.8s
     const timer = setTimeout(() => {
       if (!isStandalone) {
         setShowBanner(true);
       }
-    }, 2500);
+    }, 1800);
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
@@ -62,18 +74,23 @@ export default function PWAInstallBanner() {
   const handleInstallClick = async () => {
     sound.playButton();
 
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      if (choice.outcome === 'accepted') {
-        setShowBanner(false);
-        setDeferredPrompt(null);
+    const activePrompt = deferredPrompt || (typeof window !== 'undefined' ? window._pwaPrompt : null);
+
+    if (activePrompt) {
+      try {
+        await activePrompt.prompt();
+        const choice = await activePrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+          setShowBanner(false);
+          setDeferredPrompt(null);
+          if (typeof window !== 'undefined') window._pwaPrompt = null;
+        }
+      } catch (err) {
+        setShowGuideModal(true);
       }
-    } else if (isIos) {
-      setShowIosModal(true);
     } else {
-      // General instructions fallback
-      alert('To install Anime Pakistan, tap your browser menu (⋮) and choose "Install App" or "Add to Home Screen".');
+      // Open device-specific visual install guide modal
+      setShowGuideModal(true);
     }
   };
 
@@ -230,18 +247,18 @@ export default function PWAInstallBanner() {
         </div>
       </div>
 
-      {/* iOS Install Helper Modal */}
-      {showIosModal && (
+      {/* Universal Step-by-Step Install Guide Modal */}
+      {showGuideModal && (
         <div 
-          onClick={() => setShowIosModal(false)}
+          onClick={() => setShowGuideModal(false)}
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: 999999,
             background: 'rgba(0, 0, 0, 0.65)',
-            backdropFilter: 'blur(8px)',
+            backdropFilter: 'blur(10px)',
             display: 'flex',
-            alignItems: 'flex-end',
+            alignItems: 'center',
             justifyContent: 'center',
             padding: '16px',
           }}
@@ -252,11 +269,12 @@ export default function PWAInstallBanner() {
               background: '#ffffff',
               borderRadius: '24px',
               padding: '24px 20px',
-              maxWidth: '420px',
+              maxWidth: '440px',
               width: '100%',
               boxShadow: '0 24px 60px rgba(0,0,0,0.3)',
               textAlign: 'center',
               animation: 'modalSlideUp 0.3s ease-out',
+              direction: isUrdu ? 'rtl' : 'ltr',
             }}
           >
             <div style={{
@@ -272,21 +290,33 @@ export default function PWAInstallBanner() {
             </div>
 
             <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '8px' }}>
-              Install on iPhone / iPad
+              {isUrdu ? 'اینیمے پاکستان ایپ انسٹال کریں' : 'Install Anime Pakistan App'}
             </h3>
-            
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '20px' }}>
-              1. Tap the <strong>Share</strong> button <span className="material-symbols-outlined" style={{ fontSize: '16px', verticalAlign: 'middle' }}>ios_share</span> in Safari.<br />
-              2. Scroll down and tap <strong>Add to Home Screen</strong> <span className="material-symbols-outlined" style={{ fontSize: '16px', verticalAlign: 'middle' }}>add_box</span>.
-            </p>
+
+            {platformType === 'ios' ? (
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '20px', textAlign: isUrdu ? 'right' : 'left' }}>
+                <p>1. سفاری براؤزر کے نیچے <strong>Share</strong> بٹن <span className="material-symbols-outlined" style={{ fontSize: '16px', verticalAlign: 'middle' }}>ios_share</span> دبائیں۔</p>
+                <p>2. فہرست میں نیچے سکرول کر کے <strong>Add to Home Screen</strong> <span className="material-symbols-outlined" style={{ fontSize: '16px', verticalAlign: 'middle' }}>add_box</span> منتخب کریں۔</p>
+              </div>
+            ) : platformType === 'android' ? (
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '20px', textAlign: isUrdu ? 'right' : 'left' }}>
+                <p>1. کروم براؤزر کے اوپر دائیں کونے میں تین نقطوں (<strong>⋮</strong>) پر ٹیپ کریں۔</p>
+                <p>2. مینو میں سے <strong>Install App</strong> یا <strong>Add to Home Screen</strong> پر کلک کریں۔</p>
+              </div>
+            ) : (
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '20px', textAlign: isUrdu ? 'right' : 'left' }}>
+                <p>1. اپنے براؤزر کے ایڈریس بار میں موجود <strong>Install App (⊕)</strong> آئیکون پر کلک کریں۔</p>
+                <p>2. یا براؤزر مینو (⋮) کھول کر <strong>Install Anime Pakistan</strong> منتخب کریں۔</p>
+              </div>
+            )}
 
             <button
               type="button"
-              onClick={() => setShowIosModal(false)}
+              onClick={() => setShowGuideModal(false)}
               className="glass-btn"
               style={{ width: '100%', padding: '12px', fontWeight: 800 }}
             >
-              Got it
+              {isUrdu ? 'سمجھ گیا (Done)' : 'Got it'}
             </button>
           </div>
         </div>
