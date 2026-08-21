@@ -299,39 +299,56 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.90);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid rgba(0, 102, 51, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 102, 51, 0.04);
   width: 100%;
+  padding: 6px 12px 0;
+  box-sizing: border-box;
+  background: transparent;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .site-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  padding: 0 8px;
+  height: 52px;
+  padding: 0 12px;
   max-width: 1380px;
   margin: 0 auto;
-  gap: 4px;
+  gap: 6px;
   box-sizing: border-box;
-}
-
-@media (min-width: 480px) {
-  .site-header-inner {
-    height: 66px;
-    padding: 0 16px;
-    gap: 12px;
-  }
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.2px solid rgba(0, 102, 51, 0.16);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px -4px rgba(0, 70, 35, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 @media (min-width: 768px) {
+  .site-header {
+    padding: 0;
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 102, 51, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 102, 51, 0.04);
+  }
+
   .site-header-inner {
     height: 72px;
     padding: 0 24px;
     gap: 16px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -346,6 +363,8 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 @media (min-width: 480px) {
@@ -360,7 +379,7 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   display: none;
 }
 
-@media (min-width: 370px) {
+@media (min-width: 420px) {
   .brand-text-container {
     display: flex;
   }
