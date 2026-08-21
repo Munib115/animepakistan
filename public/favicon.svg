@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Deep Glass Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#02140a" />
+      <stop offset="50%" stop-color="#042010" />
+      <stop offset="100%" stop-color="#010a05" />
+    </linearGradient>
+
+    <!-- Glowing Glass Rim Border -->
+    <linearGradient id="rimGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff66" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#008040" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- 'A' Green Liquid Glass Gradient -->
+    <linearGradient id="greenLetter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff66" />
+      <stop offset="40%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- 'P' White Crystal Glass Gradient -->
+    <linearGradient id="whiteLetter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#f8fafc" />
+      <stop offset="85%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+
+    <!-- Soft Glow Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Liquid Drop Shadow -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.7" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Base with Glowing Border -->
+  <rect x="28" y="28" width="456" height="456" rx="118" fill="url(#bgGrad)" stroke="url(#rimGlow)" stroke-width="8" filter="url(#dropShadow)" />
+
+  <!-- Internal Ambient Light Spots -->
+  <circle cx="160" cy="160" r="130" fill="#00ff66" opacity="0.22" filter="url(#softGlow)" />
+  <circle cx="360" cy="340" r="110" fill="#ffffff" opacity="0.14" filter="url(#softGlow)" />
+
+  <!-- Overlapping AP Modern Monogram -->
+  <g filter="url(#dropShadow)">
+    <!-- Letter 'A' (Vibrant Emerald Green) -->
+    <path 
+      d="M 125 380 L 225 125 C 233 105, 252 92, 275 92 C 290 92, 305 100, 312 115 L 348 180 C 330 186, 316 198, 306 215 L 268 148 L 192 380 L 125 380 Z" 
+      fill="url(#greenLetter)" 
+      filter="url(#softGlow)"
+    />
+    <path 
+      d="M 160 295 L 305 295 L 290 338 L 146 338 Z" 
+      fill="url(#greenLetter)" 
+    />
+
+    <!-- Letter 'P' (Frosted Crystal White) -->
+    <path 
+      d="M 280 120 L 280 380 C 280 396, 265 408, 248 408 L 220 408 L 220 358 L 248 358 C 255 358, 262 352, 262 342 L 262 120 Z" 
+      fill="url(#whiteLetter)" 
+    />
+    <path 
+      d="M 262 110 L 358 110 C 408 110, 448 146, 448 196 C 448 246, 408 282, 358 282 L 262 282 Z M 282 148 L 282 244 L 354 244 C 382 244, 408 222, 408 196 C 408 170, 382 148, 354 148 Z" 
+      fill="url(#whiteLetter)" 
+      filter="url(#softGlow)"
+    />
+  </g>
+
+  <!-- Top Glass Highlight Sheen -->
+  <path 
+    d="M 44 140 C 44 85, 85 44, 140 44 L 372 44 C 427 44, 468 85, 468 140 C 410 180, 290 198, 190 188 C 100 178, 55 152, 44 140 Z" 
+    fill="#ffffff" 
+    opacity="0.14" 
+  />
+</svg>

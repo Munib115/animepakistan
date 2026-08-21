@@ -1,0 +1,103 @@
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import PWARegister from "@/components/PWARegister";
+import AppLoader from '@/components/AppLoader';
+import MobileTabBar from "@/components/MobileTabBar";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { absoluteUrl, siteName, siteUrl } from '@/lib/seo';
+
+export const viewport: Viewport = {
+  themeColor: "#006633",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Anime Pakistan | Urdu & Hindi Dubbed Anime',
+    template: `%s | ${siteName}`,
+  },
+  description: 'Watch Urdu and Hindi dubbed anime series, movies and cartoons online in Pakistan. Browse a fast, mobile-friendly anime catalogue.',
+  keywords: ['Urdu dubbed anime', 'Hindi dubbed anime', 'anime Pakistan', 'anime Urdu', 'anime movies Pakistan', 'cartoons in Urdu'],
+  alternates: { canonical: '/' },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
+  openGraph: {
+    type: 'website',
+    locale: 'ur_PK',
+    url: '/',
+    siteName,
+    title: 'Anime Pakistan | Urdu & Hindi Dubbed Anime',
+    description: 'Watch Urdu and Hindi dubbed anime series, movies and cartoons online in Pakistan.',
+    images: [{ url: '/icon-512.png', width: 512, height: 512, alt: 'Anime Pakistan logo' }],
+  },
+  twitter: { card: 'summary_large_image', title: 'Anime Pakistan | Urdu & Hindi Dubbed Anime', description: 'Browse Urdu and Hindi dubbed anime in Pakistan.', images: ['/icon-512.png'] },
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: '/favicon.svg?v=ap2', type: 'image/svg+xml' },
+      { url: '/icon-192.png?v=ap2', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png?v=ap2', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.ico?v=ap2' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png?v=ap2', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Anime Pakistan",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="ur" dir="rtl">
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        
+        {/* Preconnect to Poster Image CDNs for Instant 1-Second Loading */}
+        <link rel="preconnect" href="https://image.tmdb.org" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://image.tmdb.org" />
+        <link rel="preconnect" href="https://img.animesalt.link" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://img.animesalt.link" />
+        <link rel="preconnect" href="https://s4.anilist.co" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://s4.anilist.co" />
+      </head>
+      <body>
+        <AppLoader />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                { '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: absoluteUrl('/'), name: siteName, inLanguage: ['ur-PK', 'en-PK'] },
+                { '@type': 'Organization', '@id': `${siteUrl}/#organization`, name: siteName, url: absoluteUrl('/'), logo: absoluteUrl('/icon-512.png'), areaServed: { '@type': 'Country', name: 'Pakistan' } },
+              ],
+            }).replace(/</g, '\\u003c'),
+          }}
+        />
+        <LanguageProvider>
+          {children}
+          <MobileTabBar />
+          <PWARegister />
+        </LanguageProvider>
+      </body>
+    </html>
+  );
+}
