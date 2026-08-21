@@ -37,6 +37,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
     }}>
       <Link 
         href={watchHref} 
+        prefetch={true}
         onClick={() => sound.playCardClick()}
         style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}
       >

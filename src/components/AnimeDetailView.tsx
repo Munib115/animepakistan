@@ -445,6 +445,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                     <Link 
                       key={ep.slug} 
                       href={`/watch/${anime.slug}/${ep.slug}`}
+                      prefetch={true}
                       onClick={() => sound.playEpisodeSelect()}
                       className="glass-card ep-item-card"
                       style={{

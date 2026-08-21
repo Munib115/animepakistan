@@ -504,6 +504,7 @@ export default function WatchContainer({
                 <Link
                   key={ep.slug}
                   href={`/watch/${anime.slug}/${ep.slug}`}
+                  prefetch={true}
                   onClick={() => sound.playEpisodeSelect()}
                   className={`glass-card ${isCurrent ? 'active-ep-card' : ''}`}
                   style={{
