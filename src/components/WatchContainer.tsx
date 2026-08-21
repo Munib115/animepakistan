@@ -24,14 +24,47 @@ export default function WatchContainer({
   const { t, language } = useLanguage();
 
   const targetSlug = currentEpisode?.slug || anime.slug;
+  const proxyBase = process.env.NEXT_PUBLIC_STREAM_PROXY_URL || 'https://panime-stream-proxy.munibhaseeb8.workers.dev';
 
-  // Direct Multi-Audio VIP Stream (Ad-free & clean)
-  const activeMirror = useMemo(() => {
+  // Multi-Server Fallback Mirrors (including Cloudflare Ultra Fast Proxy)
+  const availableSources = useMemo<StreamSource[]>(() => {
+    const list: StreamSource[] = [];
+
+    // 1. Direct Multi-Audio VIP Stream
+    list.push({
+      label: 'VIP Server 1 (Multi-Audio HD)',
+      url: `https://as-cdn21.top/video/${targetSlug}/`,
+      isMultiAudio: true,
+    });
+
+    // 2. Cloudflare Fast Bypass Proxy
+    list.push({
+      label: 'Cloudflare Fast Server (Bypass HD)',
+      url: `${proxyBase}/?url=${encodeURIComponent(`https://as-cdn21.top/video/${targetSlug}/`)}`,
+      isMultiAudio: true,
+    });
+
+    // 3. Alternate Fast CDN 2
+    list.push({
+      label: 'Fast Server 2 (HD Stream)',
+      url: `https://as-cdn20.top/video/${targetSlug}/`,
+      isMultiAudio: false,
+    });
+
+    // 4. Any other dynamically resolved streams
     if (sources && sources.length > 0) {
-      return sources[0].url;
+      sources.forEach((s) => {
+        if (!list.some((existing) => existing.url === s.url)) {
+          list.push(s);
+        }
+      });
     }
-    return `https://as-cdn21.top/video/${targetSlug}/`;
-  }, [sources, targetSlug]);
+
+    return list;
+  }, [sources, targetSlug, proxyBase]);
+
+  const [selectedMirror, setSelectedMirror] = useState<string | null>(null);
+  const activeMirror = selectedMirror || (availableSources[0]?.url || `https://as-cdn21.top/video/${targetSlug}/`);
 
   const [isTheater, setIsTheater] = useState(false);
   const [isLightsOff, setIsLightsOff] = useState(false);
@@ -470,6 +503,66 @@ export default function WatchContainer({
             <span>4K ULTRA HD</span>
           </div>
         </div>
+
+        {/* Live Multi-Server Switcher Bar */}
+        {availableSources.length > 1 && (
+          <div style={{
+            marginTop: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '8px',
+            padding: '8px 12px',
+            borderRadius: '10px',
+            background: 'rgba(0, 102, 51, 0.06)',
+            border: '1px solid var(--glass-border)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-secondary)' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>
+                dns
+              </span>
+              <span>{language === 'ur' ? 'سرور تبدیل کریں:' : 'Switch Server:'}</span>
+            </div>
+
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              {availableSources.map((source: StreamSource, idx: number) => {
+                const isActive = activeMirror === source.url;
+                return (
+                  <button
+                    key={source.url + idx}
+                    type="button"
+                    onClick={() => {
+                      setSelectedMirror(source.url);
+                      setIframeKey((k) => k + 1);
+                      sound.playButton();
+                    }}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      padding: '4px 10px',
+                      borderRadius: '6px',
+                      border: isActive ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                      background: isActive ? 'var(--color-primary)' : '#ffffff',
+                      color: isActive ? '#ffffff' : 'var(--text-primary)',
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      boxShadow: isActive ? '0 2px 8px rgba(0, 102, 51, 0.25)' : 'none',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+                      {isActive ? 'check_circle' : 'play_arrow'}
+                    </span>
+                    <span>{source.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Series Episodes Playlist Grid */}
