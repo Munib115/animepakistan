@@ -749,7 +749,7 @@ body::after {
   }
 }
 
-/* Premium PWA launch sequence */
+/* Premium PWA launch sequence - Butter-Smooth Dissolve */
 .app-loader {
   position: fixed;
   z-index: 2147483647;
@@ -759,10 +759,18 @@ body::after {
   overflow: hidden;
   background: radial-gradient(circle at 50% 45%, #0b3b23 0%, #03150b 44%, #010804 100%);
   color: #fff;
-  transition: opacity 380ms ease, visibility 380ms ease;
+  will-change: opacity, transform, filter;
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1), visibility 500ms ease;
+  transform: translateZ(0);
 }
 
-.app-loader.is-leaving { opacity: 0; visibility: hidden; }
+.app-loader.is-leaving { 
+  opacity: 0; 
+  transform: scale(1.035) translateZ(0);
+  filter: blur(14px);
+  pointer-events: none;
+  visibility: hidden; 
+}
 .app-loader::before {
   content: '';
   position: absolute;
@@ -782,7 +790,7 @@ body::after {
 .app-loader-brand span { color: #00df71; }
 .app-loader-caption { margin: 7px 0 0; color: rgba(232, 255, 241, 0.64); font-size: 0.76rem; letter-spacing: 0.08em; }
 .app-loader-progress { width: 168px; height: 4px; margin-top: 28px; overflow: hidden; border-radius: 99px; background: rgba(255, 255, 255, 0.16); }
-.app-loader-progress span { display: block; width: 45%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #00a650, #65ffad); box-shadow: 0 0 16px rgba(51, 255, 142, 0.92); animation: app-loader-progress 1s cubic-bezier(.4,0,.2,1) infinite; }
+.app-loader-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #00a650, #65ffad); box-shadow: 0 0 16px rgba(51, 255, 142, 0.92); }
 @keyframes app-loader-spin { to { transform: rotate(360deg); } }
 @keyframes app-loader-breathe { 50% { transform: scale(1.13); opacity: 1; } }
 @keyframes app-loader-float { 50% { transform: translateY(-8px); } }
