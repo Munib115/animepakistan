@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { AnimeItem, Episode } from '@/types/anime';
 import { StreamSource } from '@/lib/resolver';
@@ -23,13 +23,45 @@ export default function WatchContainer({
 }: WatchContainerProps) {
   const { t, language } = useLanguage();
 
+  const targetSlug = currentEpisode?.slug || anime.slug;
+
+  // Multi-CDN guaranteed source list to bypass domain/Cloudflare restrictions
+  const availableSources = useMemo(() => {
+    const list = [...sources];
+    const directCdn = `https://as-cdn21.top/video/${targetSlug}/`;
+    const mirrorSalt = `https://animesalt.link/episode/${targetSlug}/`;
+
+    if (!list.some((s) => s.url === directCdn)) {
+      list.unshift({
+        label: 'VIP Server 1 (Multi-Audio HD)',
+        url: directCdn,
+        isMultiAudio: true,
+      });
+    }
+    if (!list.some((s) => s.url.includes('animesalt.link'))) {
+      list.push({
+        label: 'Fast Server 2 (HD Stream)',
+        url: mirrorSalt,
+        isMultiAudio: false,
+      });
+    }
+    return list;
+  }, [sources, targetSlug]);
+
   // Active mirror stream
   const [activeMirror, setActiveMirror] = useState<string>(
-    sources.length > 0 ? sources[0].url : ''
+    availableSources[0]?.url || `https://as-cdn21.top/video/${targetSlug}/`
   );
   const [isTheater, setIsTheater] = useState(false);
   const [isLightsOff, setIsLightsOff] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
+
+  useEffect(() => {
+    if (availableSources.length > 0) {
+      setActiveMirror(availableSources[0].url);
+      setIframeKey((k) => k + 1);
+    }
+  }, [availableSources]);
 
   // Resume prompt state
   const [savedProgress, setSavedProgress] = useState<WatchProgressItem | null>(null);
@@ -366,7 +398,8 @@ export default function WatchContainer({
               src={activeMirror}
               title={displayName}
               allowFullScreen
-              sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
+              referrerPolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-popups"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               style={{
                 position: 'absolute',
@@ -463,6 +496,63 @@ export default function WatchContainer({
             <span>4K ULTRA HD</span>
           </div>
         </div>
+
+        {/* Multi-Server Selector Bar */}
+        {availableSources.length > 1 && (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            marginTop: '10px',
+            padding: '8px 12px',
+            background: 'rgba(0, 102, 51, 0.05)',
+            borderRadius: '10px',
+            border: '1px solid var(--glass-border)',
+            flexWrap: 'wrap',
+          }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '15px', color: 'var(--color-primary)' }}>dns</span>
+              <span>{t('serverLabel')}</span>
+            </span>
+
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              {availableSources.map((source: StreamSource, idx: number) => {
+                const isActive = activeMirror === source.url;
+                return (
+                  <button
+                    key={source.url + idx}
+                    type="button"
+                    onClick={() => {
+                      setActiveMirror(source.url);
+                      setIframeKey((k) => k + 1);
+                      sound.playButton();
+                    }}
+                    style={{
+                      padding: '3px 10px',
+                      borderRadius: '6px',
+                      border: isActive ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                      background: isActive ? 'var(--color-primary)' : '#ffffff',
+                      color: isActive ? '#ffffff' : 'var(--text-primary)',
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      boxShadow: isActive ? '0 2px 6px rgba(0, 102, 51, 0.2)' : 'none',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '12px' }}>
+                      {isActive ? 'check_circle' : 'play_arrow'}
+                    </span>
+                    <span>{source.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Series Episodes Playlist Grid */}
