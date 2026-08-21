@@ -3,6 +3,7 @@ import "./globals.css";
 import PWARegister from "@/components/PWARegister";
 import AppLoader from '@/components/AppLoader';
 import MobileTabBar from "@/components/MobileTabBar";
+import PWAInstallBanner from "@/components/PWAInstallBanner";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { absoluteUrl, siteName, siteUrl } from '@/lib/seo';
 
@@ -95,6 +96,7 @@ export default function RootLayout({
         <LanguageProvider>
           {children}
           <MobileTabBar />
+          <PWAInstallBanner />
           <PWARegister />
         </LanguageProvider>
       </body>
