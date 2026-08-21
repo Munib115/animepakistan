@@ -113,8 +113,12 @@ export default function AppLoader() {
       
       <div className="app-loader-content">
         {/* 3D Liquid Glass Badge Mark */}
-        <div className="app-loader-mark">
-          <img src="/logo.png?v=ap2" alt="Anime Pakistan" />
+        <div className="app-loader-mark" style={{ width: '94px', height: '94px', maxWidth: '94px', maxHeight: '94px', overflow: 'hidden' }}>
+          <img 
+            src="/logo.png?v=ap2" 
+            alt="Anime Pakistan" 
+            style={{ width: '100%', height: '100%', maxWidth: '94px', maxHeight: '94px', objectFit: 'cover', borderRadius: '24px', display: 'block' }}
+          />
           <span className="app-loader-ring" />
         </div>
 
