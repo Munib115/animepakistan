@@ -31,21 +31,27 @@ export default {
       // Clean target
       const decodedTarget = decodeURIComponent(targetUrl);
 
-      // Fetch upstream video page/stream with spoofed legitimate headers
-      const upstreamResponse = await fetch(decodedTarget, {
-        method: request.method,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-          'Referer': 'https://animesalt.link/',
-          'Origin': 'https://animesalt.link',
-          'Accept': '*/*',
-        },
+      // Forward client headers (especially Range) to upstream
+      const upstreamHeaders = new Headers({
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Referer': 'https://animesalt.link/',
+        'Origin': 'https://animesalt.link',
+        'Accept': '*/*',
       });
 
-      // Clone headers and add CORS headers
+      // Pass through Range header for video seeking
+      const range = request.headers.get('Range');
+      if (range) upstreamHeaders.set('Range', range);
+
+      const upstreamResponse = await fetch(decodedTarget, {
+        method: request.method === 'HEAD' ? 'HEAD' : 'GET',
+        headers: upstreamHeaders,
+      });
+
       const responseHeaders = new Headers(upstreamResponse.headers);
       responseHeaders.set('Access-Control-Allow-Origin', '*');
       responseHeaders.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+      responseHeaders.set('Access-Control-Expose-Headers', 'Content-Length, Content-Range, Accept-Ranges');
       responseHeaders.delete('x-frame-options');
       responseHeaders.delete('content-security-policy');
 
