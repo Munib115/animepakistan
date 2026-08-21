@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { getGuestProfile, updateGuestName, GuestProfile } from '@/lib/guestIdentity';
 import { sound } from '@/lib/soundEngine';
+import VoiceAudioPlayer from './VoiceAudioPlayer';
 
 export interface CommentItem {
   id: string;
@@ -40,9 +41,14 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
   const [recordingSeconds, setRecordingSeconds] = useState<number>(0);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [audioPreviewUrl, setAudioPreviewUrl] = useState<string | null>(null);
+  const [liveVolumeLevel, setLiveVolumeLevel] = useState<number[]>(new Array(16).fill(15));
+  
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const animFrameRef = useRef<number | null>(null);
 
   // Load guest profile on client
   useEffect(() => {
@@ -101,14 +107,57 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
     };
   }, [isRecording]);
 
-  // Start voice recording
+  // Start voice recording with WebRTC Hardware Noise Cancellation
   const startRecording = async () => {
     try {
       sound.playButton();
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      
+      // WebRTC High-Fidelity Audio Constraints with Built-in Noise & Echo Cancellation
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: { ideal: true },
+          noiseSuppression: { ideal: true },
+          autoGainControl: { ideal: true },
+          channelCount: 1,
+          sampleRate: 48000,
+        },
+      });
+
       audioChunksRef.current = [];
-      const mediaRecorder = new MediaRecorder(stream);
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+          ? 'audio/webm;codecs=opus'
+          : 'audio/webm',
+      });
       mediaRecorderRef.current = mediaRecorder;
+
+      // Live WebRTC Audio Visualizer
+      try {
+        const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        const audioCtx = new AudioCtx();
+        audioContextRef.current = audioCtx;
+        const source = audioCtx.createMediaStreamSource(stream);
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+        source.connect(analyser);
+        analyserRef.current = analyser;
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        const updateVisualizer = () => {
+          if (analyserRef.current) {
+            analyserRef.current.getByteFrequencyData(dataArray);
+            const bars: number[] = [];
+            for (let i = 0; i < 16; i++) {
+              const val = dataArray[i * 2] || 0;
+              const height = Math.max(15, Math.min(100, Math.floor((val / 255) * 100)));
+              bars.push(height);
+            }
+            setLiveVolumeLevel(bars);
+            animFrameRef.current = requestAnimationFrame(updateVisualizer);
+          }
+        };
+        updateVisualizer();
+      } catch (e) {}
 
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
@@ -121,10 +170,13 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
         setAudioBlob(blob);
         const url = URL.createObjectURL(blob);
         setAudioPreviewUrl(url);
+
+        if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+        if (audioContextRef.current) audioContextRef.current.close().catch(() => {});
         stream.getTracks().forEach((track) => track.stop());
       };
 
-      mediaRecorder.start();
+      mediaRecorder.start(100);
       setIsRecording(true);
     } catch (err) {
       alert('Microphone access is needed to record voice messages.');
@@ -146,6 +198,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
     if (audioPreviewUrl) URL.revokeObjectURL(audioPreviewUrl);
     setAudioPreviewUrl(null);
     setRecordingSeconds(0);
+    sound.playButton();
   };
 
   // Submit comment (text and/or audio)
@@ -160,7 +213,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
     let uploadedAudioUrl: string | undefined = undefined;
 
     try {
-      // 1. Upload audio if present
+      // 1. Upload audio to Supabase Storage if present
       if (audioBlob && supabase) {
         const fileName = `${animeSlug}_${episodeSlug}_${Date.now()}.webm`;
         const { error: uploadError } = await supabase.storage
@@ -175,7 +228,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
         }
       }
 
-      // Fallback base64 audio if storage bucket is not configured
+      // Fallback base64 audio if storage bucket is not yet configured
       if (audioBlob && !uploadedAudioUrl) {
         uploadedAudioUrl = await new Promise((resolve) => {
           const reader = new FileReader();
@@ -371,14 +424,14 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
       <form onSubmit={handleSubmit} style={{
         background: '#ffffff',
         border: '1.5px solid var(--glass-border)',
-        borderRadius: '14px',
-        padding: '14px',
+        borderRadius: '16px',
+        padding: '16px',
         marginBottom: '28px',
         boxShadow: '0 4px 16px rgba(0, 102, 51, 0.06)',
       }}>
         <textarea
           rows={3}
-          placeholder="Write your thoughts on this episode, share your favorite moment, or record a voice note..."
+          placeholder="Write your thoughts on this episode, or record a voice note..."
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
           className="glass-input"
@@ -388,42 +441,77 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             border: 'none',
             background: 'transparent',
             padding: '4px',
-            fontSize: '0.88rem',
+            fontSize: '0.9rem',
             outline: 'none',
           }}
         />
 
-        {/* Audio Preview if recorded */}
-        {audioPreviewUrl && (
+        {/* Live WebRTC Recording Waveform Animation */}
+        {isRecording && (
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
-            background: 'rgba(0, 102, 51, 0.08)',
-            padding: '8px 12px',
-            borderRadius: '10px',
+            justifyContent: 'space-between',
+            background: 'rgba(0, 102, 51, 0.07)',
+            backdropFilter: 'blur(16px)',
+            border: '1.5px solid rgba(0, 204, 102, 0.4)',
+            padding: '10px 16px',
+            borderRadius: '12px',
             marginTop: '10px',
+            gap: '12px',
           }}>
-            <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '20px' }}>
-              mic
-            </span>
-            <audio src={audioPreviewUrl} controls style={{ height: '32px', flexGrow: 1 }} />
-            <button
-              type="button"
-              onClick={cancelAudio}
-              style={{
-                border: 'none',
-                background: 'rgba(239, 68, 68, 0.1)',
-                color: '#ef4444',
-                padding: '4px 8px',
-                borderRadius: '6px',
-                fontSize: '0.72rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-              }}
-            >
-              Delete
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                background: '#ef4444',
+                boxShadow: '0 0 10px #ef4444',
+                animation: 'pulse 1s infinite',
+                display: 'inline-block',
+              }} />
+              <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                Recording... {recordingSeconds}s / 60s
+              </span>
+              <span style={{
+                fontSize: '0.65rem',
+                fontWeight: 800,
+                color: 'var(--color-primary)',
+                background: 'rgba(0, 204, 102, 0.15)',
+                padding: '2px 6px',
+                borderRadius: '4px',
+              }}>
+                WebRTC ANC Active
+              </span>
+            </div>
+
+            {/* Live Audio Volume Equalizer Bars */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '3px', height: '22px' }}>
+              {liveVolumeLevel.map((lvl, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    width: '3px',
+                    height: `${lvl}%`,
+                    borderRadius: '999px',
+                    background: 'linear-gradient(to top, #006633, #00ff66)',
+                    boxShadow: '0 0 4px rgba(0, 255, 102, 0.5)',
+                    transition: 'height 0.08s ease',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Liquid Glass Audio Player Preview if recorded */}
+        {audioPreviewUrl && !isRecording && (
+          <div style={{ marginTop: '12px' }}>
+            <VoiceAudioPlayer 
+              src={audioPreviewUrl} 
+              duration={recordingSeconds} 
+              onDelete={cancelAudio} 
+            />
           </div>
         )}
 
@@ -433,8 +521,10 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
           alignItems: 'center',
           justifyContent: 'space-between',
           marginTop: '12px',
-          paddingTop: '10px',
+          paddingTop: '12px',
           borderTop: '1px solid rgba(0, 102, 51, 0.08)',
+          flexWrap: 'wrap',
+          gap: '8px',
         }}>
           {/* Audio Recorder Controls */}
           <div>
@@ -446,18 +536,21 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '6px 12px',
-                  borderRadius: '8px',
-                  border: '1px solid var(--glass-border)',
-                  background: 'rgba(0, 102, 51, 0.05)',
+                  padding: '7px 14px',
+                  borderRadius: '10px',
+                  border: '1.5px solid rgba(0, 102, 51, 0.2)',
+                  background: 'rgba(0, 102, 51, 0.06)',
+                  backdropFilter: 'blur(10px)',
                   color: 'var(--color-primary)',
-                  fontWeight: 700,
-                  fontSize: '0.78rem',
+                  fontWeight: 800,
+                  fontSize: '0.8rem',
                   cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0, 102, 51, 0.06)',
+                  transition: 'all 0.2s ease',
                 }}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>mic</span>
-                <span>Record Audio</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>mic</span>
+                <span>Record Voice Note</span>
               </button>
             ) : (
               <button
@@ -467,19 +560,19 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '6px 12px',
-                  borderRadius: '8px',
-                  border: '1px solid #ef4444',
-                  background: 'rgba(239, 68, 68, 0.1)',
+                  padding: '7px 16px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #ef4444',
+                  background: 'rgba(239, 68, 68, 0.12)',
                   color: '#ef4444',
                   fontWeight: 800,
-                  fontSize: '0.78rem',
+                  fontSize: '0.8rem',
                   cursor: 'pointer',
-                  animation: 'pulse 1.2s infinite',
+                  boxShadow: '0 2px 8px rgba(239, 68, 68, 0.2)',
                 }}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>stop_circle</span>
-                <span>Stop Recording ({recordingSeconds}s)</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>stop_circle</span>
+                <span>Finish & Review ({recordingSeconds}s)</span>
               </button>
             )}
           </div>
@@ -490,8 +583,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             disabled={submitting || (!textInput.trim() && !audioBlob)}
             className="glass-btn"
             style={{
-              padding: '7px 18px',
-              fontSize: '0.82rem',
+              padding: '8px 20px',
+              fontSize: '0.85rem',
               fontWeight: 800,
               opacity: (!textInput.trim() && !audioBlob) || submitting ? 0.6 : 1,
             }}
@@ -529,7 +622,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
               style={{
                 background: '#ffffff',
                 border: '1px solid var(--glass-border)',
-                borderRadius: '12px',
+                borderRadius: '14px',
                 padding: '14px 16px',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)',
               }}
@@ -590,7 +683,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
               {/* Text Message Content */}
               {item.content && (
                 <p style={{
-                  fontSize: '0.85rem',
+                  fontSize: '0.88rem',
                   lineHeight: 1.5,
                   color: 'var(--text-secondary)',
                   margin: '4px 0 8px 42px',
@@ -600,23 +693,13 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                 </p>
               )}
 
-              {/* Audio Voice Note Player */}
+              {/* Liquid Glass Audio Voice Note Player */}
               {item.audio_url && (
-                <div style={{
-                  marginLeft: '42px',
-                  marginTop: '8px',
-                  background: 'rgba(0, 102, 51, 0.05)',
-                  padding: '6px 10px',
-                  borderRadius: '8px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  maxWidth: '100%',
-                }}>
-                  <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '18px' }}>
-                    mic
-                  </span>
-                  <audio src={item.audio_url} controls style={{ height: '28px', maxWidth: '280px' }} />
+                <div style={{ marginLeft: '42px', marginTop: '8px' }}>
+                  <VoiceAudioPlayer 
+                    src={item.audio_url} 
+                    duration={item.audio_duration} 
+                  />
                 </div>
               )}
             </div>
