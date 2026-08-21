@@ -38,14 +38,13 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: '/favicon.svg?v=ap2', type: 'image/svg+xml' },
-      { url: '/icon-192.png?v=ap2', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512.png?v=ap2', sizes: '512x512', type: 'image/png' },
-      { url: '/favicon.ico?v=ap2' },
+      { url: '/logo.png?v=ap5', sizes: '192x192', type: 'image/png' },
+      { url: '/logo.png?v=ap5', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png?v=ap2', sizes: '180x180', type: 'image/png' },
+      { url: '/logo.png?v=ap5', sizes: '180x180', type: 'image/png' },
     ],
+    shortcut: '/logo.png?v=ap5',
   },
   appleWebApp: {
     capable: true,
@@ -65,9 +64,9 @@ export default function RootLayout({
   return (
     <html lang="ur" dir="rtl">
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="alternate icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/logo.png?v=ap5" type="image/png" />
+        <link rel="shortcut icon" href="/logo.png?v=ap5" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo.png?v=ap5" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         

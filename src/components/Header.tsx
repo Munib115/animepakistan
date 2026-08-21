@@ -167,8 +167,8 @@ function HeaderContent() {
             onClick={() => sound.playTabSwitch()}
             className={`desktop-nav-link ${isHome ? 'active' : ''}`}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>home</span>
-            <span>{t('home')}</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '16px', lineHeight: 1 }}>home</span>
+            <span style={{ lineHeight: 1 }}>{t('home')}</span>
           </Link>
 
           <Link 
@@ -176,8 +176,8 @@ function HeaderContent() {
             onClick={() => sound.playTabSwitch()}
             className={`desktop-nav-link ${isBrowse ? 'active' : ''}`}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>apps</span>
-            <span>{t('browse')}</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '16px', lineHeight: 1 }}>apps</span>
+            <span style={{ lineHeight: 1 }}>{t('browse')}</span>
           </Link>
 
           <Link 
@@ -185,8 +185,8 @@ function HeaderContent() {
             onClick={() => sound.playTabSwitch()}
             className={`desktop-nav-link ${isSeries ? 'active' : ''}`}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>live_tv</span>
-            <span>{t('series')}</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '16px', lineHeight: 1 }}>live_tv</span>
+            <span style={{ lineHeight: 1 }}>{t('series')}</span>
           </Link>
 
           <Link 
@@ -194,8 +194,8 @@ function HeaderContent() {
             onClick={() => sound.playTabSwitch()}
             className={`desktop-nav-link ${isMovies ? 'active' : ''}`}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>movie</span>
-            <span>{t('movies')}</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '16px', lineHeight: 1 }}>movie</span>
+            <span style={{ lineHeight: 1 }}>{t('movies')}</span>
           </Link>
         </nav>
 
