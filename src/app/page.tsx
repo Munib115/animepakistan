@@ -74,17 +74,19 @@ export default async function HomePage(props: PageProps) {
       <Header />
 
       {/* Main Content */}
-      <main className="container" style={{ flexGrow: 1, padding: '16px 16px 20px', position: 'relative', zIndex: 1 }}>
+      <main style={{ flexGrow: 1, padding: '0 0 24px', position: 'relative', zIndex: 1 }}>
         {/* Modern Anime Banner Carousel / Slider */}
         <HeroSlider items={items} />
 
         {/* Dynamic Multi-Language Categorized Rows */}
-        <HomeSections 
-          trendingSeries={trendingSeries}
-          popularMovies={popularMovies}
-          topRated={topRated}
-          cartoons={cartoons}
-        />
+        <div className="container" style={{ padding: '0 16px' }}>
+          <HomeSections 
+            trendingSeries={trendingSeries}
+            popularMovies={popularMovies}
+            topRated={topRated}
+            cartoons={cartoons}
+          />
+        </div>
       </main>
 
       {/* Global Footer */}

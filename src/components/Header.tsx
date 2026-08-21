@@ -106,56 +106,48 @@ function HeaderContent() {
           {/* 3D Liquid Glass AP Icon */}
           <div className="header-logo-icon">
             <img 
-              src="/logo.png?v=ap2" 
+              src="/logo.png?v=ap5" 
               alt="Anime Pakistan (AP) Logo" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
           </div>
 
-          <div className="brand-text-container" style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
-              <span style={{
-                fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
-                fontWeight: 900,
-                letterSpacing: '-0.02em',
-                color: 'var(--color-primary)',
-              }}>
-                ANIME
-              </span>
-              <span className="brand-pakistan-text" style={{
-                fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
-                fontWeight: 900,
-                color: 'var(--text-primary)',
-              }}>
-                PAKISTAN
-              </span>
-              {/* AP Badge with A Green, P White */}
-              <span style={{
-                fontSize: '0.62rem',
-                fontWeight: 900,
-                padding: '1px 5px',
-                borderRadius: '4px',
-                background: '#02180d',
-                border: '1px solid rgba(0, 204, 102, 0.4)',
-                boxShadow: '0 2px 6px rgba(0, 102, 51, 0.25)',
-                marginLeft: '2px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                letterSpacing: '0.04em',
-                flexShrink: 0,
-              }}>
-                <span style={{ color: '#00ff66' }}>A</span>
-                <span style={{ color: '#ffffff' }}>P</span>
-              </span>
-            </div>
-            <span className="brand-subtitle-text" style={{
-              fontSize: '0.62rem',
-              color: 'var(--text-muted)',
-              fontWeight: 600,
-              letterSpacing: '0.02em',
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', minWidth: 0 }}>
+            <span style={{
+              fontSize: 'clamp(0.95rem, 2.5vw, 1.12rem)',
+              fontWeight: 900,
+              letterSpacing: '-0.02em',
+              color: 'var(--color-primary)',
               lineHeight: 1,
             }}>
-              {t('brandSubtitle')}
+              ANIME
+            </span>
+            <span className="brand-pakistan-text" style={{
+              fontSize: 'clamp(0.95rem, 2.5vw, 1.12rem)',
+              fontWeight: 900,
+              color: 'var(--text-primary)',
+              lineHeight: 1,
+            }}>
+              PAKISTAN
+            </span>
+            {/* AP Badge with A Green, P White */}
+            <span style={{
+              fontSize: '0.60rem',
+              fontWeight: 900,
+              padding: '2px 5px',
+              borderRadius: '4px',
+              background: '#02180d',
+              border: '1px solid rgba(0, 204, 102, 0.4)',
+              boxShadow: '0 2px 6px rgba(0, 102, 51, 0.25)',
+              marginLeft: '2px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              letterSpacing: '0.04em',
+              flexShrink: 0,
+              lineHeight: 1,
+            }}>
+              <span style={{ color: '#00ff66' }}>A</span>
+              <span style={{ color: '#ffffff' }}>P</span>
             </span>
           </div>
         </Link>

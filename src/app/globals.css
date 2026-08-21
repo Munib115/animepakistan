@@ -355,19 +355,8 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   }
 }
 
-.brand-text-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  justify-content: center;
-}
-
 .brand-pakistan-text {
   display: inline;
-}
-
-.brand-subtitle-text {
-  display: block;
 }
 
 .desktop-center-nav {
