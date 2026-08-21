@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { getGuestProfile, updateGuestName, GuestProfile } from '@/lib/guestIdentity';
 import { sound } from '@/lib/soundEngine';
+import { useLanguage } from '@/context/LanguageContext';
 import VoiceAudioPlayer from './VoiceAudioPlayer';
 
 export interface CommentItem {
@@ -26,7 +27,58 @@ interface EpisodeCommentsProps {
   episodeTitle?: string;
 }
 
+function formatRelativeTime(dateString?: string, lang: 'ur' | 'en' = 'en'): string {
+  if (!dateString) return lang === 'ur' ? 'ابھی ابھی' : 'Just now';
+
+  try {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInSeconds = Math.max(0, Math.floor((now.getTime() - date.getTime()) / 1000));
+
+    if (diffInSeconds < 45) {
+      return lang === 'ur' ? 'ابھی ابھی' : 'Just now';
+    }
+
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    if (diffInMinutes < 60) {
+      if (lang === 'ur') return `${diffInMinutes} منٹ پہلے`;
+      return diffInMinutes === 1 ? '1 min ago' : `${diffInMinutes} mins ago`;
+    }
+
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) {
+      if (lang === 'ur') return `${diffInHours} گھنٹے پہلے`;
+      return diffInHours === 1 ? '1 hour ago' : `${diffInHours} hours ago`;
+    }
+
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays < 7) {
+      if (lang === 'ur') return `${diffInDays} دن پہلے`;
+      return diffInDays === 1 ? '1 day ago' : `${diffInDays} days ago`;
+    }
+
+    const diffInWeeks = Math.floor(diffInDays / 7);
+    if (diffInWeeks < 4) {
+      if (lang === 'ur') return `${diffInWeeks} ہفتے پہلے`;
+      return diffInWeeks === 1 ? '1 week ago' : `${diffInWeeks} weeks ago`;
+    }
+
+    const diffInMonths = Math.floor(diffInDays / 30);
+    if (diffInMonths < 12) {
+      if (lang === 'ur') return `${diffInMonths} ماہ پہلے`;
+      return diffInMonths === 1 ? '1 month ago' : `${diffInMonths} months ago`;
+    }
+
+    const diffInYears = Math.floor(diffInDays / 365);
+    if (lang === 'ur') return `${diffInYears} سال پہلے`;
+    return diffInYears === 1 ? '1 year ago' : `${diffInYears} years ago`;
+  } catch (e) {
+    return lang === 'ur' ? 'ابھی ابھی' : 'Just now';
+  }
+}
+
 export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }: EpisodeCommentsProps) {
+  const { language } = useLanguage();
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [textInput, setTextInput] = useState<string>('');
@@ -648,8 +700,14 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                     <span style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                       {item.guest_name}
                     </span>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginLeft: '8px' }}>
-                      {new Date(item.created_at).toLocaleDateString()}
+                    <span style={{ 
+                      fontSize: '0.72rem', 
+                      color: 'var(--text-muted)', 
+                      marginInlineStart: '8px',
+                      fontWeight: 600,
+                      opacity: 0.85,
+                    }}>
+                      • {formatRelativeTime(item.created_at, language)}
                     </span>
                   </div>
                 </div>
