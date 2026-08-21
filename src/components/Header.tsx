@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { sound } from '@/lib/soundEngine';
+import QuickControlHub from './QuickControlHub';
 
 function HeaderContent() {
   const { language, setLanguage, t } = useLanguage();
@@ -198,101 +199,8 @@ function HeaderContent() {
           </Link>
         </nav>
 
-        {/* Right: Controls & Language Switcher */}
+        {/* Right: Quick Search & Unified Quick Control Hub */}
         <div className="header-right-controls">
-          {/* UI Sound Mute/Unmute Toggle */}
-          <button
-            type="button"
-            className="header-action-btn"
-            onClick={() => {
-              const nextState = !isSoundOn;
-              setIsSoundOn(nextState);
-              sound.setEnabled(nextState);
-              if (nextState) sound.playButton();
-            }}
-            style={{
-              background: isSoundOn ? 'rgba(0, 102, 51, 0.1)' : '#ffffff',
-              border: isSoundOn ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
-              color: isSoundOn ? 'var(--color-primary)' : 'var(--text-muted)',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
-            }}
-            title={isSoundOn ? 'UI Audio: ON (Click to Mute)' : 'UI Audio: OFF (Click to Unmute)'}
-            aria-label="Toggle UI Sound"
-          >
-            <span className="material-symbols-outlined header-btn-icon">
-              {isSoundOn ? 'volume_up' : 'volume_off'}
-            </span>
-          </button>
-
-          {/* Professional Eye Comfort Mode Toggle (No AI Icons - Clean Material Eye) */}
-          <button
-            type="button"
-            className="header-action-btn"
-            onClick={cycleEyeComfort}
-            style={{
-              background: eyeComfort === 'warm' 
-                ? 'rgba(217, 119, 6, 0.15)' 
-                : eyeComfort === 'night' 
-                ? 'rgba(0, 204, 102, 0.15)' 
-                : '#ffffff',
-              border: eyeComfort === 'warm' 
-                ? '1.5px solid #d97706' 
-                : eyeComfort === 'night' 
-                ? '1.5px solid var(--color-glow)' 
-                : '1px solid var(--glass-border)',
-              color: eyeComfort === 'warm' 
-                ? '#d97706' 
-                : eyeComfort === 'night' 
-                ? '#00aa55' 
-                : 'var(--text-muted)',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
-            }}
-            title={
-              eyeComfort === 'warm'
-                ? 'Eye Comfort: Amber Shield (Click for Night OLED)'
-                : eyeComfort === 'night'
-                ? 'Eye Comfort: Night OLED (Click for Normal)'
-                : 'Eye Comfort: Off (Click for Warm Amber Filter)'
-            }
-            aria-label="Toggle Eye Comfort Mode"
-          >
-            <span className="material-symbols-outlined header-btn-icon">
-              {eyeComfort === 'night' ? 'bedtime' : 'visibility'}
-            </span>
-          </button>
-
-          {/* Language Switcher Pill (UR / EN) */}
-          <div className="header-lang-pill">
-            <button
-              onClick={() => {
-                setLanguage('ur');
-                sound.playTabSwitch();
-              }}
-              className="header-lang-btn"
-              style={{
-                background: language === 'ur' ? 'var(--color-primary)' : 'transparent',
-                color: language === 'ur' ? '#ffffff' : 'var(--text-secondary)',
-              }}
-              title="اردو"
-            >
-              اردو
-            </button>
-            <button
-              onClick={() => {
-                setLanguage('en');
-                sound.playTabSwitch();
-              }}
-              className="header-lang-btn"
-              style={{
-                background: language === 'en' ? 'var(--color-primary)' : 'transparent',
-                color: language === 'en' ? '#ffffff' : 'var(--text-secondary)',
-              }}
-              title="English"
-            >
-              EN
-            </button>
-          </div>
-
           {/* Quick Search Circular Icon Button */}
           <button
             type="button"
@@ -310,8 +218,11 @@ function HeaderContent() {
             aria-label="Search Anime"
             title="Search Anime"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>search</span>
+            <span className="material-symbols-outlined header-btn-icon">search</span>
           </button>
+
+          {/* Unified Liquid Glass Quick Control Hub */}
+          <QuickControlHub />
         </div>
       </div>
 
