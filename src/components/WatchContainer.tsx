@@ -8,6 +8,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
 import { saveWatchProgress, getAnimeWatchProgress, WatchProgressItem } from '@/lib/watchHistory';
 import { sound } from '@/lib/soundEngine';
+import EpisodeComments from './EpisodeComments';
 
 interface WatchContainerProps {
   anime: AnimeItem;
@@ -572,6 +573,13 @@ export default function WatchContainer({
           </div>
         </div>
       )}
+
+      {/* Episode Discussions & Voice Notes */}
+      <EpisodeComments 
+        animeSlug={anime.slug} 
+        episodeSlug={currentEpisode?.slug || 'full-movie'} 
+        episodeTitle={currentEpisode?.title} 
+      />
 
       {/* Double Tap Seek Feedback Animations */}
       <style jsx>{`
