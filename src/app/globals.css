@@ -311,11 +311,12 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  padding: 0 10px;
+  height: 56px;
+  padding: 0 8px;
   max-width: 1380px;
   margin: 0 auto;
-  gap: 6px;
+  gap: 4px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 480px) {
@@ -335,9 +336,9 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 }
 
 .header-logo-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
   overflow: hidden;
   box-shadow: 0 3px 12px rgba(0, 102, 51, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.4);
   flex-shrink: 0;
@@ -352,6 +353,16 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
     width: 40px;
     height: 40px;
     border-radius: 12px;
+  }
+}
+
+.brand-text-container {
+  display: none;
+}
+
+@media (min-width: 370px) {
+  .brand-text-container {
+    display: flex;
   }
 }
 
@@ -394,20 +405,20 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 .header-right-controls {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   z-index: 2;
   flex-shrink: 0;
 }
 
 @media (min-width: 480px) {
   .header-right-controls {
-    gap: 8px;
+    gap: 6px;
   }
 }
 
 .header-action-btn {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -415,12 +426,54 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  padding: 0;
+}
+
+.header-btn-icon {
+  font-size: 15px !important;
 }
 
 @media (min-width: 480px) {
   .header-action-btn {
     width: 36px;
     height: 36px;
+  }
+  .header-btn-icon {
+    font-size: 18px !important;
+  }
+}
+
+.header-lang-pill {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 102, 51, 0.08);
+  padding: 2px;
+  border-radius: 7px;
+  border: 1px solid var(--glass-border);
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.header-lang-btn {
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: none;
+  font-weight: 800;
+  font-size: 0.60rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+@media (min-width: 480px) {
+  .header-lang-pill {
+    padding: 2px;
+    border-radius: 8px;
+    gap: 2px;
+  }
+  .header-lang-btn {
+    padding: 3px 6px;
+    font-size: 0.68rem;
+    border-radius: 5px;
   }
 }
 

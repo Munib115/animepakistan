@@ -111,7 +111,7 @@ function HeaderContent() {
             />
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+          <div className="brand-text-container" style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
               <span style={{
                 fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
@@ -219,7 +219,7 @@ function HeaderContent() {
             title={isSoundOn ? 'UI Audio: ON (Click to Mute)' : 'UI Audio: OFF (Click to Unmute)'}
             aria-label="Toggle UI Sound"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
+            <span className="material-symbols-outlined header-btn-icon">
               {isSoundOn ? 'volume_up' : 'volume_off'}
             </span>
           </button>
@@ -246,9 +246,6 @@ function HeaderContent() {
                 ? '#00aa55' 
                 : 'var(--text-muted)',
               boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
             }}
             title={
               eyeComfort === 'warm'
@@ -259,37 +256,22 @@ function HeaderContent() {
             }
             aria-label="Toggle Eye Comfort Mode"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
+            <span className="material-symbols-outlined header-btn-icon">
               {eyeComfort === 'night' ? 'bedtime' : 'visibility'}
             </span>
           </button>
 
           {/* Language Switcher Pill (UR / EN) */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            background: 'rgba(0, 102, 51, 0.08)',
-            padding: '2px',
-            borderRadius: '8px',
-            border: '1px solid var(--glass-border)',
-            gap: '2px',
-            flexShrink: 0,
-          }}>
+          <div className="header-lang-pill">
             <button
               onClick={() => {
                 setLanguage('ur');
                 sound.playTabSwitch();
               }}
+              className="header-lang-btn"
               style={{
-                padding: '3px 6px',
-                borderRadius: '5px',
-                border: 'none',
                 background: language === 'ur' ? 'var(--color-primary)' : 'transparent',
                 color: language === 'ur' ? '#ffffff' : 'var(--text-secondary)',
-                fontWeight: 800,
-                fontSize: '0.68rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
               }}
               title="اردو"
             >
@@ -300,16 +282,10 @@ function HeaderContent() {
                 setLanguage('en');
                 sound.playTabSwitch();
               }}
+              className="header-lang-btn"
               style={{
-                padding: '3px 6px',
-                borderRadius: '5px',
-                border: 'none',
                 background: language === 'en' ? 'var(--color-primary)' : 'transparent',
                 color: language === 'en' ? '#ffffff' : 'var(--text-secondary)',
-                fontWeight: 800,
-                fontSize: '0.68rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
               }}
               title="English"
             >
