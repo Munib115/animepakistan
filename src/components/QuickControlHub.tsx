@@ -74,35 +74,33 @@ export default function QuickControlHub() {
 
   return (
     <div className="quick-hub-container" ref={hubRef} style={{ position: 'relative', zIndex: 9999 }}>
-      {/* Unified Single Navbar Quick Hub Button */}
+      {/* Unified Single Navbar Quick Settings Icon Button */}
       <button
         type="button"
         onClick={() => {
           setIsOpen((prev) => !prev);
           sound.playButton();
         }}
-        className="glass-btn-hub"
+        className="header-action-btn"
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '5px',
-          padding: '5px 10px',
-          borderRadius: '12px',
-          border: isOpen ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
           background: isOpen ? 'rgba(0, 102, 51, 0.12)' : '#ffffff',
+          border: isOpen ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
           color: isOpen ? 'var(--color-primary)' : 'var(--text-primary)',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
           cursor: 'pointer',
-          transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
-        title="Quick Control Hub"
-        aria-label="Open Quick Control Hub"
+        title={isUrdu ? 'سیٹنگز اور کنٹرولز' : 'Settings & Controls'}
+        aria-label="Settings & Controls"
       >
-        <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>
-          tune
-        </span>
-        <span style={{ fontSize: '0.72rem', fontWeight: 800 }}>
-          {isUrdu ? 'کنٹرول' : 'Controls'}
+        <span 
+          className="material-symbols-outlined header-btn-icon" 
+          style={{ 
+            color: isOpen ? 'var(--color-primary)' : 'inherit',
+            transition: 'transform 0.3s ease',
+            transform: isOpen ? 'rotate(90deg)' : 'none',
+          }}
+        >
+          settings
         </span>
       </button>
 

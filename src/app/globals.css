@@ -355,33 +355,17 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 }
 
 .brand-text-container {
-  display: none;
-}
-
-@media (min-width: 420px) {
-  .brand-text-container {
-    display: flex;
-  }
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .brand-pakistan-text {
-  display: none;
-}
-
-@media (min-width: 440px) {
-  .brand-pakistan-text {
-    display: inline;
-  }
+  display: inline;
 }
 
 .brand-subtitle-text {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .brand-subtitle-text {
-    display: block;
-  }
+  display: block;
 }
 
 .desktop-center-nav {
