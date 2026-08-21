@@ -125,13 +125,17 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         .cinematic-hero {
           position: relative;
           width: 100vw;
+          max-width: 100vw;
           min-height: 580px;
-          margin-left: calc(50% - 50vw);
+          left: 50%;
+          right: 50%;
+          margin-left: -50vw;
+          margin-right: -50vw;
           overflow: hidden;
           isolation: isolate;
           border: 0;
           border-radius: 0;
-          background: #06120b;
+          background: #020c06;
           box-shadow: 0 24px 60px -24px rgba(0, 55, 27, 0.36);
           user-select: none;
         }
@@ -149,41 +153,55 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           position: absolute;
           z-index: -1;
           inset: 0;
-          background: linear-gradient(90deg, rgba(2, 15, 8, 0.82) 0%, rgba(2, 15, 8, 0.7) 38%, rgba(2, 15, 8, 0.42) 72%, rgba(2, 15, 8, 0.32) 100%), linear-gradient(0deg, rgba(2, 15, 8, 0.62), rgba(2, 15, 8, 0.18) 58%);
+          background: 
+            linear-gradient(90deg, rgba(2, 15, 8, 0.94) 0%, rgba(2, 15, 8, 0.85) 45%, rgba(2, 15, 8, 0.45) 75%, rgba(2, 15, 8, 0.15) 100%), 
+            linear-gradient(0deg, rgba(2, 15, 8, 0.85) 0%, rgba(2, 15, 8, 0.2) 65%);
         }
-        .cinematic-hero-scrim.rtl { background: linear-gradient(270deg, rgba(2, 15, 8, 0.82) 0%, rgba(2, 15, 8, 0.7) 38%, rgba(2, 15, 8, 0.42) 72%, rgba(2, 15, 8, 0.32) 100%), linear-gradient(0deg, rgba(2, 15, 8, 0.62), rgba(2, 15, 8, 0.18) 58%); }
+        .cinematic-hero-scrim.rtl {
+          background: 
+            linear-gradient(270deg, rgba(2, 15, 8, 0.96) 0%, rgba(2, 15, 8, 0.88) 45%, rgba(2, 15, 8, 0.48) 75%, rgba(2, 15, 8, 0.15) 100%), 
+            linear-gradient(0deg, rgba(2, 15, 8, 0.85) 0%, rgba(2, 15, 8, 0.2) 65%);
+        }
         .cinematic-hero-content {
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: flex-start;
           min-height: 580px;
-          max-width: min(670px, 70%);
+          max-width: min(680px, 75%);
           padding: 56px 72px;
           color: #fff;
+          z-index: 1;
         }
-        .cinematic-hero-content.rtl { align-items: flex-end; text-align: right; margin-left: auto; }
+        .cinematic-hero-content.rtl {
+          align-items: flex-start;
+          text-align: right;
+          direction: rtl;
+          margin-inline-start: 0;
+          margin-inline-end: auto;
+        }
         .cinematic-hero-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
         .cinematic-hero-meta span, .cinematic-hero-genres { padding: 5px 9px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 7px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: rgba(255, 255, 255, 0.94); font-size: 0.75rem; font-weight: 700; }
-        .cinematic-hero-content h1 { max-width: 650px; margin: 0; color: #fff; font-size: clamp(2.1rem, 5vw, 4.3rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.98; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.65); }
+        .cinematic-hero-content h1 { max-width: 650px; margin: 0; color: #fff; font-size: clamp(2.1rem, 5vw, 4.3rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.98; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85); }
         .cinematic-hero-genres { display: inline-block; margin: 17px 0 0; color: #9af0bc; }
-        .cinematic-hero-description { display: -webkit-box; max-width: 590px; margin: 18px 0 0; overflow: hidden; color: rgba(255, 255, 255, 0.86); font-size: 1rem; line-height: 1.65; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+        .cinematic-hero-description { display: -webkit-box; max-width: 590px; margin: 18px 0 0; overflow: hidden; color: rgba(255, 255, 255, 0.90); font-size: 1rem; line-height: 1.65; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
         .cinematic-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
         .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 14px; font-weight: 800; transition: transform 160ms ease, background 160ms ease; }
         .cinematic-hero-actions :global(a):hover { transform: translateY(-2px); }
         .cinematic-hero-primary { background: #00994d; border: 1px solid rgba(255, 255, 255, 0.36); box-shadow: 0 10px 24px rgba(0, 153, 77, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.34); }
         .cinematic-hero-secondary { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.34); backdrop-filter: blur(14px); }
         .cinematic-hero-arrow { position: absolute; top: 50%; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.38); border-radius: 50%; background: rgba(5, 18, 10, 0.56); backdrop-filter: blur(14px); color: #fff; cursor: pointer; transform: translateY(-50%); }
-        .cinematic-hero-arrow.previous { left: 20px; } .cinematic-hero-arrow.next { right: 20px; }
+        .cinematic-hero-arrow.previous { inset-inline-start: 20px; } .cinematic-hero-arrow.next { inset-inline-end: 20px; }
         .cinematic-hero-dots { position: absolute; bottom: 20px; left: 50%; display: flex; gap: 7px; padding: 7px 10px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; background: rgba(4, 18, 10, 0.55); backdrop-filter: blur(12px); transform: translateX(-50%); }
         .cinematic-hero-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 99px; background: rgba(255, 255, 255, 0.42); cursor: pointer; transition: width 180ms ease, background 180ms ease; }
         .cinematic-hero-dots button.active { width: 25px; background: #00d66b; }
         @keyframes heroDrift { from { transform: scale(1.01); } to { transform: scale(1.055); } }
         @media (max-width: 700px) {
-          .cinematic-hero { width: 100%; min-height: 318px; margin-left: 0; border-radius: 19px; }
+          .cinematic-hero { width: 100%; min-height: 318px; margin-left: 0; margin-right: 0; left: 0; right: 0; border-radius: 19px; }
           .cinematic-hero-image { object-position: center 28%; image-rendering: auto; }
           .cinematic-hero-scrim, .cinematic-hero-scrim.rtl { background: linear-gradient(0deg, rgba(2, 15, 8, 0.96) 0%, rgba(2, 15, 8, 0.74) 49%, rgba(2, 15, 8, 0.08) 100%); }
           .cinematic-hero-content, .cinematic-hero-content.rtl { justify-content: flex-end; min-height: 318px; max-width: 100%; padding: 22px 13px 45px; text-align: left; align-items: flex-start; margin: 0; }
+          .cinematic-hero-content.rtl { text-align: right; }
           .cinematic-hero-content h1 { max-width: 88%; font-size: clamp(1.48rem, 8.5vw, 2.15rem); line-height: 1; }
           .cinematic-hero-meta { gap: 4px; margin-bottom: 8px; } .cinematic-hero-meta span { font-size: 0.57rem; padding: 3px 5px; }
           .cinematic-hero-meta span:nth-child(n+4) { display: none; }
@@ -191,7 +209,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           .cinematic-hero-description { margin-top: 7px; font-size: 0.7rem; line-height: 1.4; -webkit-line-clamp: 1; }
           .cinematic-hero-actions { width: 100%; gap: 7px; margin-top: 12px; } .cinematic-hero-actions :global(a) { min-height: 34px; padding: 0 10px; border-radius: 10px; font-size: 0.7rem; }
           .cinematic-hero-actions :global(.material-symbols-outlined) { font-size: 17px; }
-          .cinematic-hero-arrow { top: 31%; width: 31px; height: 31px; } .cinematic-hero-arrow :global(.material-symbols-outlined) { font-size: 20px; } .cinematic-hero-arrow.previous { left: 7px; } .cinematic-hero-arrow.next { right: 7px; }
+          .cinematic-hero-arrow { top: 31%; width: 31px; height: 31px; } .cinematic-hero-arrow :global(.material-symbols-outlined) { font-size: 20px; } .cinematic-hero-arrow.previous { inset-inline-start: 7px; } .cinematic-hero-arrow.next { inset-inline-end: 7px; }
           .cinematic-hero-dots { bottom: 8px; gap: 4px; padding: 5px 8px; } .cinematic-hero-dots button { width: 5px; height: 5px; } .cinematic-hero-dots button.active { width: 17px; }
         }
       `}</style>
