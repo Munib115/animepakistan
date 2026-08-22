@@ -22,7 +22,12 @@ export function sanitizeStreamUrl(url: string): string {
 export async function resolveStreamSources(targetUrl: string): Promise<StreamSource[]> {
   if (!targetUrl) return [];
 
-  const cleanTarget = targetUrl.replace(/^http:\/\//i, 'https://');
+  // Normalize target domain to active animesalt.me
+  let cleanTarget = targetUrl
+    .replace(/^http:\/\//i, 'https://')
+    .replace(/animesalt\.link/gi, 'animesalt.me')
+    .replace(/\/movies\//gi, '/tv/')
+    .replace(/\/series\//gi, '/tv/');
 
   // Check cache first for instant loading
   const cached = streamCache.get(cleanTarget);
@@ -39,7 +44,7 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
     const res = await fetch(cleanTarget, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Referer': 'https://animesalt.link/',
+        'Referer': 'https://animesalt.me/',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       },
       signal: controller.signal,
@@ -67,11 +72,35 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
         );
       };
 
-      // 1. Check for primary video servers
+      // 1. Parse animesalt.me onclick selectEpisode JSON format
+      $('[onclick*="selectEpisode"]').each((_, el) => {
+        const onclick = $(el).attr('onclick') || '';
+        const jsonMatch = onclick.match(/selectEpisode\((\[[^)]*?\])\s*,\s*["']/);
+        if (jsonMatch) {
+          try {
+            const rawJson = jsonMatch[1].replace(/\\"/g, '"').replace(/\\\//g, '/');
+            const parsed = JSON.parse(rawJson);
+            if (Array.isArray(parsed)) {
+              for (const s of parsed) {
+                const streamUrl = sanitizeStreamUrl(s.url || '');
+                if (streamUrl && !isBadUrl(streamUrl) && !sources.some(x => x.url === streamUrl)) {
+                  sources.push({
+                    label: s.lang ? `${s.name || 'Server'} (${s.lang})` : (s.name || `Server ${sources.length + 1}`),
+                    url: streamUrl,
+                    isMultiAudio: true
+                  });
+                }
+              }
+            }
+          } catch (e) {}
+        }
+      });
+
+      // 2. Check for primary video iframe servers
       $('iframe').each((i, el) => {
         const rawSrc = $(el).attr('src') || $(el).attr('data-src') || '';
         if (rawSrc) {
-          let fullSrc = rawSrc.startsWith('//') ? 'https:' + rawSrc : (rawSrc.startsWith('/') ? 'https://animesalt.link' + rawSrc : rawSrc);
+          let fullSrc = rawSrc.startsWith('//') ? 'https:' + rawSrc : (rawSrc.startsWith('/') ? 'https://animesalt.me' + rawSrc : rawSrc);
           fullSrc = sanitizeStreamUrl(fullSrc);
 
           if (!isBadUrl(fullSrc) && !sources.some(s => s.url === fullSrc)) {
@@ -84,11 +113,11 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
         }
       });
 
-      // 2. Check for server buttons / player options / data-embed attributes
+      // 3. Check for server buttons / player options / data-embed attributes
       $('[data-player], [data-embed], .playex, [class*="server-btn"]').each((i, el) => {
         const rawEmbed = $(el).attr('data-embed') || $(el).attr('data-player') || $(el).attr('data-src') || '';
         if (rawEmbed && !rawEmbed.endsWith('.jpg') && !rawEmbed.endsWith('.png') && !rawEmbed.endsWith('.webp')) {
-          let fullEmbed = rawEmbed.startsWith('//') ? 'https:' + rawEmbed : (rawEmbed.startsWith('/') ? 'https://animesalt.link' + rawEmbed : rawEmbed);
+          let fullEmbed = rawEmbed.startsWith('//') ? 'https:' + rawEmbed : (rawEmbed.startsWith('/') ? 'https://animesalt.me' + rawEmbed : rawEmbed);
           fullEmbed = sanitizeStreamUrl(fullEmbed);
 
           if (!isBadUrl(fullEmbed) && !sources.some(s => s.url === fullEmbed)) {
