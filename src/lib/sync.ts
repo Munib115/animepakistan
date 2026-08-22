@@ -56,9 +56,8 @@ export async function checkAndSyncNewAnime(force = false): Promise<{ synced: num
   const existingMap = new Set(existing.map(i => i.slug.toLowerCase().trim()));
 
   const sitemaps = [
-    { url: 'https://animesalt.link/movies-sitemap.xml', type: 'movie' },
-    { url: 'https://animesalt.link/series-sitemap1.xml', type: 'series' },
-    { url: 'https://animesalt.link/series-sitemap2.xml', type: 'series' }
+    { url: 'https://animevilla.org/anime-sitemap.xml', type: 'series' },
+    { url: 'https://animevilla.org/episode-sitemap.xml', type: 'movie' }
   ];
 
   const newEntries: { url: string; type: 'movie' | 'series' }[] = [];

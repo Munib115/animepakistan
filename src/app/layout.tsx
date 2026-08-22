@@ -79,10 +79,11 @@ export default function RootLayout({
         />
 
         {/* Preconnect to Poster Image CDNs for Instant 1-Second Loading */}
+        {/* Modern Web Preconnects for high-speed streaming */}
         <link rel="preconnect" href="https://image.tmdb.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://image.tmdb.org" />
-        <link rel="preconnect" href="https://img.animesalt.link" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://img.animesalt.link" />
+        <link rel="preconnect" href="https://hsastream.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://hsastream.com" />
         <link rel="preconnect" href="https://s4.anilist.co" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://s4.anilist.co" />
       </head>

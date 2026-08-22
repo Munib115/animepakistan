@@ -56,7 +56,7 @@ export default async function EpisodeWatchPage(props: PageProps) {
     number: 1,
     title: decodedEpSlug.replace(/-/g, ' ').toUpperCase(),
     slug: decodedEpSlug,
-    url: `https://animesalt.link/episode/${decodedEpSlug}/`,
+    url: `/watch/${slug}/${decodedEpSlug}`,
     thumbnail: anime.poster || '',
   };
 

@@ -27,7 +27,7 @@ export default function WatchContainer({
   const [streamSources, setStreamSources] = useState<StreamSource[]>(sources || []);
   const [selectedServerIndex, setSelectedServerIndex] = useState(0);
   
-  const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? anime.url : `https://animesalt.link/episode/${targetSlug}/`);
+  const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? `/watch/${anime.slug}` : `/watch/${anime.slug}/${targetSlug}`);
 
   // Client-side stream resolver fallback if server was blocked by cloud datacenter firewalls
   useEffect(() => {
