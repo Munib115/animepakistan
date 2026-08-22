@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
-import { resolveStreamSources, StreamSource } from '@/lib/resolver';
+import { resolveStreamSources } from '@/lib/resolver';
 import { getAnimeDb } from '@/lib/db';
 import { animeDescription, animeImage, animeName } from '@/lib/seo';
 
@@ -60,19 +60,11 @@ export default async function MovieWatchPage(props: PageProps) {
     );
   }
 
-  // Use pre-saved direct server sources from database if available (instant on Vercel)
-  let sources: StreamSource[] = [];
-  if ((anime as any).sources && (anime as any).sources.length > 0) {
-    sources = (anime as any).sources.map((s: any, idx: number) => ({
-      label: s.lang ? `${s.name || 'Server'} (${s.lang})` : `Server ${idx + 1}`,
-      url: s.url,
-      isMultiAudio: true,
-    }));
-  } else if ((anime as any).streamUrl) {
-    sources = [{ label: 'Server 1', url: (anime as any).streamUrl, isMultiAudio: true }];
-  } else {
-    sources = await resolveStreamSources(anime.url);
-  }
+  // Use pre-cached streamUrl from db first if available, otherwise resolve dynamically
+  const cachedStreamUrl = (anime as any).streamUrl;
+  const sources = cachedStreamUrl
+    ? [{ label: 'Server 1', url: cachedStreamUrl as string, isMultiAudio: true }]
+    : await resolveStreamSources(anime.url);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', position: 'relative' }}>

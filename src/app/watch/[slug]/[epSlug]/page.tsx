@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
-import { resolveStreamSources, StreamSource } from '@/lib/resolver';
+import { resolveStreamSources } from '@/lib/resolver';
 import { getAnimeDb } from '@/lib/db';
 
 interface PageProps {
@@ -60,19 +60,11 @@ export default async function EpisodeWatchPage(props: PageProps) {
     thumbnail: anime.poster || '',
   };
 
-  // Use pre-saved direct server sources from database if available (instant on Vercel)
-  let sources: StreamSource[] = [];
-  if ((episode as any).sources && (episode as any).sources.length > 0) {
-    sources = (episode as any).sources.map((s: any, idx: number) => ({
-      label: s.lang ? `${s.name || 'Server'} (${s.lang})` : `Server ${idx + 1}`,
-      url: s.url,
-      isMultiAudio: true,
-    }));
-  } else if ((episode as any).streamUrl) {
-    sources = [{ label: 'Server 1', url: (episode as any).streamUrl, isMultiAudio: true }];
-  } else {
-    sources = await resolveStreamSources(episode.url);
-  }
+  // Resolve streams: use pre-cached streamUrl if available, otherwise live resolve
+  const cachedStreamUrl = (episode as any).streamUrl;
+  const sources = cachedStreamUrl
+    ? [{ label: 'Server 1', url: cachedStreamUrl as string, isMultiAudio: true }]
+    : await resolveStreamSources(episode.url);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', position: 'relative' }}>
