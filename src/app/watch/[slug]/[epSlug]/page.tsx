@@ -60,12 +60,8 @@ export default async function EpisodeWatchPage(props: PageProps) {
     thumbnail: anime.poster || '',
   };
 
-  // Use pre-cached streamUrl from db first (works on Vercel without scraping)
-  // Only fall back to live scraping if no cached URL exists
-  const cachedStreamUrl = (episode as any).streamUrl;
-  const sources = cachedStreamUrl
-    ? [{ label: 'Server 1', url: cachedStreamUrl as string, isMultiAudio: true }]
-    : await resolveStreamSources(episode.url);
+  // Resolve streams dynamically from AnimeSalt using episode URL
+  const sources = await resolveStreamSources(episode.url);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', position: 'relative' }}>

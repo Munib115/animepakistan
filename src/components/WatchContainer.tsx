@@ -394,7 +394,8 @@ export default function WatchContainer({
               src={activeMirror}
               title={displayName}
               allowFullScreen
-              referrerPolicy="origin"
+              referrerPolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               style={{
                 position: 'absolute',

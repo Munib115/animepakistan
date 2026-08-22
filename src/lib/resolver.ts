@@ -33,36 +33,18 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
   const sources: StreamSource[] = [];
 
   try {
-    const proxyBase = process.env.NEXT_PUBLIC_STREAM_PROXY_URL || process.env.STREAM_PROXY_URL || 'https://panime-stream-proxy.munibhaseeb8.workers.dev';
-    const fetchTarget = (cleanTarget.includes('animesalt.link') && proxyBase)
-      ? `${proxyBase}?url=${encodeURIComponent(cleanTarget)}`
-      : cleanTarget;
-
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s resilient timeout
+    const timeoutId = setTimeout(() => controller.abort(), 7000);
 
-    let res = await fetch(fetchTarget, {
+    const res = await fetch(cleanTarget, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
         'Referer': 'https://animesalt.link/',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       },
       signal: controller.signal,
-      next: { revalidate: 1800 } // Cache at Next.js fetch layer for 30 mins
+      next: { revalidate: 1800 }
     });
-
-    // If proxy returned error or status wasn't ok, try direct fetch
-    if (!res.ok && fetchTarget !== cleanTarget) {
-      res = await fetch(cleanTarget, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-          'Referer': 'https://animesalt.link/',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        },
-        signal: controller.signal,
-        next: { revalidate: 1800 }
-      });
-    }
 
     clearTimeout(timeoutId);
 
