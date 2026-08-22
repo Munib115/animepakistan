@@ -90,13 +90,14 @@ export default function ContinueWatchingSection() {
               className="glass-card continue-card"
               style={{
                 flexShrink: 0,
-                width: '240px',
-                borderRadius: '14px',
+                width: '230px',
+                borderRadius: '16px',
                 overflow: 'hidden',
                 position: 'relative',
-                background: '#ffffff',
-                boxShadow: '0 6px 18px rgba(0, 50, 25, 0.08)',
-                border: '1.5px solid var(--glass-border)',
+                background: 'rgba(8, 22, 14, 0.85)',
+                backdropFilter: 'blur(20px)',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+                border: '1px solid rgba(0, 230, 118, 0.18)',
                 transition: 'transform 0.25s ease, box-shadow 0.25s ease',
               }}
             >
@@ -220,7 +221,7 @@ export default function ContinueWatchingSection() {
                   <h3 style={{
                     fontSize: '0.82rem',
                     fontWeight: 800,
-                    color: 'var(--text-primary)',
+                    color: '#ffffff',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
@@ -233,11 +234,11 @@ export default function ContinueWatchingSection() {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     fontSize: '0.72rem',
-                    color: 'var(--text-muted)',
+                    color: 'rgba(255, 255, 255, 0.65)',
                     fontWeight: 600,
                   }}>
                     <span>{item.type === 'movie' ? 'Movie' : (item.epTitle || `Episode ${item.epNumber || 1}`)}</span>
-                    <span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>
+                    <span style={{ color: '#00ff88', fontWeight: 800 }}>
                       {language === 'ur' ? 'جاری رکھیں' : 'Resume'} →
                     </span>
                   </div>

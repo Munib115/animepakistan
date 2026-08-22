@@ -108,29 +108,29 @@ export default function PWAInstallBanner() {
 
   return (
     <>
-      {/* Liquid Glass Bottom Download App Banner */}
+      {/* Liquid Glass Modern PWA App Banner */}
       <div 
         className="pwa-install-banner"
         style={{
           position: 'fixed',
-          bottom: 'calc(76px + var(--sab, 0px))',
-          left: '14px',
-          right: '14px',
-          maxWidth: '520px',
+          bottom: 'calc(74px + var(--sab, 0px))',
+          left: '16px',
+          right: '16px',
+          maxWidth: '440px',
           margin: '0 auto',
           zIndex: 99998,
-          background: 'rgba(255, 255, 255, 0.94)',
+          background: 'rgba(8, 22, 14, 0.92)',
           backdropFilter: 'blur(28px) saturate(200%)',
           WebkitBackdropFilter: 'blur(28px) saturate(200%)',
-          border: '1.5px solid rgba(0, 102, 51, 0.25)',
-          borderRadius: '20px',
-          boxShadow: '0 20px 48px -8px rgba(0, 70, 35, 0.28), 0 8px 18px rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1)',
-          padding: '12px 14px',
+          border: '1px solid rgba(0, 230, 118, 0.2)',
+          borderRadius: '18px',
+          boxShadow: '0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 230, 118, 0.08)',
+          padding: '9px 12px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '10px',
-          animation: 'bannerSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+          gap: '8px',
+          animation: 'bannerSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
           direction: isUrdu ? 'rtl' : 'ltr',
         }}
       >

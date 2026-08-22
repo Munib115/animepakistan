@@ -54,20 +54,22 @@ function TabBarContent() {
       className="apple-liquid-glass-dock"
       style={{
         position: 'fixed',
-        bottom: 'calc(10px + var(--sab, 0px))',
-        left: '14px',
-        right: '14px',
+        bottom: 'calc(12px + var(--sab, 0px))',
+        left: '16px',
+        right: '16px',
+        maxWidth: '440px',
+        margin: '0 auto',
         zIndex: 99999,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         padding: '6px 8px',
-        background: 'rgba(255, 255, 255, 0.78)',
-        backdropFilter: 'blur(30px) saturate(210%)',
-        WebkitBackdropFilter: 'blur(30px) saturate(210%)',
-        borderRadius: '9999px',
-        border: '1.5px solid rgba(255, 255, 255, 0.9)',
-        boxShadow: '0 16px 36px -4px rgba(0, 70, 35, 0.18), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 1)',
+        background: 'rgba(8, 22, 14, 0.88)',
+        backdropFilter: 'blur(32px) saturate(200%)',
+        WebkitBackdropFilter: 'blur(32px) saturate(200%)',
+        borderRadius: '24px',
+        border: '1px solid rgba(0, 230, 118, 0.25)',
+        boxShadow: '0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 230, 118, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
@@ -82,34 +84,35 @@ function TabBarContent() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '2px',
+            gap: '3px',
             flex: 1,
-            padding: '7px 4px',
-            borderRadius: '9999px',
+            padding: '6px 4px',
+            borderRadius: '16px',
             textDecoration: 'none',
-            color: tab.active ? 'var(--color-primary)' : 'var(--text-muted)',
-            transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            background: tab.active ? 'rgba(0, 102, 51, 0.12)' : 'transparent',
-            boxShadow: tab.active ? '0 2px 8px rgba(0, 102, 51, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.8)' : 'none',
+            color: tab.active ? '#00ff88' : 'rgba(255, 255, 255, 0.6)',
+            transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            background: tab.active ? 'rgba(0, 230, 118, 0.15)' : 'transparent',
+            boxShadow: tab.active ? '0 0 12px rgba(0, 230, 118, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2)' : 'none',
           }}
           className={`dock-tab-item ${tab.active ? 'active-tab' : ''}`}
         >
           <span 
             className="material-symbols-outlined dock-icon" 
             style={{ 
-              fontSize: '22px',
-              transform: tab.active ? 'scale(1.18)' : 'scale(1)',
-              transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease',
-              filter: tab.active ? 'drop-shadow(0 2px 4px rgba(0, 102, 51, 0.25))' : 'none',
+              fontSize: '21px',
+              transform: tab.active ? 'scale(1.12)' : 'scale(1)',
+              transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease',
+              filter: tab.active ? 'drop-shadow(0 0 6px rgba(0, 255, 136, 0.6))' : 'none',
             }}
           >
             {tab.icon}
           </span>
           <span style={{
-            fontSize: '0.66rem',
-            fontWeight: tab.active ? 900 : 600,
-            letterSpacing: '0.01em',
+            fontSize: '0.64rem',
+            fontWeight: tab.active ? 800 : 500,
+            letterSpacing: '0.02em',
             transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap',
           }}>
             {tab.label}
           </span>
@@ -125,24 +128,24 @@ function TabBarContent() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '2px',
+          gap: '3px',
           flex: 1,
-          padding: '7px 4px',
-          borderRadius: '9999px',
+          padding: '6px 4px',
+          borderRadius: '16px',
           background: 'none',
           border: 'none',
           cursor: 'pointer',
-          color: 'var(--color-primary)',
+          color: 'rgba(255, 255, 255, 0.6)',
           fontFamily: 'inherit',
           transition: 'all 0.25s ease',
         }}
         className="dock-tab-item"
         aria-label="Switch Language"
       >
-        <span className="material-symbols-outlined dock-icon" style={{ fontSize: '22px' }}>
+        <span className="material-symbols-outlined dock-icon" style={{ fontSize: '21px' }}>
           translate
         </span>
-        <span style={{ fontSize: '0.66rem', fontWeight: 800 }}>
+        <span style={{ fontSize: '0.64rem', fontWeight: 700, whiteSpace: 'nowrap' }}>
           {language === 'ur' ? 'EN' : 'اردو'}
         </span>
       </button>
