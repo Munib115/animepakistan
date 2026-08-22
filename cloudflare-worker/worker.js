@@ -33,8 +33,9 @@ export default {
 
       // Forward client headers (especially Range) to upstream
       const upstreamHeaders = new Headers({
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
         'Referer': 'https://animesalt.link/',
+        'Origin': 'https://animesalt.link',
         'Accept': '*/*',
       });
 
