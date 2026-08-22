@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { AnimeItem, Episode } from '@/types/anime';
-import { StreamSource } from '@/lib/resolver';
+import { StreamSource, sanitizeStreamUrl } from '@/lib/resolver';
 import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
 import { saveWatchProgress, getAnimeWatchProgress, WatchProgressItem } from '@/lib/watchHistory';
@@ -25,9 +25,12 @@ export default function WatchContainer({
 
   const targetSlug = currentEpisode?.slug || anime.slug;
   const [selectedServerIndex, setSelectedServerIndex] = useState(0);
-  const activeMirror = sources && sources.length > selectedServerIndex && sources[selectedServerIndex].url
+  
+  const rawMirror = sources && sources.length > selectedServerIndex && sources[selectedServerIndex]?.url
     ? sources[selectedServerIndex].url
-    : (sources && sources.length > 0 && sources[0].url ? sources[0].url : `https://as-cdn21.top/video/${targetSlug}/`);
+    : (sources && sources.length > 0 && sources[0]?.url ? sources[0].url : `https://as-cdn26.top/video/${targetSlug}/`);
+
+  const activeMirror = sanitizeStreamUrl(rawMirror);
 
   const [isTheater, setIsTheater] = useState(false);
   const [isLightsOff, setIsLightsOff] = useState(false);
@@ -369,6 +372,7 @@ export default function WatchContainer({
               title={displayName}
               allowFullScreen
               referrerPolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               style={{
                 position: 'absolute',
@@ -466,51 +470,6 @@ export default function WatchContainer({
             <span>4K ULTRA HD</span>
           </div>
         </div>
-
-        {/* Subtle Backup Stream Switcher Bar */}
-        {sources.length > 1 && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '8px 12px',
-            borderRadius: '10px',
-            background: 'rgba(0, 102, 51, 0.05)',
-            border: '1px solid var(--glass-border)',
-            marginTop: '8px',
-            flexWrap: 'wrap',
-            gap: '8px',
-          }}>
-            <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-              {language === 'ur' ? 'ویڈیو نہیں چل رہی؟ دوسرا بیک اپ سرور آزمائیں:' : 'Video not loading? Try backup stream:'}
-            </span>
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedServerIndex((prev) => (prev + 1) % sources.length);
-                setIframeKey((k) => k + 1);
-                sound.playButton();
-              }}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
-                padding: '4px 12px',
-                borderRadius: '6px',
-                border: '1px solid var(--color-primary)',
-                background: 'var(--color-primary)',
-                color: '#ffffff',
-                fontSize: '0.72rem',
-                fontWeight: 800,
-                cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(0, 102, 51, 0.25)',
-              }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>sync</span>
-              <span>{language === 'ur' ? 'بیک اپ سرور تبدیل کریں' : 'Switch to Backup Stream'}</span>
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Series Episodes Playlist Grid */}

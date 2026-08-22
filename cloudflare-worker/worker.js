@@ -18,7 +18,7 @@ export default {
       });
     }
 
-    // Extract target video URL from query param: ?url=https://as-cdn21.top/video/...
+    // Extract target video URL from query param: ?url=https://as-cdn26.top/video/...
     const targetUrl = url.searchParams.get('url');
 
     if (!targetUrl) {

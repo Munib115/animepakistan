@@ -143202,5 +143202,45 @@
       ]
     },
     "backdrop": "https://image.tmdb.org/t/p/original/sD3OAmfxHRXWmZFROjRRL3HcPXj.jpg"
+  },
+  {
+    "title": "What If...?",
+    "slug": "what-if",
+    "url": "https://animesalt.link/series/what-if/",
+    "type": "series",
+    "poster": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==",
+    "description": "",
+    "genres": [
+      "Action",
+      "Fantasy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "English",
+      "Japanese"
+    ],
+    "episodes": [],
+    "anilist": null,
+    "backdrop": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg=="
+  },
+  {
+    "title": "DOTA: Dragon's Blood",
+    "slug": "dota-dragons-blood",
+    "url": "https://animesalt.link/series/dota-dragons-blood/",
+    "type": "series",
+    "poster": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==",
+    "description": "",
+    "genres": [
+      "Action",
+      "Fantasy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "English",
+      "Japanese"
+    ],
+    "episodes": [],
+    "anilist": null,
+    "backdrop": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg=="
   }
 ]

@@ -6,26 +6,35 @@ export interface StreamSource {
   isMultiAudio: boolean;
 }
 
-// In-Memory Stream Cache (1 Hour TTL)
+// In-Memory Stream Cache (30 Min TTL)
 const streamCache = new Map<string, { sources: StreamSource[]; timestamp: number }>();
-const CACHE_TTL = 60 * 60 * 1000; // 1 Hour
+const CACHE_TTL = 30 * 60 * 1000; // 30 mins
+
+// Normalize any dead/legacy CDN domains (e.g. as-cdn21.top -> as-cdn26.top)
+export function sanitizeStreamUrl(url: string): string {
+  if (!url) return '';
+  return url
+    .replace(/^http:\/\//i, 'https://')
+    .replace(/as-cdn2[0-5]\.top/gi, 'as-cdn26.top')
+    .replace(/as-cdn(?!26)\d+\.top/gi, 'as-cdn26.top');
+}
 
 export async function resolveStreamSources(targetUrl: string): Promise<StreamSource[]> {
   if (!targetUrl) return [];
 
   const cleanTarget = targetUrl.replace(/^http:\/\//i, 'https://');
 
-  // Check cache first for 0ms instant loading
+  // Check cache first for instant loading
   const cached = streamCache.get(cleanTarget);
   if (cached && Date.now() - cached.timestamp < CACHE_TTL && cached.sources.length > 0) {
-    return cached.sources;
+    return cached.sources.map(s => ({ ...s, url: sanitizeStreamUrl(s.url) }));
   }
 
   const sources: StreamSource[] = [];
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5s fast timeout
+    const timeoutId = setTimeout(() => controller.abort(), 7000); // 7s resilient timeout
 
     const res = await fetch(cleanTarget, {
       headers: {
@@ -34,7 +43,7 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       },
       signal: controller.signal,
-      next: { revalidate: 3600 } // Cache at Next.js fetch layer for 1 hour
+      next: { revalidate: 1800 } // Cache at Next.js fetch layer for 30 mins
     });
 
     clearTimeout(timeoutId);
@@ -58,43 +67,33 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
         );
       };
 
-      // 1. Check for primary high-speed CDN video servers (e.g. as-cdn21.top, as-cdn*.top)
+      // 1. Check for primary video servers
       $('iframe').each((i, el) => {
-        const src = $(el).attr('src') || $(el).attr('data-src') || '';
-        if (src) {
-          const fullSrc = src.startsWith('//') ? 'https:' + src : (src.startsWith('/') ? 'https://animesalt.link' + src : src);
+        const rawSrc = $(el).attr('src') || $(el).attr('data-src') || '';
+        if (rawSrc) {
+          let fullSrc = rawSrc.startsWith('//') ? 'https:' + rawSrc : (rawSrc.startsWith('/') ? 'https://animesalt.link' + rawSrc : rawSrc);
+          fullSrc = sanitizeStreamUrl(fullSrc);
+
           if (!isBadUrl(fullSrc) && !sources.some(s => s.url === fullSrc)) {
-            if (src.includes('as-cdn') || src.includes('.top/video') || src.includes('/video/')) {
-              sources.push({
-                label: 'Multi-Audio VIP HD',
-                url: fullSrc,
-                isMultiAudio: true
-              });
-            } else if (src.includes('multi-lang-plyr') || src.includes('player.php')) {
-              sources.push({
-                label: 'Multi-Language HD Stream',
-                url: fullSrc,
-                isMultiAudio: true
-              });
-            } else {
-              sources.push({
-                label: `HD Server ${sources.length + 1}`,
-                url: fullSrc,
-                isMultiAudio: false
-              });
-            }
+            sources.push({
+              label: `Server ${sources.length + 1}`,
+              url: fullSrc,
+              isMultiAudio: true
+            });
           }
         }
       });
 
-      // 2. Check for server buttons / dooplay player options / data-embed attributes
+      // 2. Check for server buttons / player options / data-embed attributes
       $('[data-player], [data-embed], .playex, [class*="server-btn"]').each((i, el) => {
-        const embed = $(el).attr('data-embed') || $(el).attr('data-player') || $(el).attr('data-src') || '';
-        if (embed) {
-          let fullEmbed = embed.startsWith('//') ? 'https:' + embed : (embed.startsWith('/') ? 'https://animesalt.link' + embed : embed);
+        const rawEmbed = $(el).attr('data-embed') || $(el).attr('data-player') || $(el).attr('data-src') || '';
+        if (rawEmbed && !rawEmbed.endsWith('.jpg') && !rawEmbed.endsWith('.png') && !rawEmbed.endsWith('.webp')) {
+          let fullEmbed = rawEmbed.startsWith('//') ? 'https:' + rawEmbed : (rawEmbed.startsWith('/') ? 'https://animesalt.link' + rawEmbed : rawEmbed);
+          fullEmbed = sanitizeStreamUrl(fullEmbed);
+
           if (!isBadUrl(fullEmbed) && !sources.some(s => s.url === fullEmbed)) {
             sources.push({
-              label: `HD Server ${sources.length + 1}`,
+              label: `Server ${sources.length + 1}`,
               url: fullEmbed,
               isMultiAudio: false
             });
@@ -103,7 +102,7 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
       });
     }
   } catch (err: any) {
-    console.warn(`[Resolver] Network fetch slow or timed out for ${targetUrl}, using fast CDN fallback`);
+    console.warn(`[Resolver] Network fetch slow or timed out for ${targetUrl}, using active CDN fallback`);
   }
 
   // Fast Deterministic CDN Fallback if scraping timed out
@@ -112,8 +111,8 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
     const slug = slugMatch ? slugMatch[1] : '';
     if (slug) {
       sources.push({
-        label: 'Multi-Audio VIP HD',
-        url: `https://as-cdn21.top/video/${slug}/`,
+        label: 'Server 1',
+        url: `https://as-cdn26.top/video/${slug}/`,
         isMultiAudio: true,
       });
     }
