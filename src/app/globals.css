@@ -865,3 +865,30 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .app-loader *, .app-loader::before { animation: none !important; }
 }
+
+/* Premium Compact PWA Install Banner styling */
+.pwa-install-banner {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  left: auto !important;
+  width: 360px !important;
+  max-width: 90vw !important;
+  z-index: 99998 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 32px rgba(0, 51, 25, 0.22) !important;
+  padding: 8px 10px !important;
+  gap: 8px !important;
+}
+
+@media (max-width: 768px) {
+  .pwa-install-banner {
+    bottom: calc(76px + var(--sab, 0px)) !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    border-radius: 14px !important;
+  }
+}
+

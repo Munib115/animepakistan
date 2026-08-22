@@ -60,7 +60,7 @@ export default async function EpisodeWatchPage(props: PageProps) {
     thumbnail: anime.poster || '',
   };
 
-  // Resolve streams dynamically in real-time using episode URL
+  // Resolve streams dynamically from AnimeSalt using episode URL
   const sources = await resolveStreamSources(episode.url);
 
   return (

@@ -48,8 +48,6 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
         return (
           !lower ||
           lower.startsWith('about:blank') ||
-          lower.includes('short.icu') ||
-          lower.includes('player.php') ||
           lower.includes('google') ||
           lower.includes('doubleclick') ||
           lower.includes('facebook') ||
@@ -63,14 +61,28 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
       // 1. Check for primary high-speed CDN video servers (e.g. as-cdn21.top, as-cdn*.top)
       $('iframe').each((i, el) => {
         const src = $(el).attr('src') || $(el).attr('data-src') || '';
-        if (src && (src.includes('as-cdn') || src.includes('.top/video') || src.includes('/video/'))) {
+        if (src) {
           const fullSrc = src.startsWith('//') ? 'https:' + src : (src.startsWith('/') ? 'https://animesalt.link' + src : src);
           if (!isBadUrl(fullSrc) && !sources.some(s => s.url === fullSrc)) {
-            sources.push({
-              label: 'Multi-Audio VIP HD',
-              url: fullSrc,
-              isMultiAudio: true
-            });
+            if (src.includes('as-cdn') || src.includes('.top/video') || src.includes('/video/')) {
+              sources.push({
+                label: 'Multi-Audio VIP HD',
+                url: fullSrc,
+                isMultiAudio: true
+              });
+            } else if (src.includes('multi-lang-plyr') || src.includes('player.php')) {
+              sources.push({
+                label: 'Multi-Language HD Stream',
+                url: fullSrc,
+                isMultiAudio: true
+              });
+            } else {
+              sources.push({
+                label: `HD Server ${sources.length + 1}`,
+                url: fullSrc,
+                isMultiAudio: false
+              });
+            }
           }
         }
       });
@@ -84,21 +96,6 @@ export async function resolveStreamSources(targetUrl: string): Promise<StreamSou
             sources.push({
               label: `HD Server ${sources.length + 1}`,
               url: fullEmbed,
-              isMultiAudio: false
-            });
-          }
-        }
-      });
-
-      // 3. Fallback to any generic valid video iframes
-      $('iframe').each((i, el) => {
-        const src = $(el).attr('src') || $(el).attr('data-src') || '';
-        if (src) {
-          let fullSrc = src.startsWith('//') ? 'https:' + src : (src.startsWith('/') ? 'https://animesalt.link' + src : src);
-          if (!isBadUrl(fullSrc) && !sources.some(s => s.url === fullSrc)) {
-            sources.push({
-              label: `Mirror ${sources.length + 1}`,
-              url: fullSrc,
               isMultiAudio: false
             });
           }

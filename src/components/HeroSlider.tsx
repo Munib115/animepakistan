@@ -96,11 +96,11 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         <div className="cinematic-hero-actions">
           <Link href={watchLink} className="cinematic-hero-primary">
             <span className="material-symbols-outlined">play_arrow</span>
-            {t('watchNow')}
+            <span>{t('watchNow')}</span>
           </Link>
           <Link href={detailsLink} className="cinematic-hero-secondary">
             <span className="material-symbols-outlined">info</span>
-            {t('details')}
+            <span>{t('details')}</span>
           </Link>
         </div>
       </div>
@@ -186,7 +186,8 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         .cinematic-hero-genres { display: inline-flex; align-items: center; margin: 0 0 14px 0; color: #9af0bc; }
         .cinematic-hero-description { display: -webkit-box; max-width: 590px; margin: 0 0 20px 0; overflow: hidden; color: rgba(255, 255, 255, 0.90); font-size: 1rem; line-height: 1.65; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
         .cinematic-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0; }
-        .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 14px; font-weight: 800; transition: transform 160ms ease, background 160ms ease; }
+        .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; gap: 6px; min-height: 48px; padding: 0 20px; border-radius: 14px; font-weight: 800; transition: transform 160ms ease, background 160ms ease; }
+        .cinematic-hero-actions :global(a span) { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
         .cinematic-hero-actions :global(a):hover { transform: translateY(-2px); }
         .cinematic-hero-primary { background: #00994d; border: 1px solid rgba(255, 255, 255, 0.36); box-shadow: 0 10px 24px rgba(0, 153, 77, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.34); }
         .cinematic-hero-secondary { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.34); backdrop-filter: blur(14px); }

@@ -135,14 +135,14 @@ export default function PWAInstallBanner() {
         }}
       >
         {/* Left: App Logo & Info */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flexGrow: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flexGrow: 1 }}>
           {/* 3D App Icon */}
           <div style={{
-            width: '44px',
-            height: '44px',
-            borderRadius: '12px',
+            width: '36px',
+            height: '36px',
+            borderRadius: '10px',
             overflow: 'hidden',
-            boxShadow: '0 4px 14px rgba(0, 102, 51, 0.35)',
+            boxShadow: '0 3px 10px rgba(0, 102, 51, 0.25)',
             background: '#02140a',
             flexShrink: 0,
             display: 'flex',
@@ -158,10 +158,10 @@ export default function PWAInstallBanner() {
 
           {/* Title and Rating */}
           <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               <span style={{
-                fontSize: '0.88rem',
-                fontWeight: 900,
+                fontSize: '0.8rem',
+                fontWeight: 800,
                 color: 'var(--text-primary)',
                 letterSpacing: '-0.01em',
                 whiteSpace: 'nowrap',
@@ -171,13 +171,13 @@ export default function PWAInstallBanner() {
                 {isUrdu ? 'اینیمے پاکستان ایپ' : 'Anime Pakistan App'}
               </span>
               <span style={{
-                fontSize: '0.62rem',
+                fontSize: '0.58rem',
                 fontWeight: 900,
-                padding: '1px 5px',
-                borderRadius: '4px',
+                padding: '1px 4px',
+                borderRadius: '3px',
                 background: '#02180d',
                 color: '#00ff66',
-                border: '1px solid rgba(0, 204, 102, 0.4)',
+                border: '0.5px solid rgba(0, 204, 102, 0.3)',
                 letterSpacing: '0.04em',
                 flexShrink: 0,
               }}>
@@ -186,7 +186,7 @@ export default function PWAInstallBanner() {
             </div>
 
             <span style={{
-              fontSize: '0.7rem',
+              fontSize: '0.65rem',
               color: 'var(--text-secondary)',
               fontWeight: 600,
               marginTop: '1px',
@@ -200,26 +200,26 @@ export default function PWAInstallBanner() {
         </div>
 
         {/* Right: Install Action & Close Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', flexShrink: 0 }}>
           <button
             type="button"
             onClick={handleInstallClick}
             className="glass-btn"
             style={{
-              padding: '8px 14px',
-              fontSize: '0.78rem',
-              fontWeight: 900,
-              borderRadius: '12px',
+              padding: '6px 10px',
+              fontSize: '0.72rem',
+              fontWeight: 800,
+              borderRadius: '8px',
               display: 'flex',
               alignItems: 'center',
-              gap: '5px',
-              boxShadow: '0 4px 14px rgba(0, 102, 51, 0.3)',
+              gap: '4px',
+              boxShadow: '0 3px 10px rgba(0, 102, 51, 0.2)',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
             }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>download</span>
-            <span>{isUrdu ? 'ایپ انسٹال کریں' : 'Install App'}</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>download</span>
+            <span>{isUrdu ? 'انسٹال' : 'Install'}</span>
           </button>
 
           {/* Dismiss ✕ Button */}
@@ -227,11 +227,11 @@ export default function PWAInstallBanner() {
             type="button"
             onClick={handleDismiss}
             style={{
-              width: '28px',
-              height: '28px',
+              width: '24px',
+              height: '24px',
               borderRadius: '50%',
               border: 'none',
-              background: 'rgba(0, 102, 51, 0.07)',
+              background: 'rgba(0, 102, 51, 0.05)',
               color: 'var(--text-muted)',
               display: 'flex',
               alignItems: 'center',
@@ -242,7 +242,7 @@ export default function PWAInstallBanner() {
             title="Dismiss"
             aria-label="Dismiss"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>close</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '13px' }}>close</span>
           </button>
         </div>
       </div>

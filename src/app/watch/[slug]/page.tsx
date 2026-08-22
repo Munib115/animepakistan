@@ -60,7 +60,7 @@ export default async function MovieWatchPage(props: PageProps) {
     );
   }
 
-  // Resolve streams dynamically in real-time
+  // Resolve streams dynamically from AnimeSalt
   const sources = await resolveStreamSources(anime.url);
 
   return (
