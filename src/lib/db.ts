@@ -5,7 +5,7 @@ import { AnimeItem } from '@/types/anime';
 let cachedDb: AnimeItem[] | null = null;
 
 export function getAnimeDb(): AnimeItem[] {
-  if (cachedDb) {
+  if (process.env.NODE_ENV === 'production' && cachedDb) {
     return cachedDb;
   }
 
