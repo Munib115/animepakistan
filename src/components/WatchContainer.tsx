@@ -24,11 +24,34 @@ export default function WatchContainer({
   const { t, language } = useLanguage();
 
   const targetSlug = currentEpisode?.slug || anime.slug;
+  const [streamSources, setStreamSources] = useState<StreamSource[]>(sources || []);
   const [selectedServerIndex, setSelectedServerIndex] = useState(0);
   
-  const rawMirror = sources && sources.length > selectedServerIndex && sources[selectedServerIndex]?.url
-    ? sources[selectedServerIndex].url
-    : (sources && sources.length > 0 && sources[0]?.url ? sources[0].url : `https://as-cdn26.top/video/${targetSlug}/`);
+  const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? anime.url : `https://animesalt.link/episode/${targetSlug}/`);
+
+  // Client-side stream resolver fallback if server was blocked by cloud datacenter firewalls
+  useEffect(() => {
+    setStreamSources(sources || []);
+  }, [sources]);
+
+  useEffect(() => {
+    const hasValidStream = streamSources.some(s => s.url && !s.url.includes(`/${targetSlug}/`));
+    
+    if (!hasValidStream && targetEpisodeUrl) {
+      fetch(`/api/resolve-stream?url=${encodeURIComponent(targetEpisodeUrl)}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.sources && data.sources.length > 0) {
+            setStreamSources(data.sources);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [targetEpisodeUrl, targetSlug]);
+
+  const rawMirror = streamSources && streamSources.length > selectedServerIndex && streamSources[selectedServerIndex]?.url
+    ? streamSources[selectedServerIndex].url
+    : (streamSources && streamSources.length > 0 && streamSources[0]?.url ? streamSources[0].url : `https://as-cdn26.top/video/${targetSlug}/`);
 
   const activeMirror = sanitizeStreamUrl(rawMirror);
 
