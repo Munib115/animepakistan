@@ -440,7 +440,14 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                 gap: '12px',
               }}>
                 {filteredEpisodes.map((ep) => {
-                  const epThumb = getProxiedImageUrl(ep.thumbnail) || bannerUrl || coverUrl;
+                  const fallbackThumb = coverUrl || bannerUrl || anime.poster || anime.backdrop || '';
+                  const epThumb = getProxiedImageUrl(ep.thumbnail) || fallbackThumb;
+                  const cleanEpisodeTitle = ep.title
+                    .replace(/S\d+E\d+.*$/i, '')
+                    .replace(/1080p.*$/i, '')
+                    .replace(/\.mkv|\.mp4/gi, '')
+                    .trim() || `${t('episodePrefix')} ${ep.number}`;
+
                   return (
                     <Link 
                       key={ep.slug} 
@@ -454,6 +461,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                         gap: '12px',
                         padding: '10px',
                         textDecoration: 'none',
+                        borderRadius: '10px',
                       }}
                     >
                       {/* Thumbnail */}
@@ -469,8 +477,15 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                         {epThumb ? (
                           <img 
                             src={epThumb} 
-                            alt={ep.title} 
+                            alt={cleanEpisodeTitle} 
                             loading="lazy"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              if (fallbackThumb && e.currentTarget.src !== fallbackThumb) {
+                                e.currentTarget.src = fallbackThumb;
+                              }
+                            }}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                           />
                         ) : null}
@@ -504,7 +519,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                           whiteSpace: 'nowrap',
                           marginTop: '2px',
                         }}>
-                          {ep.title.includes(':') ? ep.title.split(':').slice(1).join(':').trim() : ep.title}
+                          {cleanEpisodeTitle.includes(':') ? cleanEpisodeTitle.split(':').slice(1).join(':').trim() : cleanEpisodeTitle}
                         </span>
                       </div>
                     </Link>

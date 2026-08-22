@@ -23,39 +23,12 @@ export default function WatchContainer({
 }: WatchContainerProps) {
   const { t, language } = useLanguage();
 
-  const targetUrl = currentEpisode?.url || anime.url;
-  const [streamSources, setStreamSources] = useState<StreamSource[]>(sources || []);
+  const targetSlug = currentEpisode?.slug || anime.slug;
   const [selectedServerIndex, setSelectedServerIndex] = useState(0);
-
-  // Client-side fallback resolution if server-side SSR was blocked or returned empty on Vercel
-  useEffect(() => {
-    if (sources && sources.length > 0) {
-      setStreamSources(sources);
-      return;
-    }
-
-    if (!targetUrl) return;
-
-    let isMounted = true;
-    fetch(`/api/stream-resolve?url=${encodeURIComponent(targetUrl)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (isMounted && data.sources && data.sources.length > 0) {
-          setStreamSources(data.sources);
-        }
-      })
-      .catch((err) => {
-        console.warn('Client stream fallback resolution error:', err);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [targetUrl, sources]);
-
-  const rawMirror = streamSources && streamSources.length > selectedServerIndex && streamSources[selectedServerIndex]?.url
-    ? streamSources[selectedServerIndex].url
-    : (streamSources && streamSources.length > 0 && streamSources[0]?.url ? streamSources[0].url : '');
+  
+  const rawMirror = sources && sources.length > selectedServerIndex && sources[selectedServerIndex]?.url
+    ? sources[selectedServerIndex].url
+    : (sources && sources.length > 0 && sources[0]?.url ? sources[0].url : `https://as-cdn26.top/video/${targetSlug}/`);
 
   const activeMirror = sanitizeStreamUrl(rawMirror);
 
@@ -399,6 +372,7 @@ export default function WatchContainer({
               title={displayName}
               allowFullScreen
               referrerPolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               style={{
                 position: 'absolute',
@@ -532,7 +506,14 @@ export default function WatchContainer({
           }}>
             {anime.episodes.map((ep) => {
               const isCurrent = ep.slug === currentEpisode?.slug;
-              const epThumb = getProxiedImageUrl(ep.thumbnail) || anime.poster;
+              const fallbackThumb = anime.poster || anime.backdrop || '';
+              const epThumb = getProxiedImageUrl(ep.thumbnail) || fallbackThumb;
+              const cleanTitle = ep.title
+                .replace(/S\d+E\d+.*$/i, '')
+                .replace(/1080p.*$/i, '')
+                .replace(/\.mkv|\.mp4/gi, '')
+                .trim() || `Episode ${ep.number}`;
+
               return (
                 <Link
                   key={ep.slug}
@@ -552,8 +533,8 @@ export default function WatchContainer({
                   }}
                 >
                   <div style={{
-                    width: '60px',
-                    height: '38px',
+                    width: '64px',
+                    height: '40px',
                     borderRadius: '4px',
                     overflow: 'hidden',
                     position: 'relative',
@@ -563,8 +544,15 @@ export default function WatchContainer({
                     {epThumb && (
                       <img 
                         src={epThumb} 
-                        alt={ep.title} 
+                        alt={cleanTitle} 
                         loading="lazy" 
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          if (fallbackThumb && e.currentTarget.src !== fallbackThumb) {
+                            e.currentTarget.src = fallbackThumb;
+                          }
+                        }}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                       />
                     )}
@@ -582,7 +570,7 @@ export default function WatchContainer({
                     )}
                   </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flexGrow: 1 }}>
                     <span style={{
                       fontSize: '0.68rem',
                       fontWeight: 800,
@@ -591,7 +579,7 @@ export default function WatchContainer({
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap',
                     }}>
-                      {ep.title}
+                      {cleanTitle}
                     </span>
                     <span style={{
                       fontSize: '0.62rem',
