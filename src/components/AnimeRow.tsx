@@ -142,9 +142,8 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
         {items.map((item, idx) => (
           <div 
             key={`${item.slug}-${idx}`}
+            className="row-card-item"
             style={{
-              width: '160px',
-              minWidth: '160px',
               scrollSnapAlign: 'start',
               flexShrink: 0,
             }}
@@ -155,7 +154,21 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
       </div>
 
       <style jsx>{`
+        .row-card-item {
+          width: 138px;
+          min-width: 138px;
+        }
+        @media (min-width: 480px) {
+          .row-card-item {
+            width: 155px;
+            min-width: 155px;
+          }
+        }
         @media (min-width: 768px) {
+          .row-card-item {
+            width: 175px !important;
+            min-width: 175px !important;
+          }
           .row-arrows {
             display: flex !important;
           }

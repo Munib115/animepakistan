@@ -19,10 +19,14 @@ export default function HeroSlider({ items }: HeroSliderProps) {
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  const featured = useMemo(() => items
-    .filter((item) => item.backdrop || item.anilist?.bannerImage)
-    .sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0))
-    .slice(0, 8), [items]);
+  const featured = useMemo(() => {
+    if (!items || items.length === 0) return [];
+    if (items.length <= 8) return items;
+    return items
+      .filter((item) => item.backdrop || item.anilist?.bannerImage)
+      .sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0))
+      .slice(0, 8);
+  }, [items]);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((index) => featured.length ? (index + 1) % featured.length : 0);

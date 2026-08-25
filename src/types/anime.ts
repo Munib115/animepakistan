@@ -37,6 +37,7 @@ export interface AnimeItem {
   genres: string[];
   audioLanguages: string[];
   episodes?: Episode[];
+  episodeCount?: number;
   anilist?: AnilistMetadata | null;
   /** Pre-cached stream embed URL (for movies) */
   streamUrl?: string;

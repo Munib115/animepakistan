@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAnimeDb } from '@/lib/db';
+import { getAnimeCatalog } from '@/lib/db';
 
 export function GET(request: NextRequest) {
   const query = request.nextUrl.searchParams.get('q')?.trim().toLowerCase() || '';
@@ -8,7 +8,7 @@ export function GET(request: NextRequest) {
     return NextResponse.json([]);
   }
 
-  const results = getAnimeDb()
+  const results = getAnimeCatalog()
     .filter((anime) => {
       const searchable = [
         anime.title,

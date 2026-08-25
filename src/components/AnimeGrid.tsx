@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import React, { useState, useMemo, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
 import { AnimeItem } from '@/types/anime';
 import AnimeCard from './AnimeCard';
@@ -136,6 +136,33 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
       return true;
     });
   }, [initialItems, selectedType, selectedLanguage, selectedLetter, searchQuery]);
+
+  const [displayCount, setDisplayCount] = useState(24);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  // Reset display count on filter change
+  useEffect(() => {
+    setDisplayCount(24);
+  }, [selectedType, selectedLanguage, selectedLetter, searchQuery]);
+
+  // Infinite scroll observer
+  useEffect(() => {
+    if (!loadMoreRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setDisplayCount((prev) => prev + 24);
+        }
+      },
+      { rootMargin: '400px' }
+    );
+    observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, [filteredItems.length]);
+
+  const visibleItems = useMemo(() => {
+    return filteredItems.slice(0, displayCount);
+  }, [filteredItems, displayCount]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -393,24 +420,48 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
           color: 'var(--text-muted)',
           fontWeight: 600,
         }}>
-          {filteredItems.length} {t('catalogResultsCount')}
+          {visibleItems.length} / {filteredItems.length} {t('catalogResultsCount')}
         </span>
       </div>
 
       {/* Anime Cards Grid */}
       {filteredItems.length > 0 ? (
-        <div 
-          className="anime-cards-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-            gap: '14px',
-          }}
-        >
-          {filteredItems.map(item => (
-            <AnimeCard key={item.slug} item={item} />
-          ))}
-        </div>
+        <>
+          <div 
+            className="anime-cards-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+              gap: '14px',
+            }}
+          >
+            {visibleItems.map(item => (
+              <AnimeCard key={item.slug} item={item} />
+            ))}
+          </div>
+
+          {/* Sentinel for progressive infinite loading */}
+          {displayCount < filteredItems.length && (
+            <div 
+              ref={loadMoreRef} 
+              style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                padding: '24px 0',
+              }}
+            >
+              <button
+                onClick={() => setDisplayCount((prev) => prev + 24)}
+                className="glass-btn-secondary"
+                style={{ padding: '8px 20px', fontSize: '0.82rem', borderRadius: '10px' }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>expand_more</span>
+                <span>{language === 'ur' ? 'مزید لوڈ کریں' : 'Load More Anime'}</span>
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <div className="glass-panel" style={{
           padding: '60px 20px',
@@ -442,23 +493,35 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
         </div>
       )}
 
-      {/* Grid Breakpoint Tuning */}
+      {/* Grid Breakpoint Tuning for Mobile & PC */}
       <style jsx>{`
         @keyframes pulse-mic {
           0% { transform: scale(1); opacity: 1; }
           50% { transform: scale(1.15); opacity: 0.7; }
           100% { transform: scale(1); opacity: 1; }
         }
-        @media (min-width: 640px) {
+        @media (max-width: 480px) {
           .anime-cards-grid {
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-            gap: 20px !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 10px !important;
+          }
+        }
+        @media (min-width: 481px) and (max-width: 767px) {
+          .anime-cards-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
+            gap: 14px !important;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .anime-cards-grid {
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) !important;
+            gap: 18px !important;
           }
         }
         @media (min-width: 1024px) {
           .anime-cards-grid {
-            grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)) !important;
-            gap: 22px !important;
+            grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)) !important;
+            gap: 20px !important;
           }
         }
       `}</style>

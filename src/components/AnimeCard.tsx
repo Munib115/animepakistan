@@ -265,7 +265,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
               paddingTop: '6px',
             }}>
               <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>playlist_play</span>
-              <span>{item.episodes?.length || 0} ایپی سوڈز</span>
+              <span>{item.episodeCount ?? item.episodes?.length ?? 0} {language === 'ur' ? 'ایپی سوڈز' : 'Episodes'}</span>
             </div>
           )}
         </div>

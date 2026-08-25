@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
 import HomeSections from '@/components/HomeSections';
 import AnimeGrid from '@/components/AnimeGrid';
-import { getAnimeDb } from '@/lib/db';
+import { getAnimeCatalog } from '@/lib/db';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -20,7 +20,8 @@ export default async function HomePage(props: PageProps) {
   const searchParams = await props.searchParams;
   const initialType = searchParams?.type;
 
-  const items = getAnimeDb();
+  // Load lightweight catalog (without thousands of episode objects)
+  const items = getAnimeCatalog();
 
   // If specific ?type=series or ?type=movies query is requested, render the filtered AnimeGrid directly!
   if (initialType && initialType !== 'all') {
@@ -36,6 +37,12 @@ export default async function HomePage(props: PageProps) {
     );
   }
 
+  // Top 8 featured items for Hero Banner (only send 8 items to client component)
+  const featured = items
+    .filter((item) => item.backdrop || item.anilist?.bannerImage)
+    .sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0))
+    .slice(0, 8);
+
   // Categorize items for Landing Page
   const movies = items.filter((i) => i.type === 'movie');
   const series = items.filter((i) => i.type === 'series');
@@ -43,7 +50,7 @@ export default async function HomePage(props: PageProps) {
   // Top rated items
   const topRated = [...items].sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0)).slice(0, 16);
 
-  // Keep a broadly popular title at the front of the Trending row instead of the catalogue's first item.
+  // Keep a broadly popular title at the front of the Trending row
   const trendingSeries = [...series]
     .sort((a, b) => {
       if (a.slug === 'one-piece') return -1;
@@ -75,8 +82,8 @@ export default async function HomePage(props: PageProps) {
 
       {/* Main Content */}
       <main style={{ flexGrow: 1, padding: '0 0 24px', position: 'relative', zIndex: 1 }}>
-        {/* Modern Anime Banner Carousel / Slider */}
-        <HeroSlider items={items} />
+        {/* Modern Anime Banner Carousel / Slider (Passing only 8 featured items!) */}
+        <HeroSlider items={featured} />
 
         {/* Dynamic Multi-Language Categorized Rows */}
         <div className="container" style={{ padding: '0 16px' }}>
