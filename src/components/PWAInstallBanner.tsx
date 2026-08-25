@@ -108,7 +108,7 @@ export default function PWAInstallBanner() {
 
   return (
     <>
-      {/* Liquid Glass Modern PWA App Banner */}
+      {/* Liquid Glass Modern PWA App Banner with High Transparency & White Border */}
       <div 
         className="pwa-install-banner"
         style={{
@@ -119,30 +119,31 @@ export default function PWAInstallBanner() {
           maxWidth: '440px',
           margin: '0 auto',
           zIndex: 99998,
-          background: 'rgba(8, 22, 14, 0.92)',
-          backdropFilter: 'blur(28px) saturate(200%)',
-          WebkitBackdropFilter: 'blur(28px) saturate(200%)',
-          border: '1px solid rgba(0, 230, 118, 0.2)',
-          borderRadius: '18px',
-          boxShadow: '0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 230, 118, 0.08)',
-          padding: '9px 12px',
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(0, 40, 20, 0.35) 50%, rgba(255, 255, 255, 0.12) 100%)',
+          backdropFilter: 'blur(32px) saturate(220%) brightness(108%)',
+          WebkitBackdropFilter: 'blur(32px) saturate(220%) brightness(108%)',
+          border: '1.5px solid rgba(255, 255, 255, 0.85)',
+          borderRadius: '20px',
+          boxShadow: '0 20px 48px -6px rgba(0, 0, 0, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(255, 255, 255, 0.25), 0 0 25px rgba(255, 255, 255, 0.18)',
+          padding: '10px 14px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '8px',
+          gap: '10px',
           animation: 'bannerSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
           direction: isUrdu ? 'rtl' : 'ltr',
         }}
       >
         {/* Left: App Logo & Info */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flexGrow: 1 }}>
-          {/* 3D App Icon */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flexGrow: 1 }}>
+          {/* 3D App Icon with Liquid Glass Ring */}
           <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '10px',
+            width: '38px',
+            height: '38px',
+            borderRadius: '11px',
             overflow: 'hidden',
-            boxShadow: '0 3px 10px rgba(0, 102, 51, 0.25)',
+            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.8)',
+            border: '1px solid rgba(255, 255, 255, 0.75)',
             background: '#02140a',
             flexShrink: 0,
             display: 'flex',
@@ -158,12 +159,13 @@ export default function PWAInstallBanner() {
 
           {/* Title and Rating */}
           <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
               <span style={{
-                fontSize: '0.8rem',
-                fontWeight: 800,
-                color: 'var(--text-primary)',
+                fontSize: '0.82rem',
+                fontWeight: 900,
+                color: '#ffffff',
                 letterSpacing: '-0.01em',
+                textShadow: '0 1px 4px rgba(0, 0, 0, 0.85)',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
@@ -173,11 +175,12 @@ export default function PWAInstallBanner() {
               <span style={{
                 fontSize: '0.58rem',
                 fontWeight: 900,
-                padding: '1px 4px',
-                borderRadius: '3px',
-                background: '#02180d',
-                color: '#00ff66',
-                border: '0.5px solid rgba(0, 204, 102, 0.3)',
+                padding: '1px 5px',
+                borderRadius: '4px',
+                background: 'rgba(0, 255, 102, 0.25)',
+                color: '#ffffff',
+                border: '1px solid rgba(255, 255, 255, 0.8)',
+                boxShadow: '0 0 8px rgba(0, 255, 102, 0.4)',
                 letterSpacing: '0.04em',
                 flexShrink: 0,
               }}>
@@ -186,9 +189,11 @@ export default function PWAInstallBanner() {
             </div>
 
             <span style={{
-              fontSize: '0.65rem',
-              color: 'var(--text-secondary)',
-              fontWeight: 600,
+              fontSize: '0.66rem',
+              color: '#ffffff',
+              opacity: 0.92,
+              fontWeight: 700,
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)',
               marginTop: '1px',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
@@ -200,49 +205,55 @@ export default function PWAInstallBanner() {
         </div>
 
         {/* Right: Install Action & Close Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
           <button
             type="button"
             onClick={handleInstallClick}
-            className="glass-btn"
             style={{
-              padding: '6px 10px',
-              fontSize: '0.72rem',
-              fontWeight: 800,
-              borderRadius: '8px',
+              padding: '7px 13px',
+              fontSize: '0.74rem',
+              fontWeight: 900,
+              borderRadius: '10px',
               display: 'flex',
               alignItems: 'center',
               gap: '4px',
-              boxShadow: '0 3px 10px rgba(0, 102, 51, 0.2)',
+              background: 'linear-gradient(135deg, #00c853 0%, #007e33 100%)',
+              border: '1.5px solid rgba(255, 255, 255, 0.9)',
+              color: '#ffffff',
+              boxShadow: '0 4px 16px rgba(0, 200, 83, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.8)',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
+              textShadow: '0 1px 2px rgba(0,0,0,0.5)',
+              transition: 'transform 0.15s ease, box-shadow 0.15s ease',
             }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>download</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>download</span>
             <span>{isUrdu ? 'انسٹال' : 'Install'}</span>
           </button>
 
-          {/* Dismiss ✕ Button */}
+          {/* Dismiss ✕ Button with Liquid Glass */}
           <button
             type="button"
             onClick={handleDismiss}
             style={{
-              width: '24px',
-              height: '24px',
+              width: '26px',
+              height: '26px',
               borderRadius: '50%',
-              border: 'none',
-              background: 'rgba(0, 102, 51, 0.05)',
-              color: 'var(--text-muted)',
+              border: '1px solid rgba(255, 255, 255, 0.6)',
+              background: 'rgba(255, 255, 255, 0.18)',
+              backdropFilter: 'blur(8px)',
+              color: '#ffffff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',
               transition: 'background 0.2s',
             }}
             title="Dismiss"
             aria-label="Dismiss"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '13px' }}>close</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>close</span>
           </button>
         </div>
       </div>

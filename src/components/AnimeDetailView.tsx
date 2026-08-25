@@ -48,24 +48,31 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
     return Array.from(set).sort((a, b) => a - b);
   }, [anime.episodes]);
 
-  // Filter episodes by season and search query
+  // Filter and sort episodes by season and search query
   const filteredEpisodes = useMemo(() => {
     if (!anime.episodes) return [];
-    return anime.episodes.filter((ep) => {
-      // 1. Season filter
-      if (selectedSeason !== 'ALL') {
-        const epSeason = ep.season || (ep.title.match(/^S(\d+)/i) ? parseInt(ep.title.match(/^S(\d+)/i)![1], 10) : 1);
-        if (epSeason !== selectedSeason) return false;
-      }
+    return anime.episodes
+      .filter((ep) => {
+        // 1. Season filter
+        if (selectedSeason !== 'ALL') {
+          const epSeason = ep.season || (ep.title.match(/^S(\d+)/i) ? parseInt(ep.title.match(/^S(\d+)/i)![1], 10) : (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1));
+          if (epSeason !== selectedSeason) return false;
+        }
 
-      // 2. Search query filter
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase().trim();
-        return ep.title.toLowerCase().includes(q) || ep.slug.toLowerCase().includes(q) || String(ep.number).includes(q);
-      }
+        // 2. Search query filter
+        if (searchQuery.trim()) {
+          const q = searchQuery.toLowerCase().trim();
+          return ep.title.toLowerCase().includes(q) || ep.slug.toLowerCase().includes(q) || String(ep.number).includes(q);
+        }
 
-      return true;
-    });
+        return true;
+      })
+      .sort((a, b) => {
+        const sA = a.season || (a.slug.match(/(\d+)x\d+/i) ? parseInt(a.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+        const sB = b.season || (b.slug.match(/(\d+)x\d+/i) ? parseInt(b.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+        if (sA !== sB) return sA - sB;
+        return a.number - b.number;
+      });
   }, [anime.episodes, selectedSeason, searchQuery]);
 
   return (

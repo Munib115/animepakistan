@@ -55,14 +55,15 @@ export default function WatchContainer({
     const hasValidStream = streamSources.some(s => s.url && s.url.startsWith('http'));
     
     if (!hasValidStream) {
-      // Use the new animesalt-stream API with saltSlug + episode number
+      // Use the new animesalt-stream API with saltSlug + episode number + season
       const saltSlug = (anime as any).saltSlug || anime.slug;
       const epNumber = currentEpisode?.number || 1;
+      const epSeason = currentEpisode?.season || (currentEpisode?.slug?.match(/(\d+)x\d+/i) ? parseInt(currentEpisode.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
       const isMovie = anime.type === 'movie';
       
       const streamApiUrl = isMovie
         ? `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}`
-        : `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}`;
+        : `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}&season=${epSeason}`;
 
       fetch(streamApiUrl)
         .then((res) => res.json())
@@ -84,7 +85,7 @@ export default function WatchContainer({
             .catch(() => {});
         });
     }
-  }, [targetEpisodeUrl, targetSlug, anime.slug, currentEpisode?.number]);
+  }, [targetEpisodeUrl, targetSlug, anime.slug, currentEpisode?.number, currentEpisode?.season]);
 
   // Get the active mirror URL (abyssplayer.com, short.icu, or as-cdn26.top)
   const rawMirror = streamSources && streamSources.length > selectedServerIndex && streamSources[selectedServerIndex]?.url
@@ -108,15 +109,48 @@ export default function WatchContainer({
 
   const isMovie = anime.type === 'movie';
 
+  // Sorted episodes list (Season asc, Number asc)
+  const sortedEpisodes = useMemo(() => {
+    if (!anime.episodes) return [];
+    return [...anime.episodes].sort((a, b) => {
+      const sA = a.season || (a.slug.match(/(\d+)x\d+/i) ? parseInt(a.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+      const sB = b.season || (b.slug.match(/(\d+)x\d+/i) ? parseInt(b.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+      if (sA !== sB) return sA - sB;
+      return a.number - b.number;
+    });
+  }, [anime.episodes]);
+
+  // Discover all seasons present in episodes
+  const availableSeasons = useMemo(() => {
+    const set = new Set<number>();
+    sortedEpisodes.forEach((ep) => {
+      const s = ep.season || (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+      set.add(s);
+    });
+    return Array.from(set).sort((a, b) => a - b);
+  }, [sortedEpisodes]);
+
+  // Season filter state in playlist
+  const [selectedSeason, setSelectedSeason] = useState<number | 'ALL'>('ALL');
+
+  // Filtered episodes for playlist view
+  const visibleEpisodes = useMemo(() => {
+    if (selectedSeason === 'ALL') return sortedEpisodes;
+    return sortedEpisodes.filter((ep) => {
+      const s = ep.season || (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+      return s === selectedSeason;
+    });
+  }, [sortedEpisodes, selectedSeason]);
+
   // Navigation between episodes
   const currentIndex = isMovie
     ? -1
-    : (anime.episodes || []).findIndex((e) => e.slug === currentEpisode?.slug);
+    : sortedEpisodes.findIndex((e) => e.slug === currentEpisode?.slug);
 
-  const prevEp = !isMovie && currentIndex > 0 ? anime.episodes![currentIndex - 1] : null;
+  const prevEp = !isMovie && currentIndex > 0 ? sortedEpisodes[currentIndex - 1] : null;
   const nextEp =
-    !isMovie && currentIndex >= 0 && currentIndex < (anime.episodes || []).length - 1
-      ? anime.episodes![currentIndex + 1]
+    !isMovie && currentIndex >= 0 && currentIndex < sortedEpisodes.length - 1
+      ? sortedEpisodes[currentIndex + 1]
       : null;
 
   // Check saved progress on mount
@@ -593,8 +627,116 @@ export default function WatchContainer({
         </div>
       </div>
 
-      {/* Series Episodes Playlist Grid */}
-      {!isMovie && anime.episodes && anime.episodes.length > 0 && (
+      {/* Player Navigation & Quick Controls Bar */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '10px',
+        position: 'relative',
+        zIndex: isLightsOff ? 9999 : 2,
+      }}>
+        {/* Previous / Next Episode Quick Buttons */}
+        {!isMovie && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {prevEp ? (
+              <Link
+                href={`/watch/${anime.slug}/${prevEp.slug}`}
+                prefetch={true}
+                onClick={() => sound.playEpisodeSelect()}
+                className="glass-btn-secondary"
+                style={{ padding: '6px 14px', fontSize: '0.8rem', borderRadius: '8px' }}
+                title={`Previous: S${prevEp.season || 1} Ep ${prevEp.number}`}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                  {language === 'ur' ? 'skip_next' : 'skip_previous'}
+                </span>
+                <span>{language === 'ur' ? 'پچھلی قسط' : 'Previous Ep'}</span>
+              </Link>
+            ) : (
+              <button
+                disabled
+                className="glass-btn-secondary"
+                style={{ padding: '6px 14px', fontSize: '0.8rem', borderRadius: '8px', opacity: 0.4, cursor: 'not-allowed' }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                  {language === 'ur' ? 'skip_next' : 'skip_previous'}
+                </span>
+                <span>{language === 'ur' ? 'پچھلی قسط' : 'Previous Ep'}</span>
+              </button>
+            )}
+
+            {nextEp ? (
+              <Link
+                href={`/watch/${anime.slug}/${nextEp.slug}`}
+                prefetch={true}
+                onClick={() => sound.playEpisodeSelect()}
+                className="glass-btn"
+                style={{ padding: '6px 16px', fontSize: '0.8rem', borderRadius: '8px' }}
+                title={`Next: S${nextEp.season || 1} Ep ${nextEp.number}`}
+              >
+                <span>{language === 'ur' ? 'اگلی قسط' : 'Next Ep'}</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                  {language === 'ur' ? 'skip_previous' : 'skip_next'}
+                </span>
+              </Link>
+            ) : null}
+          </div>
+        )}
+
+        {/* Player Action Buttons: Reload, Theater, Lights */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}>
+          <button
+            onClick={handleReload}
+            title="Reload Video Player"
+            className="glass-btn-secondary"
+            style={{ padding: '6px 10px', fontSize: '0.78rem', borderRadius: '8px' }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>refresh</span>
+            <span>{language === 'ur' ? 'ری لوڈ' : 'Reload'}</span>
+          </button>
+
+          <button
+            onClick={() => setIsTheater((prev) => !prev)}
+            title="Toggle Theater Mode (T)"
+            className="glass-btn-secondary"
+            style={{
+              padding: '6px 10px',
+              fontSize: '0.78rem',
+              borderRadius: '8px',
+              background: isTheater ? 'var(--color-primary)' : undefined,
+              color: isTheater ? '#ffffff' : undefined,
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+              {isTheater ? 'fullscreen_exit' : 'aspect_ratio'}
+            </span>
+            <span>{language === 'ur' ? 'تھیٹر موڈ' : 'Theater'}</span>
+          </button>
+
+          <button
+            onClick={() => setIsLightsOff((prev) => !prev)}
+            title="Toggle Lights Off (L)"
+            className="glass-btn-secondary"
+            style={{
+              padding: '6px 10px',
+              fontSize: '0.78rem',
+              borderRadius: '8px',
+              background: isLightsOff ? '#1e293b' : undefined,
+              color: isLightsOff ? '#fbbf24' : undefined,
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+              {isLightsOff ? 'lightbulb' : 'lightbulb_circle'}
+            </span>
+            <span>{language === 'ur' ? 'لائٹس آف' : 'Lights'}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Series Episodes Playlist Organized by Season */}
+      {!isMovie && sortedEpisodes.length > 0 && (
         <div className="glass-panel" style={{ padding: '20px', position: 'relative', zIndex: 1 }}>
           <div style={{
             display: 'flex',
@@ -602,7 +744,7 @@ export default function WatchContainer({
             justifyContent: 'space-between',
             marginBottom: '14px',
             flexWrap: 'wrap',
-            gap: '8px',
+            gap: '10px',
           }}>
             <h2 style={{
               fontSize: '1.05rem',
@@ -613,22 +755,86 @@ export default function WatchContainer({
               gap: '6px',
             }}>
               <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)' }}>playlist_play</span>
-              <span>{t('episodesList')} ({anime.episodes.length})</span>
+              <span>{t('episodesList')} ({sortedEpisodes.length})</span>
             </h2>
+
+            <span className="glass-badge">
+              {visibleEpisodes.length} / {sortedEpisodes.length} {t('episodesSuffix')}
+            </span>
           </div>
 
+          {/* Season Selection Tabs (if multi-season) */}
+          {availableSeasons.length > 1 && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              overflowX: 'auto',
+              marginBottom: '14px',
+              paddingBottom: '4px',
+              scrollbarWidth: 'none',
+            }}>
+              <button
+                onClick={() => {
+                  setSelectedSeason('ALL');
+                  sound.playTabSwitch();
+                }}
+                style={{
+                  padding: '6px 14px',
+                  borderRadius: '8px',
+                  border: selectedSeason === 'ALL' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                  background: selectedSeason === 'ALL' ? 'var(--color-primary)' : '#ffffff',
+                  color: selectedSeason === 'ALL' ? '#ffffff' : 'var(--text-secondary)',
+                  fontWeight: selectedSeason === 'ALL' ? 800 : 600,
+                  fontSize: '0.78rem',
+                  cursor: 'pointer',
+                  flexShrink: 0,
+                  transition: 'all 0.2s',
+                }}
+              >
+                {language === 'ur' ? 'تمام سیزنز (All Seasons)' : 'All Seasons'}
+              </button>
+
+              {availableSeasons.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => {
+                    setSelectedSeason(s);
+                    sound.playTabSwitch();
+                  }}
+                  style={{
+                    padding: '6px 14px',
+                    borderRadius: '8px',
+                    border: selectedSeason === s ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                    background: selectedSeason === s ? 'var(--color-primary)' : '#ffffff',
+                    color: selectedSeason === s ? '#ffffff' : 'var(--text-secondary)',
+                    fontWeight: selectedSeason === s ? 800 : 600,
+                    fontSize: '0.78rem',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {language === 'ur' ? `سیزن ${s} (Season ${s})` : `Season ${s}`}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Episode Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
             gap: '10px',
-            maxHeight: '380px',
+            maxHeight: '400px',
             overflowY: 'auto',
             paddingRight: '4px',
           }}>
-            {anime.episodes.map((ep) => {
+            {visibleEpisodes.map((ep) => {
               const isCurrent = ep.slug === currentEpisode?.slug;
               const fallbackThumb = anime.poster || anime.backdrop || '';
               const epThumb = getProxiedImageUrl(ep.thumbnail) || fallbackThumb;
+              const epSeason = ep.season || (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
               const cleanTitle = ep.title
                 .replace(/S\d+E\d+.*$/i, '')
                 .replace(/1080p.*$/i, '')
@@ -677,7 +883,7 @@ export default function WatchContainer({
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                       />
                     )}
-                    {isCurrent && (
+                    {isCurrent ? (
                       <div style={{
                         position: 'absolute',
                         top: 0, left: 0, right: 0, bottom: 0,
@@ -688,26 +894,58 @@ export default function WatchContainer({
                       }}>
                         <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#ffffff' }}>volume_up</span>
                       </div>
+                    ) : (
+                      <div style={{
+                        position: 'absolute',
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        background: 'rgba(0, 0, 0, 0.2)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        opacity: 0,
+                        transition: 'opacity 0.2s',
+                      }} className="play-hover-overlay">
+                        <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#ffffff' }}>play_arrow</span>
+                      </div>
                     )}
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flexGrow: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <span style={{
+                        fontSize: '0.65rem',
+                        fontWeight: 800,
+                        color: 'var(--color-primary)',
+                        background: 'rgba(0, 102, 51, 0.08)',
+                        padding: '1px 5px',
+                        borderRadius: '4px',
+                      }}>
+                        S{epSeason}:E{ep.number}
+                      </span>
+                      {isCurrent && (
+                        <span style={{
+                          fontSize: '0.58rem',
+                          fontWeight: 800,
+                          color: '#ffffff',
+                          background: 'var(--color-primary)',
+                          padding: '1px 5px',
+                          borderRadius: '4px',
+                        }}>
+                          {language === 'ur' ? 'چل رہا ہے' : 'PLAYING'}
+                        </span>
+                      )}
+                    </div>
+
                     <span style={{
-                      fontSize: '0.68rem',
-                      fontWeight: 800,
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
                       color: isCurrent ? 'var(--color-primary)' : 'var(--text-primary)',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap',
+                      marginTop: '3px',
                     }}>
                       {cleanTitle}
-                    </span>
-                    <span style={{
-                      fontSize: '0.62rem',
-                      color: isCurrent ? 'var(--color-primary)' : 'var(--text-muted)',
-                      fontWeight: 600,
-                    }}>
-                      {isCurrent ? 'Now Playing' : `Ep ${ep.number}`}
                     </span>
                   </div>
                 </Link>

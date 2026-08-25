@@ -5,7 +5,9 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const saltSlug = searchParams.get('slug')?.trim();
   const epNumStr = searchParams.get('ep');
+  const seasonStr = searchParams.get('season');
   const epNum = epNumStr ? parseInt(epNumStr, 10) : undefined;
+  const epSeason = seasonStr ? parseInt(seasonStr, 10) : undefined;
 
   if (!saltSlug) {
     return NextResponse.json({ error: 'Missing slug parameter', sources: [] }, { status: 400 });
@@ -19,10 +21,11 @@ export async function GET(request: NextRequest) {
       cleanTarget = `https://animesalt.cx/series/${saltSlug}/`;
     }
 
-    const sources = await resolveStreamSources(cleanTarget, epNum);
+    // Pass season so resolver picks the correct season's episode (fixes wrong-ep bug)
+    const sources = await resolveStreamSources(cleanTarget, epNum, epSeason);
 
     return NextResponse.json(
-      { sources, slug: saltSlug, ep: epNum },
+      { sources, slug: saltSlug, ep: epNum, season: epSeason },
       {
         headers: {
           'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=3600',

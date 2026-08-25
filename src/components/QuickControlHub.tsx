@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { sound } from '@/lib/soundEngine';
-import { getWatchHistory, WatchProgressItem } from '@/lib/watchHistory';
+import { getWatchHistory, removeWatchItem, clearWatchHistory, formatTimeSeconds, formatRelativeTime, WatchProgressItem } from '@/lib/watchHistory';
 import { getWatchlist, WatchlistItem } from '@/lib/watchlist';
 
 export default function QuickControlHub() {
@@ -15,6 +15,7 @@ export default function QuickControlHub() {
   const [historyItems, setHistoryItems] = useState<WatchProgressItem[]>([]);
   const [watchlistItems, setWatchlistItems] = useState<WatchlistItem[]>([]);
   const [activeTab, setActiveTab] = useState<'settings' | 'history' | 'watchlist'>('settings');
+  const [historySearch, setHistorySearch] = useState('');
 
   const hubRef = useRef<HTMLDivElement>(null);
 
@@ -39,12 +40,23 @@ export default function QuickControlHub() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Refresh history & watchlist whenever opened
+  // Refresh history & watchlist whenever opened or updated
   useEffect(() => {
-    if (isOpen) {
+    const refreshData = () => {
       setHistoryItems(getWatchHistory());
       setWatchlistItems(getWatchlist());
+    };
+
+    if (isOpen) {
+      refreshData();
     }
+
+    window.addEventListener('ap_history_updated', refreshData);
+    window.addEventListener('storage', refreshData);
+    return () => {
+      window.removeEventListener('ap_history_updated', refreshData);
+      window.removeEventListener('storage', refreshData);
+    };
   }, [isOpen]);
 
   const toggleSound = () => {
@@ -360,48 +372,254 @@ export default function QuickControlHub() {
             </div>
           )}
 
-          {/* TAB 2: Continue Watching List */}
+          {/* TAB 2: Complete Watch History List with Full Info */}
           {activeTab === 'history' && (
-            <div style={{ maxHeight: '240px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              {historyItems.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '24px 10px', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                  {isUrdu ? 'کوئی ویڈیو ابھی نہیں دیکھی گئی' : 'No watch history yet'}
-                </div>
-              ) : (
-                historyItems.slice(0, 6).map((item) => (
-                  <Link
-                    key={item.animeSlug}
-                    href={item.epSlug ? `/watch/${item.animeSlug}/${item.epSlug}` : `/watch/${item.animeSlug}`}
-                    onClick={() => setIsOpen(false)}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {/* Optional Search Filter if user has multiple history items */}
+              {historyItems.length > 3 && (
+                <div style={{ position: 'relative', marginBottom: '2px' }}>
+                  <span className="material-symbols-outlined" style={{
+                    position: 'absolute',
+                    left: isUrdu ? 'auto' : '8px',
+                    right: isUrdu ? '8px' : 'auto',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    fontSize: '16px',
+                    color: 'var(--text-muted)',
+                  }}>
+                    search
+                  </span>
+                  <input
+                    type="text"
+                    placeholder={isUrdu ? 'ہسٹری میں تلاش کریں...' : 'Search watch history...'}
+                    value={historySearch}
+                    onChange={(e) => setHistorySearch(e.target.value)}
                     style={{
+                      width: '100%',
+                      padding: isUrdu ? '5px 28px 5px 8px' : '5px 8px 5px 28px',
+                      fontSize: '0.72rem',
+                      borderRadius: '8px',
+                      border: '1px solid var(--glass-border)',
+                      background: 'rgba(255, 255, 255, 0.9)',
+                      color: 'var(--text-primary)',
+                      outline: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* History Items Scroll Area (Shows ALL history items) */}
+              <div style={{
+                maxHeight: '280px',
+                overflowY: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                paddingRight: '2px',
+              }}>
+                {historyItems.length === 0 ? (
+                  <div style={{ textAlign: 'center', padding: '24px 10px', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--text-muted)', display: 'block', marginBottom: '6px' }}>
+                      history_toggle_off
+                    </span>
+                    {isUrdu ? 'کوئی ویڈیو ابھی نہیں دیکھی گئی' : 'No watch history yet'}
+                  </div>
+                ) : (
+                  historyItems
+                    .filter((item) => {
+                      if (!historySearch.trim()) return true;
+                      const q = historySearch.toLowerCase().trim();
+                      return item.animeTitle.toLowerCase().includes(q) || (item.epTitle || '').toLowerCase().includes(q);
+                    })
+                    .map((item) => {
+                      const watchUrl = item.type === 'movie'
+                        ? `/watch/${item.animeSlug}`
+                        : (item.epSlug ? `/watch/${item.animeSlug}/${item.epSlug}` : `/watch/${item.animeSlug}`);
+
+                      const cleanEpTitle = item.epTitle
+                        ? item.epTitle.replace(/S\d+E\d+.*$/i, '').replace(/1080p.*$/i, '').replace(/\.mkv|\.mp4/gi, '').trim()
+                        : (item.type === 'movie' ? (isUrdu ? 'مووی' : 'Full Movie') : `Episode ${item.epNumber || 1}`);
+
+                      return (
+                        <div
+                          key={item.animeSlug}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            background: '#ffffff',
+                            border: '1px solid var(--glass-border)',
+                            borderRadius: '10px',
+                            overflow: 'hidden',
+                            boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
+                            position: 'relative',
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
+                            {/* Poster / Thumbnail with Progress Overlay */}
+                            <Link
+                              href={watchUrl}
+                              onClick={() => {
+                                setIsOpen(false);
+                                sound.playEpisodeSelect();
+                              }}
+                              style={{
+                                width: '42px',
+                                height: '54px',
+                                borderRadius: '6px',
+                                overflow: 'hidden',
+                                position: 'relative',
+                                flexShrink: 0,
+                                background: '#004d26',
+                                textDecoration: 'none',
+                              }}
+                            >
+                              <img 
+                                src={item.poster} 
+                                alt="" 
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                              />
+                              <div style={{
+                                position: 'absolute',
+                                top: 0, left: 0, right: 0, bottom: 0,
+                                background: 'rgba(0, 0, 0, 0.3)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#ffffff' }}>
+                                  play_arrow
+                                </span>
+                              </div>
+                            </Link>
+
+                            {/* Info Column */}
+                            <div style={{ flexGrow: 1, minWidth: 0 }}>
+                              <Link
+                                href={watchUrl}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  sound.playEpisodeSelect();
+                                }}
+                                style={{
+                                  fontSize: '0.78rem',
+                                  fontWeight: 800,
+                                  color: 'var(--text-primary)',
+                                  textDecoration: 'none',
+                                  display: 'block',
+                                  whiteSpace: 'nowrap',
+                                  overflow: 'hidden',
+                                  textOverflow: 'ellipsis',
+                                }}
+                              >
+                                {item.animeTitle}
+                              </Link>
+
+                              <div style={{
+                                fontSize: '0.68rem',
+                                color: 'var(--color-primary)',
+                                fontWeight: 700,
+                                marginTop: '1px',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                              }}>
+                                {cleanEpTitle}
+                              </div>
+
+                              {/* Time watched & relative timestamp */}
+                              <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                fontSize: '0.62rem',
+                                color: 'var(--text-muted)',
+                                marginTop: '3px',
+                              }}>
+                                <span>
+                                  {formatTimeSeconds(item.currentTime)} / {formatTimeSeconds(item.duration)} ({item.progressPercent}%)
+                                </span>
+                                <span>
+                                  {formatRelativeTime(item.updatedAt, isUrdu)}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Delete single item button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeWatchItem(item.animeSlug);
+                                sound.playButton();
+                              }}
+                              title={isUrdu ? 'ہسٹری سے ہٹائیں' : 'Remove from history'}
+                              style={{
+                                background: 'rgba(239, 68, 68, 0.08)',
+                                border: 'none',
+                                borderRadius: '6px',
+                                width: '24px',
+                                height: '24px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: '#ef4444',
+                                flexShrink: 0,
+                                transition: 'all 0.15s',
+                              }}
+                            >
+                              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>delete</span>
+                            </button>
+                          </div>
+
+                          {/* Progress Line */}
+                          <div style={{ width: '100%', height: '3px', background: 'rgba(0, 102, 51, 0.1)' }}>
+                            <div style={{
+                              height: '100%',
+                              width: `${item.progressPercent}%`,
+                              background: 'var(--color-primary)',
+                            }} />
+                          </div>
+                        </div>
+                      );
+                    })
+                )}
+              </div>
+
+              {/* Clear All History Button */}
+              {historyItems.length > 0 && (
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  marginTop: '4px',
+                  paddingTop: '6px',
+                  borderTop: '1px solid var(--glass-border)',
+                }}>
+                  <button
+                    onClick={() => {
+                      if (window.confirm(isUrdu ? 'کیا آپ تمام ہسٹری صاف کرنا چاہتے ہیں؟' : 'Clear entire watch history?')) {
+                        clearWatchHistory();
+                        sound.playButton();
+                      }
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#ef4444',
+                      fontSize: '0.68rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '8px',
-                      padding: '6px 8px',
-                      borderRadius: '8px',
-                      background: '#ffffff',
-                      border: '1px solid var(--glass-border)',
-                      textDecoration: 'none',
+                      gap: '4px',
+                      padding: '4px 8px',
+                      borderRadius: '6px',
                     }}
                   >
-                    <img 
-                      src={item.poster} 
-                      alt="" 
-                      style={{ width: '32px', height: '42px', borderRadius: '4px', objectFit: 'cover' }} 
-                    />
-                    <div style={{ flexGrow: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {item.animeTitle}
-                      </div>
-                      <div style={{ fontSize: '0.66rem', color: 'var(--color-primary)', fontWeight: 700 }}>
-                        {item.epTitle || `Progress ${item.progressPercent}%`}
-                      </div>
-                    </div>
-                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>
-                      play_circle
-                    </span>
-                  </Link>
-                ))
+                    <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>delete_sweep</span>
+                    <span>{isUrdu ? 'تمام ہسٹری صاف کریں' : 'Clear All History'}</span>
+                  </button>
+                </div>
               )}
             </div>
           )}

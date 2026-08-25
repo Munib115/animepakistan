@@ -32,7 +32,8 @@ function isBadUrl(u: string): boolean {
  */
 export async function resolveStreamSources(
   targetUrl: string,
-  episodeNumber?: number
+  episodeNumber?: number,
+  seasonNumber?: number
 ): Promise<StreamSource[]> {
   if (!targetUrl) return [];
 
@@ -51,12 +52,30 @@ export async function resolveStreamSources(
       const db = getAnimeDb();
       const anime = db.find(a => (a.saltSlug === slug || a.slug === slug) && a.type === 'series');
       const epNum = episodeNumber || 1;
-      const episode = anime?.episodes?.find(e => e.number === epNum);
-      
+      const epSeason = seasonNumber; // may be undefined for single-season lookup
+
+      // Match by season+number when season is provided, otherwise fall back to number-only
+      const episode = anime?.episodes?.find(e => {
+        if (!e.number) return false;
+        const numMatch = e.number === epNum;
+        if (!numMatch) return false;
+        if (epSeason !== undefined) {
+          // Derive season from episode season field or slug pattern (e.g. "show-2x3" → season 2)
+          const eSeason = e.season ?? (() => {
+            const m = e.slug.match(/(\d+)x\d+/i);
+            return m ? parseInt(m[1], 10) : 1;
+          })();
+          return eSeason === epSeason;
+        }
+        return true; // no season filter → first number match (single-season)
+      });
+
       if (episode && episode.url && episode.url.startsWith('http')) {
         cleanTarget = episode.url.replace(/animesalt\.(link|me)/gi, 'animesalt.cx');
       } else {
-        cleanTarget = `https://animesalt.cx/episode/${slug}-1x${epNum}/`;
+        // Build correct episode URL using season derived from match or default to 1
+        const eSeason = episode?.season ?? epSeason ?? 1;
+        cleanTarget = `https://animesalt.cx/episode/${slug}-${eSeason}x${epNum}/`;
       }
     }
   }

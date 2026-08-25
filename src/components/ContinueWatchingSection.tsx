@@ -13,11 +13,15 @@ export default function ContinueWatchingSection() {
   useEffect(() => {
     setItems(getWatchHistory());
 
-    const handleStorage = () => {
+    const handleUpdate = () => {
       setItems(getWatchHistory());
     };
-    window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
+    window.addEventListener('storage', handleUpdate);
+    window.addEventListener('ap_history_updated', handleUpdate);
+    return () => {
+      window.removeEventListener('storage', handleUpdate);
+      window.removeEventListener('ap_history_updated', handleUpdate);
+    };
   }, []);
 
   const handleRemove = (e: React.MouseEvent, slug: string) => {

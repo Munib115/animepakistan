@@ -95,12 +95,17 @@ export default async function EpisodeWatchPage(props: PageProps) {
   if (sources.length === 0) {
     const saltSlug = (anime as any).saltSlug || anime.slug;
     const epNumber = episode.number || 1;
+    // Derive the season number from the episode object or its slug pattern (e.g. "show-2x3" → 2)
+    const epSeason: number = (episode as any).season ?? (() => {
+      const m = episode.slug.match(/(\d+)x\d+/i);
+      return m ? parseInt(m[1], 10) : 1;
+    })();
 
     // Try the new animesalt-stream route first (scrapes triggerEpisode data)
     try {
       const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
       const streamRes = await fetch(
-        `${baseUrl}/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}`,
+        `${baseUrl}/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}&season=${epSeason}`,
         { next: { revalidate: 1800 } }
       );
       if (streamRes.ok) {
@@ -111,11 +116,12 @@ export default async function EpisodeWatchPage(props: PageProps) {
       }
     } catch (e) {}
 
-    // Fall back to general resolver
+    // Fall back to general resolver (pass season so it picks the right episode)
     if (sources.length === 0) {
       sources = await resolveStreamSources(
         `https://animesalt.cx/series/${saltSlug}/`,
-        epNumber
+        epNumber,
+        epSeason
       );
     }
   }
