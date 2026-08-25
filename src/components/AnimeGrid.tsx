@@ -5,6 +5,7 @@ import { useSearchParams, usePathname } from 'next/navigation';
 import { AnimeItem } from '@/types/anime';
 import AnimeCard from './AnimeCard';
 import { useLanguage } from '@/context/LanguageContext';
+import { sound } from '@/lib/soundEngine';
 
 interface AnimeGridProps {
   initialItems: AnimeItem[];
@@ -14,10 +15,50 @@ interface AnimeGridProps {
 function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const urlType = searchParams?.get('type') || initialType || 'all';
   const [searchQuery, setSearchQuery] = useState('');
+  const [isListening, setIsListening] = useState(false);
+
+  const startVoiceSearch = () => {
+    sound.playButton();
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Voice search is not supported on this browser. Please use Chrome/Android Chrome.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.lang = language === 'ur' ? 'ur-PK' : 'en-PK';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      if (transcript) {
+        const cleaned = transcript.replace(/\.+$/g, '').trim();
+        setSearchQuery(cleaned);
+      }
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error('Speech recognition error', event.error);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+  };
+
   const [selectedType, setSelectedType] = useState<string>(urlType);
   const [selectedLetter, setSelectedLetter] = useState<string>('ALL');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('ALL');
@@ -133,33 +174,63 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
             </span>
             <input 
               type="text" 
-              placeholder={t('searchPlaceholder')} 
+              placeholder={isListening ? (language === 'ur' ? "سن رہا ہے... بولیں" : "Listening... Speak now") : t('searchPlaceholder')} 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="glass-input"
               style={{
                 paddingLeft: '40px',
-                paddingRight: searchQuery ? '36px' : '16px',
+                paddingRight: '72px',
               }}
             />
-            {searchQuery && (
+            <div style={{
+              position: 'absolute',
+              right: '8px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              {/* Mic Icon Button */}
               <button 
-                onClick={() => setSearchQuery('')}
+                type="button" 
+                onClick={startVoiceSearch} 
                 style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
                   background: 'none',
                   border: 'none',
-                  color: 'var(--text-muted)',
+                  color: isListening ? '#ef4444' : 'var(--color-primary)',
                   cursor: 'pointer',
                   padding: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  animation: isListening ? 'pulse-mic 1.5s infinite' : 'none',
                 }}
+                title="Voice Search"
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>close</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                  {isListening ? 'mic' : 'mic_none'}
+                </span>
               </button>
-            )}
+
+              {searchQuery && (
+                <button 
+                  onClick={() => setSearchQuery('')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-muted)',
+                    cursor: 'pointer',
+                    padding: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>close</span>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Type Switcher Pills */}
@@ -373,6 +444,11 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
 
       {/* Grid Breakpoint Tuning */}
       <style jsx>{`
+        @keyframes pulse-mic {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.15); opacity: 0.7; }
+          100% { transform: scale(1); opacity: 1; }
+        }
         @media (min-width: 640px) {
           .anime-cards-grid {
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;

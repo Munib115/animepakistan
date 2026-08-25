@@ -20,6 +20,45 @@ function HeaderContent() {
   const [results, setResults] = useState<Array<{ slug: string; type: 'movie' | 'series'; title: string; poster: string; audioLanguages: string[] }>>([]);
   const [isSearching, setIsSearching] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [isListening, setIsListening] = useState(false);
+
+  const startVoiceSearch = () => {
+    sound.playButton();
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Voice search is not supported on this browser. Please use Chrome/Android Chrome.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.lang = language === 'ur' ? 'ur-PK' : 'en-PK';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      if (transcript) {
+        const cleaned = transcript.replace(/\.+$/g, '').trim();
+        setQuery(cleaned);
+      }
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error('Speech recognition error', event.error);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+  };
 
   // Initialize and apply Eye Comfort mode on mount
   useEffect(() => {
@@ -222,19 +261,54 @@ function HeaderContent() {
         <>
           <button type="button" className="mobile-search-backdrop" onClick={closeSearch} aria-label="Close search" />
           <div className="mobile-search-panel" role="dialog" aria-modal="true" aria-label="Search anime">
-          <div className="mobile-search-input-wrap">
+          <div className="mobile-search-input-wrap" style={{ position: 'relative' }}>
             <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '22px' }}>search</span>
             <input
               ref={searchInputRef}
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search anime, movies or genres..."
+              placeholder={isListening ? (language === 'ur' ? "سن رہا ہے... بولیں" : "Listening... Speak now") : "Search anime, movies or genres..."}
               aria-label="Search anime"
+              style={{
+                paddingRight: '72px'
+              }}
             />
-            <button type="button" onClick={closeSearch} aria-label="Close search">
-              <span className="material-symbols-outlined">close</span>
-            </button>
+            <div style={{
+              position: 'absolute',
+              right: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              {/* Mic Icon Button */}
+              <button 
+                type="button" 
+                onClick={startVoiceSearch} 
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: isListening ? '#ef4444' : 'var(--color-primary)',
+                  cursor: 'pointer',
+                  padding: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  animation: isListening ? 'pulse-mic 1.5s infinite' : 'none',
+                }}
+                title="Voice Search"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
+                  {isListening ? 'mic' : 'mic_none'}
+                </span>
+              </button>
+
+              <button type="button" onClick={closeSearch} aria-label="Close search" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex', alignItems: 'center' }}>
+                <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--text-muted)' }}>close</span>
+              </button>
+            </div>
           </div>
 
           {query.trim().length >= 2 && (
@@ -258,6 +332,11 @@ function HeaderContent() {
       )}
 
       <style jsx>{`
+        @keyframes pulse-mic {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.15); opacity: 0.7; }
+          100% { transform: scale(1); opacity: 1; }
+        }
         .mobile-search-panel {
           display: none;
         }
