@@ -53,7 +53,7 @@ async function writeDB(storeName: 'metadata' | 'chunks', key: string | null, val
   return new Promise((resolve, reject) => {
     const tx = db.transaction(storeName, 'readwrite');
     const store = tx.objectStore(storeName);
-    const request = key ? store.put(value, key) : store.put(value);
+    const request = storeName === 'metadata' ? store.put(value) : store.put(value, key!);
     request.onsuccess = () => resolve();
     request.onerror = () => reject(request.error);
   });

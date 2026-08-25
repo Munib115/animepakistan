@@ -157,22 +157,75 @@ export async function checkAndSyncNewAnime(force = false): Promise<{ synced: num
 
       const episodes: any[] = [];
       if (entry.type === 'series') {
-        $('article.episodes').each((i, el) => {
-          const epHref = $(el).find('a.lnk-blk').first().attr('href') || '';
-          const epNum = $(el).find('.num-epi').text().trim();
-          let epTitle = $(el).find('.entry-title').text().trim() || `Episode ${epNum}`;
-          epTitle = epTitle.replace(/^private:\s*/gi, '');
-          const epSlug = epHref.split('/').filter(Boolean).pop() || '';
-          if (epSlug) {
-            episodes.push({
-              number: parseInt(epNum, 10) || i + 1,
-              title: epTitle,
-              slug: epSlug,
-              url: epHref
-            });
+        const seasonButtons: { post: string; season: number }[] = [];
+        $('a.season-btn').each((_, el) => {
+          const post = $(el).attr('data-post') || '';
+          const season = $(el).attr('data-season') || '';
+          if (post && season) {
+            seasonButtons.push({ post, season: parseInt(season, 10) });
           }
         });
-        episodes.sort((a, b) => a.number - b.number);
+
+        if (seasonButtons.length > 0) {
+          for (const btn of seasonButtons) {
+            try {
+              const ajaxUrl = `https://animesalt.cx/wp-admin/admin-ajax.php?action=action_select_season&season=${btn.season}&post=${btn.post}`;
+              const ajaxRes = await fetch(ajaxUrl, {
+                headers: { 'User-Agent': 'Mozilla/5.0' }
+              });
+              if (ajaxRes.ok) {
+                const ajaxHtml = await ajaxRes.text();
+                const $ajax = cheerio.load(ajaxHtml);
+                
+                $ajax('article.episodes').each((i, el) => {
+                  const epHref = $ajax(el).find('a.lnk-blk').first().attr('href') || '';
+                  const epNumStr = $ajax(el).find('.num-epi').text().trim();
+                  const epNum = parseInt(epNumStr, 10) || i + 1;
+                  let epTitle = $ajax(el).find('.entry-title').text().trim() || `Episode ${epNum}`;
+                  epTitle = epTitle.replace(/^private:\s*/gi, '');
+                  const epSlug = epHref.split('/').filter(Boolean).pop() || '';
+                  const epThumb = $ajax(el).find('img').attr('src') || '';
+                  if (epSlug) {
+                    episodes.push({
+                      number: epNum,
+                      season: btn.season,
+                      title: `S${btn.season} E${epNum}: ${epTitle}`,
+                      slug: epSlug,
+                      url: epHref.replace(/^http:\/\//i, 'https://'),
+                      thumbnail: epThumb ? (epThumb.startsWith('//') ? 'https:' + epThumb : epThumb) : ''
+                    });
+                  }
+                });
+              }
+            } catch (err) {
+              console.warn(`[Sync Engine] Failed to fetch Season ${btn.season} for "${title}":`, err);
+            }
+          }
+        } else {
+          $('article.episodes').each((i, el) => {
+            const epHref = $(el).find('a.lnk-blk').first().attr('href') || '';
+            const epNum = $(el).find('.num-epi').text().trim();
+            let epTitle = $(el).find('.entry-title').text().trim() || `Episode ${epNum}`;
+            epTitle = epTitle.replace(/^private:\s*/gi, '');
+            const epSlug = epHref.split('/').filter(Boolean).pop() || '';
+            const epThumb = $(el).find('img').attr('src') || '';
+            if (epSlug) {
+              episodes.push({
+                number: parseInt(epNum, 10) || i + 1,
+                season: 1,
+                title: epTitle,
+                slug: epSlug,
+                url: epHref.replace(/^http:\/\//i, 'https://'),
+                thumbnail: epThumb ? (epThumb.startsWith('//') ? 'https:' + epThumb : epThumb) : ''
+              });
+            }
+          });
+        }
+
+        episodes.sort((a, b) => {
+          if (a.season !== b.season) return a.season - b.season;
+          return a.number - b.number;
+        });
       }
 
       let streamUrl = '';

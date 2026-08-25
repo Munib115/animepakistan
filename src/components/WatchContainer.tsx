@@ -310,14 +310,75 @@ export default function WatchContainer({
           </div>
         </div>
 
-        {/* Badges */}
-        <div style={{ display: 'flex', gap: '8px' }}>
+        {/* Badges & Download Button */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span className="glass-badge" style={{ background: 'var(--color-primary)', color: '#ffffff' }}>
             {isMovie ? (language === 'ur' ? 'مووی (MOVIE)' : 'MOVIE') : `${t('episodePrefix')} ${currentEpisode?.number || 1}`}
           </span>
           <span className="glass-badge-white">
             HD 1080p
           </span>
+
+          {/* Small Icon-Only Download Button */}
+          {streamSources.length > 0 && (
+            <button
+              onClick={handleDownloadClick}
+              disabled={downloadingItem?.status === 'downloading' || downloadingItem?.status === 'paused'}
+              title={downloadingItem ? `Download: ${downloadingItem.progress}%` : 'Download Video'}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '32px',
+                height: '32px',
+                borderRadius: '8px',
+                border: 'none',
+                background: downloadingItem
+                  ? downloadingItem.status === 'completed'
+                    ? '#16a34a'
+                    : 'rgba(0, 102, 51, 0.15)'
+                  : 'var(--color-primary)',
+                color: downloadingItem
+                  ? downloadingItem.status === 'completed'
+                    ? '#ffffff'
+                    : 'var(--color-primary)'
+                  : '#ffffff',
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px rgba(0, 102, 51, 0.08)',
+                transition: 'all 0.2s',
+                position: 'relative',
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                {downloadingItem
+                  ? downloadingItem.status === 'completed'
+                    ? 'download_done'
+                    : 'downloading'
+                  : 'download'}
+              </span>
+
+              {downloadingItem && downloadingItem.status !== 'completed' && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-4px',
+                  right: '-4px',
+                  background: 'var(--color-primary)',
+                  color: '#ffffff',
+                  fontSize: '8px',
+                  fontWeight: 900,
+                  borderRadius: '50%',
+                  width: '14px',
+                  height: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #ffffff',
+                }}>
+                  {downloadingItem.progress}
+                </span>
+              )}
+            </button>
+          )}
         </div>
       </div>
 
@@ -531,98 +592,6 @@ export default function WatchContainer({
           </div>
         </div>
       </div>
-
-      {/* Player Controls: Server Selection & Direct Download */}
-      {streamSources.length > 0 && (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '12px',
-          padding: '12px 16px',
-          background: 'rgba(255,255,255,0.8)',
-          backdropFilter: 'blur(10px)',
-          borderRadius: '16px',
-          border: '1px solid var(--glass-border)',
-          boxShadow: '0 4px 20px rgba(0, 102, 51, 0.04)',
-          position: 'relative',
-          zIndex: isLightsOff ? 9999 : 2,
-        }}>
-          {/* Servers/Mirrors */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-secondary)' }}>
-              {language === 'ur' ? 'سرور منتخب کریں:' : 'Select Server:'}
-            </span>
-            {streamSources.map((source, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setSelectedServerIndex(idx);
-                  sound.playTabSwitch();
-                }}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: '8px',
-                  border: 'none',
-                  background: selectedServerIndex === idx ? 'var(--color-primary)' : 'rgba(0, 102, 51, 0.05)',
-                  color: selectedServerIndex === idx ? '#ffffff' : 'var(--color-primary)',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-              >
-                {source.label || `Server ${idx + 1}`}
-              </button>
-            ))}
-          </div>
-
-          {/* Download Action */}
-          <button
-            onClick={handleDownloadClick}
-            disabled={downloadingItem?.status === 'downloading' || downloadingItem?.status === 'paused'}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 16px',
-              borderRadius: '10px',
-              border: 'none',
-              background: downloadingItem
-                ? downloadingItem.status === 'completed'
-                  ? '#16a34a'
-                  : 'rgba(0, 102, 51, 0.15)'
-                : 'var(--color-primary)',
-              color: downloadingItem
-                ? downloadingItem.status === 'completed'
-                  ? '#ffffff'
-                  : 'var(--color-primary)'
-                : '#ffffff',
-              fontSize: '0.8rem',
-              fontWeight: 800,
-              cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(0, 102, 51, 0.08)',
-              transition: 'all 0.2s',
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-              {downloadingItem
-                ? downloadingItem.status === 'completed'
-                  ? 'download_done'
-                  : 'downloading'
-                : 'download'}
-            </span>
-            <span>
-              {downloadingItem
-                ? downloadingItem.status === 'completed'
-                  ? (language === 'ur' ? 'ڈاؤنلوڈ مکمل' : 'Downloaded')
-                  : `${downloadingItem.progress}%`
-                : (language === 'ur' ? 'ڈاؤنلوڈ ویڈیو' : 'Download Video')}
-            </span>
-          </button>
-        </div>
-      )}
 
       {/* Series Episodes Playlist Grid */}
       {!isMovie && anime.episodes && anime.episodes.length > 0 && (

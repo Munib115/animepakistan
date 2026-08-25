@@ -909,3 +909,36 @@ body::after {
   }
 }
 
+/* --- MOBILE & ANDROID HARDWARE SPEED OPTIMIZATIONS --- */
+@media (max-width: 768px) {
+  /* Prevent heavy Chrome layout calculations for off-screen elements */
+  .glass-panel,
+  .glass-card,
+  .anime-details-layout,
+  .episode-item-card,
+  .hero-slider-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 100px 300px;
+  }
+
+  /* Force GPU rendering path to eliminate micro-stutters during scrolling */
+  .glass-card,
+  .slider-track,
+  .hero-slider-section,
+  .download-sidebar,
+  .download-fab {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  /* Optimize layout complexity by reducing filter blur radius and shadow offsets */
+  .glass-card, 
+  .glass-panel,
+  .apple-liquid-glass-dock {
+    box-shadow: 0 4px 12px rgba(0, 51, 25, 0.03) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+}
+

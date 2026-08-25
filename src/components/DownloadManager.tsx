@@ -17,24 +17,6 @@ export default function DownloadManager() {
         className="download-fab"
         aria-label="Open Download Manager"
         title="ڈاؤنلوڈ منیجر (Download Manager)"
-        style={{
-          position: 'fixed',
-          bottom: '84px', // Float above bottom bar
-          right: '24px',
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          background: 'var(--color-primary, #006633)',
-          color: '#ffffff',
-          border: 'none',
-          boxShadow: '0 8px 24px rgba(0, 102, 51, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.2)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          zIndex: 99990,
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
       >
         <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
           download_for_offline
@@ -64,14 +46,37 @@ export default function DownloadManager() {
 
       {/* Styled JSX for animations & hover effects */}
       <style jsx global>{`
+        .download-fab {
+          position: fixed;
+          bottom: 84px; /* Mobile tab dock offset */
+          right: 24px;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: transparent;
+          color: var(--color-primary, #006633);
+          border: none;
+          box-shadow: none;
+          display: flex;
+          align-items: center;
+          justifyContent: center;
+          cursor: pointer;
+          z-index: 99990;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (min-width: 768px) {
+          .download-fab {
+            bottom: 24px; /* Desktop lower floating position */
+          }
+        }
         @keyframes pulse {
           0% { transform: scale(1); }
           50% { transform: scale(1.1); }
           100% { transform: scale(1); }
         }
         .download-fab:hover {
-          transform: translateY(-4px) scale(1.05);
-          filter: brightness(1.1);
+          transform: translateY(-4px) scale(1.1);
+          color: var(--color-primary-dark, #004d26);
         }
         .download-sidebar {
           box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
