@@ -94,8 +94,6 @@ export default function WatchContainer({
 
   const activeMirror = sanitizeStreamUrl(rawMirror);
 
-  const [isTheater, setIsTheater] = useState(false);
-  const [isLightsOff, setIsLightsOff] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
@@ -257,11 +255,7 @@ export default function WatchContainer({
     }
   };
 
-  const handleReload = () => {
-    setIframeKey((key) => key + 1);
-  };
-
-  // Keyboard shortcuts
+  // Keyboard shortcuts (arrow keys seek)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
@@ -271,10 +265,6 @@ export default function WatchContainer({
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
         handleSeek('right');
-      } else if (e.key.toLowerCase() === 't') {
-        setIsTheater((prev) => !prev);
-      } else if (e.key.toLowerCase() === 'l') {
-        setIsLightsOff((prev) => !prev);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -285,28 +275,10 @@ export default function WatchContainer({
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      gap: '20px',
-      padding: '16px 0',
+      gap: '14px',
+      padding: '12px 0',
       position: 'relative',
     }}>
-      
-      {/* Lights Off Dimming Overlay */}
-      {isLightsOff && (
-        <div 
-          onClick={() => setIsLightsOff(false)}
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0, 0, 0, 0.88)',
-            zIndex: 9998,
-            backdropFilter: 'blur(10px)',
-            transition: 'opacity 0.3s ease',
-          }}
-        />
-      )}
 
       {/* Top Header & Breadcrumbs */}
       <div style={{
@@ -314,9 +286,9 @@ export default function WatchContainer({
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: '12px',
+        gap: '8px',
         position: 'relative',
-        zIndex: isLightsOff ? 9999 : 2,
+        zIndex: 2,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Link 
@@ -332,16 +304,16 @@ export default function WatchContainer({
 
           <div>
             <h1 style={{
-              fontSize: 'clamp(1.1rem, 3vw, 1.45rem)',
+              fontSize: 'clamp(0.95rem, 2.8vw, 1.3rem)',
               fontWeight: 900,
-              color: isLightsOff ? '#ffffff' : 'var(--text-primary)',
+              color: 'var(--text-primary)',
               lineHeight: 1.2,
             }}>
               {displayName}
             </h1>
             {!isMovie && currentEpisode && (
               <span style={{
-                fontSize: '0.82rem',
+                fontSize: '0.78rem',
                 fontWeight: 700,
                 color: 'var(--color-primary)',
               }}>
@@ -439,7 +411,7 @@ export default function WatchContainer({
           boxShadow: '0 4px 16px rgba(0, 102, 51, 0.3)',
           color: '#ffffff',
           position: 'relative',
-          zIndex: isLightsOff ? 9999 : 2,
+          zIndex: 2,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#00ff66' }}>
@@ -495,34 +467,28 @@ export default function WatchContainer({
         </div>
       )}
 
-      {/* Main Liquid Glass Video Player Container */}
-      <div 
-        className="liquid-glass-panel" 
+      {/* Main Video Player Container */}
+      <div
         style={{
-          padding: '12px',
-          borderRadius: '20px',
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(235,245,238,0.92) 100%)',
-          border: '1.5px solid var(--glass-border)',
-          boxShadow: '0 20px 50px rgba(0, 102, 51, 0.16)',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          background: '#010804',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 102, 51, 0.25)',
           position: 'relative',
-          zIndex: isLightsOff ? 9999 : 2,
-          maxWidth: isTheater ? '100%' : '100%',
+          zIndex: 2,
           transform: 'translate3d(0,0,0)',
           willChange: 'transform',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
-        {/* 16:9 Screen Container with Liquid Glass Frame */}
-        <div 
+        {/* 16:9 Screen Container */}
+        <div
           onClick={handlePlayerTap}
           style={{
             position: 'relative',
             width: '100%',
-            paddingTop: isTheater ? '52%' : '56.25%', // Cinematic widescreen in theater mode
+            paddingTop: '56.25%',
             background: '#010804',
-            borderRadius: '14px',
             overflow: 'hidden',
-            boxShadow: '0 12px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 102, 51, 0.3)',
             cursor: 'pointer',
             transform: 'translate3d(0,0,0)',
           }}
@@ -684,113 +650,59 @@ export default function WatchContainer({
         </div>
       </div>
 
-      {/* Player Navigation & Quick Controls Bar */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '10px',
-        position: 'relative',
-        zIndex: isLightsOff ? 9999 : 2,
-      }}>
-        {/* Previous / Next Episode Quick Buttons */}
-        {!isMovie && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {prevEp ? (
-              <Link
-                href={`/watch/${anime.slug}/${prevEp.slug}`}
-                prefetch={true}
-                onClick={() => sound.playEpisodeSelect()}
-                className="glass-btn-secondary"
-                style={{ padding: '6px 14px', fontSize: '0.8rem', borderRadius: '8px' }}
-                title={`Previous: S${prevEp.season || 1} Ep ${prevEp.number}`}
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-                  {language === 'ur' ? 'skip_next' : 'skip_previous'}
-                </span>
-                <span>{language === 'ur' ? 'پچھلی قسط' : 'Previous Ep'}</span>
-              </Link>
-            ) : (
-              <button
-                disabled
-                className="glass-btn-secondary"
-                style={{ padding: '6px 14px', fontSize: '0.8rem', borderRadius: '8px', opacity: 0.4, cursor: 'not-allowed' }}
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-                  {language === 'ur' ? 'skip_next' : 'skip_previous'}
-                </span>
-                <span>{language === 'ur' ? 'پچھلی قسط' : 'Previous Ep'}</span>
-              </button>
-            )}
+      {/* Player Navigation Bar — Previous / Next Episode */}
+      {!isMovie && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          position: 'relative',
+          zIndex: 2,
+        }}>
+          {prevEp ? (
+            <Link
+              href={`/watch/${anime.slug}/${prevEp.slug}`}
+              prefetch={true}
+              onClick={() => sound.playEpisodeSelect()}
+              className="glass-btn-secondary"
+              style={{ padding: '7px 14px', fontSize: '0.8rem', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              title={`Previous: S${prevEp.season || 1} Ep ${prevEp.number}`}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
+                {language === 'ur' ? 'skip_next' : 'skip_previous'}
+              </span>
+              <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'پچھلی قسط' : 'Prev Ep'}</span>
+            </Link>
+          ) : (
+            <button
+              disabled
+              className="glass-btn-secondary"
+              style={{ padding: '7px 14px', fontSize: '0.8rem', borderRadius: '8px', opacity: 0.38, cursor: 'not-allowed', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
+                {language === 'ur' ? 'skip_next' : 'skip_previous'}
+              </span>
+              <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'پچھلی قسط' : 'Prev Ep'}</span>
+            </button>
+          )}
 
-            {nextEp ? (
-              <Link
-                href={`/watch/${anime.slug}/${nextEp.slug}`}
-                prefetch={true}
-                onClick={() => sound.playEpisodeSelect()}
-                className="glass-btn"
-                style={{ padding: '6px 16px', fontSize: '0.8rem', borderRadius: '8px' }}
-                title={`Next: S${nextEp.season || 1} Ep ${nextEp.number}`}
-              >
-                <span>{language === 'ur' ? 'اگلی قسط' : 'Next Ep'}</span>
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-                  {language === 'ur' ? 'skip_previous' : 'skip_next'}
-                </span>
-              </Link>
-            ) : null}
-          </div>
-        )}
-
-        {/* Player Action Buttons: Reload, Theater, Lights */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}>
-          <button
-            onClick={handleReload}
-            title="Reload Video Player"
-            className="glass-btn-secondary"
-            style={{ padding: '6px 10px', fontSize: '0.78rem', borderRadius: '8px' }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>refresh</span>
-            <span>{language === 'ur' ? 'ری لوڈ' : 'Reload'}</span>
-          </button>
-
-          <button
-            onClick={() => setIsTheater((prev) => !prev)}
-            title="Toggle Theater Mode (T)"
-            className="glass-btn-secondary"
-            style={{
-              padding: '6px 10px',
-              fontSize: '0.78rem',
-              borderRadius: '8px',
-              background: isTheater ? 'var(--color-primary)' : undefined,
-              color: isTheater ? '#ffffff' : undefined,
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
-              {isTheater ? 'fullscreen_exit' : 'aspect_ratio'}
-            </span>
-            <span>{language === 'ur' ? 'تھیٹر موڈ' : 'Theater'}</span>
-          </button>
-
-          <button
-            onClick={() => setIsLightsOff((prev) => !prev)}
-            title="Toggle Lights Off (L)"
-            className="glass-btn-secondary"
-            style={{
-              padding: '6px 10px',
-              fontSize: '0.78rem',
-              borderRadius: '8px',
-              background: isLightsOff ? '#1e293b' : undefined,
-              color: isLightsOff ? '#fbbf24' : undefined,
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
-              {isLightsOff ? 'lightbulb' : 'lightbulb_circle'}
-            </span>
-            <span>{language === 'ur' ? 'لائٹس آف' : 'Lights'}</span>
-          </button>
+          {nextEp && (
+            <Link
+              href={`/watch/${anime.slug}/${nextEp.slug}`}
+              prefetch={true}
+              onClick={() => sound.playEpisodeSelect()}
+              className="glass-btn"
+              style={{ padding: '7px 14px', fontSize: '0.8rem', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              title={`Next: S${nextEp.season || 1} Ep ${nextEp.number}`}
+            >
+              <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'اگلی قسط' : 'Next Ep'}</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
+                {language === 'ur' ? 'skip_previous' : 'skip_next'}
+              </span>
+            </Link>
+          )}
         </div>
-      </div>
+      )}
 
       {/* Series Episodes Playlist Organized by Season */}
       {!isMovie && sortedEpisodes.length > 0 && (
@@ -881,11 +793,11 @@ export default function WatchContainer({
           {/* Episode Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
-            gap: '10px',
-            maxHeight: '400px',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))',
+            gap: '8px',
+            maxHeight: '420px',
             overflowY: 'auto',
-            paddingRight: '4px',
+            paddingRight: '2px',
           }}>
             {visibleEpisodes.map((ep) => {
               const isCurrent = ep.slug === currentEpisode?.slug;
