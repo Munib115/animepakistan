@@ -2,7 +2,8 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
-import { resolveStreamSources } from '@/lib/resolver';
+import { StreamSource, sanitizeStreamUrl } from '@/lib/resolver';
+import { resolveStreamSources } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
 import { animeDescription, animeImage, animeName } from '@/lib/seo';
 
@@ -19,11 +20,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = animeDescription(anime);
   const url = `/watch/${anime.slug}`;
   return {
-    title: `${name} Urdu & Hindi Dubbed Movie`,
+    title: `Watch ${name} Urdu & Hindi Dubbed Movie`,
     description,
     alternates: { canonical: url },
-    openGraph: { type: 'video.movie', url, title: `${name} Urdu & Hindi Dubbed Movie`, description, images: [{ url: animeImage(anime), alt: `${name} poster` }] },
-    twitter: { card: 'summary_large_image', title: `${name} Urdu & Hindi Dubbed Movie`, description, images: [animeImage(anime)] },
+    openGraph: { type: 'video.other', url, title: `Watch ${name} Urdu & Hindi Dubbed Movie`, description, images: [{ url: animeImage(anime), alt: `${name} poster` }] },
+    twitter: { card: 'summary_large_image', title: `Watch ${name} Urdu & Hindi Dubbed Movie`, description, images: [animeImage(anime)] },
   };
 }
 
@@ -33,7 +34,7 @@ export default async function MovieWatchPage(props: PageProps) {
   // Load database from in-memory cache
   const items = getAnimeDb();
 
-  // Find movie
+  // Find target movie with flexible slug matching
   const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
   const anime = items.find((item) => {
     const itemSlug = item.slug.toLowerCase().trim();
@@ -51,7 +52,7 @@ export default async function MovieWatchPage(props: PageProps) {
             </span>
             <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Movie Not Found</h2>
             <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
-              We could not find the requested movie watch page in our database.
+              We could not find the requested anime movie in our database.
             </p>
           </div>
         </main>
@@ -60,11 +61,59 @@ export default async function MovieWatchPage(props: PageProps) {
     );
   }
 
-  // Use pre-cached streamUrl from db first if available, otherwise resolve dynamically
-  const cachedStreamUrl = (anime as any).streamUrl;
-  const sources = cachedStreamUrl
-    ? [{ label: 'Server 1', url: cachedStreamUrl as string, isMultiAudio: true }]
-    : await resolveStreamSources(anime.url);
+  // Resolve streams with priority:
+  // 1. Pre-cached streamUrl on the anime object
+  // 2. New animesalt-stream API (saltSlug, no episode number → first/only stream)
+  // 3. General resolver (legacy fallback)
+  let sources: StreamSource[] = [];
+
+  if (anime.streamUrl) {
+    if (anime.streamUrl.includes('multi-lang-plyr/player.php?data=')) {
+      try {
+        const urlObj = new URL(anime.streamUrl);
+        const dataParam = urlObj.searchParams.get('data');
+        if (dataParam) {
+          const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
+          const parsed = JSON.parse(decodedStr);
+          if (Array.isArray(parsed)) {
+            sources = parsed.map((item: any) => ({
+              label: `Abyss (${item.language || 'HD'})`,
+              url: sanitizeStreamUrl(item.link),
+              isMultiAudio: false
+            }));
+          }
+        }
+      } catch (e) {
+        sources = [{ label: 'HD-1 (Hindi)', url: anime.streamUrl, isMultiAudio: true }];
+      }
+    } else {
+      sources = [{ label: 'HD-1 (Hindi)', url: anime.streamUrl, isMultiAudio: true }];
+    }
+  }
+
+  if (sources.length === 0) {
+    const saltSlug = anime.saltSlug || anime.slug;
+
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+      const streamRes = await fetch(
+        `${baseUrl}/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}`,
+        { next: { revalidate: 1800 } }
+      );
+      if (streamRes.ok) {
+        const data = await streamRes.json();
+        if (data.sources && data.sources.length > 0) {
+          sources = data.sources;
+        }
+      }
+    } catch (e) {}
+
+    if (sources.length === 0) {
+      sources = await resolveStreamSources(
+        `https://animesalt.cx/movies/${saltSlug}/`
+      );
+    }
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', position: 'relative' }}>

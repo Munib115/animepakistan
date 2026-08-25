@@ -28,8 +28,8 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
   const rawCover = anime.poster || anime.anilist?.coverImage || '';
   const rawBanner = anime.anilist?.bannerImage || anime.backdrop || '';
   
-  const coverUrl = getProxiedImageUrl(rawCover);
-  const bannerUrl = getProxiedImageUrl(rawBanner);
+  const coverUrl = getProxiedImageUrl(rawCover, 'poster');
+  const bannerUrl = getProxiedImageUrl(rawBanner, 'backdrop');
   
   const rating = anime.anilist?.rating ? (anime.anilist.rating / 10).toFixed(1) : null;
   const isMovie = anime.type === 'movie';

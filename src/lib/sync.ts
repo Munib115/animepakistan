@@ -2,12 +2,25 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 import { AnimeItem } from '@/types/anime';
+import { sanitizeStreamUrl } from './resolver';
 
 const DB_FILE = path.join(process.cwd(), 'src', 'data', 'anime-db.json');
 const TMDB_KEY = process.env.TMDB_API_KEY || '119b065ce02f9f479565d6b99a758ee2';
 
 let lastSyncTimestamp = 0;
 const SYNC_COOLDOWN_MS = 1000 * 60 * 30; // 30 minutes cooldown between automated checks
+
+function isBadUrl(u: string): boolean {
+  const lower = u.toLowerCase();
+  return (
+    !lower ||
+    lower.startsWith('about:blank') ||
+    lower.includes('googletagmanager') ||
+    lower.includes('doubleclick') ||
+    lower.includes('facebook') ||
+    lower.includes('analytics')
+  );
+}
 
 async function fetchTMDBArt(query: string, type: string) {
   try {
@@ -56,8 +69,11 @@ export async function checkAndSyncNewAnime(force = false): Promise<{ synced: num
   const existingMap = new Set(existing.map(i => i.slug.toLowerCase().trim()));
 
   const sitemaps = [
-    { url: 'https://animevilla.org/anime-sitemap.xml', type: 'series' },
-    { url: 'https://animevilla.org/episode-sitemap.xml', type: 'movie' }
+    { url: 'https://animesalt.cx/movies-sitemap1.xml', type: 'movie' },
+    { url: 'https://animesalt.cx/movies-sitemap2.xml', type: 'movie' },
+    { url: 'https://animesalt.cx/series-sitemap1.xml', type: 'series' },
+    { url: 'https://animesalt.cx/series-sitemap2.xml', type: 'series' },
+    { url: 'https://animesalt.cx/series-sitemap3.xml', type: 'series' }
   ];
 
   const newEntries: { url: string; type: 'movie' | 'series' }[] = [];
@@ -110,6 +126,23 @@ export async function checkAndSyncNewAnime(force = false): Promise<{ synced: num
 
       const tmdbArt = await fetchTMDBArt(title, entry.type);
 
+      let poster = tmdbArt?.poster || '';
+      if (!poster) {
+        const pagePoster = $('.bd img[data-src*="image.tmdb.org"]').first().attr('data-src') ||
+                           $('.bd img[src*="image.tmdb.org"]').first().attr('src') || '';
+        if (pagePoster) {
+          poster = pagePoster.startsWith('//') ? 'https:' + pagePoster : pagePoster;
+        }
+      }
+
+      let backdrop = tmdbArt?.backdrop || '';
+      if (!backdrop) {
+        const pageBackdrop = $('.TPostBg').first().attr('data-src') || $('.TPostBg').first().attr('src') || '';
+        if (pageBackdrop) {
+          backdrop = pageBackdrop.startsWith('//') ? 'https:' + pageBackdrop : pageBackdrop;
+        }
+      }
+
       const genres: string[] = [];
       $('a[href*="/genre/"], a[href*="/category/genre/"]').each((_, el) => {
         const g = $(el).text().trim();
@@ -142,17 +175,29 @@ export async function checkAndSyncNewAnime(force = false): Promise<{ synced: num
         episodes.sort((a, b) => a.number - b.number);
       }
 
+      let streamUrl = '';
+      if (entry.type === 'movie') {
+        $('iframe').each((_, el) => {
+          const src = $(el).attr('src') || $(el).attr('data-src') || '';
+          if (src && !isBadUrl(src)) {
+            streamUrl = sanitizeStreamUrl(src);
+            return false; // Break
+          }
+        });
+      }
+
       const newItem: AnimeItem = {
         title,
         slug,
         url: entry.url.replace(/^http:\/\//i, 'https://'),
         type: entry.type,
-        poster: tmdbArt?.poster || '',
-        backdrop: tmdbArt?.backdrop || '',
+        poster: poster || '',
+        backdrop: backdrop || '',
         description: tmdbArt?.overview || $('.entry-content p').first().text().trim() || '',
         genres: genres.length > 0 ? genres : ['Action', 'Adventure'],
         audioLanguages: audioLanguages.length > 0 ? audioLanguages : ['Hindi', 'Urdu', 'Japanese'],
         episodes: entry.type === 'series' ? episodes : undefined,
+        streamUrl: entry.type === 'movie' ? streamUrl : undefined,
         anilist: null
       };
 

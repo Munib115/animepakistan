@@ -113,7 +113,7 @@ export default function PWAInstallBanner() {
         className="pwa-install-banner"
         style={{
           position: 'fixed',
-          bottom: 'calc(74px + var(--sab, 0px))',
+          bottom: 'calc(88px + var(--sab, 0px))',
           left: '16px',
           right: '16px',
           maxWidth: '440px',

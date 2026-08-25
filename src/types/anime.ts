@@ -5,6 +5,8 @@ export interface Episode {
   slug: string;
   url: string;
   thumbnail: string;
+  /** Pre-cached stream embed URL from animesalt.me */
+  streamUrl?: string;
 }
 
 export interface AnilistMetadata {
@@ -25,6 +27,8 @@ export interface AnilistMetadata {
 export interface AnimeItem {
   title: string;
   slug: string;
+  /** The animesalt.me /tv/{saltSlug}/ page slug (may differ from local slug) */
+  saltSlug?: string;
   url: string;
   type: 'movie' | 'series';
   poster: string;
@@ -34,5 +38,7 @@ export interface AnimeItem {
   audioLanguages: string[];
   episodes?: Episode[];
   anilist?: AnilistMetadata | null;
+  /** Pre-cached stream embed URL (for movies) */
+  streamUrl?: string;
 }
 

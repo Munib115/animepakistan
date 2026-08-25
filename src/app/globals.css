@@ -91,9 +91,26 @@ html.eye-comfort-night .glass-btn-secondary {
   border-color: rgba(0, 204, 102, 0.2) !important;
 }
 
+.apple-liquid-glass-dock {
+  --tab-bg: rgba(255, 255, 255, 0.72);
+  --tab-border: rgba(0, 102, 51, 0.15);
+  --tab-shadow: 0 16px 36px -10px rgba(0, 70, 35, 0.15), 0 0 20px rgba(0, 102, 51, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  --tab-color-active: var(--color-primary);
+  --tab-color-inactive: var(--text-secondary);
+  --tab-bg-active: rgba(0, 102, 51, 0.08);
+  --tab-shadow-active: 0 0 8px rgba(0, 102, 51, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  --tab-icon-glow: drop-shadow(0 0 4px rgba(0, 102, 51, 0.2));
+}
+
 html.eye-comfort-night .apple-liquid-glass-dock {
-  background: rgba(5, 20, 10, 0.88) !important;
-  border-color: rgba(0, 204, 102, 0.25) !important;
+  --tab-bg: rgba(8, 22, 14, 0.88);
+  --tab-border: rgba(0, 230, 118, 0.25);
+  --tab-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 230, 118, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  --tab-color-active: #00ff88;
+  --tab-color-inactive: rgba(255, 255, 255, 0.6);
+  --tab-bg-active: rgba(0, 230, 118, 0.15);
+  --tab-shadow-active: 0 0 12px rgba(0, 230, 118, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  --tab-icon-glow: drop-shadow(0 0 6px rgba(0, 255, 136, 0.6));
 }
 
 /* --- BASE & HARDWARE ACCELERATION STYLES --- */
@@ -883,7 +900,7 @@ body::after {
 
 @media (max-width: 768px) {
   .pwa-install-banner {
-    bottom: calc(76px + var(--sab, 0px)) !important;
+    bottom: calc(88px + var(--sab, 0px)) !important;
     left: 10px !important;
     right: 10px !important;
     width: auto !important;

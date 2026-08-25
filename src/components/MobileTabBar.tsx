@@ -64,12 +64,12 @@ function TabBarContent() {
         alignItems: 'center',
         justifyContent: 'space-around',
         padding: '6px 8px',
-        background: 'rgba(8, 22, 14, 0.88)',
+        background: 'var(--tab-bg)',
         backdropFilter: 'blur(32px) saturate(200%)',
         WebkitBackdropFilter: 'blur(32px) saturate(200%)',
         borderRadius: '24px',
-        border: '1px solid rgba(0, 230, 118, 0.25)',
-        boxShadow: '0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 230, 118, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
+        border: '1px solid var(--tab-border)',
+        boxShadow: 'var(--tab-shadow)',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
@@ -89,10 +89,10 @@ function TabBarContent() {
             padding: '6px 4px',
             borderRadius: '16px',
             textDecoration: 'none',
-            color: tab.active ? '#00ff88' : 'rgba(255, 255, 255, 0.6)',
+            color: tab.active ? 'var(--tab-color-active)' : 'var(--tab-color-inactive)',
             transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            background: tab.active ? 'rgba(0, 230, 118, 0.15)' : 'transparent',
-            boxShadow: tab.active ? '0 0 12px rgba(0, 230, 118, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2)' : 'none',
+            background: tab.active ? 'var(--tab-bg-active)' : 'transparent',
+            boxShadow: tab.active ? 'var(--tab-shadow-active)' : 'none',
           }}
           className={`dock-tab-item ${tab.active ? 'active-tab' : ''}`}
         >
@@ -102,7 +102,7 @@ function TabBarContent() {
               fontSize: '21px',
               transform: tab.active ? 'scale(1.12)' : 'scale(1)',
               transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease',
-              filter: tab.active ? 'drop-shadow(0 0 6px rgba(0, 255, 136, 0.6))' : 'none',
+              filter: tab.active ? 'var(--tab-icon-glow)' : 'none',
             }}
           >
             {tab.icon}
@@ -135,7 +135,7 @@ function TabBarContent() {
           background: 'none',
           border: 'none',
           cursor: 'pointer',
-          color: 'rgba(255, 255, 255, 0.6)',
+          color: 'var(--tab-color-inactive)',
           fontFamily: 'inherit',
           transition: 'all 0.25s ease',
         }}

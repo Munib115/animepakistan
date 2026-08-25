@@ -82,7 +82,7 @@ export default function ContinueWatchingSection() {
             ? `/watch/${item.animeSlug}`
             : `/watch/${item.animeSlug}/${item.epSlug || ''}`;
 
-          const imageSrc = getProxiedImageUrl(item.backdrop || item.poster);
+          const imageSrc = getProxiedImageUrl(item.backdrop || item.poster, 'backdrop');
 
           return (
             <div 

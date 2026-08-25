@@ -2,7 +2,8 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
-import { resolveStreamSources } from '@/lib/resolver';
+import { StreamSource, sanitizeStreamUrl } from '@/lib/resolver';
+import { resolveStreamSources } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
 
 interface PageProps {
@@ -60,11 +61,64 @@ export default async function EpisodeWatchPage(props: PageProps) {
     thumbnail: anime.poster || '',
   };
 
-  // Resolve streams: use pre-cached streamUrl if available, otherwise live resolve
-  const cachedStreamUrl = (episode as any).streamUrl;
-  const sources = cachedStreamUrl
-    ? [{ label: 'Server 1', url: cachedStreamUrl as string, isMultiAudio: true }]
-    : await resolveStreamSources(episode.url);
+  // Resolve streams with priority:
+  // 1. Pre-cached streamUrl on the episode object
+  // 2. New animesalt-stream API (saltSlug + episode number)
+  // 3. General resolver (legacy fallback)
+  let sources: StreamSource[] = [];
+
+  if ((episode as any).streamUrl) {
+    const streamUrl = (episode as any).streamUrl;
+    if (streamUrl.includes('multi-lang-plyr/player.php?data=')) {
+      try {
+        const urlObj = new URL(streamUrl);
+        const dataParam = urlObj.searchParams.get('data');
+        if (dataParam) {
+          const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
+          const parsed = JSON.parse(decodedStr);
+          if (Array.isArray(parsed)) {
+            sources = parsed.map((item: any) => ({
+              label: `Abyss (${item.language || 'HD'})`,
+              url: sanitizeStreamUrl(item.link),
+              isMultiAudio: false
+            }));
+          }
+        }
+      } catch (e) {
+        sources = [{ label: 'HD-1 (Hindi)', url: streamUrl, isMultiAudio: true }];
+      }
+    } else {
+      sources = [{ label: 'HD-1 (Hindi)', url: streamUrl, isMultiAudio: true }];
+    }
+  }
+
+  if (sources.length === 0) {
+    const saltSlug = (anime as any).saltSlug || anime.slug;
+    const epNumber = episode.number || 1;
+
+    // Try the new animesalt-stream route first (scrapes triggerEpisode data)
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+      const streamRes = await fetch(
+        `${baseUrl}/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}`,
+        { next: { revalidate: 1800 } }
+      );
+      if (streamRes.ok) {
+        const data = await streamRes.json();
+        if (data.sources && data.sources.length > 0) {
+          sources = data.sources;
+        }
+      }
+    } catch (e) {}
+
+    // Fall back to general resolver
+    if (sources.length === 0) {
+      sources = await resolveStreamSources(
+        `https://animesalt.cx/series/${saltSlug}/`,
+        epNumber
+      );
+    }
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', position: 'relative' }}>

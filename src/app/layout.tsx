@@ -5,6 +5,8 @@ import AppLoader from '@/components/AppLoader';
 import MobileTabBar from "@/components/MobileTabBar";
 import PWAInstallBanner from "@/components/PWAInstallBanner";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { DownloadProvider } from "@/context/DownloadContext";
+import DownloadManager from "@/components/DownloadManager";
 import { absoluteUrl, siteName, siteUrl } from '@/lib/seo';
 
 export const viewport: Viewport = {
@@ -102,10 +104,13 @@ export default function RootLayout({
           }}
         />
         <LanguageProvider>
-          {children}
-          <MobileTabBar />
-          <PWAInstallBanner />
-          <PWARegister />
+          <DownloadProvider>
+            {children}
+            <DownloadManager />
+            <MobileTabBar />
+            <PWAInstallBanner />
+            <PWARegister />
+          </DownloadProvider>
         </LanguageProvider>
       </body>
     </html>

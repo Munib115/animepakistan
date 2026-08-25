@@ -269,7 +269,8 @@ function HeaderContent() {
         @media (max-width: 767px) {
           .site-header {
             top: calc(10px + var(--sat, 0px)) !important;
-            margin: 0 14px 10px;
+            margin: 0 auto 10px !important;
+            width: calc(100% - 28px) !important;
             border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
             border-radius: 28px !important;
             background: rgba(255, 255, 255, 0.78) !important;

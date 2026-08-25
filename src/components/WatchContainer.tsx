@@ -8,6 +8,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
 import { saveWatchProgress, getAnimeWatchProgress, WatchProgressItem } from '@/lib/watchHistory';
 import { sound } from '@/lib/soundEngine';
+import { useDownloads } from '@/context/DownloadContext';
 import EpisodeComments from './EpisodeComments';
 
 interface WatchContainerProps {
@@ -22,10 +23,26 @@ export default function WatchContainer({
   sources = [],
 }: WatchContainerProps) {
   const { t, language } = useLanguage();
+  const { downloads, startDownload } = useDownloads();
 
   const targetSlug = currentEpisode?.slug || anime.slug;
   const [streamSources, setStreamSources] = useState<StreamSource[]>(sources || []);
   const [selectedServerIndex, setSelectedServerIndex] = useState(0);
+
+  const downloadId = `${anime.slug}-${currentEpisode?.slug || 'full-movie'}`;
+  const downloadingItem = downloads.find((d) => d.id === downloadId);
+
+  const handleDownloadClick = () => {
+    sound.playButton();
+    if (!activeMirror) return;
+    startDownload(
+      anime.slug,
+      currentEpisode?.slug || 'full-movie',
+      displayName,
+      currentEpisode?.title || 'Full Movie',
+      activeMirror
+    );
+  };
   
   const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? `/watch/${anime.slug}` : `/watch/${anime.slug}/${targetSlug}`);
 
@@ -35,23 +52,44 @@ export default function WatchContainer({
   }, [sources]);
 
   useEffect(() => {
-    const hasValidStream = streamSources.some(s => s.url && !s.url.includes(`/${targetSlug}/`));
+    const hasValidStream = streamSources.some(s => s.url && s.url.startsWith('http'));
     
-    if (!hasValidStream && targetEpisodeUrl) {
-      fetch(`/api/resolve-stream?url=${encodeURIComponent(targetEpisodeUrl)}`)
+    if (!hasValidStream) {
+      // Use the new animesalt-stream API with saltSlug + episode number
+      const saltSlug = (anime as any).saltSlug || anime.slug;
+      const epNumber = currentEpisode?.number || 1;
+      const isMovie = anime.type === 'movie';
+      
+      const streamApiUrl = isMovie
+        ? `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}`
+        : `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}`;
+
+      fetch(streamApiUrl)
         .then((res) => res.json())
         .then((data) => {
           if (data.sources && data.sources.length > 0) {
             setStreamSources(data.sources);
+          } else {
+            // Last resort: try the old resolve-stream route
+            fetch(`/api/resolve-stream?url=${encodeURIComponent(targetEpisodeUrl)}`)
+              .then(r => r.json())
+              .then(d => { if (d.sources?.length > 0) setStreamSources(d.sources); })
+              .catch(() => {});
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          fetch(`/api/resolve-stream?url=${encodeURIComponent(targetEpisodeUrl)}`)
+            .then(r => r.json())
+            .then(d => { if (d.sources?.length > 0) setStreamSources(d.sources); })
+            .catch(() => {});
+        });
     }
-  }, [targetEpisodeUrl, targetSlug]);
+  }, [targetEpisodeUrl, targetSlug, anime.slug, currentEpisode?.number]);
 
+  // Get the active mirror URL (abyssplayer.com, short.icu, or as-cdn26.top)
   const rawMirror = streamSources && streamSources.length > selectedServerIndex && streamSources[selectedServerIndex]?.url
     ? streamSources[selectedServerIndex].url
-    : (streamSources && streamSources.length > 0 && streamSources[0]?.url ? streamSources[0].url : `https://as-cdn26.top/video/${targetSlug}/`);
+    : (streamSources && streamSources.length > 0 && streamSources[0]?.url ? streamSources[0].url : '');
 
   const activeMirror = sanitizeStreamUrl(rawMirror);
 
@@ -493,6 +531,98 @@ export default function WatchContainer({
           </div>
         </div>
       </div>
+
+      {/* Player Controls: Server Selection & Direct Download */}
+      {streamSources.length > 0 && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '12px',
+          padding: '12px 16px',
+          background: 'rgba(255,255,255,0.8)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: '16px',
+          border: '1px solid var(--glass-border)',
+          boxShadow: '0 4px 20px rgba(0, 102, 51, 0.04)',
+          position: 'relative',
+          zIndex: isLightsOff ? 9999 : 2,
+        }}>
+          {/* Servers/Mirrors */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-secondary)' }}>
+              {language === 'ur' ? 'سرور منتخب کریں:' : 'Select Server:'}
+            </span>
+            {streamSources.map((source, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  setSelectedServerIndex(idx);
+                  sound.playTabSwitch();
+                }}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  background: selectedServerIndex === idx ? 'var(--color-primary)' : 'rgba(0, 102, 51, 0.05)',
+                  color: selectedServerIndex === idx ? '#ffffff' : 'var(--color-primary)',
+                  fontSize: '0.75rem',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                {source.label || `Server ${idx + 1}`}
+              </button>
+            ))}
+          </div>
+
+          {/* Download Action */}
+          <button
+            onClick={handleDownloadClick}
+            disabled={downloadingItem?.status === 'downloading' || downloadingItem?.status === 'paused'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '8px 16px',
+              borderRadius: '10px',
+              border: 'none',
+              background: downloadingItem
+                ? downloadingItem.status === 'completed'
+                  ? '#16a34a'
+                  : 'rgba(0, 102, 51, 0.15)'
+                : 'var(--color-primary)',
+              color: downloadingItem
+                ? downloadingItem.status === 'completed'
+                  ? '#ffffff'
+                  : 'var(--color-primary)'
+                : '#ffffff',
+              fontSize: '0.8rem',
+              fontWeight: 800,
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(0, 102, 51, 0.08)',
+              transition: 'all 0.2s',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+              {downloadingItem
+                ? downloadingItem.status === 'completed'
+                  ? 'download_done'
+                  : 'downloading'
+                : 'download'}
+            </span>
+            <span>
+              {downloadingItem
+                ? downloadingItem.status === 'completed'
+                  ? (language === 'ur' ? 'ڈاؤنلوڈ مکمل' : 'Downloaded')
+                  : `${downloadingItem.progress}%`
+                : (language === 'ur' ? 'ڈاؤنلوڈ ویڈیو' : 'Download Video')}
+            </span>
+          </button>
+        </div>
+      )}
 
       {/* Series Episodes Playlist Grid */}
       {!isMovie && anime.episodes && anime.episodes.length > 0 && (
