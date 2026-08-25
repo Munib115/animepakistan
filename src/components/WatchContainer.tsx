@@ -580,12 +580,7 @@ export default function WatchContainer({
             </div>
           )}
 
-          <style jsx>{`
-            @keyframes spin-loader {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}</style>
+
 
           {/* Top Left Watermark: MUNIB UR REHMAN (Liquid Glass, Non-intrusive) */}
           <div style={{
@@ -931,37 +926,6 @@ export default function WatchContainer({
         episodeTitle={currentEpisode?.title} 
       />
 
-      {/* Double Tap Seek Feedback Animations */}
-      <style jsx>{`
-        @keyframes seekRippleLeft {
-          0% {
-            opacity: 0;
-            transform: scale(0.85);
-          }
-          40% {
-            opacity: 1;
-            transform: scale(1.02);
-          }
-          100% {
-            opacity: 0;
-            transform: scale(1.15);
-          }
-        }
-        @keyframes seekRippleRight {
-          0% {
-            opacity: 0;
-            transform: scale(0.85);
-          }
-          40% {
-            opacity: 1;
-            transform: scale(1.02);
-          }
-          100% {
-            opacity: 0;
-            transform: scale(1.15);
-          }
-        }
-      `}</style>
     </div>
   );
 }
