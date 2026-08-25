@@ -97,6 +97,7 @@ export default function WatchContainer({
   const [isTheater, setIsTheater] = useState(false);
   const [isLightsOff, setIsLightsOff] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
   // Resume prompt state
   const [savedProgress, setSavedProgress] = useState<WatchProgressItem | null>(null);
@@ -107,7 +108,13 @@ export default function WatchContainer({
     ? (anime.anilist?.englishName || anime.title) 
     : (anime.anilist?.romajiName || anime.anilist?.englishName || anime.title);
 
+  const resolvedPoster = anime.poster || anime.anilist?.coverImage || anime.backdrop || '';
   const isMovie = anime.type === 'movie';
+
+  // Reset iframe loaded state when activeMirror changes
+  useEffect(() => {
+    setIsIframeLoaded(false);
+  }, [activeMirror]);
 
   // Sorted episodes list (Season asc, Number asc)
   const sortedEpisodes = useMemo(() => {
@@ -165,7 +172,7 @@ export default function WatchContainer({
     saveWatchProgress({
       animeSlug: anime.slug,
       animeTitle: displayName,
-      poster: anime.poster,
+      poster: resolvedPoster,
       backdrop: anime.backdrop,
       type: anime.type,
       epSlug: currentEpisode?.slug,
@@ -186,7 +193,7 @@ export default function WatchContainer({
       saveWatchProgress({
         animeSlug: anime.slug,
         animeTitle: displayName,
-        poster: anime.poster,
+        poster: resolvedPoster,
         backdrop: anime.backdrop,
         type: anime.type,
         epSlug: currentEpisode?.slug,
@@ -521,24 +528,61 @@ export default function WatchContainer({
           }}
         >
           {activeMirror ? (
-            <iframe
-              ref={iframeRef}
-              key={iframeKey}
-              src={activeMirror}
-              title={displayName}
-              allowFullScreen
-              referrerPolicy="no-referrer"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                border: 'none',
-                backgroundColor: '#000000',
-              }}
-            />
+            <>
+              {/* Sleek Liquid Glass Loader until iframe is ready */}
+              {!isIframeLoaded && (
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: 'linear-gradient(135deg, #010c05 0%, #031c0e 100%)',
+                  zIndex: 4,
+                  gap: '12px',
+                  color: '#ffffff',
+                }}>
+                  <div style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    border: '3px solid rgba(0, 204, 102, 0.2)',
+                    borderTopColor: 'var(--color-glow)',
+                    animation: 'spin-loader 0.8s linear infinite',
+                  }} />
+                  <span style={{ fontSize: '0.84rem', fontWeight: 800, letterSpacing: '0.04em', color: '#e6f7ec' }}>
+                    {language === 'ur' ? 'ویڈیو لوڈ ہو رہی ہے...' : 'Loading video stream...'}
+                  </span>
+                </div>
+              )}
+
+              <iframe
+                ref={iframeRef}
+                key={iframeKey}
+                src={activeMirror}
+                title={displayName}
+                allowFullScreen
+                loading="eager"
+                onLoad={() => setIsIframeLoaded(true)}
+                referrerPolicy="no-referrer"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                  backgroundColor: '#000000',
+                  transform: 'translateZ(0)',
+                  willChange: 'transform',
+                }}
+              />
+            </>
           ) : (
             <div style={{
               position: 'absolute',
@@ -553,16 +597,29 @@ export default function WatchContainer({
               color: '#ffffff',
               gap: '12px',
               padding: '20px',
-              textAlign: 'center'
+              textAlign: 'center',
+              background: 'linear-gradient(135deg, #010c05 0%, #031c0e 100%)',
             }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '52px', color: 'var(--color-primary)' }}>
-                play_circle
-              </span>
-              <p style={{ fontSize: '1rem', fontWeight: 700 }}>
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '50%',
+                border: '3px solid rgba(0, 204, 102, 0.2)',
+                borderTopColor: 'var(--color-glow)',
+                animation: 'spin-loader 0.8s linear infinite',
+              }} />
+              <p style={{ fontSize: '0.9rem', fontWeight: 700 }}>
                 {t('connectingServer')}
               </p>
             </div>
           )}
+
+          <style jsx>{`
+            @keyframes spin-loader {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
 
           {/* Top Left Watermark: MUNIB UR REHMAN (Liquid Glass, Non-intrusive) */}
           <div style={{

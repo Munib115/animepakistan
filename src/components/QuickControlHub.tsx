@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { sound } from '@/lib/soundEngine';
 import { getWatchHistory, removeWatchItem, clearWatchHistory, formatTimeSeconds, formatRelativeTime, WatchProgressItem } from '@/lib/watchHistory';
 import { getWatchlist, WatchlistItem } from '@/lib/watchlist';
+import { getProxiedImageUrl } from '@/lib/image';
 
 export default function QuickControlHub() {
   const { language, setLanguage, t } = useLanguage();
@@ -19,8 +20,16 @@ export default function QuickControlHub() {
 
   const hubRef = useRef<HTMLDivElement>(null);
 
-  // Initialize on mount
+  // Initialize on mount and maintain active sync
   useEffect(() => {
+    const refreshData = () => {
+      setHistoryItems(getWatchHistory());
+      setWatchlistItems(getWatchlist());
+    };
+
+    // Immediate sync on load
+    refreshData();
+
     try {
       const savedEye = localStorage.getItem('ap_eye_comfort') as 'off' | 'warm' | 'night';
       if (savedEye && (savedEye === 'warm' || savedEye === 'night')) {
@@ -36,27 +45,24 @@ export default function QuickControlHub() {
         setIsOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Refresh history & watchlist whenever opened or updated
-  useEffect(() => {
-    const refreshData = () => {
-      setHistoryItems(getWatchHistory());
-      setWatchlistItems(getWatchlist());
-    };
-
-    if (isOpen) {
-      refreshData();
-    }
-
     window.addEventListener('ap_history_updated', refreshData);
     window.addEventListener('storage', refreshData);
+
     return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('ap_history_updated', refreshData);
       window.removeEventListener('storage', refreshData);
     };
+  }, []);
+
+  // When dropdown opens, do a fresh sync
+  useEffect(() => {
+    if (isOpen) {
+      setHistoryItems(getWatchHistory());
+      setWatchlistItems(getWatchlist());
+    }
   }, [isOpen]);
 
   const toggleSound = () => {
@@ -376,7 +382,7 @@ export default function QuickControlHub() {
           {activeTab === 'history' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {/* Optional Search Filter if user has multiple history items */}
-              {historyItems.length > 3 && (
+              {historyItems.length > 2 && (
                 <div style={{ position: 'relative', marginBottom: '2px' }}>
                   <span className="material-symbols-outlined" style={{
                     position: 'absolute',
@@ -396,11 +402,11 @@ export default function QuickControlHub() {
                     onChange={(e) => setHistorySearch(e.target.value)}
                     style={{
                       width: '100%',
-                      padding: isUrdu ? '5px 28px 5px 8px' : '5px 8px 5px 28px',
+                      padding: isUrdu ? '6px 28px 6px 8px' : '6px 8px 6px 28px',
                       fontSize: '0.72rem',
                       borderRadius: '8px',
                       border: '1px solid var(--glass-border)',
-                      background: 'rgba(255, 255, 255, 0.9)',
+                      background: '#ffffff',
                       color: 'var(--text-primary)',
                       outline: 'none',
                       boxSizing: 'border-box',
@@ -409,9 +415,9 @@ export default function QuickControlHub() {
                 </div>
               )}
 
-              {/* History Items Scroll Area (Shows ALL history items) */}
+              {/* History Items Scroll Area (Shows ALL history items with full details) */}
               <div style={{
-                maxHeight: '280px',
+                maxHeight: '300px',
                 overflowY: 'auto',
                 display: 'flex',
                 flexDirection: 'column',
@@ -419,11 +425,16 @@ export default function QuickControlHub() {
                 paddingRight: '2px',
               }}>
                 {historyItems.length === 0 ? (
-                  <div style={{ textAlign: 'center', padding: '24px 10px', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--text-muted)', display: 'block', marginBottom: '6px' }}>
+                  <div style={{ textAlign: 'center', padding: '32px 12px', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '36px', color: 'var(--color-primary)', display: 'block', marginBottom: '8px', opacity: 0.6 }}>
                       history_toggle_off
                     </span>
-                    {isUrdu ? 'کوئی ویڈیو ابھی نہیں دیکھی گئی' : 'No watch history yet'}
+                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.84rem' }}>
+                      {isUrdu ? 'کوئی ہسٹری موجود نہیں ہے' : 'No watch history yet'}
+                    </div>
+                    <div style={{ fontSize: '0.7rem', marginTop: '4px' }}>
+                      {isUrdu ? 'جب آپ کوئی اینیمی دیکھیں گے تو وہ یہاں دکھائی دے گا۔' : 'Episodes and movies you watch will appear right here.'}
+                    </div>
                   </div>
                 ) : (
                   historyItems
@@ -439,7 +450,9 @@ export default function QuickControlHub() {
 
                       const cleanEpTitle = item.epTitle
                         ? item.epTitle.replace(/S\d+E\d+.*$/i, '').replace(/1080p.*$/i, '').replace(/\.mkv|\.mp4/gi, '').trim()
-                        : (item.type === 'movie' ? (isUrdu ? 'مووی' : 'Full Movie') : `Episode ${item.epNumber || 1}`);
+                        : (item.type === 'movie' ? (isUrdu ? 'مکمل مووی' : 'Full Movie') : `Episode ${item.epNumber || 1}`);
+
+                      const posterSrc = getProxiedImageUrl(item.poster || item.backdrop || '');
 
                       return (
                         <div
@@ -448,14 +461,15 @@ export default function QuickControlHub() {
                             display: 'flex',
                             flexDirection: 'column',
                             background: '#ffffff',
-                            border: '1px solid var(--glass-border)',
-                            borderRadius: '10px',
+                            border: '1.2px solid var(--glass-border)',
+                            borderRadius: '12px',
                             overflow: 'hidden',
-                            boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
+                            boxShadow: '0 3px 10px rgba(0, 70, 35, 0.05)',
                             position: 'relative',
+                            transition: 'transform 0.18s ease, box-shadow 0.18s ease',
                           }}
                         >
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px' }}>
                             {/* Poster / Thumbnail with Progress Overlay */}
                             <Link
                               href={watchUrl}
@@ -464,30 +478,37 @@ export default function QuickControlHub() {
                                 sound.playEpisodeSelect();
                               }}
                               style={{
-                                width: '42px',
-                                height: '54px',
-                                borderRadius: '6px',
+                                width: '48px',
+                                height: '62px',
+                                borderRadius: '8px',
                                 overflow: 'hidden',
                                 position: 'relative',
                                 flexShrink: 0,
-                                background: '#004d26',
+                                background: 'linear-gradient(135deg, #004d26 0%, #006633 100%)',
                                 textDecoration: 'none',
+                                display: 'block',
                               }}
                             >
-                              <img 
-                                src={item.poster} 
-                                alt="" 
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                              />
+                              {posterSrc ? (
+                                <img 
+                                  src={posterSrc} 
+                                  alt={item.animeTitle} 
+                                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                                />
+                              ) : (
+                                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                                  <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>play_circle</span>
+                                </div>
+                              )}
                               <div style={{
                                 position: 'absolute',
                                 top: 0, left: 0, right: 0, bottom: 0,
-                                background: 'rgba(0, 0, 0, 0.3)',
+                                background: 'rgba(0, 0, 0, 0.35)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                               }}>
-                                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#ffffff' }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#ffffff' }}>
                                   play_arrow
                                 </span>
                               </div>
@@ -495,6 +516,29 @@ export default function QuickControlHub() {
 
                             {/* Info Column */}
                             <div style={{ flexGrow: 1, minWidth: 0 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '2px' }}>
+                                <span style={{
+                                  fontSize: '0.6rem',
+                                  fontWeight: 800,
+                                  padding: '1px 4px',
+                                  borderRadius: '3px',
+                                  background: item.type === 'movie' ? '#006633' : '#059669',
+                                  color: '#ffffff',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.02em',
+                                  lineHeight: 1.2,
+                                }}>
+                                  {item.type === 'movie' ? 'Movie' : `EP ${item.epNumber || 1}`}
+                                </span>
+                                <span style={{
+                                  fontSize: '0.62rem',
+                                  fontWeight: 700,
+                                  color: 'var(--text-muted)',
+                                }}>
+                                  {formatRelativeTime(item.updatedAt, isUrdu)}
+                                </span>
+                              </div>
+
                               <Link
                                 href={watchUrl}
                                 onClick={() => {
@@ -502,7 +546,7 @@ export default function QuickControlHub() {
                                   sound.playEpisodeSelect();
                                 }}
                                 style={{
-                                  fontSize: '0.78rem',
+                                  fontSize: '0.80rem',
                                   fontWeight: 800,
                                   color: 'var(--text-primary)',
                                   textDecoration: 'none',
@@ -510,6 +554,7 @@ export default function QuickControlHub() {
                                   whiteSpace: 'nowrap',
                                   overflow: 'hidden',
                                   textOverflow: 'ellipsis',
+                                  lineHeight: 1.2,
                                 }}
                               >
                                 {item.animeTitle}
@@ -519,7 +564,7 @@ export default function QuickControlHub() {
                                 fontSize: '0.68rem',
                                 color: 'var(--color-primary)',
                                 fontWeight: 700,
-                                marginTop: '1px',
+                                marginTop: '2px',
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
@@ -527,7 +572,7 @@ export default function QuickControlHub() {
                                 {cleanEpTitle}
                               </div>
 
-                              {/* Time watched & relative timestamp */}
+                              {/* Time watched / duration badge */}
                               <div style={{
                                 display: 'flex',
                                 alignItems: 'center',
@@ -536,48 +581,69 @@ export default function QuickControlHub() {
                                 color: 'var(--text-muted)',
                                 marginTop: '3px',
                               }}>
-                                <span>
+                                <span style={{ fontWeight: 600 }}>
                                   {formatTimeSeconds(item.currentTime)} / {formatTimeSeconds(item.duration)} ({item.progressPercent}%)
-                                </span>
-                                <span>
-                                  {formatRelativeTime(item.updatedAt, isUrdu)}
                                 </span>
                               </div>
                             </div>
 
-                            {/* Delete single item button */}
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                removeWatchItem(item.animeSlug);
-                                sound.playButton();
-                              }}
-                              title={isUrdu ? 'ہسٹری سے ہٹائیں' : 'Remove from history'}
-                              style={{
-                                background: 'rgba(239, 68, 68, 0.08)',
-                                border: 'none',
-                                borderRadius: '6px',
-                                width: '24px',
-                                height: '24px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                cursor: 'pointer',
-                                color: '#ef4444',
-                                flexShrink: 0,
-                                transition: 'all 0.15s',
-                              }}
-                            >
-                              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>delete</span>
-                            </button>
+                            {/* Resume & Delete Actions */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center' }}>
+                              <Link
+                                href={watchUrl}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  sound.playEpisodeSelect();
+                                }}
+                                title={isUrdu ? 'دوبارہ چلائیں' : 'Resume'}
+                                style={{
+                                  background: 'rgba(0, 102, 51, 0.1)',
+                                  borderRadius: '6px',
+                                  width: '26px',
+                                  height: '26px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  color: 'var(--color-primary)',
+                                  textDecoration: 'none',
+                                }}
+                              >
+                                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>play_arrow</span>
+                              </Link>
+
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  removeWatchItem(item.animeSlug);
+                                  sound.playButton();
+                                }}
+                                title={isUrdu ? 'ہسٹری سے ہٹائیں' : 'Remove from history'}
+                                style={{
+                                  background: 'rgba(239, 68, 68, 0.08)',
+                                  border: 'none',
+                                  borderRadius: '6px',
+                                  width: '26px',
+                                  height: '26px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  cursor: 'pointer',
+                                  color: '#ef4444',
+                                  transition: 'all 0.15s',
+                                }}
+                              >
+                                <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>delete</span>
+                              </button>
+                            </div>
                           </div>
 
-                          {/* Progress Line */}
-                          <div style={{ width: '100%', height: '3px', background: 'rgba(0, 102, 51, 0.1)' }}>
+                          {/* Emerald Progress Line along card bottom */}
+                          <div style={{ width: '100%', height: '3.5px', background: 'rgba(0, 102, 51, 0.08)' }}>
                             <div style={{
                               height: '100%',
-                              width: `${item.progressPercent}%`,
-                              background: 'var(--color-primary)',
+                              width: `${Math.max(4, Math.min(100, item.progressPercent))}%`,
+                              background: 'linear-gradient(90deg, var(--color-primary) 0%, var(--color-glow) 100%)',
+                              boxShadow: '0 0 6px rgba(0, 204, 102, 0.4)',
                             }} />
                           </div>
                         </div>
@@ -586,18 +652,23 @@ export default function QuickControlHub() {
                 )}
               </div>
 
-              {/* Clear All History Button */}
+              {/* Clear All History Action */}
               {historyItems.length > 0 && (
                 <div style={{
                   display: 'flex',
-                  justifyContent: 'flex-end',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
                   marginTop: '4px',
-                  paddingTop: '6px',
+                  paddingTop: '8px',
                   borderTop: '1px solid var(--glass-border)',
                 }}>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                    {historyItems.length} {isUrdu ? 'آئٹمز' : 'items saved'}
+                  </span>
+
                   <button
                     onClick={() => {
-                      if (window.confirm(isUrdu ? 'کیا آپ تمام ہسٹری صاف کرنا چاہتے ہیں؟' : 'Clear entire watch history?')) {
+                      if (window.confirm(isUrdu ? 'کیا آپ تمام واچ ہسٹری صاف کرنا چاہتے ہیں؟' : 'Clear all watch history?')) {
                         clearWatchHistory();
                         sound.playButton();
                       }
@@ -606,14 +677,13 @@ export default function QuickControlHub() {
                       background: 'none',
                       border: 'none',
                       color: '#ef4444',
-                      fontSize: '0.68rem',
-                      fontWeight: 700,
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '4px',
-                      padding: '4px 8px',
-                      borderRadius: '6px',
+                      padding: '2px 6px',
                     }}
                   >
                     <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>delete_sweep</span>

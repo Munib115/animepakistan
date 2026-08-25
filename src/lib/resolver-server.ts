@@ -2,9 +2,9 @@ import * as cheerio from 'cheerio';
 import { StreamSource, sanitizeStreamUrl } from './resolver';
 import { getAnimeDb } from './db';
 
-// In-Memory Stream Cache (30 Min TTL)
+// In-Memory Stream Cache (24 Hour TTL for ultra-fast instant playback on return visits)
 const streamCache = new Map<string, { sources: StreamSource[]; timestamp: number }>();
-const CACHE_TTL = 30 * 60 * 1000; // 30 mins
+const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
 /** Check if a URL is an ad/tracker/garbage URL */
 function isBadUrl(u: string): boolean {
@@ -25,10 +25,7 @@ function isBadUrl(u: string): boolean {
 }
 
 /**
- * Resolve stream sources from animesalt.cx by fetching the page.
- * 
- * @param targetUrl - The animesalt.cx URL (movies or episode page)
- * @param episodeNumber - Optional episode number to filter
+ * Resolve stream sources with zero latency when pre-cached, and fast scraping fallback.
  */
 export async function resolveStreamSources(
   targetUrl: string,
@@ -42,7 +39,7 @@ export async function resolveStreamSources(
     .replace(/^http:\/\//i, 'https://')
     .replace(/animesalt\.(link|me)/gi, 'animesalt.cx');
 
-  // If series/tv page and episode number is specified, find/construct correct episode page URL
+  // If series/tv page and episode number is specified, check local DB first (0ms instant resolution!)
   const isSeries = cleanTarget.includes('/series/') || cleanTarget.includes('/tv/');
   if (isSeries) {
     const match = cleanTarget.match(/animesalt\.cx\/(series|tv)\/([^/]+)/);
@@ -52,7 +49,7 @@ export async function resolveStreamSources(
       const db = getAnimeDb();
       const anime = db.find(a => (a.saltSlug === slug || a.slug === slug) && a.type === 'series');
       const epNum = episodeNumber || 1;
-      const epSeason = seasonNumber; // may be undefined for single-season lookup
+      const epSeason = seasonNumber;
 
       // Match by season+number when season is provided, otherwise fall back to number-only
       const episode = anime?.episodes?.find(e => {
@@ -60,20 +57,41 @@ export async function resolveStreamSources(
         const numMatch = e.number === epNum;
         if (!numMatch) return false;
         if (epSeason !== undefined) {
-          // Derive season from episode season field or slug pattern (e.g. "show-2x3" → season 2)
           const eSeason = e.season ?? (() => {
             const m = e.slug.match(/(\d+)x\d+/i);
             return m ? parseInt(m[1], 10) : 1;
           })();
           return eSeason === epSeason;
         }
-        return true; // no season filter → first number match (single-season)
+        return true;
       });
+
+      // If episode has a pre-cached streamUrl, parse and return instantly!
+      if (episode && (episode as any).streamUrl) {
+        const streamUrl = (episode as any).streamUrl;
+        if (streamUrl.includes('multi-lang-plyr/player.php?data=')) {
+          try {
+            const urlObj = new URL(streamUrl);
+            const dataParam = urlObj.searchParams.get('data');
+            if (dataParam) {
+              const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
+              const parsed = JSON.parse(decodedStr);
+              if (Array.isArray(parsed)) {
+                return parsed.map((item: any) => ({
+                  label: `Abyss (${item.language || 'HD'})`,
+                  url: sanitizeStreamUrl(item.link),
+                  isMultiAudio: false
+                }));
+              }
+            }
+          } catch (e) {}
+        }
+        return [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+      }
 
       if (episode && episode.url && episode.url.startsWith('http')) {
         cleanTarget = episode.url.replace(/animesalt\.(link|me)/gi, 'animesalt.cx');
       } else {
-        // Build correct episode URL using season derived from match or default to 1
         const eSeason = episode?.season ?? epSeason ?? 1;
         cleanTarget = `https://animesalt.cx/episode/${slug}-${eSeason}x${epNum}/`;
       }
@@ -82,7 +100,7 @@ export async function resolveStreamSources(
 
   const cacheKey = cleanTarget;
 
-  // Check cache
+  // Check in-memory stream cache
   const cached = streamCache.get(cacheKey);
   if (cached && Date.now() - cached.timestamp < CACHE_TTL && cached.sources.length > 0) {
     return cached.sources;
@@ -92,7 +110,7 @@ export async function resolveStreamSources(
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const timeoutId = setTimeout(() => controller.abort(), 4500); // fast 4.5s abort to prevent hanging
 
     const res = await fetch(cleanTarget, {
       headers: {
@@ -102,7 +120,7 @@ export async function resolveStreamSources(
         'Accept-Language': 'en-US,en;q=0.9',
       },
       signal: controller.signal,
-      next: { revalidate: 1800 },
+      next: { revalidate: 3600 },
     });
 
     clearTimeout(timeoutId);
@@ -150,10 +168,10 @@ export async function resolveStreamSources(
       });
     }
   } catch (err: any) {
-    console.warn(`[Resolver Server] Timed out or failed for: ${cleanTarget}`, err?.message);
+    console.warn(`[Resolver Server] Note: ${cleanTarget} resolution notice:`, err?.message);
   }
 
-  // Cache results
+  // Cache results for 24h
   if (sources.length > 0) {
     streamCache.set(cacheKey, { sources, timestamp: Date.now() });
   }

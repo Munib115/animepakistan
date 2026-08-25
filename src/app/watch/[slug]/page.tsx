@@ -94,25 +94,10 @@ export default async function MovieWatchPage(props: PageProps) {
   if (sources.length === 0) {
     const saltSlug = anime.saltSlug || anime.slug;
 
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-      const streamRes = await fetch(
-        `${baseUrl}/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}`,
-        { next: { revalidate: 1800 } }
-      );
-      if (streamRes.ok) {
-        const data = await streamRes.json();
-        if (data.sources && data.sources.length > 0) {
-          sources = data.sources;
-        }
-      }
-    } catch (e) {}
-
-    if (sources.length === 0) {
-      sources = await resolveStreamSources(
-        `https://animesalt.cx/movies/${saltSlug}/`
-      );
-    }
+    // Directly resolve stream sources with in-memory caching
+    sources = await resolveStreamSources(
+      `https://animesalt.cx/movies/${saltSlug}/`
+    );
   }
 
   return (
