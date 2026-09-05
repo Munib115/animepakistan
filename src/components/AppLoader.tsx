@@ -11,34 +11,30 @@ const CRITICAL_PRELOAD_IMAGES = [
 export default function AppLoader() {
   const [isLeaving, setIsLeaving] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [progress, setProgress] = useState(30);
+  const [progress, setProgress] = useState(20);
 
   useEffect(() => {
-    // If user has already visited in this session, never show splash loader again!
+    // Check if user has already seen the launch animation in this browser session
     try {
-      if (sessionStorage.getItem('ap_splash_shown')) {
+      if (sessionStorage.getItem('ap_intro_seen')) {
         return;
       }
-      sessionStorage.setItem('ap_splash_shown', '1');
+      sessionStorage.setItem('ap_intro_seen', '1');
     } catch (e) {}
 
-    // First visit: show ultra-snappy 280ms intro animation then dissolve
+    // First visit: activate luxury streaming launch sequence (~0.8s)
     setIsVisible(true);
-    setProgress(75);
 
-    const finishTimer = window.setTimeout(() => {
-      setProgress(100);
-      setIsLeaving(true);
-
-      const hideTimer = window.setTimeout(() => {
-        setIsVisible(false);
-      }, 260);
-
-      return () => window.clearTimeout(hideTimer);
-    }, 200);
+    const t1 = window.setTimeout(() => setProgress(65), 100);
+    const t2 = window.setTimeout(() => setProgress(100), 380);
+    const t3 = window.setTimeout(() => setIsLeaving(true), 650);
+    const t4 = window.setTimeout(() => setIsVisible(false), 1080);
 
     return () => {
-      window.clearTimeout(finishTimer);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      window.clearTimeout(t3);
+      window.clearTimeout(t4);
     };
   }, []);
 

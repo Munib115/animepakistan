@@ -110,14 +110,10 @@ export default async function HomePage(props: PageProps) {
       <main style={{ flexGrow: 1, padding: '0 0 24px', position: 'relative', zIndex: 1 }}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, '\\u003c') }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
-        <div className="container" style={{ padding: '22px 16px 0' }}>
-          <h1 style={{ margin: 0, fontSize: 'clamp(1.35rem, 3vw, 2rem)', fontWeight: 900, color: 'var(--text-primary)' }}>
-            Urdu & Hindi Dubbed Anime in Pakistan
-          </h1>
-          <p style={{ margin: '8px 0 0', maxWidth: '760px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-            Explore anime series, movies and cartoons with Urdu and Hindi audio options, then browse each title’s episodes and details.
-          </p>
-        </div>
+        {/* Accessible SEO H1 - Visually hidden to maintain clean cinematic streaming layout */}
+        <h1 className="sr-only">
+          Urdu & Hindi Dubbed Anime in Pakistan
+        </h1>
         {/* Modern Anime Banner Carousel / Slider (Passing only 8 featured items!) */}
         <HeroSlider items={featured} />
 
