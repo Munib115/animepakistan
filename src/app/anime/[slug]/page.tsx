@@ -64,26 +64,32 @@ export default async function AnimeDetailPage(props: PageProps) {
   }
 
   // Discover related franchise titles (e.g. Dragon Ball -> DBZ, Super, Daima; Naruto -> Shippuden, Boruto; Ben 10 -> Alien Force, etc.)
+  const stopWords = new Set(['the', 'a', 'an', 'in', 'of', 'to', 'for', 'and', 'with']);
   const slugParts = anime.slug.toLowerCase().split('-');
-  const rootSlug = slugParts[0];
-  const secondarySlug = slugParts[1] || '';
-  const compoundPrefixes = ['dragon', 'ben', 'fairy', 'sword', 'attack', 'demon', 'jujutsu', 'tokyo', 'my', 'hunter', 'yu', 'ninja', 'sailor', 'one', 'digimon', 'beyblade', 'doraemon', 'shinchan'];
+  const meaningfulParts = slugParts.filter((p) => !stopWords.has(p) && p.length > 2);
+  const rootSlug = meaningfulParts[0] || slugParts[0];
+  const secondarySlug = meaningfulParts[1] || '';
+  const compoundPrefixes = ['dragon', 'ben', 'fairy', 'sword', 'attack', 'demon', 'jujutsu', 'tokyo', 'my', 'hunter', 'yu', 'ninja', 'sailor', 'one', 'digimon', 'beyblade', 'doraemon', 'shinchan', 'tomb', 'devil', 'naruto', 'bleach'];
   const franchiseKey = compoundPrefixes.includes(rootSlug) && secondarySlug && !['1979', '2005', 'classic', 'reboot', 'super', 'z', 'shippuden'].includes(secondarySlug)
-    ? (rootSlug === 'dragon' ? 'dragon-ball' : rootSlug === 'ben' ? 'ben-10' : rootSlug === 'one' ? 'one-piece' : rootSlug)
+    ? (rootSlug === 'dragon' ? 'dragon-ball' : rootSlug === 'ben' ? 'ben-10' : rootSlug === 'one' ? 'one-piece' : `${rootSlug}-${secondarySlug}`)
     : rootSlug;
 
-  const relatedAnime = items
-    .filter((item) => {
-      if (item.slug === anime.slug) return false;
-      const itemSlug = item.slug.toLowerCase();
-      const itemTitle = item.title.toLowerCase();
-      return (
-        itemSlug.startsWith(franchiseKey) ||
-        itemSlug.includes(franchiseKey) ||
-        itemTitle.includes(franchiseKey.replace('-', ' '))
-      );
-    })
-    .slice(0, 12);
+  const relatedAnime = franchiseKey && franchiseKey.length >= 3
+    ? items
+        .filter((item) => {
+          if (item.slug === anime.slug) return false;
+          const itemSlug = item.slug.toLowerCase();
+          const itemTitle = item.title.toLowerCase();
+          return (
+            itemSlug.startsWith(`${franchiseKey}-`) ||
+            itemSlug.endsWith(`-${franchiseKey}`) ||
+            itemSlug.includes(`-${franchiseKey}-`) ||
+            itemSlug === franchiseKey ||
+            itemTitle.includes(franchiseKey.replace('-', ' '))
+          );
+        })
+        .slice(0, 12)
+    : [];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', position: 'relative' }}>
