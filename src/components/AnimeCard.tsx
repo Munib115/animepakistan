@@ -77,6 +77,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
               src={posterSrc}
               alt={displayName}
               loading="lazy"
+              decoding="async"
               onError={() => setImgError(true)}
               style={{
                 position: 'absolute',

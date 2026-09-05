@@ -33,6 +33,21 @@ export function getAnimeDb(): AnimeItem[] {
 export function getAnimeCatalog(): AnimeItem[] {
   if (cachedCatalog) return cachedCatalog;
 
+  // 1. Fast-path: Load pre-generated lightweight catalog (320 KB vs 9.4 MB)
+  try {
+    const catalogPath = path.join(process.cwd(), 'src', 'data', 'anime-catalog.json');
+    if (fs.existsSync(catalogPath)) {
+      const raw = fs.readFileSync(catalogPath, 'utf8');
+      cachedCatalog = JSON.parse(raw);
+      if (cachedCatalog && cachedCatalog.length > 0) {
+        return cachedCatalog;
+      }
+    }
+  } catch (e) {
+    console.warn('Fallback to reading full anime DB for catalog:', e);
+  }
+
+  // 2. Fallback: Generate from full DB on the fly
   const db = loadDb();
   cachedCatalog = db.map((item) => ({
     title: item.title,

@@ -10,93 +10,35 @@ const CRITICAL_PRELOAD_IMAGES = [
 
 export default function AppLoader() {
   const [isLeaving, setIsLeaving] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [progress, setProgress] = useState(15);
+  const [isVisible, setIsVisible] = useState(false);
+  const [progress, setProgress] = useState(30);
 
   useEffect(() => {
-    let isMounted = true;
-    const startTime = performance.now();
-
-    async function preloadAssets() {
-      // 1. Progress to 35% on font ready
-      if (typeof document !== 'undefined' && 'fonts' in document) {
-        try {
-          await document.fonts.ready;
-          if (isMounted) setProgress((p) => Math.max(p, 40));
-        } catch (e) {}
+    // If user has already visited in this session, never show splash loader again!
+    try {
+      if (sessionStorage.getItem('ap_splash_shown')) {
+        return;
       }
+      sessionStorage.setItem('ap_splash_shown', '1');
+    } catch (e) {}
 
-      // 2. Discover and preload first visible Hero & Poster images from DOM or critical paths
-      const imagePromises: Promise<void>[] = [];
+    // First visit: show ultra-snappy 280ms intro animation then dissolve
+    setIsVisible(true);
+    setProgress(75);
 
-      // Collect initial page image tags already in DOM
-      const domImages = Array.from(document.querySelectorAll('img')).map((img) => img.src).filter(Boolean);
-      const allUrls = Array.from(new Set([...CRITICAL_PRELOAD_IMAGES, ...domImages.slice(0, 8)]));
+    const finishTimer = window.setTimeout(() => {
+      setProgress(100);
+      setIsLeaving(true);
 
-      allUrls.forEach((url) => {
-        const p = new Promise<void>((resolve) => {
-          const img = new Image();
-          img.src = url;
-          if (img.complete) {
-            resolve();
-          } else {
-            img.onload = () => {
-              if ('decode' in img) {
-                img.decode().then(resolve).catch(resolve);
-              } else {
-                resolve();
-              }
-            };
-            img.onerror = () => resolve();
-          }
-        });
-        imagePromises.push(p);
-      });
+      const hideTimer = window.setTimeout(() => {
+        setIsVisible(false);
+      }, 260);
 
-      // Progressively increment progress bar
-      let loadedCount = 0;
-      imagePromises.forEach((p) => {
-        p.then(() => {
-          loadedCount++;
-          if (isMounted) {
-            const percent = 40 + Math.floor((loadedCount / Math.max(1, imagePromises.length)) * 55);
-            setProgress((prev) => Math.max(prev, percent));
-          }
-        });
-      });
-
-      await Promise.allSettled(imagePromises);
-      if (isMounted) setProgress(100);
-
-      // Buttery smooth fadeout transition (min 600ms total splash for seamless transition)
-      const elapsed = performance.now() - startTime;
-      const delay = Math.max(80, 650 - elapsed);
-
-      window.setTimeout(() => {
-        if (!isMounted) return;
-        setIsLeaving(true);
-        window.setTimeout(() => {
-          if (isMounted) setIsVisible(false);
-        }, 520);
-      }, delay);
-    }
-
-    preloadAssets();
-
-    // Safety fallback timeout
-    const fallback = window.setTimeout(() => {
-      if (isMounted) {
-        setProgress(100);
-        setIsLeaving(true);
-        window.setTimeout(() => {
-          if (isMounted) setIsVisible(false);
-        }, 520);
-      }
-    }, 2200);
+      return () => window.clearTimeout(hideTimer);
+    }, 200);
 
     return () => {
-      isMounted = false;
-      window.clearTimeout(fallback);
+      window.clearTimeout(finishTimer);
     };
   }, []);
 
