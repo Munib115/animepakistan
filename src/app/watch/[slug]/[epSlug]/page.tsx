@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
+import { redirect } from 'next/navigation';
 import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
 import { resolveStreamSources } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
@@ -23,14 +24,36 @@ export default async function EpisodeWatchPage(props: PageProps) {
   // Load database from in-memory cache
   const items = getAnimeDb();
 
-  // Find series
+  // Find series with flexible slug matching
   const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
   const anime = items.find((item) => {
     const itemSlug = item.slug.toLowerCase().trim();
-    return (itemSlug === decodedSlug || itemSlug === decodedSlug.replace(/\/$/, '')) && item.type === 'series';
+    const saltSlug = item.saltSlug?.toLowerCase().trim();
+    return (
+      itemSlug === decodedSlug ||
+      itemSlug === decodedSlug.replace(/\/$/, '') ||
+      saltSlug === decodedSlug ||
+      item.url?.includes(`/${decodedSlug}/`)
+    ) && item.type === 'series';
   });
 
   if (!anime) {
+    // Check if this slug is actually a movie, and redirect to movie watch page!
+    const movie = items.find((item) => {
+      const itemSlug = item.slug.toLowerCase().trim();
+      const saltSlug = item.saltSlug?.toLowerCase().trim();
+      return (
+        itemSlug === decodedSlug ||
+        itemSlug === decodedSlug.replace(/\/$/, '') ||
+        saltSlug === decodedSlug ||
+        item.url?.includes(`/${decodedSlug}/`)
+      ) && item.type === 'movie';
+    });
+
+    if (movie) {
+      redirect(`/watch/${movie.slug}`);
+    }
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh' }}>
         <Header />

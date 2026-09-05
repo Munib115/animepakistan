@@ -97,7 +97,7 @@ async function main() {
   let patchedCount = 0;
   let failCount = 0;
   let processed = 0;
-  const CONCURRENCY = 12;
+  const CONCURRENCY = 16;
 
   async function worker(queue) {
     while (queue.length > 0) {
@@ -117,8 +117,8 @@ async function main() {
         console.log(`[${processed}/${tasks.length}] Patched: ${patchedCount}, Failed: ${failCount} (Current: ${task.anime.title} - ${task.ep.slug})`);
       }
 
-      // Save every 50 episodes
-      if (processed % 50 === 0) {
+      // Save every 25 episodes
+      if (processed % 25 === 0) {
         fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
       }
     }
@@ -142,11 +142,28 @@ async function main() {
   const remaining = tasks.filter(t => !priorityIndex.includes(t));
   const queue = [...priorityIndex, ...remaining];
 
+  // Graceful shutdown: save DB whenever stopped
+  function saveOnExit() {
+    console.log(`\nSaving database to disk (${patchedCount} patched so far)...`);
+    fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
+    console.log('Database successfully saved!');
+  }
+
+  process.on('SIGINT', () => {
+    saveOnExit();
+    process.exit(0);
+  });
+  process.on('SIGTERM', () => {
+    saveOnExit();
+    process.exit(0);
+  });
+
   const workers = Array.from({ length: CONCURRENCY }, () => worker(queue));
   await Promise.all(workers);
 
-  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
+  saveOnExit();
   console.log(`\nDone! Successfully patched ${patchedCount} episodes. Failed: ${failCount}`);
 }
 
 main().catch(console.error);
+

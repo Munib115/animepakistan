@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
+import { redirect } from 'next/navigation';
 import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
 import { resolveStreamSources } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
@@ -15,18 +16,25 @@ export const maxDuration = 30;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const anime = getAnimeDb().find((item) => item.type === 'movie' && item.slug.toLowerCase() === decodeURIComponent(slug).toLowerCase());
-  if (!anime) return { title: 'Movie Not Found', robots: { index: false, follow: false } };
+  const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
+  const db = getAnimeDb();
+  const anime = db.find((item) => {
+    const itemSlug = item.slug.toLowerCase().trim();
+    const saltSlug = item.saltSlug?.toLowerCase().trim();
+    return itemSlug === decodedSlug || itemSlug === decodedSlug.replace(/\/$/, '') || saltSlug === decodedSlug || item.url?.includes(`/${decodedSlug}/`);
+  });
+
+  if (!anime) return { title: 'Anime Not Found', robots: { index: false, follow: false } };
 
   const name = animeName(anime);
   const description = animeDescription(anime);
   const url = `/watch/${anime.slug}`;
   return {
-    title: `Watch ${name} Urdu & Hindi Dubbed Movie`,
+    title: `Watch ${name} Urdu & Hindi Dubbed`,
     description,
     alternates: { canonical: url },
-    openGraph: { type: 'video.other', url, title: `Watch ${name} Urdu & Hindi Dubbed Movie`, description, images: [{ url: animeImage(anime), alt: `${name} poster` }] },
-    twitter: { card: 'summary_large_image', title: `Watch ${name} Urdu & Hindi Dubbed Movie`, description, images: [animeImage(anime)] },
+    openGraph: { type: 'video.other', url, title: `Watch ${name} Urdu & Hindi Dubbed`, description, images: [{ url: animeImage(anime), alt: `${name} poster` }] },
+    twitter: { card: 'summary_large_image', title: `Watch ${name} Urdu & Hindi Dubbed`, description, images: [animeImage(anime)] },
   };
 }
 
@@ -40,10 +48,37 @@ export default async function MovieWatchPage(props: PageProps) {
   const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
   const anime = items.find((item) => {
     const itemSlug = item.slug.toLowerCase().trim();
-    return (itemSlug === decodedSlug || itemSlug === decodedSlug.replace(/\/$/, '')) && item.type === 'movie';
+    const saltSlug = item.saltSlug?.toLowerCase().trim();
+    return (
+      itemSlug === decodedSlug ||
+      itemSlug === decodedSlug.replace(/\/$/, '') ||
+      saltSlug === decodedSlug ||
+      item.url?.includes(`/${decodedSlug}/`)
+    ) && item.type === 'movie';
   });
 
   if (!anime) {
+    // Check if this slug belongs to a series, and seamlessly redirect to its watch page!
+    const series = items.find((item) => {
+      const itemSlug = item.slug.toLowerCase().trim();
+      const saltSlug = item.saltSlug?.toLowerCase().trim();
+      return (
+        itemSlug === decodedSlug ||
+        itemSlug === decodedSlug.replace(/\/$/, '') ||
+        saltSlug === decodedSlug ||
+        item.url?.includes(`/${decodedSlug}/`)
+      ) && item.type === 'series';
+    });
+
+    if (series) {
+      const firstEp = series.episodes && series.episodes.length > 0 ? series.episodes[0] : null;
+      if (firstEp) {
+        redirect(`/watch/${series.slug}/${firstEp.slug}`);
+      } else {
+        redirect(`/anime/${series.slug}`);
+      }
+    }
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh' }}>
         <Header />
