@@ -4,32 +4,43 @@ import React, { useEffect, useState } from 'react';
 
 export default function AppLoader() {
   const [isLeaving, setIsLeaving] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
-  const [progress, setProgress] = useState(15);
+  const [isDismissed, setIsDismissed] = useState(true);
+  const [progress, setProgress] = useState(30);
 
   useEffect(() => {
-    // Check if user has already seen the launch animation in this browser session
+    // Check if user has already seen the launch animation or is reloading
     try {
-      if (sessionStorage.getItem('ap_intro_seen')) {
+      let isReload = false;
+      if (typeof window !== 'undefined' && window.performance) {
+        if (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) {
+          isReload = (performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming).type === 'reload';
+        } else if (performance.navigation) {
+          isReload = performance.navigation.type === 1;
+        }
+      }
+
+      if (isReload || localStorage.getItem('ap_intro_seen') || sessionStorage.getItem('ap_intro_seen')) {
         setIsDismissed(true);
         return;
       }
+      
+      localStorage.setItem('ap_intro_seen', '1');
       sessionStorage.setItem('ap_intro_seen', '1');
     } catch (e) {}
 
-    // Multi-stage smooth progress sequence while page loads in background
-    const p1 = window.setTimeout(() => setProgress(55), 100);
-    const p2 = window.setTimeout(() => setProgress(88), 350);
-    const p3 = window.setTimeout(() => setProgress(100), 600);
-    const p4 = window.setTimeout(() => setIsLeaving(true), 750);
-    const p5 = window.setTimeout(() => setIsDismissed(true), 1200);
+    // First visit only: brief 450ms luxury intro
+    setIsDismissed(false);
+
+    const p1 = window.setTimeout(() => setProgress(80), 80);
+    const p2 = window.setTimeout(() => setProgress(100), 220);
+    const p3 = window.setTimeout(() => setIsLeaving(true), 380);
+    const p4 = window.setTimeout(() => setIsDismissed(true), 680);
 
     return () => {
       window.clearTimeout(p1);
       window.clearTimeout(p2);
       window.clearTimeout(p3);
       window.clearTimeout(p4);
-      window.clearTimeout(p5);
     };
   }, []);
 
@@ -68,7 +79,7 @@ export default function AppLoader() {
         <div className="app-loader-progress" aria-hidden="true">
           <span style={{ 
             width: `${progress}%`,
-            transition: 'width 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: 'width 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
           }} />
         </div>
       </div>

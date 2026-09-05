@@ -1,11 +1,14 @@
 import { AnimeItem } from '@/types/anime';
-import animeDbData from '@/data/anime-db.json';
 import animeCatalogData from '@/data/anime-catalog.json';
 
-const cachedDb: AnimeItem[] = animeDbData as AnimeItem[];
+let cachedDb: AnimeItem[] | null = null;
 const cachedCatalog: AnimeItem[] = animeCatalogData as AnimeItem[];
 
 export function getAnimeDb(): AnimeItem[] {
+  if (!cachedDb) {
+    // Lazily load full 9.4MB episode database only when detail or watch routes request it
+    cachedDb = require('@/data/anime-db.json') as AnimeItem[];
+  }
   return cachedDb;
 }
 

@@ -76,7 +76,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                if (sessionStorage.getItem('ap_intro_seen')) {
+                var isReload = false;
+                if (window.performance) {
+                  if (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) {
+                    isReload = performance.getEntriesByType('navigation')[0].type === 'reload';
+                  } else if (performance.navigation) {
+                    isReload = performance.navigation.type === 1;
+                  }
+                }
+                if (isReload || localStorage.getItem('ap_intro_seen') || sessionStorage.getItem('ap_intro_seen')) {
                   document.documentElement.classList.add('ap-intro-dismissed');
                 }
               } catch(e) {}
