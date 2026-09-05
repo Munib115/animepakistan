@@ -8,6 +8,8 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { DownloadProvider } from "@/context/DownloadContext";
 import DownloadManager from "@/components/DownloadManager";
 import { absoluteUrl, siteName, siteUrl } from '@/lib/seo';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const viewport: Viewport = {
   themeColor: "#006633",
@@ -112,6 +114,8 @@ export default function RootLayout({
             <PWARegister />
           </DownloadProvider>
         </LanguageProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
