@@ -71,26 +71,6 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        {/* Instant Session Script: Prevents splash screen on internal navigation or reload */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var isReload = false;
-                if (window.performance) {
-                  if (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) {
-                    isReload = performance.getEntriesByType('navigation')[0].type === 'reload';
-                  } else if (performance.navigation) {
-                    isReload = performance.navigation.type === 1;
-                  }
-                }
-                if (isReload || localStorage.getItem('ap_intro_seen') || sessionStorage.getItem('ap_intro_seen')) {
-                  document.documentElement.classList.add('ap-intro-dismissed');
-                }
-              } catch(e) {}
-            `,
-          }}
-        />
 
         {/* High-speed Google Fonts & Material Symbols CDN */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

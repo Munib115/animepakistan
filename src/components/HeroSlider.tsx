@@ -121,6 +121,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
   return (
     <section
       className="cinematic-hero"
+      style={{ position: 'relative', overflow: 'hidden', minHeight: '440px', borderRadius: '24px' }}
       aria-label="Featured anime"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -128,7 +129,14 @@ export default function HeroSlider({ items }: HeroSliderProps) {
       onTouchMove={(event) => { touchEndX.current = event.targetTouches[0].clientX; }}
       onTouchEnd={handleTouchEnd}
     >
-      <img key={current.slug} className="cinematic-hero-image" src={backdrop} alt="" fetchPriority="high" />
+      <img 
+        key={current.slug} 
+        className="cinematic-hero-image" 
+        src={backdrop} 
+        alt="" 
+        fetchPriority="high" 
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} 
+      />
       <div className={`cinematic-hero-scrim ${language === 'ur' ? 'rtl' : ''}`} />
 
       <div className={`cinematic-hero-content ${language === 'ur' ? 'rtl' : ''}`}>
