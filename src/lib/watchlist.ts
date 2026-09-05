@@ -20,21 +20,32 @@ export function getWatchlist(): WatchlistItem[] {
   }
 }
 
-export function toggleWatchlist(item: Omit<WatchlistItem, 'addedAt'>): boolean {
+export function toggleWatchlist(item: Omit<WatchlistItem, 'addedAt'> | string): boolean {
   if (typeof window === 'undefined') return false;
   try {
+    const slug = typeof item === 'string' ? item : item.slug;
     const list = getWatchlist();
-    const exists = list.some((w) => w.slug === item.slug);
+    const exists = list.some((w) => w.slug === slug);
     let updated: WatchlistItem[];
 
     if (exists) {
-      updated = list.filter((w) => w.slug !== item.slug);
+      updated = list.filter((w) => w.slug !== slug);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      window.dispatchEvent(new CustomEvent('ap_watchlist_updated', { detail: { slug, added: false } }));
       return false; // removed
     } else {
-      const newItem: WatchlistItem = { ...item, addedAt: Date.now() };
+      const newItem: WatchlistItem = typeof item === 'string' 
+        ? { slug, title: slug, poster: '', type: 'series', addedAt: Date.now() }
+        : { 
+            slug: item.slug, 
+            title: item.title || item.slug, 
+            poster: item.poster || '', 
+            type: item.type || 'series', 
+            addedAt: Date.now() 
+          };
       updated = [newItem, ...list];
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      window.dispatchEvent(new CustomEvent('ap_watchlist_updated', { detail: { slug, added: true } }));
       return true; // added
     }
   } catch (e) {

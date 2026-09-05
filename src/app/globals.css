@@ -67,28 +67,189 @@ html.eye-comfort-warm {
 }
 
 html.eye-comfort-night {
-  --bg-primary: #020b05;
-  --bg-secondary: #05140a;
-  --bg-tertiary: #0a2012;
-  --text-primary: #e6f7ec;
-  --text-secondary: #a3ccb4;
-  --text-muted: #6b8f7b;
-  --glass-bg: rgba(5, 20, 10, 0.88);
-  --glass-bg-hover: rgba(10, 32, 18, 0.98);
-  --glass-border: rgba(0, 204, 102, 0.22);
+  color-scheme: dark;
+  --bg-primary: #000000;         /* True 0-nit pitch black for OLED */
+  --bg-secondary: #060e08;       /* Deep obsidian surface */
+  --bg-tertiary: #0c1c11;        /* Rich dark card container */
+  
+  --color-primary: #00e575;      /* Luminous emerald neon green */
+  --color-primary-dark: #00b85c;
+  --color-accent: #00ff88;
+  --color-accent-light: #34d399;
+  --color-glow: #00ff88;
+  
+  --text-primary: #f0fdf4;       /* 100% crisp white-mint text */
+  --text-secondary: #9dd1b2;     /* High-legibility soft mint text */
+  --text-muted: #5e8c71;         /* Muted mint text */
+  --text-light: #ffffff;
+  
+  --glass-bg: rgba(5, 14, 8, 0.96);
+  --glass-bg-hover: rgba(9, 24, 14, 0.98);
+  --glass-border: rgba(0, 229, 117, 0.22);
+  --glass-border-glow: rgba(0, 255, 136, 0.45);
+  --glass-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.95), 0 0 24px rgba(0, 229, 117, 0.08);
+  --glass-shadow-hover: 0 20px 50px -6px rgba(0, 0, 0, 0.98), 0 0 32px rgba(0, 229, 117, 0.18);
+}
+
+/* Comprehensive OLED Night Overrides for Complete Visual Cohesion */
+html.eye-comfort-night body {
+  background-color: #000000 !important;
+  color: #f0fdf4 !important;
 }
 
 html.eye-comfort-night .site-header {
-  background: rgba(2, 11, 5, 0.92) !important;
-  border-bottom-color: rgba(0, 204, 102, 0.2) !important;
+  background: rgba(2, 8, 4, 0.94) !important;
+  border-bottom: 1px solid rgba(0, 229, 117, 0.2) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
 }
 
+html.eye-comfort-night .desktop-center-nav {
+  background: rgba(4, 14, 7, 0.92) !important;
+  border: 1px solid rgba(0, 229, 117, 0.25) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8) !important;
+}
+
+html.eye-comfort-night .desktop-nav-link {
+  color: rgba(240, 253, 244, 0.72) !important;
+}
+
+html.eye-comfort-night .desktop-nav-link:hover,
+html.eye-comfort-night .desktop-nav-link.active {
+  background: rgba(0, 229, 117, 0.2) !important;
+  color: #00ff88 !important;
+  border-color: rgba(0, 229, 117, 0.4) !important;
+}
+
+html.eye-comfort-night .header-action-btn {
+  background: rgba(5, 15, 8, 0.95) !important;
+  border: 1.5px solid rgba(0, 229, 117, 0.25) !important;
+  color: #00ff88 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Quick Control Hub OLED Styling */
+html.eye-comfort-night .quick-hub-popover {
+  background: rgba(4, 12, 7, 0.98) !important;
+  border: 1.5px solid rgba(0, 229, 117, 0.3) !important;
+  box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.98), 0 0 35px rgba(0, 229, 117, 0.15) !important;
+  color: #f0fdf4 !important;
+}
+
+html.eye-comfort-night .hub-glass-tile,
+html.eye-comfort-night .quick-hub-tile {
+  background: #08140c !important;
+  border: 1px solid rgba(0, 229, 117, 0.2) !important;
+  color: #f0fdf4 !important;
+}
+
+html.eye-comfort-night .hub-glass-tile:hover {
+  background: #0d2215 !important;
+  border-color: rgba(0, 229, 117, 0.45) !important;
+}
+
+html.eye-comfort-night .quick-hub-tabs-container {
+  background: rgba(0, 22, 11, 0.85) !important;
+  border: 1px solid rgba(0, 229, 117, 0.2) !important;
+}
+
+html.eye-comfort-night .quick-hub-tab-btn {
+  color: #9dd1b2 !important;
+}
+
+html.eye-comfort-night .quick-hub-tab-btn.active {
+  background: #00e575 !important;
+  color: #011508 !important;
+  box-shadow: 0 2px 10px rgba(0, 229, 117, 0.35) !important;
+}
+
+html.eye-comfort-night .quick-hub-card {
+  background: #07120a !important;
+  border: 1.2px solid rgba(0, 229, 117, 0.2) !important;
+  color: #f0fdf4 !important;
+}
+
+html.eye-comfort-night .quick-hub-card:hover {
+  border-color: rgba(0, 229, 117, 0.4) !important;
+  background: #0b1d10 !important;
+}
+
+html.eye-comfort-night .quick-hub-input {
+  background: #061008 !important;
+  border: 1px solid rgba(0, 229, 117, 0.25) !important;
+  color: #f0fdf4 !important;
+}
+
+/* Cards across the application */
 html.eye-comfort-night .glass-panel,
 html.eye-comfort-night .glass-card,
+html.eye-comfort-night .liquid-glass-panel,
+html.eye-comfort-night .liquid-glass-card {
+  background: #060e08 !important;
+  border-color: rgba(0, 229, 117, 0.2) !important;
+  color: #f0fdf4 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
+}
+
+html.eye-comfort-night .glass-card:hover,
+html.eye-comfort-night .liquid-glass-card:hover {
+  border-color: #00ff88 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 229, 117, 0.2) !important;
+}
+
+html.eye-comfort-night .glass-card-footer {
+  background: #060e08 !important;
+  color: #f0fdf4 !important;
+}
+
 html.eye-comfort-night .glass-btn-secondary {
-  background: #05140a !important;
-  color: #e6f7ec !important;
-  border-color: rgba(0, 204, 102, 0.2) !important;
+  background: #08160d !important;
+  border: 1px solid rgba(0, 229, 117, 0.25) !important;
+  color: #f0fdf4 !important;
+}
+
+html.eye-comfort-night .glass-btn-secondary:hover {
+  background: #0d2416 !important;
+  border-color: #00ff88 !important;
+  color: #00ff88 !important;
+}
+
+html.eye-comfort-night .glass-input {
+  background: #061008 !important;
+  border: 1.5px solid rgba(0, 229, 117, 0.25) !important;
+  color: #f0fdf4 !important;
+}
+
+html.eye-comfort-night .glass-badge-white {
+  background: #0a180f !important;
+  border: 1px solid rgba(0, 229, 117, 0.25) !important;
+  color: #9dd1b2 !important;
+}
+
+/* Mobile Search Dialog */
+html.eye-comfort-night .mobile-search-panel {
+  background: rgba(3, 10, 6, 0.96) !important;
+  border: 1.5px solid rgba(0, 229, 117, 0.3) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95) !important;
+}
+
+html.eye-comfort-night .mobile-search-input-wrap {
+  background: #07140b !important;
+  border: 1px solid rgba(0, 229, 117, 0.25) !important;
+}
+
+html.eye-comfort-night .mobile-search-input-wrap input {
+  color: #f0fdf4 !important;
+}
+
+html.eye-comfort-night .mobile-search-result {
+  background: #08150c !important;
+  border: 1px solid rgba(0, 229, 117, 0.15) !important;
+}
+
+html.eye-comfort-night .mobile-search-result:hover {
+  background: #0d2013 !important;
+  border-color: #00ff88 !important;
 }
 
 .apple-liquid-glass-dock {

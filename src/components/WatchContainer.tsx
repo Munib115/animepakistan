@@ -9,6 +9,8 @@ import { getProxiedImageUrl } from '@/lib/image';
 import { saveWatchProgress, getAnimeWatchProgress, WatchProgressItem } from '@/lib/watchHistory';
 import { sound } from '@/lib/soundEngine';
 import { useDownloads } from '@/context/DownloadContext';
+import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
+import { shareContent } from '@/lib/shareHelper';
 import EpisodeComments from './EpisodeComments';
 
 interface WatchContainerProps {
@@ -31,6 +33,58 @@ export default function WatchContainer({
 
   const downloadId = `${anime.slug}-${currentEpisode?.slug || 'full-movie'}`;
   const downloadingItem = downloads.find((d) => d.id === downloadId);
+
+  const [inList, setInList] = useState(false);
+  const [isShareCopied, setIsShareCopied] = useState(false);
+  const [copiedEpSlug, setCopiedEpSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!anime?.slug) return;
+    setInList(isInWatchlist(anime.slug));
+    const handleWatchlistUpdate = () => {
+      if (anime?.slug) setInList(isInWatchlist(anime.slug));
+    };
+    window.addEventListener('ap_watchlist_updated', handleWatchlistUpdate);
+    return () => window.removeEventListener('ap_watchlist_updated', handleWatchlistUpdate);
+  }, [anime?.slug]);
+
+  const handleWatchlistToggle = () => {
+    if (!anime?.slug) return;
+    sound.pop();
+    const added = toggleWatchlist({
+      slug: anime.slug,
+      title: displayName,
+      poster: resolvedPoster,
+      type: isMovie ? 'movie' : 'series',
+    });
+    setInList(added);
+  };
+
+  const handleShareCurrent = async () => {
+    sound.click();
+    const title = isMovie 
+      ? displayName 
+      : `${displayName} - ${currentEpisode?.title || `Episode ${currentEpisode?.number || 1}`}`;
+    const text = isMovie
+      ? `Watch ${displayName} in Urdu & Hindi on AnimePakistan`
+      : `Watch ${displayName} ${currentEpisode?.title || `Episode ${currentEpisode?.number || 1}`} in Urdu & Hindi on AnimePakistan`;
+    const url = typeof window !== 'undefined' ? window.location.href : (currentEpisode ? `/watch/${anime.slug}/${currentEpisode.slug}` : `/watch/${anime.slug}`);
+    await shareContent({ title, text, url });
+    setIsShareCopied(true);
+    setTimeout(() => setIsShareCopied(false), 2000);
+  };
+
+  const handleShareEpisode = async (ep: Episode) => {
+    sound.click();
+    const epUrl = typeof window !== 'undefined' ? `${window.location.origin}/watch/${anime.slug}/${ep.slug}` : `/watch/${anime.slug}/${ep.slug}`;
+    await shareContent({
+      title: `${displayName} - ${ep.title}`,
+      text: `Watch ${displayName} ${ep.title} in Urdu & Hindi on AnimePakistan`,
+      url: epUrl,
+    });
+    setCopiedEpSlug(ep.slug);
+    setTimeout(() => setCopiedEpSlug(null), 2000);
+  };
 
   const handleDownloadClick = () => {
     sound.playButton();
@@ -331,6 +385,58 @@ export default function WatchContainer({
           <span className="glass-badge-white">
             HD 1080p
           </span>
+
+          {/* Add to Watchlist Button */}
+          <button
+            type="button"
+            onClick={handleWatchlistToggle}
+            title={inList ? (language === 'ur' ? 'لسٹ میں محفوظ ہے' : 'In Watchlist') : (language === 'ur' ? 'لسٹ میں شامل کریں' : 'Add to List')}
+            aria-label={inList ? 'In Watchlist' : 'Add to List'}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '32px',
+              height: '32px',
+              borderRadius: '8px',
+              border: inList ? '1.5px solid #00ff66' : '1px solid var(--glass-border)',
+              background: inList ? 'rgba(0, 102, 51, 0.25)' : 'var(--bg-secondary)',
+              color: inList ? 'var(--color-primary)' : 'var(--text-primary)',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 102, 51, 0.08)',
+              transition: 'all 0.2s',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '18px', color: inList ? '#00ff66' : 'inherit' }}>
+              {inList ? 'bookmark_added' : 'bookmark_add'}
+            </span>
+          </button>
+
+          {/* Share Current Video / Episode Button */}
+          <button
+            type="button"
+            onClick={handleShareCurrent}
+            title={isShareCopied ? (language === 'ur' ? 'لنک کاپی ہوگیا' : 'Link Copied!') : (isMovie ? (language === 'ur' ? 'مووی شیئر کریں' : 'Share Movie') : (language === 'ur' ? 'ایپی سوڈ شیئر کریں' : 'Share Episode'))}
+            aria-label="Share"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '32px',
+              height: '32px',
+              borderRadius: '8px',
+              border: isShareCopied ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
+              background: isShareCopied ? 'rgba(22, 163, 74, 0.15)' : 'var(--bg-secondary)',
+              color: isShareCopied ? '#16a34a' : 'var(--text-primary)',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 102, 51, 0.08)',
+              transition: 'all 0.2s',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+              {isShareCopied ? 'check' : 'share'}
+            </span>
+          </button>
 
           {/* Small Icon-Only Download Button */}
           {streamSources.length > 0 && (
@@ -747,7 +853,7 @@ export default function WatchContainer({
                   padding: '6px 14px',
                   borderRadius: '8px',
                   border: selectedSeason === 'ALL' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
-                  background: selectedSeason === 'ALL' ? 'var(--color-primary)' : '#ffffff',
+                  background: selectedSeason === 'ALL' ? 'var(--color-primary)' : 'var(--bg-secondary)',
                   color: selectedSeason === 'ALL' ? '#ffffff' : 'var(--text-secondary)',
                   fontWeight: selectedSeason === 'ALL' ? 800 : 600,
                   fontSize: '0.78rem',
@@ -770,7 +876,7 @@ export default function WatchContainer({
                     padding: '6px 14px',
                     borderRadius: '8px',
                     border: selectedSeason === s ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
-                    background: selectedSeason === s ? 'var(--color-primary)' : '#ffffff',
+                    background: selectedSeason === s ? 'var(--color-primary)' : 'var(--bg-secondary)',
                     color: selectedSeason === s ? '#ffffff' : 'var(--text-secondary)',
                     fontWeight: selectedSeason === s ? 800 : 600,
                     fontSize: '0.78rem',
@@ -819,7 +925,7 @@ export default function WatchContainer({
                     padding: '8px',
                     textDecoration: 'none',
                     border: isCurrent ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
-                    background: isCurrent ? 'rgba(0, 102, 51, 0.08)' : '#ffffff',
+                    background: isCurrent ? 'rgba(0, 102, 51, 0.18)' : 'var(--bg-secondary)',
                     borderRadius: '8px',
                   }}
                 >
@@ -912,6 +1018,37 @@ export default function WatchContainer({
                       {cleanTitle}
                     </span>
                   </div>
+
+                  {/* Share Episode Icon Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleShareEpisode(ep);
+                    }}
+                    title={copiedEpSlug === ep.slug ? (language === 'ur' ? 'لنک کاپی ہوگیا' : 'Link Copied!') : (language === 'ur' ? 'ایپی سوڈ شیئر کریں' : 'Share Episode')}
+                    aria-label="Share Episode"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '6px',
+                      border: copiedEpSlug === ep.slug ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
+                      background: copiedEpSlug === ep.slug ? 'rgba(22, 163, 74, 0.12)' : 'var(--bg-secondary)',
+                      color: copiedEpSlug === ep.slug ? '#16a34a' : 'var(--text-secondary)',
+                      cursor: 'pointer',
+                      flexShrink: 0,
+                      transition: 'all 0.18s ease',
+                      zIndex: 2,
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                      {copiedEpSlug === ep.slug ? 'check' : 'share'}
+                    </span>
+                  </button>
                 </Link>
               );
             })}

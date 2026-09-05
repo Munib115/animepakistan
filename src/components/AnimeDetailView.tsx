@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { AnimeItem, Episode } from '@/types/anime';
 import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
 import { sound } from '@/lib/soundEngine';
+import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
+import { shareContent } from '@/lib/shareHelper';
 
 interface AnimeDetailViewProps {
   anime: AnimeItem;
@@ -15,6 +17,9 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
   const { t, language } = useLanguage();
   const [selectedSeason, setSelectedSeason] = useState<number | 'ALL'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+  const [inList, setInList] = useState(false);
+  const [isShareCopied, setIsShareCopied] = useState(false);
+  const [copiedEpSlug, setCopiedEpSlug] = useState<string | null>(null);
 
   const displayName = language === 'en'
     ? (anime.anilist?.englishName || anime.title)
@@ -74,6 +79,52 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
         return a.number - b.number;
       });
   }, [anime.episodes, selectedSeason, searchQuery]);
+
+  useEffect(() => {
+    if (!anime?.slug) return;
+    setInList(isInWatchlist(anime.slug));
+    const handleWatchlistUpdate = () => {
+      if (anime?.slug) setInList(isInWatchlist(anime.slug));
+    };
+    window.addEventListener('ap_watchlist_updated', handleWatchlistUpdate);
+    return () => window.removeEventListener('ap_watchlist_updated', handleWatchlistUpdate);
+  }, [anime?.slug]);
+
+  const handleWatchlistToggle = () => {
+    if (!anime?.slug) return;
+    sound.pop();
+    const added = toggleWatchlist({
+      slug: anime.slug,
+      title: displayName,
+      poster: rawCover,
+      type: isMovie ? 'movie' : 'series',
+    });
+    setInList(added);
+  };
+
+  const handleShareAnime = async () => {
+    sound.click();
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : `/anime/${anime.slug}`;
+    await shareContent({
+      title: displayName,
+      text: `Watch ${displayName} in Urdu & Hindi on AnimePakistan`,
+      url: currentUrl,
+    });
+    setIsShareCopied(true);
+    setTimeout(() => setIsShareCopied(false), 2000);
+  };
+
+  const handleShareEpisode = async (ep: Episode) => {
+    sound.click();
+    const epUrl = typeof window !== 'undefined' ? `${window.location.origin}/watch/${anime.slug}/${ep.slug}` : `/watch/${anime.slug}/${ep.slug}`;
+    await shareContent({
+      title: `${displayName} - ${ep.title}`,
+      text: `Watch ${displayName} ${ep.title} in Urdu & Hindi on AnimePakistan`,
+      url: epUrl,
+    });
+    setCopiedEpSlug(ep.slug);
+    setTimeout(() => setCopiedEpSlug(null), 2000);
+  };
 
   return (
     <div style={{ position: 'relative' }}>
@@ -172,22 +223,109 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                 )}
               </div>
 
-              {/* Direct Play CTA for Movies */}
-              {isMovie && (
-                <Link 
-                  href={`/watch/${anime.slug}`}
-                  className="glass-btn"
-                  style={{
-                    width: '100%',
-                    marginTop: '16px',
-                    padding: '12px',
-                    fontSize: '0.95rem'
-                  }}
-                >
-                  <span className="material-symbols-outlined">play_arrow</span>
-                  <span>{t('playMovie')}</span>
-                </Link>
-              )}
+              {/* Action Buttons Column Under Poster */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '14px' }}>
+                {isMovie ? (
+                  <Link 
+                    href={`/watch/${anime.slug}`}
+                    className="glass-btn"
+                    style={{
+                      width: '100%',
+                      padding: '11px',
+                      fontSize: '0.90rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      fontWeight: 800,
+                    }}
+                  >
+                    <span className="material-symbols-outlined">play_arrow</span>
+                    <span>{t('playMovie')}</span>
+                  </Link>
+                ) : (filteredEpisodes.length > 0 || (anime.episodes && anime.episodes.length > 0)) ? (
+                  <Link 
+                    href={`/watch/${anime.slug}/${filteredEpisodes[0]?.slug || anime.episodes?.[0]?.slug}`}
+                    className="glass-btn"
+                    style={{
+                      width: '100%',
+                      padding: '11px',
+                      fontSize: '0.90rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      fontWeight: 800,
+                    }}
+                  >
+                    <span className="material-symbols-outlined">play_arrow</span>
+                    <span>{language === 'ur' ? 'ایپی سوڈ 1 دیکھیں' : 'Watch Episode 1'}</span>
+                  </Link>
+                ) : null}
+
+                {/* Add to List & Share Row */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                  <button
+                    type="button"
+                    onClick={handleWatchlistToggle}
+                    className="glass-btn-secondary"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '5px',
+                      padding: '10px 6px',
+                      borderRadius: '8px',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                      border: inList ? '1.5px solid #00ff66' : '1px solid var(--glass-border)',
+                      background: inList ? 'rgba(0, 102, 51, 0.15)' : 'var(--bg-secondary)',
+                      color: inList ? 'var(--color-primary)' : 'var(--text-primary)',
+                      cursor: 'pointer',
+                      transition: 'all 0.18s ease',
+                    }}
+                    title={inList ? 'In Watchlist' : 'Add to List'}
+                    aria-label={inList ? 'In Watchlist' : 'Add to List'}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: inList ? 'var(--color-primary)' : 'inherit' }}>
+                      {inList ? 'bookmark_added' : 'bookmark_add'}
+                    </span>
+                    <span style={{ whiteSpace: 'nowrap' }}>
+                      {inList ? (language === 'ur' ? 'محفوظ' : 'In List') : (language === 'ur' ? 'لسٹ میں شامل' : 'Add to List')}
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleShareAnime}
+                    className="glass-btn-secondary"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '5px',
+                      padding: '10px 6px',
+                      borderRadius: '8px',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                      border: isShareCopied ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
+                      background: isShareCopied ? 'rgba(22, 163, 74, 0.12)' : 'var(--bg-secondary)',
+                      color: isShareCopied ? '#16a34a' : 'var(--text-primary)',
+                      cursor: 'pointer',
+                      transition: 'all 0.18s ease',
+                    }}
+                    title={isShareCopied ? 'Link Copied' : 'Share Anime'}
+                    aria-label="Share Anime"
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                      {isShareCopied ? 'check' : 'share'}
+                    </span>
+                    <span style={{ whiteSpace: 'nowrap' }}>
+                      {isShareCopied ? (language === 'ur' ? 'کاپی ہوگیا' : 'Copied') : (language === 'ur' ? 'شیئر' : 'Share')}
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Info Column */}
@@ -219,7 +357,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
-                    background: '#ffffff',
+                    background: 'var(--bg-secondary)',
                     border: '1px solid var(--glass-border)',
                     padding: '3px 8px',
                     borderRadius: '6px',
@@ -281,7 +419,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     {anime.audioLanguages.map((lang) => (
                       <span key={lang} style={{
-                        background: '#ffffff',
+                        background: 'var(--bg-secondary)',
                         border: '1px solid var(--color-primary)',
                         color: 'var(--color-primary)',
                         padding: '3px 8px',
@@ -298,7 +436,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
 
               {/* Description */}
               <div style={{
-                background: '#ffffff',
+                background: 'var(--bg-secondary)',
                 padding: '16px',
                 borderRadius: '10px',
                 border: '1px solid var(--glass-border)',
@@ -374,7 +512,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                       padding: '6px 14px',
                       borderRadius: '8px',
                       border: selectedSeason === 'ALL' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
-                      background: selectedSeason === 'ALL' ? 'var(--color-primary)' : '#ffffff',
+                      background: selectedSeason === 'ALL' ? 'var(--color-primary)' : 'var(--bg-secondary)',
                       color: selectedSeason === 'ALL' ? '#ffffff' : 'var(--text-secondary)',
                       fontWeight: selectedSeason === 'ALL' ? 800 : 600,
                       fontSize: '0.78rem',
@@ -397,7 +535,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                         padding: '6px 14px',
                         borderRadius: '8px',
                         border: selectedSeason === s ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
-                        background: selectedSeason === s ? 'var(--color-primary)' : '#ffffff',
+                        background: selectedSeason === s ? 'var(--color-primary)' : 'var(--bg-secondary)',
                         color: selectedSeason === s ? '#ffffff' : 'var(--text-secondary)',
                         fontWeight: selectedSeason === s ? 800 : 600,
                         fontSize: '0.78rem',
@@ -529,6 +667,37 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                           {cleanEpisodeTitle.includes(':') ? cleanEpisodeTitle.split(':').slice(1).join(':').trim() : cleanEpisodeTitle}
                         </span>
                       </div>
+
+                      {/* Share Episode Icon Button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleShareEpisode(ep);
+                        }}
+                        title={copiedEpSlug === ep.slug ? (language === 'ur' ? 'لنک کاپی ہوگیا' : 'Link Copied!') : (language === 'ur' ? 'ایپی سوڈ شیئر کریں' : 'Share Episode')}
+                        aria-label="Share Episode"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '8px',
+                          border: copiedEpSlug === ep.slug ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
+                          background: copiedEpSlug === ep.slug ? 'rgba(22, 163, 74, 0.12)' : 'var(--bg-secondary)',
+                          color: copiedEpSlug === ep.slug ? '#16a34a' : 'var(--text-secondary)',
+                          cursor: 'pointer',
+                          flexShrink: 0,
+                          transition: 'all 0.18s ease',
+                          zIndex: 2,
+                        }}
+                      >
+                        <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                          {copiedEpSlug === ep.slug ? 'check' : 'share'}
+                        </span>
+                      </button>
                     </Link>
                   );
                 })}
@@ -538,7 +707,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                 padding: '24px',
                 textAlign: 'center',
                 color: 'var(--text-muted)',
-                background: '#ffffff',
+                background: 'var(--bg-secondary)',
                 borderRadius: '10px',
                 border: '1px dashed var(--glass-border)'
               }}>

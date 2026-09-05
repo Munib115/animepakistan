@@ -190,6 +190,15 @@ class SoundEngine {
       osc.stop(now + 0.055);
     } catch (e) {}
   }
+
+  // Convenience aliases
+  public pop() {
+    this.playCardClick();
+  }
+
+  public click() {
+    this.playButton();
+  }
 }
 
 export const sound = new SoundEngine();

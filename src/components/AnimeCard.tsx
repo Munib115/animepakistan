@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AnimeItem } from '@/types/anime';
 import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
 import { sound } from '@/lib/soundEngine';
+import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
 
 interface AnimeCardProps {
   item: AnimeItem;
@@ -14,6 +15,27 @@ interface AnimeCardProps {
 export default function AnimeCard({ item }: AnimeCardProps) {
   const { language } = useLanguage();
   const [imgError, setImgError] = useState(false);
+  const [inList, setInList] = useState(false);
+
+  useEffect(() => {
+    setInList(isInWatchlist(item.slug));
+    const handleUpdate = () => setInList(isInWatchlist(item.slug));
+    window.addEventListener('ap_watchlist_updated', handleUpdate);
+    return () => window.removeEventListener('ap_watchlist_updated', handleUpdate);
+  }, [item.slug]);
+
+  const handleWatchlistToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    sound.pop();
+    const added = toggleWatchlist({
+      slug: item.slug,
+      title: displayName,
+      poster: rawPoster,
+      type: item.type === 'movie' ? 'movie' : 'series',
+    });
+    setInList(added);
+  };
 
   const displayName = language === 'en' 
     ? (item.anilist?.englishName || item.title) 
@@ -91,7 +113,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
             </div>
           )}
 
-          {/* Top Floating Badges */}
+          {/* Top Floating Badges & Quick Watchlist Action */}
           <div style={{
             position: 'absolute',
             top: '8px',
@@ -100,8 +122,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            zIndex: 2,
-            pointerEvents: 'none',
+            zIndex: 4,
           }}>
             {/* Type badge */}
             <span style={{
@@ -114,29 +135,60 @@ export default function AnimeCard({ item }: AnimeCardProps) {
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
               boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+              pointerEvents: 'none',
             }}>
               {isMovie ? 'MOVIE' : 'SERIES'}
             </span>
 
-            {/* Rating badge */}
-            {rating && (
-              <span style={{
-                background: 'rgba(0, 0, 0, 0.75)',
-                backdropFilter: 'blur(6px)',
-                color: '#fbbf24',
-                fontSize: '0.65rem',
-                fontWeight: 800,
-                padding: '2px 6px',
-                borderRadius: '4px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '2px',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
-              }}>
-                <span className="material-symbols-outlined" style={{ fontSize: '11px' }}>star</span>
-                {rating}
-              </span>
-            )}
+            {/* Right: Rating badge + Quick Watchlist Action */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              {rating && (
+                <span style={{
+                  background: 'rgba(0, 0, 0, 0.75)',
+                  backdropFilter: 'blur(6px)',
+                  color: '#fbbf24',
+                  fontSize: '0.65rem',
+                  fontWeight: 800,
+                  padding: '2px 6px',
+                  borderRadius: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '2px',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                  pointerEvents: 'none',
+                }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '11px' }}>star</span>
+                  {rating}
+                </span>
+              )}
+
+              <button
+                type="button"
+                onClick={handleWatchlistToggle}
+                title={inList ? (language === 'ur' ? 'لسٹ سے ہٹائیں' : 'In Watchlist') : (language === 'ur' ? 'لسٹ میں شامل کریں' : 'Add to List')}
+                aria-label={inList ? 'In Watchlist' : 'Add to List'}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '6px',
+                  border: inList ? '1px solid #00ff66' : '1px solid rgba(255, 255, 255, 0.35)',
+                  background: inList ? 'rgba(0, 102, 51, 0.9)' : 'rgba(0, 0, 0, 0.65)',
+                  backdropFilter: 'blur(6px)',
+                  color: inList ? '#00ff66' : '#ffffff',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                  transition: 'all 0.18s ease',
+                  padding: 0,
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>
+                  {inList ? 'bookmark_added' : 'bookmark_add'}
+                </span>
+              </button>
+            </div>
           </div>
 
           {/* Audio Languages Chips on Poster Bottom */}
@@ -215,13 +267,13 @@ export default function AnimeCard({ item }: AnimeCardProps) {
         </div>
 
         {/* Card Metadata Footer */}
-        <div style={{
+        <div className="glass-card-footer" style={{
           padding: '10px 10px 12px 10px',
           display: 'flex',
           flexDirection: 'column',
           flexGrow: 1,
           justifyContent: 'space-between',
-          background: '#ffffff',
+          background: 'var(--bg-secondary)',
           gap: '6px',
         }}>
           <div>

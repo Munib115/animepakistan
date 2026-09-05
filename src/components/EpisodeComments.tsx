@@ -109,7 +109,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
     setNewName(profile.name);
   }, []);
 
-  // Fetch comments from Supabase
+  // Fetch comments from Supabase & subscribe to realtime updates
   useEffect(() => {
     async function loadComments() {
       setLoading(true);
@@ -127,6 +127,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
 
         if (data && !error) {
           setComments(data as CommentItem[]);
+        } else if (error) {
+          console.error('Supabase load comments error:', error);
         }
       } catch (err) {
         console.error('Error fetching comments:', err);
@@ -136,6 +138,34 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
     }
 
     loadComments();
+
+    // Subscribe to realtime comment updates
+    if (!supabase) return;
+    const channel = supabase
+      .channel(`comments_${animeSlug}_${episodeSlug}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'episode_comments',
+          filter: `episode_slug=eq.${episodeSlug}`,
+        },
+        (payload) => {
+          const newRow = payload.new as CommentItem;
+          if (newRow && newRow.anime_slug === animeSlug) {
+            setComments((prev) => {
+              if (prev.some((c) => c.id === newRow.id)) return prev;
+              return [newRow, ...prev];
+            });
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [animeSlug, episodeSlug]);
 
   // Voice note timer
@@ -310,9 +340,13 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
           .single();
 
         if (data && !error) {
-          setComments((prev) => [data as CommentItem, ...prev]);
+          setComments((prev) => {
+            if (prev.some((c) => c.id === data.id)) return prev;
+            return [data as CommentItem, ...prev];
+          });
         } else {
-          // Optimistic local add
+          console.error('Supabase comment insert failed:', error);
+          // Optimistic local add fallback
           setComments((prev) => [{ ...newComment, id: `local_${Date.now()}` } as CommentItem, ...prev]);
         }
       } else {
@@ -424,7 +458,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                     padding: '2px 6px',
                     borderRadius: '4px',
                     border: '1px solid var(--color-primary)',
-                    background: '#ffffff',
+                    background: 'var(--bg-secondary)',
+                    color: 'var(--text-primary)',
                     width: '130px',
                   }}
                 />
@@ -474,7 +509,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
 
       {/* Comment Input Box */}
       <form onSubmit={handleSubmit} style={{
-        background: '#ffffff',
+        background: 'var(--bg-secondary)',
         border: '1.5px solid var(--glass-border)',
         borderRadius: '16px',
         padding: '16px',
@@ -672,7 +707,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             <div
               key={item.id}
               style={{
-                background: '#ffffff',
+                background: 'var(--bg-secondary)',
                 border: '1px solid var(--glass-border)',
                 borderRadius: '14px',
                 padding: '14px 16px',

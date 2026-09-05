@@ -7,6 +7,13 @@ import { sound } from '@/lib/soundEngine';
 import { getWatchHistory, removeWatchItem, clearWatchHistory, formatTimeSeconds, formatRelativeTime, WatchProgressItem } from '@/lib/watchHistory';
 import { getWatchlist, WatchlistItem } from '@/lib/watchlist';
 import { getProxiedImageUrl } from '@/lib/image';
+import {
+  publishMyLibrary,
+  fetchLibraryByCode,
+  applySharedLibrary,
+  getSavedMyShareCode,
+  SharedLibraryRecord,
+} from '@/lib/shareLibrary';
 
 export default function QuickControlHub() {
   const { language, setLanguage, t } = useLanguage();
@@ -15,10 +22,119 @@ export default function QuickControlHub() {
   const [eyeComfort, setEyeComfort] = useState<'off' | 'warm' | 'night'>('off');
   const [historyItems, setHistoryItems] = useState<WatchProgressItem[]>([]);
   const [watchlistItems, setWatchlistItems] = useState<WatchlistItem[]>([]);
-  const [activeTab, setActiveTab] = useState<'settings' | 'history' | 'watchlist'>('settings');
+  const [activeTab, setActiveTab] = useState<'settings' | 'history' | 'watchlist' | 'share'>('settings');
   const [historySearch, setHistorySearch] = useState('');
 
+  // Share Library State
+  const [myShareCode, setMyShareCode] = useState<string | null>(null);
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [shareFeedback, setShareFeedback] = useState<string | null>(null);
+  const [isCopiedCode, setIsCopiedCode] = useState(false);
+  const [isCopiedLink, setIsCopiedLink] = useState(false);
+
+  // Import Friend Library State
+  const [friendCodeInput, setFriendCodeInput] = useState('');
+  const [isLoadingFriend, setIsLoadingFriend] = useState(false);
+  const [friendLibrary, setFriendLibrary] = useState<SharedLibraryRecord | null>(null);
+  const [friendFetchError, setFriendFetchError] = useState<string | null>(null);
+  const [importSuccess, setImportSuccess] = useState<string | null>(null);
+
   const hubRef = useRef<HTMLDivElement>(null);
+
+  const handlePublish = async () => {
+    setIsPublishing(true);
+    setShareFeedback(null);
+    sound.playButton();
+    try {
+      const res = await publishMyLibrary();
+      if (res.error || !res.shareCode) {
+        setShareFeedback(res.error || 'Failed to generate share code.');
+      } else {
+        setMyShareCode(res.shareCode);
+        setShareFeedback(isUrdu ? 'کوڈ کامیابی سے تیار ہو گیا ہے!' : 'Library synced & code generated!');
+        sound.playEpisodeSelect();
+      }
+    } catch (err: any) {
+      setShareFeedback(err.message || 'Error publishing library');
+    } finally {
+      setIsPublishing(false);
+    }
+  };
+
+  const handleCopyCode = () => {
+    if (!myShareCode) return;
+    sound.playButton();
+    try {
+      navigator.clipboard.writeText(myShareCode);
+    } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = myShareCode;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    setIsCopiedCode(true);
+    setTimeout(() => setIsCopiedCode(false), 2000);
+  };
+
+  const handleCopyLink = () => {
+    if (!myShareCode) return;
+    sound.playButton();
+    const url = typeof window !== 'undefined' ? `${window.location.origin}/?share=${myShareCode}` : '';
+    try {
+      navigator.clipboard.writeText(url);
+    } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    setIsCopiedLink(true);
+    setTimeout(() => setIsCopiedLink(false), 2000);
+  };
+
+  const handleLoadFriendLibrary = async (codeToSearch?: string) => {
+    const code = (codeToSearch || friendCodeInput).trim().toUpperCase();
+    if (!code) {
+      setFriendFetchError(isUrdu ? 'براہ کرم کوڈ درج کریں' : 'Please enter a code');
+      return;
+    }
+    setIsLoadingFriend(true);
+    setFriendFetchError(null);
+    setFriendLibrary(null);
+    setImportSuccess(null);
+    sound.playButton();
+    try {
+      const res = await fetchLibraryByCode(code);
+      if (res.error || !res.data) {
+        setFriendFetchError(res.error || (isUrdu ? 'کوڈ نہیں ملا، دوبارہ چیک کریں' : 'Library not found. Please check code.'));
+      } else {
+        setFriendLibrary(res.data);
+        sound.playEpisodeSelect();
+      }
+    } catch (e: any) {
+      setFriendFetchError(e.message || 'Failed to fetch library');
+    } finally {
+      setIsLoadingFriend(false);
+    }
+  };
+
+  const handleApplyLibrary = (mode: 'merge' | 'replace') => {
+    if (!friendLibrary) return;
+    sound.playButton();
+    const result = applySharedLibrary(friendLibrary, mode);
+    setImportSuccess(
+      isUrdu
+        ? `لائبریری کامیابی سے حاصل ہو گئی (${result.addedWatchlist} واچ لسٹ، ${result.addedHistory} ہسٹری)!`
+        : `Imported successfully (${result.addedWatchlist} in list, ${result.addedHistory} in history)!`
+    );
+    sound.playEpisodeSelect();
+    setWatchlistItems(getWatchlist());
+    setHistoryItems(getWatchHistory());
+  };
 
   // Initialize on mount and maintain active sync
   useEffect(() => {
@@ -29,6 +145,10 @@ export default function QuickControlHub() {
 
     // Immediate sync on load
     refreshData();
+
+    // Check for previously generated share code
+    const savedCode = getSavedMyShareCode();
+    if (savedCode) setMyShareCode(savedCode);
 
     try {
       const savedEye = localStorage.getItem('ap_eye_comfort') as 'off' | 'warm' | 'night';
@@ -46,14 +166,28 @@ export default function QuickControlHub() {
       }
     };
 
+    // Listen for direct URL share trigger
+    const handleOpenShare = (e: any) => {
+      setIsOpen(true);
+      setActiveTab('share');
+      if (e.detail?.code) {
+        setFriendCodeInput(e.detail.code);
+        handleLoadFriendLibrary(e.detail.code);
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('ap_history_updated', refreshData);
+    window.addEventListener('ap_watchlist_updated', refreshData);
     window.addEventListener('storage', refreshData);
+    window.addEventListener('ap_open_share_hub', handleOpenShare);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('ap_history_updated', refreshData);
+      window.removeEventListener('ap_watchlist_updated', refreshData);
       window.removeEventListener('storage', refreshData);
+      window.removeEventListener('ap_open_share_hub', handleOpenShare);
     };
   }, []);
 
@@ -101,7 +235,7 @@ export default function QuickControlHub() {
         }}
         className="header-action-btn"
         style={{
-          background: isOpen ? 'rgba(0, 102, 51, 0.12)' : '#ffffff',
+          background: isOpen ? 'rgba(0, 102, 51, 0.18)' : 'var(--bg-secondary)',
           border: isOpen ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
           color: isOpen ? 'var(--color-primary)' : 'var(--text-primary)',
           boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
@@ -122,25 +256,51 @@ export default function QuickControlHub() {
         </span>
       </button>
 
+      {/* Mobile / Click-Outside Backdrop */}
+      {isOpen && (
+        <div
+          className="quick-hub-backdrop"
+          onClick={() => setIsOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9998,
+            background: 'rgba(0, 0, 0, 0.25)',
+            backdropFilter: 'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)',
+          }}
+        />
+      )}
+
       {/* Floating Liquid Glass Control Hub Popover */}
       {isOpen && (
         <div
-          className="quick-hub-popover"
+          className="quick-hub-popover glass-panel"
           style={{
             position: 'absolute',
-            top: 'calc(100% + 10px)',
+            top: 'calc(100% + 8px)',
             right: isUrdu ? 'auto' : 0,
             left: isUrdu ? 0 : 'auto',
-            width: 'min(340px, 92vw)',
-            background: 'rgba(255, 255, 255, 0.96)',
+            width: 'min(380px, 94vw)',
+            maxHeight: 'calc(100dvh - 90px)',
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'var(--glass-bg)',
             backdropFilter: 'blur(24px) saturate(180%)',
             WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-            border: '1.5px solid rgba(0, 102, 51, 0.2)',
-            borderRadius: '20px',
-            boxShadow: '0 20px 48px -8px rgba(0, 70, 35, 0.24), 0 8px 20px rgba(0, 0, 0, 0.08)',
-            padding: '16px',
+            border: '1.5px solid var(--glass-border)',
+            borderRadius: '18px',
+            boxShadow: 'var(--glass-shadow)',
+            padding: '12px 12px 6px 12px',
             animation: 'hubPop 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
             direction: isUrdu ? 'rtl' : 'ltr',
+            zIndex: 9999,
+            boxSizing: 'border-box',
+            overflow: 'hidden',
+            color: 'var(--text-primary)',
           }}
         >
           {/* Header */}
@@ -148,9 +308,10 @@ export default function QuickControlHub() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: '14px',
-            paddingBottom: '10px',
+            marginBottom: '10px',
+            paddingBottom: '8px',
             borderBottom: '1px solid var(--glass-border)',
+            flexShrink: 0,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '20px' }}>
@@ -181,30 +342,36 @@ export default function QuickControlHub() {
           </div>
 
           {/* Hub Navigation Tabs */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: '4px',
-            background: 'rgba(0, 102, 51, 0.06)',
-            padding: '3px',
-            borderRadius: '10px',
-            marginBottom: '14px',
-          }}>
+          <div 
+            className="quick-hub-tabs-container"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '3px',
+              background: 'var(--bg-tertiary)',
+              padding: '3px',
+              borderRadius: '10px',
+              marginBottom: '10px',
+              flexShrink: 0,
+            }}
+          >
             <button
               onClick={() => {
                 setActiveTab('settings');
                 sound.playTabSwitch();
               }}
+              className={`quick-hub-tab-btn ${activeTab === 'settings' ? 'active' : ''}`}
               style={{
-                padding: '6px 4px',
+                padding: '6px 2px',
                 borderRadius: '8px',
                 border: 'none',
                 background: activeTab === 'settings' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'settings' ? '#ffffff' : 'var(--text-secondary)',
-                fontSize: '0.72rem',
+                fontSize: '0.68rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.18s',
+                whiteSpace: 'nowrap',
               }}
             >
               {isUrdu ? 'سیٹنگز' : 'Settings'}
@@ -215,16 +382,18 @@ export default function QuickControlHub() {
                 setActiveTab('history');
                 sound.playTabSwitch();
               }}
+              className={`quick-hub-tab-btn ${activeTab === 'history' ? 'active' : ''}`}
               style={{
-                padding: '6px 4px',
+                padding: '6px 2px',
                 borderRadius: '8px',
                 border: 'none',
                 background: activeTab === 'history' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'history' ? '#ffffff' : 'var(--text-secondary)',
-                fontSize: '0.72rem',
+                fontSize: '0.68rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.18s',
+                whiteSpace: 'nowrap',
               }}
             >
               {isUrdu ? `جاری (${historyItems.length})` : `History (${historyItems.length})`}
@@ -235,25 +404,68 @@ export default function QuickControlHub() {
                 setActiveTab('watchlist');
                 sound.playTabSwitch();
               }}
+              className={`quick-hub-tab-btn ${activeTab === 'watchlist' ? 'active' : ''}`}
               style={{
-                padding: '6px 4px',
+                padding: '6px 2px',
                 borderRadius: '8px',
                 border: 'none',
                 background: activeTab === 'watchlist' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'watchlist' ? '#ffffff' : 'var(--text-secondary)',
-                fontSize: '0.72rem',
+                fontSize: '0.68rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.18s',
+                whiteSpace: 'nowrap',
               }}
             >
-              {isUrdu ? `فہرست (${watchlistItems.length})` : `My List (${watchlistItems.length})`}
+              {isUrdu ? `فہرست (${watchlistItems.length})` : `List (${watchlistItems.length})`}
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('share');
+                sound.playTabSwitch();
+              }}
+              className={`quick-hub-tab-btn ${activeTab === 'share' ? 'active' : ''}`}
+              style={{
+                padding: '6px 2px',
+                borderRadius: '8px',
+                border: 'none',
+                background: activeTab === 'share' ? 'var(--color-primary)' : 'transparent',
+                color: activeTab === 'share' ? '#ffffff' : 'var(--text-secondary)',
+                fontSize: '0.68rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                transition: 'all 0.18s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '2px',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '13px' }}>
+                share
+              </span>
+              {isUrdu ? 'شیئر' : 'Share'}
             </button>
           </div>
 
           {/* TAB 1: Settings Grid (Language, Eye Comfort, Sound) */}
           {activeTab === 'settings' && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+            <div
+              className="quick-hub-scroll"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '8px',
+                flex: '1 1 auto',
+                minHeight: 0,
+                overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
+                paddingBottom: '16px',
+              }}
+            >
               {/* Language Switch Tile */}
               <div 
                 onClick={() => {
@@ -265,7 +477,7 @@ export default function QuickControlHub() {
                   gridColumn: 'span 2',
                   padding: '10px 12px',
                   borderRadius: '12px',
-                  background: '#ffffff',
+                  background: 'var(--bg-secondary)',
                   border: '1px solid var(--glass-border)',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.02)',
                   display: 'flex',
@@ -300,41 +512,42 @@ export default function QuickControlHub() {
                 </span>
               </div>
 
-              {/* Eye Comfort Mode Tile */}
+              {/* Theme & OLED Mode Tile */}
               <div 
                 onClick={cycleEyeComfort}
                 className="hub-glass-tile"
                 style={{
                   padding: '10px',
                   borderRadius: '12px',
-                  background: eyeComfort === 'warm' ? 'rgba(217, 119, 6, 0.08)' : eyeComfort === 'night' ? 'rgba(0, 204, 102, 0.08)' : '#ffffff',
-                  border: eyeComfort === 'warm' ? '1.5px solid #d97706' : eyeComfort === 'night' ? '1.5px solid var(--color-glow)' : '1px solid var(--glass-border)',
+                  background: eyeComfort === 'warm' ? 'rgba(217, 119, 6, 0.12)' : eyeComfort === 'night' ? 'rgba(0, 229, 117, 0.18)' : 'var(--bg-secondary)',
+                  border: eyeComfort === 'warm' ? '1.5px solid #d97706' : eyeComfort === 'night' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '6px',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span className="material-symbols-outlined" style={{ 
                     fontSize: '18px', 
-                    color: eyeComfort === 'warm' ? '#d97706' : eyeComfort === 'night' ? '#00aa55' : 'var(--text-secondary)' 
+                    color: eyeComfort === 'warm' ? '#d97706' : eyeComfort === 'night' ? 'var(--color-primary)' : 'var(--text-secondary)' 
                   }}>
-                    {eyeComfort === 'night' ? 'bedtime' : 'visibility'}
+                    {eyeComfort === 'night' ? 'dark_mode' : eyeComfort === 'warm' ? 'wb_sunny' : 'brightness_medium'}
                   </span>
                   <span style={{
                     fontSize: '0.62rem',
                     fontWeight: 900,
-                    padding: '1px 5px',
+                    padding: '2px 6px',
                     borderRadius: '4px',
-                    background: eyeComfort === 'warm' ? '#d97706' : eyeComfort === 'night' ? '#00aa55' : 'rgba(0,0,0,0.06)',
-                    color: eyeComfort !== 'off' ? '#ffffff' : 'var(--text-muted)',
+                    background: eyeComfort === 'warm' ? '#d97706' : eyeComfort === 'night' ? 'var(--color-primary)' : 'rgba(0,0,0,0.08)',
+                    color: eyeComfort === 'night' ? '#011508' : eyeComfort === 'warm' ? '#ffffff' : 'var(--text-muted)',
                   }}>
-                    {eyeComfort === 'warm' ? 'Amber' : eyeComfort === 'night' ? 'OLED' : 'Off'}
+                    {eyeComfort === 'warm' ? (isUrdu ? 'ایمبر ورم' : 'Amber') : eyeComfort === 'night' ? (isUrdu ? 'OLED سیاہ' : 'OLED Black') : (isUrdu ? 'لائٹ' : 'Light')}
                   </span>
                 </div>
                 <div style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                  {isUrdu ? 'آنکھوں کا آرام' : 'Eye Comfort'}
+                  {isUrdu ? 'تھیم اور نائٹ موڈ' : 'Theme & OLED'}
                 </div>
               </div>
 
@@ -345,12 +558,13 @@ export default function QuickControlHub() {
                 style={{
                   padding: '10px',
                   borderRadius: '12px',
-                  background: isSoundOn ? 'rgba(0, 102, 51, 0.08)' : '#ffffff',
+                  background: isSoundOn ? 'rgba(0, 204, 102, 0.12)' : 'var(--bg-secondary)',
                   border: isSoundOn ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '6px',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -363,9 +577,9 @@ export default function QuickControlHub() {
                   <span style={{
                     fontSize: '0.62rem',
                     fontWeight: 900,
-                    padding: '1px 5px',
+                    padding: '2px 6px',
                     borderRadius: '4px',
-                    background: isSoundOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.06)',
+                    background: isSoundOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.08)',
                     color: isSoundOn ? '#ffffff' : 'var(--text-muted)',
                   }}>
                     {isSoundOn ? 'ON' : 'OFF'}
@@ -380,10 +594,10 @@ export default function QuickControlHub() {
 
           {/* TAB 2: Complete Watch History List with Full Info */}
           {activeTab === 'history' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minHeight: 0, flex: '1 1 auto', overflow: 'hidden' }}>
               {/* Optional Search Filter if user has multiple history items */}
               {historyItems.length > 2 && (
-                <div style={{ position: 'relative', marginBottom: '2px' }}>
+                <div style={{ position: 'relative', marginBottom: '2px', flexShrink: 0 }}>
                   <span className="material-symbols-outlined" style={{
                     position: 'absolute',
                     left: isUrdu ? 'auto' : '8px',
@@ -400,13 +614,14 @@ export default function QuickControlHub() {
                     placeholder={isUrdu ? 'ہسٹری میں تلاش کریں...' : 'Search watch history...'}
                     value={historySearch}
                     onChange={(e) => setHistorySearch(e.target.value)}
+                    className="quick-hub-input"
                     style={{
                       width: '100%',
                       padding: isUrdu ? '6px 28px 6px 8px' : '6px 8px 6px 28px',
                       fontSize: '0.72rem',
                       borderRadius: '8px',
                       border: '1px solid var(--glass-border)',
-                      background: '#ffffff',
+                      background: 'var(--bg-secondary)',
                       color: 'var(--text-primary)',
                       outline: 'none',
                       boxSizing: 'border-box',
@@ -416,14 +631,20 @@ export default function QuickControlHub() {
               )}
 
               {/* History Items Scroll Area (Shows ALL history items with full details) */}
-              <div style={{
-                maxHeight: '300px',
-                overflowY: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-                paddingRight: '2px',
-              }}>
+              <div 
+                className="quick-hub-scroll"
+                style={{
+                  flex: '1 1 auto',
+                  overflowY: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px',
+                  paddingRight: '4px',
+                  paddingBottom: '20px',
+                  minHeight: 0,
+                }}
+              >
                 {historyItems.length === 0 ? (
                   <div style={{ textAlign: 'center', padding: '32px 12px', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
                     <span className="material-symbols-outlined" style={{ fontSize: '36px', color: 'var(--color-primary)', display: 'block', marginBottom: '8px', opacity: 0.6 }}>
@@ -457,10 +678,13 @@ export default function QuickControlHub() {
                       return (
                         <div
                           key={item.animeSlug}
+                          className="quick-hub-card"
                           style={{
                             display: 'flex',
                             flexDirection: 'column',
-                            background: '#ffffff',
+                            flexShrink: 0,
+                            minHeight: '78px',
+                            background: 'var(--bg-secondary)',
                             border: '1.2px solid var(--glass-border)',
                             borderRadius: '12px',
                             overflow: 'hidden',
@@ -658,9 +882,10 @@ export default function QuickControlHub() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginTop: '4px',
+                  marginTop: '6px',
                   paddingTop: '8px',
                   borderTop: '1px solid var(--glass-border)',
+                  flexShrink: 0,
                 }}>
                   <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                     {historyItems.length} {isUrdu ? 'آئٹمز' : 'items saved'}
@@ -696,7 +921,20 @@ export default function QuickControlHub() {
 
           {/* TAB 3: My Watchlist */}
           {activeTab === 'watchlist' && (
-            <div style={{ maxHeight: '240px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <div 
+              className="quick-hub-scroll"
+              style={{
+                flex: '1 1 auto',
+                overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '6px',
+                minHeight: 0,
+                paddingRight: '4px',
+                paddingBottom: '20px',
+              }}
+            >
               {watchlistItems.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '24px 10px', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
                   {isUrdu ? 'فہرست میں کوئی اینیمے شامل نہیں ہے' : 'No saved anime in your list'}
@@ -707,13 +945,16 @@ export default function QuickControlHub() {
                     key={item.slug}
                     href={item.type === 'movie' ? `/watch/${item.slug}` : `/anime/${item.slug}`}
                     onClick={() => setIsOpen(false)}
+                    className="quick-hub-card"
                     style={{
                       display: 'flex',
                       alignItems: 'center',
+                      flexShrink: 0,
+                      minHeight: '52px',
                       gap: '8px',
                       padding: '6px 8px',
                       borderRadius: '8px',
-                      background: '#ffffff',
+                      background: 'var(--bg-secondary)',
                       border: '1px solid var(--glass-border)',
                       textDecoration: 'none',
                     }}
@@ -736,6 +977,511 @@ export default function QuickControlHub() {
               )}
             </div>
           )}
+
+          {/* TAB 4: Share & Sync Library */}
+          {activeTab === 'share' && (
+            <div
+              className="quick-hub-scroll"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                flex: '1 1 auto',
+                minHeight: 0,
+                overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
+                paddingRight: '4px',
+                paddingBottom: '24px',
+              }}
+            >
+              {/* Top Banner */}
+              <div
+                style={{
+                  background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.08) 0%, rgba(20, 150, 80, 0.05) 100%)',
+                  border: '1px solid rgba(0, 102, 51, 0.18)',
+                  borderRadius: '12px',
+                  padding: '10px 12px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                  <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '18px' }}>
+                    cloud_sync
+                  </span>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                    {isUrdu ? 'کلاؤڈ شیئر اور سنک' : 'Cloud Library Share'}
+                  </span>
+                </div>
+                <p style={{ margin: 0, fontSize: '0.70rem', color: 'var(--text-secondary)', lineHeight: 1.35 }}>
+                  {isUrdu
+                    ? 'اپنا واچ لسٹ اور ہسٹری کلاؤڈ کوڈ کے ذریعے شیئر کریں، یا اپنے دوست کا کوڈ درج کر کے لائبریری حاصل کریں۔'
+                    : 'Share your watchlist & history using a unique cloud code, or enter a friend\'s code to view their library.'}
+                </p>
+              </div>
+
+              {/* SECTION 1: Share My Library Card */}
+              <div
+                className="quick-hub-card"
+                style={{
+                  background: 'var(--bg-secondary)',
+                  border: '1.5px solid var(--glass-border)',
+                  borderRadius: '14px',
+                  padding: '12px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '18px' }}>
+                      cloud_upload
+                    </span>
+                    <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                      {isUrdu ? 'میری لائبریری شیئر کریں' : 'Share My Library'}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '4px' }}>
+                    <span style={{
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      background: 'rgba(0, 102, 51, 0.08)',
+                      color: 'var(--color-primary)',
+                      padding: '2px 6px',
+                      borderRadius: '6px',
+                    }}>
+                      {watchlistItems.length} {isUrdu ? 'لسٹ' : 'list'}
+                    </span>
+                    <span style={{
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      background: 'rgba(0, 102, 51, 0.08)',
+                      color: 'var(--color-primary)',
+                      padding: '2px 6px',
+                      borderRadius: '6px',
+                    }}>
+                      {historyItems.length} {isUrdu ? 'ہسٹری' : 'history'}
+                    </span>
+                  </div>
+                </div>
+
+                {!myShareCode ? (
+                  <div>
+                    <button
+                      onClick={handlePublish}
+                      disabled={isPublishing}
+                      style={{
+                        width: '100%',
+                        padding: '10px 12px',
+                        background: 'var(--color-primary)',
+                        color: '#ffffff',
+                        border: 'none',
+                        borderRadius: '10px',
+                        fontSize: '0.78rem',
+                        fontWeight: 800,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        cursor: isPublishing ? 'wait' : 'pointer',
+                        opacity: isPublishing ? 0.7 : 1,
+                        transition: 'all 0.2s',
+                      }}
+                    >
+                      <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                        {isPublishing ? 'hourglass_top' : 'cloud_upload'}
+                      </span>
+                      {isPublishing
+                        ? (isUrdu ? 'کوڈ بن رہا ہے...' : 'Generating Code...')
+                        : (isUrdu ? 'شیئر کوڈ بنائیں' : 'Generate Share Code')}
+                    </button>
+                    {shareFeedback && (
+                      <div style={{ marginTop: '6px', fontSize: '0.68rem', color: '#dc2626', textAlign: 'center' }}>
+                        {shareFeedback}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {/* Share Code Display Box */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        background: 'rgba(0, 102, 51, 0.05)',
+                        border: '1.5px dashed rgba(0, 102, 51, 0.3)',
+                        borderRadius: '10px',
+                        padding: '8px 12px',
+                        marginBottom: '8px',
+                      }}
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                          {isUrdu ? 'آپ کا کوڈ' : 'Your Share Code'}
+                        </span>
+                        <span style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--color-primary)', letterSpacing: '2px', fontFamily: 'monospace' }}>
+                          {myShareCode}
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', gap: '4px' }}>
+                        <button
+                          onClick={handleCopyCode}
+                          title={isUrdu ? 'کوڈ کاپی کریں' : 'Copy Code'}
+                          style={{
+                            background: isCopiedCode ? 'var(--color-primary)' : 'var(--bg-secondary)',
+                            color: isCopiedCode ? '#ffffff' : 'var(--color-primary)',
+                            border: '1px solid rgba(0, 102, 51, 0.2)',
+                            borderRadius: '8px',
+                            padding: '6px 8px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            fontSize: '0.68rem',
+                            fontWeight: 700,
+                            transition: 'all 0.15s',
+                          }}
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+                            {isCopiedCode ? 'check' : 'content_copy'}
+                          </span>
+                          {isCopiedCode ? (isUrdu ? 'کاپی' : 'Copied!') : (isUrdu ? 'کاپی' : 'Copy')}
+                        </button>
+                        <button
+                          onClick={handleCopyLink}
+                          title={isUrdu ? 'لنک کاپی کریں' : 'Copy Link'}
+                          style={{
+                            background: isCopiedLink ? 'var(--color-primary)' : 'var(--bg-secondary)',
+                            color: isCopiedLink ? '#ffffff' : 'var(--color-primary)',
+                            border: '1px solid rgba(0, 102, 51, 0.2)',
+                            borderRadius: '8px',
+                            padding: '6px 8px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            fontSize: '0.68rem',
+                            fontWeight: 700,
+                            transition: 'all 0.15s',
+                          }}
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+                            {isCopiedLink ? 'check' : 'link'}
+                          </span>
+                          {isCopiedLink ? (isUrdu ? 'لنک' : 'Linked!') : (isUrdu ? 'لنک' : 'Link')}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Re-sync Button */}
+                    <button
+                      onClick={handlePublish}
+                      disabled={isPublishing}
+                      style={{
+                        width: '100%',
+                        padding: '7px 10px',
+                        background: 'transparent',
+                        color: 'var(--color-primary)',
+                        border: '1px solid rgba(0, 102, 51, 0.25)',
+                        borderRadius: '8px',
+                        fontSize: '0.72rem',
+                        fontWeight: 700,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        cursor: isPublishing ? 'wait' : 'pointer',
+                        transition: 'all 0.15s',
+                      }}
+                    >
+                      <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+                        sync
+                      </span>
+                      {isPublishing
+                        ? (isUrdu ? 'سنک ہو رہا ہے...' : 'Syncing changes...')
+                        : (isUrdu ? 'تازہ ترین لسٹ دوبارہ سنک کریں' : 'Re-sync Updated Library')}
+                    </button>
+
+                    {shareFeedback && (
+                      <div style={{ marginTop: '6px', fontSize: '0.68rem', color: '#059669', textAlign: 'center', fontWeight: 600 }}>
+                        {shareFeedback}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* SECTION 2: Import Friend's Library Card */}
+              <div
+                className="quick-hub-card"
+                style={{
+                  background: 'var(--bg-secondary)',
+                  border: '1.5px solid var(--glass-border)',
+                  borderRadius: '14px',
+                  padding: '12px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                  <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '18px' }}>
+                    cloud_download
+                  </span>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                    {isUrdu ? 'دوست کی لائبریری حاصل کریں' : 'Import Friend\'s Library'}
+                  </span>
+                </div>
+
+                <p style={{ margin: '0 0 10px 0', fontSize: '0.68rem', color: 'var(--text-muted)', lineHeight: 1.3 }}>
+                  {isUrdu
+                    ? 'دوست کا شیئر کوڈ (مثلاً AP-7K9M) درج کریں تاکہ ان کی واچ لسٹ اور ہسٹری آپ کے پاس آ سکے۔'
+                    : 'Enter friend\'s code (e.g. AP-7K9M) to load their watchlist and history.'}
+                </p>
+
+                {/* Input & Search Form */}
+                <div style={{ display: 'flex', gap: '6px', marginBottom: '8px' }}>
+                  <input
+                    type="text"
+                    value={friendCodeInput}
+                    onChange={(e) => setFriendCodeInput(e.target.value.toUpperCase())}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleLoadFriendLibrary();
+                    }}
+                    placeholder="AP-XXXX"
+                    maxLength={10}
+                    style={{
+                      flex: 1,
+                      padding: '8px 10px',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(0, 102, 51, 0.25)',
+                      fontSize: '0.85rem',
+                      fontFamily: 'monospace',
+                      fontWeight: 700,
+                      letterSpacing: '1px',
+                      textTransform: 'uppercase',
+                      outline: 'none',
+                      color: 'var(--text-primary)',
+                      background: 'rgba(0, 102, 51, 0.02)',
+                    }}
+                  />
+
+                  {/* Paste button */}
+                  <button
+                    onClick={async () => {
+                      try {
+                        const text = await navigator.clipboard.readText();
+                        if (text) {
+                          const match = text.match(/share=([A-Za-z0-9\-]+)/i);
+                          const clean = (match ? match[1] : text).trim().toUpperCase();
+                          setFriendCodeInput(clean);
+                          handleLoadFriendLibrary(clean);
+                        }
+                      } catch (e) {}
+                    }}
+                    title={isUrdu ? 'پیسٹ کریں' : 'Paste Code'}
+                    type="button"
+                    style={{
+                      padding: '8px 10px',
+                      background: 'rgba(0, 102, 51, 0.07)',
+                      border: '1px solid rgba(0, 102, 51, 0.2)',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      color: 'var(--color-primary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                      content_paste
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => handleLoadFriendLibrary()}
+                    disabled={isLoadingFriend || !friendCodeInput.trim()}
+                    type="button"
+                    style={{
+                      padding: '8px 14px',
+                      background: 'var(--color-primary)',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: (isLoadingFriend || !friendCodeInput.trim()) ? 'default' : 'pointer',
+                      fontSize: '0.75rem',
+                      fontWeight: 800,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      opacity: (isLoadingFriend || !friendCodeInput.trim()) ? 0.6 : 1,
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>
+                      {isLoadingFriend ? 'hourglass_top' : 'search'}
+                    </span>
+                    {isLoadingFriend ? (isUrdu ? 'تلاش...' : 'Loading...') : (isUrdu ? 'تلاش' : 'Fetch')}
+                  </button>
+                </div>
+
+                {/* Error Message */}
+                {friendFetchError && (
+                  <div
+                    style={{
+                      padding: '8px 10px',
+                      borderRadius: '8px',
+                      background: '#fee2e2',
+                      border: '1px solid #fca5a5',
+                      color: '#991b1b',
+                      fontSize: '0.70rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      marginBottom: '8px',
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>
+                      info
+                    </span>
+                    {friendFetchError}
+                  </div>
+                )}
+
+                {/* Friend Library Found Details */}
+                {friendLibrary && (
+                  <div
+                    style={{
+                      background: 'rgba(0, 102, 51, 0.04)',
+                      border: '1px solid rgba(0, 102, 51, 0.2)',
+                      borderRadius: '10px',
+                      padding: '10px',
+                      marginTop: '8px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <span style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                        {isUrdu ? 'دوست کا ڈیٹا موصول ہو گیا' : 'Friend\'s Library Found'}
+                      </span>
+                      <span style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--color-primary)', fontFamily: 'monospace' }}>
+                        {friendLibrary.share_code}
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+                      <div style={{
+                        flex: 1,
+                        background: 'var(--bg-secondary)',
+                        padding: '6px 8px',
+                        borderRadius: '6px',
+                        border: '1px solid var(--glass-border)',
+                        textAlign: 'center',
+                      }}>
+                        <div style={{ fontSize: '0.88rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                          {friendLibrary.watchlist.length}
+                        </div>
+                        <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)' }}>
+                          {isUrdu ? 'واچ لسٹ اینیمے' : 'Watchlist Anime'}
+                        </div>
+                      </div>
+
+                      <div style={{
+                        flex: 1,
+                        background: 'var(--bg-secondary)',
+                        padding: '6px 8px',
+                        borderRadius: '6px',
+                        border: '1px solid var(--glass-border)',
+                        textAlign: 'center',
+                      }}>
+                        <div style={{ fontSize: '0.88rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                          {friendLibrary.history.length}
+                        </div>
+                        <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)' }}>
+                          {isUrdu ? 'دیکھی گئی اقساط' : 'Watched Episodes'}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Merge or Replace Buttons */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <button
+                        onClick={() => handleApplyLibrary('merge')}
+                        style={{
+                          padding: '8px 10px',
+                          background: 'var(--color-primary)',
+                          color: '#ffffff',
+                          border: 'none',
+                          borderRadius: '8px',
+                          fontSize: '0.74rem',
+                          fontWeight: 800,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px',
+                          boxShadow: '0 2px 6px rgba(0, 102, 51, 0.25)',
+                        }}
+                      >
+                        <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>
+                          library_add
+                        </span>
+                        {isUrdu ? 'اپنی لائبریری میں شامل کریں (Merge)' : 'Merge into My Library (Recommended)'}
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          const confirmReplace = window.confirm(
+                            isUrdu
+                              ? 'کیا آپ واقعی اپنی موجودہ لائبریری کو تبدیل کرنا چاہتے ہیں؟'
+                              : 'Are you sure you want to replace your current library with your friend\'s library?'
+                          );
+                          if (confirmReplace) handleApplyLibrary('replace');
+                        }}
+                        style={{
+                          padding: '7px 10px',
+                          background: 'transparent',
+                          color: '#b91c1c',
+                          border: '1px solid rgba(185, 28, 28, 0.3)',
+                          borderRadius: '8px',
+                          fontSize: '0.70rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px',
+                        }}
+                      >
+                        <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+                          swap_horiz
+                        </span>
+                        {isUrdu ? 'مکمل تبدیل کریں (Replace)' : 'Replace My Entire Library'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Import Success Note */}
+                {importSuccess && (
+                  <div
+                    style={{
+                      padding: '8px 10px',
+                      borderRadius: '8px',
+                      background: '#dcfce7',
+                      border: '1px solid #86efac',
+                      color: '#15803d',
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      marginTop: '8px',
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                      check_circle
+                    </span>
+                    {importSuccess}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -753,6 +1499,35 @@ export default function QuickControlHub() {
         .hub-glass-tile:hover {
           background: rgba(0, 102, 51, 0.05) !important;
           border-color: var(--color-primary) !important;
+        }
+        .quick-hub-scroll::-webkit-scrollbar {
+          width: 4px;
+        }
+        .quick-hub-scroll::-webkit-scrollbar-track {
+          background: rgba(0, 102, 51, 0.04);
+          border-radius: 4px;
+        }
+        .quick-hub-scroll::-webkit-scrollbar-thumb {
+          background: rgba(0, 102, 51, 0.25);
+          border-radius: 4px;
+        }
+        .quick-hub-scroll::-webkit-scrollbar-thumb:hover {
+          background: var(--color-primary);
+        }
+        @media (max-width: 600px) {
+          :global(.quick-hub-popover) {
+            position: fixed !important;
+            top: calc(65px + var(--sat, 0px)) !important;
+            left: 10px !important;
+            right: 10px !important;
+            bottom: auto !important;
+            width: auto !important;
+            max-width: calc(100vw - 20px) !important;
+            max-height: calc(100dvh - 78px - var(--sab, 0px)) !important;
+            z-index: 10000 !important;
+            border-radius: 16px !important;
+            padding: 10px 10px 4px 10px !important;
+          }
         }
       `}</style>
     </div>

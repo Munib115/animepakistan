@@ -103,6 +103,37 @@ export async function checkAndSyncNewAnime(force = false): Promise<{ synced: num
     }
   }
 
+  // Also check page 1 of movies and series archives for instant detection of fresh drops
+  const archivePages = [
+    { url: 'https://animesalt.cx/movies/', type: 'movie' as const },
+    { url: 'https://animesalt.cx/series/', type: 'series' as const }
+  ];
+
+  for (const ap of archivePages) {
+    try {
+      const res = await fetch(ap.url, {
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        next: { revalidate: 300 }
+      });
+      if (res.ok) {
+        const html = await res.text();
+        const $ = cheerio.load(html);
+        $('article a, .poster a, .entry-title a').each((_, el) => {
+          const href = $(el).attr('href');
+          if (!href) return;
+          const cleanUrl = href.replace(/^http:\/\//i, 'https://').split('#')[0].split('?')[0];
+          const slug = cleanUrl.split('/').filter(Boolean).pop()?.toLowerCase().trim();
+          if (slug && !existingMap.has(slug) && slug !== 'movies' && slug !== 'series') {
+            newEntries.push({ url: cleanUrl, type: ap.type });
+            existingMap.add(slug);
+          }
+        });
+      }
+    } catch (err) {
+      console.warn(`[Sync Engine] Could not fetch archive ${ap.url}`);
+    }
+  }
+
   if (newEntries.length === 0) {
     console.log('[Sync Engine] Database is fully up-to-date with latest AnimeSalt catalog.');
     return { synced: 0, total: existing.length };

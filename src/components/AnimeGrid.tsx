@@ -125,11 +125,12 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
       // 4. Search query
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase().trim();
-        const matchTitle = item.title.toLowerCase().includes(query);
-        const matchEn = item.anilist?.englishName?.toLowerCase().includes(query);
-        const matchRomaji = item.anilist?.romajiName?.toLowerCase().includes(query);
-        const matchGenre = item.genres?.some(g => g.toLowerCase().includes(query)) ||
-                           item.anilist?.genres?.some(g => g.toLowerCase().includes(query));
+        const normalizedQuery = query.replace(/\bbenten\b/gi, 'ben 10').replace(/\bben\s+ten\b/gi, 'ben 10');
+        const matchTitle = item.title.toLowerCase().includes(query) || item.title.toLowerCase().includes(normalizedQuery);
+        const matchEn = item.anilist?.englishName?.toLowerCase().includes(query) || item.anilist?.englishName?.toLowerCase().includes(normalizedQuery);
+        const matchRomaji = item.anilist?.romajiName?.toLowerCase().includes(query) || item.anilist?.romajiName?.toLowerCase().includes(normalizedQuery);
+        const matchGenre = item.genres?.some(g => g.toLowerCase().includes(query) || g.toLowerCase().includes(normalizedQuery)) ||
+                           item.anilist?.genres?.some(g => g.toLowerCase().includes(query) || g.toLowerCase().includes(normalizedQuery));
         if (!matchTitle && !matchEn && !matchRomaji && !matchGenre) return false;
       }
 

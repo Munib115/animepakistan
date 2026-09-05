@@ -277,12 +277,13 @@ export default function PWAInstallBanner() {
           <div 
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: '#ffffff',
+              background: 'var(--bg-secondary)',
+              border: '1.5px solid var(--glass-border)',
               borderRadius: '24px',
               padding: '24px 20px',
               maxWidth: '440px',
               width: '100%',
-              boxShadow: '0 24px 60px rgba(0,0,0,0.3)',
+              boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
               textAlign: 'center',
               animation: 'modalSlideUp 0.3s ease-out',
               direction: isUrdu ? 'rtl' : 'ltr',

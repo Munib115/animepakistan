@@ -72,6 +72,17 @@ function HeaderContent() {
     } catch (e) {}
   }, []);
 
+  // Auto-detect and open shared library if ?share=CODE query parameter is present
+  useEffect(() => {
+    const shareCode = searchParams.get('share');
+    if (shareCode) {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('ap_open_share_hub', { detail: { code: shareCode } }));
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams]);
+
   const cycleEyeComfort = () => {
     sound.playTabSwitch();
     let nextMode: 'off' | 'warm' | 'night' = 'off';
@@ -241,7 +252,7 @@ function HeaderContent() {
               sound.playButton();
             }}
             style={{
-              background: '#ffffff',
+              background: 'var(--bg-secondary)',
               border: '1.5px solid var(--glass-border)',
               color: 'var(--color-primary)',
               boxShadow: '0 2px 8px rgba(0,0,0,0.06)',

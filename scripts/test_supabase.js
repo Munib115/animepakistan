@@ -20,10 +20,10 @@ const supabase = createClient(url, key);
 
 async function test() {
   try {
-    const { data, error } = await supabase.from('anime').select('*').limit(1);
-    console.log('Response data:', data);
-    console.log('Response error (if table not yet created):', error ? error.message : 'None');
-    console.log('Connection to Supabase successfully established!');
+    const { data, error } = await supabase.from('episode_comments').select('*').limit(5);
+    console.log('Response data count:', data ? data.length : 0);
+    console.log('Response error:', error ? error.message : 'None');
+    console.log('Connection to Supabase and episode_comments table successfully verified!');
   } catch (err) {
     console.error('Connection error:', err);
   }

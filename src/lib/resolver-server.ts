@@ -129,6 +129,16 @@ export async function resolveStreamSources(
       const html = await res.text();
       const $ = cheerio.load(html);
 
+      // Extract server button labels if available (e.g. SERVER 1 (SUB), SERVER 2 (DUB))
+      const serverLabels: string[] = [];
+      $('.server-btn').each((_, el) => {
+        const name = $(el).find('.server-name').text().trim();
+        const info = $(el).find('.server-info').text().trim();
+        if (name) {
+          serverLabels.push(info ? `${name} (${info.toUpperCase()})` : name);
+        }
+      });
+
       // Parse all iframes on the page
       $('iframe').each((_, el) => {
         const rawSrc = $(el).attr('src') || $(el).attr('data-src') || '';
@@ -158,14 +168,37 @@ export async function resolveStreamSources(
               console.error('Failed to parse multi-lang player data:', e);
             }
           } else if (!isBadUrl(fullSrc)) {
+            let label = serverLabels[sources.length] || `Server ${sources.length + 1}`;
+            if (fullSrc.includes('/sub') && !label.toUpperCase().includes('SUB')) {
+              label += ' (Sub)';
+            } else if (fullSrc.includes('/dub') && !label.toUpperCase().includes('DUB')) {
+              label += ' (Dub)';
+            }
             sources.push({
-              label: `Server ${sources.length + 1}`,
+              label,
               url: sanitizeStreamUrl(fullSrc),
               isMultiAudio: true
             });
           }
         }
       });
+
+      // Additional fallback for embed data attributes
+      if (sources.length === 0) {
+        $('[data-player], [data-embed], .playex').each((_, el) => {
+          const embed = $(el).attr('data-player') || $(el).attr('data-embed') || $(el).attr('data-src');
+          if (embed && embed.startsWith('http') && !isBadUrl(embed)) {
+            const clean = sanitizeStreamUrl(embed);
+            if (!sources.some(s => s.url === clean)) {
+              sources.push({
+                label: `Server ${sources.length + 1}`,
+                url: clean,
+                isMultiAudio: true
+              });
+            }
+          }
+        });
+      }
     }
   } catch (err: any) {
     console.warn(`[Resolver Server] Note: ${cleanTarget} resolution notice:`, err?.message);

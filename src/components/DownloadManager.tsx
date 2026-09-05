@@ -265,8 +265,8 @@ export default function DownloadManager() {
                       style={{
                         padding: '14px',
                         borderRadius: '12px',
-                        border: '1.5px solid rgba(0, 102, 51, 0.05)',
-                        background: '#ffffff',
+                        border: '1.5px solid var(--glass-border)',
+                        background: 'var(--bg-secondary)',
                         boxShadow: '0 4px 12px rgba(0, 102, 51, 0.02)',
                         display: 'flex',
                         flexDirection: 'column',
@@ -276,10 +276,10 @@ export default function DownloadManager() {
                       {/* Title Info */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px' }}>
                         <div style={{ minWidth: 0, flexGrow: 1 }}>
-                          <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a', margin: '0 0 2px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 2px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {item.title}
                           </h4>
-                          <p style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600, margin: 0 }}>
+                          <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, margin: 0 }}>
                             {item.subtitle}
                           </p>
                         </div>
@@ -314,7 +314,7 @@ export default function DownloadManager() {
 
                       {/* Progress Bar */}
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: '#64748b', fontWeight: 600 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
                           <span>{item.progress}%</span>
                           <span>
                             {item.downloadedMB} MB / {item.totalMB > 0 ? `${item.totalMB} MB` : 'Estimating...'}
@@ -325,7 +325,7 @@ export default function DownloadManager() {
                             width: '100%',
                             height: '6px',
                             borderRadius: '4px',
-                            background: '#f1f5f9',
+                            background: 'var(--bg-tertiary)',
                             overflow: 'hidden',
                           }}
                         >
@@ -347,7 +347,7 @@ export default function DownloadManager() {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',
-                          borderTop: '1px solid rgba(0,0,0,0.03)',
+                          borderTop: '1px solid var(--glass-border)',
                           paddingTop: '8px',
                         }}
                       >
