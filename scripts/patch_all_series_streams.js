@@ -22,56 +22,65 @@ function isValidStreamUrl(url) {
 }
 
 async function fetchEpisodeStream(epUrl) {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 9000);
-    const res = await fetch(epUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Referer': 'https://animesalt.cx/',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      },
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
+  async function tryFetch(url) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 9000);
+      const res = await fetch(url, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Referer': 'https://animesalt.cx/',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        },
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
 
-    if (!res.ok) return null;
-    const html = await res.text();
-    const $ = cheerio.load(html);
+      if (!res.ok) return null;
+      const html = await res.text();
+      const $ = cheerio.load(html);
 
-    // 1. Check for multi-lang player data attribute or iframe
-    let multiLangUrl = null;
-    let cdnUrl = null;
+      let multiLangUrl = null;
+      let cdnUrl = null;
 
-    $('iframe').each((_, el) => {
-      const src = $(el).attr('src') || $(el).attr('data-src') || '';
-      if (src.includes('multi-lang-plyr/player.php?data=')) {
-        multiLangUrl = src.startsWith('//') ? 'https:' + src : src;
-      } else if (isValidStreamUrl(src) && !cdnUrl) {
-        cdnUrl = src.startsWith('//') ? 'https:' + src : src;
-      }
-    });
-
-    // Also check data-player / data-embed attributes
-    if (!cdnUrl && !multiLangUrl) {
-      $('[data-player], [data-embed], .playex').each((_, el) => {
-        const embed = $(el).attr('data-player') || $(el).attr('data-embed') || $(el).attr('data-src');
-        if (embed && isValidStreamUrl(embed)) {
-          if (embed.includes('multi-lang-plyr/player.php?data=')) {
-            multiLangUrl = embed;
-          } else if (!cdnUrl) {
-            cdnUrl = embed;
-          }
+      $('iframe').each((_, el) => {
+        const src = $(el).attr('src') || $(el).attr('data-src') || '';
+        if (src.includes('multi-lang-plyr/player.php?data=')) {
+          multiLangUrl = src.startsWith('//') ? 'https:' + src : src;
+        } else if (isValidStreamUrl(src) && !cdnUrl) {
+          cdnUrl = src.startsWith('//') ? 'https:' + src : src;
         }
       });
-    }
 
-    // Prefer multiLangUrl if available because it has Hindi / Tamil / Telugu / English audio
-    const chosen = multiLangUrl || cdnUrl;
-    return chosen ? chosen.trim() : null;
-  } catch (err) {
-    return null;
+      if (!cdnUrl && !multiLangUrl) {
+        $('[data-player], [data-embed], .playex').each((_, el) => {
+          const embed = $(el).attr('data-player') || $(el).attr('data-embed') || $(el).attr('data-src');
+          if (embed && isValidStreamUrl(embed)) {
+            if (embed.includes('multi-lang-plyr/player.php?data=')) {
+              multiLangUrl = embed;
+            } else if (!cdnUrl) {
+              cdnUrl = embed;
+            }
+          }
+        });
+      }
+
+      const chosen = multiLangUrl || cdnUrl;
+      return chosen ? chosen.trim() : null;
+    } catch (err) {
+      return null;
+    }
   }
+
+  let result = await tryFetch(epUrl);
+  if (!result) {
+    if (epUrl.includes('/episode/private-')) {
+      result = await tryFetch(epUrl.replace('/episode/private-', '/episode/'));
+    } else if (epUrl.includes('/episode/')) {
+      result = await tryFetch(epUrl.replace('/episode/', '/episode/private-'));
+    }
+  }
+  return result;
 }
 
 async function main() {
@@ -97,7 +106,7 @@ async function main() {
   let patchedCount = 0;
   let failCount = 0;
   let processed = 0;
-  const CONCURRENCY = 16;
+  const CONCURRENCY = 20;
 
   async function worker(queue) {
     while (queue.length > 0) {
@@ -113,39 +122,56 @@ async function main() {
         failCount++;
       }
 
-      if (processed % 10 === 0 || processed === tasks.length) {
+      if (processed % 20 === 0 || processed === tasks.length) {
         console.log(`[${processed}/${tasks.length}] Patched: ${patchedCount}, Failed: ${failCount} (Current: ${task.anime.title} - ${task.ep.slug})`);
       }
 
-      // Save every 25 episodes
-      if (processed % 25 === 0) {
+      // Save every 40 episodes
+      if (processed % 40 === 0) {
         fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
       }
     }
   }
 
-  // First, let's prioritize tomb-raider-king and popular series
-  const priorityIndex = tasks.filter(t => 
-    t.anime.slug.includes('tomb-raider') || 
-    t.anime.slug.includes('naruto') || 
-    t.anime.slug.includes('dragon-ball') ||
-    t.anime.slug.includes('one-piece') ||
-    t.anime.slug.includes('attack-on-titan') ||
-    t.anime.slug.includes('bleach') ||
-    t.anime.slug.includes('pokemon') ||
-    t.anime.slug.includes('death-note') ||
-    t.anime.slug.includes('hunter') ||
-    t.anime.slug.includes('jujutsu') ||
-    t.anime.slug.includes('demon-slayer')
-  );
-  
-  const remaining = tasks.filter(t => !priorityIndex.includes(t));
-  const queue = [...priorityIndex, ...remaining];
+  const queue = [...tasks];
 
   // Graceful shutdown: save DB whenever stopped
   function saveOnExit() {
     console.log(`\nSaving database to disk (${patchedCount} patched so far)...`);
     fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
+    try {
+      const catalog = db.map((item) => ({
+        title: item.title,
+        slug: item.slug,
+        saltSlug: item.saltSlug,
+        url: item.url,
+        type: item.type,
+        poster: item.poster,
+        backdrop: item.backdrop,
+        description: item.description ? item.description.slice(0, 200) : '',
+        genres: item.genres,
+        audioLanguages: item.audioLanguages,
+        episodeCount: item.episodes?.length || 0,
+        anilist: item.anilist
+          ? {
+              id: item.anilist.id,
+              romajiName: item.anilist.romajiName,
+              englishName: item.anilist.englishName,
+              nativeName: item.anilist.nativeName,
+              description: '',
+              coverImage: item.anilist.coverImage,
+              bannerImage: item.anilist.bannerImage,
+              rating: item.anilist.rating,
+              year: item.anilist.year,
+              season: item.anilist.season,
+              status: item.anilist.status,
+              genres: item.anilist.genres,
+            }
+          : null,
+      }));
+      fs.writeFileSync(path.join(__dirname, '../src/data/anime-catalog.json'), JSON.stringify(catalog), 'utf8');
+      console.log('Catalog also synced!');
+    } catch (e) {}
     console.log('Database successfully saved!');
   }
 
