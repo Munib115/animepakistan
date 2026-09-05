@@ -361,10 +361,10 @@ function HeaderContent() {
             top: calc(10px + var(--sat, 0px)) !important;
             margin: 0 auto 10px !important;
             width: calc(100% - 28px) !important;
-            border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+            border: 1.5px solid var(--glass-border) !important;
             border-radius: 28px !important;
-            background: rgba(255, 255, 255, 0.78) !important;
-            box-shadow: 0 16px 36px -4px rgba(0, 70, 35, 0.18), 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 1) !important;
+            background: var(--glass-bg) !important;
+            box-shadow: var(--glass-shadow) !important;
           }
           .site-header-inner {
             height: 62px !important;
@@ -378,21 +378,21 @@ function HeaderContent() {
             left: 14px;
             right: 14px;
             padding: 10px;
-            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            border: 1.5px solid var(--glass-border);
             border-radius: 24px;
-            background: rgba(255, 255, 255, 0.88);
+            background: var(--glass-bg);
             backdrop-filter: blur(30px) saturate(210%);
             -webkit-backdrop-filter: blur(30px) saturate(210%);
-            box-shadow: 0 16px 36px -4px rgba(0, 70, 35, 0.18), inset 0 1px 2px #fff;
+            box-shadow: var(--glass-shadow);
           }
           .mobile-search-input-wrap {
             display: flex;
             align-items: center;
             gap: 8px;
             padding: 4px 6px 4px 12px;
-            border: 1px solid rgba(0, 102, 51, 0.16);
+            border: 1px solid var(--glass-border);
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.82);
+            background: var(--bg-secondary);
           }
           .mobile-search-input-wrap input {
             flex: 1;
@@ -432,7 +432,8 @@ function HeaderContent() {
             gap: 10px;
             padding: 7px;
             border-radius: 14px;
-            background: rgba(255, 255, 255, 0.72);
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
           }
           .mobile-search-result img, .mobile-search-result > .material-symbols-outlined {
             width: 38px;

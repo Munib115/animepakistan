@@ -8,11 +8,11 @@ export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer style={{
+    <footer className="site-footer" style={{
       marginTop: 'auto',
-      background: 'rgba(255, 255, 255, 0.95)',
+      background: 'var(--glass-bg)',
       backdropFilter: 'blur(20px)',
-      borderTop: '1px solid rgba(0, 102, 51, 0.12)',
+      borderTop: '1px solid var(--glass-border)',
       padding: '40px 0 24px 0',
       color: 'var(--text-secondary)',
       fontSize: '0.85rem',
@@ -90,7 +90,7 @@ export default function Footer() {
 
         {/* Disclaimer & Copyright */}
         <div style={{
-          borderTop: '1px solid rgba(0, 102, 51, 0.08)',
+          borderTop: '1px solid var(--glass-border)',
           paddingTop: '16px',
           display: 'flex',
           flexWrap: 'wrap',

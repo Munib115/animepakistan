@@ -88,7 +88,7 @@ export default function FAQSection() {
       <div className="glass-panel" style={{
         padding: 'clamp(24px, 4vw, 36px) clamp(16px, 3vw, 28px)',
         borderRadius: '20px',
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,248,243,0.95) 100%)',
+        background: 'var(--glass-bg)',
         border: '1.5px solid var(--glass-border)',
       }}>
         {/* Section Heading */}
@@ -150,9 +150,9 @@ export default function FAQSection() {
                 key={idx}
                 style={{
                   borderRadius: '14px',
-                  border: isOpen ? '1.5px solid var(--color-primary)' : '1px solid rgba(0, 102, 51, 0.12)',
-                  background: isOpen ? 'rgba(255, 255, 255, 0.98)' : '#ffffff',
-                  boxShadow: isOpen ? '0 8px 24px rgba(0, 102, 51, 0.08)' : '0 2px 8px rgba(0, 0, 0, 0.02)',
+                  border: isOpen ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                  background: isOpen ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
+                  boxShadow: isOpen ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 2px 8px rgba(0, 0, 0, 0.05)',
                   transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                   overflow: 'hidden',
                 }}
@@ -206,7 +206,7 @@ export default function FAQSection() {
                     fontSize: '0.88rem',
                     lineHeight: 1.65,
                     color: 'var(--text-secondary)',
-                    borderTop: '1px solid rgba(0, 102, 51, 0.06)',
+                    borderTop: '1px solid var(--glass-border)',
                     paddingTop: '12px',
                   }}>
                     {answer}

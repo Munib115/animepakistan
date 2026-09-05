@@ -252,6 +252,34 @@ html.eye-comfort-night .mobile-search-result:hover {
   border-color: #00ff88 !important;
 }
 
+/* Site Footer OLED Night Styling */
+html.eye-comfort-night .site-footer,
+html.eye-comfort-night footer {
+  background: #000000 !important;
+  border-top: 1px solid rgba(0, 229, 117, 0.22) !important;
+  color: #9dd1b2 !important;
+}
+
+html.eye-comfort-night .site-footer a {
+  color: #9dd1b2 !important;
+}
+
+html.eye-comfort-night .site-footer a:hover {
+  color: #00ff88 !important;
+}
+
+/* FAQ Section OLED Night Styling */
+html.eye-comfort-night [aria-label*="Frequently Asked Questions"] .glass-panel {
+  background: #040c06 !important;
+  border-color: rgba(0, 229, 117, 0.25) !important;
+}
+
+html.eye-comfort-night [aria-label*="Frequently Asked Questions"] div[style*="border-radius: 14px"] {
+  background: #07130a !important;
+  border-color: rgba(0, 229, 117, 0.22) !important;
+  color: #f0fdf4 !important;
+}
+
 .apple-liquid-glass-dock {
   --tab-bg: rgba(255, 255, 255, 0.72);
   --tab-border: rgba(0, 102, 51, 0.15);
@@ -765,9 +793,9 @@ body::after {
 .liquid-glass-panel,
 .glass-card,
 .liquid-glass-card {
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 16px 36px -14px rgba(0, 70, 35, 0.18), 0 4px 12px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.96);
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
 
 .mobile-search-backdrop {
@@ -775,7 +803,7 @@ body::after {
   z-index: 100000;
   inset: 0;
   border: 0;
-  background: rgba(8, 28, 17, 0.16);
+  background: rgba(8, 28, 17, 0.45);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
@@ -788,12 +816,12 @@ body::after {
   left: 14px;
   right: 14px;
   padding: 10px;
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border: 1.5px solid var(--glass-border);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--glass-bg);
   backdrop-filter: blur(30px) saturate(210%);
   -webkit-backdrop-filter: blur(30px) saturate(210%);
-  box-shadow: 0 20px 44px -10px rgba(0, 70, 35, 0.22), inset 0 1px 2px #fff;
+  box-shadow: var(--glass-shadow);
 }
 
 .mobile-search-input-wrap {
@@ -801,9 +829,9 @@ body::after {
   align-items: center;
   gap: 8px;
   padding: 4px 6px 4px 12px;
-  border: 1px solid rgba(0, 102, 51, 0.16);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--bg-secondary);
 }
 
 .mobile-search-input-wrap input {
@@ -849,7 +877,8 @@ body::after {
   gap: 10px;
   padding: 7px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
 }
 
 .mobile-search-result img,
