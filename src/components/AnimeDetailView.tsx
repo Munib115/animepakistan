@@ -11,11 +11,13 @@ import { shareContent } from '@/lib/shareHelper';
 
 interface AnimeDetailViewProps {
   anime: AnimeItem;
+  relatedAnime?: AnimeItem[];
 }
 
-export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
+export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetailViewProps) {
   const { t, language } = useLanguage();
   const [selectedSeason, setSelectedSeason] = useState<number | 'ALL'>('ALL');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [searchQuery, setSearchQuery] = useState('');
   const [inList, setInList] = useState(false);
   const [isShareCopied, setIsShareCopied] = useState(false);
@@ -53,7 +55,17 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
     return Array.from(set).sort((a, b) => a - b);
   }, [anime.episodes]);
 
-  // Filter and sort episodes by season and search query
+  // Episode counts per season for informative badges
+  const seasonCounts = useMemo(() => {
+    const map = new Map<number, number>();
+    anime.episodes?.forEach((ep) => {
+      const s = ep.season || (ep.title.match(/^S(\d+)/i) ? parseInt(ep.title.match(/^S(\d+)/i)![1], 10) : (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1));
+      map.set(s, (map.get(s) || 0) + 1);
+    });
+    return map;
+  }, [anime.episodes]);
+
+  // Filter and sort episodes by season, sort order, and search query
   const filteredEpisodes = useMemo(() => {
     if (!anime.episodes) return [];
     return anime.episodes
@@ -75,10 +87,15 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
       .sort((a, b) => {
         const sA = a.season || (a.slug.match(/(\d+)x\d+/i) ? parseInt(a.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
         const sB = b.season || (b.slug.match(/(\d+)x\d+/i) ? parseInt(b.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
-        if (sA !== sB) return sA - sB;
-        return a.number - b.number;
+        if (sortOrder === 'desc') {
+          if (sA !== sB) return sB - sA;
+          return b.number - a.number;
+        } else {
+          if (sA !== sB) return sA - sB;
+          return a.number - b.number;
+        }
       });
-  }, [anime.episodes, selectedSeason, searchQuery]);
+  }, [anime.episodes, selectedSeason, searchQuery, sortOrder]);
 
   useEffect(() => {
     if (!anime?.slug) return;
@@ -458,6 +475,115 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
           </div>
         </div>
 
+        {/* Franchise & Related Series / Movies Row */}
+        {relatedAnime && relatedAnime.length > 0 && (
+          <div className="glass-panel" style={{ padding: '20px 20px 22px', marginBottom: '24px' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '16px',
+              flexWrap: 'wrap',
+              gap: '8px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)' }}>movie_filter</span>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                  {language === 'ur' ? 'متعلقہ فرنچائز اور سیریز' : 'Franchise & Related Series'}
+                </h3>
+              </div>
+              <span className="glass-badge">
+                {relatedAnime.length} {language === 'ur' ? 'شوز دستیاب' : 'Titles Available'}
+              </span>
+            </div>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+              gap: '12px',
+            }}>
+              {relatedAnime.map((item) => {
+                const itemCover = getProxiedImageUrl(item.poster || item.anilist?.coverImage || '', 'poster');
+                const itemTitle = item.anilist?.englishName || item.title;
+                const isMovieItem = item.type === 'movie';
+                const targetHref = isMovieItem ? `/watch/${item.slug}` : `/anime/${item.slug}`;
+
+                return (
+                  <Link
+                    key={item.slug}
+                    href={targetHref}
+                    prefetch={true}
+                    className="glass-card"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      padding: '10px',
+                      borderRadius: '10px',
+                      textDecoration: 'none',
+                      gap: '8px',
+                      transition: 'transform 0.2s, border-color 0.2s',
+                    }}
+                  >
+                    <div style={{
+                      width: '100%',
+                      aspectRatio: '16/9',
+                      borderRadius: '6px',
+                      overflow: 'hidden',
+                      background: 'var(--bg-secondary)',
+                      position: 'relative',
+                    }}>
+                      {itemCover ? (
+                        <img
+                          src={itemCover}
+                          alt={itemTitle}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+                          <span className="material-symbols-outlined">movie</span>
+                        </div>
+                      )}
+                      <span style={{
+                        position: 'absolute',
+                        top: '6px',
+                        right: '6px',
+                        background: isMovieItem ? 'rgba(220, 38, 38, 0.88)' : 'rgba(0, 102, 51, 0.88)',
+                        color: '#ffffff',
+                        padding: '2px 6px',
+                        borderRadius: '4px',
+                        fontSize: '0.65rem',
+                        fontWeight: 800,
+                        backdropFilter: 'blur(4px)',
+                      }}>
+                        {isMovieItem ? (language === 'ur' ? 'مکمل مووی' : 'Movie') : `${item.episodeCount || item.episodes?.length || 0} ${language === 'ur' ? 'اقساط' : 'Eps'}`}
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                      <span style={{
+                        fontSize: '0.82rem',
+                        fontWeight: 700,
+                        color: 'var(--text-primary)',
+                        lineHeight: 1.3,
+                        overflow: 'hidden',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                      }}>
+                        {itemTitle}
+                      </span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--color-primary)', fontWeight: 600 }}>
+                        {isMovieItem ? (language === 'ur' ? 'مکمل مووی' : 'Full Movie') : (language === 'ur' ? 'تمام اقساط' : 'All Episodes')}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Series Episodes List with Season Filter Tabs */}
         {!isMovie && (
           <div className="glass-panel" style={{ padding: '24px 20px' }}>
@@ -521,7 +647,7 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                       transition: 'all 0.2s',
                     }}
                   >
-                    تمام سیزنز (All Seasons)
+                    {language === 'ur' ? `تمام سیزنز (${anime.episodes?.length || 0})` : `All Seasons (${anime.episodes?.length || 0})`}
                   </button>
 
                   {availableSeasons.map((s) => (
@@ -544,38 +670,82 @@ export default function AnimeDetailView({ anime }: AnimeDetailViewProps) {
                         transition: 'all 0.2s',
                       }}
                     >
-                      سیزن {s} (Season {s})
+                      {language === 'ur' ? `سیزن ${s} (${seasonCounts.get(s) || 0} اقساط)` : `Season ${s} (${seasonCounts.get(s) || 0} eps)`}
                     </button>
                   ))}
                 </div>
               )}
 
-              {/* Episode Search Box for fast lookup in big seasons */}
-              {(anime.episodes?.length || 0) > 12 && (
-                <div style={{ position: 'relative', maxWidth: '320px' }}>
-                  <span className="material-symbols-outlined" style={{
-                    position: 'absolute',
-                    left: '10px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    fontSize: '18px',
-                    color: 'var(--text-muted)',
-                  }}>
-                    search
-                  </span>
-                  <input
-                    type="text"
-                    placeholder="Search episode title or number..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="glass-input"
-                    style={{
-                      padding: '8px 12px 8px 34px',
-                      fontSize: '0.82rem',
+              {/* Controls Bar: Search Box + Sort Order Toggle */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '10px',
+                flexWrap: 'wrap',
+              }}>
+                {/* Search Box */}
+                {(anime.episodes?.length || 0) > 6 && (
+                  <div style={{ position: 'relative', flex: '1 1 220px', maxWidth: '340px' }}>
+                    <span className="material-symbols-outlined" style={{
+                      position: 'absolute',
+                      left: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      fontSize: '18px',
+                      color: 'var(--text-muted)',
+                    }}>
+                      search
+                    </span>
+                    <input
+                      type="text"
+                      placeholder={language === 'ur' ? 'قسط نمبر یا عنوان تلاش کریں...' : 'Search episode title or number...'}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="glass-input"
+                      style={{
+                        width: '100%',
+                        padding: '8px 12px 8px 34px',
+                        fontSize: '0.82rem',
+                      }}
+                    />
+                  </div>
+                )}
+
+                {/* Sort Order Toggle Button */}
+                {(anime.episodes?.length || 0) > 1 && (
+                  <button
+                    onClick={() => {
+                      sound.pop();
+                      setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
                     }}
-                  />
-                </div>
-              )}
+                    className="glass-btn"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '7px 14px',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      borderRadius: '8px',
+                      background: sortOrder === 'desc' ? 'rgba(0, 102, 51, 0.18)' : 'var(--bg-secondary)',
+                      border: sortOrder === 'desc' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                      color: sortOrder === 'desc' ? 'var(--color-primary)' : 'var(--text-secondary)',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
+                      {sortOrder === 'desc' ? 'arrow_downward' : 'arrow_upward'}
+                    </span>
+                    <span>
+                      {sortOrder === 'desc'
+                        ? (language === 'ur' ? 'نئے پہلے (Newest First)' : 'Newest First')
+                        : (language === 'ur' ? 'پرانے پہلے (Oldest First)' : 'Oldest First')}
+                    </span>
+                  </button>
+                )}
+              </div>
             </div>
 
             {filteredEpisodes.length > 0 ? (

@@ -210,17 +210,34 @@ export default function WatchContainer({
     return Array.from(set).sort((a, b) => a - b);
   }, [sortedEpisodes]);
 
-  // Season filter state in playlist
+  // Season filter & sort order in playlist
   const [selectedSeason, setSelectedSeason] = useState<number | 'ALL'>('ALL');
+  const [playlistSortOrder, setPlaylistSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  // Filtered episodes for playlist view
-  const visibleEpisodes = useMemo(() => {
-    if (selectedSeason === 'ALL') return sortedEpisodes;
-    return sortedEpisodes.filter((ep) => {
+  // Count episodes per season
+  const seasonCounts = useMemo(() => {
+    const map = new Map<number, number>();
+    sortedEpisodes.forEach((ep) => {
       const s = ep.season || (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
-      return s === selectedSeason;
+      map.set(s, (map.get(s) || 0) + 1);
     });
-  }, [sortedEpisodes, selectedSeason]);
+    return map;
+  }, [sortedEpisodes]);
+
+  // Filtered and sorted episodes for playlist view
+  const visibleEpisodes = useMemo(() => {
+    const list = selectedSeason === 'ALL'
+      ? [...sortedEpisodes]
+      : sortedEpisodes.filter((ep) => {
+          const s = ep.season || (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+          return s === selectedSeason;
+        });
+
+    if (playlistSortOrder === 'desc') {
+      return list.reverse();
+    }
+    return list;
+  }, [sortedEpisodes, selectedSeason, playlistSortOrder]);
 
   // Navigation between episodes
   const currentIndex = isMovie
@@ -890,9 +907,42 @@ export default function WatchContainer({
               <span>{t('episodesList')} ({sortedEpisodes.length})</span>
             </h2>
 
-            <span className="glass-badge">
-              {visibleEpisodes.length} / {sortedEpisodes.length} {t('episodesSuffix')}
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button
+                onClick={() => {
+                  sound.pop();
+                  setPlaylistSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
+                }}
+                className="glass-btn"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  padding: '5px 10px',
+                  fontSize: '0.74rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  borderRadius: '6px',
+                  background: playlistSortOrder === 'desc' ? 'rgba(0, 102, 51, 0.18)' : 'var(--bg-secondary)',
+                  border: playlistSortOrder === 'desc' ? '1px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                  color: playlistSortOrder === 'desc' ? 'var(--color-primary)' : 'var(--text-secondary)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>
+                  {playlistSortOrder === 'desc' ? 'arrow_downward' : 'arrow_upward'}
+                </span>
+                <span>
+                  {playlistSortOrder === 'desc'
+                    ? (language === 'ur' ? 'نئے پہلے' : 'Newest First')
+                    : (language === 'ur' ? 'پرانے پہلے' : 'Oldest First')}
+                </span>
+              </button>
+
+              <span className="glass-badge">
+                {visibleEpisodes.length} / {sortedEpisodes.length} {t('episodesSuffix')}
+              </span>
+            </div>
           </div>
 
           {/* Season Selection Tabs (if multi-season) */}
@@ -924,7 +974,7 @@ export default function WatchContainer({
                   transition: 'all 0.2s',
                 }}
               >
-                {language === 'ur' ? 'تمام سیزنز (All Seasons)' : 'All Seasons'}
+                {language === 'ur' ? `تمام سیزنز (${sortedEpisodes.length})` : `All Seasons (${sortedEpisodes.length})`}
               </button>
 
               {availableSeasons.map((s) => (
@@ -947,7 +997,7 @@ export default function WatchContainer({
                     transition: 'all 0.2s',
                   }}
                 >
-                  {language === 'ur' ? `سیزن ${s} (Season ${s})` : `Season ${s}`}
+                  {language === 'ur' ? `سیزن ${s} (${seasonCounts.get(s) || 0} اقساط)` : `Season ${s} (${seasonCounts.get(s) || 0} eps)`}
                 </button>
               ))}
             </div>
