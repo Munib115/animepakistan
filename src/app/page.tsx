@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
 import HomeSections from '@/components/HomeSections';
 import AnimeGrid from '@/components/AnimeGrid';
-import { FAQS } from '@/components/FAQSection';
+import { FAQS } from '@/data/faqs';
 import { getAnimeCatalog } from '@/lib/db';
 import { absoluteUrl, animeName } from '@/lib/seo';
 import type { Metadata } from 'next';
