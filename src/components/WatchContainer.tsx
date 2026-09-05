@@ -105,6 +105,9 @@ export default function WatchContainer({
     setStreamSources(sources || []);
   }, [sources]);
 
+  // Fallback URL directly from current episode or anime metadata
+  const defaultFallbackUrl = currentEpisode?.url || (anime.type === 'movie' ? anime.url : `https://animesalt.cx/episode/${currentEpisode?.slug || anime.slug}/`);
+
   useEffect(() => {
     const hasValidStream = streamSources.some(s => s.url && s.url.startsWith('http'));
     
@@ -124,27 +127,32 @@ export default function WatchContainer({
         .then((data) => {
           if (data.sources && data.sources.length > 0) {
             setStreamSources(data.sources);
-          } else {
-            // Last resort: try the old resolve-stream route
-            fetch(`/api/resolve-stream?url=${encodeURIComponent(targetEpisodeUrl)}`)
-              .then(r => r.json())
-              .then(d => { if (d.sources?.length > 0) setStreamSources(d.sources); })
-              .catch(() => {});
+          } else if (defaultFallbackUrl && defaultFallbackUrl.startsWith('http')) {
+            setStreamSources([{
+              label: 'Direct Server (HD)',
+              url: sanitizeStreamUrl(defaultFallbackUrl),
+              isMultiAudio: true,
+            }]);
           }
         })
         .catch(() => {
-          fetch(`/api/resolve-stream?url=${encodeURIComponent(targetEpisodeUrl)}`)
-            .then(r => r.json())
-            .then(d => { if (d.sources?.length > 0) setStreamSources(d.sources); })
-            .catch(() => {});
+          if (defaultFallbackUrl && defaultFallbackUrl.startsWith('http')) {
+            setStreamSources([{
+              label: 'Direct Server (HD)',
+              url: sanitizeStreamUrl(defaultFallbackUrl),
+              isMultiAudio: true,
+            }]);
+          }
         });
     }
-  }, [targetEpisodeUrl, targetSlug, anime.slug, currentEpisode?.number, currentEpisode?.season]);
+  }, [targetEpisodeUrl, targetSlug, anime.slug, currentEpisode?.number, currentEpisode?.season, defaultFallbackUrl]);
 
-  // Get the active mirror URL (abyssplayer.com, short.icu, or as-cdn26.top)
+  // Get the active mirror URL (abyssplayer.com, short.icu, as-cdn26.top, or direct embed)
   const rawMirror = streamSources && streamSources.length > selectedServerIndex && streamSources[selectedServerIndex]?.url
     ? streamSources[selectedServerIndex].url
-    : (streamSources && streamSources.length > 0 && streamSources[0]?.url ? streamSources[0].url : '');
+    : (streamSources && streamSources.length > 0 && streamSources[0]?.url 
+        ? streamSources[0].url 
+        : (defaultFallbackUrl && defaultFallbackUrl.startsWith('http') ? defaultFallbackUrl : ''));
 
   const activeMirror = sanitizeStreamUrl(rawMirror);
 

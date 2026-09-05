@@ -110,7 +110,7 @@ export async function resolveStreamSources(
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4500); // fast 4.5s abort to prevent hanging
+    const timeoutId = setTimeout(() => controller.abort(), 12000); // 12s timeout for reliable serverless fetches
 
     const res = await fetch(cleanTarget, {
       headers: {
@@ -202,6 +202,15 @@ export async function resolveStreamSources(
     }
   } catch (err: any) {
     console.warn(`[Resolver Server] Note: ${cleanTarget} resolution notice:`, err?.message);
+  }
+
+  // If scraping failed or was blocked by Cloudflare, return direct episode URL so iframe plays
+  if (sources.length === 0 && (cleanTarget.includes('/episode/') || cleanTarget.includes('/movies/'))) {
+    sources.push({
+      label: 'Direct Server (HD)',
+      url: sanitizeStreamUrl(cleanTarget),
+      isMultiAudio: true,
+    });
   }
 
   // Cache results for 24h

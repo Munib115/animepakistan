@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { resolveStreamSources } from '@/lib/resolver-server';
 
+export const maxDuration = 30;
+
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const saltSlug = searchParams.get('slug')?.trim();
@@ -22,7 +24,18 @@ export async function GET(request: NextRequest) {
     }
 
     // Pass season so resolver picks the correct season's episode (fixes wrong-ep bug)
-    const sources = await resolveStreamSources(cleanTarget, epNum, epSeason);
+    let sources = await resolveStreamSources(cleanTarget, epNum, epSeason);
+
+    if (sources.length === 0) {
+      const fallbackUrl = (epNum !== undefined && !isNaN(epNum))
+        ? `https://animesalt.cx/episode/${saltSlug}-${epSeason || 1}x${epNum}/`
+        : `https://animesalt.cx/movies/${saltSlug}/`;
+      sources = [{
+        label: 'Direct Server (HD)',
+        url: fallbackUrl,
+        isMultiAudio: true,
+      }];
+    }
 
     return NextResponse.json(
       { sources, slug: saltSlug, ep: epNum, season: epSeason },
@@ -33,6 +46,14 @@ export async function GET(request: NextRequest) {
       }
     );
   } catch (e: any) {
-    return NextResponse.json({ error: e.message, sources: [] }, { status: 500 });
+    const fallbackUrl = (epNum !== undefined && !isNaN(epNum))
+      ? `https://animesalt.cx/episode/${saltSlug}-${epSeason || 1}x${epNum}/`
+      : `https://animesalt.cx/movies/${saltSlug}/`;
+    return NextResponse.json({
+      sources: [{ label: 'Direct Server (HD)', url: fallbackUrl, isMultiAudio: true }],
+      slug: saltSlug,
+      ep: epNum,
+      season: epSeason,
+    });
   }
 }

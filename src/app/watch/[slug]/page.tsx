@@ -11,6 +11,8 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const maxDuration = 30;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const anime = getAnimeDb().find((item) => item.type === 'movie' && item.slug.toLowerCase() === decodeURIComponent(slug).toLowerCase());
@@ -95,9 +97,21 @@ export default async function MovieWatchPage(props: PageProps) {
     const saltSlug = anime.saltSlug || anime.slug;
 
     // Directly resolve stream sources with in-memory caching
-    sources = await resolveStreamSources(
-      `https://animesalt.cx/movies/${saltSlug}/`
-    );
+    try {
+      sources = await resolveStreamSources(
+        anime.url && anime.url.startsWith('http') ? anime.url : `https://animesalt.cx/movies/${saltSlug}/`
+      );
+    } catch (e) {
+      sources = [];
+    }
+
+    if (sources.length === 0 && anime.url && anime.url.startsWith('http')) {
+      sources = [{
+        label: 'Server 1 (HD)',
+        url: sanitizeStreamUrl(anime.url),
+        isMultiAudio: true,
+      }];
+    }
   }
 
   return (
