@@ -1,27 +1,40 @@
 import * as cheerio from 'cheerio';
-import { StreamSource, sanitizeStreamUrl } from './resolver';
+import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from './resolver';
 import { getAnimeDb } from './db';
 
 // In-Memory Stream Cache (24 Hour TTL for ultra-fast instant playback on return visits)
 const streamCache = new Map<string, { sources: StreamSource[]; timestamp: number }>();
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
-/** Check if a URL is an ad/tracker/garbage URL */
+/** Check if a URL is an ad/tracker/garbage or full-website URL */
 function isBadUrl(u: string): boolean {
-  const lower = u.toLowerCase();
-  return (
-    !lower ||
-    lower.startsWith('about:blank') ||
-    lower.includes('google') ||
-    lower.includes('doubleclick') ||
-    lower.includes('facebook') ||
-    lower.includes('cloudflare') ||
-    lower.includes('disqus') ||
-    lower.includes('syndication') ||
-    lower.includes('analytics') ||
-    lower.includes('googletagmanager') ||
-    lower.includes('youtube.com/embed')
-  );
+  return !isValidStreamEmbedUrl(u);
+}
+
+function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
+  if (!streamUrl || !isValidStreamEmbedUrl(streamUrl)) return [];
+
+  if (streamUrl.includes('multi-lang-plyr/player.php?data=')) {
+    try {
+      const urlObj = new URL(streamUrl);
+      const dataParam = urlObj.searchParams.get('data');
+      if (dataParam) {
+        const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
+        const parsed = JSON.parse(decodedStr);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed
+            .filter((item: any) => item.link && isValidStreamEmbedUrl(item.link))
+            .map((item: any) => ({
+              label: `Abyss (${item.language || 'HD'})`,
+              url: sanitizeStreamUrl(item.link),
+              isMultiAudio: false,
+            }));
+        }
+      }
+    } catch (e) {}
+  }
+
+  return [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
 }
 
 /**
@@ -39,14 +52,44 @@ export async function resolveStreamSources(
     .replace(/^http:\/\//i, 'https://')
     .replace(/animesalt\.(link|me)/gi, 'animesalt.cx');
 
-  // If series/tv page and episode number is specified, check local DB first (0ms instant resolution!)
+  const db = getAnimeDb();
+
+  // 1. Direct match for episode URL (e.g. https://animesalt.cx/episode/tomb-raider-king-1x1/)
+  if (cleanTarget.includes('/episode/')) {
+    const epSlugMatch = cleanTarget.match(/animesalt\.cx\/episode\/([^/]+)/);
+    const epSlug = epSlugMatch ? epSlugMatch[1] : '';
+    if (epSlug) {
+      for (const anime of db) {
+        if (!anime.episodes) continue;
+        const foundEp = anime.episodes.find(e => e.slug === epSlug || (e.url && e.url.includes(epSlug)));
+        if (foundEp && (foundEp as any).streamUrl) {
+          const parsedSources = parseStreamUrlToSources((foundEp as any).streamUrl);
+          if (parsedSources.length > 0) return parsedSources;
+        }
+      }
+    }
+  }
+
+  // 2. Direct match for movies
+  if (cleanTarget.includes('/movies/')) {
+    const movieSlugMatch = cleanTarget.match(/animesalt\.cx\/movies\/([^/]+)/);
+    const movieSlug = movieSlugMatch ? movieSlugMatch[1] : '';
+    if (movieSlug) {
+      const anime = db.find(a => (a.saltSlug === movieSlug || a.slug === movieSlug) && a.type === 'movie');
+      if (anime && anime.streamUrl) {
+        const parsedSources = parseStreamUrlToSources(anime.streamUrl);
+        if (parsedSources.length > 0) return parsedSources;
+      }
+    }
+  }
+
+  // 3. Match for series/tv URL with episodeNumber
   const isSeries = cleanTarget.includes('/series/') || cleanTarget.includes('/tv/');
   if (isSeries) {
     const match = cleanTarget.match(/animesalt\.cx\/(series|tv)\/([^/]+)/);
     const slug = match ? match[2] : cleanTarget.replace(/^.*\/(series|tv)\//, '').split('/')[0];
     
     if (slug) {
-      const db = getAnimeDb();
       const anime = db.find(a => (a.saltSlug === slug || a.slug === slug) && a.type === 'series');
       const epNum = episodeNumber || 1;
       const epSeason = seasonNumber;
@@ -68,25 +111,8 @@ export async function resolveStreamSources(
 
       // If episode has a pre-cached streamUrl, parse and return instantly!
       if (episode && (episode as any).streamUrl) {
-        const streamUrl = (episode as any).streamUrl;
-        if (streamUrl.includes('multi-lang-plyr/player.php?data=')) {
-          try {
-            const urlObj = new URL(streamUrl);
-            const dataParam = urlObj.searchParams.get('data');
-            if (dataParam) {
-              const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
-              const parsed = JSON.parse(decodedStr);
-              if (Array.isArray(parsed)) {
-                return parsed.map((item: any) => ({
-                  label: `Abyss (${item.language || 'HD'})`,
-                  url: sanitizeStreamUrl(item.link),
-                  isMultiAudio: false
-                }));
-              }
-            }
-          } catch (e) {}
-        }
-        return [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+        const parsedSources = parseStreamUrlToSources((episode as any).streamUrl);
+        if (parsedSources.length > 0) return parsedSources;
       }
 
       if (episode && episode.url && episode.url.startsWith('http')) {
@@ -204,19 +230,13 @@ export async function resolveStreamSources(
     console.warn(`[Resolver Server] Note: ${cleanTarget} resolution notice:`, err?.message);
   }
 
-  // If scraping failed or was blocked by Cloudflare, return direct episode URL so iframe plays
-  if (sources.length === 0 && (cleanTarget.includes('/episode/') || cleanTarget.includes('/movies/'))) {
-    sources.push({
-      label: 'Direct Server (HD)',
-      url: sanitizeStreamUrl(cleanTarget),
-      isMultiAudio: true,
-    });
-  }
+  // Filter out any source that is not a valid stream embed (strictly reject third-party website pages)
+  const validSources = sources.filter(s => s.url && isValidStreamEmbedUrl(s.url));
 
   // Cache results for 24h
-  if (sources.length > 0) {
-    streamCache.set(cacheKey, { sources, timestamp: Date.now() });
+  if (validSources.length > 0) {
+    streamCache.set(cacheKey, { sources: validSources, timestamp: Date.now() });
   }
 
-  return sources;
+  return validSources;
 }

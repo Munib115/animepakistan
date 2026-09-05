@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
-import { StreamSource, sanitizeStreamUrl } from '@/lib/resolver';
+import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
 import { resolveStreamSources } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
 
@@ -79,18 +79,22 @@ export default async function EpisodeWatchPage(props: PageProps) {
           const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
           const parsed = JSON.parse(decodedStr);
           if (Array.isArray(parsed)) {
-            sources = parsed.map((item: any) => ({
-              label: `Abyss (${item.language || 'HD'})`,
-              url: sanitizeStreamUrl(item.link),
-              isMultiAudio: false
-            }));
+            sources = parsed
+              .filter((item: any) => item.link && isValidStreamEmbedUrl(item.link))
+              .map((item: any) => ({
+                label: `Abyss (${item.language || 'HD'})`,
+                url: sanitizeStreamUrl(item.link),
+                isMultiAudio: false
+              }));
           }
         }
       } catch (e) {
-        sources = [{ label: 'HD-1 (Hindi)', url: streamUrl, isMultiAudio: true }];
+        if (isValidStreamEmbedUrl(streamUrl)) {
+          sources = [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+        }
       }
-    } else {
-      sources = [{ label: 'HD-1 (Hindi)', url: streamUrl, isMultiAudio: true }];
+    } else if (isValidStreamEmbedUrl(streamUrl)) {
+      sources = [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
     }
   }
 
@@ -108,27 +112,15 @@ export default async function EpisodeWatchPage(props: PageProps) {
         ? episode.url
         : `https://animesalt.cx/series/${saltSlug}/`;
 
-      sources = await resolveStreamSources(
+      const resolved = await resolveStreamSources(
         episodeTargetUrl,
         epNumber,
         epSeason
       );
+      sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));
     } catch (e) {
       console.error('Failed to resolve episode stream sources:', e);
       sources = [];
-    }
-
-    // Bulletproof Vercel Fallback: If external scraping failed or was blocked by Cloudflare,
-    // provide the direct episode embed URL so the player plays 100% of the time!
-    if (sources.length === 0) {
-      const fallbackUrl = episode.url && episode.url.startsWith('http')
-        ? episode.url
-        : `https://animesalt.cx/episode/${episode.slug}/`;
-      sources = [{
-        label: 'Server 1 (HD)',
-        url: sanitizeStreamUrl(fallbackUrl),
-        isMultiAudio: true,
-      }];
     }
   }
 

@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
-import { StreamSource, sanitizeStreamUrl } from '@/lib/resolver';
+import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
 import { resolveStreamSources } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
 import { animeDescription, animeImage, animeName } from '@/lib/seo';
@@ -98,14 +98,15 @@ export default async function MovieWatchPage(props: PageProps) {
 
     // Directly resolve stream sources with in-memory caching
     try {
-      sources = await resolveStreamSources(
+      const resolved = await resolveStreamSources(
         anime.url && anime.url.startsWith('http') ? anime.url : `https://animesalt.cx/movies/${saltSlug}/`
       );
+      sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));
     } catch (e) {
       sources = [];
     }
 
-    if (sources.length === 0 && anime.url && anime.url.startsWith('http')) {
+    if (sources.length === 0 && anime.url && isValidStreamEmbedUrl(anime.url)) {
       sources = [{
         label: 'Server 1 (HD)',
         url: sanitizeStreamUrl(anime.url),

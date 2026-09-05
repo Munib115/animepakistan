@@ -135,7 +135,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         <div className="cinematic-hero-meta">
           {metadata.map((item) => <span key={item}>{item}</span>)}
         </div>
-        <h1>{displayName}</h1>
+        <h2>{displayName}</h2>
         {current.genres?.length > 0 && (
           <p className="cinematic-hero-genres">{current.genres.slice(0, 3).join(' · ')}</p>
         )}
@@ -246,7 +246,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         }
         .cinematic-hero-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
         .cinematic-hero-meta span, .cinematic-hero-genres { padding: 4px 9px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 7px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: rgba(255, 255, 255, 0.94); font-size: 0.75rem; font-weight: 700; }
-        .cinematic-hero-content h1 { max-width: 620px; margin: 0 0 12px 0; color: #fff; font-size: clamp(1.8rem, 3.8vw, 3rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.16; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85); }
+        .cinematic-hero-content h2 { max-width: 620px; margin: 0 0 12px 0; color: #fff; font-size: clamp(1.8rem, 3.8vw, 3rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.16; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85); }
         .cinematic-hero-genres { display: inline-flex; align-items: center; margin: 0 0 12px 0; color: #9af0bc; }
         .cinematic-hero-description { display: -webkit-box; max-width: 580px; margin: 0 0 18px 0; overflow: hidden; color: rgba(255, 255, 255, 0.90); font-size: 0.95rem; line-height: 1.6; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
         .cinematic-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0; }
@@ -296,7 +296,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             margin: 0;
           }
           .cinematic-hero-content.rtl { text-align: right; align-items: flex-start; }
-          .cinematic-hero-content h1 {
+          .cinematic-hero-content h2 {
             font-size: clamp(1.15rem, 4.5vw, 1.45rem) !important;
             line-height: 1.18;
             margin: 0 0 6px 0;

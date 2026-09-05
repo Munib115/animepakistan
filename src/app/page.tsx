@@ -3,7 +3,9 @@ import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
 import HomeSections from '@/components/HomeSections';
 import AnimeGrid from '@/components/AnimeGrid';
+import { FAQS } from '@/components/FAQSection';
 import { getAnimeCatalog } from '@/lib/db';
+import { absoluteUrl, animeName } from '@/lib/seo';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -72,6 +74,30 @@ export default async function HomePage(props: PageProps) {
            t.includes('miraculous') || t.includes('slugterra') || t.includes('avengers');
   }).slice(0, 16);
 
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Featured Urdu and Hindi Dubbed Anime',
+    numberOfItems: featured.length,
+    itemListElement: featured.map((anime, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: absoluteUrl(anime.type === 'movie' ? `/watch/${anime.slug}` : `/anime/${anime.slug}`),
+      name: animeName(anime),
+    })),
+  };
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.qUr,
+      acceptedAnswer: { '@type': 'Answer', text: faq.aUr },
+    })),
+    inLanguage: 'ur-PK',
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', position: 'relative' }}>
       {/* Background Ambient Glow */}
@@ -82,6 +108,16 @@ export default async function HomePage(props: PageProps) {
 
       {/* Main Content */}
       <main style={{ flexGrow: 1, padding: '0 0 24px', position: 'relative', zIndex: 1 }}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, '\\u003c') }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
+        <div className="container" style={{ padding: '22px 16px 0' }}>
+          <h1 style={{ margin: 0, fontSize: 'clamp(1.35rem, 3vw, 2rem)', fontWeight: 900, color: 'var(--text-primary)' }}>
+            Urdu & Hindi Dubbed Anime in Pakistan
+          </h1>
+          <p style={{ margin: '8px 0 0', maxWidth: '760px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+            Explore anime series, movies and cartoons with Urdu and Hindi audio options, then browse each title’s episodes and details.
+          </p>
+        </div>
         {/* Modern Anime Banner Carousel / Slider (Passing only 8 featured items!) */}
         <HeroSlider items={featured} />
 

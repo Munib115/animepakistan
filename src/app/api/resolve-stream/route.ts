@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { resolveStreamSources } from '@/lib/resolver-server';
+import { isValidStreamEmbedUrl } from '@/lib/resolver';
 
 export const maxDuration = 30;
 
@@ -16,18 +17,12 @@ export async function GET(request: NextRequest) {
   const decodedUrl = decodeURIComponent(targetUrl);
 
   try {
-    let sources = await resolveStreamSources(
+    const rawSources = await resolveStreamSources(
       decodedUrl,
       epNumber && !isNaN(epNumber) ? epNumber : undefined
     );
 
-    if (sources.length === 0 && decodedUrl.startsWith('http')) {
-      sources = [{
-        label: 'Direct Server (HD)',
-        url: decodedUrl,
-        isMultiAudio: true,
-      }];
-    }
+    const sources = rawSources.filter(s => s.url && isValidStreamEmbedUrl(s.url));
 
     return NextResponse.json({ sources }, {
       headers: {
@@ -35,9 +30,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (e: any) {
-    return NextResponse.json({
-      sources: decodedUrl.startsWith('http') ? [{ label: 'Direct Server (HD)', url: decodedUrl, isMultiAudio: true }] : [],
-    });
+    return NextResponse.json({ sources: [] });
   }
 }
 

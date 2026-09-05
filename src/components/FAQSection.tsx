@@ -3,14 +3,14 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
-interface FAQItem {
+export interface FAQItem {
   qEn: string;
   qUr: string;
   aEn: string;
   aUr: string;
 }
 
-const FAQS: FAQItem[] = [
+export const FAQS: FAQItem[] = [
   {
     qEn: 'What is Anime Urdu (پاک Anime)?',
     qUr: 'Anime Urdu (پاک Anime) کیا ہے؟',
@@ -57,20 +57,6 @@ export default function FAQSection() {
     setOpenIndex(openIndex === idx ? null : idx);
   };
 
-  // Structured Data for Google FAQPage Schema (SEO Rich Snippets)
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': FAQS.map((faq) => ({
-      '@type': 'Question',
-      'name': language === 'ur' ? faq.qUr : faq.qEn,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': language === 'ur' ? faq.aUr : faq.aEn,
-      }
-    }))
-  };
-
   return (
     <section 
       aria-label="Frequently Asked Questions (FAQ)"
@@ -79,12 +65,6 @@ export default function FAQSection() {
         marginBottom: '28px',
       }}
     >
-      {/* Schema JSON-LD for Google Search Results */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className="glass-panel" style={{
         padding: 'clamp(24px, 4vw, 36px) clamp(16px, 3vw, 28px)',
         borderRadius: '20px',

@@ -1,7 +1,7 @@
 import type { AnimeItem } from '@/types/anime';
 
-// Set NEXT_PUBLIC_SITE_URL to the exact HTTPS production domain before launch.
-const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://animepakistan.pk';
+// Keep every canonical URL, sitemap entry, and JSON-LD entity on the public hostname.
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.panime.space';
 
 export const siteUrl = configuredSiteUrl.replace(/\/$/, '');
 export const siteName = 'Anime Pakistan';

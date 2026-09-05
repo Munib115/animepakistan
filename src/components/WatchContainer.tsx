@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { AnimeItem, Episode } from '@/types/anime';
-import { StreamSource, sanitizeStreamUrl } from '@/lib/resolver';
+import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
 import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
 import { saveWatchProgress, getAnimeWatchProgress, WatchProgressItem } from '@/lib/watchHistory';
@@ -100,61 +100,74 @@ export default function WatchContainer({
   
   const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? `/watch/${anime.slug}` : `/watch/${anime.slug}/${targetSlug}`);
 
-  // Client-side stream resolver fallback if server was blocked by cloud datacenter firewalls
+  // Filter stream sources strictly to only allow valid video embeds (never website pages)
   useEffect(() => {
-    setStreamSources(sources || []);
+    const valid = (sources || []).filter(s => s.url && isValidStreamEmbedUrl(s.url));
+    setStreamSources(valid);
   }, [sources]);
 
-  // Fallback URL directly from current episode or anime metadata
-  const defaultFallbackUrl = currentEpisode?.url || (anime.type === 'movie' ? anime.url : `https://animesalt.cx/episode/${currentEpisode?.slug || anime.slug}/`);
+  const [isRetryingStream, setIsRetryingStream] = useState(false);
+  const [streamResolveTimeout, setStreamResolveTimeout] = useState(false);
+
+  const fetchClientStreams = () => {
+    const saltSlug = (anime as any).saltSlug || anime.slug;
+    const epNumber = currentEpisode?.number || 1;
+    const epSeason = currentEpisode?.season || (currentEpisode?.slug?.match(/(\d+)x\d+/i) ? parseInt(currentEpisode.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+    const isMovie = anime.type === 'movie';
+    
+    const streamApiUrl = isMovie
+      ? `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}`
+      : `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}&season=${epSeason}`;
+
+    setIsRetryingStream(true);
+    fetch(streamApiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.sources && Array.isArray(data.sources)) {
+          const valid = data.sources.filter((s: StreamSource) => s.url && isValidStreamEmbedUrl(s.url));
+          if (valid.length > 0) {
+            setStreamSources(valid);
+            setStreamResolveTimeout(false);
+          }
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIsRetryingStream(false));
+  };
 
   useEffect(() => {
-    const hasValidStream = streamSources.some(s => s.url && s.url.startsWith('http'));
-    
+    const hasValidStream = streamSources.some(s => s.url && isValidStreamEmbedUrl(s.url));
     if (!hasValidStream) {
-      // Use the new animesalt-stream API with saltSlug + episode number + season
-      const saltSlug = (anime as any).saltSlug || anime.slug;
-      const epNumber = currentEpisode?.number || 1;
-      const epSeason = currentEpisode?.season || (currentEpisode?.slug?.match(/(\d+)x\d+/i) ? parseInt(currentEpisode.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
-      const isMovie = anime.type === 'movie';
-      
-      const streamApiUrl = isMovie
-        ? `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}`
-        : `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}&season=${epSeason}`;
-
-      fetch(streamApiUrl)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.sources && data.sources.length > 0) {
-            setStreamSources(data.sources);
-          } else if (defaultFallbackUrl && defaultFallbackUrl.startsWith('http')) {
-            setStreamSources([{
-              label: 'Direct Server (HD)',
-              url: sanitizeStreamUrl(defaultFallbackUrl),
-              isMultiAudio: true,
-            }]);
-          }
-        })
-        .catch(() => {
-          if (defaultFallbackUrl && defaultFallbackUrl.startsWith('http')) {
-            setStreamSources([{
-              label: 'Direct Server (HD)',
-              url: sanitizeStreamUrl(defaultFallbackUrl),
-              isMultiAudio: true,
-            }]);
-          }
-        });
+      fetchClientStreams();
     }
-  }, [targetEpisodeUrl, targetSlug, anime.slug, currentEpisode?.number, currentEpisode?.season, defaultFallbackUrl]);
+  }, [targetEpisodeUrl, targetSlug, anime.slug, currentEpisode?.number, currentEpisode?.season]);
 
-  // Get the active mirror URL (abyssplayer.com, short.icu, as-cdn26.top, or direct embed)
-  const rawMirror = streamSources && streamSources.length > selectedServerIndex && streamSources[selectedServerIndex]?.url
-    ? streamSources[selectedServerIndex].url
-    : (streamSources && streamSources.length > 0 && streamSources[0]?.url 
-        ? streamSources[0].url 
-        : (defaultFallbackUrl && defaultFallbackUrl.startsWith('http') ? defaultFallbackUrl : ''));
+  // Timeout indicator for friendly reload UI
+  useEffect(() => {
+    const hasValidStream = streamSources.some(s => s.url && isValidStreamEmbedUrl(s.url));
+    if (!hasValidStream) {
+      const timer = setTimeout(() => {
+        setStreamResolveTimeout(true);
+      }, 7000);
+      return () => clearTimeout(timer);
+    } else {
+      setStreamResolveTimeout(false);
+    }
+  }, [streamSources]);
 
-  const activeMirror = sanitizeStreamUrl(rawMirror);
+  // Filter only legitimate video embed sources
+  const validStreamSources = useMemo(() => {
+    return (streamSources || []).filter(s => s.url && isValidStreamEmbedUrl(s.url));
+  }, [streamSources]);
+
+  // Get active mirror URL strictly from valid sources
+  const rawMirror = validStreamSources.length > selectedServerIndex && validStreamSources[selectedServerIndex]?.url
+    ? validStreamSources[selectedServerIndex].url
+    : (validStreamSources.length > 0 && validStreamSources[0]?.url 
+        ? validStreamSources[0].url 
+        : '');
+
+  const activeMirror = isValidStreamEmbedUrl(rawMirror) ? sanitizeStreamUrl(rawMirror) : '';
 
   const [iframeKey, setIframeKey] = useState(0);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
@@ -675,22 +688,63 @@ export default function WatchContainer({
               alignItems: 'center',
               justifyContent: 'center',
               color: '#ffffff',
-              gap: '12px',
-              padding: '20px',
+              gap: '14px',
+              padding: '24px',
               textAlign: 'center',
               background: 'linear-gradient(135deg, #010c05 0%, #031c0e 100%)',
             }}>
-              <div style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '50%',
-                border: '3px solid rgba(0, 204, 102, 0.2)',
-                borderTopColor: 'var(--color-glow)',
-                animation: 'spin-loader 0.8s linear infinite',
-              }} />
-              <p style={{ fontSize: '0.9rem', fontWeight: 700 }}>
-                {t('connectingServer')}
-              </p>
+              {!streamResolveTimeout ? (
+                <>
+                  <div style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    border: '3px solid rgba(0, 204, 102, 0.2)',
+                    borderTopColor: 'var(--color-glow)',
+                    animation: 'spin-loader 0.8s linear infinite',
+                  }} />
+                  <p style={{ fontSize: '0.9rem', fontWeight: 700 }}>
+                    {t('connectingServer')}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <span className="material-symbols-outlined" style={{ fontSize: '42px', color: 'var(--color-primary)' }}>
+                    sync_problem
+                  </span>
+                  <div>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '4px' }}>
+                      {language === 'ur' ? 'سرور اسٹریم ہم آہنگ ہو رہی ہے' : 'Stream Synchronizing'}
+                    </h3>
+                    <p style={{ fontSize: '0.8rem', color: '#94a3b8', maxWidth: '360px', margin: '0 auto' }}>
+                      {language === 'ur' 
+                        ? 'ویڈیو کنکشن بحال کرنے کیلئے نیچے دیے گئے بٹن پر کلک کریں۔' 
+                        : 'The high-speed stream server is reconnecting. Click below to retry.'}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={fetchClientStreams}
+                    disabled={isRetryingStream}
+                    className="glass-btn-primary"
+                    style={{
+                      padding: '8px 20px',
+                      fontSize: '0.85rem',
+                      fontWeight: 800,
+                      borderRadius: '10px',
+                      cursor: isRetryingStream ? 'wait' : 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: '18px', animation: isRetryingStream ? 'spin-loader 1s linear infinite' : 'none' }}>
+                      refresh
+                    </span>
+                    <span>{isRetryingStream ? (language === 'ur' ? 'لوڈ ہو رہا ہے...' : 'Retrying...') : (language === 'ur' ? 'دوبارہ کوشش کریں' : 'Retry Server')}</span>
+                  </button>
+                </>
+              )}
             </div>
           )}
 

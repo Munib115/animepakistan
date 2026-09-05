@@ -13,7 +13,6 @@ export const viewport: Viewport = {
   themeColor: "#006633",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
   viewportFit: "cover",
 };
 
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
     default: 'Anime Pakistan | Urdu & Hindi Dubbed Anime',
     template: `%s | ${siteName}`,
   },
-  description: 'Watch Urdu and Hindi dubbed anime series, movies and cartoons online in Pakistan. Browse a fast, mobile-friendly anime catalogue.',
+  description: 'Discover Urdu and Hindi dubbed anime series, movies and cartoons for viewers in Pakistan. Browse a fast, mobile-friendly anime catalogue.',
   keywords: ['Urdu dubbed anime', 'Hindi dubbed anime', 'anime Pakistan', 'anime Urdu', 'anime movies Pakistan', 'cartoons in Urdu'],
   alternates: { canonical: '/' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
@@ -97,8 +96,24 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@graph': [
-                { '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: absoluteUrl('/'), name: siteName, inLanguage: ['ur-PK', 'en-PK'] },
-                { '@type': 'Organization', '@id': `${siteUrl}/#organization`, name: siteName, url: absoluteUrl('/'), logo: absoluteUrl('/icon-512.png'), areaServed: { '@type': 'Country', name: 'Pakistan' } },
+                {
+                  '@type': 'WebSite',
+                  '@id': `${siteUrl}/#website`,
+                  url: absoluteUrl('/'),
+                  name: siteName,
+                  description: 'Urdu and Hindi dubbed anime, movies and cartoons for viewers in Pakistan.',
+                  inLanguage: ['ur-PK', 'en-PK'],
+                  publisher: { '@id': `${siteUrl}/#organization` },
+                },
+                {
+                  '@type': 'Organization',
+                  '@id': `${siteUrl}/#organization`,
+                  name: siteName,
+                  url: absoluteUrl('/'),
+                  logo: absoluteUrl('/icon-512.png'),
+                  areaServed: { '@type': 'Country', name: 'Pakistan' },
+                  inLanguage: ['ur-PK', 'en-PK'],
+                },
               ],
             }).replace(/</g, '\\u003c'),
           }}
