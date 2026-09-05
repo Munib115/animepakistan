@@ -2,6 +2,7 @@ export interface StreamSource {
   label: string;
   url: string;
   isMultiAudio: boolean;
+  directApiStream?: string;
 }
 
 /** Normalize any legacy CDN or protocol issues */
@@ -26,11 +27,21 @@ export function decodeHtmlEntities(str: string): string {
     .replace(/\\"/g, '"');
 }
 
-/** Check if a URL is a legitimate video player embed and NOT a full website webpage */
+/** Check if a URL is a legitimate video player embed and NOT a full website webpage or dead shortener */
 export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
   if (!url || typeof url !== 'string') return false;
   const lower = url.toLowerCase().trim();
   if (!lower.startsWith('http://') && !lower.startsWith('https://')) return false;
+
+  // NEVER embed dead shorteners or broken shortener proxies
+  if (
+    lower.includes('short.icu') ||
+    lower.includes('short.link') ||
+    lower.includes('shortener') ||
+    lower.includes('linkvertise')
+  ) {
+    return false;
+  }
 
   // NEVER embed third-party website pages inside the video player
   if (

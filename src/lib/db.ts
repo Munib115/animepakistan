@@ -2,7 +2,7 @@ import { AnimeItem } from '@/types/anime';
 import animeCatalogData from '@/data/anime-catalog.json';
 
 let cachedDb: AnimeItem[] | null = null;
-const cachedCatalog: AnimeItem[] = animeCatalogData as AnimeItem[];
+const cachedCatalog: AnimeItem[] = animeCatalogData as unknown as AnimeItem[];
 
 export function getAnimeDb(): AnimeItem[] {
   if (!cachedDb) {

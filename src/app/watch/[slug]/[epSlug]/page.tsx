@@ -86,65 +86,29 @@ export default async function EpisodeWatchPage(props: PageProps) {
     thumbnail: anime.poster || '',
   };
 
-  // Resolve streams with priority:
-  // 1. Pre-cached streamUrl on the episode object
-  // 2. New animesalt-stream API (saltSlug + episode number)
-  // 3. General resolver (legacy fallback)
+  // Resolve streams cleanly using unified resolver-server
   let sources: StreamSource[] = [];
+  const saltSlug = (anime as any).saltSlug || anime.slug;
+  const epNumber = episode.number || 1;
+  const epSeason: number = (episode as any).season ?? (() => {
+    const m = episode.slug.match(/(\d+)x\d+/i);
+    return m ? parseInt(m[1], 10) : 1;
+  })();
 
-  if ((episode as any).streamUrl) {
-    const streamUrl = (episode as any).streamUrl;
-    if (streamUrl.includes('multi-lang-plyr/player.php?data=')) {
-      try {
-        const urlObj = new URL(streamUrl);
-        const dataParam = urlObj.searchParams.get('data');
-        if (dataParam) {
-          const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
-          const parsed = JSON.parse(decodedStr);
-          if (Array.isArray(parsed)) {
-            sources = parsed
-              .filter((item: any) => item.link && isValidStreamEmbedUrl(item.link))
-              .map((item: any) => ({
-                label: `Abyss (${item.language || 'HD'})`,
-                url: sanitizeStreamUrl(item.link),
-                isMultiAudio: false
-              }));
-          }
-        }
-      } catch (e) {
-        if (isValidStreamEmbedUrl(streamUrl)) {
-          sources = [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
-        }
-      }
-    } else if (isValidStreamEmbedUrl(streamUrl)) {
-      sources = [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
-    }
-  }
+  const episodeTargetUrl = episode.url && episode.url.startsWith('http')
+    ? episode.url
+    : `https://animesalt.cx/episode/${saltSlug}-${epSeason}x${epNumber}/`;
 
-  if (sources.length === 0) {
-    const saltSlug = (anime as any).saltSlug || anime.slug;
-    const epNumber = episode.number || 1;
-    const epSeason: number = (episode as any).season ?? (() => {
-      const m = episode.slug.match(/(\d+)x\d+/i);
-      return m ? parseInt(m[1], 10) : 1;
-    })();
-
-    // Directly resolve stream sources with in-memory caching and fast fallback
-    try {
-      const episodeTargetUrl = episode.url && episode.url.startsWith('http')
-        ? episode.url
-        : `https://animesalt.cx/series/${saltSlug}/`;
-
-      const resolved = await resolveStreamSources(
-        episodeTargetUrl,
-        epNumber,
-        epSeason
-      );
-      sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));
-    } catch (e) {
-      console.error('Failed to resolve episode stream sources:', e);
-      sources = [];
-    }
+  try {
+    const resolved = await resolveStreamSources(
+      episodeTargetUrl,
+      epNumber,
+      epSeason
+    );
+    sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));
+  } catch (e) {
+    console.error('Failed to resolve episode stream sources:', e);
+    sources = [];
   }
 
   return (
