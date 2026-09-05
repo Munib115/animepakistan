@@ -70,7 +70,20 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/logo.png?v=ap5" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        
+
+        {/* Instant Session Script: Prevents splash screen on internal navigation or reload */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem('ap_intro_seen')) {
+                  document.documentElement.classList.add('ap-intro-dismissed');
+                }
+              } catch(e) {}
+            `,
+          }}
+        />
+
         {/* High-speed Google Fonts & Material Symbols CDN */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -80,7 +93,6 @@ export default function RootLayout({
         />
 
         {/* Preconnect to Poster Image CDNs for Instant 1-Second Loading */}
-        {/* Modern Web Preconnects for high-speed streaming */}
         <link rel="preconnect" href="https://image.tmdb.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://image.tmdb.org" />
         <link rel="preconnect" href="https://hsastream.com" crossOrigin="anonymous" />
