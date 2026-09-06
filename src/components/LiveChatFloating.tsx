@@ -47,6 +47,15 @@ export default function LiveChatFloating() {
   const [customNameInput, setCustomNameInput] = useState('');
   const [isSending, setIsSending] = useState(false);
 
+  // Persistent refs to avoid tearing down realtime subscription on state changes
+  const isOpenRef = useRef(isOpen);
+  isOpenRef.current = isOpen;
+
+  const guestRef = useRef(guest);
+  guestRef.current = guest;
+
+  const lastSeenTimeRef = useRef<string>('');
+
   // Media Attachment State
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [mediaPreviewUrl, setMediaPreviewUrl] = useState<string | null>(null);
@@ -69,12 +78,26 @@ export default function LiveChatFloating() {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Client hydration check
+  // Client hydration check & initialize last seen timestamp
   useEffect(() => {
     setMounted(true);
     const profile = getGuestProfile();
     setGuest(profile);
+    guestRef.current = profile;
     setCustomNameInput(profile.name);
+
+    try {
+      const storedLastSeen = localStorage.getItem('ap_chat_last_seen_time');
+      if (storedLastSeen) {
+        lastSeenTimeRef.current = storedLastSeen;
+      } else {
+        const nowIso = new Date().toISOString();
+        localStorage.setItem('ap_chat_last_seen_time', nowIso);
+        lastSeenTimeRef.current = nowIso;
+      }
+    } catch (e) {
+      lastSeenTimeRef.current = new Date().toISOString();
+    }
   }, []);
 
   // Scroll to latest message
@@ -96,7 +119,18 @@ export default function LiveChatFloating() {
           .limit(100);
 
         if (!error && data && isSubscribed) {
-          setMessages(data as ChatMessage[]);
+          const list = data as ChatMessage[];
+          setMessages(list);
+
+          // Realtime unread count calculation when inbox is closed
+          if (!isOpenRef.current && lastSeenTimeRef.current) {
+            const lastSeenTs = new Date(lastSeenTimeRef.current).getTime();
+            const newIncoming = list.filter((m) => {
+              const msgTs = new Date(m.created_at).getTime();
+              return m.sender_id !== guestRef.current.id && msgTs > lastSeenTs;
+            });
+            setUnreadCount(newIncoming.length);
+          }
         }
       } catch (err) {}
     }
@@ -116,11 +150,19 @@ export default function LiveChatFloating() {
             return [...prev, newMsg];
           });
 
-          // Sound alert if message from another user
-          if (newMsg.sender_id !== guest.id) {
-            sound.notification();
-            sound.haptic([15, 30, 20]);
-            setUnreadCount((c) => (isOpen ? 0 : c + 1));
+          // Sound alert & realtime unread count increment if message from another user
+          if (newMsg.sender_id !== guestRef.current.id) {
+            if (isOpenRef.current) {
+              lastSeenTimeRef.current = newMsg.created_at;
+              try {
+                localStorage.setItem('ap_chat_last_seen_time', newMsg.created_at);
+              } catch (e) {}
+              setUnreadCount(0);
+            } else {
+              sound.notification();
+              sound.haptic([15, 30, 20]);
+              setUnreadCount((c) => c + 1);
+            }
           }
         }
       )
@@ -140,14 +182,20 @@ export default function LiveChatFloating() {
       clearInterval(pollInterval);
       supabase.removeChannel(channel);
     };
-  }, [mounted, guest.id, isOpen]);
+  }, [mounted]);
 
+  // Mark messages as seen when user opens chat
   useEffect(() => {
     if (isOpen) {
       setUnreadCount(0);
+      const latest = messages.length > 0 ? messages[messages.length - 1].created_at : new Date().toISOString();
+      lastSeenTimeRef.current = latest;
+      try {
+        localStorage.setItem('ap_chat_last_seen_time', latest);
+      } catch (e) {}
       scrollToBottom('instant');
     }
-  }, [isOpen, scrollToBottom]);
+  }, [isOpen, messages, scrollToBottom]);
 
   useEffect(() => {
     if (isOpen) {
@@ -438,7 +486,7 @@ export default function LiveChatFloating() {
   return createPortal(
     <>
       {/* ══════════════════════════════════════════════════════════════════════
-          1. FLOATING GREEN MESSENGER BUTTON (Glows, Always on top, Right side)
+          1. FLOATING GREEN MESSENGER BUTTON (Compact & Professional)
       ══════════════════════════════════════════════════════════════════════ */}
       <button
         id="ap-live-messenger-btn"
@@ -446,17 +494,17 @@ export default function LiveChatFloating() {
         onClick={toggleChat}
         aria-label="Open Community Live Chat"
         className={`ap-messenger-floating-btn ${isOpen ? 'is-active' : ''}`}
-        title="Live Otaku Chat | لائیو چیٹ"
+        title="Live Community Chat | لائیو چیٹ"
       >
         <span className="ap-messenger-glow-ring" />
         <span className="ap-messenger-pulse-core" />
 
-        {/* Stable Material Symbol icon */}
+        {/* Compact Professional Material Symbol icon */}
         <span 
           className="material-symbols-outlined" 
           style={{ 
-            fontSize: '30px', 
-            color: '#032010',
+            fontSize: '22px', 
+            color: '#021a0d',
             transform: isOpen ? 'rotate(90deg)' : 'none',
             transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
             userSelect: 'none',
@@ -465,10 +513,10 @@ export default function LiveChatFloating() {
           {isOpen ? 'close' : 'chat'}
         </span>
 
-        {/* Unread Badge */}
+        {/* Realtime Unread Messages Badge */}
         {unreadCount > 0 && !isOpen && (
-          <span className="ap-messenger-unread-badge">
-            {unreadCount}
+          <span className="ap-messenger-unread-badge" aria-label={`${unreadCount} new messages`}>
+            {unreadCount > 99 ? '99+' : unreadCount}
           </span>
         )}
 

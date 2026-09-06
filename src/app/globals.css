@@ -1205,26 +1205,26 @@ body::after {
    LIVE COMMUNITY CHAT & GLOWING FLOATING MESSENGER STYLES
    ============================================================================== */
 
-/* Floating Messenger Trigger Button */
+/* Floating Messenger Trigger Button - Compact Professional Design */
 .ap-messenger-floating-btn {
   position: fixed;
   bottom: calc(152px + env(safe-area-inset-bottom, 0px));
-  right: 18px;
-  width: 60px;
-  height: 60px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
   background: linear-gradient(135deg, #00ff66 0%, #00b344 100%);
-  color: #032010;
-  border: 2px solid rgba(255, 255, 255, 0.45);
+  color: #021a0d;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 100005;
   box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.65),
-    0 0 28px rgba(0, 255, 102, 0.7),
-    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    0 6px 18px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(0, 255, 102, 0.45),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.7);
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -1232,85 +1232,92 @@ body::after {
 
 @media (min-width: 768px) {
   .ap-messenger-floating-btn {
-    bottom: 28px;
-    right: 28px;
-    width: 64px;
-    height: 64px;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
   }
 }
 
 .ap-messenger-floating-btn:hover {
   transform: scale(1.08) translateY(-2px);
   box-shadow: 
-    0 12px 32px rgba(0, 0, 0, 0.7),
-    0 0 40px rgba(0, 255, 102, 0.9);
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 0 22px rgba(0, 255, 102, 0.6);
 }
 
 .ap-messenger-floating-btn:active {
   transform: scale(0.92);
 }
 
-/* Glowing Breathing Pulse Aura */
+/* Glowing Breathing Pulse Aura - Compact */
 .ap-messenger-glow-ring {
   position: absolute;
-  inset: -4px;
+  inset: -2px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(0, 255, 102, 0.45) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 255, 102, 0.35) 0%, transparent 70%);
   animation: greenAuraBreathing 2.4s ease-in-out infinite;
   pointer-events: none;
 }
 
 .ap-messenger-pulse-core {
   position: absolute;
-  inset: -8px;
+  inset: -4px;
   border-radius: 999px;
-  border: 2px solid rgba(0, 255, 102, 0.5);
+  border: 1.5px solid rgba(0, 255, 102, 0.4);
   animation: greenPulseWave 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
   pointer-events: none;
 }
 
 @keyframes greenAuraBreathing {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.18); opacity: 0.95; }
+  0%, 100% { transform: scale(1); opacity: 0.45; }
+  50% { transform: scale(1.15); opacity: 0.85; }
 }
 
 @keyframes greenPulseWave {
-  0% { transform: scale(0.9); opacity: 0.95; }
-  100% { transform: scale(1.48); opacity: 0; }
+  0% { transform: scale(0.9); opacity: 0.85; }
+  100% { transform: scale(1.4); opacity: 0; }
 }
 
-/* Unread Badge */
+/* Realtime Unread Messages Badge - Sleek Pill */
 .ap-messenger-unread-badge {
   position: absolute;
-  top: -3px;
-  left: -3px;
-  background: #ff2d55;
+  top: -4px;
+  left: -4px;
+  background: linear-gradient(135deg, #ff2a5f 0%, #e60039 100%);
   color: #ffffff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
-  height: 20px;
-  min-width: 20px;
-  padding: 0 6px;
+  height: 18px;
+  min-width: 18px;
+  padding: 0 5px;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #0a0f0d;
-  box-shadow: 0 2px 8px rgba(255, 45, 85, 0.6);
+  border: 1.5px solid #06110a;
+  box-shadow: 0 2px 8px rgba(255, 42, 95, 0.65);
   z-index: 3;
+  animation: badgePopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  line-height: 1;
 }
 
-/* Online Beacon Dot */
+@keyframes badgePopIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Online Beacon Dot - Compact */
 .ap-messenger-online-dot {
   position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 14px;
-  height: 14px;
+  bottom: 1px;
+  right: 1px;
+  width: 10px;
+  height: 10px;
   background: #00ff66;
   border-radius: 999px;
-  border: 2px solid #0a0f0d;
-  box-shadow: 0 0 8px #00ff66;
+  border: 1.5px solid #06110a;
+  box-shadow: 0 0 6px #00ff66;
   z-index: 3;
 }
 
