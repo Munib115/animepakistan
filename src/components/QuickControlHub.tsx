@@ -340,9 +340,9 @@ export default function QuickControlHub() {
             backdropFilter: 'blur(24px) saturate(180%)',
             WebkitBackdropFilter: 'blur(24px) saturate(180%)',
             border: '1.5px solid var(--glass-border)',
-            borderRadius: '18px',
+            borderRadius: '24px',
             boxShadow: 'var(--glass-shadow)',
-            padding: '12px 12px 6px 12px',
+            padding: '14px 14px 8px 14px',
             animation: 'hubPop 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
             direction: isUrdu ? 'rtl' : 'ltr',
             zIndex: 9999,
@@ -376,8 +376,8 @@ export default function QuickControlHub() {
                 background: 'rgba(0, 102, 51, 0.07)',
                 border: 'none',
                 borderRadius: '50%',
-                width: '24px',
-                height: '24px',
+                width: '26px',
+                height: '26px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -395,10 +395,10 @@ export default function QuickControlHub() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '3px',
+              gap: '4px',
               background: 'var(--bg-tertiary)',
-              padding: '3px',
-              borderRadius: '10px',
+              padding: '4px',
+              borderRadius: '999px',
               marginBottom: '10px',
               flexShrink: 0,
             }}
@@ -410,8 +410,8 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'settings' ? 'active' : ''}`}
               style={{
-                padding: '6px 2px',
-                borderRadius: '8px',
+                padding: '7px 4px',
+                borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'settings' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'settings' ? '#ffffff' : 'var(--text-secondary)',
@@ -432,8 +432,8 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'history' ? 'active' : ''}`}
               style={{
-                padding: '6px 2px',
-                borderRadius: '8px',
+                padding: '7px 4px',
+                borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'history' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'history' ? '#ffffff' : 'var(--text-secondary)',
@@ -454,8 +454,8 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'watchlist' ? 'active' : ''}`}
               style={{
-                padding: '6px 2px',
-                borderRadius: '8px',
+                padding: '7px 4px',
+                borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'watchlist' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'watchlist' ? '#ffffff' : 'var(--text-secondary)',
@@ -476,8 +476,8 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'share' ? 'active' : ''}`}
               style={{
-                padding: '6px 2px',
-                borderRadius: '8px',
+                padding: '7px 4px',
+                borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'share' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'share' ? '#ffffff' : 'var(--text-secondary)',
@@ -523,8 +523,8 @@ export default function QuickControlHub() {
                 className="hub-glass-tile"
                 style={{
                   gridColumn: 'span 2',
-                  padding: '10px 12px',
-                  borderRadius: '12px',
+                  padding: '12px 14px',
+                  borderRadius: '18px',
                   background: 'var(--bg-secondary)',
                   border: '1px solid var(--glass-border)',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.02)',
@@ -551,8 +551,8 @@ export default function QuickControlHub() {
                 <span style={{
                   fontSize: '0.72rem',
                   fontWeight: 900,
-                  padding: '3px 8px',
-                  borderRadius: '6px',
+                  padding: '4px 10px',
+                  borderRadius: '999px',
                   background: 'var(--color-primary)',
                   color: '#ffffff',
                 }}>
@@ -565,8 +565,8 @@ export default function QuickControlHub() {
                 onClick={cycleEyeComfort}
                 className="hub-glass-tile"
                 style={{
-                  padding: '10px',
-                  borderRadius: '12px',
+                  padding: '12px',
+                  borderRadius: '18px',
                   background: eyeComfort === 'warm' ? 'rgba(217, 119, 6, 0.12)' : eyeComfort === 'night' ? 'rgba(0, 229, 117, 0.18)' : 'var(--bg-secondary)',
                   border: eyeComfort === 'warm' ? '1.5px solid #d97706' : eyeComfort === 'night' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   cursor: 'pointer',
@@ -586,8 +586,8 @@ export default function QuickControlHub() {
                   <span style={{
                     fontSize: '0.62rem',
                     fontWeight: 900,
-                    padding: '2px 6px',
-                    borderRadius: '4px',
+                    padding: '2px 8px',
+                    borderRadius: '999px',
                     background: eyeComfort === 'warm' ? '#d97706' : eyeComfort === 'night' ? 'var(--color-primary)' : 'rgba(0,0,0,0.08)',
                     color: eyeComfort === 'night' ? '#011508' : eyeComfort === 'warm' ? '#ffffff' : 'var(--text-muted)',
                   }}>
@@ -604,8 +604,8 @@ export default function QuickControlHub() {
                 onClick={toggleSound}
                 className="hub-glass-tile"
                 style={{
-                  padding: '10px',
-                  borderRadius: '12px',
+                  padding: '12px',
+                  borderRadius: '18px',
                   background: isSoundOn ? 'rgba(0, 204, 102, 0.12)' : 'var(--bg-secondary)',
                   border: isSoundOn ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   cursor: 'pointer',
@@ -625,8 +625,8 @@ export default function QuickControlHub() {
                   <span style={{
                     fontSize: '0.62rem',
                     fontWeight: 900,
-                    padding: '2px 6px',
-                    borderRadius: '4px',
+                    padding: '2px 8px',
+                    borderRadius: '999px',
                     background: isSoundOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.08)',
                     color: isSoundOn ? '#ffffff' : 'var(--text-muted)',
                   }}>
@@ -643,8 +643,8 @@ export default function QuickControlHub() {
                 className="hub-glass-tile"
                 style={{
                   gridColumn: 'span 2',
-                  padding: '12px',
-                  borderRadius: '14px',
+                  padding: '14px',
+                  borderRadius: '20px',
                   background: isAdBlockOn ? 'linear-gradient(135deg, rgba(0, 102, 51, 0.12) 0%, rgba(0, 229, 117, 0.06) 100%)' : 'var(--bg-secondary)',
                   border: isAdBlockOn ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   display: 'flex',
@@ -660,7 +660,7 @@ export default function QuickControlHub() {
                     <div style={{
                       width: '32px',
                       height: '32px',
-                      borderRadius: '8px',
+                      borderRadius: '12px',
                       background: isAdBlockOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.08)',
                       color: isAdBlockOn ? '#ffffff' : 'var(--text-muted)',
                       display: 'flex',
@@ -679,8 +679,8 @@ export default function QuickControlHub() {
                           <span style={{
                             fontSize: '0.60rem',
                             fontWeight: 900,
-                            padding: '1px 5px',
-                            borderRadius: '4px',
+                            padding: '1px 6px',
+                            borderRadius: '999px',
                             background: 'var(--color-primary)',
                             color: '#ffffff',
                           }}>
@@ -701,8 +701,8 @@ export default function QuickControlHub() {
                     style={{
                       border: 'none',
                       background: isAdBlockOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.15)',
-                      padding: '4px 10px',
-                      borderRadius: '20px',
+                      padding: '5px 12px',
+                      borderRadius: '999px',
                       color: isAdBlockOn ? '#ffffff' : 'var(--text-muted)',
                       fontSize: '0.70rem',
                       fontWeight: 900,
@@ -730,8 +730,8 @@ export default function QuickControlHub() {
                 <div style={{
                   background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.18) 0%, rgba(0, 229, 117, 0.08) 100%)',
                   border: '1px solid rgba(0, 255, 102, 0.25)',
-                  borderRadius: '10px',
-                  padding: '10px 12px',
+                  borderRadius: '18px',
+                  padding: '10px 14px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
@@ -757,7 +757,7 @@ export default function QuickControlHub() {
                   <div style={{
                     background: 'rgba(0, 255, 102, 0.15)',
                     border: '1px solid rgba(0, 255, 102, 0.3)',
-                    borderRadius: '20px',
+                    borderRadius: '999px',
                     padding: '2px 8px',
                     fontSize: '0.62rem',
                     fontWeight: 900,
@@ -826,9 +826,9 @@ export default function QuickControlHub() {
                     className="quick-hub-input"
                     style={{
                       width: '100%',
-                      padding: isUrdu ? '6px 28px 6px 8px' : '6px 8px 6px 28px',
+                      padding: isUrdu ? '7px 32px 7px 12px' : '7px 12px 7px 32px',
                       fontSize: '0.72rem',
-                      borderRadius: '8px',
+                      borderRadius: '999px',
                       border: '1px solid var(--glass-border)',
                       background: 'var(--bg-secondary)',
                       color: 'var(--text-primary)',
@@ -895,14 +895,14 @@ export default function QuickControlHub() {
                             minHeight: '78px',
                             background: 'var(--bg-secondary)',
                             border: '1.2px solid var(--glass-border)',
-                            borderRadius: '12px',
+                            borderRadius: '18px',
                             overflow: 'hidden',
                             boxShadow: '0 3px 10px rgba(0, 70, 35, 0.05)',
                             position: 'relative',
                             transition: 'transform 0.18s ease, box-shadow 0.18s ease',
                           }}
                         >
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 10px' }}>
                             {/* Poster / Thumbnail with Progress Overlay */}
                             <Link
                               href={watchUrl}
@@ -913,7 +913,7 @@ export default function QuickControlHub() {
                               style={{
                                 width: '48px',
                                 height: '62px',
-                                borderRadius: '8px',
+                                borderRadius: '12px',
                                 overflow: 'hidden',
                                 position: 'relative',
                                 flexShrink: 0,
@@ -953,8 +953,8 @@ export default function QuickControlHub() {
                                 <span style={{
                                   fontSize: '0.6rem',
                                   fontWeight: 800,
-                                  padding: '1px 4px',
-                                  borderRadius: '3px',
+                                  padding: '2px 6px',
+                                  borderRadius: '999px',
                                   background: item.type === 'movie' ? '#006633' : '#059669',
                                   color: '#ffffff',
                                   textTransform: 'uppercase',
@@ -1031,9 +1031,9 @@ export default function QuickControlHub() {
                                 title={isUrdu ? 'دوبارہ چلائیں' : 'Resume'}
                                 style={{
                                   background: 'rgba(0, 102, 51, 0.1)',
-                                  borderRadius: '6px',
-                                  width: '26px',
-                                  height: '26px',
+                                  borderRadius: '50%',
+                                  width: '28px',
+                                  height: '28px',
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'center',
@@ -1054,9 +1054,9 @@ export default function QuickControlHub() {
                                 style={{
                                   background: 'rgba(239, 68, 68, 0.08)',
                                   border: 'none',
-                                  borderRadius: '6px',
-                                  width: '26px',
-                                  height: '26px',
+                                  borderRadius: '50%',
+                                  width: '28px',
+                                  height: '28px',
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'center',
@@ -1161,8 +1161,8 @@ export default function QuickControlHub() {
                       flexShrink: 0,
                       minHeight: '52px',
                       gap: '8px',
-                      padding: '6px 8px',
-                      borderRadius: '8px',
+                      padding: '8px 10px',
+                      borderRadius: '16px',
                       background: 'var(--bg-secondary)',
                       border: '1px solid var(--glass-border)',
                       textDecoration: 'none',
@@ -1171,7 +1171,7 @@ export default function QuickControlHub() {
                     <img 
                       src={item.poster} 
                       alt="" 
-                      style={{ width: '32px', height: '42px', borderRadius: '4px', objectFit: 'cover' }} 
+                      style={{ width: '32px', height: '42px', borderRadius: '10px', objectFit: 'cover' }} 
                     />
                     <div style={{ flexGrow: 1, minWidth: 0 }}>
                       <div style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -1208,8 +1208,8 @@ export default function QuickControlHub() {
                 style={{
                   background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.08) 0%, rgba(20, 150, 80, 0.05) 100%)',
                   border: '1px solid rgba(0, 102, 51, 0.18)',
-                  borderRadius: '12px',
-                  padding: '10px 12px',
+                  borderRadius: '18px',
+                  padding: '12px 14px',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
@@ -1233,8 +1233,8 @@ export default function QuickControlHub() {
                 style={{
                   background: 'var(--bg-secondary)',
                   border: '1.5px solid var(--glass-border)',
-                  borderRadius: '14px',
-                  padding: '12px',
+                  borderRadius: '18px',
+                  padding: '14px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
                 }}
               >
@@ -1253,8 +1253,8 @@ export default function QuickControlHub() {
                       fontWeight: 700,
                       background: 'rgba(0, 102, 51, 0.08)',
                       color: 'var(--color-primary)',
-                      padding: '2px 6px',
-                      borderRadius: '6px',
+                      padding: '2px 8px',
+                      borderRadius: '999px',
                     }}>
                       {watchlistItems.length} {isUrdu ? 'لسٹ' : 'list'}
                     </span>
@@ -1263,8 +1263,8 @@ export default function QuickControlHub() {
                       fontWeight: 700,
                       background: 'rgba(0, 102, 51, 0.08)',
                       color: 'var(--color-primary)',
-                      padding: '2px 6px',
-                      borderRadius: '6px',
+                      padding: '2px 8px',
+                      borderRadius: '999px',
                     }}>
                       {historyItems.length} {isUrdu ? 'ہسٹری' : 'history'}
                     </span>
@@ -1278,11 +1278,11 @@ export default function QuickControlHub() {
                       disabled={isPublishing}
                       style={{
                         width: '100%',
-                        padding: '10px 12px',
+                        padding: '10px 14px',
                         background: 'var(--color-primary)',
                         color: '#ffffff',
                         border: 'none',
-                        borderRadius: '10px',
+                        borderRadius: '999px',
                         fontSize: '0.78rem',
                         fontWeight: 800,
                         display: 'flex',
@@ -1317,8 +1317,8 @@ export default function QuickControlHub() {
                         justifyContent: 'space-between',
                         background: 'rgba(0, 102, 51, 0.05)',
                         border: '1.5px dashed rgba(0, 102, 51, 0.3)',
-                        borderRadius: '10px',
-                        padding: '8px 12px',
+                        borderRadius: '16px',
+                        padding: '10px 14px',
                         marginBottom: '8px',
                       }}
                     >
@@ -1338,8 +1338,8 @@ export default function QuickControlHub() {
                             background: isCopiedCode ? 'var(--color-primary)' : 'var(--bg-secondary)',
                             color: isCopiedCode ? '#ffffff' : 'var(--color-primary)',
                             border: '1px solid rgba(0, 102, 51, 0.2)',
-                            borderRadius: '8px',
-                            padding: '6px 8px',
+                            borderRadius: '999px',
+                            padding: '6px 10px',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
@@ -1361,8 +1361,8 @@ export default function QuickControlHub() {
                             background: isCopiedLink ? 'var(--color-primary)' : 'var(--bg-secondary)',
                             color: isCopiedLink ? '#ffffff' : 'var(--color-primary)',
                             border: '1px solid rgba(0, 102, 51, 0.2)',
-                            borderRadius: '8px',
-                            padding: '6px 8px',
+                            borderRadius: '999px',
+                            padding: '6px 10px',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
@@ -1386,11 +1386,11 @@ export default function QuickControlHub() {
                       disabled={isPublishing}
                       style={{
                         width: '100%',
-                        padding: '7px 10px',
+                        padding: '8px 12px',
                         background: 'transparent',
                         color: 'var(--color-primary)',
                         border: '1px solid rgba(0, 102, 51, 0.25)',
-                        borderRadius: '8px',
+                        borderRadius: '999px',
                         fontSize: '0.72rem',
                         fontWeight: 700,
                         display: 'flex',
@@ -1424,8 +1424,8 @@ export default function QuickControlHub() {
                 style={{
                   background: 'var(--bg-secondary)',
                   border: '1.5px solid var(--glass-border)',
-                  borderRadius: '14px',
-                  padding: '12px',
+                  borderRadius: '18px',
+                  padding: '14px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
                 }}
               >
@@ -1457,8 +1457,8 @@ export default function QuickControlHub() {
                     maxLength={10}
                     style={{
                       flex: 1,
-                      padding: '8px 10px',
-                      borderRadius: '8px',
+                      padding: '8px 14px',
+                      borderRadius: '999px',
                       border: '1px solid rgba(0, 102, 51, 0.25)',
                       fontSize: '0.85rem',
                       fontFamily: 'monospace',
@@ -1487,10 +1487,10 @@ export default function QuickControlHub() {
                     title={isUrdu ? 'پیسٹ کریں' : 'Paste Code'}
                     type="button"
                     style={{
-                      padding: '8px 10px',
+                      padding: '8px 12px',
                       background: 'rgba(0, 102, 51, 0.07)',
                       border: '1px solid rgba(0, 102, 51, 0.2)',
-                      borderRadius: '8px',
+                      borderRadius: '999px',
                       cursor: 'pointer',
                       color: 'var(--color-primary)',
                       display: 'flex',
@@ -1508,11 +1508,11 @@ export default function QuickControlHub() {
                     disabled={isLoadingFriend || !friendCodeInput.trim()}
                     type="button"
                     style={{
-                      padding: '8px 14px',
+                      padding: '8px 16px',
                       background: 'var(--color-primary)',
                       color: '#ffffff',
                       border: 'none',
-                      borderRadius: '8px',
+                      borderRadius: '999px',
                       cursor: (isLoadingFriend || !friendCodeInput.trim()) ? 'default' : 'pointer',
                       fontSize: '0.75rem',
                       fontWeight: 800,
@@ -1533,8 +1533,8 @@ export default function QuickControlHub() {
                 {friendFetchError && (
                   <div
                     style={{
-                      padding: '8px 10px',
-                      borderRadius: '8px',
+                      padding: '8px 12px',
+                      borderRadius: '14px',
                       background: '#fee2e2',
                       border: '1px solid #fca5a5',
                       color: '#991b1b',
@@ -1558,8 +1558,8 @@ export default function QuickControlHub() {
                     style={{
                       background: 'rgba(0, 102, 51, 0.04)',
                       border: '1px solid rgba(0, 102, 51, 0.2)',
-                      borderRadius: '10px',
-                      padding: '10px',
+                      borderRadius: '18px',
+                      padding: '12px',
                       marginTop: '8px',
                     }}
                   >
@@ -1576,8 +1576,8 @@ export default function QuickControlHub() {
                       <div style={{
                         flex: 1,
                         background: 'var(--bg-secondary)',
-                        padding: '6px 8px',
-                        borderRadius: '6px',
+                        padding: '8px 10px',
+                        borderRadius: '14px',
                         border: '1px solid var(--glass-border)',
                         textAlign: 'center',
                       }}>
@@ -1592,8 +1592,8 @@ export default function QuickControlHub() {
                       <div style={{
                         flex: 1,
                         background: 'var(--bg-secondary)',
-                        padding: '6px 8px',
-                        borderRadius: '6px',
+                        padding: '8px 10px',
+                        borderRadius: '14px',
                         border: '1px solid var(--glass-border)',
                         textAlign: 'center',
                       }}>
@@ -1611,11 +1611,11 @@ export default function QuickControlHub() {
                       <button
                         onClick={() => handleApplyLibrary('merge')}
                         style={{
-                          padding: '8px 10px',
+                          padding: '9px 14px',
                           background: 'var(--color-primary)',
                           color: '#ffffff',
                           border: 'none',
-                          borderRadius: '8px',
+                          borderRadius: '999px',
                           fontSize: '0.74rem',
                           fontWeight: 800,
                           cursor: 'pointer',
@@ -1642,11 +1642,11 @@ export default function QuickControlHub() {
                           if (confirmReplace) handleApplyLibrary('replace');
                         }}
                         style={{
-                          padding: '7px 10px',
+                          padding: '8px 14px',
                           background: 'transparent',
                           color: '#b91c1c',
                           border: '1px solid rgba(185, 28, 28, 0.3)',
-                          borderRadius: '8px',
+                          borderRadius: '999px',
                           fontSize: '0.70rem',
                           fontWeight: 700,
                           cursor: 'pointer',
@@ -1669,8 +1669,8 @@ export default function QuickControlHub() {
                 {importSuccess && (
                   <div
                     style={{
-                      padding: '8px 10px',
-                      borderRadius: '8px',
+                      padding: '8px 12px',
+                      borderRadius: '14px',
                       background: '#dcfce7',
                       border: '1px solid #86efac',
                       color: '#15803d',
@@ -1714,11 +1714,11 @@ export default function QuickControlHub() {
         }
         .quick-hub-scroll::-webkit-scrollbar-track {
           background: rgba(0, 102, 51, 0.04);
-          border-radius: 4px;
+          border-radius: 999px;
         }
         .quick-hub-scroll::-webkit-scrollbar-thumb {
           background: rgba(0, 102, 51, 0.25);
-          border-radius: 4px;
+          border-radius: 999px;
         }
         .quick-hub-scroll::-webkit-scrollbar-thumb:hover {
           background: var(--color-primary);
@@ -1734,8 +1734,8 @@ export default function QuickControlHub() {
             max-width: calc(100vw - 20px) !important;
             max-height: calc(100dvh - 78px - var(--sab, 0px)) !important;
             z-index: 10000 !important;
-            border-radius: 16px !important;
-            padding: 10px 10px 4px 10px !important;
+            border-radius: 22px !important;
+            padding: 12px 12px 6px 12px !important;
           }
         }
       `}</style>

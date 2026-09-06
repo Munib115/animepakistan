@@ -45,7 +45,7 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
           <div style={{
             width: '4px',
             height: '18px',
-            borderRadius: '2px',
+            borderRadius: '999px',
             background: 'var(--color-primary)',
           }} />
           <h2 style={{
@@ -85,9 +85,9 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
             <button
               onClick={() => scroll('left')}
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '6px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
                 background: 'var(--bg-secondary)',
                 border: '1px solid var(--glass-border)',
                 display: 'flex',
@@ -95,6 +95,7 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
                 justifyContent: 'center',
                 color: 'var(--text-primary)',
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
               aria-label="Scroll Left"
             >
@@ -105,9 +106,9 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
             <button
               onClick={() => scroll('right')}
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '6px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
                 background: 'var(--bg-secondary)',
                 border: '1px solid var(--glass-border)',
                 display: 'flex',
@@ -115,6 +116,7 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
                 justifyContent: 'center',
                 color: 'var(--text-primary)',
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
               aria-label="Scroll Right"
             >

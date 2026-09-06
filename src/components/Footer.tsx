@@ -39,7 +39,7 @@ export default function Footer() {
               <div style={{
                 width: '34px',
                 height: '34px',
-                borderRadius: '10px',
+                borderRadius: '12px',
                 overflow: 'hidden',
                 boxShadow: '0 4px 12px rgba(0, 102, 51, 0.3)',
                 flexShrink: 0,
@@ -57,8 +57,8 @@ export default function Footer() {
               <span style={{
                 fontSize: '0.68rem',
                 fontWeight: 900,
-                padding: '1px 6px',
-                borderRadius: '5px',
+                padding: '2px 8px',
+                borderRadius: '999px',
                 background: '#02180d',
                 border: '1px solid rgba(0, 204, 102, 0.4)',
                 display: 'inline-flex',

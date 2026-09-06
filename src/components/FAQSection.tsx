@@ -23,7 +23,7 @@ export default function FAQSection() {
     >
       <div className="glass-panel" style={{
         padding: 'clamp(24px, 4vw, 36px) clamp(16px, 3vw, 28px)',
-        borderRadius: '20px',
+        borderRadius: '24px',
         background: 'var(--glass-bg)',
         border: '1.5px solid var(--glass-border)',
       }}>
@@ -35,8 +35,8 @@ export default function FAQSection() {
             gap: '6px',
             background: 'rgba(0, 102, 51, 0.1)',
             color: 'var(--color-primary)',
-            padding: '4px 12px',
-            borderRadius: '9999px',
+            padding: '4px 14px',
+            borderRadius: '999px',
             fontSize: '0.78rem',
             fontWeight: 800,
             marginBottom: '8px',
@@ -85,7 +85,7 @@ export default function FAQSection() {
               <div 
                 key={idx}
                 style={{
-                  borderRadius: '14px',
+                  borderRadius: '18px',
                   border: isOpen ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   background: isOpen ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
                   boxShadow: isOpen ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 2px 8px rgba(0, 0, 0, 0.05)',

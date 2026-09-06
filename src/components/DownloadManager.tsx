@@ -33,7 +33,7 @@ export default function DownloadManager() {
               fontSize: '0.68rem',
               fontWeight: 800,
               padding: '2px 7px',
-              borderRadius: '10px',
+              borderRadius: '999px',
               border: '2px solid #ffffff',
               boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
               animation: 'pulse 1.5s infinite',
@@ -91,7 +91,7 @@ export default function DownloadManager() {
         .control-btn {
           width: 32px;
           height: 32px;
-          border-radius: 8px;
+          border-radius: 50%;
           border: 1px solid rgba(0,0,0,0.06);
           background: #f8fafc;
           color: #475569;
@@ -208,8 +208,8 @@ export default function DownloadManager() {
                     color: '#64748b',
                     background: 'rgba(0,0,0,0.04)',
                     border: 'none',
-                    padding: '6px 12px',
-                    borderRadius: '8px',
+                    padding: '6px 14px',
+                    borderRadius: '999px',
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                   }}
@@ -263,8 +263,8 @@ export default function DownloadManager() {
                       key={item.id}
                       className="download-item-card"
                       style={{
-                        padding: '14px',
-                        borderRadius: '12px',
+                        padding: '16px',
+                        borderRadius: '18px',
                         border: '1.5px solid var(--glass-border)',
                         background: 'var(--bg-secondary)',
                         boxShadow: '0 4px 12px rgba(0, 102, 51, 0.02)',
@@ -289,8 +289,8 @@ export default function DownloadManager() {
                           style={{
                             fontSize: '0.62rem',
                             fontWeight: 800,
-                            padding: '3px 8px',
-                            borderRadius: '6px',
+                            padding: '3px 10px',
+                            borderRadius: '999px',
                             textTransform: 'uppercase',
                             background: isCompleted
                               ? 'rgba(22, 163, 74, 0.1)'
@@ -324,7 +324,7 @@ export default function DownloadManager() {
                           style={{
                             width: '100%',
                             height: '6px',
-                            borderRadius: '4px',
+                            borderRadius: '999px',
                             background: 'var(--bg-tertiary)',
                             overflow: 'hidden',
                           }}
@@ -334,7 +334,7 @@ export default function DownloadManager() {
                               width: `${item.progress}%`,
                               height: '100%',
                               background: isCompleted ? '#16a34a' : isFailed ? '#ef4444' : 'var(--color-primary)',
-                              borderRadius: '4px',
+                              borderRadius: '999px',
                               transition: 'width 0.3s ease',
                             }}
                           />

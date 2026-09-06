@@ -245,8 +245,8 @@ function HeaderContent() {
             <span style={{
               fontSize: '0.60rem',
               fontWeight: 900,
-              padding: '2px 5px',
-              borderRadius: '4px',
+              padding: '2px 7px',
+              borderRadius: '999px',
               background: '#02180d',
               border: '1px solid rgba(0, 204, 102, 0.4)',
               boxShadow: '0 2px 6px rgba(0, 102, 51, 0.25)',
@@ -550,9 +550,9 @@ function HeaderContent() {
           display: flex;
           align-items: center;
           gap: 10px;
-          padding: 6px 10px 6px 14px;
+          padding: 6px 10px 6px 16px;
           border: 1.5px solid var(--glass-border);
-          border-radius: 14px;
+          border-radius: 999px;
           background: var(--bg-secondary);
           transition: border-color 0.2s, box-shadow 0.2s;
         }
@@ -584,7 +584,7 @@ function HeaderContent() {
           width: 32px;
           height: 32px;
           border: 0;
-          border-radius: 8px;
+          border-radius: 999px;
           background: rgba(255, 255, 255, 0.06);
           color: var(--text-secondary);
           cursor: pointer;
@@ -608,8 +608,8 @@ function HeaderContent() {
           align-items: center;
           gap: 6px;
           margin-top: 8px;
-          padding: 6px 12px;
-          border-radius: 8px;
+          padding: 6px 14px;
+          border-radius: 999px;
           background: rgba(0, 204, 102, 0.12);
           border: 1px solid rgba(0, 204, 102, 0.25);
           color: #00ff88;
@@ -637,8 +637,8 @@ function HeaderContent() {
           gap: 6px;
         }
         .search-tag-pill {
-          padding: 6px 12px;
-          border-radius: 8px;
+          padding: 6px 14px;
+          border-radius: 999px;
           background: var(--bg-secondary);
           border: 1px solid var(--glass-border);
           color: var(--text-primary);
@@ -671,7 +671,7 @@ function HeaderContent() {
         }
         .skeleton-row {
           height: 60px;
-          border-radius: 12px;
+          border-radius: 18px;
           background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.04) 75%);
           background-size: 200% 100%;
           animation: skeleton-shimmer 1.5s infinite;
@@ -692,8 +692,8 @@ function HeaderContent() {
           align-items: center;
           gap: 6px;
           margin-top: 8px;
-          padding: 8px 16px;
-          border-radius: 10px;
+          padding: 8px 18px;
+          border-radius: 999px;
           background: var(--color-primary);
           color: #ffffff;
           font-size: 0.82rem;
@@ -709,7 +709,7 @@ function HeaderContent() {
           align-items: center;
           gap: 12px;
           padding: 8px 12px;
-          border-radius: 14px;
+          border-radius: 18px;
           background: var(--bg-secondary);
           border: 1px solid var(--glass-border);
           text-decoration: none;
@@ -723,7 +723,7 @@ function HeaderContent() {
         .mobile-search-result img, .mobile-search-result > .material-symbols-outlined {
           width: 44px;
           height: 58px;
-          border-radius: 8px;
+          border-radius: 12px;
           object-fit: cover;
           background: var(--bg-tertiary);
           color: var(--color-primary);
@@ -757,8 +757,8 @@ function HeaderContent() {
         .search-badge {
           font-size: 0.65rem;
           font-weight: 700;
-          padding: 1px 6px;
-          border-radius: 4px;
+          padding: 2px 8px;
+          border-radius: 999px;
           text-transform: uppercase;
         }
         .search-badge.series {

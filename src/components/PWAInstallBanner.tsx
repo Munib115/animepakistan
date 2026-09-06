@@ -140,7 +140,7 @@ export default function PWAInstallBanner() {
           <div style={{
             width: '38px',
             height: '38px',
-            borderRadius: '11px',
+            borderRadius: '14px',
             overflow: 'hidden',
             boxShadow: '0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.8)',
             border: '1px solid rgba(255, 255, 255, 0.75)',
@@ -175,8 +175,8 @@ export default function PWAInstallBanner() {
               <span style={{
                 fontSize: '0.58rem',
                 fontWeight: 900,
-                padding: '1px 5px',
-                borderRadius: '4px',
+                padding: '2px 8px',
+                borderRadius: '999px',
                 background: 'rgba(0, 255, 102, 0.25)',
                 color: '#ffffff',
                 border: '1px solid rgba(255, 255, 255, 0.8)',
@@ -210,10 +210,10 @@ export default function PWAInstallBanner() {
             type="button"
             onClick={handleInstallClick}
             style={{
-              padding: '7px 13px',
+              padding: '7px 16px',
               fontSize: '0.74rem',
               fontWeight: 900,
-              borderRadius: '10px',
+              borderRadius: '999px',
               display: 'flex',
               alignItems: 'center',
               gap: '4px',

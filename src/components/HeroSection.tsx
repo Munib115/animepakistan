@@ -77,8 +77,8 @@ export default function HeroSection({ moviesCount, seriesCount }: HeroSectionPro
           fontSize: '0.82rem',
           fontWeight: 600,
           background: 'var(--bg-secondary)',
-          padding: '6px 12px',
-          borderRadius: '8px',
+          padding: '6px 14px',
+          borderRadius: '999px',
           border: '1px solid var(--glass-border)',
           boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
         }}>
@@ -93,8 +93,8 @@ export default function HeroSection({ moviesCount, seriesCount }: HeroSectionPro
           fontSize: '0.82rem',
           fontWeight: 600,
           background: 'var(--bg-secondary)',
-          padding: '6px 12px',
-          borderRadius: '8px',
+          padding: '6px 14px',
+          borderRadius: '999px',
           border: '1px solid var(--glass-border)',
           boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
         }}>
@@ -109,8 +109,8 @@ export default function HeroSection({ moviesCount, seriesCount }: HeroSectionPro
           fontSize: '0.82rem',
           fontWeight: 600,
           background: 'var(--bg-secondary)',
-          padding: '6px 12px',
-          borderRadius: '8px',
+          padding: '6px 14px',
+          borderRadius: '999px',
           border: '1px solid var(--glass-border)',
           boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
         }}>

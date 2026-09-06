@@ -328,7 +328,7 @@ html.eye-comfort-night [aria-label*="Frequently Asked Questions"] .glass-panel {
   border-color: rgba(0, 229, 117, 0.25) !important;
 }
 
-html.eye-comfort-night [aria-label*="Frequently Asked Questions"] div[style*="border-radius: 14px"] {
+html.eye-comfort-night [aria-label*="Frequently Asked Questions"] div[style*="border-radius: 18px"] {
   background: #07130a !important;
   border-color: rgba(0, 229, 117, 0.22) !important;
   color: #f0fdf4 !important;
@@ -399,7 +399,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 102, 51, 0.2);
-  border-radius: 4px;
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary);
@@ -434,7 +434,7 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   -webkit-backdrop-filter: blur(18px) saturate(180%);
   border: 1.5px solid var(--glass-border);
   box-shadow: var(--glass-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-  border-radius: 18px;
+  border-radius: 24px;
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
@@ -445,7 +445,7 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   background: var(--bg-secondary);
   border: 1.2px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  border-radius: 14px;
+  border-radius: 20px;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
   position: relative;
   overflow: hidden;
@@ -486,7 +486,7 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 .glass-input {
   background: #ffffff;
   border: 1.5px solid var(--glass-border);
-  border-radius: 12px;
+  border-radius: 18px;
   color: var(--text-primary);
   font-family: inherit;
   font-size: 0.95rem;
@@ -507,13 +507,13 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 .glass-btn {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   border: 1px solid rgba(0, 102, 51, 0.3);
-  border-radius: 10px;
+  border-radius: 999px;
   color: #ffffff;
   cursor: pointer;
   font-family: inherit;
   font-size: 0.95rem;
-  font-weight: 600;
-  padding: 12px 20px;
+  font-weight: 700;
+  padding: 12px 22px;
   transition: transform 0.15s ease, box-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
@@ -537,13 +537,13 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 .glass-btn-secondary {
   background: #ffffff;
   border: 1.5px solid var(--glass-border);
-  border-radius: 10px;
+  border-radius: 999px;
   color: var(--color-primary);
   cursor: pointer;
   font-family: inherit;
   font-size: 0.95rem;
-  font-weight: 600;
-  padding: 12px 20px;
+  font-weight: 700;
+  padding: 12px 22px;
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
@@ -724,16 +724,16 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   display: flex;
   align-items: center;
   background: rgba(0, 102, 51, 0.08);
-  padding: 2px;
-  border-radius: 7px;
+  padding: 3px;
+  border-radius: 999px;
   border: 1px solid var(--glass-border);
-  gap: 1px;
+  gap: 2px;
   flex-shrink: 0;
 }
 
 .header-lang-btn {
-  padding: 2px 4px;
-  border-radius: 4px;
+  padding: 2px 6px;
+  border-radius: 999px;
   border: none;
   font-weight: 800;
   font-size: 0.60rem;
@@ -743,14 +743,14 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 
 @media (min-width: 480px) {
   .header-lang-pill {
-    padding: 2px;
-    border-radius: 8px;
-    gap: 2px;
+    padding: 3px 4px;
+    border-radius: 999px;
+    gap: 3px;
   }
   .header-lang-btn {
-    padding: 3px 6px;
+    padding: 3px 8px;
     font-size: 0.68rem;
-    border-radius: 5px;
+    border-radius: 999px;
   }
 }
 
@@ -764,8 +764,8 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   background: rgba(0, 102, 51, 0.1);
   border: 1px solid rgba(0, 102, 51, 0.25);
   color: var(--color-primary);
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -778,8 +778,8 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   background: #ffffff;
   border: 1px solid rgba(0, 102, 51, 0.15);
   color: var(--text-secondary);
-  padding: 3px 8px;
-  border-radius: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 600;
   display: inline-flex;
@@ -880,9 +880,9 @@ body::after {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 6px 4px 12px;
+  padding: 4px 6px 4px 14px;
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  border-radius: 999px;
   background: var(--bg-secondary);
 }
 
@@ -903,7 +903,7 @@ body::after {
   width: 36px;
   height: 36px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 999px;
   background: rgba(0, 102, 51, 0.1);
   color: var(--color-primary);
   cursor: pointer;
@@ -928,7 +928,7 @@ body::after {
   align-items: center;
   gap: 10px;
   padding: 7px;
-  border-radius: 14px;
+  border-radius: 18px;
   background: var(--bg-secondary);
   border: 1px solid var(--glass-border);
 }
@@ -937,7 +937,7 @@ body::after {
 .mobile-search-result > .material-symbols-outlined {
   width: 38px;
   height: 52px;
-  border-radius: 9px;
+  border-radius: 12px;
   object-fit: cover;
   background: var(--bg-tertiary);
   color: var(--color-primary);
@@ -1126,7 +1126,7 @@ body::after {
   width: 360px !important;
   max-width: 90vw !important;
   z-index: 99998 !important;
-  border-radius: 16px !important;
+  border-radius: 24px !important;
   box-shadow: 0 12px 32px rgba(0, 51, 25, 0.22) !important;
   padding: 8px 10px !important;
   gap: 8px !important;
@@ -1139,7 +1139,7 @@ body::after {
     right: 10px !important;
     width: auto !important;
     max-width: none !important;
-    border-radius: 14px !important;
+    border-radius: 20px !important;
   }
 }
 

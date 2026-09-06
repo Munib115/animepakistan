@@ -427,8 +427,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             alignItems: 'center',
             gap: '8px',
             background: 'rgba(0, 102, 51, 0.08)',
-            padding: '5px 12px',
-            borderRadius: '20px',
+            padding: '5px 14px',
+            borderRadius: '999px',
             border: '1px solid var(--glass-border)',
           }}>
             <div style={{
@@ -447,7 +447,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             </div>
 
             {isEditingName ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <input
                   type="text"
                   value={newName}
@@ -455,8 +455,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                   maxLength={24}
                   style={{
                     fontSize: '0.75rem',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
+                    padding: '3px 10px',
+                    borderRadius: '999px',
                     border: '1px solid var(--color-primary)',
                     background: 'var(--bg-secondary)',
                     color: 'var(--text-primary)',
@@ -470,8 +470,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                     border: 'none',
                     background: 'var(--color-primary)',
                     color: '#ffffff',
-                    padding: '2px 8px',
-                    borderRadius: '4px',
+                    padding: '3px 12px',
+                    borderRadius: '999px',
                     fontSize: '0.7rem',
                     fontWeight: 700,
                     cursor: 'pointer',
@@ -511,8 +511,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
       <form onSubmit={handleSubmit} style={{
         background: 'var(--bg-secondary)',
         border: '1.5px solid var(--glass-border)',
-        borderRadius: '16px',
-        padding: '16px',
+        borderRadius: '22px',
+        padding: '18px 20px',
         marginBottom: '28px',
         boxShadow: '0 4px 16px rgba(0, 102, 51, 0.06)',
       }}>
@@ -542,8 +542,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             background: 'rgba(0, 102, 51, 0.07)',
             backdropFilter: 'blur(16px)',
             border: '1.5px solid rgba(0, 204, 102, 0.4)',
-            padding: '10px 16px',
-            borderRadius: '12px',
+            padding: '12px 18px',
+            borderRadius: '18px',
             marginTop: '10px',
             gap: '12px',
           }}>
@@ -565,8 +565,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                 fontWeight: 800,
                 color: 'var(--color-primary)',
                 background: 'rgba(0, 204, 102, 0.15)',
-                padding: '2px 6px',
-                borderRadius: '4px',
+                padding: '3px 8px',
+                borderRadius: '999px',
               }}>
                 WebRTC ANC Active
               </span>
@@ -623,8 +623,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '7px 14px',
-                  borderRadius: '10px',
+                  padding: '8px 18px',
+                  borderRadius: '999px',
                   border: '1.5px solid rgba(0, 102, 51, 0.2)',
                   background: 'rgba(0, 102, 51, 0.06)',
                   backdropFilter: 'blur(10px)',
@@ -647,8 +647,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '7px 16px',
-                  borderRadius: '10px',
+                  padding: '8px 18px',
+                  borderRadius: '999px',
                   border: '1.5px solid #ef4444',
                   background: 'rgba(239, 68, 68, 0.12)',
                   color: '#ef4444',
@@ -692,7 +692,7 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             textAlign: 'center',
             padding: '36px 16px',
             background: 'rgba(0, 102, 51, 0.03)',
-            borderRadius: '12px',
+            borderRadius: '18px',
             border: '1px dashed var(--glass-border)',
           }}>
             <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--color-primary)', opacity: 0.7 }}>
@@ -709,8 +709,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
               style={{
                 background: 'var(--bg-secondary)',
                 border: '1px solid var(--glass-border)',
-                borderRadius: '14px',
-                padding: '14px 16px',
+                borderRadius: '18px',
+                padding: '16px 18px',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)',
               }}
             >
@@ -758,8 +758,8 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
                     border: 'none',
                     background: likedMap[item.id] ? 'rgba(239, 68, 68, 0.1)' : 'rgba(0, 102, 51, 0.05)',
                     color: likedMap[item.id] ? '#ef4444' : 'var(--text-muted)',
-                    padding: '4px 8px',
-                    borderRadius: '6px',
+                    padding: '4px 10px',
+                    borderRadius: '999px',
                     fontSize: '0.75rem',
                     fontWeight: 700,
                     cursor: 'pointer',

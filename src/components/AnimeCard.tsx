@@ -131,8 +131,8 @@ export default function AnimeCard({ item }: AnimeCardProps) {
               color: '#ffffff',
               fontSize: '0.65rem',
               fontWeight: 800,
-              padding: '2px 6px',
-              borderRadius: '4px',
+              padding: '2px 8px',
+              borderRadius: '999px',
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
               boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
@@ -150,8 +150,8 @@ export default function AnimeCard({ item }: AnimeCardProps) {
                   color: '#fbbf24',
                   fontSize: '0.65rem',
                   fontWeight: 800,
-                  padding: '2px 6px',
-                  borderRadius: '4px',
+                  padding: '2px 7px',
+                  borderRadius: '999px',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '2px',
@@ -174,7 +174,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
                   justifyContent: 'center',
                   width: '24px',
                   height: '24px',
-                  borderRadius: '6px',
+                  borderRadius: '50%',
                   border: inList ? '1px solid #00ff66' : '1px solid rgba(255, 255, 255, 0.35)',
                   background: inList ? 'rgba(0, 102, 51, 0.9)' : 'rgba(0, 0, 0, 0.65)',
                   backdropFilter: 'blur(6px)',
@@ -211,8 +211,8 @@ export default function AnimeCard({ item }: AnimeCardProps) {
                   color: '#e6f4ea',
                   fontSize: '0.6rem',
                   fontWeight: 700,
-                  padding: '1px 5px',
-                  borderRadius: '3px',
+                  padding: '1px 7px',
+                  borderRadius: '999px',
                   border: '0.5px solid rgba(255,255,255,0.2)',
                 }}>
                   {lang}
@@ -224,8 +224,8 @@ export default function AnimeCard({ item }: AnimeCardProps) {
                   color: '#ffffff',
                   fontSize: '0.6rem',
                   fontWeight: 700,
-                  padding: '1px 4px',
-                  borderRadius: '3px',
+                  padding: '1px 6px',
+                  borderRadius: '999px',
                 }}>
                   +{item.audioLanguages.length - 2}
                 </span>

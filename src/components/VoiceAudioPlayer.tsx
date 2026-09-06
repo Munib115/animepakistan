@@ -103,8 +103,8 @@ export default function VoiceAudioPlayer({ src, duration, onDelete, isOwner = fa
       WebkitBackdropFilter: 'blur(20px) saturate(180%)',
       border: '1.5px solid var(--glass-border)',
       boxShadow: 'var(--glass-shadow)',
-      padding: '8px 14px',
-      borderRadius: '16px',
+      padding: '8px 16px',
+      borderRadius: '999px',
       maxWidth: '100%',
       width: '360px',
       boxSizing: 'border-box',
@@ -191,8 +191,8 @@ export default function VoiceAudioPlayer({ src, duration, onDelete, isOwner = fa
             fontWeight: 800,
             fontSize: '0.62rem',
             background: 'rgba(0, 102, 51, 0.08)',
-            padding: '1px 5px',
-            borderRadius: '4px',
+            padding: '2px 8px',
+            borderRadius: '999px',
             letterSpacing: '0.02em',
           }}>
             <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#00cc66', display: 'inline-block' }} />

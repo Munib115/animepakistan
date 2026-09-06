@@ -55,7 +55,7 @@ export default function ContinueWatchingSection() {
           <div style={{
             width: '4px',
             height: '16px',
-            borderRadius: '2px',
+            borderRadius: '999px',
             background: 'var(--color-primary)',
           }} />
           <h2 style={{
@@ -102,7 +102,7 @@ export default function ContinueWatchingSection() {
               style={{
                 flexShrink: 0,
                 width: '190px',
-                borderRadius: '12px',
+                borderRadius: '18px',
                 overflow: 'hidden',
                 position: 'relative',
                 background: 'var(--bg-secondary)',
@@ -188,8 +188,8 @@ export default function ContinueWatchingSection() {
                     color: '#00ff88',
                     fontSize: '0.62rem',
                     fontWeight: 800,
-                    padding: '1px 5px',
-                    borderRadius: '4px',
+                    padding: '2px 7px',
+                    borderRadius: '999px',
                     border: '1px solid rgba(0, 255, 102, 0.3)',
                     lineHeight: 1.2,
                   }}>

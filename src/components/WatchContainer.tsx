@@ -629,7 +629,7 @@ export default function WatchContainer({
           padding: '10px 16px',
           background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.95) 0%, rgba(3, 30, 15, 0.95) 100%)',
           backdropFilter: 'blur(12px)',
-          borderRadius: '12px',
+          borderRadius: '18px',
           border: '1px solid rgba(0, 255, 102, 0.4)',
           boxShadow: '0 4px 16px rgba(0, 102, 51, 0.3)',
           color: '#ffffff',
@@ -654,8 +654,8 @@ export default function WatchContainer({
                 handleSeek('right');
               }}
               style={{
-                padding: '5px 12px',
-                borderRadius: '6px',
+                padding: '5px 14px',
+                borderRadius: '999px',
                 background: '#00ff66',
                 color: '#011508',
                 fontSize: '0.75rem',
@@ -674,8 +674,8 @@ export default function WatchContainer({
             <button
               onClick={() => setShowResumeBanner(false)}
               style={{
-                padding: '5px 8px',
-                borderRadius: '6px',
+                padding: '5px 10px',
+                borderRadius: '999px',
                 background: 'rgba(255,255,255,0.15)',
                 color: '#ffffff',
                 fontSize: '0.75rem',
@@ -827,10 +827,10 @@ export default function WatchContainer({
                     disabled={isRetryingStream}
                     className="glass-btn-primary"
                     style={{
-                      padding: '8px 20px',
+                      padding: '8px 22px',
                       fontSize: '0.85rem',
                       fontWeight: 800,
-                      borderRadius: '10px',
+                      borderRadius: '999px',
                       cursor: isRetryingStream ? 'wait' : 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -863,8 +863,8 @@ export default function WatchContainer({
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
             border: '1px solid rgba(255, 255, 255, 0.15)',
-            padding: '3px 8px',
-            borderRadius: '6px',
+            padding: '3px 10px',
+            borderRadius: '999px',
             boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
             opacity: 0.72,
           }}>
@@ -899,8 +899,8 @@ export default function WatchContainer({
             gap: '4px',
             background: 'rgba(0, 102, 51, 0.65)',
             backdropFilter: 'blur(8px)',
-            padding: '3px 8px',
-            borderRadius: '6px',
+            padding: '3px 10px',
+            borderRadius: '999px',
             fontSize: '0.62rem',
             fontWeight: 800,
             color: '#6ee7b7',
@@ -927,7 +927,7 @@ export default function WatchContainer({
               prefetch={true}
               onClick={() => sound.playEpisodeSelect()}
               className="glass-btn-secondary"
-              style={{ padding: '7px 14px', fontSize: '0.8rem', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '7px 16px', fontSize: '0.8rem', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
               title={`Previous: S${prevEp.season || 1} Ep ${prevEp.number}`}
             >
               <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
@@ -939,7 +939,7 @@ export default function WatchContainer({
             <button
               disabled
               className="glass-btn-secondary"
-              style={{ padding: '7px 14px', fontSize: '0.8rem', borderRadius: '8px', opacity: 0.38, cursor: 'not-allowed', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '7px 16px', fontSize: '0.8rem', borderRadius: '999px', opacity: 0.38, cursor: 'not-allowed', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
             >
               <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>
                 {language === 'ur' ? 'skip_next' : 'skip_previous'}
@@ -954,7 +954,7 @@ export default function WatchContainer({
               prefetch={true}
               onClick={() => sound.playEpisodeSelect()}
               className="glass-btn"
-              style={{ padding: '7px 14px', fontSize: '0.8rem', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '7px 16px', fontSize: '0.8rem', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
               title={`Next: S${nextEp.season || 1} Ep ${nextEp.number}`}
             >
               <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'اگلی قسط' : 'Next Ep'}</span>
@@ -1000,11 +1000,11 @@ export default function WatchContainer({
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '4px',
-                  padding: '5px 10px',
+                  padding: '5px 12px',
                   fontSize: '0.74rem',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  borderRadius: '6px',
+                  borderRadius: '999px',
                   background: playlistSortOrder === 'desc' ? 'rgba(0, 102, 51, 0.18)' : 'var(--bg-secondary)',
                   border: playlistSortOrder === 'desc' ? '1px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   color: playlistSortOrder === 'desc' ? 'var(--color-primary)' : 'var(--text-secondary)',
@@ -1044,8 +1044,8 @@ export default function WatchContainer({
                   sound.playTabSwitch();
                 }}
                 style={{
-                  padding: '6px 14px',
-                  borderRadius: '8px',
+                  padding: '6px 16px',
+                  borderRadius: '999px',
                   border: selectedSeason === 'ALL' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   background: selectedSeason === 'ALL' ? 'var(--color-primary)' : 'var(--bg-secondary)',
                   color: selectedSeason === 'ALL' ? '#ffffff' : 'var(--text-secondary)',
@@ -1067,8 +1067,8 @@ export default function WatchContainer({
                     sound.playTabSwitch();
                   }}
                   style={{
-                    padding: '6px 14px',
-                    borderRadius: '8px',
+                    padding: '6px 16px',
+                    borderRadius: '999px',
                     border: selectedSeason === s ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                     background: selectedSeason === s ? 'var(--color-primary)' : 'var(--bg-secondary)',
                     color: selectedSeason === s ? '#ffffff' : 'var(--text-secondary)',
@@ -1120,13 +1120,13 @@ export default function WatchContainer({
                     textDecoration: 'none',
                     border: isCurrent ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                     background: isCurrent ? 'rgba(0, 102, 51, 0.18)' : 'var(--bg-secondary)',
-                    borderRadius: '8px',
+                    borderRadius: '16px',
                   }}
                 >
                   <div style={{
                     width: '64px',
                     height: '40px',
-                    borderRadius: '4px',
+                    borderRadius: '10px',
                     overflow: 'hidden',
                     position: 'relative',
                     background: 'linear-gradient(135deg, #004d26 0%, #006633 100%)',
@@ -1181,8 +1181,8 @@ export default function WatchContainer({
                         fontWeight: 800,
                         color: 'var(--color-primary)',
                         background: 'rgba(0, 102, 51, 0.08)',
-                        padding: '1px 5px',
-                        borderRadius: '4px',
+                        padding: '1px 6px',
+                        borderRadius: '999px',
                       }}>
                         S{epSeason}:E{ep.number}
                       </span>
@@ -1192,8 +1192,8 @@ export default function WatchContainer({
                           fontWeight: 800,
                           color: '#ffffff',
                           background: 'var(--color-primary)',
-                          padding: '1px 5px',
-                          borderRadius: '4px',
+                          padding: '1px 6px',
+                          borderRadius: '999px',
                         }}>
                           {language === 'ur' ? 'چل رہا ہے' : 'PLAYING'}
                         </span>

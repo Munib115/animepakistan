@@ -196,7 +196,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                 width: '100%',
                 paddingTop: '142%',
                 position: 'relative',
-                borderRadius: '12px',
+                borderRadius: '22px',
                 overflow: 'hidden',
                 boxShadow: '0 8px 24px rgba(0, 102, 51, 0.18)',
                 border: '2px solid var(--glass-border)',
@@ -291,8 +291,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '5px',
-                      padding: '10px 6px',
-                      borderRadius: '8px',
+                      padding: '10px 14px',
+                      borderRadius: '999px',
                       fontSize: '0.78rem',
                       fontWeight: 700,
                       border: inList ? '1.5px solid #00ff66' : '1px solid var(--glass-border)',
@@ -321,8 +321,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '5px',
-                      padding: '10px 6px',
-                      borderRadius: '8px',
+                      padding: '10px 14px',
+                      borderRadius: '999px',
                       fontSize: '0.78rem',
                       fontWeight: 700,
                       border: isShareCopied ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
@@ -376,8 +376,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                     gap: '4px',
                     background: 'var(--bg-secondary)',
                     border: '1px solid var(--glass-border)',
-                    padding: '3px 8px',
-                    borderRadius: '6px',
+                    padding: '4px 10px',
+                    borderRadius: '999px',
                     fontSize: '0.75rem',
                     fontWeight: 700,
                     color: '#b45309'
@@ -418,8 +418,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                     color: 'var(--color-primary)',
                     fontSize: '0.75rem',
                     fontWeight: 600,
-                    padding: '4px 10px',
-                    borderRadius: '6px',
+                    padding: '5px 12px',
+                    borderRadius: '999px',
                     border: '1px solid rgba(0, 102, 51, 0.15)'
                   }}>
                     {genre}
@@ -439,8 +439,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                         background: 'var(--bg-secondary)',
                         border: '1px solid var(--color-primary)',
                         color: 'var(--color-primary)',
-                        padding: '3px 8px',
-                        borderRadius: '6px',
+                        padding: '4px 12px',
+                        borderRadius: '999px',
                         fontSize: '0.75rem',
                         fontWeight: 700,
                       }}>
@@ -454,8 +454,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
               {/* Description */}
               <div style={{
                 background: 'var(--bg-secondary)',
-                padding: '16px',
-                borderRadius: '10px',
+                padding: '18px 20px',
+                borderRadius: '20px',
                 border: '1px solid var(--glass-border)',
                 marginTop: '4px',
               }}>
@@ -526,8 +526,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                       sound.playTabSwitch();
                     }}
                     style={{
-                      padding: '6px 14px',
-                      borderRadius: '8px',
+                      padding: '7px 16px',
+                      borderRadius: '999px',
                       border: selectedSeason === 'ALL' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                       background: selectedSeason === 'ALL' ? 'var(--color-primary)' : 'var(--bg-secondary)',
                       color: selectedSeason === 'ALL' ? '#ffffff' : 'var(--text-secondary)',
@@ -549,8 +549,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                         sound.playTabSwitch();
                       }}
                       style={{
-                        padding: '6px 14px',
-                        borderRadius: '8px',
+                        padding: '7px 16px',
+                        borderRadius: '999px',
                         border: selectedSeason === s ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                         background: selectedSeason === s ? 'var(--color-primary)' : 'var(--bg-secondary)',
                         color: selectedSeason === s ? '#ffffff' : 'var(--text-secondary)',
@@ -580,7 +580,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                   <div style={{ position: 'relative', flex: '1 1 220px', maxWidth: '340px' }}>
                     <span className="material-symbols-outlined" style={{
                       position: 'absolute',
-                      left: '10px',
+                      left: '12px',
                       top: '50%',
                       transform: 'translateY(-50%)',
                       fontSize: '18px',
@@ -596,9 +596,9 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                       className="glass-input"
                       style={{
                         width: '100%',
-                        padding: '8px 12px 8px 34px',
+                        padding: '9px 16px 9px 36px',
                         fontSize: '0.82rem',
-                        borderRadius: '8px',
+                        borderRadius: '999px',
                       }}
                     />
                   </div>
@@ -616,11 +616,11 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',
-                      padding: '7px 14px',
+                      padding: '8px 16px',
                       fontSize: '0.78rem',
                       fontWeight: 700,
                       cursor: 'pointer',
-                      borderRadius: '8px',
+                      borderRadius: '999px',
                       background: sortOrder === 'desc' ? 'rgba(0, 102, 51, 0.18)' : 'var(--bg-secondary)',
                       border: sortOrder === 'desc' ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                       color: sortOrder === 'desc' ? 'var(--color-primary)' : 'var(--text-secondary)',
@@ -666,16 +666,16 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                         display: 'flex',
                         alignItems: 'center',
                         gap: '12px',
-                        padding: '10px',
+                        padding: '12px',
                         textDecoration: 'none',
-                        borderRadius: '10px',
+                        borderRadius: '18px',
                       }}
                     >
                       {/* Thumbnail */}
                       <div style={{
                         width: '80px',
                         height: '50px',
-                        borderRadius: '6px',
+                        borderRadius: '12px',
                         overflow: 'hidden',
                         position: 'relative',
                         background: 'linear-gradient(135deg, #004d26 0%, #006633 100%)',
@@ -744,9 +744,9 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                           display: 'inline-flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          width: '32px',
-                          height: '32px',
-                          borderRadius: '8px',
+                          width: '34px',
+                          height: '34px',
+                          borderRadius: '50%',
                           border: copiedEpSlug === ep.slug ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
                           background: copiedEpSlug === ep.slug ? 'rgba(22, 163, 74, 0.12)' : 'var(--bg-secondary)',
                           color: copiedEpSlug === ep.slug ? '#16a34a' : 'var(--text-secondary)',
@@ -770,7 +770,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                 textAlign: 'center',
                 color: 'var(--text-muted)',
                 background: 'var(--bg-secondary)',
-                borderRadius: '10px',
+                borderRadius: '18px',
                 border: '1px dashed var(--glass-border)'
               }}>
                 {t('loadingEpisodes')}
@@ -822,7 +822,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                       display: 'flex',
                       flexDirection: 'column',
                       padding: '10px',
-                      borderRadius: '10px',
+                      borderRadius: '18px',
                       textDecoration: 'none',
                       gap: '8px',
                       transition: 'transform 0.2s, border-color 0.2s',
@@ -831,7 +831,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                     <div style={{
                       width: '100%',
                       aspectRatio: '16/9',
-                      borderRadius: '6px',
+                      borderRadius: '12px',
                       overflow: 'hidden',
                       background: 'var(--bg-secondary)',
                       position: 'relative',
@@ -854,8 +854,8 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                         right: '6px',
                         background: isMovieItem ? 'rgba(220, 38, 38, 0.88)' : 'rgba(0, 102, 51, 0.88)',
                         color: '#ffffff',
-                        padding: '2px 6px',
-                        borderRadius: '4px',
+                        padding: '3px 8px',
+                        borderRadius: '999px',
                         fontSize: '0.65rem',
                         fontWeight: 800,
                         backdropFilter: 'blur(4px)',

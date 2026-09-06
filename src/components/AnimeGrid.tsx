@@ -217,8 +217,8 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
               className="glass-input"
               style={{
                 width: '100%',
-                padding: '10px 72px 10px 42px',
-                borderRadius: '16px',
+                padding: '11px 72px 11px 42px',
+                borderRadius: '999px',
                 border: '1.5px solid var(--glass-border)',
                 background: 'var(--bg-secondary)',
                 color: 'var(--text-primary)',
@@ -282,7 +282,7 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
             display: 'flex',
             background: 'rgba(0, 102, 51, 0.08)',
             padding: '4px',
-            borderRadius: '14px',
+            borderRadius: '999px',
             gap: '4px',
             border: '1px solid var(--glass-border)',
           }}>
@@ -298,8 +298,8 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
                   handleTypeChange(type.id);
                 }}
                 style={{
-                  padding: '7px 14px',
-                  borderRadius: '10px',
+                  padding: '7px 16px',
+                  borderRadius: '999px',
                   border: 'none',
                   background: selectedType === type.id ? 'var(--color-primary)' : 'transparent',
                   color: selectedType === type.id ? '#ffffff' : 'var(--text-secondary)',
@@ -347,7 +347,7 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
               style={{
                 minWidth: '28px',
                 height: '28px',
-                borderRadius: '8px',
+                borderRadius: '999px',
                 border: selectedLetter === letter ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                 background: selectedLetter === letter ? 'var(--color-primary)' : 'var(--bg-secondary)',
                 color: selectedLetter === letter ? '#ffffff' : 'var(--text-secondary)',
@@ -424,7 +424,7 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
           <div style={{
             width: '4px',
             height: '18px',
-            borderRadius: '2px',
+            borderRadius: '999px',
             background: 'var(--color-primary)',
             flexShrink: 0,
           }} />
@@ -498,7 +498,7 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
               <button
                 onClick={() => setDisplayCount((prev) => prev + 24)}
                 className="glass-btn-secondary"
-                style={{ padding: '8px 20px', fontSize: '0.82rem', borderRadius: '10px' }}
+                style={{ padding: '9px 24px', fontSize: '0.82rem', borderRadius: '999px' }}
               >
                 <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>expand_more</span>
                 <span>{language === 'ur' ? 'مزید لوڈ کریں' : 'Load More Anime'}</span>

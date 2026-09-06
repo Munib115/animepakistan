@@ -214,12 +214,12 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           margin-inline-end: auto;
         }
         .cinematic-hero-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 8px; }
-        .cinematic-hero-meta span, .cinematic-hero-genres { padding: 4px 9px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 7px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: rgba(255, 255, 255, 0.94); font-size: 0.75rem; font-weight: 700; }
+        .cinematic-hero-meta span, .cinematic-hero-genres { padding: 4px 11px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 999px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: rgba(255, 255, 255, 0.94); font-size: 0.75rem; font-weight: 700; }
         .cinematic-hero-content h2 { max-width: 650px; margin: 0 0 8px 0; color: #fff; font-size: clamp(1.65rem, 3.2vw, 2.4rem); font-weight: 900; letter-spacing: -0.025em; line-height: 1.15; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85); }
         .cinematic-hero-genres { display: inline-flex; align-items: center; margin: 0 0 8px 0; color: #9af0bc; }
         .cinematic-hero-description { display: -webkit-box; max-width: 600px; margin: 0 0 16px 0; overflow: hidden; color: rgba(255, 255, 255, 0.92); font-size: 0.90rem; line-height: 1.5; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
         .cinematic-hero-actions { display: flex; align-items: center; gap: 12px; margin-top: 2px; }
-        .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; gap: 8px; min-height: 44px; padding: 0 24px; border-radius: 12px; font-weight: 800; font-size: 0.88rem; transition: transform 160ms ease, background 160ms ease, border-color 160ms ease; cursor: pointer; color: #fff; text-decoration: none; }
+        .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; gap: 8px; min-height: 44px; padding: 0 24px; border-radius: 999px; font-weight: 800; font-size: 0.88rem; transition: transform 160ms ease, background 160ms ease, border-color 160ms ease; cursor: pointer; color: #fff; text-decoration: none; }
         .cinematic-hero-actions :global(a):hover { transform: translateY(-2px); }
         .cinematic-hero-primary { background: #00994d; border: 1px solid rgba(255, 255, 255, 0.36); box-shadow: 0 10px 24px rgba(0, 153, 77, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.34); }
         .cinematic-hero-secondary { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.34); backdrop-filter: blur(14px); }
@@ -239,7 +239,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             right: 0 !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            border-radius: 20px !important;
+            border-radius: 22px !important;
             border: 1px solid rgba(0, 102, 51, 0.18) !important;
             box-shadow: 0 14px 35px -10px rgba(0, 45, 20, 0.35) !important;
           }
@@ -276,8 +276,8 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           }
           .cinematic-hero-meta span {
             font-size: 0.66rem !important;
-            padding: 2px 6px !important;
-            border-radius: 5px !important;
+            padding: 2px 8px !important;
+            border-radius: 999px !important;
             background: rgba(255, 255, 255, 0.14);
             border: 1px solid rgba(255, 255, 255, 0.22);
           }
@@ -286,7 +286,8 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             display: inline-flex !important;
             font-size: 0.70rem !important;
             margin-bottom: 6px !important;
-            padding: 2px 6px !important;
+            padding: 2px 8px !important;
+            border-radius: 999px !important;
           }
           .cinematic-hero-description {
             display: -webkit-box !important;
@@ -311,7 +312,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             flex: 1;
             min-height: 38px !important;
             padding: 0 14px !important;
-            border-radius: 10px !important;
+            border-radius: 999px !important;
             font-size: 0.80rem !important;
             font-weight: 800;
             justify-content: center;

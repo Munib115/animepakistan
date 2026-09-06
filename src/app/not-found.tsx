@@ -65,7 +65,7 @@ export default function NotFound() {
               className="glass-btn-primary"
               style={{
                 padding: '10px 24px',
-                borderRadius: '12px',
+                borderRadius: '999px',
                 fontWeight: 800,
                 fontSize: '0.9rem',
                 display: 'inline-flex',
@@ -85,7 +85,7 @@ export default function NotFound() {
               className="glass-btn-secondary"
               style={{
                 padding: '10px 24px',
-                borderRadius: '12px',
+                borderRadius: '999px',
                 fontWeight: 700,
                 fontSize: '0.9rem',
                 display: 'inline-flex',
