@@ -737,6 +737,21 @@ export default function WatchContainer({
         {/* 16:9 Screen Container */}
         <div
           onClick={handlePlayerTap}
+          onClickCapture={(e) => {
+            // Defuse rogue external anchors or clickjack overlays
+            const target = e.target as HTMLElement;
+            const anchor = target?.closest?.('a');
+            if (anchor && anchor.href) {
+              const href = anchor.href.toLowerCase();
+              if (!href.startsWith(window.location.origin) && !href.startsWith('/') && !href.startsWith('#')) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.nativeEvent?.stopImmediatePropagation?.();
+                adblockShield.recordBlocked('popup', href);
+                return;
+              }
+            }
+          }}
           style={{
             position: 'relative',
             width: '100%',
@@ -789,7 +804,7 @@ export default function WatchContainer({
                 loading="eager"
                 onLoad={() => setIsIframeLoaded(true)}
                 referrerPolicy="origin-when-cross-origin"
-                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-popups allow-forms"
+                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 style={{
                   position: 'absolute',

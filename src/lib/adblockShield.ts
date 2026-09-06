@@ -1,6 +1,6 @@
 // Advanced High-Performance AdBlocker Engine for AnimePakistan
 // Sourced from open-source adblocking architectures (uBlock Origin & Ghostery scriptlet defusers)
-// Shields video playback from popups, clickjacking, rogue redirects, and ad trackers
+// Shields video playback and browsing from popups, clickjacking, rogue redirects, and ad trackers
 
 export interface AdBlockStats {
   adsBlocked: number;
@@ -32,27 +32,35 @@ const INITIAL_STATS: AdBlockStats = {
 };
 
 // Comprehensive list of known video-streaming ad networks, popunders, clickjackers, and trackers
-// (Compiled from EasyList, Peter Lowe's list, and AdGuard mobile/video rules)
+// (Compiled from Ghostery, EasyList, Peter Lowe's list, and uBlock Origin scriptlet rules)
 const BLOCKED_DOMAINS = [
-  // Popunder & Clickjack Networks
+  // Popunder & Clickjack Networks (Ghostery & uBlock Origin compiled rules)
   'popads', 'popcash', 'propellerads', 'monetag', 'onclickunder', 'adsterra',
   'clickadu', 'galaksion', 'ezmob', 'hilltopads', 'richpush', 'admaven', 'ad-maven',
   'adcash', 'yllix', 'mondiad', 'adoperator', 'short.icu', 'streamtape-ads',
   'zeroredirect', 'syndication', 'trafficstars', 'trafficjunky', 'trafficforce',
   'exoclick', 'juicyads', 'plugrush', 'ero-advertising', 'bidvertiser',
+  'deloton', 'onclickmega', 'adxad', 'clksite', 'alwingulla', 'gloaphoo',
+  'thaudray', 'asg', 'hilltop', 'vidoomy', 'popmyads', 'ad-score', 'adkernel',
+  'realsrv', 'tsyndicate', 'ad-delivery', 'adskeeper', 'rtbmark', 'adsco.re',
+  'wigetmedia', 'tsyndicate', 'syndication.exoclick', 'syndication.realsrv',
 
   // Rogue Redirects & Gambling/Spam
   '1xbet', 'bet365', 'betway', 'parimatch', 'melbet', 'mostbet', 'linebet',
   'dafabet', 'vulkan', 'slot', 'casino', 'poker', 'bonus-free',
+  'paviliongiddy', 'highcpmgate', 'waisheph', 'poawoopt', 'whomeeno', 'in-page-push',
+  'fast-redirect', 'linkvertise', 'adshrink', 'clk.sh', 'direct-link',
+  'mega-ad', 'super-ad', 'clicktrack', 'trklink',
 
   // Programmatic Ad Exchanges & Video Ad Injections
   'doubleclick', 'googleadservices', 'adnxs', 'appnexus', 'smartadserver',
   'rubiconproject', 'criteo', 'pubmatic', 'openx', 'adroll', 'adthrive',
-  'mediavine', 'vidoomy', 'revcontent', 'mgid', 'infolinks', 'outbrain',
-  'taboola', 'adtrue', 'yadro', 'adkeeper', 'tsyndicate', 'adsupply',
-  'adform', 'adkernel', 'adreactor', 'casalemedia', 'gumgum', 'improvedigital',
+  'mediavine', 'revcontent', 'mgid', 'infolinks', 'outbrain',
+  'taboola', 'adtrue', 'yadro', 'adkeeper', 'adsupply',
+  'adform', 'adreactor', 'casalemedia', 'gumgum', 'improvedigital',
   'lijit', 'liveintent', 'mathtag', 'media.net', 'nativeads', 'sovrn',
   'spotxchange', 'teads', 'tremorhub', 'triplelift', 'undertone', 'yieldmo',
+  'googleads', 'pagead',
 
   // Trackers & Telemetry Beacons
   'scorecardresearch', 'quantserve', 'whos.amung.us', 'histats', 'statcounter',
@@ -134,7 +142,7 @@ class AdBlockEngine {
       this.stats = { ...INITIAL_STATS };
     }
 
-    // 2. Install uBlock-style Safe WindowProxy popup defuser
+    // 2. Install uBlock/Ghostery-style Safe WindowProxy popup defuser
     this.installWindowOpenDefuser();
 
     // 3. Install programmatic click & redirect defuser
@@ -146,7 +154,7 @@ class AdBlockEngine {
     // 5. Install Network Request filter for fetch & XHR
     this.installNetworkFilter();
 
-    // 6. Install focus & violation guard
+    // 6. Install focus & violation guard + Anti-Anti-AdBlock
     this.installWindowGuards();
   }
 
@@ -235,7 +243,7 @@ class AdBlockEngine {
     return BLOCKED_DOMAINS.some((domain) => lower.includes(domain));
   }
 
-  // 1. uBlock Origin WindowProxy defuser
+  // 1. Ghostery & uBlock Origin WindowProxy defuser
   private installWindowOpenDefuser() {
     if (typeof window === 'undefined') return;
     const originalOpen = window.open;
@@ -290,10 +298,11 @@ class AdBlockEngine {
     };
   }
 
-  // 2. Programmatic click & link navigation defuser
+  // 2. Programmatic click & link navigation defuser (Ghostery & uBlock Origin style)
   private installClickGuard() {
     if (typeof window === 'undefined') return;
 
+    // Capture phase listener across whole document
     window.addEventListener(
       'click',
       (event: MouseEvent) => {
@@ -306,45 +315,71 @@ class AdBlockEngine {
         if (anchor && anchor.href) {
           const href = anchor.href.toLowerCase();
           const isExternal = !href.startsWith(window.location.origin) && !href.startsWith('/') && !href.startsWith('#');
+          const isInsidePlayer = !!target.closest('.watch-container') || !!target.closest('.watch-player-box') || !!target.closest('iframe') || !!target.closest('[class*="player"]');
 
-          if (isExternal && this.isAdUrl(href)) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.recordBlocked('redirect', href);
-            return;
+          if (isExternal && (this.isAdUrl(href) || isInsidePlayer || anchor.target === '_blank')) {
+            // Defuse popup clickjacking
+            if (this.isAdUrl(href) || isInsidePlayer) {
+              event.preventDefault();
+              event.stopPropagation();
+              event.stopImmediatePropagation();
+              this.recordBlocked('redirect', href);
+              return;
+            }
           }
         }
       },
       true
     );
 
+    // Defuse programmatic a.click()
     if (typeof HTMLAnchorElement !== 'undefined' && HTMLAnchorElement.prototype) {
       const originalClick = HTMLAnchorElement.prototype.click;
+      const originalDispatch = HTMLAnchorElement.prototype.dispatchEvent;
       const self = this;
 
       HTMLAnchorElement.prototype.click = function (this: HTMLAnchorElement) {
-        if (self.enabled && this.href && self.isAdUrl(this.href)) {
-          self.recordBlocked('redirect', this.href);
-          return;
+        if (self.enabled && this.href) {
+          const href = this.href.toLowerCase();
+          const isExternal = !href.startsWith(window.location.origin) && !href.startsWith('/') && !href.startsWith('#');
+          if (isExternal && (self.isAdUrl(href) || this.target === '_blank')) {
+            self.recordBlocked('redirect', this.href);
+            return;
+          }
         }
         return originalClick.apply(this);
+      };
+
+      HTMLAnchorElement.prototype.dispatchEvent = function (this: HTMLAnchorElement, event: Event) {
+        if (self.enabled && this.href && event.type === 'click') {
+          const href = this.href.toLowerCase();
+          const isExternal = !href.startsWith(window.location.origin) && !href.startsWith('/') && !href.startsWith('#');
+          if (isExternal && (self.isAdUrl(href) || this.target === '_blank')) {
+            self.recordBlocked('redirect', this.href);
+            return false;
+          }
+        }
+        return originalDispatch.apply(this, [event]);
       };
     }
   }
 
-  // 3. MutationObserver overlay-buster
+  // 3. MutationObserver overlay-buster (Ghostery clickjack cover removal)
   private installOverlayBuster() {
     if (typeof window === 'undefined' || typeof MutationObserver === 'undefined') return;
 
     const checkAndNeutralizeNode = (node: Node) => {
       if (!this.enabled || !(node instanceof HTMLElement)) return;
 
+      // Preserve legitimate UI elements
       if (
         node.closest('.quick-control-hub') ||
         node.closest('.quick-hub-popover') ||
         node.closest('.quick-hub-backdrop') ||
+        node.closest('.live-chat-floating') ||
         node.closest('header') ||
-        node.closest('nav')
+        node.closest('nav') ||
+        node.closest('button')
       ) {
         return;
       }
@@ -352,16 +387,22 @@ class AdBlockEngine {
       const style = window.getComputedStyle(node);
       const isFixed = style.position === 'fixed' || style.position === 'absolute';
       const zIndex = parseInt(style.zIndex, 10);
-      const highZIndex = !isNaN(zIndex) && zIndex >= 999;
+      const highZIndex = !isNaN(zIndex) && zIndex >= 50;
 
       if (isFixed && highZIndex) {
         const opacity = parseFloat(style.opacity);
         const isTransparent = isNaN(opacity) || opacity <= 0.05 || style.backgroundColor === 'transparent' || style.backgroundColor === 'rgba(0, 0, 0, 0)';
         const width = node.offsetWidth || parseInt(style.width, 10) || 0;
         const height = node.offsetHeight || parseInt(style.height, 10) || 0;
-        const coversScreen = width >= window.innerWidth * 0.7 && height >= window.innerHeight * 0.7;
 
-        if (coversScreen && isTransparent) {
+        // Covers screen OR covers the player box
+        const coversScreen = width >= window.innerWidth * 0.6 && height >= window.innerHeight * 0.6;
+        const coversPlayer = !!node.closest('.watch-player-box') && width >= 150 && height >= 80;
+
+        const hasExternalAdLink = node instanceof HTMLAnchorElement && this.isAdUrl(node.href);
+        const containsExternalAdLink = !!node.querySelector('a') && Array.from(node.querySelectorAll('a')).some(a => this.isAdUrl(a.href));
+
+        if ((coversScreen && isTransparent) || (coversPlayer && isTransparent) || hasExternalAdLink || containsExternalAdLink) {
           try {
             node.remove();
             this.recordBlocked('ad', 'clickjack-overlay');
@@ -385,7 +426,7 @@ class AdBlockEngine {
     }
   }
 
-  // 4. Network filter for fetch & XMLHttpRequest
+  // 4. Network filter for fetch & XMLHttpRequest (Ghostery network defusers)
   private installNetworkFilter() {
     if (typeof window === 'undefined') return;
 
@@ -425,9 +466,17 @@ class AdBlockEngine {
     }
   }
 
-  // 5. Window blur & security policy violation guards
+  // 5. Window blur, security policy violation guards & Ghostery Anti-Anti-AdBlock
   private installWindowGuards() {
     if (typeof window === 'undefined') return;
+
+    // Ghostery Anti-Anti-AdBlock Defuser
+    try {
+      (window as any).canRunAds = true;
+      (window as any).isAdBlockActive = false;
+      (window as any).adsBlocked = false;
+      (window as any).adblocker = false;
+    } catch (e) {}
 
     // Detect iframe focus-stealing popunder tricks
     window.addEventListener('blur', () => {
@@ -442,6 +491,32 @@ class AdBlockEngine {
         this.recordBlocked('popup', (e as any).blockedURI || 'sandbox-violation');
       }
     });
+
+    // Top-level navigation guard against rogue ad scripts trying to redirect the user
+    const self = this;
+    if (typeof window.location !== 'undefined') {
+      try {
+        const originalAssign = window.location.assign;
+        window.location.assign = function (url: string) {
+          if (self.enabled && self.isAdUrl(url)) {
+            self.recordBlocked('redirect', url);
+            return;
+          }
+          return originalAssign.call(window.location, url);
+        };
+      } catch (e) {}
+
+      try {
+        const originalReplace = window.location.replace;
+        window.location.replace = function (url: string) {
+          if (self.enabled && self.isAdUrl(url)) {
+            self.recordBlocked('redirect', url);
+            return;
+          }
+          return originalReplace.call(window.location, url);
+        };
+      } catch (e) {}
+    }
   }
 }
 
