@@ -1,6 +1,6 @@
 // Persistent Unique Guest Identity System
 
-const ADJECTIVES = ['Silent', 'Shadow', 'Dragon', 'Crimson', 'Neon', 'Cosmic', 'Solar', 'Phantom', 'Mystic', 'Blazing', 'Cyber', 'Thunder'];
+const ADJECTIVES = ['Silent', 'Shadow', 'Dragon', 'Crimson', 'Neon', 'Cosmic', 'Solar', 'Phantom', 'Mystic', 'Blazing', 'Cyber', 'Apex'];
 const NOUNS = ['Ninja', 'Otaku', 'Samurai', 'Shinobi', 'Titan', 'Ronin', 'Gamer', 'Hunter', 'Knight', 'Hero', 'Sensei', 'Champion'];
 const AVATAR_COLORS = ['#00ff66', '#10b981', '#06b6d4', '#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
 
@@ -26,7 +26,7 @@ export function getGuestProfile(): GuestProfile {
     const savedName = localStorage.getItem('ap_guest_name');
     const savedColor = localStorage.getItem('ap_guest_color');
 
-    if (savedId && savedName && savedColor) {
+    if (savedId && savedName && savedColor && !savedName.includes('Thunder')) {
       return {
         id: savedId,
         name: savedName,

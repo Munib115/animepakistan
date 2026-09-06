@@ -18,26 +18,18 @@ export interface ChatMessage {
   created_at: string;
 }
 
-const INITIAL_FALLBACK_MESSAGES: ChatMessage[] = [
-  {
-    id: 'welcome_1',
-    sender_id: 'system_bot',
-    sender_name: 'Anime Pakistan Bot 🤖',
-    avatar_color: '#00ff66',
-    message_type: 'text',
-    content: 'خوش آمدید! Welcome to Anime Pakistan Community Live Chat! 🇵🇰✨ Send messages, voice notes, photos & videos!',
-    created_at: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
-  },
-  {
-    id: 'welcome_2',
-    sender_id: 'guest_hashirama',
-    sender_name: 'Zoro Swordsman #3412',
-    avatar_color: '#10b981',
-    message_type: 'text',
-    content: 'One Piece Urdu dubbed episode 1089 is so fire! ⚔️🔥 Koi aur dekh raha hai?',
-    created_at: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-  },
-];
+const INITIAL_FALLBACK_MESSAGES: ChatMessage[] = [];
+
+function generateUUID(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 
 export default function LiveChatFloating() {
   const [mounted, setMounted] = useState(false);
@@ -90,7 +82,7 @@ export default function LiveChatFloating() {
     messagesEndRef.current?.scrollIntoView({ behavior });
   }, []);
 
-  // Fetch initial messages & subscribe to Supabase Realtime
+  // Fetch initial messages & subscribe to Supabase Realtime + Polling fallback
   useEffect(() => {
     if (!mounted) return;
     let isSubscribed = true;
@@ -101,9 +93,9 @@ export default function LiveChatFloating() {
           .from('live_chat_messages')
           .select('*')
           .order('created_at', { ascending: true })
-          .limit(60);
+          .limit(100);
 
-        if (!error && data && data.length > 0 && isSubscribed) {
+        if (!error && data && isSubscribed) {
           setMessages(data as ChatMessage[]);
         }
       } catch (err) {}
@@ -132,10 +124,20 @@ export default function LiveChatFloating() {
           }
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        if (status === 'SUBSCRIBED') {
+          loadMessages();
+        }
+      });
+
+    // 4-second background sync guarantees real-time delivery across all browsers and devices
+    const pollInterval = setInterval(() => {
+      loadMessages();
+    }, 4000);
 
     return () => {
       isSubscribed = false;
+      clearInterval(pollInterval);
       supabase.removeChannel(channel);
     };
   }, [mounted, guest.id, isOpen]);
@@ -300,7 +302,7 @@ export default function LiveChatFloating() {
         }
 
         const newMsg: ChatMessage = {
-          id: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+          id: generateUUID(),
           sender_id: guest.id,
           sender_name: guest.name,
           avatar_color: guest.avatarColor,
@@ -314,7 +316,10 @@ export default function LiveChatFloating() {
         setMessages((prev) => [...prev, newMsg]);
         sound.successChime();
 
-        await supabase.from('live_chat_messages').insert([newMsg]);
+        const { error: insertErr } = await supabase.from('live_chat_messages').insert([newMsg]);
+        if (insertErr) {
+          console.error('[LiveChat] Supabase voice insert error:', insertErr);
+        }
       } catch (err) {
         console.error('Error sending voice message:', err);
       } finally {
@@ -366,7 +371,7 @@ export default function LiveChatFloating() {
       }
 
       const newMsg: ChatMessage = {
-        id: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        id: generateUUID(),
         sender_id: guest.id,
         sender_name: guest.name,
         avatar_color: guest.avatarColor,
@@ -383,7 +388,10 @@ export default function LiveChatFloating() {
       setMessages((prev) => [...prev, newMsg]);
       sound.softClick();
 
-      await supabase.from('live_chat_messages').insert([newMsg]);
+      const { error: insertErr } = await supabase.from('live_chat_messages').insert([newMsg]);
+      if (insertErr) {
+        console.error('[LiveChat] Supabase message insert error:', insertErr);
+      }
     } catch (err) {
       console.error('Error sending message:', err);
     } finally {
@@ -454,7 +462,7 @@ export default function LiveChatFloating() {
             userSelect: 'none',
           }}
         >
-          {isOpen ? 'close' : 'forum'}
+          {isOpen ? 'close' : 'chat'}
         </span>
 
         {/* Unread Badge */}
@@ -543,37 +551,58 @@ export default function LiveChatFloating() {
             )}
           </div>
           <span className="ap-chat-active-count">
-            <span className="material-symbols-outlined" style={{ fontSize: '15px', color: '#00ff66' }}>
-              bolt
-            </span>
+            <span style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              background: '#00ff66',
+              boxShadow: '0 0 6px #00ff66',
+              display: 'inline-block',
+            }} />
             <span>Online</span>
           </span>
         </div>
 
         {/* MESSAGE STREAM */}
         <div className="ap-chat-messages-scroll">
-          {messages.map((msg) => {
-            const isMe = msg.sender_id === guest.id;
-            return (
-              <div
-                key={msg.id}
-                className={`ap-chat-msg-row ${isMe ? 'msg-me' : 'msg-them'}`}
-              >
-                {!isMe && (
-                  <div
-                    className="ap-msg-avatar"
-                    style={{ background: msg.avatar_color || '#10b981' }}
-                  >
-                    {msg.sender_name.slice(0, 2).toUpperCase()}
-                  </div>
-                )}
-
-                <div className="ap-msg-bubble-wrapper">
+          {messages.length === 0 ? (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '60px 16px',
+              textAlign: 'center',
+              color: 'rgba(255, 255, 255, 0.55)',
+              gap: '6px',
+            }}>
+              <p style={{ margin: 0, fontSize: '0.88rem', fontWeight: 600 }}>
+                No messages yet. Send a message to start chatting!
+              </p>
+            </div>
+          ) : (
+            messages.map((msg) => {
+              const isMe = msg.sender_id === guest.id;
+              return (
+                <div
+                  key={msg.id}
+                  className={`ap-chat-msg-row ${isMe ? 'msg-me' : 'msg-them'}`}
+                >
                   {!isMe && (
-                    <span className="ap-msg-sender-name">
-                      {msg.sender_name}
-                    </span>
+                    <div
+                      className="ap-msg-avatar"
+                      style={{ background: msg.avatar_color || '#10b981' }}
+                    >
+                      {msg.sender_name.slice(0, 2).toUpperCase()}
+                    </div>
                   )}
+
+                  <div className="ap-msg-bubble-wrapper">
+                    {!isMe && (
+                      <span className="ap-msg-sender-name">
+                        {msg.sender_name}
+                      </span>
+                    )}
 
                   {/* ULTRA CURVY DESIGN CHAT BUBBLE */}
                   <div className={`ap-msg-bubble ${isMe ? 'bubble-me' : 'bubble-them'}`}>
@@ -647,7 +676,7 @@ export default function LiveChatFloating() {
                 </div>
               </div>
             );
-          })}
+          }))}
           <div ref={messagesEndRef} />
         </div>
 
