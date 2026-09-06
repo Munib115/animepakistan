@@ -112,24 +112,13 @@ export default function PWAInstallBanner() {
       <div 
         className="pwa-install-banner"
         style={{
-          position: 'fixed',
-          bottom: 'calc(88px + var(--sab, 0px))',
-          left: '16px',
-          right: '16px',
-          maxWidth: '440px',
-          margin: '0 auto',
-          zIndex: 99998,
           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(0, 40, 20, 0.35) 50%, rgba(255, 255, 255, 0.12) 100%)',
           backdropFilter: 'blur(32px) saturate(220%) brightness(108%)',
           WebkitBackdropFilter: 'blur(32px) saturate(220%) brightness(108%)',
           border: '1.5px solid rgba(255, 255, 255, 0.85)',
-          borderRadius: '20px',
-          boxShadow: '0 20px 48px -6px rgba(0, 0, 0, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(255, 255, 255, 0.25), 0 0 25px rgba(255, 255, 255, 0.18)',
-          padding: '10px 14px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '10px',
           animation: 'bannerSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
           direction: isUrdu ? 'rtl' : 'ltr',
         }}
@@ -333,38 +322,6 @@ export default function PWAInstallBanner() {
           </div>
         </div>
       )}
-
-      {/* Animation Styles */}
-      <style jsx>{`
-        @keyframes bannerSlideUp {
-          from {
-            opacity: 0;
-            transform: translateY(40px) scale(0.96);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        @keyframes modalSlideUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @media (min-width: 768px) {
-          .pwa-install-banner {
-            bottom: 24px !important;
-            right: 24px !important;
-            left: auto !important;
-            width: 440px;
-          }
-        }
-      `}</style>
     </>
   );
 }

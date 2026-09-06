@@ -41,11 +41,82 @@ export async function resolveAsCdnDirectStream(embedUrl: string): Promise<string
   return null;
 }
 
+/** Resolves direct HLS m3u8 source from megaplay.buzz */
+export async function resolveMegaplayDirectStream(streamUrl: string): Promise<string | null> {
+  if (!streamUrl || !streamUrl.includes('megaplay.buzz')) return null;
+  try {
+    const res = await fetch(streamUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://animesalt.cx/'
+      },
+      signal: AbortSignal.timeout(6000)
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const fileIdMatch = html.match(/File\s+(\d+)/i);
+    if (!fileIdMatch) return null;
+    const fileId = fileIdMatch[1];
+    const apiRes = await fetch(`https://megaplay.buzz/stream/getSources?id=${fileId}`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': streamUrl,
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      signal: AbortSignal.timeout(6000)
+    });
+    if (apiRes.ok) {
+      const data = await apiRes.json();
+      return data?.sources?.file || null;
+    }
+  } catch (e) {}
+  return null;
+}
+
+/** Resolves nested ad-heavy toon-stream embed to direct clean iframe player */
+export async function resolveToonStreamNested(embedUrl: string): Promise<string | null> {
+  if (!embedUrl || !embedUrl.includes('toon-stream.site/embed/')) return null;
+  try {
+    const res = await fetch(embedUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://toon-stream.site/'
+      },
+      signal: AbortSignal.timeout(6000)
+    });
+    if (res.ok) {
+      const html = await res.text();
+      const $ = cheerio.load(html);
+      let src = $('iframe').attr('src') || $('iframe').attr('data-src');
+      if (src?.startsWith('//')) src = 'https:' + src;
+      if (src && isValidStreamEmbedUrl(src)) {
+        return sanitizeStreamUrl(src);
+      }
+    }
+  } catch (e) {}
+  return null;
+}
+
 function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
   if (!streamUrl || !isValidStreamEmbedUrl(streamUrl)) return [];
 
   // Reject dead shorteners immediately
   if (streamUrl.includes('short.icu') || streamUrl.includes('short.link')) return [];
+
+  // Dedicated MegaPlay handler for Sub and Dub (Boruto, etc.)
+  if (streamUrl.includes('megaplay.buzz/stream/')) {
+    const subUrl = streamUrl.replace(/\/dub$/i, '/sub');
+    const dubUrl = streamUrl.replace(/\/sub$/i, '/dub');
+    return [
+      { label: 'MegaPlay (Sub)', url: sanitizeStreamUrl(subUrl), isMultiAudio: true },
+      { label: 'MegaPlay (Dub)', url: sanitizeStreamUrl(dubUrl), isMultiAudio: true },
+    ];
+  }
+
+  // Clean unnested direct player mirrors
+  if (streamUrl.includes('gdmirrorbot') || streamUrl.includes('abyssplayer')) {
+    return [{ label: 'Server 1 (HD)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+  }
 
   if (streamUrl.includes('multi-lang-plyr/player.php?data=')) {
     try {
@@ -71,6 +142,34 @@ function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
   }
 
   return [{ label: 'HD-1 (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+}
+
+/** Enriches stream sources by un-nesting embedded players and fetching high-speed direct API streams */
+async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
+  for (let i = 0; i < sourcesList.length; i++) {
+    const s = sourcesList[i];
+    // Un-nest any toon-stream nested embeds
+    if (s.url.includes('toon-stream.site/embed/')) {
+      try {
+        const unnested = await resolveToonStreamNested(s.url);
+        if (unnested) s.url = unnested;
+      } catch (e) {}
+    }
+    // Attach direct as-cdn HLS stream if available
+    if (s.url.includes('as-cdn') && !s.directApiStream) {
+      try {
+        const direct = await resolveAsCdnDirectStream(s.url);
+        if (direct) s.directApiStream = direct;
+      } catch (e) {}
+    }
+    // Attach direct megaplay master HLS stream if available
+    if (s.url.includes('megaplay.buzz') && !s.directApiStream) {
+      try {
+        const direct = await resolveMegaplayDirectStream(s.url);
+        if (direct) s.directApiStream = direct;
+      } catch (e) {}
+    }
+  }
 }
 
 /**
@@ -101,14 +200,7 @@ export async function resolveStreamSources(
         if (foundEp && (foundEp as any).streamUrl) {
           const parsedSources = parseStreamUrlToSources((foundEp as any).streamUrl);
           if (parsedSources.length > 0) {
-            for (const s of parsedSources) {
-              if (s.url.includes('as-cdn') && !s.directApiStream) {
-                try {
-                  const direct = await resolveAsCdnDirectStream(s.url);
-                  if (direct) s.directApiStream = direct;
-                } catch (e) {}
-              }
-            }
+            await enrichSourcesWithDirectStreams(parsedSources);
             return parsedSources;
           }
         }
@@ -125,14 +217,7 @@ export async function resolveStreamSources(
       if (anime && anime.streamUrl) {
         const parsedSources = parseStreamUrlToSources(anime.streamUrl);
         if (parsedSources.length > 0) {
-          for (const s of parsedSources) {
-            if (s.url.includes('as-cdn') && !s.directApiStream) {
-              try {
-                const direct = await resolveAsCdnDirectStream(s.url);
-                if (direct) s.directApiStream = direct;
-              } catch (e) {}
-            }
-          }
+          await enrichSourcesWithDirectStreams(parsedSources);
           return parsedSources;
         }
       }
@@ -169,14 +254,7 @@ export async function resolveStreamSources(
       if (episode && (episode as any).streamUrl) {
         const parsedSources = parseStreamUrlToSources((episode as any).streamUrl);
         if (parsedSources.length > 0) {
-          for (const s of parsedSources) {
-            if (s.url.includes('as-cdn') && !s.directApiStream) {
-              try {
-                const direct = await resolveAsCdnDirectStream(s.url);
-                if (direct) s.directApiStream = direct;
-              } catch (e) {}
-            }
-          }
+          await enrichSourcesWithDirectStreams(parsedSources);
           return parsedSources;
         }
       }
@@ -306,16 +384,8 @@ export async function resolveStreamSources(
     return aIsCdn - bIsCdn;
   });
 
-  // Attach direct API stream for primary as-cdn source
-  for (const s of validSources) {
-    if (s.url.includes('as-cdn') && !s.directApiStream) {
-      try {
-        const direct = await resolveAsCdnDirectStream(s.url);
-        if (direct) s.directApiStream = direct;
-      } catch (e) {}
-      break;
-    }
-  }
+  // Attach direct API stream and un-nest any players
+  await enrichSourcesWithDirectStreams(validSources);
 
   // Cache results for 24h
   if (validSources.length > 0) {

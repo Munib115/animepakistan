@@ -788,10 +788,8 @@ export default function WatchContainer({
                 allowFullScreen
                 loading="eager"
                 onLoad={() => setIsIframeLoaded(true)}
-                referrerPolicy="no-referrer"
-                sandbox={isShieldActive
-                  ? "allow-scripts allow-same-origin allow-presentation allow-fullscreen"
-                  : "allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-popups allow-forms"}
+                referrerPolicy="origin-when-cross-origin"
+                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-popups allow-forms"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 style={{
                   position: 'absolute',
