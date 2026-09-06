@@ -37,6 +37,7 @@ export default function WatchContainer({
 
   const [inList, setInList] = useState(false);
   const [isShareCopied, setIsShareCopied] = useState(false);
+  const [showBgDownloadToast, setShowBgDownloadToast] = useState(false);
 
   // AdBlocker State (Background Sandbox Protection)
   const [isShieldActive, setIsShieldActive] = useState(true);
@@ -88,9 +89,24 @@ export default function WatchContainer({
     setTimeout(() => setIsShareCopied(false), 2000);
   };
 
+  useEffect(() => {
+    if (showBgDownloadToast) {
+      const timer = setTimeout(() => {
+        setShowBgDownloadToast(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showBgDownloadToast]);
+
   const handleDownloadClick = () => {
     sound.playButton();
     if (!activeMirror) return;
+
+    if (downloadingItem && downloadingItem.status === 'downloading') {
+      setShowBgDownloadToast((prev) => !prev);
+      return;
+    }
+
     startDownload(
       anime.slug,
       currentEpisode?.slug || 'full-movie',
@@ -98,9 +114,9 @@ export default function WatchContainer({
       currentEpisode?.title || 'Full Movie',
       activeMirror
     );
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('ap_open_downloads'));
-    }
+
+    // Show non-intrusive background download toast notification
+    setShowBgDownloadToast(true);
   };
 
   const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? `/watch/${anime.slug}` : `/watch/${anime.slug}/${targetSlug}`);
@@ -561,12 +577,18 @@ export default function WatchContainer({
             </span>
           </button>
 
-          {/* Small Icon-Only Download Button */}
+          {/* Background Download Button */}
           {streamSources.length > 0 && (
             <button
               onClick={handleDownloadClick}
-              disabled={downloadingItem?.status === 'downloading' || downloadingItem?.status === 'paused'}
-              title={downloadingItem ? `Download: ${downloadingItem.progress}%` : 'Download Video'}
+              title={
+                downloadingItem
+                  ? downloadingItem.status === 'completed'
+                    ? (language === 'ur' ? 'محفوظ ہے (مکمل)' : 'Downloaded (Complete)')
+                    : `${language === 'ur' ? 'بیک گراؤنڈ میں ڈاؤنلوڈ جاری ہے' : 'Downloading in background'}: ${downloadingItem.progress}%`
+                  : (language === 'ur' ? 'بیک گراؤنڈ میں ڈاؤنلوڈ کریں' : 'Download in Background')
+              }
+              aria-label="Download in Background"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -578,7 +600,7 @@ export default function WatchContainer({
                 background: downloadingItem
                   ? downloadingItem.status === 'completed'
                     ? '#16a34a'
-                    : 'rgba(0, 102, 51, 0.15)'
+                    : 'rgba(0, 102, 51, 0.18)'
                   : 'var(--color-primary)',
                 color: downloadingItem
                   ? downloadingItem.status === 'completed'
@@ -591,11 +613,17 @@ export default function WatchContainer({
                 position: 'relative',
               }}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+              <span 
+                className="material-symbols-outlined" 
+                style={{ 
+                  fontSize: '18px',
+                  animation: downloadingItem?.status === 'downloading' ? 'spin 2s linear infinite' : 'none',
+                }}
+              >
                 {downloadingItem
                   ? downloadingItem.status === 'completed'
                     ? 'download_done'
-                    : 'downloading'
+                    : 'sync'
                   : 'download'}
               </span>
 
@@ -606,7 +634,7 @@ export default function WatchContainer({
                   right: '-4px',
                   background: 'var(--color-glow)',
                   color: '#000000',
-                  fontSize: '0.62rem',
+                  fontSize: '0.60rem',
                   fontWeight: 900,
                   borderRadius: '999px',
                   padding: '1px 4px',
@@ -1229,6 +1257,151 @@ export default function WatchContainer({
         episodeTitle={currentEpisode?.title}
       />
 
+      {/* Background Download Toast Notification Banner */}
+      {showBgDownloadToast && downloadingItem && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 'calc(80px + var(--sab, 0px))',
+            right: '20px',
+            maxWidth: '380px',
+            width: 'calc(100vw - 40px)',
+            background: 'var(--glass-bg)',
+            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+            border: '1.5px solid var(--color-primary)',
+            borderRadius: '18px',
+            boxShadow: '0 8px 32px rgba(0, 102, 51, 0.25)',
+            padding: '12px 14px',
+            zIndex: 99990,
+            animation: 'toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            direction: language === 'ur' ? 'rtl' : 'ltr',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+              <span 
+                className="material-symbols-outlined" 
+                style={{ 
+                  color: 'var(--color-primary)', 
+                  fontSize: '22px',
+                  animation: downloadingItem.status === 'downloading' ? 'spin 2s linear infinite' : 'none',
+                }}
+              >
+                {downloadingItem.status === 'completed' ? 'download_done' : 'sync'}
+              </span>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ fontSize: '0.80rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                    {language === 'ur' ? 'بیک گراؤنڈ میں ڈاؤنلوڈ جاری ہے' : 'Downloading in Background'}
+                  </span>
+                  <span style={{
+                    fontSize: '0.62rem',
+                    fontWeight: 900,
+                    padding: '1px 6px',
+                    borderRadius: '999px',
+                    background: 'rgba(0, 204, 102, 0.18)',
+                    color: 'var(--color-primary)',
+                  }}>
+                    {downloadingItem.progress}%
+                  </span>
+                </div>
+                <span style={{
+                  fontSize: '0.68rem',
+                  color: 'var(--text-muted)',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  display: 'block',
+                }}>
+                  {currentEpisode?.title || displayName}
+                </span>
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('ap_open_downloads'));
+                  }
+                  setShowBgDownloadToast(false);
+                }}
+                style={{
+                  padding: '5px 10px',
+                  borderRadius: '999px',
+                  border: '1px solid var(--glass-border)',
+                  background: 'var(--bg-secondary)',
+                  color: 'var(--color-primary)',
+                  fontSize: '0.70rem',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {language === 'ur' ? 'ہب میں دیکھیں' : 'View in Hub'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowBgDownloadToast(false)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer',
+                  padding: '2px',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>close</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Mini Progress Track */}
+          <div style={{
+            width: '100%',
+            height: '4px',
+            borderRadius: '999px',
+            background: 'rgba(0, 0, 0, 0.08)',
+            marginTop: '8px',
+            overflow: 'hidden',
+          }}>
+            <div style={{
+              width: `${downloadingItem.progress}%`,
+              height: '100%',
+              background: downloadingItem.status === 'completed' ? '#16a34a' : 'var(--color-primary)',
+              borderRadius: '999px',
+              transition: 'width 0.3s ease',
+            }} />
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes toastSlideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        @media (min-width: 768px) {
+          :global(.bg-download-toast) {
+            bottom: 24px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
