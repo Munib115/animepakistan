@@ -476,7 +476,7 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
               gap: '14px',
-              alignItems: 'start',
+              alignItems: 'stretch',
             }}
           >
             {visibleItems.map(item => (

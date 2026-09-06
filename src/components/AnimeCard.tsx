@@ -53,7 +53,8 @@ export default function AnimeCard({ item }: AnimeCardProps) {
     <div className="glass-card" style={{
       display: 'flex',
       flexDirection: 'column',
-      height: 'auto',
+      height: '100%',
+      width: '100%',
       position: 'relative',
       overflow: 'hidden',
     }}>
@@ -61,7 +62,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
         href={watchHref} 
         prefetch={true}
         onClick={() => sound.playCardClick()}
-        style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: 'auto' }}
+        style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', flex: 1 }}
       >
         
         {/* Poster Container */}
@@ -273,6 +274,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
+          flex: 1,
           background: 'var(--bg-secondary)',
           gap: '6px',
         }}>
@@ -281,17 +283,20 @@ export default function AnimeCard({ item }: AnimeCardProps) {
               fontSize: '0.85rem',
               fontWeight: 700,
               color: 'var(--text-primary)',
-              lineHeight: 1.3,
+              lineHeight: 1.35,
+              minHeight: '2.7em',
+              maxHeight: '2.7em',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
+              wordBreak: 'break-word',
             }}>
               {displayName}
             </h3>
 
-            {item.anilist?.year && (
+            {item.anilist?.year ? (
               <span style={{
                 fontSize: '0.7rem',
                 color: 'var(--text-muted)',
@@ -301,25 +306,42 @@ export default function AnimeCard({ item }: AnimeCardProps) {
               }}>
                 {item.anilist.year}
               </span>
+            ) : (
+              <span style={{
+                fontSize: '0.7rem',
+                color: 'transparent',
+                fontWeight: 600,
+                marginTop: '2px',
+                display: 'block',
+                userSelect: 'none',
+              }}>
+                &nbsp;
+              </span>
             )}
           </div>
 
-          {/* Episode count for series */}
-          {!isMovie && (
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '0.72rem',
-              color: 'var(--color-primary)',
-              fontWeight: 700,
-              borderTop: '1px solid rgba(0, 102, 51, 0.08)',
-              paddingTop: '6px',
-            }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>playlist_play</span>
-              <span>{item.episodeCount ?? item.episodes?.length ?? 0} {language === 'ur' ? 'ایپی سوڈز' : 'Episodes'}</span>
-            </div>
-          )}
+          {/* Bottom Info Bar: Always present with exact identical height for all cards */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '0.72rem',
+            color: 'var(--color-primary)',
+            fontWeight: 700,
+            borderTop: '1px solid rgba(0, 102, 51, 0.08)',
+            paddingTop: '6px',
+            minHeight: '26px',
+          }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
+              {isMovie ? 'movie' : 'playlist_play'}
+            </span>
+            <span>
+              {isMovie 
+                ? (language === 'ur' ? 'مکمل فلم' : 'Full Movie')
+                : `${item.episodeCount ?? item.episodes?.length ?? 0} ${language === 'ur' ? 'ایپی سوڈز' : 'Episodes'}`
+              }
+            </span>
+          </div>
         </div>
       </Link>
     </div>
