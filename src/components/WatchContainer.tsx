@@ -98,6 +98,9 @@ export default function WatchContainer({
       currentEpisode?.title || 'Full Movie',
       activeMirror
     );
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('ap_open_downloads'));
+    }
   };
 
   const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? `/watch/${anime.slug}` : `/watch/${anime.slug}/${targetSlug}`);

@@ -15,6 +15,7 @@ import {
   SharedLibraryRecord,
 } from '@/lib/shareLibrary';
 import { adblockShield, ShieldStats, formatTimeSaved } from '@/lib/adblockShield';
+import { useDownloads } from '@/context/DownloadContext';
 
 export default function QuickControlHub() {
   const { language, setLanguage, t } = useLanguage();
@@ -29,9 +30,11 @@ export default function QuickControlHub() {
     bandwidthSavedMB: 0,
     timeSavedSec: 0,
   });
+  const { downloads, pauseDownload, resumeDownload, cancelDownload, clearCompleted } = useDownloads();
+  const activeDownloadsCount = downloads.filter((d) => d.status === 'downloading').length;
   const [historyItems, setHistoryItems] = useState<WatchProgressItem[]>([]);
   const [watchlistItems, setWatchlistItems] = useState<WatchlistItem[]>([]);
-  const [activeTab, setActiveTab] = useState<'settings' | 'history' | 'watchlist' | 'share'>('settings');
+  const [activeTab, setActiveTab] = useState<'settings' | 'history' | 'watchlist' | 'downloads' | 'share'>('settings');
   const [historySearch, setHistorySearch] = useState('');
 
   // Share Library State
@@ -201,9 +204,15 @@ export default function QuickControlHub() {
       setActiveTab('settings');
     };
 
+    const handleOpenDownloads = () => {
+      setIsOpen(true);
+      setActiveTab('downloads');
+    };
+
     window.addEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
     window.addEventListener('ap_adblock_changed', handleShieldToggleEvent);
     window.addEventListener('ap_open_settings_hub', handleOpenSettingsHub);
+    window.addEventListener('ap_open_downloads', handleOpenDownloads);
 
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('ap_history_updated', refreshData);
@@ -218,6 +227,7 @@ export default function QuickControlHub() {
       window.removeEventListener('storage', refreshData);
       window.removeEventListener('ap_open_share_hub', handleOpenShare);
       window.removeEventListener('ap_open_settings_hub', handleOpenSettingsHub);
+      window.removeEventListener('ap_open_downloads', handleOpenDownloads);
       window.removeEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
       window.removeEventListener('ap_adblock_changed', handleShieldToggleEvent);
     };
@@ -302,6 +312,26 @@ export default function QuickControlHub() {
         >
           settings
         </span>
+        {activeDownloadsCount > 0 && (
+          <span
+            style={{
+              position: 'absolute',
+              top: '-3px',
+              right: '-3px',
+              background: '#ef4444',
+              color: '#ffffff',
+              fontSize: '0.62rem',
+              fontWeight: 900,
+              padding: '1px 5px',
+              borderRadius: '999px',
+              border: '1.5px solid #ffffff',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+              lineHeight: 1,
+            }}
+          >
+            {activeDownloadsCount}
+          </span>
+        )}
       </button>
 
       {/* Mobile / Click-Outside Backdrop */}
@@ -389,15 +419,14 @@ export default function QuickControlHub() {
             </button>
           </div>
 
-          {/* Hub Navigation Tabs */}
-          <div 
-            className="quick-hub-tabs-container"
+          {/* 5 Tabs Switcher: Settings, History, Watchlist, Downloads, Share */}
+          <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '4px',
+              gridTemplateColumns: 'repeat(5, 1fr)',
+              gap: '3px',
               background: 'var(--bg-tertiary)',
-              padding: '4px',
+              padding: '3px',
               borderRadius: '999px',
               marginBottom: '10px',
               flexShrink: 0,
@@ -410,16 +439,17 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'settings' ? 'active' : ''}`}
               style={{
-                padding: '7px 4px',
+                padding: '7px 2px',
                 borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'settings' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'settings' ? '#ffffff' : 'var(--text-secondary)',
-                fontSize: '0.68rem',
+                fontSize: '0.66rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.18s',
                 whiteSpace: 'nowrap',
+                textAlign: 'center',
               }}
             >
               {isUrdu ? 'سیٹنگز' : 'Settings'}
@@ -432,16 +462,17 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'history' ? 'active' : ''}`}
               style={{
-                padding: '7px 4px',
+                padding: '7px 2px',
                 borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'history' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'history' ? '#ffffff' : 'var(--text-secondary)',
-                fontSize: '0.68rem',
+                fontSize: '0.66rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.18s',
                 whiteSpace: 'nowrap',
+                textAlign: 'center',
               }}
             >
               {isUrdu ? `جاری (${historyItems.length})` : `History (${historyItems.length})`}
@@ -454,19 +485,47 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'watchlist' ? 'active' : ''}`}
               style={{
-                padding: '7px 4px',
+                padding: '7px 2px',
                 borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'watchlist' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'watchlist' ? '#ffffff' : 'var(--text-secondary)',
-                fontSize: '0.68rem',
+                fontSize: '0.66rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.18s',
                 whiteSpace: 'nowrap',
+                textAlign: 'center',
               }}
             >
               {isUrdu ? `فہرست (${watchlistItems.length})` : `List (${watchlistItems.length})`}
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab('downloads');
+                sound.playTabSwitch();
+              }}
+              className={`quick-hub-tab-btn ${activeTab === 'downloads' ? 'active' : ''}`}
+              style={{
+                padding: '7px 2px',
+                borderRadius: '999px',
+                border: 'none',
+                background: activeTab === 'downloads' ? 'var(--color-primary)' : 'transparent',
+                color: activeTab === 'downloads' ? '#ffffff' : 'var(--text-secondary)',
+                fontSize: '0.66rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                transition: 'all 0.18s',
+                whiteSpace: 'nowrap',
+                textAlign: 'center',
+                position: 'relative',
+              }}
+            >
+              {isUrdu 
+                ? `ڈاؤنلوڈ (${downloads.length})` 
+                : `Offline (${downloads.length})`
+              }
             </button>
 
             <button
@@ -476,12 +535,12 @@ export default function QuickControlHub() {
               }}
               className={`quick-hub-tab-btn ${activeTab === 'share' ? 'active' : ''}`}
               style={{
-                padding: '7px 4px',
+                padding: '7px 2px',
                 borderRadius: '999px',
                 border: 'none',
                 background: activeTab === 'share' ? 'var(--color-primary)' : 'transparent',
                 color: activeTab === 'share' ? '#ffffff' : 'var(--text-secondary)',
-                fontSize: '0.68rem',
+                fontSize: '0.66rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.18s',
@@ -492,7 +551,7 @@ export default function QuickControlHub() {
                 whiteSpace: 'nowrap',
               }}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '13px' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '12px' }}>
                 share
               </span>
               {isUrdu ? 'شیئر' : 'Share'}
@@ -1689,6 +1748,321 @@ export default function QuickControlHub() {
                   </div>
                 )}
               </div>
+            </div>
+          )}
+
+          {/* TAB 5: Offline Downloads Manager */}
+          {activeTab === 'downloads' && (
+            <div
+              className="quick-hub-scroll"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                flex: '1 1 auto',
+                minHeight: 0,
+                overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
+                paddingBottom: '16px',
+              }}
+            >
+              {/* Downloads Header Action Bar */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 2px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '18px' }}>
+                    download_for_offline
+                  </span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                    {isUrdu ? 'ڈاؤنلوڈ منیجر' : 'Offline Downloads'}
+                  </span>
+                  {activeDownloadsCount > 0 && (
+                    <span style={{
+                      fontSize: '0.62rem',
+                      fontWeight: 800,
+                      background: 'rgba(0, 204, 102, 0.2)',
+                      color: 'var(--color-primary)',
+                      padding: '2px 7px',
+                      borderRadius: '999px',
+                    }}>
+                      {activeDownloadsCount} {isUrdu ? 'جاری' : 'Active'}
+                    </span>
+                  )}
+                </div>
+
+                {downloads.length > 0 && (
+                  <button
+                    onClick={clearCompleted}
+                    style={{
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      color: 'var(--text-muted)',
+                      background: 'rgba(0, 0, 0, 0.05)',
+                      border: 'none',
+                      padding: '4px 10px',
+                      borderRadius: '999px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    {isUrdu ? 'مکمل صاف کریں' : 'Clear Finished'}
+                  </button>
+                )}
+              </div>
+
+              {/* Downloads Item List */}
+              {downloads.length === 0 ? (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '36px 16px',
+                    color: 'var(--text-muted)',
+                    textAlign: 'center',
+                    gap: '8px',
+                    borderRadius: '18px',
+                    background: 'var(--bg-secondary)',
+                    border: '1px dashed var(--glass-border)',
+                  }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: '42px', color: 'var(--text-muted)' }}>
+                    download_done
+                  </span>
+                  <p style={{ fontSize: '0.85rem', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+                    {isUrdu ? 'کوئی ڈاؤنلوڈ موجود نہیں' : 'No active downloads'}
+                  </p>
+                  <span style={{ fontSize: '0.75rem', lineHeight: 1.4 }}>
+                    {isUrdu 
+                      ? 'کسی بھی ایپی سوڈ کو آف لائن دیکھنے کے لیے ڈاؤنلوڈ بٹن دبائیں'
+                      : 'Click Download on any episode or movie to watch offline'
+                    }
+                  </span>
+                </div>
+              ) : (
+                downloads.map((item) => {
+                  const isCompleted = item.status === 'completed';
+                  const isDownloading = item.status === 'downloading';
+                  const isPaused = item.status === 'paused';
+                  const isFailed = item.status === 'failed';
+
+                  return (
+                    <div
+                      key={item.id}
+                      style={{
+                        padding: '12px',
+                        borderRadius: '18px',
+                        border: '1.5px solid var(--glass-border)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: '0 4px 12px rgba(0, 102, 51, 0.02)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '8px',
+                      }}
+                    >
+                      {/* Title & Status */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+                        <div style={{ minWidth: 0, flexGrow: 1 }}>
+                          <h4 style={{
+                            fontSize: '0.82rem',
+                            fontWeight: 800,
+                            color: 'var(--text-primary)',
+                            margin: '0 0 2px 0',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                          }}>
+                            {item.title}
+                          </h4>
+                          <p style={{ fontSize: '0.70rem', color: 'var(--text-muted)', fontWeight: 600, margin: 0 }}>
+                            {item.subtitle}
+                          </p>
+                        </div>
+
+                        {/* Status Pill */}
+                        <span
+                          style={{
+                            fontSize: '0.62rem',
+                            fontWeight: 800,
+                            padding: '2px 8px',
+                            borderRadius: '999px',
+                            textTransform: 'uppercase',
+                            background: isCompleted
+                              ? 'rgba(22, 163, 74, 0.12)'
+                              : isFailed
+                              ? 'rgba(239, 68, 68, 0.12)'
+                              : isPaused
+                              ? 'rgba(100, 116, 139, 0.12)'
+                              : 'rgba(0, 102, 51, 0.12)',
+                            color: isCompleted
+                              ? '#16a34a'
+                              : isFailed
+                              ? '#ef4444'
+                              : isPaused
+                              ? '#64748b'
+                              : 'var(--color-primary)',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          {isCompleted 
+                            ? (isUrdu ? 'محفوظ' : 'Saved') 
+                            : isPaused 
+                            ? (isUrdu ? 'روکا ہوا' : 'Paused') 
+                            : isFailed 
+                            ? (isUrdu ? 'ناکام' : 'Failed') 
+                            : (isUrdu ? 'ڈاؤنلوڈ جاری' : 'Downloading')
+                          }
+                        </span>
+                      </div>
+
+                      {/* Progress Bar & MB Count */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.66rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                          <span>{item.progress}%</span>
+                          <span>
+                            {item.downloadedMB} MB / {item.totalMB > 0 ? `${item.totalMB} MB` : '...'}
+                          </span>
+                        </div>
+                        <div
+                          style={{
+                            width: '100%',
+                            height: '5px',
+                            borderRadius: '999px',
+                            background: 'rgba(0, 0, 0, 0.08)',
+                            overflow: 'hidden',
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: `${item.progress}%`,
+                              height: '100%',
+                              background: isCompleted ? '#16a34a' : isFailed ? '#ef4444' : 'var(--color-primary)',
+                              borderRadius: '999px',
+                              transition: 'width 0.3s ease',
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Speed & Controls */}
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          borderTop: '1px solid var(--glass-border)',
+                          paddingTop: '6px',
+                        }}
+                      >
+                        <span style={{ fontSize: '0.66rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                          {isDownloading && item.speed && (
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                              <span className="material-symbols-outlined" style={{ fontSize: '12px' }}>speed</span>
+                              {item.speed}
+                            </span>
+                          )}
+                        </span>
+
+                        {/* Action Buttons */}
+                        <div style={{ display: 'flex', gap: '6px' }}>
+                          {isDownloading && (
+                            <button
+                              onClick={() => {
+                                pauseDownload(item.id);
+                                sound.playButton();
+                              }}
+                              style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                border: '1px solid var(--glass-border)',
+                                background: 'var(--bg-tertiary)',
+                                color: 'var(--text-primary)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                              }}
+                              title={isUrdu ? 'روکیں' : 'Pause'}
+                            >
+                              <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>pause</span>
+                            </button>
+                          )}
+                          {isPaused && (
+                            <button
+                              onClick={() => {
+                                resumeDownload(item.id);
+                                sound.playButton();
+                              }}
+                              style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                border: '1px solid var(--glass-border)',
+                                background: 'rgba(0, 204, 102, 0.15)',
+                                color: 'var(--color-primary)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                              }}
+                              title={isUrdu ? 'شروع کریں' : 'Resume'}
+                            >
+                              <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>play_arrow</span>
+                            </button>
+                          )}
+                          {(isDownloading || isPaused) && (
+                            <button
+                              onClick={() => {
+                                cancelDownload(item.id);
+                                sound.playButton();
+                              }}
+                              style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                border: '1px solid rgba(239, 68, 68, 0.2)',
+                                background: 'rgba(239, 68, 68, 0.08)',
+                                color: '#ef4444',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                              }}
+                              title={isUrdu ? 'منسوخ کریں' : 'Cancel'}
+                            >
+                              <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>close</span>
+                            </button>
+                          )}
+                          {(isCompleted || isFailed) && (
+                            <button
+                              onClick={() => {
+                                cancelDownload(item.id);
+                                sound.playButton();
+                              }}
+                              style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                border: '1px solid rgba(239, 68, 68, 0.2)',
+                                background: 'rgba(239, 68, 68, 0.08)',
+                                color: '#ef4444',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                              }}
+                              title={isUrdu ? 'حذف کریں' : 'Delete'}
+                            >
+                              <span className="material-symbols-outlined" style={{ fontSize: '15px' }}>delete</span>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
           )}
         </div>
