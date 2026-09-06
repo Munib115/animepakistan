@@ -155,8 +155,8 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           position: relative;
           width: calc(100% - 32px);
           max-width: 1420px;
-          min-height: 560px;
-          height: clamp(540px, 66vh, 700px);
+          min-height: 520px;
+          height: clamp(520px, 62vh, 660px);
           margin: 12px auto 18px;
           overflow: hidden;
           isolation: isolate;
@@ -193,12 +193,12 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         .cinematic-hero-content {
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: flex-end;
           align-items: flex-start;
-          min-height: 560px;
+          min-height: 520px;
           height: 100%;
           max-width: min(720px, 72%);
-          padding: 48px 60px;
+          padding: 36px 56px 48px;
           color: #fff;
           z-index: 1;
         }
@@ -209,21 +209,21 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           margin-inline-start: 0;
           margin-inline-end: auto;
         }
-        .cinematic-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-        .cinematic-hero-meta span, .cinematic-hero-genres { padding: 4px 10px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: rgba(255, 255, 255, 0.94); font-size: 0.78rem; font-weight: 700; }
-        .cinematic-hero-content h2 { max-width: 650px; margin: 0 0 14px 0; color: #fff; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.15; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85); }
-        .cinematic-hero-genres { display: inline-flex; align-items: center; margin: 0 0 14px 0; color: #9af0bc; }
-        .cinematic-hero-description { display: -webkit-box; max-width: 620px; margin: 0 0 22px 0; overflow: hidden; color: rgba(255, 255, 255, 0.92); font-size: 0.98rem; line-height: 1.65; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
-        .cinematic-hero-actions { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
-        .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; gap: 8px; min-height: 48px; padding: 0 26px; border-radius: 14px; font-weight: 800; font-size: 0.92rem; transition: transform 160ms ease, background 160ms ease, border-color 160ms ease; cursor: pointer; color: #fff; text-decoration: none; }
+        .cinematic-hero-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 8px; }
+        .cinematic-hero-meta span, .cinematic-hero-genres { padding: 4px 9px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 7px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: rgba(255, 255, 255, 0.94); font-size: 0.75rem; font-weight: 700; }
+        .cinematic-hero-content h2 { max-width: 650px; margin: 0 0 8px 0; color: #fff; font-size: clamp(1.65rem, 3.2vw, 2.4rem); font-weight: 900; letter-spacing: -0.025em; line-height: 1.15; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85); }
+        .cinematic-hero-genres { display: inline-flex; align-items: center; margin: 0 0 8px 0; color: #9af0bc; }
+        .cinematic-hero-description { display: -webkit-box; max-width: 600px; margin: 0 0 16px 0; overflow: hidden; color: rgba(255, 255, 255, 0.92); font-size: 0.90rem; line-height: 1.5; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+        .cinematic-hero-actions { display: flex; align-items: center; gap: 12px; margin-top: 2px; }
+        .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; gap: 8px; min-height: 44px; padding: 0 24px; border-radius: 12px; font-weight: 800; font-size: 0.88rem; transition: transform 160ms ease, background 160ms ease, border-color 160ms ease; cursor: pointer; color: #fff; text-decoration: none; }
         .cinematic-hero-actions :global(a):hover { transform: translateY(-2px); }
         .cinematic-hero-primary { background: #00994d; border: 1px solid rgba(255, 255, 255, 0.36); box-shadow: 0 10px 24px rgba(0, 153, 77, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.34); }
         .cinematic-hero-secondary { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.34); backdrop-filter: blur(14px); }
-        .cinematic-hero-arrow { position: absolute; top: 50%; z-index: 2; display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid rgba(255, 255, 255, 0.38); border-radius: 50%; background: rgba(5, 18, 10, 0.56); backdrop-filter: blur(14px); color: #fff; cursor: pointer; transform: translateY(-50%); }
-        .cinematic-hero-arrow.previous { inset-inline-start: 22px; } .cinematic-hero-arrow.next { inset-inline-end: 22px; }
-        .cinematic-hero-dots { position: absolute; bottom: 20px; left: 50%; display: flex; gap: 8px; padding: 7px 12px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; background: rgba(4, 18, 10, 0.55); backdrop-filter: blur(12px); transform: translateX(-50%); }
-        .cinematic-hero-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; background: rgba(255, 255, 255, 0.42); cursor: pointer; transition: width 180ms ease, background 180ms ease; }
-        .cinematic-hero-dots button.active { width: 26px; background: #00d66b; }
+        .cinematic-hero-arrow { position: absolute; top: 50%; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.38); border-radius: 50%; background: rgba(5, 18, 10, 0.56); backdrop-filter: blur(14px); color: #fff; cursor: pointer; transform: translateY(-50%); }
+        .cinematic-hero-arrow.previous { inset-inline-start: 18px; } .cinematic-hero-arrow.next { inset-inline-end: 18px; }
+        .cinematic-hero-dots { position: absolute; bottom: 16px; left: 50%; display: flex; gap: 7px; padding: 6px 10px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; background: rgba(4, 18, 10, 0.55); backdrop-filter: blur(12px); transform: translateX(-50%); }
+        .cinematic-hero-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 99px; background: rgba(255, 255, 255, 0.42); cursor: pointer; transition: width 180ms ease, background 180ms ease; }
+        .cinematic-hero-dots button.active { width: 24px; background: #00d66b; }
         @keyframes heroDrift { from { transform: scale(1.01); } to { transform: scale(1.055); } }
         @media (max-width: 768px) {
           .cinematic-hero {
@@ -252,7 +252,7 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             height: 100% !important;
             max-height: 600px !important;
             max-width: 100%;
-            padding: 22px 18px 28px !important;
+            padding: 20px 18px 36px !important;
             text-align: left;
             align-items: flex-start;
             margin: 0;
