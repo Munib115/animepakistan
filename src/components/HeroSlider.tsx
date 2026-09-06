@@ -5,9 +5,6 @@ import Link from 'next/link';
 import { AnimeItem } from '@/types/anime';
 import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
-import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
-import { shareContent } from '@/lib/shareHelper';
-import { sound } from '@/lib/soundEngine';
 
 interface HeroSliderProps {
   items: AnimeItem[];
@@ -19,8 +16,6 @@ export default function HeroSlider({ items }: HeroSliderProps) {
   const { t, language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [inList, setInList] = useState(false);
-  const [isShareCopied, setIsShareCopied] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -96,44 +91,6 @@ export default function HeroSlider({ items }: HeroSliderProps) {
     touchEndX.current = null;
   };
 
-  useEffect(() => {
-    if (!current) return;
-    setInList(isInWatchlist(current.slug));
-
-    const handleWatchlistUpdate = () => {
-      if (current) {
-        setInList(isInWatchlist(current.slug));
-      }
-    };
-    window.addEventListener('ap_watchlist_updated', handleWatchlistUpdate);
-    return () => window.removeEventListener('ap_watchlist_updated', handleWatchlistUpdate);
-  }, [current]);
-
-  const handleWatchlistToggle = () => {
-    if (!current) return;
-    sound.pop();
-    const added = toggleWatchlist({
-      slug: current.slug,
-      title: displayName,
-      poster: current.poster || current.anilist?.coverImage || '',
-      type: current.type === 'movie' ? 'movie' : 'series',
-    });
-    setInList(added);
-  };
-
-  const handleShare = async () => {
-    if (!current) return;
-    sound.click();
-    const fullUrl = typeof window !== 'undefined' ? `${window.location.origin}${watchLink}` : watchLink;
-    await shareContent({
-      title: displayName,
-      text: `Watch ${displayName} in Urdu & Hindi on AnimePakistan`,
-      url: fullUrl,
-    });
-    setIsShareCopied(true);
-    setTimeout(() => setIsShareCopied(false), 2000);
-  };
-
   return (
     <section
       className="cinematic-hero"
@@ -174,26 +131,6 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             <span className="material-symbols-outlined">info</span>
             <span>{t('details')}</span>
           </Link>
-          <button
-            type="button"
-            onClick={handleWatchlistToggle}
-            className={`cinematic-hero-secondary cinematic-hero-btn ${inList ? 'active-list' : ''}`}
-            aria-label={inList ? 'In Watchlist' : 'Add to List'}
-            title={inList ? 'In Watchlist' : 'Add to List'}
-          >
-            <span className="material-symbols-outlined">{inList ? 'bookmark_added' : 'bookmark_add'}</span>
-            <span className="btn-label">{inList ? (language === 'ur' ? 'لسٹ میں محفوظ' : 'In List') : (language === 'ur' ? 'لسٹ میں شامل کریں' : 'Add to List')}</span>
-          </button>
-          <button
-            type="button"
-            onClick={handleShare}
-            className="cinematic-hero-secondary cinematic-hero-btn cinematic-hero-icon-btn"
-            aria-label="Share Anime"
-            title={isShareCopied ? 'Link Copied' : 'Share Anime'}
-          >
-            <span className="material-symbols-outlined">{isShareCopied ? 'check' : 'share'}</span>
-            <span className="btn-label">{isShareCopied ? (language === 'ur' ? 'کاپی ہوگیا' : 'Copied') : (language === 'ur' ? 'شیئر' : 'Share')}</span>
-          </button>
         </div>
       </div>
 
@@ -218,9 +155,9 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           position: relative;
           width: calc(100% - 32px);
           max-width: 1420px;
-          min-height: 520px;
-          height: clamp(520px, 60vh, 640px);
-          margin: 14px auto 24px;
+          min-height: 560px;
+          height: clamp(540px, 66vh, 700px);
+          margin: 12px auto 18px;
           overflow: hidden;
           isolation: isolate;
           border: 1px solid rgba(0, 102, 51, 0.18);
@@ -258,10 +195,10 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           flex-direction: column;
           justify-content: center;
           align-items: flex-start;
-          min-height: 520px;
+          min-height: 560px;
           height: 100%;
-          max-width: min(700px, 72%);
-          padding: 44px 58px;
+          max-width: min(720px, 72%);
+          padding: 48px 60px;
           color: #fff;
           z-index: 1;
         }
@@ -277,17 +214,11 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         .cinematic-hero-content h2 { max-width: 650px; margin: 0 0 14px 0; color: #fff; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.15; text-wrap: balance; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85); }
         .cinematic-hero-genres { display: inline-flex; align-items: center; margin: 0 0 14px 0; color: #9af0bc; }
         .cinematic-hero-description { display: -webkit-box; max-width: 620px; margin: 0 0 22px 0; overflow: hidden; color: rgba(255, 255, 255, 0.92); font-size: 0.98rem; line-height: 1.65; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
-        .cinematic-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 0; }
-        .cinematic-hero-actions :global(a), .cinematic-hero-btn { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 14px; font-weight: 800; font-size: 0.92rem; transition: transform 160ms ease, background 160ms ease, border-color 160ms ease; cursor: pointer; color: #fff; text-decoration: none; }
-        .cinematic-hero-actions :global(a span), .cinematic-hero-btn span { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
-        .cinematic-hero-actions :global(a):hover, .cinematic-hero-btn:hover { transform: translateY(-2px); }
+        .cinematic-hero-actions { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+        .cinematic-hero-actions :global(a) { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; gap: 8px; min-height: 48px; padding: 0 26px; border-radius: 14px; font-weight: 800; font-size: 0.92rem; transition: transform 160ms ease, background 160ms ease, border-color 160ms ease; cursor: pointer; color: #fff; text-decoration: none; }
+        .cinematic-hero-actions :global(a):hover { transform: translateY(-2px); }
         .cinematic-hero-primary { background: #00994d; border: 1px solid rgba(255, 255, 255, 0.36); box-shadow: 0 10px 24px rgba(0, 153, 77, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.34); }
         .cinematic-hero-secondary { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.34); backdrop-filter: blur(14px); }
-        .cinematic-hero-btn.active-list {
-          background: rgba(0, 153, 77, 0.38) !important;
-          border-color: #00e575 !important;
-          color: #00e575 !important;
-        }
         .cinematic-hero-arrow { position: absolute; top: 50%; z-index: 2; display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid rgba(255, 255, 255, 0.38); border-radius: 50%; background: rgba(5, 18, 10, 0.56); backdrop-filter: blur(14px); color: #fff; cursor: pointer; transform: translateY(-50%); }
         .cinematic-hero-arrow.previous { inset-inline-start: 22px; } .cinematic-hero-arrow.next { inset-inline-end: 22px; }
         .cinematic-hero-dots { position: absolute; bottom: 20px; left: 50%; display: flex; gap: 8px; padding: 7px 12px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; background: rgba(4, 18, 10, 0.55); backdrop-filter: blur(12px); transform: translateX(-50%); }
@@ -296,18 +227,18 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         @keyframes heroDrift { from { transform: scale(1.01); } to { transform: scale(1.055); } }
         @media (max-width: 768px) {
           .cinematic-hero {
-            width: calc(100% - 24px) !important;
-            min-height: 400px !important;
-            height: clamp(390px, 54vh, 470px) !important;
-            max-height: 490px !important;
-            margin: 10px auto 16px !important;
+            width: calc(100% - 20px) !important;
+            min-height: 480px !important;
+            height: clamp(480px, 66vh, 580px) !important;
+            max-height: 600px !important;
+            margin: 8px auto 12px !important;
             left: 0 !important;
             right: 0 !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            border-radius: 20px !important;
+            border-radius: 22px !important;
             border: 1px solid rgba(0, 102, 51, 0.18) !important;
-            box-shadow: 0 16px 40px -12px rgba(0, 45, 20, 0.32) !important;
+            box-shadow: 0 18px 45px -12px rgba(0, 45, 20, 0.35) !important;
           }
           .cinematic-hero-image {
             object-position: center 20% !important;
@@ -317,18 +248,18 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           }
           .cinematic-hero-content, .cinematic-hero-content.rtl {
             justify-content: flex-end;
-            min-height: 400px !important;
+            min-height: 480px !important;
             height: 100% !important;
-            max-height: 490px !important;
+            max-height: 600px !important;
             max-width: 100%;
-            padding: 20px 18px 26px !important;
+            padding: 22px 18px 28px !important;
             text-align: left;
             align-items: flex-start;
             margin: 0;
           }
           .cinematic-hero-content.rtl { text-align: right; align-items: flex-start; }
           .cinematic-hero-content h2 {
-            font-size: clamp(1.25rem, 5vw, 1.7rem) !important;
+            font-size: clamp(1.3rem, 5.2vw, 1.75rem) !important;
             line-height: 1.2;
             margin: 0 0 8px 0;
             font-weight: 900;
@@ -360,42 +291,27 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             font-size: 0.82rem !important;
             line-height: 1.45 !important;
             color: rgba(255, 255, 255, 0.88) !important;
-            margin: 0 0 12px 0 !important;
+            margin: 0 0 14px 0 !important;
           }
           .cinematic-hero-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
+            max-width: 360px;
             margin-top: 4px;
             flex-wrap: nowrap;
           }
-          .cinematic-hero-actions :global(a), .cinematic-hero-btn {
-            min-height: 38px !important;
-            padding: 0 10px !important;
-            border-radius: 10px !important;
-            font-size: 0.78rem !important;
+          .cinematic-hero-actions :global(a) {
+            flex: 1;
+            min-height: 42px !important;
+            padding: 0 16px !important;
+            border-radius: 12px !important;
+            font-size: 0.84rem !important;
             font-weight: 800;
             justify-content: center;
           }
-          .cinematic-hero-primary {
-            flex: 1.2;
-          }
-          .cinematic-hero-actions :global(a.cinematic-hero-secondary) {
-            flex: 1;
-          }
-          .cinematic-hero-btn {
-            flex: 1;
-            white-space: nowrap;
-          }
-          .cinematic-hero-icon-btn {
-            flex: 0 0 38px !important;
-            padding: 0 !important;
-          }
-          .cinematic-hero-icon-btn .btn-label {
-            display: none !important;
-          }
-          .cinematic-hero-actions :global(.material-symbols-outlined), .cinematic-hero-btn :global(.material-symbols-outlined) { font-size: 18px !important; }
+          .cinematic-hero-actions :global(.material-symbols-outlined) { font-size: 20px !important; }
           .cinematic-hero-arrow { display: none !important; }
           .cinematic-hero-dots {
             bottom: 8px !important;
