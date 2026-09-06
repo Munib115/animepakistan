@@ -11,7 +11,7 @@ import { sound } from '@/lib/soundEngine';
 import { useDownloads } from '@/context/DownloadContext';
 import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
 import { shareContent } from '@/lib/shareHelper';
-import { adblockShield, ShieldStats, formatTimeSaved } from '@/lib/adblockShield';
+import { adblockShield } from '@/lib/adblockShield';
 import EpisodeComments from './EpisodeComments';
 
 interface WatchContainerProps {
@@ -39,32 +39,17 @@ export default function WatchContainer({
   const [isShareCopied, setIsShareCopied] = useState(false);
   const [copiedEpSlug, setCopiedEpSlug] = useState<string | null>(null);
 
-  // AdBlocker State (Background Sandbox Protection & Live Stats)
+  // AdBlocker State (Background Sandbox Protection)
   const [isShieldActive, setIsShieldActive] = useState(true);
-  const [liveStats, setLiveStats] = useState<ShieldStats>({
-    adsBlocked: 0,
-    popupsBlocked: 0,
-    trackersBlocked: 0,
-    bandwidthSavedMB: 0,
-    timeSavedSec: 0,
-  });
 
   useEffect(() => {
     setIsShieldActive(adblockShield.isEnabled());
-    setLiveStats(adblockShield.getStats());
-
     const handleShieldChange = () => {
       setIsShieldActive(adblockShield.isEnabled());
     };
-    const handleStatsUpdate = () => {
-      setLiveStats(adblockShield.getStats());
-    };
-
     window.addEventListener('ap_adblock_changed', handleShieldChange);
-    window.addEventListener('ap_adblock_stats_updated', handleStatsUpdate);
     return () => {
       window.removeEventListener('ap_adblock_changed', handleShieldChange);
-      window.removeEventListener('ap_adblock_stats_updated', handleStatsUpdate);
     };
   }, []);
 
@@ -878,18 +863,16 @@ export default function WatchContainer({
         </div>
       </div>
 
-      {/* Player Navigation Bar — Previous / Next Episode + Live AdBlocker Stats */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '8px',
-        position: 'relative',
-        zIndex: 2,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {!isMovie && prevEp ? (
+      {/* Player Navigation Bar — Previous / Next Episode */}
+      {!isMovie && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          position: 'relative',
+          zIndex: 2,
+        }}>
+          {prevEp ? (
             <Link
               href={`/watch/${anime.slug}/${prevEp.slug}`}
               prefetch={true}
@@ -903,7 +886,7 @@ export default function WatchContainer({
               </span>
               <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'پچھلی قسط' : 'Prev Ep'}</span>
             </Link>
-          ) : !isMovie ? (
+          ) : (
             <button
               disabled
               className="glass-btn-secondary"
@@ -914,9 +897,9 @@ export default function WatchContainer({
               </span>
               <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'پچھلی قسط' : 'Prev Ep'}</span>
             </button>
-          ) : null}
+          )}
 
-          {!isMovie && nextEp && (
+          {nextEp && (
             <Link
               href={`/watch/${anime.slug}/${nextEp.slug}`}
               prefetch={true}
@@ -932,43 +915,7 @@ export default function WatchContainer({
             </Link>
           )}
         </div>
-
-        {/* Live AdBlocker Session Stats Button */}
-        {isShieldActive && (
-          <button
-            type="button"
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent('ap_open_settings_hub'));
-              sound.playButton();
-            }}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '6px 12px',
-              borderRadius: '20px',
-              background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.22) 0%, rgba(0, 229, 117, 0.10) 100%)',
-              border: '1px solid rgba(0, 255, 102, 0.35)',
-              color: 'var(--text-primary)',
-              fontSize: '0.74rem',
-              fontWeight: 800,
-              cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0, 102, 51, 0.12)',
-              transition: 'all 0.2s ease',
-            }}
-            title={language === 'ur' ? 'سیٹنگز میں ایڈ بلاکر کی مکمل تفصیلات دیکھیں' : 'Click to view full AdBlocker statistics in Settings'}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#00ff88' }}>
-              verified_user
-            </span>
-            <span>
-              {language === 'ur'
-                ? `ایڈ بلاکر: ${liveStats.adsBlocked + liveStats.popupsBlocked} اشتہارات بلاک (${formatTimeSaved(liveStats.timeSavedSec)} بچت)`
-                : `AdBlocker: ${liveStats.adsBlocked + liveStats.popupsBlocked} ads blocked (${formatTimeSaved(liveStats.timeSavedSec)} saved)`}
-            </span>
-          </button>
-        )}
-      </div>
+      )}
 
       {/* Series Episodes Playlist Organized by Season */}
       {!isMovie && sortedEpisodes.length > 0 && (

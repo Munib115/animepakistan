@@ -772,52 +772,6 @@ export default function QuickControlHub() {
                   </div>
                 </div>
 
-                {/* 4-Card Statistics Grid with Icons & Large Numbers */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(4, 1fr)',
-                  gap: '6px',
-                  background: 'var(--bg-secondary)',
-                  padding: '10px 8px',
-                  borderRadius: '10px',
-                  border: '1px solid var(--glass-border)',
-                }}>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
-                      {shieldStats.adsBlocked}
-                    </div>
-                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
-                      {isUrdu ? 'اشتہارات' : 'Ads Blocked'}
-                    </div>
-                  </div>
-
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
-                      {shieldStats.popupsBlocked}
-                    </div>
-                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
-                      {isUrdu ? 'پاپ اپس' : 'Popups'}
-                    </div>
-                  </div>
-
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
-                      {shieldStats.trackersBlocked}
-                    </div>
-                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
-                      {isUrdu ? 'ٹریکرز' : 'Trackers'}
-                    </div>
-                  </div>
-
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
-                      {formatTimeSaved(shieldStats.timeSavedSec)}
-                    </div>
-                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
-                      {isUrdu ? 'وقت کی بچت' : 'Time Saved'}
-                    </div>
-                  </div>
-                </div>
 
                 {/* Reset Stats / Status Row */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.64rem', color: 'var(--text-muted)' }}>
