@@ -152,6 +152,8 @@ ON public.live_chat_messages FOR INSERT
 WITH CHECK (true);
 
 -- Enable Realtime for live_chat_messages so new chats pop in instantly
+ALTER TABLE public.live_chat_messages REPLICA IDENTITY FULL;
+
 DO $$
 BEGIN
   IF NOT EXISTS (
@@ -163,6 +165,23 @@ BEGIN
     ALTER PUBLICATION supabase_realtime ADD TABLE public.live_chat_messages;
   END IF;
 END $$;
+
+-- Optional live_chat_presence table for presence backups
+CREATE TABLE IF NOT EXISTS public.live_chat_presence (
+    session_id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    user_name TEXT NOT NULL,
+    avatar_color TEXT DEFAULT '#00ff66',
+    last_seen TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE public.live_chat_presence ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Allow public read presence" ON public.live_chat_presence;
+CREATE POLICY "Allow public read presence" ON public.live_chat_presence FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow public upsert presence" ON public.live_chat_presence;
+CREATE POLICY "Allow public upsert presence" ON public.live_chat_presence FOR ALL USING (true) WITH CHECK (true);
 
 -- Create public storage bucket for chat media (voice notes, images, videos)
 INSERT INTO storage.buckets (id, name, public) 

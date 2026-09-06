@@ -46,6 +46,9 @@ export default function LiveChatFloating() {
   const [isEditingName, setIsEditingName] = useState(false);
   const [customNameInput, setCustomNameInput] = useState('');
   const [isSending, setIsSending] = useState(false);
+  const [onlineCount, setOnlineCount] = useState(1);
+
+  const channelRef = useRef<any>(null);
 
   // Persistent refs to avoid tearing down realtime subscription on state changes
   const isOpenRef = useRef(isOpen);
@@ -154,9 +157,15 @@ export default function LiveChatFloating() {
 
     loadMessages();
 
-    // Subscribe to Realtime Postgres Changes
+    // Subscribe to Realtime Postgres Changes & Presence Tracking
     const channel = supabase
-      .channel('public:live_chat_messages')
+      .channel('animepakistan_community_lounge', {
+        config: {
+          presence: {
+            key: guestRef.current.id,
+          },
+        },
+      })
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'live_chat_messages' },
@@ -183,11 +192,36 @@ export default function LiveChatFloating() {
           }
         }
       )
-      .subscribe((status) => {
+      .on('presence', { event: 'sync' }, () => {
+        const state = channel.presenceState();
+        const activeUsersCount = Object.keys(state).length;
+        setOnlineCount(Math.max(1, activeUsersCount));
+      })
+      .on('presence', { event: 'join' }, () => {
+        const state = channel.presenceState();
+        setOnlineCount(Math.max(1, Object.keys(state).length));
+      })
+      .on('presence', { event: 'leave' }, () => {
+        const state = channel.presenceState();
+        setOnlineCount(Math.max(1, Object.keys(state).length));
+      })
+      .subscribe(async (status) => {
         if (status === 'SUBSCRIBED') {
           loadMessages();
+          try {
+            await channel.track({
+              user_id: guestRef.current.id,
+              user_name: guestRef.current.name,
+              avatar_color: guestRef.current.avatarColor,
+              online_at: new Date().toISOString(),
+            });
+          } catch (err) {
+            console.error('Failed to track Supabase presence:', err);
+          }
         }
       });
+
+    channelRef.current = channel;
 
     // Smart background sync (only when tab is visible)
     const pollInterval = setInterval(() => {
@@ -198,6 +232,7 @@ export default function LiveChatFloating() {
     return () => {
       isSubscribed = false;
       clearInterval(pollInterval);
+      channel.untrack().catch(() => {});
       supabase.removeChannel(channel);
     };
   }, [mounted]);
@@ -239,9 +274,18 @@ export default function LiveChatFloating() {
     if (!customNameInput.trim()) return;
     const updated = updateGuestName(customNameInput.trim());
     setGuest(updated);
+    guestRef.current = updated;
     setIsEditingName(false);
     sound.softClick();
     sound.haptic(10);
+    try {
+      channelRef.current?.track({
+        user_id: updated.id,
+        user_name: updated.name,
+        avatar_color: updated.avatarColor,
+        online_at: new Date().toISOString(),
+      });
+    } catch (err) {}
   };
 
   // Handle File Selection for Image / Video
@@ -568,7 +612,7 @@ export default function LiveChatFloating() {
                 <span>Anime</span> Pakistan Lounge
               </h3>
               <p className="ap-chat-subtitle">
-                لائیو چیٹ • Urdu & Hindi Anime Community
+                لائیو چیٹ • {onlineCount} {onlineCount === 1 ? 'user' : 'users'} online
               </p>
             </div>
           </div>
@@ -615,15 +659,16 @@ export default function LiveChatFloating() {
               </div>
             )}
           </div>
-          <span className="ap-chat-active-count">
+          <span className="ap-chat-active-count" title={`${onlineCount} ${onlineCount === 1 ? 'user' : 'users'} active right now`}>
             <span style={{
               width: '6px',
               height: '6px',
               borderRadius: '50%',
               background: '#00ff66',
-              boxShadow: '0 0 6px #00ff66',
+              boxShadow: '0 0 8px #00ff66',
               display: 'inline-block',
             }} />
+            <span style={{ fontWeight: 800, color: '#00ff66' }}>{onlineCount}</span>
             <span>Online</span>
           </span>
         </div>
