@@ -11,7 +11,7 @@ import { sound } from '@/lib/soundEngine';
 import { useDownloads } from '@/context/DownloadContext';
 import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
 import { shareContent } from '@/lib/shareHelper';
-import { adblockShield } from '@/lib/adblockShield';
+import { adblockShield, ShieldStats, formatTimeSaved } from '@/lib/adblockShield';
 import EpisodeComments from './EpisodeComments';
 
 interface WatchContainerProps {
@@ -39,17 +39,32 @@ export default function WatchContainer({
   const [isShareCopied, setIsShareCopied] = useState(false);
   const [copiedEpSlug, setCopiedEpSlug] = useState<string | null>(null);
 
-  // AdBlocker State (Background Sandbox Protection)
+  // AdBlocker State (Background Sandbox Protection & Live Stats)
   const [isShieldActive, setIsShieldActive] = useState(true);
+  const [liveStats, setLiveStats] = useState<ShieldStats>({
+    adsBlocked: 0,
+    popupsBlocked: 0,
+    trackersBlocked: 0,
+    bandwidthSavedMB: 0,
+    timeSavedSec: 0,
+  });
 
   useEffect(() => {
     setIsShieldActive(adblockShield.isEnabled());
+    setLiveStats(adblockShield.getStats());
+
     const handleShieldChange = () => {
       setIsShieldActive(adblockShield.isEnabled());
     };
+    const handleStatsUpdate = () => {
+      setLiveStats(adblockShield.getStats());
+    };
+
     window.addEventListener('ap_adblock_changed', handleShieldChange);
+    window.addEventListener('ap_adblock_stats_updated', handleStatsUpdate);
     return () => {
       window.removeEventListener('ap_adblock_changed', handleShieldChange);
+      window.removeEventListener('ap_adblock_stats_updated', handleStatsUpdate);
     };
   }, []);
 
@@ -77,8 +92,8 @@ export default function WatchContainer({
 
   const handleShareCurrent = async () => {
     sound.click();
-    const title = isMovie 
-      ? displayName 
+    const title = isMovie
+      ? displayName
       : `${displayName} - ${currentEpisode?.title || `Episode ${currentEpisode?.number || 1}`}`;
     const text = isMovie
       ? `Watch ${displayName} in Urdu & Hindi on AnimePakistan`
@@ -112,7 +127,7 @@ export default function WatchContainer({
       activeMirror
     );
   };
-  
+
   const targetEpisodeUrl = currentEpisode?.url || (anime.type === 'movie' ? `/watch/${anime.slug}` : `/watch/${anime.slug}/${targetSlug}`);
 
   // Filter stream sources strictly to only allow valid video embeds (never website pages)
@@ -129,7 +144,7 @@ export default function WatchContainer({
     const epNumber = currentEpisode?.number || 1;
     const epSeason = currentEpisode?.season || (currentEpisode?.slug?.match(/(\d+)x\d+/i) ? parseInt(currentEpisode.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
     const isMovie = anime.type === 'movie';
-    
+
     const streamApiUrl = isMovie
       ? `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}`
       : `/api/animesalt-stream?slug=${encodeURIComponent(saltSlug)}&ep=${epNumber}&season=${epSeason}`;
@@ -146,7 +161,7 @@ export default function WatchContainer({
           }
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setIsRetryingStream(false));
   };
 
@@ -178,9 +193,9 @@ export default function WatchContainer({
   // Get active mirror URL strictly from valid sources
   const rawMirror = validStreamSources.length > selectedServerIndex && validStreamSources[selectedServerIndex]?.url
     ? validStreamSources[selectedServerIndex].url
-    : (validStreamSources.length > 0 && validStreamSources[0]?.url 
-        ? validStreamSources[0].url 
-        : '');
+    : (validStreamSources.length > 0 && validStreamSources[0]?.url
+      ? validStreamSources[0].url
+      : '');
 
   const activeMirror = isValidStreamEmbedUrl(rawMirror) ? sanitizeStreamUrl(rawMirror) : '';
 
@@ -192,17 +207,29 @@ export default function WatchContainer({
   const [showResumeBanner, setShowResumeBanner] = useState(false);
   const watchSecondsRef = useRef(0);
 
-  const displayName = language === 'en' 
-    ? (anime.anilist?.englishName || anime.title) 
+  const displayName = language === 'en'
+    ? (anime.anilist?.englishName || anime.title)
     : (anime.anilist?.romajiName || anime.anilist?.englishName || anime.title);
 
   const resolvedPoster = anime.poster || anime.anilist?.coverImage || anime.backdrop || '';
   const isMovie = anime.type === 'movie';
 
-  // Reset iframe loaded state when activeMirror changes
+  // Reset iframe loaded state & register stream protection when activeMirror changes
   useEffect(() => {
     setIsIframeLoaded(false);
-  }, [activeMirror]);
+    if (activeMirror && isShieldActive) {
+      adblockShield.recordStreamSession(activeMirror);
+    }
+  }, [activeMirror, isShieldActive]);
+
+  // Periodic watch tick to suppress recurring background ads during video playback
+  useEffect(() => {
+    if (!activeMirror || !isShieldActive) return;
+    const tickInterval = setInterval(() => {
+      adblockShield.recordStreamWatchTick();
+    }, 25000);
+    return () => clearInterval(tickInterval);
+  }, [activeMirror, isShieldActive]);
 
   // Sorted episodes list (Season asc, Number asc)
   const sortedEpisodes = useMemo(() => {
@@ -244,9 +271,9 @@ export default function WatchContainer({
     const list = selectedSeason === 'ALL'
       ? [...sortedEpisodes]
       : sortedEpisodes.filter((ep) => {
-          const s = ep.season || (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
-          return s === selectedSeason;
-        });
+        const s = ep.season || (ep.slug.match(/(\d+)x\d+/i) ? parseInt(ep.slug.match(/(\d+)x\d+/i)![1], 10) : 1);
+        return s === selectedSeason;
+      });
 
     if (playlistSortOrder === 'desc') {
       return list.reverse();
@@ -331,7 +358,7 @@ export default function WatchContainer({
         iframeRef.current.contentWindow.postMessage({ type: 'seek', seconds, direction }, '*');
         iframeRef.current.contentWindow.postMessage({ event: 'command', func: 'seekBy', args: [seconds] }, '*');
         iframeRef.current.contentWindow.postMessage({ type: 'player:seek', seconds }, '*');
-      } catch (e) {}
+      } catch (e) { }
     }
 
     // Clear visual feedback after 750ms
@@ -342,6 +369,9 @@ export default function WatchContainer({
 
   // Double click / double tap handler
   const handlePlayerTap = (e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => {
+    if (isShieldActive) {
+      adblockShield.recordPlayerInteraction();
+    }
     const now = Date.now();
     const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
     const target = e.currentTarget.getBoundingClientRect();
@@ -398,7 +428,7 @@ export default function WatchContainer({
         zIndex: 2,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <Link 
+          <Link
             href={isMovie ? '/' : `/anime/${anime.slug}`}
             className="glass-btn-secondary"
             style={{ padding: '6px 14px', fontSize: '0.82rem', borderRadius: '10px' }}
@@ -577,8 +607,8 @@ export default function WatchContainer({
               play_circle
             </span>
             <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-              {language === 'ur' 
-                ? `آپ نے پچھلی بار یہ ویڈیو ${savedProgress.progressPercent}٪ تک دیکھی تھی۔` 
+              {language === 'ur'
+                ? `آپ نے پچھلی بار یہ ویڈیو ${savedProgress.progressPercent}٪ تک دیکھی تھی۔`
                 : `You previously watched up to ${savedProgress.progressPercent}% of this video.`}
             </span>
           </div>
@@ -752,8 +782,8 @@ export default function WatchContainer({
                       {language === 'ur' ? 'سرور اسٹریم ہم آہنگ ہو رہی ہے' : 'Stream Synchronizing'}
                     </h3>
                     <p style={{ fontSize: '0.8rem', color: '#94a3b8', maxWidth: '360px', margin: '0 auto' }}>
-                      {language === 'ur' 
-                        ? 'ویڈیو کنکشن بحال کرنے کیلئے نیچے دیے گئے بٹن پر کلک کریں۔' 
+                      {language === 'ur'
+                        ? 'ویڈیو کنکشن بحال کرنے کیلئے نیچے دیے گئے بٹن پر کلک کریں۔'
                         : 'The high-speed stream server is reconnecting. Click below to retry.'}
                     </p>
                   </div>
@@ -848,16 +878,18 @@ export default function WatchContainer({
         </div>
       </div>
 
-      {/* Player Navigation Bar — Previous / Next Episode */}
-      {!isMovie && (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          position: 'relative',
-          zIndex: 2,
-        }}>
-          {prevEp ? (
+      {/* Player Navigation Bar — Previous / Next Episode + Live AdBlocker Stats */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '8px',
+        position: 'relative',
+        zIndex: 2,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {!isMovie && prevEp ? (
             <Link
               href={`/watch/${anime.slug}/${prevEp.slug}`}
               prefetch={true}
@@ -871,7 +903,7 @@ export default function WatchContainer({
               </span>
               <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'پچھلی قسط' : 'Prev Ep'}</span>
             </Link>
-          ) : (
+          ) : !isMovie ? (
             <button
               disabled
               className="glass-btn-secondary"
@@ -882,9 +914,9 @@ export default function WatchContainer({
               </span>
               <span style={{ whiteSpace: 'nowrap' }}>{language === 'ur' ? 'پچھلی قسط' : 'Prev Ep'}</span>
             </button>
-          )}
+          ) : null}
 
-          {nextEp && (
+          {!isMovie && nextEp && (
             <Link
               href={`/watch/${anime.slug}/${nextEp.slug}`}
               prefetch={true}
@@ -900,7 +932,43 @@ export default function WatchContainer({
             </Link>
           )}
         </div>
-      )}
+
+        {/* Live AdBlocker Session Stats Button */}
+        {isShieldActive && (
+          <button
+            type="button"
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent('ap_open_settings_hub'));
+              sound.playButton();
+            }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 12px',
+              borderRadius: '20px',
+              background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.22) 0%, rgba(0, 229, 117, 0.10) 100%)',
+              border: '1px solid rgba(0, 255, 102, 0.35)',
+              color: 'var(--text-primary)',
+              fontSize: '0.74rem',
+              fontWeight: 800,
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 102, 51, 0.12)',
+              transition: 'all 0.2s ease',
+            }}
+            title={language === 'ur' ? 'سیٹنگز میں ایڈ بلاکر کی مکمل تفصیلات دیکھیں' : 'Click to view full AdBlocker statistics in Settings'}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#00ff88' }}>
+              verified_user
+            </span>
+            <span>
+              {language === 'ur'
+                ? `ایڈ بلاکر: ${liveStats.adsBlocked + liveStats.popupsBlocked} اشتہارات بلاک (${formatTimeSaved(liveStats.timeSavedSec)} بچت)`
+                : `AdBlocker: ${liveStats.adsBlocked + liveStats.popupsBlocked} ads blocked (${formatTimeSaved(liveStats.timeSavedSec)} saved)`}
+            </span>
+          </button>
+        )}
+      </div>
 
       {/* Series Episodes Playlist Organized by Season */}
       {!isMovie && sortedEpisodes.length > 0 && (
@@ -1069,10 +1137,10 @@ export default function WatchContainer({
                     flexShrink: 0,
                   }}>
                     {epThumb && (
-                      <img 
-                        src={epThumb} 
-                        alt={cleanTitle} 
-                        loading="lazy" 
+                      <img
+                        src={epThumb}
+                        alt={cleanTitle}
+                        loading="lazy"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
@@ -1080,7 +1148,7 @@ export default function WatchContainer({
                             e.currentTarget.src = fallbackThumb;
                           }
                         }}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
                     )}
                     {isCurrent ? (
@@ -1187,10 +1255,10 @@ export default function WatchContainer({
       )}
 
       {/* Episode Discussions & Voice Notes */}
-      <EpisodeComments 
-        animeSlug={anime.slug} 
-        episodeSlug={currentEpisode?.slug || 'full-movie'} 
-        episodeTitle={currentEpisode?.title} 
+      <EpisodeComments
+        animeSlug={anime.slug}
+        episodeSlug={currentEpisode?.slug || 'full-movie'}
+        episodeTitle={currentEpisode?.title}
       />
 
     </div>

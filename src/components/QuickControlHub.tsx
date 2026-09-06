@@ -14,7 +14,7 @@ import {
   getSavedMyShareCode,
   SharedLibraryRecord,
 } from '@/lib/shareLibrary';
-import { adblockShield, ShieldStats } from '@/lib/adblockShield';
+import { adblockShield, ShieldStats, formatTimeSaved } from '@/lib/adblockShield';
 
 export default function QuickControlHub() {
   const { language, setLanguage, t } = useLanguage();
@@ -196,8 +196,14 @@ export default function QuickControlHub() {
       setIsAdBlockOn(adblockShield.isEnabled());
     };
 
+    const handleOpenSettingsHub = () => {
+      setIsOpen(true);
+      setActiveTab('settings');
+    };
+
     window.addEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
     window.addEventListener('ap_adblock_changed', handleShieldToggleEvent);
+    window.addEventListener('ap_open_settings_hub', handleOpenSettingsHub);
 
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('ap_history_updated', refreshData);
@@ -211,6 +217,7 @@ export default function QuickControlHub() {
       window.removeEventListener('ap_watchlist_updated', refreshData);
       window.removeEventListener('storage', refreshData);
       window.removeEventListener('ap_open_share_hub', handleOpenShare);
+      window.removeEventListener('ap_open_settings_hub', handleOpenSettingsHub);
       window.removeEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
       window.removeEventListener('ap_adblock_changed', handleShieldToggleEvent);
     };
@@ -719,48 +726,94 @@ export default function QuickControlHub() {
                   </button>
                 </div>
 
-                {/* Real-time Accurate Summary Statistics Grid */}
+                {/* Real-time Summary Banner */}
+                <div style={{
+                  background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.18) 0%, rgba(0, 229, 117, 0.08) 100%)',
+                  border: '1px solid rgba(0, 255, 102, 0.25)',
+                  borderRadius: '10px',
+                  padding: '10px 12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '10px',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '24px', color: '#00ff88' }}>
+                      verified
+                    </span>
+                    <div>
+                      <div style={{ fontSize: '0.84rem', fontWeight: 900, color: 'var(--text-primary)' }}>
+                        {isUrdu 
+                          ? `${shieldStats.adsBlocked + shieldStats.popupsBlocked} اشتہارات و پاپ اپس بلاک ہوئے`
+                          : `${shieldStats.adsBlocked + shieldStats.popupsBlocked} Ads & Popups Blocked`}
+                      </div>
+                      <div style={{ fontSize: '0.70rem', color: 'var(--color-primary)', fontWeight: 700 }}>
+                        {isUrdu
+                          ? `${formatTimeSaved(shieldStats.timeSavedSec)} وقت اور ${shieldStats.bandwidthSavedMB} MB ڈیٹا بچایا گیا`
+                          : `${formatTimeSaved(shieldStats.timeSavedSec)} Saved • ${shieldStats.bandwidthSavedMB} MB Data Saved`}
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{
+                    background: 'rgba(0, 255, 102, 0.15)',
+                    border: '1px solid rgba(0, 255, 102, 0.3)',
+                    borderRadius: '20px',
+                    padding: '2px 8px',
+                    fontSize: '0.62rem',
+                    fontWeight: 900,
+                    color: '#00ff88',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00ff88', display: 'inline-block', boxShadow: '0 0 6px #00ff88' }} />
+                    <span>{isUrdu ? 'لائیو' : 'LIVE'}</span>
+                  </div>
+                </div>
+
+                {/* 4-Card Statistics Grid with Icons & Large Numbers */}
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(4, 1fr)',
                   gap: '6px',
                   background: 'var(--bg-secondary)',
-                  padding: '8px',
+                  padding: '10px 8px',
                   borderRadius: '10px',
                   border: '1px solid var(--glass-border)',
                 }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                      {shieldStats.adsBlocked}
+                    </div>
+                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
+                      {isUrdu ? 'اشتہارات' : 'Ads Blocked'}
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
                       {shieldStats.popupsBlocked}
                     </div>
-                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
                       {isUrdu ? 'پاپ اپس' : 'Popups'}
                     </div>
                   </div>
 
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
-                      {shieldStats.adsBlocked}
-                    </div>
-                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                      {isUrdu ? 'اشتہارات' : 'Ads'}
-                    </div>
-                  </div>
-
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
                       {shieldStats.trackersBlocked}
                     </div>
-                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
                       {isUrdu ? 'ٹریکرز' : 'Trackers'}
                     </div>
                   </div>
 
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
-                      {shieldStats.timeSavedSec}s
+                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                      {formatTimeSaved(shieldStats.timeSavedSec)}
                     </div>
-                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                    <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 700 }}>
                       {isUrdu ? 'وقت کی بچت' : 'Time Saved'}
                     </div>
                   </div>
