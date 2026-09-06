@@ -14,12 +14,21 @@ import {
   getSavedMyShareCode,
   SharedLibraryRecord,
 } from '@/lib/shareLibrary';
+import { adblockShield, ShieldStats } from '@/lib/adblockShield';
 
 export default function QuickControlHub() {
   const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [eyeComfort, setEyeComfort] = useState<'off' | 'warm' | 'night'>('off');
+  const [isAdBlockOn, setIsAdBlockOn] = useState(true);
+  const [shieldStats, setShieldStats] = useState<ShieldStats>({
+    adsBlocked: 0,
+    popupsBlocked: 0,
+    trackersBlocked: 0,
+    bandwidthSavedMB: 0,
+    timeSavedSec: 0,
+  });
   const [historyItems, setHistoryItems] = useState<WatchProgressItem[]>([]);
   const [watchlistItems, setWatchlistItems] = useState<WatchlistItem[]>([]);
   const [activeTab, setActiveTab] = useState<'settings' | 'history' | 'watchlist' | 'share'>('settings');
@@ -176,6 +185,20 @@ export default function QuickControlHub() {
       }
     };
 
+    // AdBlocker sync
+    setIsAdBlockOn(adblockShield.isEnabled());
+    setShieldStats(adblockShield.getStats());
+
+    const handleShieldStatsUpdate = () => {
+      setShieldStats(adblockShield.getStats());
+    };
+    const handleShieldToggleEvent = () => {
+      setIsAdBlockOn(adblockShield.isEnabled());
+    };
+
+    window.addEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
+    window.addEventListener('ap_adblock_changed', handleShieldToggleEvent);
+
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('ap_history_updated', refreshData);
     window.addEventListener('ap_watchlist_updated', refreshData);
@@ -188,6 +211,8 @@ export default function QuickControlHub() {
       window.removeEventListener('ap_watchlist_updated', refreshData);
       window.removeEventListener('storage', refreshData);
       window.removeEventListener('ap_open_share_hub', handleOpenShare);
+      window.removeEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
+      window.removeEventListener('ap_adblock_changed', handleShieldToggleEvent);
     };
   }, []);
 
@@ -196,6 +221,8 @@ export default function QuickControlHub() {
     if (isOpen) {
       setHistoryItems(getWatchHistory());
       setWatchlistItems(getWatchlist());
+      setShieldStats(adblockShield.getStats());
+      setIsAdBlockOn(adblockShield.isEnabled());
     }
   }, [isOpen]);
 
@@ -204,6 +231,20 @@ export default function QuickControlHub() {
     setIsSoundOn(next);
     sound.setEnabled(next);
     if (next) sound.playButton();
+  };
+
+  const toggleAdBlock = () => {
+    const next = !isAdBlockOn;
+    adblockShield.setEnabled(next);
+    setIsAdBlockOn(next);
+    sound.click();
+    sound.haptic(15);
+  };
+
+  const handleResetShieldStats = () => {
+    adblockShield.resetStats();
+    setShieldStats(adblockShield.getStats());
+    sound.pop();
   };
 
   const cycleEyeComfort = () => {
@@ -587,6 +628,167 @@ export default function QuickControlHub() {
                 </div>
                 <div style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   {isUrdu ? 'کلک ساؤنڈز' : 'UI Audio FX'}
+                </div>
+              </div>
+
+              {/* AdBlocker Box (Tile) */}
+              <div 
+                className="hub-glass-tile"
+                style={{
+                  gridColumn: 'span 2',
+                  padding: '12px',
+                  borderRadius: '14px',
+                  background: isAdBlockOn ? 'linear-gradient(135deg, rgba(0, 102, 51, 0.12) 0%, rgba(0, 229, 117, 0.06) 100%)' : 'var(--bg-secondary)',
+                  border: isAdBlockOn ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px',
+                  boxShadow: isAdBlockOn ? '0 4px 16px rgba(0, 102, 51, 0.10)' : '0 2px 6px rgba(0,0,0,0.02)',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                {/* Header Row: Shield Icon, Title, Subtitle, and ON/OFF Switch */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '8px',
+                      background: isAdBlockOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.08)',
+                      color: isAdBlockOn ? '#ffffff' : 'var(--text-muted)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: isAdBlockOn ? '0 2px 8px rgba(0, 102, 51, 0.3)' : 'none',
+                    }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
+                        {isAdBlockOn ? 'verified_user' : 'shield'}
+                      </span>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.80rem', fontWeight: 800, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span>{isUrdu ? 'ایڈ بلاکر' : 'AdBlocker'}</span>
+                        {isAdBlockOn && (
+                          <span style={{
+                            fontSize: '0.60rem',
+                            fontWeight: 900,
+                            padding: '1px 5px',
+                            borderRadius: '4px',
+                            background: 'var(--color-primary)',
+                            color: '#ffffff',
+                          }}>
+                            {isUrdu ? 'فعال' : 'ACTIVE'}
+                          </span>
+                        )}
+                      </div>
+                      <div style={{ fontSize: '0.67rem', color: 'var(--text-muted)' }}>
+                        {isUrdu ? 'پاپ اپس اور غیر ضروری اشتہارات کی خودکار روک تھام' : 'Stops unwanted popups & redirects during playback'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Toggle Pill Switch */}
+                  <button
+                    type="button"
+                    onClick={toggleAdBlock}
+                    style={{
+                      border: 'none',
+                      background: isAdBlockOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.15)',
+                      padding: '4px 10px',
+                      borderRadius: '20px',
+                      color: isAdBlockOn ? '#ffffff' : 'var(--text-muted)',
+                      fontSize: '0.70rem',
+                      fontWeight: 900,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      transition: 'all 0.2s ease',
+                    }}
+                    title={isAdBlockOn ? 'Disable AdBlocker' : 'Enable AdBlocker'}
+                  >
+                    <span style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      background: isAdBlockOn ? '#00ff88' : '#888888',
+                      display: 'inline-block',
+                      boxShadow: isAdBlockOn ? '0 0 6px #00ff88' : 'none',
+                    }} />
+                    <span>{isAdBlockOn ? 'ON' : 'OFF'}</span>
+                  </button>
+                </div>
+
+                {/* Real-time Accurate Summary Statistics Grid */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4, 1fr)',
+                  gap: '6px',
+                  background: 'var(--bg-secondary)',
+                  padding: '8px',
+                  borderRadius: '10px',
+                  border: '1px solid var(--glass-border)',
+                }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                      {shieldStats.popupsBlocked}
+                    </div>
+                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      {isUrdu ? 'پاپ اپس' : 'Popups'}
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                      {shieldStats.adsBlocked}
+                    </div>
+                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      {isUrdu ? 'اشتہارات' : 'Ads'}
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                      {shieldStats.trackersBlocked}
+                    </div>
+                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      {isUrdu ? 'ٹریکرز' : 'Trackers'}
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                      {shieldStats.timeSavedSec}s
+                    </div>
+                    <div style={{ fontSize: '0.60rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      {isUrdu ? 'وقت کی بچت' : 'Time Saved'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reset Stats / Status Row */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.64rem', color: 'var(--text-muted)' }}>
+                  <span>
+                    {isAdBlockOn 
+                      ? (isUrdu ? '✓ ویڈیو کلک کرنے پر پاپ اپس یا دوسری سائٹ نہیں کھلے گی' : '✓ Protected: Video clicks will not redirect or open ads')
+                      : (isUrdu ? '⚠ ایڈ بلاکر بند ہے: پاپ اپس آ سکتے ہیں' : '⚠ AdBlocker off: Popups may open')}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleResetShieldStats}
+                    style={{
+                      border: 'none',
+                      background: 'none',
+                      color: 'var(--color-primary)',
+                      fontSize: '0.64rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      padding: 0,
+                    }}
+                  >
+                    {isUrdu ? 'ری سیٹ' : 'Reset'}
+                  </button>
                 </div>
               </div>
             </div>

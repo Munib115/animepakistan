@@ -11,6 +11,7 @@ import { sound } from '@/lib/soundEngine';
 import { useDownloads } from '@/context/DownloadContext';
 import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
 import { shareContent } from '@/lib/shareHelper';
+import { adblockShield } from '@/lib/adblockShield';
 import EpisodeComments from './EpisodeComments';
 
 interface WatchContainerProps {
@@ -37,6 +38,20 @@ export default function WatchContainer({
   const [inList, setInList] = useState(false);
   const [isShareCopied, setIsShareCopied] = useState(false);
   const [copiedEpSlug, setCopiedEpSlug] = useState<string | null>(null);
+
+  // AdBlocker State (Background Sandbox Protection)
+  const [isShieldActive, setIsShieldActive] = useState(true);
+
+  useEffect(() => {
+    setIsShieldActive(adblockShield.isEnabled());
+    const handleShieldChange = () => {
+      setIsShieldActive(adblockShield.isEnabled());
+    };
+    window.addEventListener('ap_adblock_changed', handleShieldChange);
+    return () => {
+      window.removeEventListener('ap_adblock_changed', handleShieldChange);
+    };
+  }, []);
 
   useEffect(() => {
     if (!anime?.slug) return;
@@ -679,6 +694,9 @@ export default function WatchContainer({
                 loading="eager"
                 onLoad={() => setIsIframeLoaded(true)}
                 referrerPolicy="no-referrer"
+                sandbox={isShieldActive
+                  ? "allow-scripts allow-same-origin allow-presentation allow-fullscreen"
+                  : "allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-popups allow-forms"}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 style={{
                   position: 'absolute',
