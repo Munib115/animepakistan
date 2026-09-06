@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,18 +13,18 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const anime = getAnimeDb().find((item) => item.type === 'series' && item.slug.toLowerCase() === decodeURIComponent(slug).toLowerCase());
+  const anime = getAnimeDb().find((item) => item.slug.toLowerCase() === decodeURIComponent(slug).toLowerCase());
   if (!anime) return { title: 'Anime Not Found', robots: { index: false, follow: false } };
 
   const name = animeName(anime);
   const description = animeDescription(anime);
-  const url = `/anime/${anime.slug}`;
+  const url = anime.type === 'movie' ? `/watch/${anime.slug}` : `/anime/${anime.slug}`;
   return {
-    title: `${name} Urdu & Hindi Dubbed Episodes`,
+    title: `${name} Urdu & Hindi Dubbed ${anime.type === 'movie' ? 'Movie' : 'Episodes'}`,
     description,
     alternates: { canonical: url },
-    openGraph: { type: 'video.tv_show', url, title: `${name} Urdu & Hindi Dubbed Episodes`, description, images: [{ url: animeImage(anime), alt: `${name} poster` }] },
-    twitter: { card: 'summary_large_image', title: `${name} Urdu & Hindi Dubbed Episodes`, description, images: [animeImage(anime)] },
+    openGraph: { type: anime.type === 'movie' ? 'video.movie' : 'video.tv_show', url, title: `${name} Urdu & Hindi Dubbed`, description, images: [{ url: animeImage(anime), alt: `${name} poster` }] },
+    twitter: { card: 'summary_large_image', title: `${name} Urdu & Hindi Dubbed`, description, images: [animeImage(anime)] },
   };
 }
 
@@ -61,6 +62,10 @@ export default async function AnimeDetailPage(props: PageProps) {
         <Footer />
       </div>
     );
+  }
+
+  if (anime.type === 'movie') {
+    redirect(`/watch/${anime.slug}`);
   }
 
   // Discover related franchise titles (e.g. Dragon Ball -> DBZ, Super, Daima; Naruto -> Shippuden, Boruto; Ben 10 -> Alien Force, etc.)

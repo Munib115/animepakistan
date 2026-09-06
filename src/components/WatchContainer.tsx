@@ -968,7 +968,7 @@ export default function WatchContainer({
           {prevEp ? (
             <Link
               href={`/watch/${anime.slug}/${prevEp.slug}`}
-              prefetch={true}
+              prefetch={false}
               onClick={() => sound.playEpisodeSelect()}
               className="glass-btn-secondary"
               style={{ padding: '7px 16px', fontSize: '0.8rem', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
@@ -995,7 +995,7 @@ export default function WatchContainer({
           {nextEp && (
             <Link
               href={`/watch/${anime.slug}/${nextEp.slug}`}
-              prefetch={true}
+              prefetch={false}
               onClick={() => sound.playEpisodeSelect()}
               className="glass-btn"
               style={{ padding: '7px 16px', fontSize: '0.8rem', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
@@ -1153,7 +1153,7 @@ export default function WatchContainer({
                 <Link
                   key={ep.slug}
                   href={`/watch/${anime.slug}/${ep.slug}`}
-                  prefetch={true}
+                  prefetch={false}
                   onClick={() => sound.playEpisodeSelect()}
                   className={`glass-card ${isCurrent ? 'active-ep-card' : ''}`}
                   style={{

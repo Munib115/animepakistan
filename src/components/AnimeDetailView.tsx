@@ -659,7 +659,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                     <Link 
                       key={ep.slug} 
                       href={`/watch/${anime.slug}/${ep.slug}`}
-                      prefetch={true}
+                      prefetch={false}
                       onClick={() => sound.playEpisodeSelect()}
                       className="glass-card ep-item-card"
                       style={{
@@ -816,7 +816,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                   <Link
                     key={item.slug}
                     href={targetHref}
-                    prefetch={true}
+                    prefetch={false}
                     className="glass-card"
                     style={{
                       display: 'flex',

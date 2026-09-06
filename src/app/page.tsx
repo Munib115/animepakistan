@@ -3,7 +3,6 @@ import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
 import HomeSections from '@/components/HomeSections';
 import AnimeGrid from '@/components/AnimeGrid';
-import LiveChatFloating from '@/components/LiveChatFloating';
 import { FAQS } from '@/data/faqs';
 import { getAnimeCatalog } from '@/lib/db';
 import { absoluteUrl, animeName } from '@/lib/seo';
@@ -36,7 +35,6 @@ export default async function HomePage(props: PageProps) {
           <AnimeGrid initialItems={items} initialType={initialType} />
         </main>
         <Footer />
-        <LiveChatFloating />
       </div>
     );
   }
@@ -132,9 +130,6 @@ export default async function HomePage(props: PageProps) {
 
       {/* Global Footer */}
       <Footer />
-
-      {/* Floating Messenger Live Chat */}
-      <LiveChatFloating />
     </div>
   );
 }

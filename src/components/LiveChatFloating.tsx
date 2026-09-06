@@ -78,13 +78,24 @@ export default function LiveChatFloating() {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Client hydration check & initialize last seen timestamp
+  const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
+
+  // Client hydration check & initialize portal container and last seen timestamp
   useEffect(() => {
     setMounted(true);
     const profile = getGuestProfile();
     setGuest(profile);
     guestRef.current = profile;
     setCustomNameInput(profile.name);
+
+    // Setup isolated DOM portal root to avoid React removeChild conflicts
+    let el = document.getElementById('ap-live-chat-root');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'ap-live-chat-root';
+      document.body.appendChild(el);
+    }
+    setPortalNode(el);
 
     try {
       const storedLastSeen = localStorage.getItem('ap_chat_last_seen_time');
@@ -100,9 +111,15 @@ export default function LiveChatFloating() {
     }
   }, []);
 
-  // Scroll to latest message
+  // Safe scroll to latest message (prevents iOS Safari 'instant' TypeError)
   const scrollToBottom = useCallback((behavior: ScrollBehavior = 'smooth') => {
-    messagesEndRef.current?.scrollIntoView({ behavior });
+    try {
+      messagesEndRef.current?.scrollIntoView({ behavior: behavior === 'smooth' ? 'smooth' : 'auto' });
+    } catch (e) {
+      try {
+        messagesEndRef.current?.scrollIntoView();
+      } catch (err) {}
+    }
   }, []);
 
   // Fetch initial messages & subscribe to Supabase Realtime + Polling fallback
@@ -172,10 +189,11 @@ export default function LiveChatFloating() {
         }
       });
 
-    // 4-second background sync guarantees real-time delivery across all browsers and devices
+    // Smart background sync (only when tab is visible)
     const pollInterval = setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return;
       loadMessages();
-    }, 4000);
+    }, 10000);
 
     return () => {
       isSubscribed = false;
@@ -193,7 +211,7 @@ export default function LiveChatFloating() {
       try {
         localStorage.setItem('ap_chat_last_seen_time', latest);
       } catch (e) {}
-      scrollToBottom('instant');
+      scrollToBottom('auto');
     }
   }, [isOpen, messages, scrollToBottom]);
 
@@ -204,16 +222,15 @@ export default function LiveChatFloating() {
   }, [messages.length, isOpen, scrollToBottom]);
 
   // Toggle chat inbox
-  const toggleChat = (e?: React.MouseEvent) => {
+  const toggleChat = (e?: React.MouseEvent | React.TouchEvent) => {
     if (e) {
-      e.preventDefault();
       e.stopPropagation();
     }
+    setIsOpen((prev) => !prev);
     try {
       sound.buttonPop();
       sound.haptic(18);
     } catch (err) {}
-    setIsOpen((prev) => !prev);
   };
 
   // Save updated guest name
@@ -481,7 +498,7 @@ export default function LiveChatFloating() {
     }
   };
 
-  if (!mounted || typeof document === 'undefined') return null;
+  if (!mounted || !portalNode) return null;
 
   return createPortal(
     <>
@@ -874,6 +891,6 @@ export default function LiveChatFloating() {
         </div>
       )}
     </>,
-    document.body
+    portalNode
   );
 }

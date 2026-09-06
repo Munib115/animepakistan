@@ -7,6 +7,7 @@ import PWAInstallBanner from "@/components/PWAInstallBanner";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { DownloadProvider } from "@/context/DownloadContext";
 import AdBlockGlobalShield from "@/components/AdBlockGlobalShield";
+import LiveChatFloating from "@/components/LiveChatFloating";
 import { absoluteUrl, siteName, siteUrl } from '@/lib/seo';
 
 export const viewport: Viewport = {
@@ -125,8 +126,10 @@ export default function RootLayout({
             <MobileTabBar />
             <PWAInstallBanner />
             <PWARegister />
+            <LiveChatFloating />
           </DownloadProvider>
         </LanguageProvider>
+        <div id="ap-live-chat-root" />
       </body>
     </html>
   );

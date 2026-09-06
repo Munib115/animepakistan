@@ -364,19 +364,25 @@ class AdBlockEngine {
     }
   }
 
-  // 3. MutationObserver overlay-buster (Ghostery clickjack cover removal)
+  // 3. Lightweight, High-Speed Overlay-Buster (Ghostery clickjack cover removal without layout thrashing)
   private installOverlayBuster() {
     if (typeof window === 'undefined' || typeof MutationObserver === 'undefined') return;
 
     const checkAndNeutralizeNode = (node: Node) => {
       if (!this.enabled || !(node instanceof HTMLElement)) return;
 
-      // Preserve legitimate UI elements
+      // Never touch legitimate application UI components
       if (
+        node.id === 'ap-live-chat-root' ||
+        node.closest('#ap-live-chat-root') ||
+        node.closest('.ap-chat-inbox-container') ||
+        node.closest('.ap-chat-backdrop') ||
+        node.closest('.ap-messenger-floating-btn') ||
         node.closest('.quick-control-hub') ||
         node.closest('.quick-hub-popover') ||
         node.closest('.quick-hub-backdrop') ||
-        node.closest('.live-chat-floating') ||
+        node.closest('.apple-liquid-glass-dock') ||
+        node.closest('.pwa-install-banner') ||
         node.closest('header') ||
         node.closest('nav') ||
         node.closest('button')
@@ -384,44 +390,56 @@ class AdBlockEngine {
         return;
       }
 
-      const style = window.getComputedStyle(node);
-      const isFixed = style.position === 'fixed' || style.position === 'absolute';
-      const zIndex = parseInt(style.zIndex, 10);
-      const highZIndex = !isNaN(zIndex) && zIndex >= 50;
+      // Fast check: suspicious ad links or iframe overlays without triggering reflows
+      if (node instanceof HTMLAnchorElement && node.href && this.isAdUrl(node.href)) {
+        try {
+          node.remove();
+          this.recordBlocked('ad', 'clickjack-anchor');
+        } catch (e) {}
+        return;
+      }
 
-      if (isFixed && highZIndex) {
-        const opacity = parseFloat(style.opacity);
-        const isTransparent = isNaN(opacity) || opacity <= 0.05 || style.backgroundColor === 'transparent' || style.backgroundColor === 'rgba(0, 0, 0, 0)';
-        const width = node.offsetWidth || parseInt(style.width, 10) || 0;
-        const height = node.offsetHeight || parseInt(style.height, 10) || 0;
+      // Check for rogue external ad anchors nested inside
+      if (node.childElementCount > 0) {
+        const adAnchors = node.querySelectorAll('a[href]');
+        for (let i = 0; i < adAnchors.length; i++) {
+          const a = adAnchors[i] as HTMLAnchorElement;
+          if (a.href && this.isAdUrl(a.href)) {
+            try {
+              a.remove();
+              this.recordBlocked('ad', a.href);
+            } catch (e) {}
+          }
+        }
+      }
 
-        // Covers screen OR covers the player box
-        const coversScreen = width >= window.innerWidth * 0.6 && height >= window.innerHeight * 0.6;
-        const coversPlayer = !!node.closest('.watch-player-box') && width >= 150 && height >= 80;
-
-        const hasExternalAdLink = node instanceof HTMLAnchorElement && this.isAdUrl(node.href);
-        const containsExternalAdLink = !!node.querySelector('a') && Array.from(node.querySelectorAll('a')).some(a => this.isAdUrl(a.href));
-
-        if ((coversScreen && isTransparent) || (coversPlayer && isTransparent) || hasExternalAdLink || containsExternalAdLink) {
+      // Specifically protect video player box from rogue transparent overlays
+      const isPlayerOverlay = node.closest('.watch-player-box') && !node.closest('iframe');
+      if (isPlayerOverlay && (node.style.position === 'absolute' || node.style.position === 'fixed')) {
+        const isClickjack = node.style.zIndex && parseInt(node.style.zIndex, 10) > 1;
+        if (isClickjack) {
           try {
             node.remove();
-            this.recordBlocked('ad', 'clickjack-overlay');
+            this.recordBlocked('ad', 'player-clickjack-overlay');
           } catch (e) {}
         }
       }
     };
 
     const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        mutation.addedNodes.forEach(checkAndNeutralizeNode);
+      for (let i = 0; i < mutations.length; i++) {
+        const mutation = mutations[i];
+        for (let j = 0; j < mutation.addedNodes.length; j++) {
+          checkAndNeutralizeNode(mutation.addedNodes[j]);
+        }
       }
     });
 
     if (document.body) {
-      observer.observe(document.body, { childList: true, subtree: true });
+      observer.observe(document.body, { childList: true });
     } else {
       window.addEventListener('DOMContentLoaded', () => {
-        observer.observe(document.body, { childList: true, subtree: true });
+        observer.observe(document.body, { childList: true });
       });
     }
   }

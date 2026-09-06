@@ -113,7 +113,7 @@ export default function ContinueWatchingSection() {
             >
               <Link 
                 href={watchLink}
-                prefetch={true}
+                prefetch={false}
                 onClick={() => sound.playCardClick()}
                 style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', color: 'inherit' }}
               >
