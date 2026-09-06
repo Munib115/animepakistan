@@ -114,3 +114,68 @@ CREATE POLICY "Allow public update own shared libraries"
 ON public.shared_libraries FOR UPDATE
 USING (true)
 WITH CHECK (true);
+
+-- ==============================================================================
+-- 11. LIVE COMMUNITY CHAT (Text, Voice Notes, Photos, Videos & Realtime Sync)
+-- ==============================================================================
+
+-- Create live_chat_messages table
+CREATE TABLE IF NOT EXISTS public.live_chat_messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    sender_id TEXT NOT NULL,
+    sender_name TEXT NOT NULL,
+    avatar_color TEXT DEFAULT '#00ff66',
+    message_type TEXT NOT NULL DEFAULT 'text' CHECK (message_type IN ('text', 'voice', 'image', 'video')),
+    content TEXT,
+    media_url TEXT,
+    media_duration INTEGER DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Fast lookup for recent live messages
+CREATE INDEX IF NOT EXISTS idx_live_chat_created_at 
+ON public.live_chat_messages(created_at DESC);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE public.live_chat_messages ENABLE ROW LEVEL SECURITY;
+
+-- Allow anyone to read live chat messages
+DROP POLICY IF EXISTS "Allow public read live chat messages" ON public.live_chat_messages;
+CREATE POLICY "Allow public read live chat messages"
+ON public.live_chat_messages FOR SELECT
+USING (true);
+
+-- Allow anyone to send live chat messages
+DROP POLICY IF EXISTS "Allow public insert live chat messages" ON public.live_chat_messages;
+CREATE POLICY "Allow public insert live chat messages"
+ON public.live_chat_messages FOR INSERT
+WITH CHECK (true);
+
+-- Enable Realtime for live_chat_messages so new chats pop in instantly
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_publication_tables 
+    WHERE pubname = 'supabase_realtime' 
+    AND schemaname = 'public' 
+    AND tablename = 'live_chat_messages'
+  ) THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.live_chat_messages;
+  END IF;
+END $$;
+
+-- Create public storage bucket for chat media (voice notes, images, videos)
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('chat_media', 'chat_media', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage RLS policies for chat media bucket
+DROP POLICY IF EXISTS "Allow public read chat media" ON storage.objects;
+CREATE POLICY "Allow public read chat media" 
+ON storage.objects FOR SELECT 
+USING (bucket_id = 'chat_media');
+
+DROP POLICY IF EXISTS "Allow public upload chat media" ON storage.objects;
+CREATE POLICY "Allow public upload chat media" 
+ON storage.objects FOR INSERT 
+WITH CHECK (bucket_id = 'chat_media');
