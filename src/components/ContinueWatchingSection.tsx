@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { WatchProgressItem, getWatchHistory, removeWatchItem } from '@/lib/watchHistory';
 import { useLanguage } from '@/context/LanguageContext';
 import { getProxiedImageUrl } from '@/lib/image';
+import { sound } from '@/lib/soundEngine';
 
 export default function ContinueWatchingSection() {
   const { language } = useLanguage();
@@ -27,6 +28,7 @@ export default function ContinueWatchingSection() {
   const handleRemove = (e: React.MouseEvent, slug: string) => {
     e.preventDefault();
     e.stopPropagation();
+    sound.pop();
     removeWatchItem(slug);
     setItems(getWatchHistory());
   };
@@ -37,7 +39,7 @@ export default function ContinueWatchingSection() {
     <section 
       aria-label="Continue Watching"
       style={{
-        marginBottom: '32px',
+        marginBottom: '24px',
         position: 'relative',
       }}
     >
@@ -46,37 +48,39 @@ export default function ContinueWatchingSection() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: '16px',
+        marginBottom: '12px',
         padding: '0 4px',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{
             width: '4px',
-            height: '18px',
+            height: '16px',
             borderRadius: '2px',
             background: 'var(--color-primary)',
           }} />
           <h2 style={{
-            fontSize: '1.2rem',
+            fontSize: '1.05rem',
             fontWeight: 800,
             color: 'var(--text-primary)',
+            margin: 0,
           }}>
             {language === 'ur' ? 'دیکھنا جاری رکھیں' : 'Continue Watching'}
           </h2>
         </div>
 
-        <span className="glass-badge" style={{ fontSize: '0.72rem' }}>
+        <span className="glass-badge" style={{ fontSize: '0.70rem', padding: '2px 8px' }}>
           {items.length} {language === 'ur' ? 'جاری' : 'in progress'}
         </span>
       </div>
 
-      {/* Horizontal Scroll Cards Row */}
+      {/* Horizontal Scroll Cards Row — Compact, Professional, No Empty Blank Space */}
       <div 
         style={{
           display: 'flex',
-          gap: '16px',
+          alignItems: 'flex-start',
+          gap: '12px',
           overflowX: 'auto',
-          paddingBottom: '8px',
+          paddingBottom: '6px',
           scrollbarWidth: 'none',
           WebkitOverflowScrolling: 'touch',
         }}
@@ -87,86 +91,107 @@ export default function ContinueWatchingSection() {
             : `/watch/${item.animeSlug}/${item.epSlug || ''}`;
 
           const imageSrc = getProxiedImageUrl(item.backdrop || item.poster, 'backdrop');
+          const cleanEpLabel = item.type === 'movie'
+            ? (language === 'ur' ? 'مکمل مووی' : 'Movie')
+            : `Ep ${item.epNumber || (item.epTitle?.match(/(\d+)/)?.[1] || 1)}`;
 
           return (
             <div 
               key={item.animeSlug}
-              className="glass-card continue-card"
+              className="glass-card"
               style={{
                 flexShrink: 0,
-                width: '230px',
-                borderRadius: '16px',
+                width: '190px',
+                borderRadius: '12px',
                 overflow: 'hidden',
                 position: 'relative',
-                background: 'rgba(8, 22, 14, 0.85)',
-                backdropFilter: 'blur(20px)',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
-                border: '1px solid rgba(0, 230, 118, 0.18)',
-                transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--glass-border)',
+                boxShadow: 'var(--glass-shadow)',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
               }}
             >
-              <Link href={watchLink} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column' }}>
-                {/* Widescreen Preview with Progress Bar */}
+              <Link 
+                href={watchLink}
+                prefetch={true}
+                onClick={() => sound.playCardClick()}
+                style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', color: 'inherit' }}
+              >
+                {/* 16:9 Widescreen Preview (190px width -> 106px height) */}
                 <div style={{
                   position: 'relative',
                   width: '100%',
-                  height: '130px',
-                  background: '#041208',
+                  height: '106px',
+                  background: 'var(--bg-tertiary)',
                   overflow: 'hidden',
                 }}>
-                  {imageSrc && (
+                  {imageSrc ? (
                     <img 
                       src={imageSrc} 
                       alt={item.animeTitle}
                       loading="lazy"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     />
+                  ) : (
+                    <div style={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.2) 0%, rgba(0, 50, 25, 0.4) 100%)',
+                    }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--color-primary)', opacity: 0.6 }}>
+                        smart_display
+                      </span>
+                    </div>
                   )}
 
-                  {/* Gradient Overlay */}
+                  {/* Subtle Gradient Overlay */}
                   <div style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%)',
+                    background: 'linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%)',
                   }} />
 
-                  {/* Play Button Overlay */}
+                  {/* Sleek Play Button Overlay */}
                   <div style={{
                     position: 'absolute',
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: '38px',
-                    height: '38px',
+                    width: '32px',
+                    height: '32px',
                     borderRadius: '50%',
                     background: 'rgba(0, 102, 51, 0.85)',
-                    backdropFilter: 'blur(6px)',
+                    backdropFilter: 'blur(4px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#ffffff',
-                    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.4)',
-                    border: '1px solid rgba(255,255,255,0.3)',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.35)',
+                    border: '1px solid rgba(255,255,255,0.25)',
                   }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '22px' }}>play_arrow</span>
+                    <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>play_arrow</span>
                   </div>
 
                   {/* Percentage Progress Badge */}
                   <div style={{
                     position: 'absolute',
-                    bottom: '8px',
-                    right: '8px',
-                    background: 'rgba(0, 0, 0, 0.8)',
+                    bottom: '6px',
+                    right: '6px',
+                    background: 'rgba(0, 0, 0, 0.80)',
                     backdropFilter: 'blur(4px)',
-                    color: '#00ff66',
-                    fontSize: '0.68rem',
+                    color: '#00ff88',
+                    fontSize: '0.62rem',
                     fontWeight: 800,
-                    padding: '2px 6px',
+                    padding: '1px 5px',
                     borderRadius: '4px',
                     border: '1px solid rgba(0, 255, 102, 0.3)',
+                    lineHeight: 1.2,
                   }}>
                     {item.progressPercent}%
                   </div>
@@ -178,8 +203,8 @@ export default function ContinueWatchingSection() {
                       position: 'absolute',
                       top: '6px',
                       right: '6px',
-                      width: '24px',
-                      height: '24px',
+                      width: '22px',
+                      height: '22px',
                       borderRadius: '50%',
                       background: 'rgba(0, 0, 0, 0.65)',
                       backdropFilter: 'blur(4px)',
@@ -191,7 +216,8 @@ export default function ContinueWatchingSection() {
                       cursor: 'pointer',
                       zIndex: 3,
                     }}
-                    title="Remove from history"
+                    title={language === 'ur' ? 'ہسٹری سے ہٹائیں' : 'Remove from history'}
+                    aria-label="Remove"
                   >
                     <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>close</span>
                   </button>
@@ -202,7 +228,7 @@ export default function ContinueWatchingSection() {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    height: '4px',
+                    height: '3px',
                     background: 'rgba(255, 255, 255, 0.25)',
                     zIndex: 2,
                   }}>
@@ -210,25 +236,27 @@ export default function ContinueWatchingSection() {
                       height: '100%',
                       width: `${item.progressPercent}%`,
                       background: 'linear-gradient(90deg, #00ff66 0%, #10b981 100%)',
-                      boxShadow: '0 0 8px rgba(0, 255, 102, 0.8)',
+                      boxShadow: '0 0 6px rgba(0, 255, 102, 0.8)',
                     }} />
                   </div>
                 </div>
 
-                {/* Details Footer */}
+                {/* Compact Details Footer — Zero Extra Blank Area */}
                 <div style={{
-                  padding: '10px 12px',
+                  padding: '7px 9px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '4px',
+                  gap: '3px',
                 }}>
                   <h3 style={{
-                    fontSize: '0.82rem',
+                    fontSize: '0.76rem',
                     fontWeight: 800,
-                    color: '#ffffff',
+                    color: 'var(--text-primary)',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
+                    margin: 0,
+                    lineHeight: 1.3,
                   }}>
                     {item.animeTitle}
                   </h3>
@@ -237,13 +265,15 @@ export default function ContinueWatchingSection() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    fontSize: '0.72rem',
-                    color: 'rgba(255, 255, 255, 0.65)',
+                    fontSize: '0.68rem',
+                    color: 'var(--text-muted)',
                     fontWeight: 600,
                   }}>
-                    <span>{item.type === 'movie' ? 'Movie' : (item.epTitle || `Episode ${item.epNumber || 1}`)}</span>
-                    <span style={{ color: '#00ff88', fontWeight: 800 }}>
-                      {language === 'ur' ? 'جاری رکھیں' : 'Resume'} →
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '105px' }}>
+                      {cleanEpLabel}
+                    </span>
+                    <span style={{ color: 'var(--color-primary)', fontWeight: 800, flexShrink: 0 }}>
+                      {language === 'ur' ? 'چلائیں' : 'Resume'} →
                     </span>
                   </div>
                 </div>
