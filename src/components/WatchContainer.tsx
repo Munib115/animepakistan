@@ -389,55 +389,120 @@ export default function WatchContainer({
       position: 'relative',
     }}>
 
-      {/* Top Header & Breadcrumbs */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '8px',
-        position: 'relative',
-        zIndex: 2,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      {/* Premium Curvy Glass Header Card */}
+      <div 
+        className="watch-header-card"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '12px',
+          padding: '12px 16px',
+          borderRadius: '20px',
+          background: 'var(--glass-bg)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid var(--glass-border)',
+          boxShadow: 'var(--glass-shadow)',
+          position: 'relative',
+          zIndex: 2,
+        }}
+      >
+        {/* Left: Curvy Back Icon + Full Detail Titles */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          minWidth: 0,
+          flex: '1 1 260px',
+        }}>
           <Link
             href={isMovie ? '/' : `/anime/${anime.slug}`}
+            title={isMovie ? t('home') : t('episodesList')}
+            aria-label={isMovie ? t('home') : t('episodesList')}
             className="glass-btn-secondary"
-            style={{ padding: '6px 14px', fontSize: '0.82rem', borderRadius: '10px' }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '38px',
+              height: '38px',
+              minWidth: '38px',
+              borderRadius: '50%',
+              padding: 0,
+              border: '1px solid var(--glass-border)',
+              background: 'var(--bg-secondary)',
+              color: 'var(--text-primary)',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+              flexShrink: 0,
+            }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
               {language === 'ur' ? 'arrow_forward' : 'arrow_back'}
             </span>
-            <span>{isMovie ? t('home') : t('episodesList')}</span>
           </Link>
 
-          <div>
+          <div style={{ minWidth: 0, flex: 1 }}>
             <h1 style={{
-              fontSize: 'clamp(0.95rem, 2.8vw, 1.3rem)',
+              fontSize: 'clamp(0.95rem, 2.5vw, 1.25rem)',
               fontWeight: 900,
               color: 'var(--text-primary)',
-              lineHeight: 1.2,
+              lineHeight: 1.25,
+              margin: 0,
+              letterSpacing: '-0.02em',
+              wordBreak: 'break-word',
             }}>
               {displayName}
             </h1>
             {!isMovie && currentEpisode && (
-              <span style={{
+              <div style={{
                 fontSize: '0.78rem',
                 fontWeight: 700,
                 color: 'var(--color-primary)',
+                marginTop: '2px',
+                lineHeight: 1.3,
+                wordBreak: 'break-word',
               }}>
                 {currentEpisode.title}
-              </span>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Badges & Download Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span className="glass-badge" style={{ background: 'var(--color-primary)', color: '#ffffff' }}>
+        {/* Right: Curvy Badges & Action Buttons */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          flexWrap: 'wrap',
+          flexShrink: 0,
+        }}>
+          <span
+            className="glass-badge"
+            style={{
+              background: 'var(--color-primary)',
+              color: '#ffffff',
+              borderRadius: '999px',
+              padding: '4px 12px',
+              fontWeight: 800,
+              fontSize: '0.74rem',
+              letterSpacing: '0.02em',
+              boxShadow: '0 2px 8px rgba(0, 102, 51, 0.2)',
+            }}
+          >
             {isMovie ? (language === 'ur' ? 'مووی (MOVIE)' : 'MOVIE') : `${t('episodePrefix')} ${currentEpisode?.number || 1}`}
           </span>
-          <span className="glass-badge-white">
+          <span
+            className="glass-badge-white"
+            style={{
+              borderRadius: '999px',
+              padding: '4px 10px',
+              fontWeight: 800,
+              fontSize: '0.72rem',
+            }}
+          >
             HD 1080p
           </span>
 
@@ -451,15 +516,15 @@ export default function WatchContainer({
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '32px',
-              height: '32px',
-              borderRadius: '8px',
+              width: '34px',
+              height: '34px',
+              borderRadius: '50%',
               border: inList ? '1.5px solid #00ff66' : '1px solid var(--glass-border)',
               background: inList ? 'rgba(0, 102, 51, 0.25)' : 'var(--bg-secondary)',
               color: inList ? 'var(--color-primary)' : 'var(--text-primary)',
               cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0, 102, 51, 0.08)',
-              transition: 'all 0.2s',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
+              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '18px', color: inList ? '#00ff66' : 'inherit' }}>
@@ -477,15 +542,15 @@ export default function WatchContainer({
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '32px',
-              height: '32px',
-              borderRadius: '8px',
+              width: '34px',
+              height: '34px',
+              borderRadius: '50%',
               border: isShareCopied ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
               background: isShareCopied ? 'rgba(22, 163, 74, 0.15)' : 'var(--bg-secondary)',
               color: isShareCopied ? '#16a34a' : 'var(--text-primary)',
               cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0, 102, 51, 0.08)',
-              transition: 'all 0.2s',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
+              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
@@ -503,9 +568,9 @@ export default function WatchContainer({
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '32px',
-                height: '32px',
-                borderRadius: '8px',
+                width: '34px',
+                height: '34px',
+                borderRadius: '50%',
                 border: 'none',
                 background: downloadingItem
                   ? downloadingItem.status === 'completed'
@@ -518,8 +583,8 @@ export default function WatchContainer({
                     : 'var(--color-primary)'
                   : '#ffffff',
                 cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(0, 102, 51, 0.08)',
-                transition: 'all 0.2s',
+                boxShadow: '0 2px 8px rgba(0, 102, 51, 0.25)',
+                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
               }}
             >
@@ -536,19 +601,16 @@ export default function WatchContainer({
                   position: 'absolute',
                   top: '-4px',
                   right: '-4px',
-                  background: 'var(--color-primary)',
-                  color: '#ffffff',
-                  fontSize: '8px',
+                  background: 'var(--color-glow)',
+                  color: '#000000',
+                  fontSize: '0.62rem',
                   fontWeight: 900,
-                  borderRadius: '50%',
-                  width: '14px',
-                  height: '14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '1px solid #ffffff',
+                  borderRadius: '999px',
+                  padding: '1px 4px',
+                  lineHeight: 1,
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
                 }}>
-                  {downloadingItem.progress}
+                  {downloadingItem.progress}%
                 </span>
               )}
             </button>
