@@ -37,7 +37,6 @@ export default function WatchContainer({
 
   const [inList, setInList] = useState(false);
   const [isShareCopied, setIsShareCopied] = useState(false);
-  const [copiedEpSlug, setCopiedEpSlug] = useState<string | null>(null);
 
   // AdBlocker State (Background Sandbox Protection)
   const [isShieldActive, setIsShieldActive] = useState(true);
@@ -87,18 +86,6 @@ export default function WatchContainer({
     await shareContent({ title, text, url });
     setIsShareCopied(true);
     setTimeout(() => setIsShareCopied(false), 2000);
-  };
-
-  const handleShareEpisode = async (ep: Episode) => {
-    sound.click();
-    const epUrl = typeof window !== 'undefined' ? `${window.location.origin}/watch/${anime.slug}/${ep.slug}` : `/watch/${anime.slug}/${ep.slug}`;
-    await shareContent({
-      title: `${displayName} - ${ep.title}`,
-      text: `Watch ${displayName} ${ep.title} in Urdu & Hindi on AnimePakistan`,
-      url: epUrl,
-    });
-    setCopiedEpSlug(ep.slug);
-    setTimeout(() => setCopiedEpSlug(null), 2000);
   };
 
   const handleDownloadClick = () => {
@@ -1163,37 +1150,6 @@ export default function WatchContainer({
                       {cleanTitle}
                     </span>
                   </div>
-
-                  {/* Share Episode Icon Button */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleShareEpisode(ep);
-                    }}
-                    title={copiedEpSlug === ep.slug ? (language === 'ur' ? 'لنک کاپی ہوگیا' : 'Link Copied!') : (language === 'ur' ? 'ایپی سوڈ شیئر کریں' : 'Share Episode')}
-                    aria-label="Share Episode"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '28px',
-                      height: '28px',
-                      borderRadius: '6px',
-                      border: copiedEpSlug === ep.slug ? '1.5px solid #16a34a' : '1px solid var(--glass-border)',
-                      background: copiedEpSlug === ep.slug ? 'rgba(22, 163, 74, 0.12)' : 'var(--bg-secondary)',
-                      color: copiedEpSlug === ep.slug ? '#16a34a' : 'var(--text-secondary)',
-                      cursor: 'pointer',
-                      flexShrink: 0,
-                      transition: 'all 0.18s ease',
-                      zIndex: 2,
-                    }}
-                  >
-                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
-                      {copiedEpSlug === ep.slug ? 'check' : 'share'}
-                    </span>
-                  </button>
                 </Link>
               );
             })}
