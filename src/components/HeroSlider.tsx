@@ -174,8 +174,12 @@ export default function HeroSlider({ items }: HeroSliderProps) {
           height: 100%;
           object-fit: cover;
           object-position: center 25%;
-          animation: heroDrift ${SLIDE_DURATION}ms ease-out both;
+          animation: heroFadeIn 0.35s ease-out both;
           image-rendering: auto;
+        }
+        @keyframes heroFadeIn {
+          from { opacity: 0.6; }
+          to { opacity: 1; }
         }
         .cinematic-hero-scrim {
           position: absolute;
@@ -224,62 +228,63 @@ export default function HeroSlider({ items }: HeroSliderProps) {
         .cinematic-hero-dots { position: absolute; bottom: 16px; left: 50%; display: flex; gap: 7px; padding: 6px 10px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; background: rgba(4, 18, 10, 0.55); backdrop-filter: blur(12px); transform: translateX(-50%); }
         .cinematic-hero-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 99px; background: rgba(255, 255, 255, 0.42); cursor: pointer; transition: width 180ms ease, background 180ms ease; }
         .cinematic-hero-dots button.active { width: 24px; background: #00d66b; }
-        @keyframes heroDrift { from { transform: scale(1.01); } to { transform: scale(1.055); } }
         @media (max-width: 768px) {
           .cinematic-hero {
             width: calc(100% - 20px) !important;
-            min-height: 480px !important;
-            height: clamp(480px, 66vh, 580px) !important;
-            max-height: 600px !important;
+            min-height: 330px !important;
+            height: clamp(330px, 44vh, 400px) !important;
+            max-height: 420px !important;
             margin: 8px auto 12px !important;
             left: 0 !important;
             right: 0 !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            border-radius: 22px !important;
+            border-radius: 20px !important;
             border: 1px solid rgba(0, 102, 51, 0.18) !important;
-            box-shadow: 0 18px 45px -12px rgba(0, 45, 20, 0.35) !important;
+            box-shadow: 0 14px 35px -10px rgba(0, 45, 20, 0.35) !important;
           }
           .cinematic-hero-image {
             object-position: center 20% !important;
+            animation: none !important;
+            transform: none !important;
           }
           .cinematic-hero-scrim, .cinematic-hero-scrim.rtl {
-            background: linear-gradient(0deg, rgba(2, 12, 6, 0.98) 0%, rgba(2, 12, 6, 0.78) 42%, rgba(2, 12, 6, 0.28) 72%, rgba(2, 12, 6, 0.05) 100%) !important;
+            background: linear-gradient(0deg, rgba(2, 12, 6, 0.94) 0%, rgba(2, 12, 6, 0.72) 46%, rgba(2, 12, 6, 0.16) 74%, rgba(2, 12, 6, 0.0) 100%) !important;
           }
           .cinematic-hero-content, .cinematic-hero-content.rtl {
             justify-content: flex-end;
-            min-height: 480px !important;
+            min-height: 330px !important;
             height: 100% !important;
-            max-height: 600px !important;
+            max-height: 420px !important;
             max-width: 100%;
-            padding: 20px 18px 36px !important;
+            padding: 16px 16px 26px !important;
             text-align: left;
             align-items: flex-start;
             margin: 0;
           }
           .cinematic-hero-content.rtl { text-align: right; align-items: flex-start; }
           .cinematic-hero-content h2 {
-            font-size: clamp(1.3rem, 5.2vw, 1.75rem) !important;
+            font-size: clamp(1.18rem, 4.6vw, 1.55rem) !important;
             line-height: 1.2;
-            margin: 0 0 8px 0;
+            margin: 0 0 6px 0;
             font-weight: 900;
             letter-spacing: -0.02em;
           }
           .cinematic-hero-meta {
             gap: 5px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
           }
           .cinematic-hero-meta span {
-            font-size: 0.68rem !important;
-            padding: 3px 7px !important;
-            border-radius: 6px !important;
+            font-size: 0.66rem !important;
+            padding: 2px 6px !important;
+            border-radius: 5px !important;
             background: rgba(255, 255, 255, 0.14);
             border: 1px solid rgba(255, 255, 255, 0.22);
           }
           .cinematic-hero-meta span:nth-child(n+4) { display: none; }
           .cinematic-hero-genres {
             display: inline-flex !important;
-            font-size: 0.72rem !important;
+            font-size: 0.70rem !important;
             margin-bottom: 6px !important;
             padding: 2px 6px !important;
           }
@@ -288,35 +293,35 @@ export default function HeroSlider({ items }: HeroSliderProps) {
             -webkit-line-clamp: 2 !important;
             -webkit-box-orient: vertical !important;
             overflow: hidden !important;
-            font-size: 0.82rem !important;
-            line-height: 1.45 !important;
+            font-size: 0.78rem !important;
+            line-height: 1.4 !important;
             color: rgba(255, 255, 255, 0.88) !important;
-            margin: 0 0 14px 0 !important;
+            margin: 0 0 12px 0 !important;
           }
           .cinematic-hero-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
-            max-width: 360px;
-            margin-top: 4px;
+            max-width: 340px;
+            margin-top: 2px;
             flex-wrap: nowrap;
           }
           .cinematic-hero-actions :global(a) {
             flex: 1;
-            min-height: 42px !important;
-            padding: 0 16px !important;
-            border-radius: 12px !important;
-            font-size: 0.84rem !important;
+            min-height: 38px !important;
+            padding: 0 14px !important;
+            border-radius: 10px !important;
+            font-size: 0.80rem !important;
             font-weight: 800;
             justify-content: center;
           }
-          .cinematic-hero-actions :global(.material-symbols-outlined) { font-size: 20px !important; }
+          .cinematic-hero-actions :global(.material-symbols-outlined) { font-size: 18px !important; }
           .cinematic-hero-arrow { display: none !important; }
           .cinematic-hero-dots {
-            bottom: 8px !important;
+            bottom: 6px !important;
             gap: 5px !important;
-            padding: 4px 8px !important;
+            padding: 3px 7px !important;
             border-radius: 999px;
             background: rgba(0, 0, 0, 0.5);
           }

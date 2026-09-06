@@ -131,6 +131,7 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
         ref={rowRef}
         style={{
           display: 'flex',
+          alignItems: 'flex-start',
           gap: '16px',
           overflowX: 'auto',
           scrollSnapType: 'x mandatory',
@@ -146,6 +147,8 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
             style={{
               scrollSnapAlign: 'start',
               flexShrink: 0,
+              alignSelf: 'flex-start',
+              height: 'auto',
             }}
           >
             <AnimeCard item={item} />
@@ -157,6 +160,8 @@ export default function AnimeRow({ title, items, browseHref = '/browse' }: Anime
         .row-card-item {
           width: 138px;
           min-width: 138px;
+          height: auto;
+          align-self: flex-start;
         }
         @media (min-width: 480px) {
           .row-card-item {

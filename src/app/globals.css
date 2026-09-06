@@ -453,8 +453,6 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   -webkit-transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   will-change: transform;
-  content-visibility: auto;
-  contain-intrinsic-size: 160px 260px;
 }
 
 .glass-card:hover, .liquid-glass-card:hover {
@@ -1147,11 +1145,8 @@ body::after {
 
 /* --- MOBILE & ANDROID HARDWARE SPEED OPTIMIZATIONS --- */
 @media (max-width: 768px) {
-  /* Prevent heavy Chrome layout calculations for off-screen elements */
-  .glass-panel,
-  .glass-card,
+  /* Prevent heavy Chrome layout calculations for large off-screen sections */
   .anime-details-layout,
-  .episode-item-card,
   .hero-slider-section {
     content-visibility: auto;
     contain-intrinsic-size: 100px 300px;

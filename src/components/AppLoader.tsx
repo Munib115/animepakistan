@@ -32,11 +32,22 @@ export default function AppLoader() {
     window.addEventListener('keydown', unlockAndPlay, { passive: true, once: true });
     window.addEventListener('touchstart', unlockAndPlay, { passive: true, once: true });
 
+    // Ensure initial page launch always starts cleanly at the top of the viewport
+    try {
+      if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    } catch (e) {}
+
     // 2. Smooth, luxury progress bar sequence (~1.1s total)
     const t1 = window.setTimeout(() => setProgress(55), 120);
     const t2 = window.setTimeout(() => setProgress(88), 380);
     const t3 = window.setTimeout(() => setProgress(100), 700);
-    const t4 = window.setTimeout(() => setIsLeaving(true), 920);
+    const t4 = window.setTimeout(() => {
+      setIsLeaving(true);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    }, 920);
     const t5 = window.setTimeout(() => setIsDismissed(true), 1350);
 
     return () => {

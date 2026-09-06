@@ -168,13 +168,22 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       
-      {/* Search and Filters Bar */}
-      <div className="glass-panel" style={{
-        padding: '16px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '14px',
-      }}>
+      {/* Search and Filters Curvy Glass Card */}
+      <div 
+        className="glass-panel" 
+        style={{
+          padding: '18px 16px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          borderRadius: '24px',
+          border: '1.5px solid var(--glass-border)',
+          background: 'var(--glass-bg)',
+          backdropFilter: 'blur(28px) saturate(200%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(200%)',
+          boxShadow: 'var(--glass-shadow)',
+        }}
+      >
         {/* Top Filter Controls */}
         <div style={{
           display: 'flex',
@@ -191,7 +200,7 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
           }}>
             <span className="material-symbols-outlined" style={{
               position: 'absolute',
-              left: '12px',
+              left: '14px',
               top: '50%',
               transform: 'translateY(-50%)',
               color: 'var(--color-primary)',
@@ -207,8 +216,15 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="glass-input"
               style={{
-                paddingLeft: '40px',
-                paddingRight: '72px',
+                width: '100%',
+                padding: '10px 72px 10px 42px',
+                borderRadius: '16px',
+                border: '1.5px solid var(--glass-border)',
+                background: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+                fontSize: '0.90rem',
+                outline: 'none',
+                boxSizing: 'border-box',
               }}
             />
             <div style={{
@@ -261,62 +277,42 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
             </div>
           </div>
 
-          {/* Type Switcher Pills */}
+          {/* Type Switcher Curvy Pills */}
           <div style={{
             display: 'flex',
             background: 'rgba(0, 102, 51, 0.08)',
             padding: '4px',
-            borderRadius: '10px',
+            borderRadius: '14px',
             gap: '4px',
+            border: '1px solid var(--glass-border)',
           }}>
-            <button
-              onClick={() => handleTypeChange('all')}
-              style={{
-                padding: '8px 14px',
-                borderRadius: '8px',
-                border: 'none',
-                background: selectedType === 'all' ? 'var(--color-primary)' : 'transparent',
-                color: selectedType === 'all' ? '#ffffff' : 'var(--text-secondary)',
-                fontWeight: selectedType === 'all' ? 700 : 600,
-                fontSize: '0.82rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-              }}
-            >
-              {t('filterAll')}
-            </button>
-            <button
-              onClick={() => handleTypeChange('series')}
-              style={{
-                padding: '8px 14px',
-                borderRadius: '8px',
-                border: 'none',
-                background: selectedType === 'series' ? 'var(--color-primary)' : 'transparent',
-                color: selectedType === 'series' ? '#ffffff' : 'var(--text-secondary)',
-                fontWeight: selectedType === 'series' ? 700 : 600,
-                fontSize: '0.82rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-              }}
-            >
-              {t('filterSeries')}
-            </button>
-            <button
-              onClick={() => handleTypeChange('movies')}
-              style={{
-                padding: '8px 14px',
-                borderRadius: '8px',
-                border: 'none',
-                background: selectedType === 'movies' ? 'var(--color-primary)' : 'transparent',
-                color: selectedType === 'movies' ? '#ffffff' : 'var(--text-secondary)',
-                fontWeight: selectedType === 'movies' ? 700 : 600,
-                fontSize: '0.82rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-              }}
-            >
-              {t('filterMovies')}
-            </button>
+            {[
+              { id: 'all', label: t('filterAll') },
+              { id: 'series', label: t('filterSeries') },
+              { id: 'movies', label: t('filterMovies') },
+            ].map(type => (
+              <button
+                key={type.id}
+                onClick={() => {
+                  sound.playTabSwitch();
+                  handleTypeChange(type.id);
+                }}
+                style={{
+                  padding: '7px 14px',
+                  borderRadius: '10px',
+                  border: 'none',
+                  background: selectedType === type.id ? 'var(--color-primary)' : 'transparent',
+                  color: selectedType === type.id ? '#ffffff' : 'var(--text-secondary)',
+                  fontWeight: selectedType === type.id ? 800 : 600,
+                  fontSize: '0.80rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  boxShadow: selectedType === type.id ? '0 2px 8px rgba(0, 102, 51, 0.25)' : 'none',
+                }}
+              >
+                {type.label}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -324,30 +320,36 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '4px',
+          gap: '6px',
           overflowX: 'auto',
-          paddingBottom: '4px',
+          paddingBottom: '2px',
           scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
         }}>
           <span style={{
-            fontSize: '0.75rem',
-            fontWeight: 700,
+            fontSize: '0.74rem',
+            fontWeight: 800,
             color: 'var(--text-muted)',
-            marginRight: '6px',
+            marginRight: '4px',
             flexShrink: 0,
+            textTransform: 'uppercase',
+            letterSpacing: '0.04em',
           }}>
             {t('filterAtoZ')}:
           </span>
           {alphabets.map(letter => (
             <button
               key={letter}
-              onClick={() => setSelectedLetter(letter)}
+              onClick={() => {
+                sound.pop();
+                setSelectedLetter(letter);
+              }}
               style={{
                 minWidth: '28px',
                 height: '28px',
-                borderRadius: '6px',
-                border: selectedLetter === letter ? '1.5px solid var(--color-primary)' : '1px solid transparent',
-                background: selectedLetter === letter ? 'var(--color-primary)' : 'rgba(0, 102, 51, 0.05)',
+                borderRadius: '8px',
+                border: selectedLetter === letter ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                background: selectedLetter === letter ? 'var(--color-primary)' : 'var(--bg-secondary)',
                 color: selectedLetter === letter ? '#ffffff' : 'var(--text-secondary)',
                 fontWeight: selectedLetter === letter ? 800 : 600,
                 fontSize: '0.75rem',
@@ -367,29 +369,35 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
           alignItems: 'center',
           gap: '6px',
           overflowX: 'auto',
-          paddingBottom: '4px',
+          paddingBottom: '2px',
           scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
         }}>
           <span style={{
-            fontSize: '0.75rem',
-            fontWeight: 700,
+            fontSize: '0.74rem',
+            fontWeight: 800,
             color: 'var(--text-muted)',
-            marginRight: '6px',
+            marginRight: '4px',
             flexShrink: 0,
+            textTransform: 'uppercase',
+            letterSpacing: '0.04em',
           }}>
             {t('filterLanguage')}:
           </span>
           {availableLanguages.map(lang => (
             <button
               key={lang}
-              onClick={() => setSelectedLanguage(lang)}
+              onClick={() => {
+                sound.pop();
+                setSelectedLanguage(lang);
+              }}
               style={{
-                padding: '4px 10px',
-                borderRadius: '6px',
+                padding: '4px 12px',
+                borderRadius: '20px',
                 border: selectedLanguage === lang ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
-                background: selectedLanguage === lang ? 'var(--color-primary)' : '#ffffff',
+                background: selectedLanguage === lang ? 'var(--color-primary)' : 'var(--bg-secondary)',
                 color: selectedLanguage === lang ? '#ffffff' : 'var(--text-secondary)',
-                fontWeight: selectedLanguage === lang ? 700 : 500,
+                fontWeight: selectedLanguage === lang ? 800 : 600,
                 fontSize: '0.75rem',
                 cursor: 'pointer',
                 flexShrink: 0,
@@ -402,27 +410,61 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
         </div>
       </div>
 
-      {/* Grid Results Header */}
+      {/* Grid Results Header with Zero Collision */}
       <div style={{
         display: 'flex',
+        flexWrap: 'wrap',
         justifyContent: 'space-between',
         alignItems: 'center',
+        gap: '8px',
         padding: '0 4px',
+        margin: '6px 0 2px',
       }}>
-        <h2 style={{
-          fontSize: '1.15rem',
-          fontWeight: 800,
-          color: 'var(--text-primary)',
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+          <div style={{
+            width: '4px',
+            height: '18px',
+            borderRadius: '2px',
+            background: 'var(--color-primary)',
+            flexShrink: 0,
+          }} />
+          <h2 style={{
+            fontSize: 'clamp(1.05rem, 3.2vw, 1.3rem)',
+            fontWeight: 800,
+            color: 'var(--text-primary)',
+            margin: 0,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}>
+            {selectedType === 'movies' ? t('catalogHeadingMovies') : selectedType === 'series' ? t('catalogHeadingSeries') : t('allAnimeCatalog')}
+          </h2>
+        </div>
+
+        {/* Count Pill Badge - Curvy, Clean, No Text Collision */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '5px',
+          padding: '4px 12px',
+          borderRadius: '999px',
+          background: 'var(--bg-secondary)',
+          border: '1px solid var(--glass-border)',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+          flexShrink: 0,
         }}>
-          {selectedType === 'movies' ? t('popularMovies') : selectedType === 'series' ? t('trendingSeries') : t('allAnimeCatalog')}
-        </h2>
-        <span style={{
-          fontSize: '0.8rem',
-          color: 'var(--text-muted)',
-          fontWeight: 600,
-        }}>
-          {visibleItems.length} / {filteredItems.length} {t('catalogResultsCount')}
-        </span>
+          <span style={{
+            fontSize: '0.80rem',
+            fontWeight: 800,
+            color: 'var(--color-primary)',
+          }}>
+            {visibleItems.length}
+          </span>
+          <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 600 }}>/</span>
+          <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+            {filteredItems.length} {t('catalogResultsCount')}
+          </span>
+        </div>
       </div>
 
       {/* Anime Cards Grid */}
@@ -434,6 +476,7 @@ function AnimeGridContent({ initialItems, initialType }: AnimeGridProps) {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
               gap: '14px',
+              alignItems: 'start',
             }}
           >
             {visibleItems.map(item => (

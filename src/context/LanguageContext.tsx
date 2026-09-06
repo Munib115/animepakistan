@@ -119,6 +119,22 @@ export const translations: Translations = {
     ur: 'زبان (Audio):',
     en: 'Audio Language:',
   },
+  filterAtoZ: {
+    ur: 'الفابیٹ',
+    en: 'A to Z',
+  },
+  filterLanguage: {
+    ur: 'زبان',
+    en: 'Audio Language',
+  },
+  allAnimeCatalog: {
+    ur: 'تمام اینیمے کیٹلاگ',
+    en: 'All Anime Catalog',
+  },
+  catalogResultsCount: {
+    ur: 'اینیمے',
+    en: 'Anime',
+  },
   catalogHeadingAll: {
     ur: 'تمام کیٹلاگ (All Anime)',
     en: 'All Anime Catalog',
@@ -132,7 +148,7 @@ export const translations: Translations = {
     en: 'Anime Movies Catalog',
   },
   animeCountSuffix: {
-    ur: 'انیمے',
+    ur: 'اینیمے',
     en: 'Anime',
   },
   noResultsTitle: {

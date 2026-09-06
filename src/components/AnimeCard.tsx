@@ -53,7 +53,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
     <div className="glass-card" style={{
       display: 'flex',
       flexDirection: 'column',
-      height: '100%',
+      height: 'auto',
       position: 'relative',
       overflow: 'hidden',
     }}>
@@ -61,7 +61,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
         href={watchHref} 
         prefetch={true}
         onClick={() => sound.playCardClick()}
-        style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}
+        style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: 'auto' }}
       >
         
         {/* Poster Container */}
@@ -272,7 +272,6 @@ export default function AnimeCard({ item }: AnimeCardProps) {
           padding: '10px 10px 12px 10px',
           display: 'flex',
           flexDirection: 'column',
-          flexGrow: 1,
           justifyContent: 'space-between',
           background: 'var(--bg-secondary)',
           gap: '6px',
