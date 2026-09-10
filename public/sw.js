@@ -1,44 +1,62 @@
-const CACHE_NAME = 'anime-pakistan-cache-v2';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'anime-pakistan-cache-v3';
+
+// Only tiny, critical assets are pre-cached at install time.
+// Large game ROM and emulator files are cached lazily on first request
+// to avoid blocking the initial page load.
+const CRITICAL_ASSETS = [
   '/',
-  '/offline',
   '/manifest.json',
-  '/logo.png?v=ap5',
   '/fonts/MaterialSymbolsOutlined.woff2',
-  '/roms/dbz-supersonic-warriors.zip',
+];
+
+// Game assets cached lazily in background after install (non-blocking)
+const GAME_ASSETS = [
+  '/offline',
   '/emulatorjs/loader.js',
   '/emulatorjs/emulator.min.js',
   '/emulatorjs/emulator.min.css',
   '/emulatorjs/cores/reports/mgba.json',
   '/emulatorjs/cores/mgba-wasm.data',
-  '/emulatorjs/cores/mgba-legacy-wasm.data'
+  '/roms/dbz-supersonic-warriors.gba',
 ];
 
-// Install Event: Pre-cache core assets including offline DBZ arcade
+// Install Event: Only cache tiny critical assets — NO large files
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Pre-caching static assets and offline arcade');
-      return cache.addAll(ASSETS_TO_CACHE).catch((err) => {
-        console.warn('[Service Worker] Pre-caching notice:', err);
+      return cache.addAll(CRITICAL_ASSETS).catch((err) => {
+        console.warn('[SW] Critical pre-cache error:', err);
       });
     })
   );
   self.skipWaiting();
 });
 
-// Activate Event: Clear stale caches
+// Activate Event: Clear stale caches, then warm-up game assets in background
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('[Service Worker] Removing old cache:', key);
+            console.log('[SW] Removing old cache:', key);
             return caches.delete(key);
           }
         })
       );
+    }).then(() => {
+      // Lazily warm-up game assets in the background (non-blocking)
+      caches.open(CACHE_NAME).then((cache) => {
+        GAME_ASSETS.forEach((url) => {
+          cache.match(url).then((hit) => {
+            if (!hit) {
+              fetch(url, { priority: 'low' }).then((res) => {
+                if (res && res.status === 200) cache.put(url, res);
+              }).catch(() => {});
+            }
+          });
+        });
+      });
     })
   );
   self.clients.claim();

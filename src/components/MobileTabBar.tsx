@@ -54,7 +54,7 @@ function TabBarContent() {
       className="apple-liquid-glass-dock"
       style={{
         position: 'fixed',
-        bottom: 'calc(12px + var(--sab, 0px))',
+        bottom: 'calc(12px + env(safe-area-inset-bottom, 0px))',
         left: '16px',
         right: '16px',
         maxWidth: '440px',

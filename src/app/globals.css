@@ -33,6 +33,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Expose iOS safe-area-inset-bottom as a CSS custom property */
+  --sab: env(safe-area-inset-bottom, 0px);
 }
 
 html, body {
@@ -47,9 +49,18 @@ html, body {
 body {
   overflow-y: auto;
   min-height: 100vh;
+  /* On mobile, reserve space at the bottom for the floating tab bar (≈80px) + safe area */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* On mobile (<768px), push content clear of the tab bar */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* Butter-Smooth 120Hz Route Entry Animation */

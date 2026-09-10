@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function OfflineArcadePage() {
+  const router = useRouter();
   const [isOnline, setIsOnline] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -13,6 +14,61 @@ export default function OfflineArcadePage() {
   const [emulatorError, setEmulatorError] = useState<string | null>(null);
   const arcadeContainerRef = useRef<HTMLDivElement>(null);
   const gameFrameRef = useRef<HTMLDivElement>(null);
+  const ejsScriptRef = useRef<HTMLScriptElement | null>(null);
+
+  // ── Stop the emulator completely (audio + engine + DOM) ──────────────────
+  const stopEmulator = useCallback(() => {
+    try {
+      const ejs = (window as any).EJS_emulator;
+      if (ejs) {
+        // Pause / stop the game loop
+        if (typeof ejs.pause === 'function') ejs.pause();
+        if (typeof ejs.stop === 'function') ejs.stop();
+        if (typeof ejs.exit === 'function') ejs.exit();
+        // Kill the game manager if present
+        if (ejs.gameManager) {
+          if (typeof ejs.gameManager.pause === 'function') ejs.gameManager.pause();
+          if (typeof ejs.gameManager.exit === 'function') ejs.gameManager.exit();
+        }
+      }
+    } catch { /* ignore */ }
+
+    // Suspend ALL Web Audio contexts — this kills any lingering sound
+    try {
+      const win = window as any;
+      // EmulatorJS stores its AudioContext here
+      if (win.EJS_emulator?.audioContext) {
+        win.EJS_emulator.audioContext.suspend();
+        win.EJS_emulator.audioContext.close();
+      }
+      // Also close any global audio context that leaked
+      if (win.AudioContext) {
+        document.querySelectorAll('audio, video').forEach((el) => {
+          const media = el as HTMLMediaElement;
+          media.pause();
+          media.src = '';
+        });
+      }
+    } catch { /* ignore */ }
+
+    // Remove the EmulatorJS loader script from the page
+    if (ejsScriptRef.current && ejsScriptRef.current.parentNode) {
+      ejsScriptRef.current.parentNode.removeChild(ejsScriptRef.current);
+      ejsScriptRef.current = null;
+    }
+
+    // Remove any style/script tags injected by EmulatorJS itself
+    document.querySelectorAll('script[src*="emulatorjs"], link[href*="emulatorjs"]')
+      .forEach((el) => el.remove());
+
+    // Blank the canvas so the last frame doesn't linger
+    const canvas = document.getElementById('gba-game-canvas');
+    if (canvas) canvas.innerHTML = '';
+
+    // Clear all EmulatorJS global state
+    const ejsKeys = Object.keys(window).filter((k) => k.startsWith('EJS_'));
+    ejsKeys.forEach((k) => { try { delete (window as any)[k]; } catch { } });
+  }, []);
 
   // Connectivity monitoring
   useEffect(() => {
@@ -39,14 +95,11 @@ export default function OfflineArcadePage() {
 
   // Initialize self-hosted EmulatorJS
   useEffect(() => {
-    let scriptElement: HTMLScriptElement | null = null;
-
     const startEmulator = () => {
       try {
-        // Configure EmulatorJS globals
         (window as any).EJS_player = '#gba-game-canvas';
         (window as any).EJS_core = 'gba';
-        (window as any).EJS_gameUrl = '/roms/dbz-supersonic-warriors.zip';
+        (window as any).EJS_gameUrl = '/roms/dbz-supersonic-warriors.gba';
         (window as any).EJS_pathtodata = '/emulatorjs/';
         (window as any).EJS_gameName = 'Dragon Ball Z: Supersonic Warriors';
         (window as any).EJS_color = '#00e575';
@@ -54,43 +107,31 @@ export default function OfflineArcadePage() {
         (window as any).EJS_volume = isMuted ? 0 : 0.9;
         (window as any).EJS_alignStartButton = 'center';
         (window as any).EJS_noAutoFocus = false;
-        
-        // Disable external analytics or ads
         (window as any).EJS_disableDatabases = false;
-        (window as any).EJS_VirtualGamepadSettings = [
-          0, // Disable default emulatorjs virtual gamepad since we provide a custom responsive arcade controller
-        ];
+        (window as any).EJS_VirtualGamepadSettings = [0];
+        (window as any).EJS_onGameStart = () => setEmulatorLoaded(true);
 
-        (window as any).EJS_onGameStart = () => {
-          setEmulatorLoaded(true);
-        };
-
-        // Inject self-hosted loader.js
-        scriptElement = document.createElement('script');
-        scriptElement.src = '/emulatorjs/loader.js';
-        scriptElement.async = true;
-        scriptElement.onload = () => {
-          setEmulatorLoaded(true);
-        };
-        scriptElement.onerror = () => {
+        const script = document.createElement('script');
+        script.src = '/emulatorjs/loader.js';
+        script.async = true;
+        script.onload = () => setEmulatorLoaded(true);
+        script.onerror = () =>
           setEmulatorError('Could not load local GBA emulator engine. Please ensure files are cached.');
-        };
-
-        document.body.appendChild(scriptElement);
+        ejsScriptRef.current = script;
+        document.body.appendChild(script);
       } catch (err: any) {
         setEmulatorError(err?.message || 'Failed to initialize emulator');
       }
     };
 
-    // Slight delay to ensure DOM mount
     const timer = setTimeout(startEmulator, 150);
 
+    // Cleanup: stop emulator when component unmounts (e.g. navigating away)
     return () => {
       clearTimeout(timer);
-      if (scriptElement && scriptElement.parentNode) {
-        scriptElement.parentNode.removeChild(scriptElement);
-      }
+      stopEmulator();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Fullscreen toggle
@@ -112,40 +153,74 @@ export default function OfflineArcadePage() {
     }
   };
 
-  // Simulate Key Event for Gamepad Buttons
+  // EmulatorJS key code mapping (GBA default mapping)
+  // key = display key name, code = KeyboardEvent.code value, keyCode = legacy code
   const sendKey = useCallback((key: string, keyCode: number, isDown: boolean) => {
     triggerHaptic();
     const eventType = isDown ? 'keydown' : 'keyup';
-    const event = new KeyboardEvent(eventType, {
-      key: key,
-      code: key,
-      keyCode: keyCode,
+
+    // Build proper code string (e.g. ArrowUp, KeyZ, KeyX, Enter, ShiftLeft)
+    let code = key;
+    if (key === 'ArrowUp') code = 'ArrowUp';
+    else if (key === 'ArrowDown') code = 'ArrowDown';
+    else if (key === 'ArrowLeft') code = 'ArrowLeft';
+    else if (key === 'ArrowRight') code = 'ArrowRight';
+    else if (key === 'Enter') code = 'Enter';
+    else if (key === 'Shift') code = 'ShiftLeft';
+    else if (key.length === 1) code = 'Key' + key.toUpperCase();
+
+    const makeEvent = () => new KeyboardEvent(eventType, {
+      key,
+      code,
+      keyCode,
       which: keyCode,
       bubbles: true,
       cancelable: true,
     });
-    window.dispatchEvent(event);
+
+    // 1. Dispatch on the emulator canvas element (most reliable for EmulatorJS)
+    const canvas = document.getElementById('gba-game-canvas');
+    if (canvas) canvas.dispatchEvent(makeEvent());
+
+    // 2. Dispatch on document (EmulatorJS listens here)
+    document.dispatchEvent(makeEvent());
+
+    // 3. Dispatch on window as fallback
+    window.dispatchEvent(makeEvent());
+
+    // 4. Use EmulatorJS gamepad API directly if available
+    const ejs = (window as any).EJS_emulator;
+    if (ejs && ejs.gameManager && ejs.gameManager.input) {
+      try {
+        ejs.gameManager.input.emit(eventType, { key, code, keyCode });
+      } catch {}
+    }
   }, []);
 
   return (
     <div className="offline-page-root" ref={arcadeContainerRef}>
       {/* Top Floating Status Bar */}
-      <header className="arcade-header">
-        <Link href="/" className="arcade-back-btn">
-          <span className="material-symbols-outlined">arrow_back</span>
-          <span>{isOnline ? 'Back to Anime' : 'Exit to App'}</span>
-        </Link>
+        <header className="arcade-header">
+          {/* Back button — stops emulator before navigating */}
+          <button
+            type="button"
+            className="arcade-back-btn"
+            aria-label="Go back"
+            onClick={() => { stopEmulator(); router.push('/'); }}
+          >
+            <span className="material-symbols-outlined">arrow_back</span>
+          </button>
 
         <div className="arcade-badge-group">
           {isOnline ? (
             <div className="status-badge online">
               <span className="pulse-dot green" />
-              <span>Internet Connected! Tap to stream</span>
+              <span>Online</span>
             </div>
           ) : (
             <div className="status-badge offline">
               <span className="pulse-dot orange" />
-              <span>Offline Mode • Zero Data Used</span>
+              <span>Offline</span>
             </div>
           )}
         </div>
@@ -246,23 +321,23 @@ export default function OfflineArcadePage() {
               <button
                 type="button"
                 className="shoulder-trigger-btn left"
-                onTouchStart={() => sendKey('a', 65, true)}
-                onTouchEnd={() => sendKey('a', 65, false)}
+                onTouchStart={(e) => { e.preventDefault(); sendKey('a', 65, true); }}
+                onTouchEnd={(e) => { e.preventDefault(); sendKey('a', 65, false); }}
                 onMouseDown={() => sendKey('a', 65, true)}
                 onMouseUp={() => sendKey('a', 65, false)}
               >
-                <span>L (Charge Ki)</span>
+                <span>L · Charge Ki</span>
               </button>
 
               <button
                 type="button"
                 className="shoulder-trigger-btn right"
-                onTouchStart={() => sendKey('s', 83, true)}
-                onTouchEnd={() => sendKey('s', 83, false)}
+                onTouchStart={(e) => { e.preventDefault(); sendKey('s', 83, true); }}
+                onTouchEnd={(e) => { e.preventDefault(); sendKey('s', 83, false); }}
                 onMouseDown={() => sendKey('s', 83, true)}
                 onMouseUp={() => sendKey('s', 83, false)}
               >
-                <span>R (Super Dash)</span>
+                <span>R · Super Dash</span>
               </button>
             </div>
 
@@ -273,42 +348,42 @@ export default function OfflineArcadePage() {
                 <button
                   type="button"
                   className="dpad-btn up"
-                  onTouchStart={() => sendKey('ArrowUp', 38, true)}
-                  onTouchEnd={() => sendKey('ArrowUp', 38, false)}
+                  onTouchStart={(e) => { e.preventDefault(); sendKey('ArrowUp', 38, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKey('ArrowUp', 38, false); }}
+                  onMouseDown={() => sendKey('ArrowUp', 38, true)}
+                  onMouseUp={() => sendKey('ArrowUp', 38, false)}
                   aria-label="Up"
-                >
-                  ▲
-                </button>
+                >▲</button>
                 <div className="dpad-horizontal">
                   <button
                     type="button"
                     className="dpad-btn left"
-                    onTouchStart={() => sendKey('ArrowLeft', 37, true)}
-                    onTouchEnd={() => sendKey('ArrowLeft', 37, false)}
+                    onTouchStart={(e) => { e.preventDefault(); sendKey('ArrowLeft', 37, true); }}
+                    onTouchEnd={(e) => { e.preventDefault(); sendKey('ArrowLeft', 37, false); }}
+                    onMouseDown={() => sendKey('ArrowLeft', 37, true)}
+                    onMouseUp={() => sendKey('ArrowLeft', 37, false)}
                     aria-label="Left"
-                  >
-                    ◀
-                  </button>
+                  >◀</button>
                   <div className="dpad-center" />
                   <button
                     type="button"
                     className="dpad-btn right"
-                    onTouchStart={() => sendKey('ArrowRight', 39, true)}
-                    onTouchEnd={() => sendKey('ArrowRight', 39, false)}
+                    onTouchStart={(e) => { e.preventDefault(); sendKey('ArrowRight', 39, true); }}
+                    onTouchEnd={(e) => { e.preventDefault(); sendKey('ArrowRight', 39, false); }}
+                    onMouseDown={() => sendKey('ArrowRight', 39, true)}
+                    onMouseUp={() => sendKey('ArrowRight', 39, false)}
                     aria-label="Right"
-                  >
-                    ▶
-                  </button>
+                  >▶</button>
                 </div>
                 <button
                   type="button"
                   className="dpad-btn down"
-                  onTouchStart={() => sendKey('ArrowDown', 40, true)}
-                  onTouchEnd={() => sendKey('ArrowDown', 40, false)}
+                  onTouchStart={(e) => { e.preventDefault(); sendKey('ArrowDown', 40, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKey('ArrowDown', 40, false); }}
+                  onMouseDown={() => sendKey('ArrowDown', 40, true)}
+                  onMouseUp={() => sendKey('ArrowDown', 40, false)}
                   aria-label="Down"
-                >
-                  ▼
-                </button>
+                >▼</button>
               </div>
 
               {/* Start & Select Capsule Buttons */}
@@ -316,40 +391,47 @@ export default function OfflineArcadePage() {
                 <button
                   type="button"
                   className="meta-capsule-btn"
-                  onTouchStart={() => sendKey('Shift', 16, true)}
-                  onTouchEnd={() => sendKey('Shift', 16, false)}
-                >
-                  <span>SELECT</span>
-                </button>
+                  onTouchStart={(e) => { e.preventDefault(); sendKey('Shift', 16, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKey('Shift', 16, false); }}
+                  onMouseDown={() => sendKey('Shift', 16, true)}
+                  onMouseUp={() => sendKey('Shift', 16, false)}
+                >SELECT</button>
                 <button
                   type="button"
                   className="meta-capsule-btn"
-                  onTouchStart={() => sendKey('Enter', 13, true)}
-                  onTouchEnd={() => sendKey('Enter', 13, false)}
-                >
-                  <span>START</span>
-                </button>
+                  onTouchStart={(e) => { e.preventDefault(); sendKey('Enter', 13, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKey('Enter', 13, false); }}
+                  onMouseDown={() => sendKey('Enter', 13, true)}
+                  onMouseUp={() => sendKey('Enter', 13, false)}
+                >START</button>
               </div>
 
-              {/* A & B Action Buttons (Angled GBA style) */}
+
+              {/* A & B Action Buttons */}
               <div className="virtual-actions">
                 <button
                   type="button"
-                  className="action-round-btn btn-b"
-                  onTouchStart={() => sendKey('z', 90, true)}
-                  onTouchEnd={() => sendKey('z', 90, false)}
-                >
-                  <span>B</span>
-                  <small>Ki</small>
-                </button>
-                <button
-                  type="button"
                   className="action-round-btn btn-a"
-                  onTouchStart={() => sendKey('x', 88, true)}
-                  onTouchEnd={() => sendKey('x', 88, false)}
+                  onTouchStart={(e) => { e.preventDefault(); sendKey('x', 88, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKey('x', 88, false); }}
+                  onMouseDown={() => sendKey('x', 88, true)}
+                  onMouseUp={() => sendKey('x', 88, false)}
+                  aria-label="A button"
                 >
                   <span>A</span>
                   <small>Hit</small>
+                </button>
+                <button
+                  type="button"
+                  className="action-round-btn btn-b"
+                  onTouchStart={(e) => { e.preventDefault(); sendKey('z', 90, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKey('z', 90, false); }}
+                  onMouseDown={() => sendKey('z', 90, true)}
+                  onMouseUp={() => sendKey('z', 90, false)}
+                  aria-label="B button"
+                >
+                  <span>B</span>
+                  <small>Ki</small>
                 </button>
               </div>
             </div>
@@ -405,6 +487,8 @@ export default function OfflineArcadePage() {
 
       {/* Embedded High-Performance Styles */}
       <style jsx>{`
+        * { box-sizing: border-box; }
+
         .offline-page-root {
           min-height: 100vh;
           min-height: 100dvh;
@@ -415,9 +499,12 @@ export default function OfflineArcadePage() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 12px 14px 28px;
+          padding: 12px 10px 28px;
           box-sizing: border-box;
           user-select: none;
+          overflow-x: hidden;
+          width: 100%;
+          max-width: 100vw;
         }
 
         .arcade-header {
@@ -426,25 +513,26 @@ export default function OfflineArcadePage() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 8px 14px;
+          gap: 8px;
+          padding: 6px 8px;
           border-radius: 999px;
           background: rgba(4, 20, 10, 0.7);
           border: 1px solid rgba(0, 229, 117, 0.22);
           backdrop-filter: blur(16px);
-          margin-bottom: 12px;
-          box-sizing: border-box;
+          margin-bottom: 10px;
+          overflow: hidden;
         }
 
         .arcade-back-btn {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          justify-content: center;
+          flex-shrink: 0;
+          width: 36px;
+          height: 36px;
           color: #f0fdf4;
           text-decoration: none;
-          font-size: 0.82rem;
-          font-weight: 700;
-          padding: 6px 14px;
-          border-radius: 999px;
+          border-radius: 50%;
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(255, 255, 255, 0.15);
           transition: all 0.18s;
@@ -452,23 +540,29 @@ export default function OfflineArcadePage() {
         .arcade-back-btn:hover {
           background: rgba(0, 229, 117, 0.2);
           border-color: #00e575;
-          transform: translateX(-2px);
         }
 
         .arcade-badge-group {
           display: flex;
           align-items: center;
+          flex: 1;
+          min-width: 0;
+          justify-content: center;
         }
 
         .status-badge {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          padding: 5px 14px;
+          gap: 6px;
+          padding: 5px 12px;
           border-radius: 999px;
-          font-size: 0.76rem;
+          font-size: 0.70rem;
           font-weight: 700;
-          letter-spacing: 0.02em;
+          letter-spacing: 0.03em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
         }
         .status-badge.offline {
           background: rgba(234, 179, 8, 0.14);
@@ -526,13 +620,13 @@ export default function OfflineArcadePage() {
           flex-direction: column;
           align-items: center;
           flex: 1;
+          overflow-x: hidden;
         }
 
         /* GBA Console Bezel */
         .gba-console-bezel {
           width: 100%;
-          max-width: 820px;
-          border-radius: 28px;
+          border-radius: 20px;
           background: linear-gradient(180deg, #091a0f 0%, #030d07 100%);
           border: 2px solid rgba(0, 229, 117, 0.3);
           box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 32px rgba(0, 204, 102, 0.15);
@@ -720,165 +814,154 @@ export default function OfflineArcadePage() {
           color: #cbd5e1;
         }
 
-        /* Mobile Touch Gamepad */
+        /* ═══════════════════════════════════════════════
+           MOBILE TOUCH GAMEPAD — fully responsive
+        ═══════════════════════════════════════════════ */
         .mobile-touch-gamepad {
           width: 100%;
-          max-width: 820px;
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          margin-top: 14px;
-          padding: 0 4px;
-          box-sizing: border-box;
+          gap: 10px;
+          margin-top: 12px;
+          padding: 14px 10px;
+          background: rgba(4, 14, 9, 0.70);
+          border: 1px solid rgba(0, 229, 117, 0.18);
+          border-radius: 20px;
+          backdrop-filter: blur(16px);
         }
 
+        /* L / R shoulder row */
         .gamepad-shoulders-row {
           display: flex;
           justify-content: space-between;
-          gap: 12px;
+          gap: 8px;
         }
 
         .shoulder-trigger-btn {
           flex: 1;
-          height: 44px;
+          min-width: 0;
+          height: 40px;
           border-radius: 12px;
           background: linear-gradient(180deg, #1f3627 0%, #0d1e13 100%);
           border: 1.5px solid rgba(0, 229, 117, 0.35);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
           color: #f0fdf4;
-          font-size: 0.78rem;
+          font-size: 0.72rem;
           font-weight: 800;
           cursor: pointer;
           display: grid;
           place-items: center;
           touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+          transition: background 0.08s, transform 0.08s;
         }
         .shoulder-trigger-btn:active {
           background: #00e575;
           color: #000;
-          transform: translateY(2px);
+          transform: scale(0.96);
         }
 
+        /* Main gamepad row */
         .gamepad-main-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 10px;
+          gap: 8px;
+          width: 100%;
         }
 
-        /* Virtual D-Pad */
+        /* ── D-Pad ── */
         .virtual-dpad {
           display: flex;
           flex-direction: column;
           align-items: center;
+          flex-shrink: 0;
         }
-
         .dpad-horizontal {
           display: flex;
           align-items: center;
         }
-
         .dpad-btn {
-          width: 48px;
-          height: 48px;
+          width: 46px;
+          height: 46px;
           background: linear-gradient(145deg, #1c2e22 0%, #0c1810 100%);
-          border: 1px solid rgba(0, 229, 117, 0.3);
-          color: #94a3b8;
-          font-size: 1rem;
+          border: 1.5px solid rgba(0, 229, 117, 0.28);
+          color: #a3e8c8;
+          font-size: 0.85rem;
           display: grid;
           place-items: center;
           cursor: pointer;
           touch-action: manipulation;
-          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+          -webkit-tap-highlight-color: transparent;
+          box-shadow: inset 0 1px 1px rgba(255,255,255,0.12), 0 3px 6px rgba(0,0,0,0.4);
+          transition: background 0.08s;
         }
-        .dpad-btn:active {
-          background: #00e575;
-          color: #000;
-        }
-
-        .dpad-btn.up { border-radius: 10px 10px 0 0; }
-        .dpad-btn.down { border-radius: 0 0 10px 10px; }
-        .dpad-btn.left { border-radius: 10px 0 0 10px; }
+        .dpad-btn:active { background: #00e575; color: #000; }
+        .dpad-btn.up    { border-radius: 10px 10px 0 0; }
+        .dpad-btn.down  { border-radius: 0 0 10px 10px; }
+        .dpad-btn.left  { border-radius: 10px 0 0 10px; }
         .dpad-btn.right { border-radius: 0 10px 10px 0; }
         .dpad-center {
-          width: 48px;
-          height: 48px;
+          width: 46px; height: 46px;
           background: #0e1d13;
-          border: 1px solid rgba(0, 229, 117, 0.15);
+          border: 1px solid rgba(0, 229, 117, 0.12);
         }
 
-        /* Virtual Meta (Select/Start) */
+        /* ── Center meta (SELECT / START) ── */
         .virtual-meta-buttons {
           display: flex;
-          gap: 10px;
-          transform: rotate(-18deg);
-          margin-top: 20px;
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+          flex-shrink: 0;
         }
-
         .meta-capsule-btn {
-          width: 58px;
-          height: 24px;
+          width: 64px;
+          height: 22px;
           border-radius: 999px;
           background: #1e293b;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255,255,255,0.2);
           color: #cbd5e1;
-          font-size: 0.60rem;
+          font-size: 0.58rem;
           font-weight: 800;
           cursor: pointer;
           display: grid;
           place-items: center;
           touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+          transition: background 0.08s;
+          letter-spacing: 0.05em;
         }
-        .meta-capsule-btn:active {
-          background: #00e575;
-          color: #000;
-        }
+        .meta-capsule-btn:active { background: #00e575; color: #000; }
 
-        /* Virtual Actions (A & B) */
+        /* ── A / B action buttons ── */
         .virtual-actions {
           display: flex;
-          gap: 14px;
-          transform: rotate(-24deg);
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          flex-shrink: 0;
         }
-
         .action-round-btn {
-          width: 60px;
-          height: 60px;
+          width: 54px;
+          height: 54px;
           border-radius: 50%;
-          border: 2px solid rgba(255, 255, 255, 0.25);
+          border: 2px solid rgba(255,255,255,0.22);
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           touch-action: manipulation;
-          box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+          -webkit-tap-highlight-color: transparent;
+          box-shadow: 0 6px 14px rgba(0,0,0,0.55), inset 0 1px 2px rgba(255,255,255,0.25);
+          transition: transform 0.08s;
         }
-        .action-round-btn span {
-          font-size: 1.15rem;
-          font-weight: 900;
-          line-height: 1;
-        }
-        .action-round-btn small {
-          font-size: 0.55rem;
-          font-weight: 800;
-          text-transform: uppercase;
-        }
-
-        .action-round-btn.btn-b {
-          background: linear-gradient(145deg, #10b981 0%, #047857 100%);
-          color: #fff;
-        }
-        .action-round-btn.btn-a {
-          background: linear-gradient(145deg, #059669 0%, #064e3b 100%);
-          color: #fff;
-          margin-top: -16px;
-        }
-        .action-round-btn:active {
-          background: #00ff88 !important;
-          color: #000 !important;
-          transform: scale(0.95);
-        }
+        .action-round-btn span { font-size: 1.05rem; font-weight: 900; line-height: 1; }
+        .action-round-btn small { font-size: 0.5rem; font-weight: 800; text-transform: uppercase; opacity: 0.8; }
+        .action-round-btn.btn-b { background: linear-gradient(145deg, #10b981 0%, #047857 100%); color: #fff; }
+        .action-round-btn.btn-a { background: linear-gradient(145deg, #059669 0%, #064e3b 100%); color: #fff; }
+        .action-round-btn:active { background: #00ff88 !important; color: #000 !important; transform: scale(0.92); }
 
         /* Controls Modal */
         .controls-modal-backdrop {
@@ -959,14 +1042,15 @@ export default function OfflineArcadePage() {
           font-weight: 700;
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 400px) {
           .bezel-shortcuts { display: none; }
-          .bezel-top-bar { padding: 8px 12px; }
-          .gba-brand { font-size: 0.74rem; }
-          .gba-model { font-size: 0.74rem; }
-          .dpad-btn { width: 42px; height: 42px; }
-          .dpad-center { width: 42px; height: 42px; }
-          .action-round-btn { width: 52px; height: 52px; }
+          .bezel-top-bar { padding: 6px 10px; }
+          .gba-brand, .gba-model { font-size: 0.68rem; }
+          .dpad-btn { width: 40px; height: 40px; font-size: 0.75rem; }
+          .dpad-center { width: 40px; height: 40px; }
+          .action-round-btn { width: 48px; height: 48px; }
+          .shoulder-trigger-btn { font-size: 0.65rem; }
+          .meta-capsule-btn { width: 56px; }
         }
       `}</style>
     </div>

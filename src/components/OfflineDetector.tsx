@@ -33,7 +33,6 @@ export default function OfflineDetector() {
     // Warm up service worker pre-caching for /offline and game ROM
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.ready.then((registration) => {
-        // Ping background cache for offline page
         if (registration.active) {
           fetch('/offline', { method: 'GET', cache: 'force-cache' }).catch(() => {});
         }
@@ -51,185 +50,234 @@ export default function OfflineDetector() {
   }
 
   return (
-    <div className="offline-banner-wrap" role="alert">
+    <div className="od-wrap" role="alert">
+
+      {/* ── OFFLINE BANNER ── */}
       {isOffline && (
-        <div className="offline-notification-card">
-          <div className="offline-badge-icon">
-            <span className="material-symbols-outlined">wifi_off</span>
+        <div className="od-card od-offline">
+          {/* Left: icon pill */}
+          <div className="od-icon-pill od-icon-warn">
+            <span className="material-symbols-outlined">signal_wifi_statusbar_not_connected</span>
           </div>
 
-          <div className="offline-info-col">
-            <strong>Internet Disconnected</strong>
-            <p>Play Dragon Ball Z (GBA) offline while you wait!</p>
+          {/* Middle: text */}
+          <div className="od-text">
+            <strong>No Connection</strong>
+            <span>Play Dragon Ball Z · GBA offline</span>
           </div>
 
-          <div className="offline-actions-col">
-            <Link href="/offline" className="play-dbz-btn">
+          {/* Right: actions */}
+          <div className="od-actions">
+            <Link href="/offline" className="od-play-btn">
               <span className="material-symbols-outlined">sports_esports</span>
               <span>Play DBZ</span>
             </Link>
             <button
               type="button"
-              className="dismiss-offline-btn"
+              className="od-close-btn"
               onClick={() => setIsOffline(false)}
-              aria-label="Close Notice"
+              aria-label="Dismiss"
             >
-              ✕
+              <span className="material-symbols-outlined">close</span>
             </button>
           </div>
         </div>
       )}
 
+      {/* ── RECONNECTED BANNER ── */}
       {showReconnected && (
-        <div className="online-notification-card">
-          <span className="material-symbols-outlined" style={{ color: '#00ff88' }}>
-            wifi
-          </span>
-          <span>Internet Connection Restored! Streaming ready.</span>
+        <div className="od-card od-online">
+          <div className="od-icon-pill od-icon-ok">
+            <span className="material-symbols-outlined">wifi</span>
+          </div>
+          <div className="od-text">
+            <strong>Back Online</strong>
+            <span>Streaming is ready</span>
+          </div>
           <button
             type="button"
-            className="dismiss-offline-btn"
+            className="od-close-btn"
             onClick={() => setShowReconnected(false)}
-            aria-label="Close Notice"
+            aria-label="Dismiss"
           >
-            ✕
+            <span className="material-symbols-outlined">close</span>
           </button>
         </div>
       )}
 
       <style jsx>{`
-        .offline-banner-wrap {
+        /* ── Wrapper ── */
+        .od-wrap {
           position: fixed;
-          bottom: 24px;
+          bottom: 28px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 999998;
           width: calc(100% - 32px);
-          max-width: 520px;
-          animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          max-width: 460px;
+          animation: od-slide 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        @keyframes od-slide {
+          from { opacity: 0; transform: translate(-50%, 22px) scale(0.96); }
+          to   { opacity: 1; transform: translate(-50%, 0)   scale(1);    }
         }
 
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translate(-50%, 20px);
-          }
-          to {
-            opacity: 1;
-            transform: translate(-50%, 0);
-          }
-        }
-
-        .offline-notification-card {
+        /* ── Base Card ── */
+        .od-card {
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 12px 16px;
-          border-radius: 20px;
-          background: rgba(8, 24, 14, 0.94);
-          border: 1.5px solid rgba(0, 229, 117, 0.4);
-          backdrop-filter: blur(20px);
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 204, 102, 0.2);
+          padding: 10px 12px 10px 10px;
+          border-radius: 24px;
+          backdrop-filter: blur(28px) saturate(1.6);
+          -webkit-backdrop-filter: blur(28px) saturate(1.6);
           color: #f0fdf4;
+          font-family: 'Inter', -apple-system, sans-serif;
         }
 
-        .offline-badge-icon {
-          width: 40px;
-          height: 40px;
-          border-radius: 12px;
-          background: rgba(234, 179, 8, 0.16);
-          border: 1px solid rgba(234, 179, 8, 0.35);
-          color: #facc15;
+        /* ── Offline variant ── */
+        .od-offline {
+          background: linear-gradient(
+            135deg,
+            rgba(8, 22, 14, 0.82) 0%,
+            rgba(4, 14, 9, 0.90) 100%
+          );
+          border: 1.2px solid rgba(0, 229, 117, 0.28);
+          box-shadow:
+            0 20px 48px rgba(0, 0, 0, 0.55),
+            0 0 0 1px rgba(0, 229, 117, 0.08) inset,
+            0 0 28px rgba(0, 200, 100, 0.12);
+        }
+
+        /* ── Online variant ── */
+        .od-online {
+          background: linear-gradient(
+            135deg,
+            rgba(0, 40, 22, 0.84) 0%,
+            rgba(0, 24, 14, 0.92) 100%
+          );
+          border: 1.2px solid rgba(0, 255, 136, 0.35);
+          box-shadow:
+            0 16px 40px rgba(0, 0, 0, 0.5),
+            0 0 20px rgba(0, 255, 120, 0.14);
+        }
+
+        /* ── Icon pill ── */
+        .od-icon-pill {
+          width: 42px;
+          height: 42px;
+          border-radius: 14px;
           display: grid;
           place-items: center;
           flex-shrink: 0;
+          font-size: 20px;
+        }
+        .od-icon-warn {
+          background: rgba(251, 191, 36, 0.14);
+          border: 1px solid rgba(251, 191, 36, 0.30);
+          color: #fbbf24;
+          box-shadow: 0 0 16px rgba(251, 191, 36, 0.18);
+        }
+        .od-icon-ok {
+          background: rgba(0, 229, 117, 0.14);
+          border: 1px solid rgba(0, 229, 117, 0.30);
+          color: #00e575;
+          box-shadow: 0 0 16px rgba(0, 229, 117, 0.20);
+        }
+        .od-icon-pill .material-symbols-outlined {
+          font-size: 22px;
+          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        .offline-info-col {
+        /* ── Text block ── */
+        .od-text {
+          flex: 1;
+          min-width: 0;
           display: flex;
           flex-direction: column;
           gap: 2px;
-          min-width: 0;
-          flex: 1;
         }
-        .offline-info-col strong {
-          font-size: 0.88rem;
-          color: #facc15;
+        .od-text strong {
+          font-size: 0.86rem;
+          font-weight: 700;
+          color: #e2fef0;
+          letter-spacing: 0.01em;
         }
-        .offline-info-col p {
-          margin: 0;
-          font-size: 0.78rem;
+        .od-text span {
+          font-size: 0.76rem;
           color: #86efac;
           line-height: 1.3;
         }
 
-        .offline-actions-col {
+        /* ── Actions row ── */
+        .od-actions {
           display: flex;
           align-items: center;
           gap: 8px;
           flex-shrink: 0;
         }
 
-        .play-dbz-btn {
+        /* ── Play button ── */
+        .od-play-btn {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 5px;
           padding: 8px 14px;
           border-radius: 999px;
-          background: #00994d;
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          box-shadow: 0 4px 14px rgba(0, 153, 77, 0.45);
+          background: linear-gradient(135deg, #00cc6a, #00994d);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          box-shadow: 0 4px 16px rgba(0, 153, 77, 0.40);
           color: #fff;
-          font-size: 0.80rem;
+          font-size: 0.78rem;
           font-weight: 800;
           text-decoration: none;
-          transition: transform 0.16s, background 0.16s;
+          letter-spacing: 0.02em;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+          white-space: nowrap;
         }
-        .play-dbz-btn:hover {
-          background: #00b359;
-          transform: translateY(-2px);
+        .od-play-btn:hover {
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 6px 22px rgba(0, 180, 90, 0.55);
+        }
+        .od-play-btn .material-symbols-outlined {
+          font-size: 17px;
+          font-variation-settings: 'FILL' 1, 'wght' 500;
         }
 
-        .dismiss-offline-btn {
-          width: 28px;
-          height: 28px;
+        /* ── Close button ── */
+        .od-close-btn {
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          border: 0;
-          color: #cbd5e1;
+          background: rgba(255, 255, 255, 0.07);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          color: #94a3b8;
           cursor: pointer;
-          font-size: 0.75rem;
           display: grid;
           place-items: center;
+          transition: background 0.15s, color 0.15s;
+        }
+        .od-close-btn:hover {
+          background: rgba(255, 255, 255, 0.14);
+          color: #e2e8f0;
+        }
+        .od-close-btn .material-symbols-outlined {
+          font-size: 16px;
         }
 
-        .online-notification-card {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 10px;
-          padding: 10px 18px;
-          border-radius: 999px;
-          background: rgba(4, 20, 10, 0.95);
-          border: 1.5px solid rgba(0, 229, 117, 0.4);
-          backdrop-filter: blur(20px);
-          color: #00ff88;
-          font-size: 0.82rem;
-          font-weight: 700;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        @media (max-width: 480px) {
-          .offline-banner-wrap {
-            bottom: 74px; /* avoid bottom nav bar on mobile */
+        /* ── Mobile ── */
+        @media (max-width: 767px) {
+          .od-wrap {
+            /* sit above the floating tab bar (≈68px tall) + 12px gap + safe area */
+            bottom: calc(92px + env(safe-area-inset-bottom, 0px));
             width: calc(100% - 20px);
           }
-          .play-dbz-btn {
-            padding: 6px 10px;
-            font-size: 0.74rem;
+          .od-play-btn {
+            padding: 7px 11px;
+            font-size: 0.73rem;
           }
-          .offline-info-col p {
-            font-size: 0.72rem;
+          .od-text span {
+            font-size: 0.70rem;
           }
         }
       `}</style>
