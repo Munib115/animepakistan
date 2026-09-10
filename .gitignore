@@ -44,4 +44,5 @@ next-env.d.ts
 .open-next/
 .wrangler/
 .dev.vars
-
+*.apk
+Dragonball Z - Supersonic Warriors GBA*

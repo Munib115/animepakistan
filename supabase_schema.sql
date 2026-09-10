@@ -198,3 +198,23 @@ DROP POLICY IF EXISTS "Allow public upload chat media" ON storage.objects;
 CREATE POLICY "Allow public upload chat media" 
 ON storage.objects FOR INSERT 
 WITH CHECK (bucket_id = 'chat_media');
+
+-- ==============================================================================
+-- OFFLINE RETRO ARCADE: GBA GAMES STORAGE
+-- ==============================================================================
+-- Create public storage bucket for game ROMs & save states
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('games', 'games', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage RLS policies for games bucket
+DROP POLICY IF EXISTS "Allow public read games" ON storage.objects;
+CREATE POLICY "Allow public read games" 
+ON storage.objects FOR SELECT 
+USING (bucket_id = 'games');
+
+DROP POLICY IF EXISTS "Allow public upload games" ON storage.objects;
+CREATE POLICY "Allow public upload games" 
+ON storage.objects FOR INSERT 
+WITH CHECK (bucket_id = 'games');
+

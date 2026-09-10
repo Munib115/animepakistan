@@ -98,58 +98,24 @@ export default function NetflixLaunchScreen() {
     <div
       id="ap-netflix-intro"
       className={`netflix-intro-overlay ${isExiting ? 'netflix-intro-exit' : ''}`}
-      onClick={() => {
-        // If sound was blocked by browser autoplay, first tap enables sound
-        if (!hasSoundPlayed) {
-          triggerSound();
-        }
-      }}
+      onClick={triggerSound}
+      onTouchStart={triggerSound}
       aria-hidden="true"
     >
       {/* Cinematic Vignette & Deep Obsidian Canvas */}
       <div className="netflix-intro-backdrop" />
 
-      {/* Top Header Bar: Sound Indicator & Skip Button */}
-      <div className="netflix-intro-topbar">
-        <button
-          type="button"
-          className="netflix-sound-badge"
-          onClick={(e) => {
-            e.stopPropagation();
-            triggerSound();
-          }}
-          aria-label="Play Sound"
-        >
-          <span className="netflix-sound-icon">
-            {hasSoundPlayed ? '🔊' : '🔈'}
-          </span>
-          <span>{hasSoundPlayed ? 'CINEMA AUDIO' : 'TAP FOR SOUND'}</span>
-        </button>
-
-        <button
-          type="button"
-          className="netflix-skip-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            dismissIntro();
-          }}
-          aria-label="Skip Intro"
-        >
-          <span>Skip ›</span>
-        </button>
-      </div>
-
       {/* Netflix Spectrum Light Rays Eruption Container */}
       <div className="netflix-spectrum-viewport">
-        {Array.from({ length: 26 }).map((_, i) => (
+        {Array.from({ length: 18 }).map((_, i) => (
           <div
             key={i}
             className="netflix-spectrum-ray"
             style={
               {
-                '--ray-left': `${(i / 25) * 100}%`,
-                '--ray-width': `${2 + (i % 4) * 2}px`,
-                '--ray-delay': `${0.62 + (i % 7) * 0.025}s`,
+                '--ray-left': `${(i / 17) * 100}%`,
+                '--ray-width': `${3 + (i % 3) * 2}px`,
+                '--ray-delay': `${0.58 + (i % 5) * 0.03}s`,
                 '--ray-color': [
                   '#004d25',
                   '#00ff88',
@@ -158,13 +124,10 @@ export default function NetflixLaunchScreen() {
                   '#10b981',
                   '#34d399',
                   '#00ffaa',
-                  '#e2e8f0',
+                  '#f8fafc',
                   '#00e575',
-                  '#ffffff',
-                  '#008040',
-                  '#80ffbf',
-                ][i % 12],
-                '--ray-scale': `${1 + (i % 3) * 0.4}`,
+                ][i % 9],
+                '--ray-scale': `${1.1 + (i % 3) * 0.35}`,
               } as React.CSSProperties
             }
           />
