@@ -30,11 +30,42 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 html, body {
   max-width: 100vw;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+body {
+  overflow-y: auto;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Butter-Smooth 120Hz Route Entry Animation */
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0.92;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: pageFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 img, video {
@@ -440,8 +471,6 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 }
 
 .glass-card, .liquid-glass-card {
-  content-visibility: auto;
-  contain-intrinsic-size: 140px 240px;
   background: var(--bg-secondary);
   border: 1.2px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
@@ -449,41 +478,27 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
   position: relative;
   overflow: hidden;
-  transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  will-change: transform;
 }
 
 .glass-card:hover, .liquid-glass-card:hover {
-  transform: translateY(-4px) translate3d(0, 0, 0);
+  transform: translateY(-4px);
   border-color: var(--glass-border-glow);
   box-shadow: var(--glass-shadow-hover);
 }
 
 .glass-card:active, .liquid-glass-card:active {
-  transform: scale(0.97) translate3d(0, 0, 0);
+  transform: scale(0.97);
 }
 
-/* --- ULTRA-PERFORMANCE OPTIMIZATIONS FOR LOW-BUDGET SMARTPHONES --- */
+/* --- ULTRA-PERFORMANCE OPTIMIZATIONS FOR 120HZ DISPLAY & SMARTPHONES --- */
 @media (max-width: 768px) {
   * {
     -webkit-tap-highlight-color: transparent;
   }
 
-  body {
-    overscroll-behavior-y: contain;
-  }
-
   .glass-card, .liquid-glass-card {
-    /* Simplified shadow to minimize GPU fill-rate strain on budget Mali/Adreno chipsets */
+    /* Clean shadow to minimize GPU fill-rate strain */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-  }
-
-  /* Hardware-accelerated smooth touch horizontal scrolling for anime rows */
-  .row-card-item {
-    content-visibility: auto;
-    contain-intrinsic-size: 142px 220px;
   }
 }
 
@@ -1089,55 +1104,7 @@ body::after {
   }
 }
 
-/* Premium Launch Sequence - 100% Solid Opaque Dark Screen (Zero transparency, website hidden underneath) */
-.app-loader {
-  position: fixed;
-  z-index: 2147483647;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background: #030604 !important; /* 100% SOLID OPAQUE - ZERO SEE THROUGH */
-  color: #fff;
-  will-change: opacity, transform, filter;
-  transition: opacity 480ms cubic-bezier(0.16, 1, 0.3, 1), transform 480ms cubic-bezier(0.16, 1, 0.3, 1), filter 480ms cubic-bezier(0.16, 1, 0.3, 1);
-  transform: translateZ(0);
-}
 
-.app-loader.is-leaving { 
-  opacity: 0; 
-  transform: scale(1.04) translateZ(0);
-  filter: blur(14px);
-  pointer-events: none;
-}
-.app-loader::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.07) 48%, transparent 64%);
-  transform: translateX(-100%);
-  animation: app-loader-shine 1.8s ease-in-out infinite;
-}
-.app-loader-content { position: relative; z-index: 1; display: grid; justify-items: center; }
-.app-loader-orb { position: absolute; border-radius: 50%; filter: blur(12px); opacity: 0.72; }
-.orb-one { width: min(58vw, 540px); height: min(58vw, 540px); background: radial-gradient(circle, rgba(0, 221, 108, 0.3), transparent 68%); animation: app-loader-breathe 2.4s ease-in-out infinite; }
-.orb-two { width: min(86vw, 740px); height: min(86vw, 740px); border: 1px solid rgba(133, 255, 191, 0.1); animation: app-loader-spin 12s linear infinite; }
-.app-loader-mark { position: relative; width: 94px; height: 94px; padding: 5px; border-radius: 29px; background: rgba(255, 255, 255, 0.1); box-shadow: 0 22px 58px rgba(0, 0, 0, 0.42), inset 0 1px 2px rgba(255, 255, 255, 0.72); backdrop-filter: blur(18px); animation: app-loader-float 1.8s ease-in-out infinite; }
-.app-loader-mark img { display: block; width: 100%; height: 100%; border-radius: 24px; object-fit: cover; }
-.app-loader-ring { position: absolute; inset: -8px; border: 1px solid rgba(125, 255, 183, 0.7); border-right-color: transparent; border-radius: inherit; animation: app-loader-spin 1.25s linear infinite; }
-.app-loader-brand { margin: 24px 0 0; font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 900; letter-spacing: 0.08em; }
-.app-loader-brand span { color: #00df71; }
-.app-loader-caption { margin: 7px 0 0; color: rgba(232, 255, 241, 0.64); font-size: 0.76rem; letter-spacing: 0.08em; }
-.app-loader-progress { width: 180px; height: 4px; margin-top: 28px; overflow: hidden; border-radius: 99px; background: rgba(255, 255, 255, 0.14); }
-.app-loader-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #00b85c, #00ff88); box-shadow: 0 0 16px rgba(51, 255, 142, 0.92); transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
-@keyframes app-loader-spin { to { transform: rotate(360deg); } }
-@keyframes app-loader-breathe { 50% { transform: scale(1.13); opacity: 1; } }
-@keyframes app-loader-float { 50% { transform: translateY(-8px); } }
-@keyframes app-loader-shine { to { transform: translateX(100%); } }
-@keyframes app-loader-progress { from { transform: translateX(-120%); } to { transform: translateX(270%); } }
-@media (prefers-reduced-motion: reduce) {
-  .app-loader *, .app-loader::before { animation: none !important; }
-}
 
 /* Premium Compact PWA Install Banner styling (Positioned Bottom-Left on Desktop to prevent overlap with live chat) */
 .pwa-install-banner {

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import PWARegister from "@/components/PWARegister";
-import AppLoader from '@/components/AppLoader';
+import RouteProgressBar from '@/components/RouteProgressBar';
 import MobileTabBar from "@/components/MobileTabBar";
 import ClientDeferredWidgets from "@/components/ClientDeferredWidgets";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -90,7 +90,7 @@ export default function RootLayout({
       </head>
       <body>
         <AdBlockGlobalShield />
-        <AppLoader />
+        <RouteProgressBar />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
