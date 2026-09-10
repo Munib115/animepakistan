@@ -109,6 +109,23 @@ export default function OfflineArcadePage() {
         (window as any).EJS_noAutoFocus = false;
         (window as any).EJS_disableDatabases = false;
         (window as any).EJS_VirtualGamepadSettings = [0];
+        (window as any).EJS_defaultControls = {
+          0: {
+            0: { value: 'x', value2: 'BUTTON_2' }, // B
+            1: { value: 's', value2: 'BUTTON_4' },
+            2: { value: 'shift', value2: 'SELECT' },
+            3: { value: 'enter', value2: 'START' },
+            4: { value: 'up arrow', value2: 'DPAD_UP' },
+            5: { value: 'down arrow', value2: 'DPAD_DOWN' },
+            6: { value: 'left arrow', value2: 'DPAD_LEFT' },
+            7: { value: 'right arrow', value2: 'DPAD_RIGHT' },
+            8: { value: 'z', value2: 'BUTTON_1' }, // A
+            9: { value: 'a', value2: 'BUTTON_3' },
+            10: { value: 'q', value2: 'LEFT_TOP_SHOULDER' }, // L (Charge Ki)
+            11: { value: 'e', value2: 'RIGHT_TOP_SHOULDER' }, // R (Super Dash)
+          },
+          1: {}, 2: {}, 3: {}
+        };
         (window as any).EJS_onGameStart = () => setEmulatorLoaded(true);
 
         const script = document.createElement('script');
@@ -153,8 +170,8 @@ export default function OfflineArcadePage() {
     }
   };
 
-  // EmulatorJS key code mapping (GBA default mapping)
-  // key = display key name, code = KeyboardEvent.code value, keyCode = legacy code
+  // EmulatorJS key code & direct gamepad simulation mapping (GBA mapping)
+  // GBA Joypad IDs: 0=B, 8=A, 10=L (Charge Ki), 11=R (Super Dash), 4=UP, 5=DOWN, 6=LEFT, 7=RIGHT, 3=START, 2=SELECT
   const sendKey = useCallback((key: string, keyCode: number, isDown: boolean) => {
     triggerHaptic();
     const eventType = isDown ? 'keydown' : 'keyup';
@@ -169,31 +186,70 @@ export default function OfflineArcadePage() {
     else if (key === 'Shift') code = 'ShiftLeft';
     else if (key.length === 1) code = 'Key' + key.toUpperCase();
 
-    const makeEvent = () => new KeyboardEvent(eventType, {
-      key,
-      code,
-      keyCode,
-      which: keyCode,
-      bubbles: true,
-      cancelable: true,
-    });
+    const makeEvent = () => {
+      const evt = new KeyboardEvent(eventType, {
+        key,
+        code,
+        keyCode,
+        which: keyCode,
+        bubbles: true,
+        cancelable: true,
+      });
+      Object.defineProperty(evt, 'keyCode', { get: () => keyCode });
+      Object.defineProperty(evt, 'which', { get: () => keyCode });
+      return evt;
+    };
 
-    // 1. Dispatch on the emulator canvas element (most reliable for EmulatorJS)
+    const evt = makeEvent();
+
+    // 1. Dispatch on the emulator canvas element
     const canvas = document.getElementById('gba-game-canvas');
-    if (canvas) canvas.dispatchEvent(makeEvent());
+    if (canvas) canvas.dispatchEvent(evt);
 
-    // 2. Dispatch on document (EmulatorJS listens here)
-    document.dispatchEvent(makeEvent());
+    // 2. Dispatch on document and window
+    document.dispatchEvent(evt);
+    window.dispatchEvent(evt);
 
-    // 3. Dispatch on window as fallback
-    window.dispatchEvent(makeEvent());
-
-    // 4. Use EmulatorJS gamepad API directly if available
+    // 3. Direct EmulatorJS input synchronization
     const ejs = (window as any).EJS_emulator;
-    if (ejs && ejs.gameManager && ejs.gameManager.input) {
-      try {
-        ejs.gameManager.input.emit(eventType, { key, code, keyCode });
-      } catch {}
+    if (ejs) {
+      // Direct call to EmulatorJS internal key handler
+      if (typeof ejs.keyChange === 'function') {
+        try {
+          ejs.keyChange(evt);
+        } catch {}
+      }
+
+      // Direct simulation into libretro core via button ID
+      const buttonMap: Record<number, number[]> = {
+        88: [0],     // 'x' -> B button
+        90: [8],     // 'z' -> A button
+        81: [10],    // 'q' -> L shoulder (Charge Ki)
+        69: [11],    // 'e' -> R shoulder (Super Dash)
+        65: [10],    // 'a' fallback for L
+        83: [11],    // 's' fallback for R
+        38: [4],     // Up
+        40: [5],     // Down
+        37: [6],     // Left
+        39: [7],     // Right
+        13: [3],     // Enter (Start)
+        16: [2],     // Shift (Select)
+        86: [2],     // 'v' (Select)
+      };
+
+      const ids = buttonMap[keyCode];
+      if (ids) {
+        if (ejs.gameManager && typeof ejs.gameManager.simulateInput === 'function') {
+          try {
+            ids.forEach((id) => ejs.gameManager.simulateInput(0, id, isDown ? 1 : 0));
+          } catch {}
+        }
+        if (typeof ejs.simulateInput === 'function') {
+          try {
+            ids.forEach((id) => ejs.simulateInput(0, id, isDown ? 1 : 0));
+          } catch {}
+        }
+      }
     }
   }, []);
 
@@ -304,10 +360,10 @@ export default function OfflineArcadePage() {
           <div className="bezel-bottom-bar">
             <span className="game-label">DRAGON BALL Z - SUPERSONIC WARRIORS</span>
             <div className="bezel-shortcuts">
-              <span className="shortcut-pill">Z: Attack</span>
-              <span className="shortcut-pill">X: Heavy</span>
-              <span className="shortcut-pill">A: Charge Ki</span>
-              <span className="shortcut-pill">S: Super Dash</span>
+              <span className="shortcut-pill">Z: B-Attack</span>
+              <span className="shortcut-pill">X: A-Heavy</span>
+              <span className="shortcut-pill">Q: L-Charge</span>
+              <span className="shortcut-pill">E: R-Dash</span>
               <span className="shortcut-pill">Enter: Start</span>
             </div>
           </div>
@@ -316,15 +372,15 @@ export default function OfflineArcadePage() {
         {/* Mobile Tactile Virtual Gamepad (Visible on mobile/touch screens) */}
         {isMobile && (
           <div className="mobile-touch-gamepad">
-            {/* L & R Shoulder Triggers */}
+            {/* L & R Shoulder Triggers — Q=L, E=R in EmulatorJS GBA mapping */}
             <div className="gamepad-shoulders-row">
               <button
                 type="button"
                 className="shoulder-trigger-btn left"
-                onTouchStart={(e) => { e.preventDefault(); sendKey('a', 65, true); }}
-                onTouchEnd={(e) => { e.preventDefault(); sendKey('a', 65, false); }}
-                onMouseDown={() => sendKey('a', 65, true)}
-                onMouseUp={() => sendKey('a', 65, false)}
+                onTouchStart={(e) => { e.preventDefault(); sendKey('q', 81, true); }}
+                onTouchEnd={(e) => { e.preventDefault(); sendKey('q', 81, false); }}
+                onMouseDown={() => sendKey('q', 81, true)}
+                onMouseUp={() => sendKey('q', 81, false)}
               >
                 <span>L · Charge Ki</span>
               </button>
@@ -332,10 +388,10 @@ export default function OfflineArcadePage() {
               <button
                 type="button"
                 className="shoulder-trigger-btn right"
-                onTouchStart={(e) => { e.preventDefault(); sendKey('s', 83, true); }}
-                onTouchEnd={(e) => { e.preventDefault(); sendKey('s', 83, false); }}
-                onMouseDown={() => sendKey('s', 83, true)}
-                onMouseUp={() => sendKey('s', 83, false)}
+                onTouchStart={(e) => { e.preventDefault(); sendKey('e', 69, true); }}
+                onTouchEnd={(e) => { e.preventDefault(); sendKey('e', 69, false); }}
+                onMouseDown={() => sendKey('e', 69, true)}
+                onMouseUp={() => sendKey('e', 69, false)}
               >
                 <span>R · Super Dash</span>
               </button>
@@ -461,8 +517,8 @@ export default function OfflineArcadePage() {
                       <tr><td><strong>Move / Jump / Duck</strong></td><td>Arrow Keys or W / A / S / D</td></tr>
                       <tr><td><strong>Light Attack / Ki Blast (B)</strong></td><td><kbd>Z</kbd> or <kbd>J</kbd></td></tr>
                       <tr><td><strong>Heavy Attack / Throw (A)</strong></td><td><kbd>X</kbd> or <kbd>K</kbd></td></tr>
-                      <tr><td><strong>Charge Ki Energy (L)</strong></td><td><kbd>A</kbd> or <kbd>Q</kbd></td></tr>
-                      <tr><td><strong>Super Dash / Flight (R)</strong></td><td><kbd>S</kbd> or <kbd>E</kbd></td></tr>
+                      <tr><td><strong>Charge Ki Energy (L)</strong></td><td><kbd>Q</kbd></td></tr>
+                      <tr><td><strong>Super Dash / Flight (R)</strong></td><td><kbd>E</kbd></td></tr>
                       <tr><td><strong>Start Game / Pause</strong></td><td><kbd>Enter</kbd></td></tr>
                       <tr><td><strong>Select / Switch Fighter</strong></td><td><kbd>Shift</kbd> or <kbd>Space</kbd></td></tr>
                       <tr><td><strong>Speedup / Turbo Mode</strong></td><td><kbd>Tab</kbd></td></tr>
