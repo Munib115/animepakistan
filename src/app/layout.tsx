@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import PWARegister from "@/components/PWARegister";
 import RouteProgressBar from '@/components/RouteProgressBar';
-import AppleLaunchScreen from '@/components/AppleLaunchScreen';
+import NetflixLaunchScreen from '@/components/NetflixLaunchScreen';
 import MobileTabBar from "@/components/MobileTabBar";
 import ClientDeferredWidgets from "@/components/ClientDeferredWidgets";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -91,7 +91,7 @@ export default function RootLayout({
       </head>
       <body>
         <AdBlockGlobalShield />
-        <AppleLaunchScreen />
+        <NetflixLaunchScreen />
         <RouteProgressBar />
         <script
           type="application/ld+json"
