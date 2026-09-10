@@ -12,7 +12,6 @@ import { useDownloads } from '@/context/DownloadContext';
 import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
 import { shareContent } from '@/lib/shareHelper';
 import { adblockShield } from '@/lib/adblockShield';
-import { networkBooster } from '@/lib/networkBooster';
 import EpisodeComments from './EpisodeComments';
 
 
@@ -214,7 +213,6 @@ export default function WatchContainer({
       if (isShieldActive) {
         adblockShield.recordStreamSession(activeMirror);
       }
-      networkBooster.prewarmMirror(activeMirror);
     }
   }, [activeMirror, isShieldActive]);
 
