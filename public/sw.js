@@ -1,7 +1,7 @@
-const CACHE_NAME = 'anime-pakistan-cache-v3';
+const CACHE_NAME = 'anime-pakistan-cache-v4';
 
 // Only tiny, critical assets are pre-cached at install time.
-// Large game ROM and emulator files are cached lazily on first request
+// Large game ROM and emulator files are cached lazily in background
 // to avoid blocking the initial page load.
 const CRITICAL_ASSETS = [
   '/',
@@ -9,14 +9,17 @@ const CRITICAL_ASSETS = [
   '/fonts/MaterialSymbolsOutlined.woff2',
 ];
 
-// Game assets cached lazily in background after install (non-blocking)
+// Complete Game assets cached in background after install (non-blocking)
 const GAME_ASSETS = [
   '/offline',
   '/emulatorjs/loader.js',
   '/emulatorjs/emulator.min.js',
   '/emulatorjs/emulator.min.css',
+  '/emulatorjs/compression/extractzip.js',
+  '/emulatorjs/src/compression.js',
   '/emulatorjs/cores/reports/mgba.json',
   '/emulatorjs/cores/mgba-wasm.data',
+  '/emulatorjs/cores/mgba-legacy-wasm.data',
   '/roms/dbz-supersonic-warriors.gba',
 ];
 
@@ -75,11 +78,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Strategy for Offline Emulator & Game ROMs -> Cache-First
+  // Strategy for Offline Emulator & Game ROMs & /offline page -> Cache-First
   if (
     requestUrl.pathname.startsWith('/emulatorjs/') ||
     requestUrl.pathname.startsWith('/roms/') ||
-    requestUrl.pathname.startsWith('/api/game-rom')
+    requestUrl.pathname.startsWith('/api/game-rom') ||
+    requestUrl.pathname === '/offline'
   ) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {

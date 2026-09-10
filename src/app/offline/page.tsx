@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { isGameFullyCached, downloadGameAssets, downloadRomFile } from '@/lib/gameCacheManager';
 
 export default function OfflineArcadePage() {
   const router = useRouter();
@@ -9,6 +10,11 @@ export default function OfflineArcadePage() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [showControlsHelp, setShowControlsHelp] = useState(false);
+  const [showOfflineModal, setShowOfflineModal] = useState(false);
+  const [isCached, setIsCached] = useState(false);
+  const [isDownloadingCache, setIsDownloadingCache] = useState(false);
+  const [cacheProgress, setCacheProgress] = useState(0);
+  const [cacheCurrentLabel, setCacheCurrentLabel] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [emulatorLoaded, setEmulatorLoaded] = useState(false);
   const [emulatorError, setEmulatorError] = useState<string | null>(null);
@@ -79,6 +85,11 @@ export default function OfflineArcadePage() {
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
+    // Check if offline game is already cached in browser
+    isGameFullyCached().then((cached) => setIsCached(cached));
+    const handleCacheUpdated = () => setIsCached(true);
+    window.addEventListener('ap-game-cache-updated', handleCacheUpdated);
+
     // Detect mobile device
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 820 || 'ontouchstart' in window);
@@ -89,6 +100,7 @@ export default function OfflineArcadePage() {
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('ap-game-cache-updated', handleCacheUpdated);
       window.removeEventListener('resize', checkMobile);
     };
   }, []);
@@ -253,6 +265,21 @@ export default function OfflineArcadePage() {
     }
   }, []);
 
+  // Manual download handler for offline game cache
+  const handleDownloadOfflineGame = async () => {
+    if (isDownloadingCache) return;
+    setIsDownloadingCache(true);
+    setCacheProgress(0);
+    const success = await downloadGameAssets((pct, label) => {
+      setCacheProgress(pct);
+      setCacheCurrentLabel(label);
+    });
+    setIsDownloadingCache(false);
+    if (success) {
+      setIsCached(true);
+    }
+  };
+
   return (
     <div className="offline-page-root" ref={arcadeContainerRef}>
       {/* Top Floating Status Bar */}
@@ -279,9 +306,47 @@ export default function OfflineArcadePage() {
               <span>Offline</span>
             </div>
           )}
+
+          {isCached ? (
+            <button
+              type="button"
+              className="status-badge cache-badge ready"
+              onClick={() => setShowOfflineModal(true)}
+              title="Game is cached locally in browser. Click to manage or download ROM."
+            >
+              <span className="material-symbols-outlined badge-mini-icon">offline_pin</span>
+              <span>Saved Offline</span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="status-badge cache-badge download"
+              onClick={() => {
+                setShowOfflineModal(true);
+                if (!isDownloadingCache) handleDownloadOfflineGame();
+              }}
+              title="Download game files to browser cache for offline play"
+            >
+              <span className="material-symbols-outlined badge-mini-icon">
+                {isDownloadingCache ? 'downloading' : 'download'}
+              </span>
+              <span>{isDownloadingCache ? `${cacheProgress}%` : 'Save Offline'}</span>
+            </button>
+          )}
         </div>
 
         <div className="arcade-top-actions">
+          <button
+            type="button"
+            className={`action-icon-btn ${isCached ? 'cache-ready' : ''}`}
+            onClick={() => setShowOfflineModal(!showOfflineModal)}
+            title="Offline Game Storage & ROM Download"
+            aria-label="Offline Game Storage"
+          >
+            <span className="material-symbols-outlined">
+              {isCached ? 'offline_pin' : 'cloud_download'}
+            </span>
+          </button>
           <button
             type="button"
             className="action-icon-btn"
@@ -535,6 +600,86 @@ export default function OfflineArcadePage() {
                   <h4>🎮 Bluetooth Gamepads (Xbox / PS / 8BitDo)</h4>
                   <p>Native Gamepad API is supported automatically. Connect your controller via Bluetooth or USB to play natively.</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Offline Game Storage & Download Modal */}
+        {showOfflineModal && (
+          <div className="controls-modal-backdrop" onClick={() => setShowOfflineModal(false)}>
+            <div className="controls-modal-card offline-dl-card" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h3>Offline Game Storage</h3>
+                <button
+                  type="button"
+                  className="close-modal-btn"
+                  onClick={() => setShowOfflineModal(false)}
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="modal-content">
+                <div className={`offline-status-banner ${isCached ? 'cached' : 'pending'}`}>
+                  <span className="material-symbols-outlined status-big-icon">
+                    {isCached ? 'check_circle' : 'cloud_download'}
+                  </span>
+                  <div>
+                    <h4>{isCached ? 'Ready for 100% Offline Play' : 'Offline Files Incomplete'}</h4>
+                    <p>
+                      {isCached
+                        ? 'All 10 game engine files and Dragon Ball Z ROM (16 MB) are securely saved in your browser cache. The arcade will load instantly without any internet.'
+                        : 'Download and cache the complete GBA engine and Dragon Ball Z game (16 MB) so you can play anywhere without an internet connection.'}
+                    </p>
+                  </div>
+                </div>
+
+                {isDownloadingCache ? (
+                  <div className="offline-progress-wrap">
+                    <div className="offline-progress-header">
+                      <span>{cacheCurrentLabel}</span>
+                      <strong>{cacheProgress}%</strong>
+                    </div>
+                    <div className="progress-bar-track">
+                      <div className="progress-bar-fill" style={{ width: `${cacheProgress}%` }} />
+                    </div>
+                    <span className="offline-progress-note">Saving files to browser cache... Please keep this page open.</span>
+                  </div>
+                ) : (
+                  <div className="offline-actions-container">
+                    {!isCached && (
+                      <button
+                        type="button"
+                        className="offline-action-btn primary"
+                        onClick={handleDownloadOfflineGame}
+                      >
+                        <span className="material-symbols-outlined">download</span>
+                        <span>Download & Save for Offline (16 MB)</span>
+                      </button>
+                    )}
+
+                    {isCached && (
+                      <button
+                        type="button"
+                        className="offline-action-btn secondary"
+                        onClick={handleDownloadOfflineGame}
+                      >
+                        <span className="material-symbols-outlined">refresh</span>
+                        <span>Verify & Re-Download Cache</span>
+                      </button>
+                    )}
+
+                    <button
+                      type="button"
+                      className="offline-action-btn tertiary"
+                      onClick={downloadRomFile}
+                    >
+                      <span className="material-symbols-outlined">save_alt</span>
+                      <span>Download GBA ROM File (.gba)</span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -1096,6 +1241,162 @@ export default function OfflineArcadePage() {
           color: #00ff88;
           font-family: monospace;
           font-weight: 700;
+        }
+
+        .status-badge.cache-badge {
+          cursor: pointer;
+          border: none;
+          transition: all 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 4px 10px;
+          border-radius: 999px;
+          font-family: inherit;
+        }
+        .status-badge.cache-badge.ready {
+          background: rgba(0, 229, 117, 0.16);
+          border: 1px solid rgba(0, 229, 117, 0.4);
+          color: #00ff88;
+        }
+        .status-badge.cache-badge.ready:hover {
+          background: rgba(0, 229, 117, 0.28);
+        }
+        .status-badge.cache-badge.download {
+          background: rgba(56, 189, 248, 0.16);
+          border: 1px solid rgba(56, 189, 248, 0.4);
+          color: #38bdf8;
+        }
+        .status-badge.cache-badge.download:hover {
+          background: rgba(56, 189, 248, 0.28);
+        }
+        .badge-mini-icon {
+          font-size: 14px;
+          line-height: 1;
+        }
+        .action-icon-btn.cache-ready {
+          color: #00e575;
+          border-color: rgba(0, 229, 117, 0.4);
+        }
+
+        /* Offline Modal Enhancements */
+        .offline-dl-card {
+          max-width: 480px;
+        }
+        .offline-status-banner {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          padding: 14px 16px;
+          border-radius: 16px;
+          margin-bottom: 16px;
+        }
+        .offline-status-banner.cached {
+          background: rgba(0, 229, 117, 0.12);
+          border: 1px solid rgba(0, 229, 117, 0.3);
+        }
+        .offline-status-banner.pending {
+          background: rgba(56, 189, 248, 0.12);
+          border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .status-big-icon {
+          font-size: 32px;
+          color: #00e575;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+        .offline-status-banner.pending .status-big-icon {
+          color: #38bdf8;
+        }
+        .offline-status-banner h4 {
+          margin: 0 0 4px 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #f0fdf4;
+        }
+        .offline-status-banner p {
+          margin: 0;
+          font-size: 0.80rem;
+          line-height: 1.45;
+          color: #a7f3d0;
+        }
+        .offline-status-banner.pending p {
+          color: #bae6fd;
+        }
+        .offline-progress-wrap {
+          padding: 14px 0 6px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .offline-progress-header {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.82rem;
+          color: #6ee7b7;
+        }
+        .progress-bar-track {
+          width: 100%;
+          height: 6px;
+          border-radius: 99px;
+          background: rgba(255, 255, 255, 0.12);
+          overflow: hidden;
+        }
+        .progress-bar-fill {
+          height: 100%;
+          border-radius: 99px;
+          background: linear-gradient(90deg, #00cc6a, #00e575);
+          transition: width 0.3s ease;
+        }
+        .offline-progress-note {
+          font-size: 0.72rem;
+          color: #94a3b8;
+        }
+        .offline-actions-container {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 8px;
+        }
+        .offline-action-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 12px 18px;
+          border-radius: 14px;
+          font-size: 0.86rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.18s ease;
+          border: none;
+          font-family: inherit;
+        }
+        .offline-action-btn.primary {
+          background: linear-gradient(135deg, #00e575 0%, #00b359 100%);
+          color: #021a0a;
+          box-shadow: 0 4px 16px rgba(0, 229, 117, 0.35);
+        }
+        .offline-action-btn.primary:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 20px rgba(0, 229, 117, 0.45);
+        }
+        .offline-action-btn.secondary {
+          background: rgba(255, 255, 255, 0.08);
+          color: #e2e8f0;
+          border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        .offline-action-btn.secondary:hover {
+          background: rgba(255, 255, 255, 0.14);
+          border-color: rgba(255, 255, 255, 0.28);
+        }
+        .offline-action-btn.tertiary {
+          background: transparent;
+          color: #38bdf8;
+          border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .offline-action-btn.tertiary:hover {
+          background: rgba(56, 189, 248, 0.12);
         }
 
         @media (max-width: 400px) {

@@ -1,20 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-
-const GAME_ASSETS = [
-  { url: '/offline', label: 'Game page', size: 30 },
-  { url: '/emulatorjs/loader.js', label: 'Emulator loader', size: 8 },
-  { url: '/emulatorjs/emulator.min.css', label: 'Emulator styles', size: 26 },
-  { url: '/emulatorjs/emulator.min.js', label: 'Emulator engine', size: 427 },
-  { url: '/emulatorjs/cores/reports/mgba.json', label: 'Core info', size: 1 },
-  { url: '/emulatorjs/cores/mgba-wasm.data', label: 'GBA core (WASM)', size: 1056 },
-  { url: '/emulatorjs/compression/extractzip.js', label: 'Decompressor', size: 196 },
-  { url: '/roms/dbz-supersonic-warriors.gba', label: 'Dragon Ball Z ROM', size: 16384 },
-];
-
-const CACHE_DONE_KEY = 'ap_game_cache_v3_done';
-const CACHE_NAME = 'anime-pakistan-cache-v3';
+import React, { useEffect, useState, useCallback } from 'react';
+import {
+  GAME_ASSETS,
+  CACHE_NAME,
+  CACHE_DONE_KEY,
+  isGameFullyCached,
+  downloadGameAssets,
+} from '@/lib/gameCacheManager';
 
 export default function GameCachePreloader() {
   const [phase, setPhase] = useState<'idle' | 'downloading' | 'done' | 'error'>('idle');
@@ -22,65 +15,67 @@ export default function GameCachePreloader() {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    // Start 4 seconds after page load so it does NOT compete with initial render
-    const startDelay = setTimeout(async () => {
-      if (localStorage.getItem(CACHE_DONE_KEY) === '1') return; // already cached
-      if (!('caches' in window)) return; // browser doesn't support Cache API
+  // Silent Background Download (User requested: "without knowing the user")
+  const startSilentPreload = useCallback(async () => {
+    if (typeof window === 'undefined' || !('caches' in window)) return;
+    const isCached = await isGameFullyCached();
+    if (isCached) return;
 
-      setVisible(true);
-      setPhase('downloading');
-
-      const totalSize = GAME_ASSETS.reduce((s, a) => s + a.size, 0);
-      let downloadedSize = 0;
-
-      try {
-        const cache = await caches.open(CACHE_NAME);
-
-        for (const asset of GAME_ASSETS) {
-          setCurrentLabel(asset.label);
-
-          // Skip if already cached
-          const existing = await cache.match(asset.url);
-          if (existing) {
-            downloadedSize += asset.size;
-            setProgress(Math.round((downloadedSize / totalSize) * 100));
-            continue;
-          }
-
-          // Fetch and store in cache
-          try {
-            const response = await fetch(asset.url, { cache: 'no-store' });
-            if (response && response.status === 200) {
-              await cache.put(asset.url, response);
-            }
-          } catch {
-            console.warn('[GameCache] Failed to cache:', asset.url);
-          }
-
-          downloadedSize += asset.size;
-          setProgress(Math.round((downloadedSize / totalSize) * 100));
-        }
-
-        localStorage.setItem(CACHE_DONE_KEY, '1');
-        setPhase('done');
-        setTimeout(() => setVisible(false), 4000);
-      } catch (err) {
-        console.warn('[GameCache] Caching error:', err);
-        setPhase('error');
-        setTimeout(() => setVisible(false), 3000);
-      }
-    }, 4000);
-
-    return () => clearTimeout(startDelay);
+    // Run silently in background without setting visible=true
+    await downloadGameAssets();
   }, []);
+
+  // Manual/On-demand download triggered by user click
+  const startManualDownload = useCallback(async () => {
+    if (typeof window === 'undefined' || !('caches' in window)) return;
+    setVisible(true);
+    setPhase('downloading');
+    setProgress(0);
+
+    const success = await downloadGameAssets((pct, label) => {
+      setProgress(pct);
+      setCurrentLabel(label);
+    });
+
+    if (success) {
+      setPhase('done');
+      setTimeout(() => setVisible(false), 3500);
+    } else {
+      setPhase('error');
+      setTimeout(() => setVisible(false), 3500);
+    }
+  }, []);
+
+  useEffect(() => {
+    // 1. Silent background download on first website visit (starts 3.5s after load)
+    const silentTimer = setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(() => {
+          startSilentPreload();
+        });
+      } else {
+        startSilentPreload();
+      }
+    }, 3500);
+
+    // 2. Listen for explicit user clicks to download
+    const handleTrigger = () => {
+      startManualDownload();
+    };
+
+    window.addEventListener('ap-start-manual-game-download', handleTrigger);
+
+    return () => {
+      clearTimeout(silentTimer);
+      window.removeEventListener('ap-start-manual-game-download', handleTrigger);
+    };
+  }, [startSilentPreload, startManualDownload]);
 
   if (!visible || phase === 'idle') return null;
 
   return (
     <div className="gc-wrap" role="status" aria-live="polite">
       <div className="gc-card">
-
         {/* Status icon */}
         <div className="gc-icon">
           {phase === 'downloading' && (
@@ -98,7 +93,7 @@ export default function GameCachePreloader() {
         <div className="gc-text">
           {phase === 'downloading' && (
             <>
-              <strong>Saving offline game...</strong>
+              <strong>Downloading offline game...</strong>
               <span>{currentLabel}</span>
               <div className="gc-bar-track">
                 <div className="gc-bar-fill" style={{ width: `${progress}%` }} />
@@ -114,13 +109,13 @@ export default function GameCachePreloader() {
           )}
           {phase === 'error' && (
             <>
-              <strong>Cache incomplete</strong>
-              <span>Will retry on next visit</span>
+              <strong>Download incomplete</strong>
+              <span>Tap to retry</span>
             </>
           )}
         </div>
 
-        {/* Dismiss button (only after done/error) */}
+        {/* Dismiss button */}
         {phase !== 'downloading' && (
           <button
             type="button"
@@ -139,34 +134,43 @@ export default function GameCachePreloader() {
           bottom: calc(92px + env(safe-area-inset-bottom, 0px));
           right: 16px;
           z-index: 999997;
-          max-width: 300px;
-          animation: gc-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+          max-width: 320px;
+          animation: gc-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         @media (min-width: 768px) {
-          .gc-wrap { bottom: 28px; right: 24px; }
+          .gc-wrap {
+            bottom: 28px;
+            right: 24px;
+          }
         }
         @keyframes gc-in {
-          from { opacity: 0; transform: translateY(16px) scale(0.96); }
-          to   { opacity: 1; transform: translateY(0) scale(1); }
+          from {
+            opacity: 0;
+            transform: translateY(16px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
         }
 
         .gc-card {
           display: flex;
           align-items: flex-start;
-          gap: 10px;
+          gap: 12px;
           padding: 12px 14px;
           border-radius: 20px;
           background: linear-gradient(
             135deg,
-            rgba(6, 18, 11, 0.88) 0%,
-            rgba(3, 12, 7, 0.94) 100%
+            rgba(6, 18, 11, 0.92) 0%,
+            rgba(3, 12, 7, 0.96) 100%
           );
-          border: 1.2px solid rgba(0, 229, 117, 0.25);
+          border: 1.2px solid rgba(0, 229, 117, 0.28);
           backdrop-filter: blur(28px) saturate(1.6);
           -webkit-backdrop-filter: blur(28px) saturate(1.6);
           box-shadow:
             0 16px 40px rgba(0, 0, 0, 0.55),
-            0 0 24px rgba(0, 180, 90, 0.10);
+            0 0 24px rgba(0, 180, 90, 0.12);
           color: #f0fdf4;
           font-family: 'Inter', -apple-system, sans-serif;
         }
@@ -175,8 +179,8 @@ export default function GameCachePreloader() {
           width: 36px;
           height: 36px;
           border-radius: 12px;
-          background: rgba(0, 229, 117, 0.12);
-          border: 1px solid rgba(0, 229, 117, 0.25);
+          background: rgba(0, 229, 117, 0.14);
+          border: 1px solid rgba(0, 229, 117, 0.3);
           display: grid;
           place-items: center;
           flex-shrink: 0;
@@ -191,7 +195,9 @@ export default function GameCachePreloader() {
           animation: spin 1.4s linear infinite;
         }
         @keyframes spin {
-          to { transform: rotate(360deg); }
+          to {
+            transform: rotate(360deg);
+          }
         }
 
         .gc-text {
@@ -212,13 +218,13 @@ export default function GameCachePreloader() {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 180px;
+          max-width: 200px;
         }
 
         .gc-bar-track {
           height: 4px;
           border-radius: 99px;
-          background: rgba(255, 255, 255, 0.10);
+          background: rgba(255, 255, 255, 0.12);
           overflow: hidden;
           margin-top: 4px;
         }
@@ -226,7 +232,7 @@ export default function GameCachePreloader() {
           height: 100%;
           border-radius: 99px;
           background: linear-gradient(90deg, #00cc6a, #00e575);
-          transition: width 0.5s ease;
+          transition: width 0.3s ease;
         }
         .gc-pct {
           font-size: 0.68rem !important;
@@ -248,8 +254,12 @@ export default function GameCachePreloader() {
           margin-top: 1px;
           transition: background 0.15s;
         }
-        .gc-close:hover { background: rgba(255, 255, 255, 0.14); }
-        .gc-close .material-symbols-outlined { font-size: 14px; }
+        .gc-close:hover {
+          background: rgba(255, 255, 255, 0.16);
+        }
+        .gc-close .material-symbols-outlined {
+          font-size: 14px;
+        }
       `}</style>
     </div>
   );

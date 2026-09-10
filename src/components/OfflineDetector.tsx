@@ -2,20 +2,26 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { isGameFullyCached } from '@/lib/gameCacheManager';
 
 export default function OfflineDetector() {
   const [isOffline, setIsOffline] = useState(false);
   const [showReconnected, setShowReconnected] = useState(false);
+  const [isCached, setIsCached] = useState(false);
 
   useEffect(() => {
-    // Initial check
+    // Initial connectivity check
     if (typeof navigator !== 'undefined' && !navigator.onLine) {
       setIsOffline(true);
     }
 
+    // Check if offline game is cached
+    isGameFullyCached().then((cached) => setIsCached(cached));
+
     const handleOffline = () => {
       setIsOffline(true);
       setShowReconnected(false);
+      isGameFullyCached().then((cached) => setIsCached(cached));
     };
 
     const handleOnline = () => {
@@ -27,23 +33,26 @@ export default function OfflineDetector() {
       return () => clearTimeout(timer);
     };
 
+    const handleCacheUpdated = () => {
+      setIsCached(true);
+    };
+
     window.addEventListener('offline', handleOffline);
     window.addEventListener('online', handleOnline);
-
-    // Warm up service worker pre-caching for /offline and game ROM
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.ready.then((registration) => {
-        if (registration.active) {
-          fetch('/offline', { method: 'GET', cache: 'force-cache' }).catch(() => {});
-        }
-      }).catch(() => {});
-    }
+    window.addEventListener('ap-game-cache-updated', handleCacheUpdated);
 
     return () => {
       window.removeEventListener('offline', handleOffline);
       window.removeEventListener('online', handleOnline);
+      window.removeEventListener('ap-game-cache-updated', handleCacheUpdated);
     };
   }, []);
+
+  const handlePlayOrDownload = () => {
+    if (!isCached) {
+      window.dispatchEvent(new CustomEvent('ap-start-manual-game-download'));
+    }
+  };
 
   if (!isOffline && !showReconnected) {
     return null;
@@ -57,20 +66,26 @@ export default function OfflineDetector() {
         <div className="od-card od-offline">
           {/* Left: icon pill */}
           <div className="od-icon-pill od-icon-warn">
-            <span className="material-symbols-outlined">signal_wifi_statusbar_not_connected</span>
+            <span className="material-symbols-outlined">
+              {isCached ? 'offline_pin' : 'signal_wifi_statusbar_not_connected'}
+            </span>
           </div>
 
           {/* Middle: text */}
           <div className="od-text">
             <strong>No Connection</strong>
-            <span>Play Dragon Ball Z · GBA offline</span>
+            <span>{isCached ? 'Dragon Ball Z is ready offline' : 'Play Dragon Ball Z · GBA'}</span>
           </div>
 
           {/* Right: actions */}
           <div className="od-actions">
-            <Link href="/offline" className="od-play-btn">
+            <Link
+              href="/offline"
+              className="od-play-btn"
+              onClick={handlePlayOrDownload}
+            >
               <span className="material-symbols-outlined">sports_esports</span>
-              <span>Play DBZ</span>
+              <span>{isCached ? 'Play DBZ' : 'Download & Play'}</span>
             </Link>
             <button
               type="button"
