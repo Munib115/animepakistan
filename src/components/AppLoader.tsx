@@ -10,6 +10,15 @@ export default function AppLoader() {
   const anthemPlayedRef = useRef(false);
 
   useEffect(() => {
+    // Check if session has already seen the loader
+    try {
+      if (typeof window !== 'undefined' && sessionStorage.getItem('ap_app_loaded')) {
+        setIsDismissed(true);
+        return;
+      }
+      sessionStorage.setItem('ap_app_loaded', '1');
+    } catch (e) {}
+
     // 1. Play Pakistan National Anthem beat / motif during loading animation
     const tryPlayAnthem = () => {
       if (!anthemPlayedRef.current) {
@@ -40,22 +49,20 @@ export default function AppLoader() {
       window.scrollTo(0, 0);
     } catch (e) {}
 
-    // 2. Smooth, luxury progress bar sequence (~1.1s total)
-    const t1 = window.setTimeout(() => setProgress(55), 120);
-    const t2 = window.setTimeout(() => setProgress(88), 380);
-    const t3 = window.setTimeout(() => setProgress(100), 700);
-    const t4 = window.setTimeout(() => {
+    // 2. High-speed, smooth luxury progress sequence (~650ms total on first visit)
+    const t1 = window.setTimeout(() => setProgress(65), 90);
+    const t2 = window.setTimeout(() => setProgress(100), 280);
+    const t3 = window.setTimeout(() => {
       setIsLeaving(true);
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-    }, 920);
-    const t5 = window.setTimeout(() => setIsDismissed(true), 1350);
+    }, 450);
+    const t4 = window.setTimeout(() => setIsDismissed(true), 680);
 
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
       window.clearTimeout(t3);
       window.clearTimeout(t4);
-      window.clearTimeout(t5);
       window.removeEventListener('pointerdown', unlockAndPlay);
       window.removeEventListener('keydown', unlockAndPlay);
       window.removeEventListener('touchstart', unlockAndPlay);

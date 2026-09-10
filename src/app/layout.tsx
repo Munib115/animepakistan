@@ -3,11 +3,10 @@ import "./globals.css";
 import PWARegister from "@/components/PWARegister";
 import AppLoader from '@/components/AppLoader';
 import MobileTabBar from "@/components/MobileTabBar";
-import PWAInstallBanner from "@/components/PWAInstallBanner";
+import ClientDeferredWidgets from "@/components/ClientDeferredWidgets";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { DownloadProvider } from "@/context/DownloadContext";
 import AdBlockGlobalShield from "@/components/AdBlockGlobalShield";
-import LiveChatFloating from "@/components/LiveChatFloating";
 import { absoluteUrl, siteName, siteUrl } from '@/lib/seo';
 
 export const viewport: Viewport = {
@@ -124,9 +123,8 @@ export default function RootLayout({
           <DownloadProvider>
             {children}
             <MobileTabBar />
-            <PWAInstallBanner />
+            <ClientDeferredWidgets />
             <PWARegister />
-            <LiveChatFloating />
           </DownloadProvider>
         </LanguageProvider>
         <div id="ap-live-chat-root" />

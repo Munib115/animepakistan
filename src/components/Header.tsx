@@ -6,7 +6,9 @@ import { createPortal } from 'react-dom';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { sound } from '@/lib/soundEngine';
-import QuickControlHub from './QuickControlHub';
+import dynamic from 'next/dynamic';
+
+const QuickControlHub = dynamic(() => import('./QuickControlHub'), { ssr: false });
 
 interface SearchResultItem {
   slug: string;

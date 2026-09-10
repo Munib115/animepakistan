@@ -15,10 +15,9 @@ interface AnimeCardProps {
 export default function AnimeCard({ item }: AnimeCardProps) {
   const { language } = useLanguage();
   const [imgError, setImgError] = useState(false);
-  const [inList, setInList] = useState(false);
+  const [inList, setInList] = useState(() => isInWatchlist(item.slug));
 
   useEffect(() => {
-    setInList(isInWatchlist(item.slug));
     const handleUpdate = () => setInList(isInWatchlist(item.slug));
     window.addEventListener('ap_watchlist_updated', handleUpdate);
     return () => window.removeEventListener('ap_watchlist_updated', handleUpdate);
@@ -146,8 +145,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
               {rating && (
                 <span style={{
-                  background: 'rgba(0, 0, 0, 0.75)',
-                  backdropFilter: 'blur(6px)',
+                  background: 'rgba(0, 0, 0, 0.88)',
                   color: '#fbbf24',
                   fontSize: '0.65rem',
                   fontWeight: 800,
@@ -177,8 +175,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
                   height: '24px',
                   borderRadius: '50%',
                   border: inList ? '1px solid #00ff66' : '1px solid rgba(255, 255, 255, 0.35)',
-                  background: inList ? 'rgba(0, 102, 51, 0.9)' : 'rgba(0, 0, 0, 0.65)',
-                  backdropFilter: 'blur(6px)',
+                  background: inList ? 'rgba(0, 102, 51, 0.95)' : 'rgba(0, 0, 0, 0.82)',
                   color: inList ? '#00ff66' : '#ffffff',
                   cursor: 'pointer',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
@@ -207,8 +204,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
             }}>
               {item.audioLanguages.slice(0, 2).map((lang) => (
                 <span key={lang} style={{
-                  background: 'rgba(0, 51, 25, 0.85)',
-                  backdropFilter: 'blur(4px)',
+                  background: 'rgba(0, 40, 20, 0.92)',
                   color: '#e6f4ea',
                   fontSize: '0.6rem',
                   fontWeight: 700,
@@ -221,7 +217,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
               ))}
               {item.audioLanguages.length > 2 && (
                 <span style={{
-                  background: 'rgba(0, 51, 25, 0.85)',
+                  background: 'rgba(0, 40, 20, 0.92)',
                   color: '#ffffff',
                   fontSize: '0.6rem',
                   fontWeight: 700,
@@ -241,8 +237,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'rgba(0, 102, 51, 0.45)',
-            backdropFilter: 'blur(2px)',
+            background: 'rgba(0, 77, 38, 0.55)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

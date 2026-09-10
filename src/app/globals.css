@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Inter:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
-
+/* --- HIGH-PERFORMANCE MATERIAL & SANS TYPOGRAPHY --- */
 @font-face {
   font-family: 'Material Symbols Outlined';
   font-style: normal;
@@ -442,6 +440,8 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 }
 
 .glass-card, .liquid-glass-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 140px 240px;
   background: var(--bg-secondary);
   border: 1.2px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
@@ -463,6 +463,28 @@ button:active, a.glass-card:active, a.glass-btn:active, a.glass-btn-secondary:ac
 
 .glass-card:active, .liquid-glass-card:active {
   transform: scale(0.97) translate3d(0, 0, 0);
+}
+
+/* --- ULTRA-PERFORMANCE OPTIMIZATIONS FOR LOW-BUDGET SMARTPHONES --- */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    overscroll-behavior-y: contain;
+  }
+
+  .glass-card, .liquid-glass-card {
+    /* Simplified shadow to minimize GPU fill-rate strain on budget Mali/Adreno chipsets */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Hardware-accelerated smooth touch horizontal scrolling for anime rows */
+  .row-card-item {
+    content-visibility: auto;
+    contain-intrinsic-size: 142px 220px;
+  }
 }
 
 /* Liquid Glass Ambient Sheen */
