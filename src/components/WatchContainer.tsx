@@ -12,7 +12,9 @@ import { useDownloads } from '@/context/DownloadContext';
 import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
 import { shareContent } from '@/lib/shareHelper';
 import { adblockShield } from '@/lib/adblockShield';
+import { networkBooster } from '@/lib/networkBooster';
 import EpisodeComments from './EpisodeComments';
+
 
 interface WatchContainerProps {
   anime: AnimeItem;
@@ -208,10 +210,14 @@ export default function WatchContainer({
   // Reset iframe loaded state & register stream protection when activeMirror changes
   useEffect(() => {
     setIsIframeLoaded(false);
-    if (activeMirror && isShieldActive) {
-      adblockShield.recordStreamSession(activeMirror);
+    if (activeMirror) {
+      if (isShieldActive) {
+        adblockShield.recordStreamSession(activeMirror);
+      }
+      networkBooster.prewarmMirror(activeMirror);
     }
   }, [activeMirror, isShieldActive]);
+
 
   // Periodic watch tick to suppress recurring background ads during video playback
   useEffect(() => {

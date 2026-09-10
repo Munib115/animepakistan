@@ -158,6 +158,14 @@
         "url": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x3/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2540_s1e3.jpg",
         "streamUrl": "https://as-cdn26.top/video/e3f2b325739bbe549d3875450b27a3a1"
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: Jaadugar: A Witch in Mongolia 1x4",
+        "slug": "jaadugar-a-witch-in-mongolia-1x4",
+        "url": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2540_s1e4.jpg"
       }
     ],
     "anilist": {
@@ -204,6 +212,14 @@
         "url": "https://animesalt.cx/episode/black-torch-1x1/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2542_s1e1.jpg",
         "streamUrl": "https://as-cdn26.top/video/5f22e82f3d2c279d57c76a0513276abb"
+      },
+      {
+        "number": 2,
+        "season": 1,
+        "title": "S1 E2: BLACK TORCH 1x2",
+        "slug": "black-torch-1x2",
+        "url": "https://animesalt.cx/episode/black-torch-1x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2542_s1e2.jpg"
       }
     ],
     "anilist": {
@@ -9485,6 +9501,102 @@
         "url": "https://animesalt.cx/episode/cinderella-chef-2x12/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s2e12.jpg",
         "streamUrl": "https://as-cdn26.top/video/b17b1ffea01fd9acd1dd69b73e5353ea"
+      },
+      {
+        "number": 1,
+        "season": 3,
+        "title": "S3 E1: Cinderella Chef 3x1",
+        "slug": "cinderella-chef-3x1",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e1.jpg"
+      },
+      {
+        "number": 2,
+        "season": 3,
+        "title": "S3 E2: Cinderella Chef 3x2",
+        "slug": "cinderella-chef-3x2",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e2.jpg"
+      },
+      {
+        "number": 3,
+        "season": 3,
+        "title": "S3 E3: Cinderella Chef 3x3",
+        "slug": "cinderella-chef-3x3",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e3.jpg"
+      },
+      {
+        "number": 4,
+        "season": 3,
+        "title": "S3 E4: Cinderella Chef 3x4",
+        "slug": "cinderella-chef-3x4",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e4.jpg"
+      },
+      {
+        "number": 5,
+        "season": 3,
+        "title": "S3 E5: Cinderella Chef 3x5",
+        "slug": "cinderella-chef-3x5",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x5/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e5.jpg"
+      },
+      {
+        "number": 6,
+        "season": 3,
+        "title": "S3 E6: Cinderella Chef 3x6",
+        "slug": "cinderella-chef-3x6",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x6/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e6.jpg"
+      },
+      {
+        "number": 7,
+        "season": 3,
+        "title": "S3 E7: Cinderella Chef 3x7",
+        "slug": "cinderella-chef-3x7",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x7/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e7.jpg"
+      },
+      {
+        "number": 8,
+        "season": 3,
+        "title": "S3 E8: Cinderella Chef 3x8",
+        "slug": "cinderella-chef-3x8",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x8/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e8.jpg"
+      },
+      {
+        "number": 9,
+        "season": 3,
+        "title": "S3 E9: Cinderella Chef 3x9",
+        "slug": "cinderella-chef-3x9",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x9/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e9.jpg"
+      },
+      {
+        "number": 10,
+        "season": 3,
+        "title": "S3 E10: Cinderella Chef 3x10",
+        "slug": "cinderella-chef-3x10",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x10/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e10.jpg"
+      },
+      {
+        "number": 11,
+        "season": 3,
+        "title": "S3 E11: Cinderella Chef 3x11",
+        "slug": "cinderella-chef-3x11",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x11/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e11.jpg"
+      },
+      {
+        "number": 12,
+        "season": 3,
+        "title": "S3 E12: Cinderella Chef 3x12",
+        "slug": "cinderella-chef-3x12",
+        "url": "https://animesalt.cx/episode/cinderella-chef-3x12/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2365_s3e12.jpg"
       }
     ],
     "anilist": null
@@ -19812,6 +19924,14 @@
         "url": "https://animesalt.cx/episode/grand-blue-dreaming-3x1/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2357_s3e1.jpg",
         "streamUrl": "https://as-cdn26.top/video/077c7fb8fcf33cec814d0bde680aa041"
+      },
+      {
+        "number": 2,
+        "season": 3,
+        "title": "S3 E2: Grand Blue Dreaming 3x2",
+        "slug": "grand-blue-dreaming-3x2",
+        "url": "https://animesalt.cx/episode/grand-blue-dreaming-3x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2357_s3e2.jpg"
       }
     ],
     "anilist": null
@@ -25850,6 +25970,30 @@
         "url": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x3/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2343_s1e3.jpg",
         "streamUrl": "https://as-cdn26.top/video/d17a7f1ab65bd42c6088a5b8b359ae8a"
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: Hanaori-san Still Wants to Fight in the Next Life 1x4",
+        "slug": "hanaori-san-still-wants-to-fight-in-the-next-life-1x4",
+        "url": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2343_s1e4.jpg"
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: Hanaori-san Still Wants to Fight in the Next Life 1x5",
+        "slug": "hanaori-san-still-wants-to-fight-in-the-next-life-1x5",
+        "url": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x5/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2343_s1e5.jpg"
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: Hanaori-san Still Wants to Fight in the Next Life 1x6",
+        "slug": "hanaori-san-still-wants-to-fight-in-the-next-life-1x6",
+        "url": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x6/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2343_s1e6.jpg"
       }
     ],
     "anilist": null
@@ -26053,6 +26197,22 @@
         "url": "https://animesalt.cx/episode/chainsmoker-cat-1x6/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2340_s1e6.jpg",
         "streamUrl": "https://as-cdn26.top/video/8acac47f63dc5da08a77ff8eca8d3986"
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: Chainsmoker Cat 1x7",
+        "slug": "chainsmoker-cat-1x7",
+        "url": "https://animesalt.cx/episode/chainsmoker-cat-1x7/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2340_s1e7.jpg"
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: Chainsmoker Cat 1x8",
+        "slug": "chainsmoker-cat-1x8",
+        "url": "https://animesalt.cx/episode/chainsmoker-cat-1x8/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2340_s1e8.jpg"
       }
     ],
     "anilist": null
@@ -26110,6 +26270,30 @@
         "url": "https://animesalt.cx/episode/tomb-raider-king-1x4/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2339_s1e4.jpg",
         "streamUrl": "https://as-cdn26.top/video/157c6fd13f6ad2911c5ec3a97dfd4438"
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: Tomb Raider King 1x5",
+        "slug": "tomb-raider-king-1x5",
+        "url": "https://animesalt.cx/episode/tomb-raider-king-1x5/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2339_s1e5.jpg"
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: Tomb Raider King 1x6",
+        "slug": "tomb-raider-king-1x6",
+        "url": "https://animesalt.cx/episode/tomb-raider-king-1x6/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2339_s1e6.jpg"
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: Tomb Raider King 1x7",
+        "slug": "tomb-raider-king-1x7",
+        "url": "https://animesalt.cx/episode/tomb-raider-king-1x7/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2339_s1e7.jpg"
       }
     ],
     "anilist": null
@@ -26176,6 +26360,22 @@
         "url": "https://animesalt.cx/episode/i-became-a-legend-after-my-10-year-long-last-stand-1x5/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2341_s1e5.jpg",
         "streamUrl": "https://as-cdn26.top/video/b0513535543a50eb3038a8e06541be1d"
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: I Became a Legend After My 10 Year-Long Last Stand 1x6",
+        "slug": "i-became-a-legend-after-my-10-year-long-last-stand-1x6",
+        "url": "https://animesalt.cx/episode/i-became-a-legend-after-my-10-year-long-last-stand-1x6/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2341_s1e6.jpg"
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: I Became a Legend After My 10 Year-Long Last Stand 1x7",
+        "slug": "i-became-a-legend-after-my-10-year-long-last-stand-1x7",
+        "url": "https://animesalt.cx/episode/i-became-a-legend-after-my-10-year-long-last-stand-1x7/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2341_s1e7.jpg"
       }
     ],
     "anilist": null
@@ -26950,6 +27150,22 @@
         "url": "https://animesalt.cx/episode/smoking-behind-the-supermarket-with-you-1x7/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2332_s1e7.jpg",
         "streamUrl": "https://as-cdn26.top/video/99bc147ed9068c9f2dbfc242373977eb"
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: Smoking Behind the Supermarket with You 1x8",
+        "slug": "smoking-behind-the-supermarket-with-you-1x8",
+        "url": "https://animesalt.cx/episode/smoking-behind-the-supermarket-with-you-1x8/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2332_s1e8.jpg"
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: Smoking Behind the Supermarket with You 1x9",
+        "slug": "smoking-behind-the-supermarket-with-you-1x9",
+        "url": "https://animesalt.cx/episode/smoking-behind-the-supermarket-with-you-1x9/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2332_s1e9.jpg"
       }
     ],
     "anilist": null
@@ -27034,6 +27250,30 @@
         "url": "https://animesalt.cx/episode/thunder-3-1x7/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2330_s1e7.jpg",
         "streamUrl": "https://as-cdn26.top/video/6ece1478634d078f9483620b74fb05f9"
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: Thunder 3 1x8",
+        "slug": "thunder-3-1x8",
+        "url": "https://animesalt.cx/episode/thunder-3-1x8/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2330_s1e8.jpg"
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: Thunder 3 1x9",
+        "slug": "thunder-3-1x9",
+        "url": "https://animesalt.cx/episode/thunder-3-1x9/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2330_s1e9.jpg"
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: Thunder 3 1x10",
+        "slug": "thunder-3-1x10",
+        "url": "https://animesalt.cx/episode/thunder-3-1x10/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2330_s1e10.jpg"
       }
     ],
     "anilist": null
@@ -27806,6 +28046,14 @@
         "url": "https://animesalt.cx/episode/yowayowa-sensei-1x11/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2325_s1e11.jpg",
         "streamUrl": "https://as-cdn26.top/video/f0b77be6bb9550347d8763f2518cb312"
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: Yowayowa Sensei 1x12",
+        "slug": "yowayowa-sensei-1x12",
+        "url": "https://animesalt.cx/episode/yowayowa-sensei-1x12/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2325_s1e12.jpg"
       }
     ],
     "anilist": null
@@ -27889,6 +28137,30 @@
         "url": "https://animesalt.cx/episode/sparks-of-tomorrow-1x7/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2328_s1e7.jpg",
         "streamUrl": "https://as-cdn26.top/video/47faaa86a0f77d1d93bdc57e86cfd6c6"
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: Sparks of Tomorrow 1x8",
+        "slug": "sparks-of-tomorrow-1x8",
+        "url": "https://animesalt.cx/episode/sparks-of-tomorrow-1x8/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2328_s1e8.jpg"
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: Sparks of Tomorrow 1x9",
+        "slug": "sparks-of-tomorrow-1x9",
+        "url": "https://animesalt.cx/episode/sparks-of-tomorrow-1x9/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2328_s1e9.jpg"
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: Sparks of Tomorrow 1x10",
+        "slug": "sparks-of-tomorrow-1x10",
+        "url": "https://animesalt.cx/episode/sparks-of-tomorrow-1x10/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2328_s1e10.jpg"
       },
       {
         "number": 14,
@@ -28017,6 +28289,22 @@
         "url": "https://animesalt.cx/episode/tamons-b-side-1x11/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2324_s1e11.jpg",
         "streamUrl": "https://as-cdn26.top/video/4daab94b22b63a9e47c1762083a4c9e0"
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: Tamon's B-Side 1x12",
+        "slug": "tamons-b-side-1x12",
+        "url": "https://animesalt.cx/episode/tamons-b-side-1x12/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2324_s1e12.jpg"
+      },
+      {
+        "number": 13,
+        "season": 1,
+        "title": "S1 E13: Tamon's B-Side 1x13",
+        "slug": "tamons-b-side-1x13",
+        "url": "https://animesalt.cx/episode/tamons-b-side-1x13/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2324_s1e13.jpg"
       }
     ],
     "anilist": null
@@ -29470,6 +29758,30 @@
         "url": "https://animesalt.cx/episode/liar-game-1x17/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2310_s1e17.jpg",
         "streamUrl": "https://as-cdn26.top/video/0d9f790e48d1c2850cc47db8af965495"
+      },
+      {
+        "number": 18,
+        "season": 1,
+        "title": "S1 E18: LIAR GAME 1x18",
+        "slug": "liar-game-1x18",
+        "url": "https://animesalt.cx/episode/liar-game-1x18/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2310_s1e18.jpg"
+      },
+      {
+        "number": 19,
+        "season": 1,
+        "title": "S1 E19: LIAR GAME 1x19",
+        "slug": "liar-game-1x19",
+        "url": "https://animesalt.cx/episode/liar-game-1x19/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2310_s1e19.jpg"
+      },
+      {
+        "number": 20,
+        "season": 1,
+        "title": "S1 E20: LIAR GAME 1x20",
+        "slug": "liar-game-1x20",
+        "url": "https://animesalt.cx/episode/liar-game-1x20/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2310_s1e20.jpg"
       }
     ],
     "anilist": null
@@ -29790,6 +30102,22 @@
         "url": "https://animesalt.cx/episode/daemons-of-the-shadow-realm-1x17/",
         "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2308_s1e17.jpg",
         "streamUrl": "https://as-cdn26.top/video/acb3e29171829ebd25544aa20017060c"
+      },
+      {
+        "number": 18,
+        "season": 1,
+        "title": "S1 E18: Daemons of the Shadow Realm 1x18",
+        "slug": "daemons-of-the-shadow-realm-1x18",
+        "url": "https://animesalt.cx/episode/daemons-of-the-shadow-realm-1x18/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2308_s1e18.jpg"
+      },
+      {
+        "number": 19,
+        "season": 1,
+        "title": "S1 E19: Daemons of the Shadow Realm 1x19",
+        "slug": "daemons-of-the-shadow-realm-1x19",
+        "url": "https://animesalt.cx/episode/daemons-of-the-shadow-realm-1x19/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2308_s1e19.jpg"
       }
     ],
     "anilist": null
