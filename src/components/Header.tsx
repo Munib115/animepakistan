@@ -830,7 +830,39 @@ function HeaderContent() {
 
 export default function Header() {
   return (
-    <Suspense fallback={<header style={{ height: '72px' }} />}>
+    <Suspense
+      fallback={
+        <header className="site-header" style={{ minHeight: '68px' }}>
+          <div className="site-header-inner">
+            <Link
+              href="/"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                textDecoration: 'none',
+              }}
+            >
+              <div className="header-logo-icon">
+                <img
+                  src="/logo.png?v=ap5"
+                  alt="Anime Pakistan Logo"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-primary)' }}>
+                  ANIME
+                </span>
+                <span style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--text-primary)' }}>
+                  PAKISTAN
+                </span>
+              </div>
+            </Link>
+          </div>
+        </header>
+      }
+    >
       <HeaderContent />
     </Suspense>
   );

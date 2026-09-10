@@ -4,7 +4,6 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { playCinematicTudum } from '@/lib/tudumAudio';
 
 export default function NetflixLaunchScreen() {
-  const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [isDestroyed, setIsDestroyed] = useState(false);
   const [hasSoundPlayed, setHasSoundPlayed] = useState(false);
@@ -19,47 +18,79 @@ export default function NetflixLaunchScreen() {
 
   const dismissIntro = useCallback(() => {
     setIsExiting(true);
-    try {
-      sessionStorage.setItem('ap_netflix_intro_seen', '1');
-    } catch {
-      // safe fallback
-    }
     setTimeout(() => {
       setIsDestroyed(true);
-    }, 400);
+    }, 450);
   }, []);
 
   useEffect(() => {
-    // Only display on initial website open in the browser session
-    try {
-      const alreadySeen = sessionStorage.getItem('ap_netflix_intro_seen');
-      if (alreadySeen) {
-        setIsDestroyed(true);
-        return;
-      }
-    } catch {
-      // safe fallback
-    }
-
-    setMounted(true);
-
-    // Attempt automatic playback of cinematic Ta-Dum
+    // 1. Play cinematic Ta-Dum as early as possible
     const soundTimer = setTimeout(() => {
       triggerSound();
-    }, 80);
+    }, 90);
 
-    // Netflix intro presentation: 1.65s (synchronized with A & P ribbon strikes and full sound decay)
-    const exitTimer = setTimeout(() => {
+    let animationComplete = false;
+    let pageReady = false;
+
+    const checkAndDismiss = () => {
+      if (animationComplete && pageReady) {
+        dismissIntro();
+      }
+    };
+
+    // 2. Minimum cinematic presentation time so the user experiences the full animation
+    const animTimer = setTimeout(() => {
+      animationComplete = true;
+      checkAndDismiss();
+    }, 1800);
+
+    // 3. Check if document and hero image are fully ready
+    const evaluateReadiness = () => {
+      if (typeof document === 'undefined') return;
+      const isDocDone = document.readyState === 'complete';
+      const heroImg = document.querySelector('.cinematic-hero-image') as HTMLImageElement | null;
+      const isHeroImgDone = !heroImg || heroImg.complete;
+
+      if (isDocDone && isHeroImgDone) {
+        pageReady = true;
+        checkAndDismiss();
+      }
+    };
+
+    // Listen to window load event
+    if (typeof window !== 'undefined') {
+      if (document.readyState === 'complete') {
+        evaluateReadiness();
+      } else {
+        window.addEventListener('load', evaluateReadiness);
+      }
+    }
+
+    // Polling interval every 120ms to catch fast finishes or image completion
+    const readyPoll = setInterval(() => {
+      evaluateReadiness();
+      if (pageReady && animationComplete) {
+        clearInterval(readyPoll);
+      }
+    }, 120);
+
+    // Safety fallback: maximum 3.6s so user is never trapped even on slow network
+    const safetyTimer = setTimeout(() => {
       dismissIntro();
-    }, 1650);
+    }, 3600);
 
     return () => {
       clearTimeout(soundTimer);
-      clearTimeout(exitTimer);
+      clearTimeout(animTimer);
+      clearTimeout(safetyTimer);
+      clearInterval(readyPoll);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('load', evaluateReadiness);
+      }
     };
   }, [dismissIntro, triggerSound]);
 
-  if (!mounted || isDestroyed) {
+  if (isDestroyed) {
     return null;
   }
 
