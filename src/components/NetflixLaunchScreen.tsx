@@ -1,11 +1,21 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { playCinematicTudum } from '@/lib/tudumAudio';
 
 export default function NetflixLaunchScreen() {
   const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [isDestroyed, setIsDestroyed] = useState(false);
+  const [hasSoundPlayed, setHasSoundPlayed] = useState(false);
+  const audioTriggeredRef = useRef(false);
+
+  const triggerSound = useCallback(() => {
+    if (audioTriggeredRef.current) return;
+    audioTriggeredRef.current = true;
+    setHasSoundPlayed(true);
+    playCinematicTudum();
+  }, []);
 
   const dismissIntro = useCallback(() => {
     setIsExiting(true);
@@ -16,7 +26,7 @@ export default function NetflixLaunchScreen() {
     }
     setTimeout(() => {
       setIsDestroyed(true);
-    }, 380);
+    }, 400);
   }, []);
 
   useEffect(() => {
@@ -33,15 +43,21 @@ export default function NetflixLaunchScreen() {
 
     setMounted(true);
 
-    // Phase timing: Netflix animation plays for ~1150ms then zooms through
+    // Attempt automatic playback of cinematic Ta-Dum
+    const soundTimer = setTimeout(() => {
+      triggerSound();
+    }, 80);
+
+    // Netflix intro presentation: 1.65s (synchronized with A & P ribbon strikes and full sound decay)
     const exitTimer = setTimeout(() => {
       dismissIntro();
-    }, 1250);
+    }, 1650);
 
     return () => {
+      clearTimeout(soundTimer);
       clearTimeout(exitTimer);
     };
-  }, [dismissIntro]);
+  }, [dismissIntro, triggerSound]);
 
   if (!mounted || isDestroyed) {
     return null;
@@ -51,12 +67,46 @@ export default function NetflixLaunchScreen() {
     <div
       id="ap-netflix-intro"
       className={`netflix-intro-overlay ${isExiting ? 'netflix-intro-exit' : ''}`}
-      onClick={dismissIntro}
-      onTouchStart={dismissIntro}
+      onClick={() => {
+        // If sound was blocked by browser autoplay, first tap enables sound
+        if (!hasSoundPlayed) {
+          triggerSound();
+        }
+      }}
       aria-hidden="true"
     >
       {/* Cinematic Vignette & Deep Obsidian Canvas */}
       <div className="netflix-intro-backdrop" />
+
+      {/* Top Header Bar: Sound Indicator & Skip Button */}
+      <div className="netflix-intro-topbar">
+        <button
+          type="button"
+          className="netflix-sound-badge"
+          onClick={(e) => {
+            e.stopPropagation();
+            triggerSound();
+          }}
+          aria-label="Play Sound"
+        >
+          <span className="netflix-sound-icon">
+            {hasSoundPlayed ? '🔊' : '🔈'}
+          </span>
+          <span>{hasSoundPlayed ? 'CINEMA AUDIO' : 'TAP FOR SOUND'}</span>
+        </button>
+
+        <button
+          type="button"
+          className="netflix-skip-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            dismissIntro();
+          }}
+          aria-label="Skip Intro"
+        >
+          <span>Skip ›</span>
+        </button>
+      </div>
 
       {/* Netflix Spectrum Light Rays Eruption Container */}
       <div className="netflix-spectrum-viewport">
@@ -185,11 +235,6 @@ export default function NetflixLaunchScreen() {
           <span className="netflix-intro-title">ANIME PAKISTAN</span>
           <span className="netflix-intro-subtitle">اردو اور ہندی ڈبڈ اینیمے</span>
         </div>
-      </div>
-
-      {/* Instant Skip Indicator Hint */}
-      <div className="netflix-skip-hint">
-        <span>Tap anywhere to skip</span>
       </div>
     </div>
   );
