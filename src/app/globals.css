@@ -2246,3 +2246,166 @@ html.eye-comfort-night .apple-loader-status-pill {
   0%, 100% { transform: scale(0.85); opacity: 0.6; }
   50% { transform: scale(1.3); opacity: 1; }
 }
+
+/* ==============================================================================
+   APPLE-STYLE LUXURY ULTRA-FAST INITIAL LAUNCH SCREEN
+   ============================================================================== */
+
+.apple-launch-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020604;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+  user-select: none;
+}
+
+.apple-launch-overlay.apple-launch-exit {
+  opacity: 0;
+  transform: scale(1.035);
+  pointer-events: none !important;
+}
+
+.apple-launch-ambient-aura {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(0, 255, 102, 0.18) 0%, rgba(0, 102, 51, 0.08) 50%, transparent 75%);
+  filter: blur(48px);
+  pointer-events: none;
+  animation: appleAuraFloat 0.5s ease-out forwards;
+}
+
+@keyframes appleAuraFloat {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.apple-launch-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  animation: appleStagePop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes appleStagePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Apple 3D Continuous Squircle Emblem */
+.apple-launch-squircle {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #051a0f 0%, #020a05 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 16px 40px -8px rgba(0, 255, 102, 0.35),
+    0 0 25px rgba(0, 255, 102, 0.18),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.apple-launch-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+/* Apple Metallic Specular Light Sweep */
+.apple-launch-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.55) 45%,
+    rgba(0, 255, 136, 0.35) 55%,
+    transparent 75%
+  );
+  transform: translateX(-160%);
+  animation: appleSheenSweep 0.48s 0.08s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes appleSheenSweep {
+  0% { transform: translateX(-160%); }
+  100% { transform: translateX(160%); }
+}
+
+/* Apple Typography */
+.apple-launch-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.apple-launch-title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+}
+
+.apple-launch-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #00ff88;
+  opacity: 0.85;
+  letter-spacing: 0.02em;
+}
+
+/* Apple iOS Minimalist Capsule Progress Pill */
+.apple-launch-progress-track {
+  width: 130px;
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  position: relative;
+  margin-top: 18px;
+}
+
+.apple-launch-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #008037 0%, #00ff88 60%, #ffffff 100%);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+  animation: applePillFill 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes applePillFill {
+  0% { width: 0%; }
+  60% { width: 75%; }
+  100% { width: 100%; }
+}
