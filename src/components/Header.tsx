@@ -219,7 +219,7 @@ function HeaderContent() {
           {/* 3D Liquid Glass AP Icon */}
           <div className="header-logo-icon">
             <img 
-              src="/logo.png?v=ap5" 
+              src="/logo.webp" 
               alt="Anime Pakistan (AP) Logo" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
@@ -845,7 +845,7 @@ export default function Header() {
             >
               <div className="header-logo-icon">
                 <img
-                  src="/logo.png?v=ap5"
+                  src="/logo.webp"
                   alt="Anime Pakistan Logo"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />

@@ -46,7 +46,7 @@ export default function Footer() {
                 background: '#02140a',
               }}>
                 <img 
-                  src="/logo.png?v=ap2" 
+                  src="/logo.webp" 
                   alt="Anime Pakistan Logo" 
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                 />

@@ -140,7 +140,7 @@ export default function PWAInstallBanner() {
             justifyContent: 'center',
           }}>
             <img 
-              src="/logo.png?v=ap2" 
+              src="/logo.webp" 
               alt="Anime Pakistan Logo" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
@@ -287,7 +287,7 @@ export default function PWAInstallBanner() {
               boxShadow: '0 8px 24px rgba(0, 102, 51, 0.3)',
               background: '#02140a',
             }}>
-              <img src="/logo.png?v=ap2" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="/logo.webp" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
 
             <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '8px' }}>

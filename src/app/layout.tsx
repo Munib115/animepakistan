@@ -34,19 +34,19 @@ export const metadata: Metadata = {
     siteName,
     title: 'Anime Pakistan | Urdu & Hindi Dubbed Anime',
     description: 'Watch Urdu and Hindi dubbed anime series, movies and cartoons online in Pakistan.',
-    images: [{ url: '/icon-512.png', width: 512, height: 512, alt: 'Anime Pakistan logo' }],
+    images: [{ url: '/icon-512.webp', width: 512, height: 512, alt: 'Anime Pakistan logo' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Anime Pakistan | Urdu & Hindi Dubbed Anime', description: 'Browse Urdu and Hindi dubbed anime in Pakistan.', images: ['/icon-512.png'] },
+  twitter: { card: 'summary_large_image', title: 'Anime Pakistan | Urdu & Hindi Dubbed Anime', description: 'Browse Urdu and Hindi dubbed anime in Pakistan.', images: ['/icon-512.webp'] },
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: '/logo.png?v=ap5', sizes: '192x192', type: 'image/png' },
-      { url: '/logo.png?v=ap5', sizes: '512x512', type: 'image/png' },
+      { url: '/logo.webp', sizes: '192x192', type: 'image/png' },
+      { url: '/logo.webp', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/logo.png?v=ap5', sizes: '180x180', type: 'image/png' },
+      { url: '/logo.webp', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/logo.png?v=ap5',
+    shortcut: '/logo.webp',
   },
   appleWebApp: {
     capable: true,
@@ -66,9 +66,9 @@ export default function RootLayout({
   return (
     <html lang="ur" dir="rtl">
       <head>
-        <link rel="icon" href="/logo.png?v=ap5" type="image/png" />
-        <link rel="shortcut icon" href="/logo.png?v=ap5" type="image/png" />
-        <link rel="apple-touch-icon" href="/logo.png?v=ap5" />
+        <link rel="icon" href="/logo.webp" type="image/png" />
+        <link rel="shortcut icon" href="/logo.webp" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo.webp" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -113,7 +113,7 @@ export default function RootLayout({
                   '@id': `${siteUrl}/#organization`,
                   name: siteName,
                   url: absoluteUrl('/'),
-                  logo: absoluteUrl('/icon-512.png'),
+                  logo: absoluteUrl('/icon-512.webp'),
                   areaServed: { '@type': 'Country', name: 'Pakistan' },
                   inLanguage: ['ur-PK', 'en-PK'],
                 },
