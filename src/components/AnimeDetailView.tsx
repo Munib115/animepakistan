@@ -166,14 +166,18 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
       <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Back Link */}
         <div style={{ marginBottom: '16px' }}>
-          <Link href="/browse" style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            color: 'var(--color-primary)',
-            fontSize: '0.85rem',
-            fontWeight: 700,
-          }}>
+          <Link 
+            href="/browse" 
+            onClick={() => sound.playBack()}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              color: 'var(--color-primary)',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+            }}
+          >
             <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
               {language === 'ur' ? 'arrow_forward' : 'arrow_back'}
             </span>

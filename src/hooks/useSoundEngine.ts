@@ -213,6 +213,22 @@ function playSiteIntro() {
   pad.stop(t + 1.9);
 }
 
+function playBackSound() {
+  triggerHaptic([20, 35, 15]);
+  const { ac } = getCtx();
+  if (!ac) return;
+  const t = ac.currentTime;
+  const o = ac.createOscillator();
+  const g = chain(ac, o);
+  o.type = 'sine';
+  o.frequency.setValueAtTime(320, t);
+  o.frequency.exponentialRampToValueAtTime(130, t + 0.09);
+  g.gain.setValueAtTime(0.5, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+  o.start(t);
+  o.stop(t + 0.15);
+}
+
 // ── hook ────────────────────────────────────────────────────────────────────
 
 export function useSoundEngine() {
@@ -254,6 +270,7 @@ export const soundMap = {
   notification: playNotification,
   episodeNext: playEpisodeNext,
   siteIntro: playSiteIntro,
+  back: playBackSound,
 } as const;
 
 export type SoundName = keyof typeof soundMap;

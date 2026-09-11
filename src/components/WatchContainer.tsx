@@ -445,6 +445,7 @@ export default function WatchContainer({
             title={isMovie ? t('home') : t('episodesList')}
             aria-label={isMovie ? t('home') : t('episodesList')}
             className="glass-btn-secondary"
+            onClick={() => sound.playBack()}
             style={{
               display: 'inline-flex',
               alignItems: 'center',

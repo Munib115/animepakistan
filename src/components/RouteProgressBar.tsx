@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { sound } from '@/lib/soundEngine';
 
 function RouteProgressBarInner() {
   const pathname = usePathname();
@@ -44,7 +45,15 @@ function RouteProgressBarInner() {
   }, [pathname, searchParams]);
 
   // Intercept client link clicks for instant visual feedback on page transition
+  // and listen to popstate (browser/hardware back button) for sound and haptics
   useEffect(() => {
+    const handlePopState = () => {
+      sound.playBack();
+      startProgress();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
     const handleAnchorClick = (e: MouseEvent) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.defaultPrevented) return;
 
@@ -69,6 +78,7 @@ function RouteProgressBarInner() {
 
     document.addEventListener('click', handleAnchorClick, { passive: true, capture: true });
     return () => {
+      window.removeEventListener('popstate', handlePopState);
       document.removeEventListener('click', handleAnchorClick, { capture: true });
       if (timerRef.current) clearInterval(timerRef.current);
       if (finishTimerRef.current) clearTimeout(finishTimerRef.current);

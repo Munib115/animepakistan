@@ -102,6 +102,15 @@ class SoundEngine {
     this.play('softClick');
   }
 
+  public playBack() {
+    this.play('back');
+    this.haptic([20, 35, 15]);
+  }
+
+  public back() {
+    this.playBack();
+  }
+
   public unlock() {
     // Lazy AudioContext handles unlock automatically on first play
   }

@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { isGameFullyCached, downloadGameAssets, downloadRomFile } from '@/lib/gameCacheManager';
+import { sound } from '@/lib/soundEngine';
 
 export default function OfflineArcadePage() {
   const router = useRouter();
@@ -306,7 +307,11 @@ export default function OfflineArcadePage() {
             className="arcade-nav-btn back-btn"
             aria-label="Return to Homepage"
             title="Return to Homepage"
-            onClick={() => { stopEmulator(); router.push('/'); }}
+            onClick={() => {
+              sound.playBack();
+              stopEmulator();
+              router.push('/');
+            }}
           >
             <span className="material-symbols-outlined">arrow_back</span>
             <span className="back-btn-text">Exit</span>
@@ -339,7 +344,10 @@ export default function OfflineArcadePage() {
           <button
             type="button"
             className={`cache-status-pill ${isCached ? 'cached' : 'not-cached'}`}
-            onClick={() => setShowOfflineModal(true)}
+            onClick={() => {
+              sound.click();
+              setShowOfflineModal(true);
+            }}
             title={isCached ? 'Game cached in browser. Click to manage storage.' : 'Click to download and save game for offline use.'}
           >
             <span className="material-symbols-outlined status-pill-icon">
@@ -356,7 +364,10 @@ export default function OfflineArcadePage() {
           <button
             type="button"
             className={`action-btn ${isMuted ? 'muted' : ''}`}
-            onClick={toggleMute}
+            onClick={() => {
+              sound.click();
+              toggleMute();
+            }}
             title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
             aria-label={isMuted ? 'Unmute Sound' : 'Mute Sound'}
           >
@@ -368,7 +379,10 @@ export default function OfflineArcadePage() {
           <button
             type="button"
             className="action-btn"
-            onClick={() => setShowControlsHelp(!showControlsHelp)}
+            onClick={() => {
+              sound.click();
+              setShowControlsHelp(!showControlsHelp);
+            }}
             title="Controller & Keyboard Guide"
             aria-label="Controls Guide"
           >
@@ -379,7 +393,10 @@ export default function OfflineArcadePage() {
           <button
             type="button"
             className="action-btn"
-            onClick={toggleFullscreen}
+            onClick={() => {
+              sound.click();
+              toggleFullscreen();
+            }}
             title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
             aria-label="Fullscreen"
           >
@@ -592,7 +609,10 @@ export default function OfflineArcadePage() {
                 <button
                   type="button"
                   className="close-modal-btn"
-                  onClick={() => setShowControlsHelp(false)}
+                  onClick={() => {
+                    sound.playBack();
+                    setShowControlsHelp(false);
+                  }}
                 >
                   ✕
                 </button>
@@ -638,7 +658,10 @@ export default function OfflineArcadePage() {
                 <button
                   type="button"
                   className="close-modal-btn"
-                  onClick={() => setShowOfflineModal(false)}
+                  onClick={() => {
+                    sound.playBack();
+                    setShowOfflineModal(false);
+                  }}
                 >
                   ✕
                 </button>
