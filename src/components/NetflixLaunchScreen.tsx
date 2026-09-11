@@ -1,11 +1,15 @@
 'use client';
 
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import { playCinematicTudum } from '@/lib/tudumAudio';
 
 export default function NetflixLaunchScreen() {
+  const pathname = usePathname();
+  const isOfflineRoute = pathname === '/offline' || (typeof window !== 'undefined' && window.location.pathname.startsWith('/offline'));
+
   const [isExiting, setIsExiting] = useState(false);
-  const [isDestroyed, setIsDestroyed] = useState(false);
+  const [isDestroyed, setIsDestroyed] = useState(isOfflineRoute);
   const [hasSoundPlayed, setHasSoundPlayed] = useState(false);
   const audioTriggeredRef = useRef(false);
 
@@ -20,11 +24,25 @@ export default function NetflixLaunchScreen() {
     setIsExiting(true);
     setTimeout(() => {
       setIsDestroyed(true);
-    }, 450);
+    }, 280);
   }, []);
 
   useEffect(() => {
-    // 1. Play cinematic Ta-Dum as early as possible
+    // Immediately skip and destroy on /offline or if already played in session
+    if (pathname === '/offline' || (typeof window !== 'undefined' && window.location.pathname.startsWith('/offline'))) {
+      setIsDestroyed(true);
+      return;
+    }
+
+    if (typeof window !== 'undefined') {
+      if (sessionStorage.getItem('ap_netflix_intro_done')) {
+        setIsDestroyed(true);
+        return;
+      }
+      sessionStorage.setItem('ap_netflix_intro_done', '1');
+    }
+
+    // 1. Play cinematic Ta-Dum
     const soundTimer = setTimeout(() => {
       triggerSound();
     }, 90);
@@ -88,9 +106,9 @@ export default function NetflixLaunchScreen() {
         window.removeEventListener('load', evaluateReadiness);
       }
     };
-  }, [dismissIntro, triggerSound]);
+  }, [dismissIntro, triggerSound, pathname, isOfflineRoute]);
 
-  if (isDestroyed) {
+  if (isOfflineRoute || isDestroyed) {
     return null;
   }
 
@@ -98,8 +116,14 @@ export default function NetflixLaunchScreen() {
     <div
       id="ap-netflix-intro"
       className={`netflix-intro-overlay ${isExiting ? 'netflix-intro-exit' : ''}`}
-      onClick={triggerSound}
-      onTouchStart={triggerSound}
+      onClick={() => {
+        triggerSound();
+        dismissIntro();
+      }}
+      onTouchStart={() => {
+        triggerSound();
+        dismissIntro();
+      }}
       aria-hidden="true"
     >
       {/* Cinematic Vignette & Deep Obsidian Canvas */}

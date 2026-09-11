@@ -103,10 +103,10 @@ export default function VoiceAudioPlayer({ src, duration, onDelete, isOwner = fa
       WebkitBackdropFilter: 'blur(20px) saturate(180%)',
       border: '1.5px solid var(--glass-border)',
       boxShadow: 'var(--glass-shadow)',
-      padding: '8px 16px',
+      padding: '8px 14px',
       borderRadius: '999px',
-      maxWidth: '100%',
-      width: '360px',
+      width: '100%',
+      maxWidth: '360px',
       boxSizing: 'border-box',
     }}>
       {/* Hidden Native Audio Element */}

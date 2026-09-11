@@ -105,6 +105,18 @@ export default function OfflineArcadePage() {
     };
   }, []);
 
+  // Toggle audio mute
+  const toggleMute = useCallback(() => {
+    setIsMuted((prev) => {
+      const next = !prev;
+      const ejs = (window as any).EJS_emulator;
+      if (ejs && typeof ejs.setVolume === 'function') {
+        ejs.setVolume(next ? 0 : 0.9);
+      }
+      return next;
+    });
+  }, []);
+
   // Initialize self-hosted EmulatorJS
   useEffect(() => {
     const startEmulator = () => {
@@ -120,6 +132,8 @@ export default function OfflineArcadePage() {
         (window as any).EJS_alignStartButton = 'center';
         (window as any).EJS_noAutoFocus = false;
         (window as any).EJS_disableDatabases = false;
+        (window as any).EJS_language = 'en-US';
+        (window as any).EJS_disableAutoLang = true;
         (window as any).EJS_VirtualGamepadSettings = [0];
         (window as any).EJS_defaultControls = {
           0: {
@@ -138,6 +152,7 @@ export default function OfflineArcadePage() {
           },
           1: {}, 2: {}, 3: {}
         };
+        (window as any).EJS_ready = () => setEmulatorLoaded(true);
         (window as any).EJS_onGameStart = () => setEmulatorLoaded(true);
 
         const script = document.createElement('script');
@@ -282,85 +297,90 @@ export default function OfflineArcadePage() {
 
   return (
     <div className="offline-page-root" ref={arcadeContainerRef}>
-      {/* Top Floating Status Bar */}
-        <header className="arcade-header">
-          {/* Back button — stops emulator before navigating */}
+      {/* Sleek Professional Top Arcade Header */}
+      <header className="arcade-header">
+        {/* Left: Exit/Home button & Brand */}
+        <div className="arcade-header-left">
           <button
             type="button"
-            className="arcade-back-btn"
-            aria-label="Go back"
+            className="arcade-nav-btn back-btn"
+            aria-label="Return to Homepage"
+            title="Return to Homepage"
             onClick={() => { stopEmulator(); router.push('/'); }}
           >
             <span className="material-symbols-outlined">arrow_back</span>
+            <span className="back-btn-text">Exit</span>
           </button>
 
-        <div className="arcade-badge-group">
-          {isOnline ? (
-            <div className="status-badge online">
-              <span className="pulse-dot green" />
-              <span>Online</span>
-            </div>
-          ) : (
-            <div className="status-badge offline">
-              <span className="pulse-dot orange" />
-              <span>Offline</span>
-            </div>
-          )}
+          <div className="arcade-brand-divider" />
 
-          {isCached ? (
-            <button
-              type="button"
-              className="status-badge cache-badge ready"
-              onClick={() => setShowOfflineModal(true)}
-              title="Game is cached locally in browser. Click to manage or download ROM."
-            >
-              <span className="material-symbols-outlined badge-mini-icon">offline_pin</span>
-              <span>Saved Offline</span>
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="status-badge cache-badge download"
-              onClick={() => {
-                setShowOfflineModal(true);
-                if (!isDownloadingCache) handleDownloadOfflineGame();
-              }}
-              title="Download game files to browser cache for offline play"
-            >
-              <span className="material-symbols-outlined badge-mini-icon">
-                {isDownloadingCache ? 'downloading' : 'download'}
-              </span>
-              <span>{isDownloadingCache ? `${cacheProgress}%` : 'Save Offline'}</span>
-            </button>
-          )}
+          <div className="arcade-brand">
+            <div className="arcade-brand-icon">
+              <img src="/logo.webp" alt="Anime Pakistan Logo" />
+            </div>
+            <div className="arcade-brand-titles">
+              <div className="arcade-title-row">
+                <span className="brand-anime">ANIME</span>
+                <span className="brand-pakistan">PAKISTAN</span>
+                <span className="brand-pill-badge">ARCADE</span>
+              </div>
+              <span className="arcade-subtitle">Dragon Ball Z • Offline GBA</span>
+            </div>
+          </div>
         </div>
 
-        <div className="arcade-top-actions">
+        {/* Center: Connectivity & Cache Status Pill */}
+        <div className="arcade-header-center">
+          <div className={`status-pill ${isOnline ? 'online' : 'offline'}`}>
+            <span className={`status-dot ${isOnline ? 'dot-green' : 'dot-amber'}`} />
+            <span className="status-text">{isOnline ? 'Online' : 'Offline Mode'}</span>
+          </div>
+
           <button
             type="button"
-            className={`action-icon-btn ${isCached ? 'cache-ready' : ''}`}
-            onClick={() => setShowOfflineModal(!showOfflineModal)}
-            title="Offline Game Storage & ROM Download"
-            aria-label="Offline Game Storage"
+            className={`cache-status-pill ${isCached ? 'cached' : 'not-cached'}`}
+            onClick={() => setShowOfflineModal(true)}
+            title={isCached ? 'Game cached in browser. Click to manage storage.' : 'Click to download and save game for offline use.'}
           >
-            <span className="material-symbols-outlined">
-              {isCached ? 'offline_pin' : 'cloud_download'}
+            <span className="material-symbols-outlined status-pill-icon">
+              {isCached ? 'verified' : 'cloud_download'}
+            </span>
+            <span className="cache-pill-label">
+              {isCached ? 'Saved Offline' : 'Save Offline (16MB)'}
             </span>
           </button>
+        </div>
+
+        {/* Right: Actions (Sound, Controls Guide, Fullscreen) */}
+        <div className="arcade-header-right">
           <button
             type="button"
-            className="action-icon-btn"
+            className={`action-btn ${isMuted ? 'muted' : ''}`}
+            onClick={toggleMute}
+            title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
+            aria-label={isMuted ? 'Unmute Sound' : 'Mute Sound'}
+          >
+            <span className="material-symbols-outlined">
+              {isMuted ? 'volume_off' : 'volume_up'}
+            </span>
+          </button>
+
+          <button
+            type="button"
+            className="action-btn"
             onClick={() => setShowControlsHelp(!showControlsHelp)}
-            title="Controls Guide"
+            title="Controller & Keyboard Guide"
             aria-label="Controls Guide"
           >
             <span className="material-symbols-outlined">sports_esports</span>
+            <span className="btn-label-desktop">Controls</span>
           </button>
+
           <button
             type="button"
-            className="action-icon-btn"
+            className="action-btn"
             onClick={toggleFullscreen}
-            title="Fullscreen"
+            title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
             aria-label="Fullscreen"
           >
             <span className="material-symbols-outlined">
@@ -394,14 +414,18 @@ export default function OfflineArcadePage() {
 
             {/* Loading / Ready state */}
             {!emulatorLoaded && !emulatorError && (
-              <div className="screen-loading-overlay">
+              <div
+                className="screen-loading-overlay"
+                onClick={() => setEmulatorLoaded(true)}
+                title="Click to start game"
+              >
                 <div className="loading-monogram">
                   <span className="dragon-ball-badge">DBZ</span>
                   <div className="loading-spinner" />
                 </div>
                 <h3>Dragon Ball Z: Supersonic Warriors</h3>
                 <p>Loading self-hosted WebAssembly GBA core...</p>
-                <span className="cache-note">Works 100% Offline • No Internet Required</span>
+                <span className="cache-note">Works 100% Offline • Click anywhere to play</span>
               </div>
             )}
 
@@ -693,14 +717,14 @@ export default function OfflineArcadePage() {
         .offline-page-root {
           min-height: 100vh;
           min-height: 100dvh;
-          background: #020904;
-          background: radial-gradient(circle at 50% 15%, #05210e 0%, #020c05 60%, #000000 100%);
-          color: #f0fdf4;
-          font-family: 'Inter', -apple-system, sans-serif;
+          background: var(--bg-primary);
+          background-image: radial-gradient(circle at 50% 8%, rgba(0, 102, 51, 0.08) 0%, transparent 60%);
+          color: var(--text-primary);
+          font-family: var(--font-sans, 'Inter', -apple-system, sans-serif);
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 12px 10px 28px;
+          padding: 12px 12px 32px;
           box-sizing: border-box;
           user-select: none;
           overflow-x: hidden;
@@ -708,110 +732,233 @@ export default function OfflineArcadePage() {
           max-width: 100vw;
         }
 
+        /* ── Sleek Professional Arcade Navbar ── */
         .arcade-header {
           width: 100%;
           max-width: 960px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 8px;
-          padding: 6px 8px;
+          gap: 10px;
+          padding: 8px 14px;
           border-radius: 999px;
-          background: rgba(4, 20, 10, 0.7);
-          border: 1px solid rgba(0, 229, 117, 0.22);
-          backdrop-filter: blur(16px);
-          margin-bottom: 10px;
-          overflow: hidden;
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          box-shadow: var(--glass-shadow);
+          margin-bottom: 14px;
         }
 
-        .arcade-back-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          width: 36px;
-          height: 36px;
-          color: #f0fdf4;
-          text-decoration: none;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          transition: all 0.18s;
-        }
-        .arcade-back-btn:hover {
-          background: rgba(0, 229, 117, 0.2);
-          border-color: #00e575;
-        }
-
-        .arcade-badge-group {
+        .arcade-header-left {
           display: flex;
           align-items: center;
-          flex: 1;
-          min-width: 0;
-          justify-content: center;
+          gap: 10px;
+          flex-shrink: 0;
         }
 
-        .status-badge {
+        .arcade-nav-btn.back-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          border-radius: 999px;
+          background: var(--bg-secondary);
+          border: 1px solid var(--glass-border);
+          color: var(--text-primary);
+          font-weight: 700;
+          font-size: 0.82rem;
+          cursor: pointer;
+          transition: all 0.18s ease;
+        }
+        .arcade-nav-btn.back-btn:hover {
+          background: var(--glass-bg-hover);
+          border-color: var(--color-primary);
+          color: var(--color-primary);
+          transform: translateX(-2px);
+          box-shadow: 0 4px 12px rgba(0, 102, 51, 0.12);
+        }
+
+        .arcade-brand-divider {
+          width: 1px;
+          height: 22px;
+          background: var(--glass-border);
+        }
+
+        .arcade-brand {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .arcade-brand-icon {
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
+          overflow: hidden;
+          border: 1px solid var(--glass-border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--bg-secondary);
+          flex-shrink: 0;
+        }
+        .arcade-brand-icon img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .arcade-brand-titles {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .arcade-title-row {
+          display: flex;
+          align-items: center;
+          line-height: 1.1;
+        }
+        .brand-anime {
+          font-size: 0.88rem;
+          font-weight: 900;
+          color: var(--color-primary);
+          letter-spacing: -0.02em;
+        }
+        .brand-pakistan {
+          font-size: 0.88rem;
+          font-weight: 900;
+          color: var(--text-primary);
+          letter-spacing: -0.02em;
+          margin-left: 3px;
+        }
+        .brand-pill-badge {
+          font-size: 0.58rem;
+          font-weight: 900;
+          padding: 2px 6px;
+          border-radius: 999px;
+          background: var(--color-primary);
+          color: #ffffff;
+          margin-left: 6px;
+          letter-spacing: 0.05em;
+        }
+        .arcade-subtitle {
+          font-size: 0.65rem;
+          color: var(--text-muted);
+          font-weight: 600;
+          line-height: 1;
+          margin-top: 2px;
+        }
+
+        /* ── Center Status Group ── */
+        .arcade-header-center {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .status-pill {
           display: inline-flex;
           align-items: center;
           gap: 6px;
           padding: 5px 12px;
           border-radius: 999px;
-          font-size: 0.70rem;
+          font-size: 0.72rem;
           font-weight: 700;
-          letter-spacing: 0.03em;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: 100%;
+          background: var(--bg-secondary);
+          border: 1px solid var(--glass-border);
+          color: var(--text-primary);
         }
-        .status-badge.offline {
-          background: rgba(234, 179, 8, 0.14);
-          border: 1px solid rgba(234, 179, 8, 0.35);
-          color: #facc15;
+        .status-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
         }
-        .status-badge.online {
-          background: rgba(0, 229, 117, 0.16);
-          border: 1px solid rgba(0, 229, 117, 0.4);
-          color: #00ff88;
+        .status-dot.dot-green {
+          background: #00cc66;
+          box-shadow: 0 0 8px #00cc66;
+          animation: pulse 1.6s infinite;
+        }
+        .status-dot.dot-amber {
+          background: #f59e0b;
+          box-shadow: 0 0 8px #f59e0b;
+          animation: pulse 1.6s infinite;
         }
 
-        .pulse-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          animation: pulse 1.5s infinite;
+        .cache-status-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 5px 12px;
+          border-radius: 999px;
+          font-size: 0.72rem;
+          font-weight: 700;
+          cursor: pointer;
+          border: 1px solid var(--glass-border);
+          transition: all 0.18s ease;
+          background: var(--bg-secondary);
         }
-        .pulse-dot.orange { background: #facc15; box-shadow: 0 0 8px #facc15; }
-        .pulse-dot.green { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+        .cache-status-pill.cached {
+          background: rgba(0, 102, 51, 0.1);
+          border-color: rgba(0, 102, 51, 0.25);
+          color: var(--color-primary);
+        }
+        .cache-status-pill.cached:hover {
+          background: rgba(0, 102, 51, 0.18);
+          transform: translateY(-1px);
+        }
+        .cache-status-pill.not-cached {
+          background: rgba(2, 132, 199, 0.1);
+          border-color: rgba(2, 132, 199, 0.25);
+          color: #0284c7;
+        }
+        .cache-status-pill.not-cached:hover {
+          background: rgba(2, 132, 199, 0.18);
+          transform: translateY(-1px);
+        }
+        .status-pill-icon {
+          font-size: 14px;
+          line-height: 1;
+        }
+
+        /* ── Right Action Controls ── */
+        .arcade-header-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-shrink: 0;
+        }
+
+        .action-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          height: 36px;
+          padding: 0 12px;
+          border-radius: 999px;
+          background: var(--bg-secondary);
+          border: 1px solid var(--glass-border);
+          color: var(--text-primary);
+          cursor: pointer;
+          transition: all 0.18s ease;
+          font-size: 0.80rem;
+          font-weight: 700;
+        }
+        .action-btn:hover {
+          background: var(--glass-bg-hover);
+          border-color: var(--color-primary);
+          color: var(--color-primary);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0, 102, 51, 0.12);
+        }
+        .action-btn.muted {
+          color: #ef4444;
+          border-color: rgba(239, 68, 68, 0.35);
+        }
 
         @keyframes pulse {
           0%, 100% { transform: scale(1); opacity: 1; }
           50% { transform: scale(1.3); opacity: 0.6; }
-        }
-
-        .arcade-top-actions {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .action-icon-btn {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #f0fdf4;
-          display: grid;
-          place-items: center;
-          cursor: pointer;
-          transition: all 0.16s;
-        }
-        .action-icon-btn:hover {
-          background: rgba(0, 229, 117, 0.25);
-          border-color: #00e575;
-          transform: translateY(-2px);
         }
 
         .arcade-stage {
@@ -830,7 +977,7 @@ export default function OfflineArcadePage() {
           border-radius: 20px;
           background: linear-gradient(180deg, #091a0f 0%, #030d07 100%);
           border: 2px solid rgba(0, 229, 117, 0.3);
-          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 32px rgba(0, 204, 102, 0.15);
+          box-shadow: var(--glass-shadow-hover), 0 24px 60px rgba(0, 0, 0, 0.5);
           overflow: hidden;
           position: relative;
           display: flex;
@@ -1170,6 +1317,7 @@ export default function OfflineArcadePage() {
           inset: 0;
           background: rgba(0, 0, 0, 0.75);
           backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           z-index: 99999;
           display: grid;
           place-items: center;
@@ -1179,34 +1327,44 @@ export default function OfflineArcadePage() {
         .controls-modal-card {
           width: 100%;
           max-width: 520px;
-          background: #08160c;
-          border: 1.5px solid rgba(0, 229, 117, 0.35);
+          background: var(--bg-secondary);
+          border: 1.5px solid var(--glass-border);
           border-radius: 20px;
-          padding: 20px;
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+          padding: 22px;
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+          color: var(--text-primary);
         }
 
         .modal-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid var(--glass-border);
           padding-bottom: 12px;
-          margin-bottom: 14px;
+          margin-bottom: 16px;
         }
         .modal-header h3 {
           margin: 0;
-          font-size: 1.1rem;
-          color: #00ff88;
+          font-size: 1.12rem;
+          font-weight: 800;
+          color: var(--color-primary);
         }
         .close-modal-btn {
-          width: 28px;
-          height: 28px;
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          border: 0;
-          color: #fff;
+          background: var(--bg-tertiary);
+          border: 1px solid var(--glass-border);
+          color: var(--text-primary);
           cursor: pointer;
+          display: grid;
+          place-items: center;
+          font-weight: 700;
+          transition: all 0.16s ease;
+        }
+        .close-modal-btn:hover {
+          background: var(--glass-bg-hover);
+          color: var(--color-primary);
         }
 
         .controls-section {
@@ -1215,13 +1373,14 @@ export default function OfflineArcadePage() {
         .controls-section h4 {
           margin: 0 0 8px 0;
           font-size: 0.92rem;
-          color: #f0fdf4;
+          font-weight: 800;
+          color: var(--color-primary);
         }
         .controls-section p {
           margin: 0;
           font-size: 0.82rem;
-          color: #94a3b8;
-          line-height: 1.4;
+          color: var(--text-secondary);
+          line-height: 1.45;
         }
 
         .controls-table {
@@ -1230,53 +1389,22 @@ export default function OfflineArcadePage() {
           font-size: 0.82rem;
         }
         .controls-table td {
-          padding: 6px 4px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          padding: 7px 4px;
+          border-bottom: 1px solid var(--glass-border);
+          color: var(--text-secondary);
+        }
+        .controls-table td strong {
+          color: var(--text-primary);
         }
         kbd {
-          padding: 2px 6px;
-          border-radius: 4px;
-          background: #1e293b;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #00ff88;
+          padding: 2px 7px;
+          border-radius: 6px;
+          background: var(--bg-tertiary);
+          border: 1px solid var(--glass-border);
+          color: var(--color-primary);
           font-family: monospace;
           font-weight: 700;
-        }
-
-        .status-badge.cache-badge {
-          cursor: pointer;
-          border: none;
-          transition: all 0.2s ease;
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          padding: 4px 10px;
-          border-radius: 999px;
-          font-family: inherit;
-        }
-        .status-badge.cache-badge.ready {
-          background: rgba(0, 229, 117, 0.16);
-          border: 1px solid rgba(0, 229, 117, 0.4);
-          color: #00ff88;
-        }
-        .status-badge.cache-badge.ready:hover {
-          background: rgba(0, 229, 117, 0.28);
-        }
-        .status-badge.cache-badge.download {
-          background: rgba(56, 189, 248, 0.16);
-          border: 1px solid rgba(56, 189, 248, 0.4);
-          color: #38bdf8;
-        }
-        .status-badge.cache-badge.download:hover {
-          background: rgba(56, 189, 248, 0.28);
-        }
-        .badge-mini-icon {
-          font-size: 14px;
-          line-height: 1;
-        }
-        .action-icon-btn.cache-ready {
-          color: #00e575;
-          border-color: rgba(0, 229, 117, 0.4);
+          font-size: 0.80rem;
         }
 
         /* Offline Modal Enhancements */
@@ -1292,8 +1420,8 @@ export default function OfflineArcadePage() {
           margin-bottom: 16px;
         }
         .offline-status-banner.cached {
-          background: rgba(0, 229, 117, 0.12);
-          border: 1px solid rgba(0, 229, 117, 0.3);
+          background: rgba(0, 102, 51, 0.12);
+          border: 1px solid rgba(0, 102, 51, 0.3);
         }
         .offline-status-banner.pending {
           background: rgba(56, 189, 248, 0.12);
@@ -1301,27 +1429,24 @@ export default function OfflineArcadePage() {
         }
         .status-big-icon {
           font-size: 32px;
-          color: #00e575;
+          color: var(--color-primary);
           flex-shrink: 0;
           margin-top: 2px;
         }
         .offline-status-banner.pending .status-big-icon {
-          color: #38bdf8;
+          color: #0284c7;
         }
         .offline-status-banner h4 {
           margin: 0 0 4px 0;
           font-size: 0.95rem;
-          font-weight: 700;
-          color: #f0fdf4;
+          font-weight: 800;
+          color: var(--text-primary);
         }
         .offline-status-banner p {
           margin: 0;
           font-size: 0.80rem;
           line-height: 1.45;
-          color: #a7f3d0;
-        }
-        .offline-status-banner.pending p {
-          color: #bae6fd;
+          color: var(--text-secondary);
         }
         .offline-progress-wrap {
           padding: 14px 0 6px;
@@ -1333,24 +1458,26 @@ export default function OfflineArcadePage() {
           display: flex;
           justify-content: space-between;
           font-size: 0.82rem;
-          color: #6ee7b7;
+          font-weight: 700;
+          color: var(--color-primary);
         }
         .progress-bar-track {
           width: 100%;
           height: 6px;
           border-radius: 99px;
-          background: rgba(255, 255, 255, 0.12);
+          background: var(--bg-tertiary);
+          border: 1px solid var(--glass-border);
           overflow: hidden;
         }
         .progress-bar-fill {
           height: 100%;
           border-radius: 99px;
-          background: linear-gradient(90deg, #00cc6a, #00e575);
+          background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
           transition: width 0.3s ease;
         }
         .offline-progress-note {
           font-size: 0.72rem;
-          color: #94a3b8;
+          color: var(--text-muted);
         }
         .offline-actions-container {
           display: flex;
@@ -1373,30 +1500,128 @@ export default function OfflineArcadePage() {
           font-family: inherit;
         }
         .offline-action-btn.primary {
-          background: linear-gradient(135deg, #00e575 0%, #00b359 100%);
-          color: #021a0a;
-          box-shadow: 0 4px 16px rgba(0, 229, 117, 0.35);
+          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+          color: #ffffff;
+          box-shadow: 0 4px 16px rgba(0, 102, 51, 0.35);
         }
         .offline-action-btn.primary:hover {
           transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(0, 229, 117, 0.45);
+          box-shadow: 0 6px 20px rgba(0, 102, 51, 0.45);
         }
         .offline-action-btn.secondary {
-          background: rgba(255, 255, 255, 0.08);
-          color: #e2e8f0;
-          border: 1px solid rgba(255, 255, 255, 0.16);
+          background: var(--bg-secondary);
+          color: var(--text-primary);
+          border: 1px solid var(--glass-border);
         }
         .offline-action-btn.secondary:hover {
-          background: rgba(255, 255, 255, 0.14);
-          border-color: rgba(255, 255, 255, 0.28);
+          background: var(--glass-bg-hover);
+          border-color: var(--color-primary);
         }
         .offline-action-btn.tertiary {
           background: transparent;
-          color: #38bdf8;
-          border: 1px solid rgba(56, 189, 248, 0.3);
+          color: var(--color-primary);
+          border: 1px solid var(--glass-border);
         }
         .offline-action-btn.tertiary:hover {
-          background: rgba(56, 189, 248, 0.12);
+          background: var(--bg-tertiary);
+        }
+
+        /* ── Bulletproof Responsive Rules: Prevents Any Cutting or Overflow ── */
+        .arcade-header-right {
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+          .arcade-header {
+            padding: 6px 8px;
+            gap: 6px;
+            margin-bottom: 10px;
+          }
+          .arcade-subtitle {
+            display: none;
+          }
+          .btn-label-desktop, .back-btn-text {
+            display: none;
+          }
+          .arcade-brand-divider {
+            display: none;
+          }
+          .status-text {
+            display: none;
+          }
+          .cache-pill-label {
+            display: none;
+          }
+          .status-pill {
+            padding: 5px 8px;
+          }
+          .cache-status-pill {
+            padding: 5px 8px;
+          }
+          .action-btn {
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            justify-content: center;
+          }
+          .arcade-nav-btn.back-btn {
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            justify-content: center;
+          }
+          .arcade-header-right {
+            gap: 4px;
+          }
+        }
+
+        /* On screens under 600px: hide 'PAKISTAN' text to keep logo + ANIME + ARCADE compact */
+        @media (max-width: 600px) {
+          .brand-pakistan {
+            display: none;
+          }
+          .arcade-brand {
+            gap: 6px;
+          }
+          .arcade-brand-icon {
+            width: 24px;
+            height: 24px;
+          }
+          .brand-anime {
+            font-size: 0.82rem;
+          }
+          .brand-pill-badge {
+            font-size: 0.52rem;
+            padding: 1px 5px;
+            margin-left: 4px;
+          }
+        }
+
+        /* On mobile screens under 480px: hide redundant center pills so action buttons never cut off */
+        @media (max-width: 480px) {
+          .arcade-header-center {
+            display: none;
+          }
+          .arcade-header {
+            padding: 5px 8px;
+            justify-content: space-between;
+          }
+          .action-btn {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+          }
+          .arcade-nav-btn.back-btn {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+          }
+          .action-btn .material-symbols-outlined,
+          .arcade-nav-btn.back-btn .material-symbols-outlined {
+            font-size: 18px;
+          }
         }
 
         @media (max-width: 400px) {

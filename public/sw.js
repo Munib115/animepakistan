@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anime-pakistan-cache-v4';
+const CACHE_NAME = 'anime-pakistan-cache-v5';
 
 // Only tiny, critical assets are pre-cached at install time.
 // Large game ROM and emulator files are cached lazily in background
@@ -78,12 +78,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Strategy for Offline Emulator & Game ROMs & /offline page -> Cache-First
+  // Strategy for Offline Emulator & Game ROMs -> Cache-First
   if (
     requestUrl.pathname.startsWith('/emulatorjs/') ||
     requestUrl.pathname.startsWith('/roms/') ||
-    requestUrl.pathname.startsWith('/api/game-rom') ||
-    requestUrl.pathname === '/offline'
+    requestUrl.pathname.startsWith('/api/game-rom')
   ) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
@@ -99,6 +98,22 @@ self.addEventListener('fetch', (event) => {
           });
         });
       })
+    );
+    return;
+  }
+
+  // Strategy for /offline page: Network-First with Cache Fallback (instant online updates + 100% offline capability)
+  if (requestUrl.pathname === '/offline') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const copy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request))
     );
     return;
   }

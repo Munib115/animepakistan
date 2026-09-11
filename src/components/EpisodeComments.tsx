@@ -698,9 +698,12 @@ export default function EpisodeComments({ animeSlug, episodeSlug, episodeTitle }
             <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--color-primary)', opacity: 0.7 }}>
               chat_bubble
             </span>
-            <p style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '8px' }}>
+            <p style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '8px', marginBottom: '4px' }}>
               Be the first to share your opinion or voice note on this episode!
             </p>
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'block' }}>
+              Join the anime community discussion with comments & HD voice notes
+            </span>
           </div>
         ) : (
           comments.map((item) => (
