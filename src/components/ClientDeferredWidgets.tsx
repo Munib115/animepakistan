@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 
 const PWAInstallBanner = dynamic(() => import('@/components/PWAInstallBanner'), {
   ssr: false,
@@ -19,6 +20,11 @@ const GameCachePreloader = dynamic(() => import('@/components/GameCachePreloader
 });
 
 export default function ClientDeferredWidgets() {
+  const pathname = usePathname();
+  if (pathname === '/offline' || pathname?.startsWith('/offline')) {
+    return null;
+  }
+
   return (
     <>
       <PWAInstallBanner />

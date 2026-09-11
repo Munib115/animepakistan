@@ -7,7 +7,7 @@ import { sound } from '@/lib/soundEngine';
 
 export default function OfflineArcadePage() {
   const router = useRouter();
-  const [isOnline, setIsOnline] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [showControlsHelp, setShowControlsHelp] = useState(false);
@@ -16,7 +16,6 @@ export default function OfflineArcadePage() {
   const [isDownloadingCache, setIsDownloadingCache] = useState(false);
   const [cacheProgress, setCacheProgress] = useState(0);
   const [cacheCurrentLabel, setCacheCurrentLabel] = useState('');
-  const [isMobile, setIsMobile] = useState(false);
   const [emulatorLoaded, setEmulatorLoaded] = useState(false);
   const [emulatorError, setEmulatorError] = useState<string | null>(null);
   const arcadeContainerRef = useRef<HTMLDivElement>(null);
@@ -79,7 +78,9 @@ export default function OfflineArcadePage() {
 
   // Connectivity monitoring
   useEffect(() => {
-    setIsOnline(navigator.onLine);
+    if (typeof navigator !== 'undefined') {
+      setIsOnline(navigator.onLine);
+    }
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
@@ -91,18 +92,10 @@ export default function OfflineArcadePage() {
     const handleCacheUpdated = () => setIsCached(true);
     window.addEventListener('ap-game-cache-updated', handleCacheUpdated);
 
-    // Detect mobile device
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 820 || 'ontouchstart' in window);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
       window.removeEventListener('ap-game-cache-updated', handleCacheUpdated);
-      window.removeEventListener('resize', checkMobile);
     };
   }, []);
 
@@ -169,11 +162,11 @@ export default function OfflineArcadePage() {
       }
     };
 
-    const timer = setTimeout(startEmulator, 150);
+    const rafId = requestAnimationFrame(startEmulator);
 
     // Cleanup: stop emulator when component unmounts (e.g. navigating away)
     return () => {
-      clearTimeout(timer);
+      cancelAnimationFrame(rafId);
       stopEmulator();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -475,9 +468,8 @@ export default function OfflineArcadePage() {
           </div>
         </div>
 
-        {/* Mobile Tactile Virtual Gamepad (Visible on mobile/touch screens) */}
-        {isMobile && (
-          <div className="mobile-touch-gamepad">
+        {/* Mobile Tactile Virtual Gamepad (Visible on mobile/touch screens via CSS) */}
+        <div className="mobile-touch-gamepad">
             {/* L & R Shoulder Triggers — Q=L, E=R in EmulatorJS GBA mapping */}
             <div className="gamepad-shoulders-row">
               <button
@@ -598,7 +590,6 @@ export default function OfflineArcadePage() {
               </div>
             </div>
           </div>
-        )}
 
         {/* Controls Guide Modal */}
         {showControlsHelp && (
@@ -753,6 +744,12 @@ export default function OfflineArcadePage() {
           overflow-x: hidden;
           width: 100%;
           max-width: 100vw;
+          animation: arcadePageFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes arcadePageFadeIn {
+          from { opacity: 0; transform: translateY(6px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         /* ── Sleek Professional Arcade Navbar ── */
@@ -1068,8 +1065,10 @@ export default function OfflineArcadePage() {
         .gba-screen-viewport {
           position: relative;
           width: 100%;
-          height: 0;
-          padding-bottom: 66.66%; /* Classic 3:2 GBA Aspect Ratio (240x160) */
+          aspect-ratio: 3 / 2;
+          height: auto;
+          min-height: 220px;
+          max-height: 520px;
           background: #000000;
           overflow: hidden;
         }
@@ -1080,6 +1079,18 @@ export default function OfflineArcadePage() {
           width: 100%;
           height: 100%;
           background: #000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .gba-canvas-target :global(canvas),
+        .gba-canvas-target :global(iframe) {
+          width: 100% !important;
+          height: 100% !important;
+          max-width: 100% !important;
+          max-height: 100% !important;
+          object-fit: contain !important;
         }
 
         .screen-loading-overlay, .screen-error-overlay {
@@ -1190,7 +1201,7 @@ export default function OfflineArcadePage() {
         ═══════════════════════════════════════════════ */
         .mobile-touch-gamepad {
           width: 100%;
-          display: flex;
+          display: none;
           flex-direction: column;
           gap: 10px;
           margin-top: 12px;
@@ -1199,6 +1210,12 @@ export default function OfflineArcadePage() {
           border: 1px solid rgba(0, 229, 117, 0.18);
           border-radius: 20px;
           backdrop-filter: blur(16px);
+        }
+
+        @media (max-width: 820px) {
+          .mobile-touch-gamepad {
+            display: flex;
+          }
         }
 
         /* L / R shoulder row */

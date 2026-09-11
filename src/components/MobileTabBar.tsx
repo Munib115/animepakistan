@@ -8,6 +8,10 @@ import { sound } from '@/lib/soundEngine';
 
 function TabBarContent() {
   const pathname = usePathname();
+  if (pathname === '/offline' || pathname?.startsWith('/offline')) {
+    return null;
+  }
+
   const searchParams = useSearchParams();
   const currentType = searchParams.get('type');
   const { language, setLanguage, t } = useLanguage();

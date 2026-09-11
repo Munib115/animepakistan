@@ -6,10 +6,12 @@ import { playCinematicTudum } from '@/lib/tudumAudio';
 
 export default function NetflixLaunchScreen() {
   const pathname = usePathname();
-  const isOfflineRoute = pathname === '/offline' || (typeof window !== 'undefined' && window.location.pathname.startsWith('/offline'));
+  if (pathname === '/offline' || pathname?.startsWith('/offline')) {
+    return null;
+  }
 
   const [isExiting, setIsExiting] = useState(false);
-  const [isDestroyed, setIsDestroyed] = useState(isOfflineRoute);
+  const [isDestroyed, setIsDestroyed] = useState(false);
   const [hasSoundPlayed, setHasSoundPlayed] = useState(false);
   const audioTriggeredRef = useRef(false);
 
@@ -106,9 +108,9 @@ export default function NetflixLaunchScreen() {
         window.removeEventListener('load', evaluateReadiness);
       }
     };
-  }, [dismissIntro, triggerSound, pathname, isOfflineRoute]);
+  }, [dismissIntro, triggerSound, pathname]);
 
-  if (isOfflineRoute || isDestroyed) {
+  if (isDestroyed) {
     return null;
   }
 
