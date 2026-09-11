@@ -5,6 +5,52 @@ import { useRouter } from 'next/navigation';
 import { isGameFullyCached, downloadGameAssets, downloadRomFile } from '@/lib/gameCacheManager';
 import { sound } from '@/lib/soundEngine';
 
+export type GraphicsMode = 'saiyan-hdr' | 'crisp-hd' | 'retro-crt' | 'classic';
+
+export interface GraphicsPreset {
+  name: string;
+  shortName: string;
+  icon: string;
+  accent: string;
+  badge: string;
+  description: string;
+}
+
+export const GRAPHICS_MODES: Record<GraphicsMode, GraphicsPreset> = {
+  'saiyan-hdr': {
+    name: 'Super Saiyan HDR',
+    shortName: 'Saiyan HDR',
+    icon: 'flare',
+    accent: '#fbbf24',
+    badge: 'HDR',
+    description: 'Vibrant Anime Colors, High Contrast & Ki Aura Glow',
+  },
+  'crisp-hd': {
+    name: 'Crisp HD Smooth',
+    shortName: 'Crisp HD',
+    icon: 'auto_fix_high',
+    accent: '#00e575',
+    badge: 'HD',
+    description: 'Anti-Aliased Sprites & Smooth Character Edges',
+  },
+  'retro-crt': {
+    name: 'Retro Arcade CRT',
+    shortName: 'Arcade CRT',
+    icon: 'tv',
+    accent: '#38bdf8',
+    badge: 'CRT',
+    description: '240p Phosphor Scanlines & Authentic Curved Glass Glow',
+  },
+  'classic': {
+    name: 'Classic GBA (2004)',
+    shortName: 'Original GBA',
+    icon: 'videogame_asset',
+    accent: '#a78bfa',
+    badge: 'RAW',
+    description: 'Pixel-Perfect Original 240×160 Raw Pixels',
+  },
+};
+
 export default function OfflineArcadePage() {
   const router = useRouter();
   const [isOnline, setIsOnline] = useState(true);
@@ -18,9 +64,43 @@ export default function OfflineArcadePage() {
   const [cacheCurrentLabel, setCacheCurrentLabel] = useState('');
   const [emulatorLoaded, setEmulatorLoaded] = useState(false);
   const [emulatorError, setEmulatorError] = useState<string | null>(null);
+  const [graphicsMode, setGraphicsMode] = useState<GraphicsMode>('saiyan-hdr');
+  const [hudMessage, setHudMessage] = useState<string | null>(null);
+  const hudTimerRef = useRef<NodeJS.Timeout | null>(null);
   const arcadeContainerRef = useRef<HTMLDivElement>(null);
   const gameFrameRef = useRef<HTMLDivElement>(null);
   const ejsScriptRef = useRef<HTMLScriptElement | null>(null);
+
+  // Load saved graphics preference
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('ap_gba_graphics_mode') as GraphicsMode;
+      if (saved && GRAPHICS_MODES[saved]) {
+        setGraphicsMode(saved);
+      }
+    } catch {}
+  }, []);
+
+  const cycleGraphicsMode = useCallback(() => {
+    sound.playButton();
+    sound.haptic(20);
+    const keys: GraphicsMode[] = ['saiyan-hdr', 'crisp-hd', 'retro-crt', 'classic'];
+    setGraphicsMode((curr) => {
+      const nextIdx = (keys.indexOf(curr) + 1) % keys.length;
+      const next = keys[nextIdx];
+      try {
+        localStorage.setItem('ap_gba_graphics_mode', next);
+      } catch {}
+
+      if (hudTimerRef.current) clearTimeout(hudTimerRef.current);
+      setHudMessage(`${GRAPHICS_MODES[next].name} • ${GRAPHICS_MODES[next].description}`);
+      hudTimerRef.current = setTimeout(() => {
+        setHudMessage(null);
+      }, 2600);
+
+      return next;
+    });
+  }, []);
 
   // ── Stop the emulator completely (audio + engine + DOM) ──────────────────
   const stopEmulator = useCallback(() => {
@@ -371,6 +451,19 @@ export default function OfflineArcadePage() {
 
           <button
             type="button"
+            className="action-btn gfx-mode-btn"
+            onClick={cycleGraphicsMode}
+            title={`Graphics Mode: ${GRAPHICS_MODES[graphicsMode].name} — Click to cycle enhancement`}
+            aria-label="Cycle Graphics Enhancement Mode"
+          >
+            <span className="material-symbols-outlined" style={{ color: GRAPHICS_MODES[graphicsMode].accent, fontSize: '18px' }}>
+              {GRAPHICS_MODES[graphicsMode].icon}
+            </span>
+            <span className="btn-label-desktop">{GRAPHICS_MODES[graphicsMode].shortName}</span>
+          </button>
+
+          <button
+            type="button"
             className="action-btn"
             onClick={() => {
               sound.click();
@@ -402,7 +495,7 @@ export default function OfflineArcadePage() {
 
       {/* Main Arcade Frame */}
       <main className="arcade-stage">
-        <div className="gba-console-bezel" ref={gameFrameRef}>
+        <div className={`gba-console-bezel bezel-aura-${graphicsMode}`} ref={gameFrameRef}>
           {/* Bezel Top: Classic GBA Accent */}
           <div className="bezel-top-bar">
             <div className="gba-power-indicator">
@@ -413,14 +506,47 @@ export default function OfflineArcadePage() {
               <span className="gba-brand">ANIME PAKISTAN</span>
               <span className="gba-model">GBA ARCADE</span>
             </div>
-            <div className="gba-speaker-grille">
-              <span /><span /><span />
+            <div className="bezel-top-right">
+              <button
+                type="button"
+                className="bezel-gfx-pill"
+                onClick={cycleGraphicsMode}
+                title="Click to switch graphics mode"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '12px', color: GRAPHICS_MODES[graphicsMode].accent }}>
+                  {GRAPHICS_MODES[graphicsMode].icon}
+                </span>
+                <span>{GRAPHICS_MODES[graphicsMode].badge}</span>
+              </button>
+              <div className="gba-speaker-grille">
+                <span /><span /><span />
+              </div>
             </div>
           </div>
 
-          {/* Screen Display Bezel */}
-          <div className="gba-screen-viewport">
+          {/* Screen Display Bezel with Real-Time Graphics Enhancement */}
+          <div className={`gba-screen-viewport gfx-mode-${graphicsMode}`}>
             <div id="gba-game-canvas" className="gba-canvas-target" />
+
+            {/* Retro CRT Scanline Shader Overlay */}
+            {graphicsMode === 'retro-crt' && (
+              <div className="crt-scanline-shader" />
+            )}
+
+            {/* Super Saiyan Ki Aura VFX Glow */}
+            {graphicsMode === 'saiyan-hdr' && (
+              <div className="saiyan-aura-glow" />
+            )}
+
+            {/* Transient Graphics HUD Notification Toast */}
+            {hudMessage && (
+              <div className="gfx-hud-pill">
+                <span className="material-symbols-outlined" style={{ color: GRAPHICS_MODES[graphicsMode].accent, fontSize: '16px' }}>
+                  {GRAPHICS_MODES[graphicsMode].icon}
+                </span>
+                <span>{hudMessage}</span>
+              </div>
+            )}
 
             {/* Loading / Ready state */}
             {!emulatorLoaded && !emulatorError && (
@@ -459,6 +585,17 @@ export default function OfflineArcadePage() {
           <div className="bezel-bottom-bar">
             <span className="game-label">DRAGON BALL Z - SUPERSONIC WARRIORS</span>
             <div className="bezel-shortcuts">
+              <button
+                type="button"
+                className="gfx-bezel-badge"
+                onClick={cycleGraphicsMode}
+                title="Click to switch Graphics Mode"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '13px', color: GRAPHICS_MODES[graphicsMode].accent }}>
+                  {GRAPHICS_MODES[graphicsMode].icon}
+                </span>
+                <span>GFX: {GRAPHICS_MODES[graphicsMode].name}</span>
+              </button>
               <span className="shortcut-pill">Z: B-Attack</span>
               <span className="shortcut-pill">X: A-Heavy</span>
               <span className="shortcut-pill">Q: L-Charge</span>
@@ -1050,6 +1187,31 @@ export default function OfflineArcadePage() {
           color: #e2e8f0;
         }
 
+        .bezel-top-right {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .bezel-gfx-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 3px 9px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          color: #f1f5f9;
+          font-size: 0.65rem;
+          font-weight: 800;
+          cursor: pointer;
+          transition: all 0.18s ease;
+        }
+        .bezel-gfx-pill:hover {
+          background: rgba(255, 255, 255, 0.18);
+          transform: translateY(-1px);
+        }
+
         .gba-speaker-grille {
           display: flex;
           gap: 4px;
@@ -1059,6 +1221,24 @@ export default function OfflineArcadePage() {
           height: 14px;
           border-radius: 2px;
           background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ── Dynamic Bezel Ki Auras ── */
+        .gba-console-bezel.bezel-aura-saiyan-hdr {
+          border-color: rgba(245, 158, 11, 0.45);
+          box-shadow: 0 0 35px rgba(245, 158, 11, 0.25), 0 24px 60px rgba(0, 0, 0, 0.6);
+        }
+        .gba-console-bezel.bezel-aura-crisp-hd {
+          border-color: rgba(0, 229, 117, 0.45);
+          box-shadow: 0 0 35px rgba(0, 229, 117, 0.22), 0 24px 60px rgba(0, 0, 0, 0.6);
+        }
+        .gba-console-bezel.bezel-aura-retro-crt {
+          border-color: rgba(56, 189, 248, 0.40);
+          box-shadow: 0 0 35px rgba(56, 189, 248, 0.20), 0 24px 60px rgba(0, 0, 0, 0.6);
+        }
+        .gba-console-bezel.bezel-aura-classic {
+          border-color: rgba(167, 139, 250, 0.35);
+          box-shadow: 0 0 30px rgba(167, 139, 250, 0.18), 0 24px 60px rgba(0, 0, 0, 0.6);
         }
 
         /* Screen Viewport */
@@ -1091,6 +1271,120 @@ export default function OfflineArcadePage() {
           max-width: 100% !important;
           max-height: 100% !important;
           object-fit: contain !important;
+        }
+
+        /* ── Graphics Enhancement Filters ── */
+        /* 1. Super Saiyan HDR (Vibrant Anime Colors & Specular Glow) */
+        .gfx-mode-saiyan-hdr .gba-canvas-target :global(canvas) {
+          filter: contrast(1.18) saturate(1.42) brightness(1.05) drop-shadow(0 0 10px rgba(245, 158, 11, 0.2));
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: crisp-edges;
+          transition: filter 0.25s ease;
+        }
+
+        /* 2. Crisp HD Smooth (Anti-Aliased Sprites) */
+        .gfx-mode-crisp-hd .gba-canvas-target :global(canvas) {
+          filter: contrast(1.07) saturate(1.18) brightness(1.02);
+          image-rendering: auto;
+          transition: filter 0.25s ease;
+        }
+
+        /* 3. Retro Arcade CRT (Scanlines & Phosphor Glow) */
+        .gfx-mode-retro-crt .gba-canvas-target :global(canvas) {
+          filter: contrast(1.14) saturate(1.24) brightness(1.06);
+          image-rendering: pixelated;
+          transition: filter 0.25s ease;
+        }
+
+        /* 4. Classic Original (Pure 2004 GBA Hardware Pixels) */
+        .gfx-mode-classic .gba-canvas-target :global(canvas) {
+          filter: none;
+          image-rendering: pixelated;
+          transition: filter 0.25s ease;
+        }
+
+        /* Retro CRT Scanline Shader Overlay */
+        .crt-scanline-shader {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background: linear-gradient(
+            rgba(18, 16, 16, 0) 50%, 
+            rgba(0, 0, 0, 0.32) 50%
+          ), linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.03),
+            rgba(0, 255, 0, 0.015),
+            rgba(0, 0, 255, 0.03)
+          );
+          background-size: 100% 3px, 6px 100%;
+          box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.75);
+          z-index: 5;
+        }
+
+        /* Super Saiyan Ki Aura VFX Glow */
+        .saiyan-aura-glow {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          box-shadow: inset 0 0 50px rgba(251, 191, 36, 0.24);
+          mix-blend-mode: screen;
+          z-index: 5;
+          animation: saiyanAuraPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes saiyanAuraPulse {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 1; }
+        }
+
+        /* HUD Mode Toast */
+        .gfx-hud-pill {
+          position: absolute;
+          top: 14px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 18px;
+          border-radius: 999px;
+          background: rgba(4, 14, 9, 0.92);
+          border: 1px solid rgba(245, 158, 11, 0.55);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          color: #ffffff;
+          font-size: 0.78rem;
+          font-weight: 800;
+          letter-spacing: 0.03em;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 16px rgba(245, 158, 11, 0.3);
+          z-index: 25;
+          pointer-events: none;
+          animation: hudPop 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes hudPop {
+          from { opacity: 0; transform: translate(-50%, -10px) scale(0.92); }
+          to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+        }
+
+        .gfx-bezel-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 3px 10px;
+          border-radius: 999px;
+          background: rgba(0, 229, 117, 0.12);
+          border: 1px solid rgba(0, 229, 117, 0.3);
+          color: #00e575;
+          font-size: 0.68rem;
+          font-weight: 800;
+          cursor: pointer;
+          transition: all 0.18s ease;
+        }
+        .gfx-bezel-badge:hover {
+          background: rgba(0, 229, 117, 0.22);
+          transform: scale(1.03);
         }
 
         .screen-loading-overlay, .screen-error-overlay {
