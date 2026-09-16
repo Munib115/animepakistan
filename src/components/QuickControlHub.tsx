@@ -15,6 +15,7 @@ import {
   SharedLibraryRecord,
 } from '@/lib/shareLibrary';
 import { adblockShield, ShieldStats, formatTimeSaved } from '@/lib/adblockShield';
+import { watchTimeTracker, WatchTimeStats, formatCompactTime } from '@/lib/watchTimeTracker';
 import { useDownloads } from '@/context/DownloadContext';
 
 export default function QuickControlHub() {
@@ -29,6 +30,14 @@ export default function QuickControlHub() {
     trackersBlocked: 0,
     bandwidthSavedMB: 0,
     timeSavedSec: 0,
+  });
+  const [watchStats, setWatchStats] = useState<WatchTimeStats & { isActive: boolean }>({
+    totalSeconds: 0,
+    todaySeconds: 0,
+    sessionSeconds: 0,
+    todayDate: '',
+    lastActiveTimestamp: Date.now(),
+    isActive: true,
   });
   const { downloads, pauseDownload, resumeDownload, cancelDownload, clearCompleted } = useDownloads();
   const activeDownloadsCount = downloads.filter((d) => d.status === 'downloading').length;
@@ -197,11 +206,22 @@ export default function QuickControlHub() {
     setIsAdBlockOn(adblockShield.isEnabled());
     setShieldStats(adblockShield.getStats());
 
+    // Watch Time Tracker sync
+    setWatchStats(watchTimeTracker.getStats());
+
     const handleShieldStatsUpdate = () => {
       setShieldStats(adblockShield.getStats());
     };
     const handleShieldToggleEvent = () => {
       setIsAdBlockOn(adblockShield.isEnabled());
+    };
+
+    const handleWatchTimeUpdate = (e: any) => {
+      if (e?.detail) {
+        setWatchStats(e.detail);
+      } else {
+        setWatchStats(watchTimeTracker.getStats());
+      }
     };
 
     const handleOpenSettingsHub = () => {
@@ -216,6 +236,7 @@ export default function QuickControlHub() {
 
     window.addEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
     window.addEventListener('ap_adblock_changed', handleShieldToggleEvent);
+    window.addEventListener('ap_watch_time_updated', handleWatchTimeUpdate);
     window.addEventListener('ap_open_settings_hub', handleOpenSettingsHub);
     window.addEventListener('ap_open_downloads', handleOpenDownloads);
 
@@ -235,6 +256,7 @@ export default function QuickControlHub() {
       window.removeEventListener('ap_open_downloads', handleOpenDownloads);
       window.removeEventListener('ap_adblock_stats_updated', handleShieldStatsUpdate);
       window.removeEventListener('ap_adblock_changed', handleShieldToggleEvent);
+      window.removeEventListener('ap_watch_time_updated', handleWatchTimeUpdate);
     };
   }, []);
 
@@ -245,6 +267,7 @@ export default function QuickControlHub() {
       setWatchlistItems(getWatchlist());
       setShieldStats(adblockShield.getStats());
       setIsAdBlockOn(adblockShield.isEnabled());
+      setWatchStats(watchTimeTracker.getStats());
     }
   }, [isOpen]);
 
@@ -267,6 +290,12 @@ export default function QuickControlHub() {
   const handleResetShieldStats = () => {
     adblockShield.resetStats();
     setShieldStats(adblockShield.getStats());
+    sound.pop();
+  };
+
+  const handleResetWatchTime = () => {
+    watchTimeTracker.resetStats();
+    setWatchStats(watchTimeTracker.getStats());
     sound.pop();
   };
 
@@ -703,85 +732,75 @@ export default function QuickControlHub() {
                 </div>
               </div>
 
-              {/* AdBlocker Box (Tile) */}
+              {/* Split Row: Half AdBlocker Box + Half Watch Time Box */}
+              {/* 1. AdBlocker Box (Half Tile) */}
               <div 
                 className="hub-glass-tile"
                 style={{
-                  gridColumn: 'span 2',
-                  padding: '14px',
-                  borderRadius: '20px',
+                  gridColumn: 'span 1',
+                  padding: '12px',
+                  borderRadius: '18px',
                   background: isAdBlockOn ? 'linear-gradient(135deg, rgba(0, 102, 51, 0.12) 0%, rgba(0, 229, 117, 0.06) 100%)' : 'var(--bg-secondary)',
                   border: isAdBlockOn ? '1.5px solid var(--color-primary)' : '1px solid var(--glass-border)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '10px',
+                  justifyContent: 'space-between',
+                  gap: '8px',
                   boxShadow: isAdBlockOn ? '0 4px 16px rgba(0, 102, 51, 0.10)' : '0 2px 6px rgba(0,0,0,0.02)',
                   transition: 'all 0.2s ease',
+                  minHeight: '142px',
+                  minWidth: 0,
+                  overflow: 'hidden',
                 }}
               >
-                {/* Header Row: Shield Icon, Title, Subtitle, and ON/OFF Switch */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {/* Header Row: Shield Icon, Title, and ON/OFF Pill */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
                     <div style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '12px',
+                      width: '26px',
+                      height: '26px',
+                      borderRadius: '8px',
                       background: isAdBlockOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.08)',
                       color: isAdBlockOn ? '#ffffff' : 'var(--text-muted)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      boxShadow: isAdBlockOn ? '0 2px 8px rgba(0, 102, 51, 0.3)' : 'none',
+                      boxShadow: isAdBlockOn ? '0 2px 6px rgba(0, 102, 51, 0.25)' : 'none',
+                      flexShrink: 0,
                     }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
                         {isAdBlockOn ? 'verified_user' : 'shield'}
                       </span>
                     </div>
-                    <div>
-                      <div style={{ fontSize: '0.80rem', fontWeight: 800, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span>{isUrdu ? 'ایڈ بلاکر' : 'AdBlocker'}</span>
-                        {isAdBlockOn && (
-                          <span style={{
-                            fontSize: '0.60rem',
-                            fontWeight: 900,
-                            padding: '1px 6px',
-                            borderRadius: '999px',
-                            background: 'var(--color-primary)',
-                            color: '#ffffff',
-                          }}>
-                            {isUrdu ? 'فعال' : 'ACTIVE'}
-                          </span>
-                        )}
-                      </div>
-                      <div style={{ fontSize: '0.67rem', color: 'var(--text-muted)' }}>
-                        {isUrdu ? 'پاپ اپس اور غیر ضروری اشتہارات کی خودکار روک تھام' : 'Stops unwanted popups & redirects during playback'}
-                      </div>
+                    <div style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {isUrdu ? 'ایڈ بلاکر' : 'AdBlocker'}
                     </div>
                   </div>
 
-                  {/* Toggle Pill Switch */}
+                  {/* Mini Toggle Pill Switch */}
                   <button
                     type="button"
                     onClick={toggleAdBlock}
                     style={{
                       border: 'none',
                       background: isAdBlockOn ? 'var(--color-primary)' : 'rgba(0,0,0,0.15)',
-                      padding: '5px 12px',
+                      padding: '3px 7px',
                       borderRadius: '999px',
                       color: isAdBlockOn ? '#ffffff' : 'var(--text-muted)',
-                      fontSize: '0.70rem',
+                      fontSize: '0.62rem',
                       fontWeight: 900,
                       cursor: 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '4px',
+                      flexShrink: 0,
                       transition: 'all 0.2s ease',
                     }}
                     title={isAdBlockOn ? 'Disable AdBlocker' : 'Enable AdBlocker'}
                   >
                     <span style={{
-                      width: '8px',
-                      height: '8px',
+                      width: '6px',
+                      height: '6px',
                       borderRadius: '50%',
                       background: isAdBlockOn ? '#00ff88' : '#888888',
                       display: 'inline-block',
@@ -791,59 +810,41 @@ export default function QuickControlHub() {
                   </button>
                 </div>
 
-                {/* Real-time Summary Banner */}
+                {/* Real-time Blocked Count Card */}
                 <div style={{
-                  background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.18) 0%, rgba(0, 229, 117, 0.08) 100%)',
-                  border: '1px solid rgba(0, 255, 102, 0.25)',
-                  borderRadius: '18px',
-                  padding: '10px 14px',
+                  background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.16) 0%, rgba(0, 229, 117, 0.06) 100%)',
+                  border: '1px solid rgba(0, 255, 102, 0.2)',
+                  borderRadius: '12px',
+                  padding: '7px 9px',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '10px',
+                  flexDirection: 'column',
+                  gap: '2px',
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '24px', color: '#00ff88' }}>
-                      verified
+                  <div style={{ fontSize: '1.02rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.15 }}>
+                    {shieldStats.adsBlocked + shieldStats.popupsBlocked}
+                    <span style={{ fontSize: '0.64rem', fontWeight: 700, color: 'var(--text-muted)', marginInlineStart: '4px' }}>
+                      {isUrdu ? 'بلاک' : 'Blocked'}
                     </span>
-                    <div>
-                      <div style={{ fontSize: '0.84rem', fontWeight: 900, color: 'var(--text-primary)' }}>
-                        {isUrdu 
-                          ? `${shieldStats.adsBlocked + shieldStats.popupsBlocked} اشتہارات و پاپ اپس بلاک ہوئے`
-                          : `${shieldStats.adsBlocked + shieldStats.popupsBlocked} Ads & Popups Blocked`}
-                      </div>
-                      <div style={{ fontSize: '0.70rem', color: 'var(--color-primary)', fontWeight: 700 }}>
-                        {isUrdu
-                          ? `${formatTimeSaved(shieldStats.timeSavedSec)} وقت اور ${shieldStats.bandwidthSavedMB} MB ڈیٹا بچایا گیا`
-                          : `${formatTimeSaved(shieldStats.timeSavedSec)} Saved • ${shieldStats.bandwidthSavedMB} MB Data Saved`}
-                      </div>
-                    </div>
                   </div>
-                  <div style={{
-                    background: 'rgba(0, 255, 102, 0.15)',
-                    border: '1px solid rgba(0, 255, 102, 0.3)',
-                    borderRadius: '999px',
-                    padding: '2px 8px',
-                    fontSize: '0.62rem',
-                    fontWeight: 900,
-                    color: '#00ff88',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    whiteSpace: 'nowrap',
-                  }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00ff88', display: 'inline-block', boxShadow: '0 0 6px #00ff88' }} />
-                    <span>{isUrdu ? 'لائیو' : 'LIVE'}</span>
+                  <div style={{ fontSize: '0.62rem', color: 'var(--color-primary)', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {formatTimeSaved(shieldStats.timeSavedSec)} {isUrdu ? 'بچایا' : 'saved'} • {shieldStats.bandwidthSavedMB}MB
                   </div>
                 </div>
 
-
-                {/* Reset Stats / Status Row */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.64rem', color: 'var(--text-muted)' }}>
-                  <span>
-                    {isAdBlockOn 
-                      ? (isUrdu ? '✓ ویڈیو کلک کرنے پر پاپ اپس یا دوسری سائٹ نہیں کھلے گی' : '✓ Protected: Video clicks will not redirect or open ads')
-                      : (isUrdu ? '⚠ ایڈ بلاکر بند ہے: پاپ اپس آ سکتے ہیں' : '⚠ AdBlocker off: Popups may open')}
+                {/* Footer: Live Protected Status & Reset Button */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.62rem', color: 'var(--text-muted)' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    <span style={{
+                      width: '5px',
+                      height: '5px',
+                      borderRadius: '50%',
+                      background: isAdBlockOn ? '#00ff88' : '#888888',
+                      display: 'inline-block',
+                      boxShadow: isAdBlockOn ? '0 0 5px #00ff88' : 'none',
+                    }} />
+                    <span style={{ fontSize: '0.60rem' }}>
+                      {isAdBlockOn ? (isUrdu ? 'محفوظ' : 'Shielded') : (isUrdu ? 'بند' : 'Off')}
+                    </span>
                   </span>
                   <button
                     type="button"
@@ -852,7 +853,148 @@ export default function QuickControlHub() {
                       border: 'none',
                       background: 'none',
                       color: 'var(--color-primary)',
-                      fontSize: '0.64rem',
+                      fontSize: '0.62rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      padding: 0,
+                    }}
+                  >
+                    {isUrdu ? 'ری سیٹ' : 'Reset'}
+                  </button>
+                </div>
+              </div>
+
+              {/* 2. Watch Time Box (Half Tile) */}
+              <div 
+                className="hub-glass-tile"
+                style={{
+                  gridColumn: 'span 1',
+                  padding: '12px',
+                  borderRadius: '18px',
+                  background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.12) 0%, rgba(0, 229, 117, 0.06) 100%)',
+                  border: '1.5px solid var(--color-primary)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  gap: '8px',
+                  boxShadow: '0 4px 16px rgba(0, 102, 51, 0.10)',
+                  transition: 'all 0.2s ease',
+                  minHeight: '142px',
+                  minWidth: 0,
+                  overflow: 'hidden',
+                }}
+              >
+                {/* Header Row: Clock Icon, Title, and LIVE pulse dot */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
+                    <div style={{
+                      width: '26px',
+                      height: '26px',
+                      borderRadius: '8px',
+                      background: 'var(--color-primary)',
+                      color: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 6px rgba(0, 102, 51, 0.25)',
+                      flexShrink: 0,
+                    }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                        schedule
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {isUrdu ? 'واچ ٹائم' : 'Watch Time'}
+                    </div>
+                  </div>
+
+                  {/* Live Pulsing Status Badge */}
+                  <div
+                    style={{
+                      background: watchStats.isActive ? 'rgba(0, 255, 102, 0.15)' : 'rgba(0,0,0,0.08)',
+                      border: watchStats.isActive ? '1px solid rgba(0, 255, 102, 0.3)' : '1px solid var(--glass-border)',
+                      borderRadius: '999px',
+                      padding: '2px 6px',
+                      fontSize: '0.58rem',
+                      fontWeight: 900,
+                      color: watchStats.isActive ? '#00ff88' : 'var(--text-muted)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '3px',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: '5px',
+                        height: '5px',
+                        borderRadius: '50%',
+                        background: watchStats.isActive ? '#00ff88' : '#888888',
+                        display: 'inline-block',
+                        boxShadow: watchStats.isActive ? '0 0 5px #00ff88' : 'none',
+                      }}
+                    />
+                    <span>{watchStats.isActive ? (isUrdu ? 'لائیو' : 'LIVE') : (isUrdu ? 'توقف' : 'IDLE')}</span>
+                  </div>
+                </div>
+
+                {/* Real-time Ticking Duration Display */}
+                <div style={{
+                  background: 'linear-gradient(135deg, rgba(0, 102, 51, 0.16) 0%, rgba(0, 229, 117, 0.06) 100%)',
+                  border: '1px solid rgba(0, 255, 102, 0.2)',
+                  borderRadius: '12px',
+                  padding: '7px 9px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '2px',
+                }}>
+                  <div style={{ fontSize: '1.02rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.15, letterSpacing: '-0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {(() => {
+                      const sec = Math.max(0, Math.floor(watchStats.totalSeconds || 0));
+                      const hrs = Math.floor(sec / 3600);
+                      const mins = Math.floor((sec % 3600) / 60);
+                      const remSec = sec % 60;
+                      if (hrs > 0) {
+                        return isUrdu ? `${hrs} گھنٹے ${mins} منٹ` : `${hrs}h ${mins}m`;
+                      }
+                      if (mins > 0) {
+                        return isUrdu ? `${mins} منٹ ${remSec}s` : `${mins}m ${remSec}s`;
+                      }
+                      return isUrdu ? `${remSec} سیکنڈ` : `${remSec}s`;
+                    })()}
+                  </div>
+                  <div style={{ fontSize: '0.62rem', color: 'var(--color-primary)', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {isUrdu 
+                      ? `آج: ${formatCompactTime(watchStats.todaySeconds, true)}`
+                      : `Today: ${formatCompactTime(watchStats.todaySeconds, false)}`
+                    } • {isUrdu 
+                      ? `سیشن: ${formatCompactTime(watchStats.sessionSeconds, true)}`
+                      : `Session: ${formatCompactTime(watchStats.sessionSeconds, false)}`
+                    }
+                  </div>
+                </div>
+
+                {/* Footer: Otaku Level & Reset */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.62rem', color: 'var(--text-muted)' }}>
+                  <span style={{ fontSize: '0.60rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {(() => {
+                      const hrs = (watchStats.totalSeconds || 0) / 3600;
+                      if (hrs >= 50) return isUrdu ? '🏆 اوتاکو' : '🏆 Otaku';
+                      if (hrs >= 15) return isUrdu ? '⭐ بَف' : '⭐ Buff';
+                      if (hrs >= 3) return isUrdu ? '🎬 ناظر' : '🎬 Viewer';
+                      return isUrdu ? '🌱 نیا' : '🌱 New';
+                    })()}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleResetWatchTime}
+                    style={{
+                      border: 'none',
+                      background: 'none',
+                      color: 'var(--color-primary)',
+                      fontSize: '0.62rem',
                       fontWeight: 700,
                       cursor: 'pointer',
                       textDecoration: 'underline',
