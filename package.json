@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "scrape:new": "node scripts/scrape_all_new_episodes.js",
+    "scrape": "node scripts/scrape_all_new_episodes.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

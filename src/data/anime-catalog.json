@@ -1,5 +1,54 @@
 [
   {
+    "id": "kaiju-no-8-original-short-anime-narumis-week-at-work",
+    "title": "Kaiju No. 8 Original Short Anime \"Narumi's Week at Work\"",
+    "slug": "kaiju-no-8-original-short-anime-narumis-week-at-work",
+    "saltSlug": "kaiju-no-8-original-short-anime-narumis-week-at-work",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/8VpgX5oPxoYkQoHd4HW5zBGBxyK.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/swtTU46Qt0Zw2OTnwkhqO4dcuc2.jpg",
+    "genres": [
+      "Action",
+      "Anime"
+    ],
+    "rating": 8,
+    "year": 2026,
+    "episodeCount": 2,
+    "source": "animesalt"
+  },
+  {
+    "id": "the-frontier-lord-begins-with-zero-subjects",
+    "title": "The Frontier Lord Begins with Zero Subjects",
+    "slug": "the-frontier-lord-begins-with-zero-subjects",
+    "saltSlug": "the-frontier-lord-begins-with-zero-subjects",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w342/vHTHQZy3JhgoVMkbXlOot5gOUzZ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w1280/pEhFkDyRMpUZr1lwmmPFVGzdgNl.jpg",
+    "genres": [
+      "Comedy"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "source": "animesalt"
+  },
+  {
+    "id": "the-first-order",
+    "title": "The First Order",
+    "slug": "the-first-order",
+    "saltSlug": "the-first-order",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/LM1wtCmWKg0NoifRvBCQ9nJBMf.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/bimNEAYulIAJUeY8tswd7LBU0Sd.jpg",
+    "genres": [
+      "Drama"
+    ],
+    "rating": 9.2,
+    "year": 2023,
+    "episodeCount": 16,
+    "source": "animesalt"
+  },
+  {
     "id": "konosuba-gods-blessing-on-this-wonderful-world",
     "title": "KONOSUBA - God's blessing on this wonderful world!",
     "slug": "konosuba-gods-blessing-on-this-wonderful-world",
@@ -17,7 +66,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 10,
+    "episodeCount": 20,
     "source": "animesalt"
   },
   {
@@ -5250,7 +5299,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 8,
+    "episodeCount": 9,
     "source": "animesalt"
   },
   {
@@ -5434,7 +5483,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 20,
+    "episodeCount": 50,
     "source": "animesalt"
   },
   {
@@ -5732,7 +5781,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 8,
+    "episodeCount": 9,
     "source": "animesalt"
   },
   {
@@ -5749,7 +5798,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 7,
+    "episodeCount": 8,
     "source": "animesalt"
   },
   {
@@ -5766,7 +5815,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 8,
+    "episodeCount": 9,
     "source": "animesalt"
   },
   {
@@ -5855,7 +5904,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 10,
+    "episodeCount": 11,
     "source": "animesalt"
   },
   {
@@ -5872,7 +5921,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 10,
+    "episodeCount": 11,
     "source": "animesalt"
   },
   {
@@ -6660,7 +6709,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 21,
+    "episodeCount": 22,
     "source": "animesalt"
   },
   {
@@ -7656,7 +7705,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 22,
+    "episodeCount": 23,
     "source": "animesalt"
   },
   {
@@ -8232,7 +8281,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 88,
+    "episodeCount": 91,
     "source": "animesalt"
   },
   {
@@ -10604,7 +10653,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 61,
+    "episodeCount": 64,
     "source": "animesalt"
   },
   {
@@ -11405,7 +11454,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 19,
+    "episodeCount": 20,
     "source": "animesalt"
   },
   {
@@ -11785,7 +11834,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 45,
+    "episodeCount": 46,
     "source": "animesalt"
   },
   {
@@ -13192,7 +13241,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 88,
+    "episodeCount": 89,
     "source": "animesalt"
   },
   {
@@ -13352,7 +13401,7 @@
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 18,
+    "episodeCount": 19,
     "source": "animesalt"
   },
   {
