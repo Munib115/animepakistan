@@ -157,7 +157,42 @@ function parseEpisodesFromHtml($, seasonNum = 1) {
       });
     }
   });
-  return episodes;
+function isValidStreamEmbed(url) {
+  if (!url || typeof url !== 'string') return false;
+  const lower = url.toLowerCase().trim();
+  if (!lower.startsWith('http://') && !lower.startsWith('https://')) return false;
+  if (lower.includes('short.icu') || lower.includes('short.link') || lower.includes('linkvertise')) return false;
+  if (lower.includes('animesalt.cx/episode') || lower.includes('animesalt.cx/series') || lower.includes('animesalt.cx/movies')) return false;
+  if (lower.includes('google') || lower.includes('doubleclick') || lower.includes('disqus') || lower.includes('facebook') || lower.includes('youtube.com/embed')) return false;
+  return true;
+}
+
+async function fetchEpisodeStream(epUrl) {
+  try {
+    const html = await fetchWithUA(epUrl, 2, 8000);
+    const $ = cheerio.load(html);
+    const candidates = [];
+    $('iframe').each((_, el) => {
+      const src = $(el).attr('src') || $(el).attr('data-src') || '';
+      if (src) {
+        const full = src.startsWith('//') ? 'https:' + src : src;
+        if (isValidStreamEmbed(full)) candidates.push(full);
+      }
+    });
+    $('[data-player], [data-embed], .playex').each((_, el) => {
+      const embed = $(el).attr('data-player') || $(el).attr('data-embed') || $(el).attr('data-src') || '';
+      if (embed && isValidStreamEmbed(embed)) {
+        candidates.push(embed.startsWith('//') ? 'https:' + embed : embed);
+      }
+    });
+    const asCdn = candidates.find(c => c.includes('as-cdn'));
+    if (asCdn) return asCdn.replace(/as-cdn2[0-5]\.top/gi, 'as-cdn26.top');
+    const mega = candidates.find(c => c.includes('megaplay.buzz'));
+    if (mega) return mega;
+    return candidates[0] || null;
+  } catch (e) {
+    return null;
+  }
 }
 
 async function scrapeFullSeriesEpisodes(seriesUrl) {
@@ -384,6 +419,15 @@ async function main() {
           source: 'animesalt'
         };
 
+        for (const ep of episodes) {
+          if (!ep.streamUrl && ep.url) {
+            try {
+              const stream = await fetchEpisodeStream(ep.url);
+              if (stream) ep.streamUrl = stream;
+            } catch (e) {}
+          }
+        }
+
         newlyAddedItems.push(newAnimeItem);
         totalNewEpisodesAdded += episodes.length;
 
@@ -413,8 +457,13 @@ async function main() {
 
           for (const newEp of episodes) {
             const preserved = existingStreamMap.get(newEp.slug) || existingStreamMap.get(`${newEp.season}-${newEp.number}`);
-            if (preserved && !newEp.streamUrl) {
+            if (preserved) {
               newEp.streamUrl = preserved;
+            } else if (!newEp.streamUrl && newEp.url) {
+              try {
+                const fetchedStream = await fetchEpisodeStream(newEp.url);
+                if (fetchedStream) newEp.streamUrl = fetchedStream;
+              } catch (e) {}
             }
           }
 
