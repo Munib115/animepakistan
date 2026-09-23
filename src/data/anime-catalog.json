@@ -19,7 +19,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 4,
     "episodesCount": 4,
     "hasStreams": true
   },
@@ -43,7 +42,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 1,
     "episodesCount": 1,
     "hasStreams": true
   },
@@ -67,7 +65,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -94,7 +91,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -117,7 +113,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -140,7 +135,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 4,
     "episodesCount": 4,
     "hasStreams": true
   },
@@ -162,7 +156,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 293,
     "episodesCount": 293,
     "hasStreams": true
   },
@@ -1030,7 +1023,6 @@
     "id": "ap-barbie-mariposa-the-fairy-princess",
     "title": "Barbie Mariposa & the Fairy Princess",
     "slug": "barbie-mariposa-the-fairy-princess",
-    "toonSlug": "barbie-mariposa",
     "type": "movie",
     "poster": "https://image.tmdb.org/t/p/w185/aUVd4itaF4mDFgld99wMIihjUK7.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w1280/wrt7STmV10GVl8Q9qPvxBUMxT1Z.jpg",
@@ -1983,7 +1975,7 @@
     "id": "ap-scooby-doo-meets-the-boo-brothers",
     "title": "Scooby-Doo! Meets the Boo Brothers",
     "slug": "scooby-doo-meets-the-boo-brothers",
-    "toonSlug": "scooby-doo",
+    "toonSlug": "scooby-doo-meets-the-boo-brothers",
     "type": "movie",
     "poster": "https://image.tmdb.org/t/p/w185/2jKmHNGED3cUyXd6oge5uuHYh3f.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w1280/5p9HiIQdUBOXjfz8ujFqaQRST8K.jpg",
@@ -4754,7 +4746,6 @@
     "id": "ap-slugterra-return-of-the-elementals",
     "title": "SlugTerra: Return of the Elementals",
     "slug": "slugterra-return-of-the-elementals",
-    "toonSlug": "elemental",
     "type": "movie",
     "poster": "https://image.tmdb.org/t/p/w185/ApN2lteDsoIU5dDHJXeqVD13vpd.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w1280/6jnSkRFKkcyKyQJGO5eVfFeXFGF.jpg",
@@ -6195,7 +6186,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -6217,7 +6207,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -6239,7 +6228,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -6262,7 +6250,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 36,
     "episodesCount": 36,
     "hasStreams": true
   },
@@ -6283,7 +6270,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 795,
     "episodesCount": 795,
     "hasStreams": true
   },
@@ -6305,7 +6291,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -6328,7 +6313,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -6351,7 +6335,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 21,
     "episodesCount": 21,
     "hasStreams": true
   },
@@ -6373,7 +6356,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -6395,7 +6377,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -6417,7 +6398,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 35,
     "episodesCount": 35,
     "hasStreams": true
   },
@@ -6440,7 +6420,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 9,
     "episodesCount": 9,
     "hasStreams": true
   },
@@ -6463,7 +6442,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -6485,7 +6463,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -6508,7 +6485,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 7,
     "episodesCount": 7,
     "hasStreams": true
   },
@@ -6530,7 +6506,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -6551,7 +6526,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -6573,7 +6547,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -6595,7 +6568,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -6618,7 +6590,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -6639,7 +6610,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -6661,7 +6631,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -6683,7 +6652,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -6705,7 +6673,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -6727,7 +6694,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -6749,7 +6715,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 28,
     "episodesCount": 28,
     "hasStreams": true
   },
@@ -6771,7 +6736,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -6794,7 +6758,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -6817,7 +6780,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -6840,7 +6802,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -6863,7 +6824,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -6885,7 +6845,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 54,
     "episodesCount": 54,
     "hasStreams": true
   },
@@ -6907,7 +6866,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 28,
     "episodesCount": 28,
     "hasStreams": true
   },
@@ -6928,7 +6886,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 208,
     "episodesCount": 208,
     "hasStreams": true
   },
@@ -6949,7 +6906,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 27,
     "episodesCount": 27,
     "hasStreams": true
   },
@@ -6972,7 +6928,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 51,
     "episodesCount": 51,
     "hasStreams": true
   },
@@ -6994,7 +6949,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 62,
     "episodesCount": 62,
     "hasStreams": true
   },
@@ -7016,7 +6970,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 79,
     "episodesCount": 79,
     "hasStreams": true
   },
@@ -7038,7 +6991,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -7061,7 +7013,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -7083,7 +7034,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 9,
     "episodesCount": 9,
     "hasStreams": true
   },
@@ -7106,7 +7056,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -7129,7 +7078,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 9,
     "episodesCount": 9,
     "hasStreams": true
   },
@@ -7154,7 +7102,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 3,
     "episodesCount": 3,
     "hasStreams": true
   },
@@ -7177,7 +7124,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -7200,7 +7146,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -7223,7 +7168,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -7246,7 +7190,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -7269,7 +7212,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -7292,7 +7234,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 42,
     "episodesCount": 42,
     "hasStreams": true
   },
@@ -7314,7 +7255,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -7336,7 +7276,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -7358,7 +7297,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -7380,7 +7318,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -7402,7 +7339,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -7424,7 +7360,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -7446,7 +7381,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -7468,7 +7402,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 14,
     "episodesCount": 14,
     "hasStreams": true
   },
@@ -7490,7 +7423,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -7513,7 +7445,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -7535,7 +7466,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -7557,7 +7487,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -7579,7 +7508,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -7601,7 +7529,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 22,
     "episodesCount": 22,
     "hasStreams": true
   },
@@ -7623,7 +7550,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 14,
     "episodesCount": 14,
     "hasStreams": true
   },
@@ -7646,7 +7572,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 21,
     "episodesCount": 21,
     "hasStreams": true
   },
@@ -7669,7 +7594,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -7692,7 +7616,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 127,
     "episodesCount": 127,
     "hasStreams": true
   },
@@ -7714,7 +7637,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -7737,7 +7659,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -7759,7 +7680,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -7781,7 +7701,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 62,
     "episodesCount": 62,
     "hasStreams": true
   },
@@ -7804,7 +7723,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 85,
     "episodesCount": 85,
     "hasStreams": true
   },
@@ -7831,7 +7749,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 64,
     "episodesCount": 64,
     "hasStreams": true
   },
@@ -7854,7 +7771,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -7877,7 +7793,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -7900,7 +7815,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -7921,7 +7835,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": false
   },
@@ -7944,7 +7857,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -7965,7 +7877,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -7988,7 +7899,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -8011,7 +7921,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8034,7 +7943,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -8056,7 +7964,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -8079,7 +7986,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -8100,7 +8006,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8123,7 +8028,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8146,7 +8050,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -8173,7 +8076,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 22,
     "episodesCount": 22,
     "hasStreams": true
   },
@@ -8195,7 +8097,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -8218,7 +8119,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -8241,7 +8141,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8264,7 +8163,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8286,7 +8184,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8309,7 +8206,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -8332,7 +8228,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -8355,7 +8250,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8385,7 +8279,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -8413,7 +8306,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8440,7 +8332,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -8468,7 +8359,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -8497,7 +8387,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 37,
     "episodesCount": 37,
     "hasStreams": true
   },
@@ -8524,7 +8413,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8552,7 +8440,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 500,
     "episodesCount": 500,
     "hasStreams": true
   },
@@ -8577,7 +8464,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8603,7 +8489,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 22,
     "episodesCount": 22,
     "hasStreams": true
   },
@@ -8632,7 +8517,6 @@
       "Japanese",
       "Urdu"
     ],
-    "episodeCount": 36,
     "episodesCount": 36,
     "hasStreams": true
   },
@@ -8656,7 +8540,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8684,7 +8567,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -8710,7 +8592,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -8739,7 +8620,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -8766,7 +8646,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8795,7 +8674,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -8823,7 +8701,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -8844,7 +8721,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 19,
     "episodesCount": 19,
     "hasStreams": true
   },
@@ -8872,7 +8748,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -8901,7 +8776,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8929,7 +8803,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -8958,7 +8831,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -8986,7 +8858,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9012,7 +8883,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9043,7 +8913,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -9069,7 +8938,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9095,7 +8963,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 36,
     "episodesCount": 36,
     "hasStreams": true
   },
@@ -9117,7 +8984,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -9145,7 +9011,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9174,7 +9039,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -9200,7 +9064,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 36,
     "episodesCount": 36,
     "hasStreams": true
   },
@@ -9227,7 +9090,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -9257,7 +9119,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -9281,7 +9142,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9311,7 +9171,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9336,7 +9195,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -9362,7 +9220,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9387,7 +9244,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -9413,7 +9269,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -9439,7 +9294,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -9465,7 +9319,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 86,
     "episodesCount": 86,
     "hasStreams": true
   },
@@ -9497,7 +9350,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 171,
     "episodesCount": 171,
     "hasStreams": true
   },
@@ -9523,7 +9375,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -9551,7 +9402,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -9579,7 +9429,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 22,
     "episodesCount": 22,
     "hasStreams": true
   },
@@ -9606,7 +9455,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9634,7 +9482,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -9662,7 +9509,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -9689,7 +9535,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -9715,7 +9560,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9743,7 +9587,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9772,7 +9615,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 5,
     "episodesCount": 5,
     "hasStreams": true
   },
@@ -9797,7 +9639,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -9825,7 +9666,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -9848,7 +9688,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 22,
     "episodesCount": 22,
     "hasStreams": true
   },
@@ -9873,7 +9712,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -9901,7 +9739,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -9927,7 +9764,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 39,
     "episodesCount": 39,
     "hasStreams": true
   },
@@ -9956,7 +9792,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 148,
     "episodesCount": 148,
     "hasStreams": true
   },
@@ -9982,7 +9817,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -10007,7 +9841,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 39,
     "episodesCount": 39,
     "hasStreams": true
   },
@@ -10037,7 +9870,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 1155,
     "episodesCount": 1155,
     "hasStreams": true
   },
@@ -10063,7 +9895,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -10093,7 +9924,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 60,
     "episodesCount": 60,
     "hasStreams": true
   },
@@ -10122,7 +9952,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 59,
     "episodesCount": 59,
     "hasStreams": true
   },
@@ -10147,7 +9976,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10173,7 +10001,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10199,7 +10026,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10225,7 +10051,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10255,7 +10080,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10279,7 +10103,6 @@
       "Japanese",
       "Kannada"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10306,7 +10129,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10329,7 +10151,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10355,7 +10176,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -10379,7 +10199,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -10402,7 +10221,6 @@
     "audioLanguages": [
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -10429,7 +10247,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 95,
     "episodesCount": 95,
     "hasStreams": true
   },
@@ -10456,7 +10273,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10479,7 +10295,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10504,7 +10319,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10530,7 +10344,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -10557,7 +10370,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10579,7 +10391,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -10605,7 +10416,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10633,7 +10443,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 0,
     "episodesCount": 0,
     "hasStreams": false
   },
@@ -10657,7 +10466,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10681,7 +10489,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10708,7 +10515,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10735,7 +10541,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 311,
     "episodesCount": 311,
     "hasStreams": true
   },
@@ -10758,7 +10563,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 612,
     "episodesCount": 612,
     "hasStreams": true
   },
@@ -10785,7 +10589,6 @@
       "Hindi",
       "English"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -10812,7 +10615,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 220,
     "episodesCount": 220,
     "hasStreams": true
   },
@@ -10838,7 +10640,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 209,
     "episodesCount": 209,
     "hasStreams": true
   },
@@ -10863,7 +10664,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10889,7 +10689,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10917,7 +10716,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -10943,7 +10741,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -10969,7 +10766,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -10993,7 +10789,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -11020,7 +10815,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 45,
     "episodesCount": 45,
     "hasStreams": true
   },
@@ -11045,7 +10839,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -11069,7 +10862,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 38,
     "episodesCount": 38,
     "hasStreams": true
   },
@@ -11098,7 +10890,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -11122,7 +10913,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 104,
     "episodesCount": 104,
     "hasStreams": true
   },
@@ -11147,7 +10937,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11173,7 +10962,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 63,
     "episodesCount": 63,
     "hasStreams": true
   },
@@ -11201,7 +10989,6 @@
       "Hindi",
       "English"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11229,7 +11016,6 @@
       "Hindi",
       "English"
     ],
-    "episodeCount": 80,
     "episodesCount": 80,
     "hasStreams": true
   },
@@ -11257,7 +11043,6 @@
       "Hindi",
       "English"
     ],
-    "episodeCount": 89,
     "episodesCount": 89,
     "hasStreams": true
   },
@@ -11280,7 +11065,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 113,
     "episodesCount": 113,
     "hasStreams": true
   },
@@ -11305,7 +11089,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11330,7 +11113,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 126,
     "episodesCount": 126,
     "hasStreams": true
   },
@@ -11354,7 +11136,6 @@
       "Hindi",
       "Tamil"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -11377,7 +11158,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 115,
     "episodesCount": 115,
     "hasStreams": true
   },
@@ -11403,7 +11183,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11429,7 +11208,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 130,
     "episodesCount": 130,
     "hasStreams": true
   },
@@ -11453,7 +11231,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 65,
     "episodesCount": 65,
     "hasStreams": true
   },
@@ -11477,7 +11254,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -11498,7 +11274,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 65,
     "episodesCount": 65,
     "hasStreams": true
   },
@@ -11522,7 +11297,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 61,
     "episodesCount": 61,
     "hasStreams": true
   },
@@ -11546,7 +11320,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 157,
     "episodesCount": 157,
     "hasStreams": true
   },
@@ -11571,7 +11344,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -11594,7 +11366,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 59,
     "episodesCount": 59,
     "hasStreams": true
   },
@@ -11620,7 +11391,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -11643,7 +11413,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 191,
     "episodesCount": 191,
     "hasStreams": true
   },
@@ -11668,7 +11437,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11694,7 +11462,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 137,
     "episodesCount": 137,
     "hasStreams": true
   },
@@ -11717,7 +11484,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 39,
     "episodesCount": 39,
     "hasStreams": true
   },
@@ -11741,7 +11507,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11764,7 +11529,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 189,
     "episodesCount": 189,
     "hasStreams": true
   },
@@ -11790,7 +11554,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11816,7 +11579,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 40,
     "episodesCount": 40,
     "hasStreams": true
   },
@@ -11841,7 +11603,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -11866,7 +11627,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 98,
     "episodesCount": 98,
     "hasStreams": true
   },
@@ -11891,7 +11651,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 74,
     "episodesCount": 74,
     "hasStreams": true
   },
@@ -11915,7 +11674,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 142,
     "episodesCount": 142,
     "hasStreams": true
   },
@@ -11938,7 +11696,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -11962,7 +11719,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 141,
     "episodesCount": 141,
     "hasStreams": true
   },
@@ -11984,7 +11740,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -12011,7 +11766,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -12036,7 +11790,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 77,
     "episodesCount": 77,
     "hasStreams": true
   },
@@ -12059,7 +11812,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 49,
     "episodesCount": 49,
     "hasStreams": true
   },
@@ -12079,7 +11831,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 65,
     "episodesCount": 65,
     "hasStreams": true
   },
@@ -12103,7 +11854,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 46,
     "episodesCount": 46,
     "hasStreams": true
   },
@@ -12129,7 +11879,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 30,
     "episodesCount": 30,
     "hasStreams": true
   },
@@ -12149,7 +11898,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 41,
     "episodesCount": 41,
     "hasStreams": true
   },
@@ -12172,7 +11920,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -12198,7 +11945,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 291,
     "episodesCount": 291,
     "hasStreams": true
   },
@@ -12220,7 +11966,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -12245,7 +11990,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -12270,7 +12014,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -12299,7 +12042,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 131,
     "episodesCount": 131,
     "hasStreams": true
   },
@@ -12323,7 +12065,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -12345,7 +12086,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -12369,7 +12109,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 21,
     "episodesCount": 21,
     "hasStreams": true
   },
@@ -12390,7 +12129,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 21,
     "episodesCount": 21,
     "hasStreams": true
   },
@@ -12415,7 +12153,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 199,
     "episodesCount": 199,
     "hasStreams": true
   },
@@ -12439,7 +12176,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -12461,7 +12197,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -12486,7 +12221,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 141,
     "episodesCount": 141,
     "hasStreams": true
   },
@@ -12512,7 +12246,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 156,
     "episodesCount": 156,
     "hasStreams": true
   },
@@ -12533,7 +12266,6 @@
     "audioLanguages": [
       "Hindi"
     ],
-    "episodeCount": 7,
     "episodesCount": 7,
     "hasStreams": true
   },
@@ -12558,7 +12290,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 38,
     "episodesCount": 38,
     "hasStreams": true
   },
@@ -12584,7 +12315,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 39,
     "episodesCount": 39,
     "hasStreams": true
   },
@@ -12612,7 +12342,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 94,
     "episodesCount": 94,
     "hasStreams": true
   },
@@ -12640,7 +12369,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -12666,7 +12394,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 85,
     "episodesCount": 85,
     "hasStreams": true
   },
@@ -12691,7 +12418,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 62,
     "episodesCount": 62,
     "hasStreams": true
   },
@@ -12723,7 +12449,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 153,
     "episodesCount": 153,
     "hasStreams": true
   },
@@ -12751,7 +12476,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -12779,7 +12503,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -12804,7 +12527,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -12826,7 +12548,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 58,
     "episodesCount": 58,
     "hasStreams": true
   },
@@ -12849,7 +12570,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -12877,7 +12597,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -12907,7 +12626,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 65,
     "episodesCount": 65,
     "hasStreams": true
   },
@@ -12936,7 +12654,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -12962,7 +12679,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -12988,7 +12704,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -13016,7 +12731,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -13045,7 +12759,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 47,
     "episodesCount": 47,
     "hasStreams": true
   },
@@ -13069,7 +12782,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13095,7 +12807,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13123,7 +12834,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -13150,7 +12860,6 @@
       "Japanese",
       "Korean"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -13180,7 +12889,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -13209,7 +12917,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 53,
     "episodesCount": 53,
     "hasStreams": true
   },
@@ -13237,7 +12944,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -13263,7 +12969,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13289,7 +12994,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 47,
     "episodesCount": 47,
     "hasStreams": true
   },
@@ -13316,7 +13020,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 63,
     "episodesCount": 63,
     "hasStreams": true
   },
@@ -13343,7 +13046,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 73,
     "episodesCount": 73,
     "hasStreams": true
   },
@@ -13368,7 +13070,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13395,7 +13096,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -13424,7 +13124,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 73,
     "episodesCount": 73,
     "hasStreams": true
   },
@@ -13451,7 +13150,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 37,
     "episodesCount": 37,
     "hasStreams": true
   },
@@ -13475,7 +13173,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13501,7 +13198,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 65,
     "episodesCount": 65,
     "hasStreams": true
   },
@@ -13526,7 +13222,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13555,7 +13250,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -13581,7 +13275,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -13608,7 +13301,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13631,7 +13323,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13655,7 +13346,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13679,7 +13369,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13708,7 +13397,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13731,7 +13419,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 132,
     "episodesCount": 132,
     "hasStreams": true
   },
@@ -13759,7 +13446,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13788,7 +13474,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 77,
     "episodesCount": 77,
     "hasStreams": true
   },
@@ -13818,7 +13503,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 89,
     "episodesCount": 89,
     "hasStreams": true
   },
@@ -13844,7 +13528,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13868,7 +13551,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13894,7 +13576,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13919,7 +13600,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -13946,7 +13626,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13971,7 +13650,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -13998,7 +13676,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14026,7 +13703,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -14053,7 +13729,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 38,
     "episodesCount": 38,
     "hasStreams": true
   },
@@ -14080,7 +13755,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -14108,7 +13782,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -14134,7 +13807,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14161,7 +13833,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -14187,7 +13858,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14211,7 +13881,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14238,7 +13907,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -14261,7 +13929,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14287,7 +13954,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14312,7 +13978,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14339,7 +14004,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14364,7 +14028,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14391,7 +14054,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -14417,7 +14079,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -14446,7 +14107,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14472,7 +14132,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 42,
     "episodesCount": 42,
     "hasStreams": true
   },
@@ -14498,7 +14157,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -14525,7 +14183,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 276,
     "episodesCount": 276,
     "hasStreams": true
   },
@@ -14552,7 +14209,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -14582,7 +14238,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -14609,7 +14264,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14634,7 +14288,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -14661,7 +14314,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -14687,7 +14339,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14714,7 +14365,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -14742,7 +14392,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14766,7 +14415,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 15,
     "episodesCount": 15,
     "hasStreams": true
   },
@@ -14790,7 +14438,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14816,7 +14463,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 36,
     "episodesCount": 36,
     "hasStreams": true
   },
@@ -14839,7 +14485,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14867,7 +14512,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14894,7 +14538,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -14922,7 +14565,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14948,7 +14590,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -14974,7 +14615,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15002,7 +14642,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15030,7 +14669,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -15054,7 +14692,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15078,7 +14715,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 46,
     "episodesCount": 46,
     "hasStreams": true
   },
@@ -15103,7 +14739,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -15128,7 +14763,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15154,7 +14788,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15180,7 +14813,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15208,7 +14840,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -15231,7 +14862,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -15253,7 +14883,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -15278,7 +14907,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15302,7 +14930,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15326,7 +14953,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -15351,7 +14977,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -15373,7 +14998,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -15399,7 +15023,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -15421,7 +15044,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 63,
     "episodesCount": 63,
     "hasStreams": true
   },
@@ -15448,7 +15070,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -15472,7 +15093,6 @@
     "audioLanguages": [
       "English"
     ],
-    "episodeCount": 32,
     "episodesCount": 32,
     "hasStreams": true
   },
@@ -15496,7 +15116,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -15521,7 +15140,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -15543,7 +15161,6 @@
     "audioLanguages": [
       "English"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -15565,7 +15182,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -15591,7 +15207,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -15614,7 +15229,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -15635,7 +15249,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 78,
     "episodesCount": 78,
     "hasStreams": true
   },
@@ -15666,7 +15279,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 33,
     "episodesCount": 33,
     "hasStreams": true
   },
@@ -15691,7 +15303,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -15714,7 +15325,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -15740,7 +15350,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 39,
     "episodesCount": 39,
     "hasStreams": true
   },
@@ -15765,7 +15374,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 9,
     "episodesCount": 9,
     "hasStreams": true
   },
@@ -15794,7 +15402,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -15819,7 +15426,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -15847,7 +15453,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 15,
     "episodesCount": 15,
     "hasStreams": true
   },
@@ -15869,7 +15474,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -15891,7 +15495,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -15915,7 +15518,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -15939,7 +15541,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -15964,7 +15565,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -15990,7 +15590,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -16014,7 +15613,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -16039,7 +15637,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -16064,7 +15661,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -16087,7 +15683,6 @@
       "Urdu",
       "Japanese"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -16114,7 +15709,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -16138,7 +15732,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -16167,7 +15760,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -16191,7 +15783,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -16215,7 +15806,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 9,
     "episodesCount": 9,
     "hasStreams": true
   },
@@ -16238,7 +15828,6 @@
     "audioLanguages": [
       "English"
     ],
-    "episodeCount": 9,
     "episodesCount": 9,
     "hasStreams": true
   },
@@ -16260,7 +15849,6 @@
     "audioLanguages": [
       "English"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -16282,7 +15870,6 @@
     "audioLanguages": [
       "English"
     ],
-    "episodeCount": 145,
     "episodesCount": 145,
     "hasStreams": true
   },
@@ -16306,7 +15893,6 @@
     "audioLanguages": [
       "English"
     ],
-    "episodeCount": 132,
     "episodesCount": 132,
     "hasStreams": true
   },
@@ -16331,7 +15917,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 47,
     "episodesCount": 47,
     "hasStreams": true
   },
@@ -16351,7 +15936,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -16376,7 +15960,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 224,
     "episodesCount": 224,
     "hasStreams": true
   },
@@ -16400,7 +15983,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -16424,7 +16006,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 53,
     "episodesCount": 53,
     "hasStreams": true
   },
@@ -16451,7 +16032,6 @@
       "Hindi",
       "English"
     ],
-    "episodeCount": 46,
     "episodesCount": 46,
     "hasStreams": true
   },
@@ -16473,7 +16053,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -16495,7 +16074,6 @@
     "audioLanguages": [
       "English"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -16521,7 +16099,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -16545,7 +16122,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 19,
     "episodesCount": 19,
     "hasStreams": true
   },
@@ -16568,7 +16144,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 39,
     "episodesCount": 39,
     "hasStreams": true
   },
@@ -16594,7 +16169,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -16621,7 +16195,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -16649,7 +16222,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 104,
     "episodesCount": 104,
     "hasStreams": true
   },
@@ -16672,7 +16244,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 7,
     "episodesCount": 7,
     "hasStreams": true
   },
@@ -16699,7 +16270,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -16720,7 +16290,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -16743,7 +16312,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -16768,7 +16336,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -16794,7 +16361,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -16819,7 +16385,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -16849,7 +16414,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 167,
     "episodesCount": 167,
     "hasStreams": true
   },
@@ -16878,7 +16442,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 89,
     "episodesCount": 89,
     "hasStreams": true
   },
@@ -16905,7 +16468,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 59,
     "episodesCount": 59,
     "hasStreams": true
   },
@@ -16931,7 +16493,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -16957,7 +16518,6 @@
       "Malayalam",
       "Tamil"
     ],
-    "episodeCount": 170,
     "episodesCount": 170,
     "hasStreams": true
   },
@@ -16982,7 +16542,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17007,7 +16566,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17033,7 +16591,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -17054,7 +16611,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17077,7 +16633,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17101,7 +16656,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 19,
     "episodesCount": 19,
     "hasStreams": true
   },
@@ -17127,7 +16681,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17151,7 +16704,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17179,7 +16731,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -17202,7 +16753,6 @@
       "Hindi",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17231,7 +16781,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17256,7 +16805,6 @@
       "Tamil",
       "Telugu"
     ],
-    "episodeCount": 84,
     "episodesCount": 84,
     "hasStreams": true
   },
@@ -17279,7 +16827,6 @@
       "English",
       "Hindi"
     ],
-    "episodeCount": 78,
     "episodesCount": 78,
     "hasStreams": true
   },
@@ -17321,7 +16868,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17342,7 +16888,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 40,
     "episodesCount": 40,
     "hasStreams": true
   },
@@ -17364,7 +16909,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -17506,7 +17050,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -17528,7 +17071,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -17550,7 +17092,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 62,
     "episodesCount": 62,
     "hasStreams": true
   },
@@ -17572,7 +17113,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -17674,7 +17214,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -17715,7 +17254,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -17737,7 +17275,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 3,
     "episodesCount": 3,
     "hasStreams": true
   },
@@ -17758,7 +17295,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -17780,7 +17316,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17842,7 +17377,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17864,7 +17398,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -17886,7 +17419,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 32,
     "episodesCount": 32,
     "hasStreams": true
   },
@@ -17908,7 +17440,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 51,
     "episodesCount": 51,
     "hasStreams": true
   },
@@ -18050,7 +17581,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 2,
     "episodesCount": 2,
     "hasStreams": true
   },
@@ -18092,7 +17622,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18113,7 +17642,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18134,7 +17662,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -18256,7 +17783,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18278,7 +17804,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18299,7 +17824,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 4,
     "episodesCount": 4,
     "hasStreams": true
   },
@@ -18421,7 +17945,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -18443,7 +17966,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -18464,7 +17986,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18486,7 +18007,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18507,7 +18027,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -18589,7 +18108,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 61,
     "episodesCount": 61,
     "hasStreams": true
   },
@@ -18651,7 +18169,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -18673,7 +18190,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18694,7 +18210,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -18715,7 +18230,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -18736,7 +18250,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -18997,7 +18510,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -19019,7 +18531,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 27,
     "episodesCount": 27,
     "hasStreams": true
   },
@@ -19561,7 +19072,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -19823,7 +19333,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 17,
     "episodesCount": 17,
     "hasStreams": true
   },
@@ -19845,7 +19354,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -19947,7 +19455,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -19969,7 +19476,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -20211,7 +19717,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 2,
     "episodesCount": 2,
     "hasStreams": true
   },
@@ -20233,7 +19738,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -20474,7 +19978,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -20496,7 +19999,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -20698,7 +20200,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -20919,7 +20420,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -20941,7 +20441,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -21203,7 +20702,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -21225,7 +20723,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -21587,7 +21084,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -21609,7 +21105,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -21630,7 +21125,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -21652,7 +21146,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -21734,7 +21227,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -21756,7 +21248,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -21778,7 +21269,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -21800,7 +21290,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -21902,7 +21391,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -21924,7 +21412,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -21946,7 +21433,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -21968,7 +21454,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -22050,7 +21535,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 366,
     "episodesCount": 366,
     "hasStreams": true
   },
@@ -22072,7 +21556,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22094,7 +21577,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -22116,7 +21598,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22138,7 +21619,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22200,7 +21680,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 2,
     "episodesCount": 2,
     "hasStreams": true
   },
@@ -22222,7 +21701,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 3,
     "episodesCount": 3,
     "hasStreams": true
   },
@@ -22284,7 +21762,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22366,7 +21843,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22387,7 +21863,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 1,
     "episodesCount": 1,
     "hasStreams": true
   },
@@ -22409,7 +21884,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -22471,7 +21945,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -22493,7 +21966,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -22555,7 +22027,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 1,
     "episodesCount": 1,
     "hasStreams": true
   },
@@ -22577,7 +22048,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -22599,7 +22069,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -22621,7 +22090,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -22643,7 +22111,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 22,
     "episodesCount": 22,
     "hasStreams": true
   },
@@ -22665,7 +22132,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22687,7 +22153,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -22709,7 +22174,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 2,
     "episodesCount": 2,
     "hasStreams": true
   },
@@ -22731,7 +22195,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22753,7 +22216,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22775,7 +22237,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -22797,7 +22258,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22839,7 +22299,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22861,7 +22320,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22883,7 +22341,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -22905,7 +22362,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -22927,7 +22383,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -22949,7 +22404,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -22971,7 +22425,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 18,
     "episodesCount": 18,
     "hasStreams": true
   },
@@ -22993,7 +22446,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -23014,7 +22466,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 20,
     "episodesCount": 20,
     "hasStreams": true
   },
@@ -23076,7 +22527,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23097,7 +22547,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -23119,7 +22568,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 74,
     "episodesCount": 74,
     "hasStreams": true
   },
@@ -23141,7 +22589,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -23163,7 +22610,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 189,
     "episodesCount": 189,
     "hasStreams": true
   },
@@ -23225,7 +22671,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23247,7 +22692,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -23269,7 +22713,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 4,
     "episodesCount": 4,
     "hasStreams": true
   },
@@ -23311,7 +22754,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -23333,7 +22775,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 22,
     "episodesCount": 22,
     "hasStreams": true
   },
@@ -23355,7 +22796,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23377,7 +22817,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23399,7 +22838,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 51,
     "episodesCount": 51,
     "hasStreams": true
   },
@@ -23420,7 +22858,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -23462,7 +22899,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23484,7 +22920,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -23506,7 +22941,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -23528,7 +22962,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 43,
     "episodesCount": 43,
     "hasStreams": true
   },
@@ -23550,7 +22983,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 48,
     "episodesCount": 48,
     "hasStreams": true
   },
@@ -23572,7 +23004,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23654,7 +23085,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23696,7 +23126,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23718,7 +23147,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -23740,7 +23168,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -23762,7 +23189,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -23784,7 +23210,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -23805,7 +23230,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -23847,7 +23271,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 216,
     "episodesCount": 216,
     "hasStreams": true
   },
@@ -23869,7 +23292,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 73,
     "episodesCount": 73,
     "hasStreams": true
   },
@@ -23891,7 +23313,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 3,
     "episodesCount": 3,
     "hasStreams": true
   },
@@ -23912,7 +23333,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 32,
     "episodesCount": 32,
     "hasStreams": true
   },
@@ -23994,7 +23414,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 24,
     "episodesCount": 24,
     "hasStreams": true
   },
@@ -24016,7 +23435,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 5,
     "episodesCount": 5,
     "hasStreams": true
   },
@@ -24037,7 +23455,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -24139,7 +23556,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -24161,7 +23577,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -24183,7 +23598,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -24205,7 +23619,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -24226,7 +23639,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -24308,7 +23720,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -24370,7 +23781,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -24392,7 +23802,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 50,
     "episodesCount": 50,
     "hasStreams": true
   },
@@ -24414,7 +23823,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 4,
     "episodesCount": 4,
     "hasStreams": true
   },
@@ -24456,7 +23864,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -24478,7 +23885,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -24500,7 +23906,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 23,
     "episodesCount": 23,
     "hasStreams": true
   },
@@ -24562,7 +23967,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 7,
     "episodesCount": 7,
     "hasStreams": true
   },
@@ -24584,7 +23988,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -24606,7 +24009,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 30,
     "episodesCount": 30,
     "hasStreams": true
   },
@@ -24627,7 +24029,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -24669,7 +24070,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 16,
     "episodesCount": 16,
     "hasStreams": true
   },
@@ -24691,7 +24091,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 100,
     "episodesCount": 100,
     "hasStreams": true
   },
@@ -24713,7 +24112,6 @@
       "Hindi",
       "Urdu"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -30672,7 +30070,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -30739,7 +30136,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -30807,7 +30203,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -30874,7 +30269,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -30941,7 +30335,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -31008,7 +30401,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -31074,7 +30466,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 1,
     "episodesCount": 1,
     "hasStreams": true
   },
@@ -31140,7 +30531,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 14,
     "episodesCount": 14,
     "hasStreams": true
   },
@@ -31207,7 +30597,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -31274,7 +30663,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -31341,7 +30729,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -31408,7 +30795,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -31474,7 +30860,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 35,
     "episodesCount": 35,
     "hasStreams": true
   },
@@ -31540,7 +30925,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": true
   },
@@ -31606,7 +30990,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -31672,7 +31055,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 25,
     "episodesCount": 25,
     "hasStreams": true
   },
@@ -31740,7 +31122,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": true
   },
@@ -31807,7 +31188,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 7,
     "episodesCount": 7,
     "hasStreams": true
   },
@@ -31873,7 +31253,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 3,
     "episodesCount": 3,
     "hasStreams": true
   },
@@ -31939,7 +31318,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 11,
     "episodesCount": 11,
     "hasStreams": true
   },
@@ -32007,7 +31385,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -32073,7 +31450,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -32140,7 +31516,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 10,
     "episodesCount": 10,
     "hasStreams": true
   },
@@ -32206,7 +31581,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 52,
     "episodesCount": 52,
     "hasStreams": true
   },
@@ -32274,7 +31648,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 26,
     "episodesCount": 26,
     "hasStreams": true
   },
@@ -32340,7 +31713,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 9,
     "episodesCount": 9,
     "hasStreams": true
   },
@@ -32406,7 +31778,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 6,
     "episodesCount": 6,
     "hasStreams": true
   },
@@ -32475,7 +31846,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 8,
     "episodesCount": 8,
     "hasStreams": false
   },
@@ -32541,7 +31911,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 12,
     "episodesCount": 12,
     "hasStreams": false
   },
@@ -33446,7 +32815,6 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 13,
     "episodesCount": 13,
     "hasStreams": true
   },
@@ -33512,197 +32880,7 @@
       "English",
       "Japanese"
     ],
-    "episodeCount": 40,
     "episodesCount": 40,
-    "hasStreams": true
-  },
-  {
-    "id": "ap-how-to-train-your-dragon-live-action",
-    "title": "How to Train Your Dragon (Live-Action)",
-    "slug": "how-to-train-your-dragon-live-action",
-    "toonSlug": "how-to-train-your-dragon-live-action",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/q5pXRYTycaeW6dEgsCrd4mYPmxM.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/q5pXRYTycaeW6dEgsCrd4mYPmxM.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-9",
-    "title": "9",
-    "slug": "9",
-    "toonSlug": "9",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/sTIkGEQzTYgz092BMESiLgHJpeN.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/sTIkGEQzTYgz092BMESiLgHJpeN.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-ben-10-secret-of-the-omnitrix-three-alternate-versions",
-    "title": "Ben 10: Secret of the Omnitrix Three Alternate Versions",
-    "slug": "ben-10-secret-of-the-omnitrix-three-alternate-versions",
-    "toonSlug": "ben-10-secret-of-the-omnitrix-alternate-versions",
-    "type": "movie",
-    "poster": "https://i.imgur.com/cWdvZ1V.jpg",
-    "backdrop": "https://i.imgur.com/cWdvZ1V.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-how-to-train-your-dragon-2",
-    "title": "How to Train Your Dragon 2",
-    "slug": "how-to-train-your-dragon-2",
-    "toonSlug": "how-to-train-your-dragon-2",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/d13Uj86LdbDLrfDoHR5aDOFYyJC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/d13Uj86LdbDLrfDoHR5aDOFYyJC.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-tangled-before-ever-after",
-    "title": "Tangled: Before Ever After",
-    "slug": "tangled-before-ever-after",
-    "toonSlug": "tangled-before-ever-after",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/zj82L9maBSW6CAVZltBoFBSuTk1.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/zj82L9maBSW6CAVZltBoFBSuTk1.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-tarzan-ii",
-    "title": "Tarzan II",
-    "slug": "tarzan-ii",
-    "toonSlug": "tarzan-ii",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/VFm7cqSUrv6mCW6uFIJFhSZLjq.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/VFm7cqSUrv6mCW6uFIJFhSZLjq.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-the-land-before-time-x-the-great-longneck-migration",
-    "title": "The Land Before Time X: The Great Longneck Migration",
-    "slug": "the-land-before-time-x-the-great-longneck-migration",
-    "toonSlug": "the-land-before-time-x-the-great-longneck-migration",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/lSwUyNrm4KaFwrM5ilY2ZWY5bEL.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/lSwUyNrm4KaFwrM5ilY2ZWY5bEL.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-the-land-before-time-xiii-the-wisdom-of-friends",
-    "title": "The Land Before Time XIII: The Wisdom of Friends",
-    "slug": "the-land-before-time-xiii-the-wisdom-of-friends",
-    "toonSlug": "the-land-before-time-xiii-the-wisdom-of-friends",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/weRDZgqsJbxrM90wq5entBV4ah2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/weRDZgqsJbxrM90wq5entBV4ah2.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
-    "hasStreams": true
-  },
-  {
-    "id": "ap-the-swan-princess-far-longer-than-forever",
-    "title": "The Swan Princess: Far Longer Than Forever",
-    "slug": "the-swan-princess-far-longer-than-forever",
-    "toonSlug": "the-swan-princess-far-longer-than-forever",
-    "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/dWyxPokAp4eiJXWriYbNvU2v1V.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/dWyxPokAp4eiJXWriYbNvU2v1V.jpg",
-    "rating": 8.2,
-    "year": 2024,
-    "genres": [
-      "Anime",
-      "Movie"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "English"
-    ],
     "hasStreams": true
   }
 ]

@@ -108,8 +108,8 @@ export default async function HomePage(props: PageProps) {
 
       {/* Main Content */}
       <main style={{ flexGrow: 1, padding: '0 0 24px', position: 'relative', zIndex: 1 }}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, '\\u003c') }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
+        <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, '\\u003c') }} />
+        <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
         {/* Accessible SEO H1 - Visually hidden to maintain clean cinematic streaming layout */}
         <h1 className="sr-only">
           Urdu & Hindi Dubbed Anime in Pakistan

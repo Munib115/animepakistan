@@ -180,12 +180,11 @@ class AdBlockEngine {
     // Install all shields in priority order
     this.installWindowOpenDefuser();      // 1. Block window.open popups
     this.installClickGuard();             // 2. Block clickjack anchors
-    this.installOverlayBuster();          // 3. MutationObserver overlay scanner
+    this.installOverlayBuster();          // 3. Player-scoped overlay defuser
     this.installNetworkFilter();          // 4. Fetch/XHR network filter
     this.installWindowGuards();           // 5. Focus guard + Anti-Anti-AdBlock
     this.installPostMessageDefuser();     // 6. Defuse postMessage ad commands
     this.installIframeGuard();            // 7. Intercept programmatic iframe creation
-    this.startDeepSweep();               // 8. Periodic deep DOM sweep
   }
 
   public isEnabled(): boolean {
@@ -418,136 +417,48 @@ class AdBlockEngine {
     }
   }
 
-  // ─── 3. MutationObserver overlay-buster (subtree: true for deep scanning) ───
+  // ─── 3. Player-scoped overlay defuser (defuses clickjackers without mutating React DOM) ───
   private installOverlayBuster() {
-    if (typeof window === 'undefined' || typeof MutationObserver === 'undefined') return;
+    if (typeof window === 'undefined') return;
 
-    const checkAndNeutralizeNode = (node: Node) => {
-      if (!this.enabled || !(node instanceof HTMLElement)) return;
+    // Defuse clickjacking clicks on the watch player box via capturing phase
+    window.addEventListener(
+      'click',
+      (e) => {
+        if (!this.enabled) return;
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
 
-      // Never touch legitimate application UI
-      if (
-        node.id === 'ap-live-chat-root' ||
-        node.closest('#ap-live-chat-root') ||
-        node.closest('.ap-chat-inbox-container') ||
-        node.closest('.ap-chat-backdrop') ||
-        node.closest('.ap-messenger-floating-btn') ||
-        node.closest('.quick-control-hub') ||
-        node.closest('.quick-hub-popover') ||
-        node.closest('.quick-hub-backdrop') ||
-        node.closest('.apple-liquid-glass-dock') ||
-        node.closest('.pwa-install-banner') ||
-        node.closest('header') ||
-        node.closest('nav') ||
-        node.closest('button')
-      ) {
-        return;
-      }
+        // Check if click is on an anchor targeting an ad
+        const anchor = target.closest('a');
+        if (anchor && anchor.href && this.isAdUrl(anchor.href)) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.recordBlocked('ad', anchor.href);
+          return false;
+        }
 
-      // Remove ad anchor nodes
-      if (node instanceof HTMLAnchorElement && node.href && this.isAdUrl(node.href)) {
-        try {
-          node.remove();
-          this.recordBlocked('ad', 'clickjack-anchor');
-        } catch (e) {}
-        return;
-      }
-
-      // Scan children for rogue ad anchors
-      if (node.childElementCount > 0) {
-        const adAnchors = node.querySelectorAll('a[href]');
-        for (let i = 0; i < adAnchors.length; i++) {
-          const a = adAnchors[i] as HTMLAnchorElement;
-          if (a.href && this.isAdUrl(a.href)) {
-            try {
-              a.remove();
-              this.recordBlocked('ad', a.href);
-            } catch (e) {}
+        // Check if click hit a transparent rogue overlay inside the watch player box
+        const playerBox = target.closest('.watch-player-box');
+        if (playerBox && target !== playerBox && !target.closest('iframe')) {
+          const style = window.getComputedStyle(target);
+          if (
+            (style.position === 'absolute' || style.position === 'fixed') &&
+            parseInt(style.zIndex || '0', 10) > 1 &&
+            !target.closest('button') &&
+            !target.closest('.player-control')
+          ) {
+            e.preventDefault();
+            e.stopPropagation();
+            target.style.pointerEvents = 'none';
+            target.style.display = 'none';
+            this.recordBlocked('popup', 'player-clickjack-defused');
+            return false;
           }
         }
-      }
-
-      // Remove transparent full-page clickjack overlays
-      // (ToonStream injects these on top of the player to hijack clicks)
-      if (node.style) {
-        const style = node.style;
-        const pos = style.position;
-        const zi = parseInt(style.zIndex || '0', 10);
-        const w = style.width;
-        const h = style.height;
-        const top = style.top;
-        const left = style.left;
-
-        const isFullscreenOverlay =
-          (pos === 'fixed' || pos === 'absolute') &&
-          zi > 100 &&
-          (w === '100%' || w === '100vw') &&
-          (h === '100%' || h === '100vh') &&
-          top === '0px' &&
-          left === '0px';
-
-        // Also match inline style clickjackers
-        const computedStyle = node.getAttribute('style') || '';
-        const isInlineClickjack =
-          computedStyle.includes('position: fixed') &&
-          computedStyle.includes('top: 0') &&
-          computedStyle.includes('left: 0') &&
-          (computedStyle.includes('width: 100%') || computedStyle.includes('width:100%')) &&
-          (computedStyle.includes('height: 100%') || computedStyle.includes('height:100%'));
-
-        if (isFullscreenOverlay || isInlineClickjack) {
-          // Check it's not a legit React portal (check for data-* or class names)
-          const classList = node.className || '';
-          const isLegitModal =
-            classList.includes('ap-') ||
-            classList.includes('modal') ||
-            classList.includes('dialog') ||
-            classList.includes('sheet') ||
-            node.closest('#__next') === null; // outside Next.js root
-          if (!isLegitModal) {
-            try {
-              node.remove();
-              this.recordBlocked('popup', 'fullscreen-clickjack');
-            } catch (e) {}
-            return;
-          }
-        }
-      }
-
-      // Protect video player box from injected rogue overlays
-      const isPlayerOverlay = node.closest('.watch-player-box') && !node.closest('iframe');
-      if (isPlayerOverlay && (node.style.position === 'absolute' || node.style.position === 'fixed')) {
-        const zi = parseInt(node.style.zIndex || '0', 10);
-        if (zi > 1) {
-          try {
-            node.remove();
-            this.recordBlocked('ad', 'player-clickjack-overlay');
-          } catch (e) {}
-        }
-      }
-    };
-
-    // Subtree: true so nested ad iframes and injected children are caught immediately
-    const observer = new MutationObserver((mutations) => {
-      for (let i = 0; i < mutations.length; i++) {
-        const mutation = mutations[i];
-        for (let j = 0; j < mutation.addedNodes.length; j++) {
-          checkAndNeutralizeNode(mutation.addedNodes[j]);
-        }
-      }
-    });
-
-    const startObserver = () => {
-      if (document.body) {
-        observer.observe(document.body, { childList: true, subtree: true });
-      }
-    };
-
-    if (document.body) {
-      startObserver();
-    } else {
-      window.addEventListener('DOMContentLoaded', startObserver);
-    }
+      },
+      true // capture phase: intercepts before ad scripts run
+    );
   }
 
   // ─── 4. Network filter for fetch & XHR ──────────────────────────────────────
@@ -747,86 +658,9 @@ class AdBlockEngine {
     };
   }
 
-  // ─── 8. Periodic deep DOM sweep (catches delayed/dynamically injected ads) ───
+  // ─── 8. Deep sweep disabled to preserve React DOM integrity ──────────────
   private startDeepSweep() {
-    if (typeof window === 'undefined') return;
-
-    const sweep = () => {
-      if (!this.enabled) return;
-
-      // Remove elements matching known ad CSS patterns
-      for (const selector of AD_SELECTOR_PATTERNS) {
-        try {
-          const elements = document.querySelectorAll(selector);
-          for (let i = 0; i < elements.length; i++) {
-            const el = elements[i] as HTMLElement;
-            // Skip legitimate app UI
-            if (
-              el.closest('#ap-live-chat-root') ||
-              el.closest('.quick-control-hub') ||
-              el.closest('.apple-liquid-glass-dock') ||
-              el.closest('.pwa-install-banner') ||
-              el.closest('header') ||
-              el.closest('nav') ||
-              (el.className && String(el.className).includes('ap-'))
-            ) {
-              continue;
-            }
-
-            // For overlays: check if they're inside player
-            if (selector.includes('overlay') || selector.includes('popup')) {
-              const isAppModal =
-                el.closest('#__next') &&
-                (String(el.className).includes('modal') ||
-                  String(el.className).includes('dialog') ||
-                  el.getAttribute('role') === 'dialog' ||
-                  el.getAttribute('aria-modal') === 'true');
-              if (isAppModal) continue;
-
-              try {
-                el.remove();
-                this.recordBlocked('ad', `sweep:${selector}`);
-              } catch (e) {}
-            }
-          }
-        } catch (e) {
-          // Ignore invalid selectors
-        }
-      }
-
-      // Remove rogue full-screen fixed-position divs (ToonStream's clickjack pattern)
-      try {
-        const fixedEls = document.querySelectorAll('div[style*="position"]');
-        fixedEls.forEach((el) => {
-          const style = (el as HTMLElement).style;
-          if (!style) return;
-          const zi = parseInt(style.zIndex || '0', 10);
-          if (
-            zi > 9000 &&
-            (style.position === 'fixed' || style.position === 'absolute') &&
-            !el.closest('#ap-live-chat-root') &&
-            !el.closest('.quick-control-hub') &&
-            !(el.className && String(el.className).includes('ap-')) &&
-            !el.getAttribute('data-ap-ui')
-          ) {
-            try {
-              (el as HTMLElement).remove();
-              this.recordBlocked('popup', 'high-zindex-overlay');
-            } catch (e) {}
-          }
-        });
-      } catch (e) {}
-    };
-
-    // Sweep every 3 seconds
-    this.sweepInterval = setInterval(sweep, 3000);
-
-    // Also sweep immediately on DOM ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => sweep());
-    } else {
-      setTimeout(sweep, 500);
-    }
+    // Intentionally no-op to prevent React hydration / reconciliation collisions
   }
 }
 
