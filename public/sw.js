@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anime-pakistan-cache-v5';
+const CACHE_NAME = 'anime-pakistan-cache-v6';
 
 // Only tiny, critical assets are pre-cached at install time.
 // Large game ROM and emulator files are cached lazily in background
@@ -66,11 +66,27 @@ self.addEventListener('activate', (event) => {
 });
 
 // Known ad networks, popunder scripts, and telemetry beacons
+// (Expanded with ToonStream-specific patterns — updated Sep 2026)
 const BLOCKED_AD_PATTERNS = [
+  // ToonStream-specific ad servers
   'manehprizes',
   'endlesshandbaglinked',
   'technocosmos',
   'decafeligiblyhad',
+  'toontrack',
+  'toonad',
+  'toonpush',
+  'tooncash',
+  'static.toonstream',
+  'ads.toonstream',
+  // RubyStm / FilesForever / Abyss embed ad servers
+  'rubyads',
+  'rubyadnetwork',
+  'rubystm-ads',
+  'filespermanent-ads',
+  'filesforever-ads',
+  'fplayer-ads',
+  // Popunder networks
   'popads',
   'popcash',
   'propellerads',
@@ -92,12 +108,30 @@ const BLOCKED_AD_PATTERNS = [
   'thaudray',
   'highcpmgate',
   'paviliongiddy',
+  'exoclick',
+  'trafficstars',
+  'trafficjunky',
+  'juicyads',
+  'bidvertiser',
+  'mondiad',
+  'in-page-push',
+  'ipush',
+  // Tracker beacons
   'histats.com',
   'whos.amung.us',
   'statcounter.com',
+  'scorecardresearch',
+  'quantserve',
+  // Redirect services
   'syndication.exoclick',
   'syndication.realsrv',
   'linkvertise',
+  'clk.sh',
+  'adshrink',
+  'fast-redirect',
+  // Cloudflare ad telemetry
+  'cdn-cgi/rum',
+  'cdn-cgi/zaraz',
 ];
 
 // Fetch Event
