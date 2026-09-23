@@ -333,7 +333,7 @@ export default function AnimeCard({ item }: AnimeCardProps) {
             <span>
               {isMovie 
                 ? (language === 'ur' ? 'مکمل فلم' : 'Full Movie')
-                : `${item.episodeCount ?? item.episodes?.length ?? 0} ${language === 'ur' ? 'ایپی سوڈز' : 'Episodes'}`
+                : `${item.episodesCount ?? item.episodeCount ?? item.episodes?.length ?? 0} ${language === 'ur' ? 'ایپی سوڈز' : 'Episodes'}`
               }
             </span>
           </div>

@@ -1,51 +1,92 @@
 import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
-import { AnimeItem } from '@/types/anime';
-import { sanitizeStreamUrl } from './resolver';
+import { AnimeItem, Episode, StreamMirrorSource } from '@/types/anime';
+import { sanitizeStreamUrl, isValidStreamEmbedUrl } from './resolver';
 
 const DB_FILE = path.join(process.cwd(), 'src', 'data', 'anime-db.json');
-const TMDB_KEY = process.env.TMDB_API_KEY || '119b065ce02f9f479565d6b99a758ee2';
+const CATALOG_FILE = path.join(process.cwd(), 'src', 'data', 'anime-catalog.json');
 
 let lastSyncTimestamp = 0;
-const SYNC_COOLDOWN_MS = 1000 * 60 * 30; // 30 minutes cooldown between automated checks
+const SYNC_COOLDOWN_MS = 1000 * 60 * 15; // 15 minutes cooldown
 
-function isBadUrl(u: string): boolean {
-  const lower = u.toLowerCase();
-  return (
-    !lower ||
-    lower.startsWith('about:blank') ||
-    lower.includes('googletagmanager') ||
-    lower.includes('doubleclick') ||
-    lower.includes('facebook') ||
-    lower.includes('analytics')
-  );
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+  'Referer': 'https://toonstream.us/',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+};
+
+function delay(ms: number) {
+  return new Promise(r => setTimeout(r, ms));
 }
 
-async function fetchTMDBArt(query: string, type: string) {
+function extractStreamsFromHtml(html: string): string[] {
+  const $ = cheerio.load(html);
+  const streams: string[] = [];
+  $('iframe').each((_, el) => {
+    let s = $(el).attr('src') || $(el).attr('data-src') || '';
+    if (s.startsWith('//')) s = 'https:' + s;
+    if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
+  });
+  return streams;
+}
+
+function buildStreamSources(streams: string[]): StreamMirrorSource[] {
+  const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
+  const salt = streams.filter(s => s.includes('as-cdn'));
+  const sources: StreamMirrorSource[] = [];
+  active.forEach((s, idx) => {
+    sources.push({
+      label: idx === 0 ? 'ToonStream 1 (HD)' : `ToonStream ${idx + 1} (Mirror)`,
+      url: sanitizeStreamUrl(s),
+      isMultiAudio: true,
+    });
+  });
+  salt.forEach(s => {
+    sources.push({
+      label: 'AnimeSalt (Backup)',
+      url: sanitizeStreamUrl(s),
+      isMultiAudio: true,
+    });
+  });
+  return sources;
+}
+
+async function fetchHtml(url: string): Promise<string | null> {
   try {
-    const encoded = encodeURIComponent(query.replace(/\(.*\)/g, '').replace(/\[.*\]/g, '').trim());
-    const tvUrl = `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encoded}`;
-    const movUrl = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encoded}`;
+    const res = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return null;
+    return await res.text();
+  } catch {
+    return null;
+  }
+}
 
-    const [tvRes, movRes] = await Promise.all([
-      fetch(tvUrl).then(r => r.json()).catch(() => ({ results: [] })),
-      fetch(movUrl).then(r => r.json()).catch(() => ({ results: [] }))
-    ]);
-
-    const all = [...(tvRes.results || []), ...(movRes.results || [])].filter(x => x && x.poster_path);
-    if (all.length > 0) {
-      all.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
-      const best = all[0];
-      return {
-        poster: `https://image.tmdb.org/t/p/w500${best.poster_path}`,
-        backdrop: best.backdrop_path ? `https://image.tmdb.org/t/p/original${best.backdrop_path}` : '',
-        overview: best.overview || '',
-        rating: best.vote_average ? Math.round(best.vote_average * 10) : null
-      };
-    }
-  } catch (e) {}
-  return null;
+function saveCatalog(db: AnimeItem[]) {
+  const catalog = db.map(item => ({
+    id: (item as any).id || `ap-${item.slug}`,
+    title: item.title,
+    slug: item.slug,
+    saltSlug: item.saltSlug || undefined,
+    toonSlug: (item as any).toonSlug || undefined,
+    type: item.type,
+    poster: item.poster,
+    backdrop: item.backdrop || item.poster,
+    rating: (item as any).rating || 8.0,
+    year: (item as any).year || 2024,
+    genres: item.genres || ['Anime'],
+    audioLanguages: item.audioLanguages || ['Hindi', 'Urdu'],
+    episodeCount: item.type === 'series' ? (item.episodes ? item.episodes.length : (item.episodeCount || 0)) : undefined,
+    episodesCount: item.type === 'series' ? (item.episodes ? item.episodes.length : (item.episodesCount || 0)) : undefined,
+    hasStreams: item.type === 'movie'
+      ? !!(item.streamUrl || (item as any).toonStreamUrl)
+      : (item.episodes ? item.episodes.some((e: any) => !!(e.streamUrl || e.toonStreamUrl)) : false),
+  }));
+  try {
+    fs.writeFileSync(CATALOG_FILE, JSON.stringify(catalog, null, 2), 'utf8');
+  } catch (e) {
+    console.error('[Sync Engine] Error writing catalog:', e);
+  }
 }
 
 export async function checkAndSyncNewAnime(force = false): Promise<{ synced: number; total: number }> {
@@ -55,248 +96,181 @@ export async function checkAndSyncNewAnime(force = false): Promise<{ synced: num
   }
   lastSyncTimestamp = now;
 
-  console.log('[Sync Engine] Checking for new anime updates from AnimeSalt sitemaps...');
+  console.log('[Sync Engine] Auto-syncing from ToonStream for fresh drops, series, and movies...');
 
-  let existing: AnimeItem[] = [];
+  let db: AnimeItem[] = [];
   try {
     if (fs.existsSync(DB_FILE)) {
-      existing = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+      db = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
     }
   } catch (e) {
     console.error('[Sync Engine] Error reading database:', e);
+    return { synced: 0, total: 0 };
   }
 
-  const existingMap = new Set(existing.map(i => i.slug.toLowerCase().trim()));
+  let totalUpdated = 0;
 
-  const sitemaps = [
-    { url: 'https://animesalt.cx/movies-sitemap1.xml', type: 'movie' },
-    { url: 'https://animesalt.cx/movies-sitemap2.xml', type: 'movie' },
-    { url: 'https://animesalt.cx/series-sitemap1.xml', type: 'series' },
-    { url: 'https://animesalt.cx/series-sitemap2.xml', type: 'series' },
-    { url: 'https://animesalt.cx/series-sitemap3.xml', type: 'series' }
-  ];
-
-  const newEntries: { url: string; type: 'movie' | 'series' }[] = [];
-
-  for (const sm of sitemaps) {
-    try {
-      const res = await fetch(sm.url, {
-        headers: { 'User-Agent': 'Mozilla/5.0' },
-        next: { revalidate: 1800 }
+  // 1. Sync Fresh Drops / Newly added episodes from ToonStream home
+  try {
+    const homeHtml = await fetchHtml('https://toonstream.us/home');
+    if (homeHtml) {
+      const $ = cheerio.load(homeHtml);
+      const freshEpUrls: string[] = [];
+      $('a[href*="/episode/"]').each((_, el) => {
+        const href = $(el).attr('href') || '';
+        const full = href.startsWith('http') ? href : `https://toonstream.us${href}`;
+        if (!freshEpUrls.includes(full)) freshEpUrls.push(full);
       });
-      if (res.ok) {
-        const xml = await res.text();
-        const $ = cheerio.load(xml, { xmlMode: true });
-        $('url loc, loc').each((_, el) => {
-          const loc = $(el).text().trim();
-          if (loc) {
-            const slug = loc.split('/').filter(Boolean).pop()?.toLowerCase().trim();
-            if (slug && !existingMap.has(slug) && slug !== 'movies' && slug !== 'series') {
-              newEntries.push({ url: loc, type: sm.type as 'movie' | 'series' });
-              existingMap.add(slug);
-            }
+
+      for (const epUrl of freshEpUrls.slice(0, 25)) {
+        const match = epUrl.match(/\/episode\/(.+?)-(\d+)x(\d+)\/?$/i);
+        if (!match) continue;
+
+        const seriesSlug = match[1];
+        const season = parseInt(match[2], 10);
+        const num = parseInt(match[3], 10);
+
+        const series = db.find(d =>
+          d.type === 'series' && (
+            d.slug === seriesSlug ||
+            (d as any).toonSlug === seriesSlug ||
+            d.slug.includes(seriesSlug) ||
+            seriesSlug.includes(d.slug)
+          )
+        );
+
+        if (!series) continue;
+        if (!series.episodes) series.episodes = [];
+
+        let ep = series.episodes.find(e => e.season === season && e.number === num);
+
+        if (!ep) {
+          const epHtml = await fetchHtml(epUrl);
+          if (!epHtml) continue;
+          const streams = extractStreamsFromHtml(epHtml);
+          const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
+          if (active.length === 0) continue;
+
+          ep = {
+            number: num,
+            season,
+            title: `S${season} E${num}: Episode ${num}`,
+            slug: `${series.slug}-${season}x${num}`,
+            url: epUrl,
+            thumbnail: series.poster || '',
+            streamUrl: active[0],
+            toonStreamUrl: active[0],
+            streamSources: buildStreamSources(streams),
+          };
+          series.episodes.push(ep);
+          series.episodes.sort((a, b) => (a.season === b.season ? a.number - b.number : (a.season || 1) - (b.season || 1)));
+          series.episodeCount = series.episodes.length;
+          series.episodesCount = series.episodes.length;
+          totalUpdated++;
+          await delay(250);
+        } else if (!(ep as any).toonStreamUrl) {
+          const epHtml = await fetchHtml(epUrl);
+          if (!epHtml) continue;
+          const streams = extractStreamsFromHtml(epHtml);
+          const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
+          if (active.length > 0) {
+            (ep as any).toonStreamUrl = active[0];
+            ep.streamUrl = active[0];
+            (ep as any).streamSources = buildStreamSources(streams);
+            totalUpdated++;
           }
-        });
-      }
-    } catch (err) {
-      console.warn(`[Sync Engine] Could not fetch sitemap ${sm.url}`);
-    }
-  }
-
-  // Also check page 1 of movies and series archives for instant detection of fresh drops
-  const archivePages = [
-    { url: 'https://animesalt.cx/movies/', type: 'movie' as const },
-    { url: 'https://animesalt.cx/series/', type: 'series' as const }
-  ];
-
-  for (const ap of archivePages) {
-    try {
-      const res = await fetch(ap.url, {
-        headers: { 'User-Agent': 'Mozilla/5.0' },
-        next: { revalidate: 300 }
-      });
-      if (res.ok) {
-        const html = await res.text();
-        const $ = cheerio.load(html);
-        $('article a, .poster a, .entry-title a').each((_, el) => {
-          const href = $(el).attr('href');
-          if (!href) return;
-          const cleanUrl = href.replace(/^http:\/\//i, 'https://').split('#')[0].split('?')[0];
-          const slug = cleanUrl.split('/').filter(Boolean).pop()?.toLowerCase().trim();
-          if (slug && !existingMap.has(slug) && slug !== 'movies' && slug !== 'series') {
-            newEntries.push({ url: cleanUrl, type: ap.type });
-            existingMap.add(slug);
-          }
-        });
-      }
-    } catch (err) {
-      console.warn(`[Sync Engine] Could not fetch archive ${ap.url}`);
-    }
-  }
-
-  if (newEntries.length === 0) {
-    console.log('[Sync Engine] Database is fully up-to-date with latest AnimeSalt catalog.');
-    return { synced: 0, total: existing.length };
-  }
-
-  console.log(`[Sync Engine] Found ${newEntries.length} new anime items to sync!`);
-  let addedCount = 0;
-
-  for (const entry of newEntries) {
-    try {
-      const pageRes = await fetch(entry.url, {
-        headers: { 'User-Agent': 'Mozilla/5.0' }
-      });
-      if (!pageRes.ok) continue;
-
-      const html = await pageRes.text();
-      const $ = cheerio.load(html);
-
-      const title = $('h1.entry-title').text().trim() || $('h1').first().text().trim() || entry.url.split('/').filter(Boolean).pop()?.replace(/-/g, ' ') || '';
-      const slug = entry.url.split('/').filter(Boolean).pop() || '';
-
-      const tmdbArt = await fetchTMDBArt(title, entry.type);
-
-      let poster = tmdbArt?.poster || '';
-      if (!poster) {
-        const pagePoster = $('.bd img[data-src*="image.tmdb.org"]').first().attr('data-src') ||
-                           $('.bd img[src*="image.tmdb.org"]').first().attr('src') || '';
-        if (pagePoster) {
-          poster = pagePoster.startsWith('//') ? 'https:' + pagePoster : pagePoster;
+          await delay(250);
         }
       }
-
-      let backdrop = tmdbArt?.backdrop || '';
-      if (!backdrop) {
-        const pageBackdrop = $('.TPostBg').first().attr('data-src') || $('.TPostBg').first().attr('src') || '';
-        if (pageBackdrop) {
-          backdrop = pageBackdrop.startsWith('//') ? 'https:' + pageBackdrop : pageBackdrop;
-        }
-      }
-
-      const genres: string[] = [];
-      $('a[href*="/genre/"], a[href*="/category/genre/"]').each((_, el) => {
-        const g = $(el).text().trim();
-        if (g && !genres.includes(g)) genres.push(g);
-      });
-
-      const audioLanguages: string[] = [];
-      $('a[href*="/language/"], a[href*="/category/language/"]').each((_, el) => {
-        const lang = $(el).text().trim();
-        if (lang && !audioLanguages.includes(lang)) audioLanguages.push(lang);
-      });
-
-      const episodes: any[] = [];
-      if (entry.type === 'series') {
-        const seasonButtons: { post: string; season: number }[] = [];
-        $('a.season-btn').each((_, el) => {
-          const post = $(el).attr('data-post') || '';
-          const season = $(el).attr('data-season') || '';
-          if (post && season) {
-            seasonButtons.push({ post, season: parseInt(season, 10) });
-          }
-        });
-
-        if (seasonButtons.length > 0) {
-          for (const btn of seasonButtons) {
-            try {
-              const ajaxUrl = `https://animesalt.cx/wp-admin/admin-ajax.php?action=action_select_season&season=${btn.season}&post=${btn.post}`;
-              const ajaxRes = await fetch(ajaxUrl, {
-                headers: { 'User-Agent': 'Mozilla/5.0' }
-              });
-              if (ajaxRes.ok) {
-                const ajaxHtml = await ajaxRes.text();
-                const $ajax = cheerio.load(ajaxHtml);
-                
-                $ajax('article.episodes').each((i, el) => {
-                  const epHref = $ajax(el).find('a.lnk-blk').first().attr('href') || '';
-                  const epNumStr = $ajax(el).find('.num-epi').text().trim();
-                  const epNum = parseInt(epNumStr, 10) || i + 1;
-                  let epTitle = $ajax(el).find('.entry-title').text().trim() || `Episode ${epNum}`;
-                  epTitle = epTitle.replace(/^private:\s*/gi, '');
-                  const epSlug = epHref.split('/').filter(Boolean).pop() || '';
-                  const epThumb = $ajax(el).find('img').attr('src') || '';
-                  if (epSlug) {
-                    episodes.push({
-                      number: epNum,
-                      season: btn.season,
-                      title: `S${btn.season} E${epNum}: ${epTitle}`,
-                      slug: epSlug,
-                      url: epHref.replace(/^http:\/\//i, 'https://'),
-                      thumbnail: epThumb ? (epThumb.startsWith('//') ? 'https:' + epThumb : epThumb) : ''
-                    });
-                  }
-                });
-              }
-            } catch (err) {
-              console.warn(`[Sync Engine] Failed to fetch Season ${btn.season} for "${title}":`, err);
-            }
-          }
-        } else {
-          $('article.episodes').each((i, el) => {
-            const epHref = $(el).find('a.lnk-blk').first().attr('href') || '';
-            const epNum = $(el).find('.num-epi').text().trim();
-            let epTitle = $(el).find('.entry-title').text().trim() || `Episode ${epNum}`;
-            epTitle = epTitle.replace(/^private:\s*/gi, '');
-            const epSlug = epHref.split('/').filter(Boolean).pop() || '';
-            const epThumb = $(el).find('img').attr('src') || '';
-            if (epSlug) {
-              episodes.push({
-                number: parseInt(epNum, 10) || i + 1,
-                season: 1,
-                title: epTitle,
-                slug: epSlug,
-                url: epHref.replace(/^http:\/\//i, 'https://'),
-                thumbnail: epThumb ? (epThumb.startsWith('//') ? 'https:' + epThumb : epThumb) : ''
-              });
-            }
-          });
-        }
-
-        episodes.sort((a, b) => {
-          if (a.season !== b.season) return a.season - b.season;
-          return a.number - b.number;
-        });
-      }
-
-      let streamUrl = '';
-      if (entry.type === 'movie') {
-        $('iframe').each((_, el) => {
-          const src = $(el).attr('src') || $(el).attr('data-src') || '';
-          if (src && !isBadUrl(src)) {
-            streamUrl = sanitizeStreamUrl(src);
-            return false; // Break
-          }
-        });
-      }
-
-      const newItem: AnimeItem = {
-        title,
-        slug,
-        url: entry.url.replace(/^http:\/\//i, 'https://'),
-        type: entry.type,
-        poster: poster || '',
-        backdrop: backdrop || '',
-        description: tmdbArt?.overview || $('.entry-content p').first().text().trim() || '',
-        genres: genres.length > 0 ? genres : ['Action', 'Adventure'],
-        audioLanguages: audioLanguages.length > 0 ? audioLanguages : ['Hindi', 'Urdu', 'Japanese'],
-        episodes: entry.type === 'series' ? episodes : undefined,
-        streamUrl: entry.type === 'movie' ? streamUrl : undefined,
-        anilist: null
-      };
-
-      existing.unshift(newItem); // Place new anime at the top of catalog
-      addedCount++;
-      console.log(`  -> [Sync Engine] Added new anime: "${title}" (${entry.type})`);
-    } catch (e: any) {
-      console.error(`  -> [Sync Engine] Failed to scrape ${entry.url}:`, e.message);
     }
+  } catch (e: any) {
+    console.warn('[Sync Engine] Error syncing fresh episodes:', e.message);
   }
 
-  if (addedCount > 0) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(existing, null, 2), 'utf8');
-    console.log(`[Sync Engine] Successfully saved ${addedCount} new anime to database! Total: ${existing.length}`);
+  // 2. Sync page 1 of movies from ToonStream
+  try {
+    const moviesHtml = await fetchHtml('https://toonstream.us/category/movies?type=all&page=1');
+    if (moviesHtml) {
+      const $ = cheerio.load(moviesHtml);
+      const movieLinks: { title: string; url: string; slug: string }[] = [];
+      $('article, .item').each((_, el) => {
+        const href = $(el).find('a[href*="/movies/"]').first().attr('href') || '';
+        if (!href) return;
+        const slugMatch = href.match(/\/movies\/([^/?\s]+)/);
+        if (!slugMatch) return;
+        const title = $(el).find('h2, h3, .entry-title, .title').first().text().trim();
+        const url = href.startsWith('http') ? href : `https://toonstream.us${href}`;
+        movieLinks.push({ title, url, slug: slugMatch[1] });
+      });
+
+      for (const mItem of movieLinks.slice(0, 15)) {
+        let movie = db.find(d =>
+          d.type === 'movie' && (
+            (d as any).toonSlug === mItem.slug ||
+            d.slug === mItem.slug
+          )
+        );
+
+        if (!movie) {
+          const mHtml = await fetchHtml(mItem.url);
+          if (!mHtml) continue;
+          const streams = extractStreamsFromHtml(mHtml);
+          const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
+          if (active.length > 0) {
+            const newMovie: AnimeItem = {
+              title: mItem.title,
+              slug: mItem.slug,
+              toonSlug: mItem.slug,
+              toonUrl: mItem.url,
+              url: mItem.url,
+              type: 'movie',
+              poster: '',
+              description: `Watch ${mItem.title} full movie in Hindi, Urdu, English dub and sub on Anime Pakistan.`,
+              genres: ['Anime', 'Movie'],
+              audioLanguages: ['Hindi', 'Urdu', 'English'],
+              streamUrl: active[0],
+              toonStreamUrl: active[0],
+              streamSources: buildStreamSources(streams),
+            };
+            db.unshift(newMovie);
+            totalUpdated++;
+          }
+          await delay(250);
+        } else if (!(movie as any).toonStreamUrl) {
+          const mHtml = await fetchHtml(mItem.url);
+          if (!mHtml) continue;
+          const streams = extractStreamsFromHtml(mHtml);
+          const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
+          if (active.length > 0) {
+            (movie as any).toonSlug = mItem.slug;
+            (movie as any).toonUrl = mItem.url;
+            (movie as any).toonStreamUrl = active[0];
+            movie.streamUrl = active[0];
+            (movie as any).streamSources = buildStreamSources(streams);
+            totalUpdated++;
+          }
+          await delay(250);
+        }
+      }
+    }
+  } catch (e: any) {
+    console.warn('[Sync Engine] Error syncing movies:', e.message);
   }
 
-  return { synced: addedCount, total: existing.length };
+  // Ensure all series have both episodeCount and episodesCount normalized
+  db.forEach(item => {
+    if (item.type === 'series') {
+      const count = (item.episodes ? item.episodes.length : 0) || item.episodeCount || (item as any).episodesCount || 0;
+      item.episodeCount = count;
+      (item as any).episodesCount = count;
+    }
+  });
+
+  if (totalUpdated > 0 || force) {
+    fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf8');
+    saveCatalog(db);
+    console.log(`[Sync Engine] Saved ${totalUpdated} updates from ToonStream! Total items: ${db.length}`);
+  }
+
+  return { synced: totalUpdated, total: db.length };
 }

@@ -864,7 +864,7 @@ export default function AnimeDetailView({ anime, relatedAnime = [] }: AnimeDetai
                         fontWeight: 800,
                         backdropFilter: 'blur(4px)',
                       }}>
-                        {isMovieItem ? (language === 'ur' ? 'مکمل مووی' : 'Movie') : `${item.episodeCount || item.episodes?.length || 0} ${language === 'ur' ? 'اقساط' : 'Eps'}`}
+                        {isMovieItem ? (language === 'ur' ? 'مکمل مووی' : 'Movie') : `${(item as any).episodesCount || item.episodeCount || item.episodes?.length || 0} ${language === 'ur' ? 'اقساط' : 'Eps'}`}
                       </span>
                     </div>
 

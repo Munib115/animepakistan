@@ -60,6 +60,7 @@ export interface AnimeItem {
   audioLanguages: string[];
   episodes?: Episode[];
   episodeCount?: number;
+  episodesCount?: number;
   anilist?: AnilistMetadata | null;
   /** Active working stream embed URL (for movies) */
   streamUrl?: string;

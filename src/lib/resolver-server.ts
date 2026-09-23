@@ -173,6 +173,148 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
 }
 
 /**
+ * Dedicated movie stream resolver:
+ * 1. Checks pre-cached streamSources on anime object
+ * 2. Checks toonStreamUrl on anime object
+ * 3. Dynamically resolves from ToonStream (direct candidate URLs and live search)
+ * 4. Only offers AnimeSalt as a secondary fallback if ToonStream has no stream
+ */
+export async function resolveMovieStreamSources(anime: any): Promise<StreamSource[]> {
+  if (!anime) return [];
+
+  // 1. If pre-cached streamSources exists and has active toonstream sources
+  if (anime.streamSources && anime.streamSources.length > 0) {
+    const hasToon = anime.streamSources.some((s: any) => s.label?.includes('ToonStream') || !s.url?.includes('as-cdn'));
+    if (hasToon) return anime.streamSources;
+  }
+
+  // 2. If toonStreamUrl is present
+  if (anime.toonStreamUrl && isValidStreamEmbedUrl(anime.toonStreamUrl)) {
+    const sources: StreamSource[] = [
+      { label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(anime.toonStreamUrl), isMultiAudio: true }
+    ];
+    if (anime.saltStreamUrl && isValidStreamEmbedUrl(anime.saltStreamUrl)) {
+      sources.push({ label: 'AnimeSalt (Backup)', url: sanitizeStreamUrl(anime.saltStreamUrl), isMultiAudio: true });
+    }
+    return sources;
+  }
+
+  // 3. Dynamic fetch from ToonStream candidate URLs
+  const candidateUrls: string[] = [];
+  if (anime.toonUrl) candidateUrls.push(anime.toonUrl);
+  if (anime.toonSlug) candidateUrls.push(`https://toonstream.us/movies/${anime.toonSlug}/`);
+  const cleanTitleSlug = (anime.title || '').toLowerCase().replace(/['":!?()&]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  candidateUrls.push(`https://toonstream.us/movies/${cleanTitleSlug}/`);
+  candidateUrls.push(`https://toonstream.us/movies/${anime.slug}/`);
+  if (anime.saltSlug) candidateUrls.push(`https://toonstream.us/movies/${anime.saltSlug}/`);
+
+  for (const url of [...new Set(candidateUrls)]) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+          'Referer': 'https://toonstream.us/',
+        },
+        signal: AbortSignal.timeout(6000),
+      });
+      if (res.ok) {
+        const html = await res.text();
+        if (html.length > 5000) {
+          const $ = cheerio.load(html);
+          const streams: string[] = [];
+          $('iframe').each((_, el) => {
+            let s = $(el).attr('src') || $(el).attr('data-src') || '';
+            if (s.startsWith('//')) s = 'https:' + s;
+            if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
+          });
+          const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
+          if (active.length > 0) {
+            const resultSources: StreamSource[] = active.map((s, i) => ({
+              label: i === 0 ? 'ToonStream 1 (HD)' : `ToonStream ${i + 1} (Mirror)`,
+              url: sanitizeStreamUrl(s),
+              isMultiAudio: true,
+            }));
+            if (anime.saltStreamUrl || (anime.streamUrl && anime.streamUrl.includes('as-cdn'))) {
+              const salt = anime.saltStreamUrl || anime.streamUrl;
+              if (isValidStreamEmbedUrl(salt)) {
+                resultSources.push({ label: 'AnimeSalt (Backup)', url: sanitizeStreamUrl(salt), isMultiAudio: true });
+              }
+            }
+            anime.toonStreamUrl = active[0];
+            anime.streamSources = resultSources;
+            anime.toonUrl = url;
+            return resultSources;
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  // 4. Try searching ToonStream
+  try {
+    const searchUrl = `https://toonstream.us/?s=${encodeURIComponent(anime.title || '')}`;
+    const searchRes = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://toonstream.us/',
+      },
+      signal: AbortSignal.timeout(6000),
+    });
+    if (searchRes.ok) {
+      const searchHtml = await searchRes.text();
+      const $ = cheerio.load(searchHtml);
+      const movieLink = $('a[href*="/movies/"]').first().attr('href');
+      if (movieLink) {
+        const fullLink = movieLink.startsWith('http') ? movieLink : `https://toonstream.us${movieLink}`;
+        const pageRes = await fetch(fullLink, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Referer': 'https://toonstream.us/',
+          },
+          signal: AbortSignal.timeout(6000),
+        });
+        if (pageRes.ok) {
+          const pageHtml = await pageRes.text();
+          const $$ = cheerio.load(pageHtml);
+          const streams: string[] = [];
+          $$('iframe').each((_, el) => {
+            let s = $$(el).attr('src') || $$(el).attr('data-src') || '';
+            if (s.startsWith('//')) s = 'https:' + s;
+            if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
+          });
+          const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
+          if (active.length > 0) {
+            const resultSources: StreamSource[] = active.map((s, i) => ({
+              label: i === 0 ? 'ToonStream 1 (HD)' : `ToonStream ${i + 1} (Mirror)`,
+              url: sanitizeStreamUrl(s),
+              isMultiAudio: true,
+            }));
+            anime.toonStreamUrl = active[0];
+            anime.streamSources = resultSources;
+            anime.toonUrl = fullLink;
+            return resultSources;
+          }
+        }
+      }
+    }
+  } catch (e) {}
+
+  // 5. Fallback if AnimeSalt had a stream and nothing else was found
+  if (anime.saltStreamUrl || anime.streamUrl) {
+    const saltUrl = anime.saltStreamUrl || anime.streamUrl;
+    if (isValidStreamEmbedUrl(saltUrl)) {
+      return [{
+        label: 'AnimeSalt (Backup)',
+        url: sanitizeStreamUrl(saltUrl),
+        isMultiAudio: true,
+      }];
+    }
+  }
+
+  return [];
+}
+
+/**
  * Resolve stream sources with zero latency when pre-cached, and fast scraping fallback.
  */
 export async function resolveStreamSources(
@@ -232,20 +374,8 @@ export async function resolveStreamSources(
         a.type === 'movie'
       );
       if (anime) {
-        if ((anime as any).streamSources && (anime as any).streamSources.length > 0) {
-          return (anime as any).streamSources;
-        }
-        if ((anime as any).toonStreamUrl || anime.streamUrl) {
-          const streamToParse = (anime as any).toonStreamUrl || anime.streamUrl;
-          const parsedSources = parseStreamUrlToSources(streamToParse);
-          if (parsedSources.length > 0) {
-            await enrichSourcesWithDirectStreams(parsedSources);
-            return parsedSources;
-          }
-        }
-        if ((anime as any).toonUrl) {
-          cleanTarget = (anime as any).toonUrl;
-        }
+        const movieSources = await resolveMovieStreamSources(anime);
+        if (movieSources.length > 0) return movieSources;
       }
     }
   }

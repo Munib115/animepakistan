@@ -1,10 +1,8 @@
-const CACHE_NAME = 'anime-pakistan-cache-v6';
+const CACHE_NAME = 'anime-pakistan-cache-v7';
 
-// Only tiny, critical assets are pre-cached at install time.
-// Large game ROM and emulator files are cached lazily in background
-// to avoid blocking the initial page load.
+// Only static unchanging assets are pre-cached at install time.
+// Next.js dynamic HTML and route chunks are loaded fresh from network.
 const CRITICAL_ASSETS = [
-  '/',
   '/manifest.json',
   '/fonts/MaterialSymbolsOutlined.woff2',
 ];

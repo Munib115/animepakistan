@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
 import { redirect } from 'next/navigation';
 import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
-import { resolveStreamSources } from '@/lib/resolver-server';
+import { resolveStreamSources, resolveMovieStreamSources } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
 import { animeDescription, animeImage, animeName } from '@/lib/seo';
 
@@ -99,24 +99,9 @@ export default async function MovieWatchPage(props: PageProps) {
   }
 
   // Resolve streams with priority:
-  // 1. Pre-cached streamSources / toonStreamUrl on the anime object
-  // 2. AnimeSalt streamUrl (preserved as backup)
-  // 3. Dynamic serverless resolution fallback
-  let sources: StreamSource[] = [];
-
-  if ((anime as any).streamSources && (anime as any).streamSources.length > 0) {
-    sources = (anime as any).streamSources;
-  } else if ((anime as any).toonStreamUrl || anime.streamUrl) {
-    const streamToUse = (anime as any).toonStreamUrl || anime.streamUrl;
-    sources = [{ label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(streamToUse), isMultiAudio: true }];
-    if ((anime as any).saltStreamUrl) {
-      sources.push({
-        label: 'AnimeSalt (Backup)',
-        url: sanitizeStreamUrl((anime as any).saltStreamUrl),
-        isMultiAudio: true
-      });
-    }
-  }
+  // 1. Dedicated ToonStream movie resolver (pre-cached or on-demand fetch)
+  // 2. Fallback to general stream source resolution
+  let sources: StreamSource[] = await resolveMovieStreamSources(anime);
 
   if (sources.length === 0) {
     const saltSlug = anime.saltSlug || anime.slug;
@@ -126,7 +111,6 @@ export default async function MovieWatchPage(props: PageProps) {
       || (toonSlug ? `https://toonstream.us/movies/${toonSlug}` : null)
       || (anime.url && anime.url.startsWith('http') ? anime.url : `https://animesalt.cx/movies/${saltSlug}/`);
 
-    // Directly resolve stream sources with in-memory caching
     try {
       const resolved = await resolveStreamSources(targetUrl);
       sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));

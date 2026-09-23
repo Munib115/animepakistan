@@ -10,7 +10,12 @@
     "scrape:new": "node scripts/auto_sync_toonstream.js",
     "sync:auto": "node scripts/auto_sync_toonstream.js",
     "scrape:toonstream": "node scripts/sync_toonstream.js",
-    "scrape": "node scripts/auto_sync_toonstream.js"
+    "scrape": "node scripts/auto_sync_toonstream.js",
+    "catalog:refresh": "node scripts/refresh_toonstream_catalog.js",
+    "streams:patch": "node scripts/patch_all_toonstream_streams.js",
+    "streams:patch-movies": "node scripts/patch_all_toonstream_streams.js --movies",
+    "streams:patch-series": "node scripts/patch_all_toonstream_streams.js --series",
+    "streams:full-refresh": "node scripts/refresh_toonstream_catalog.js && node scripts/patch_all_toonstream_streams.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

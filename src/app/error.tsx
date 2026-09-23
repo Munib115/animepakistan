@@ -13,7 +13,50 @@ export default function GlobalError({
   useEffect(() => {
     // Log client-side error to console for diagnosis
     console.error('AnimePakistan Navigation/Render Error:', error);
+
+    // If chunk failed to load or stale cache error after deployment, purge cache & reload once
+    if (typeof window !== 'undefined') {
+      const msg = error?.message || '';
+      const isStaleError =
+        msg.includes('ChunkLoadError') ||
+        msg.includes('Loading chunk') ||
+        msg.includes('module factory is not available') ||
+        msg.includes('instantiated') ||
+        msg.includes('script tag');
+
+      if (isStaleError) {
+        if ('caches' in window) {
+          caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+        }
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then((regs) => {
+            regs.forEach((r) => r.unregister());
+          });
+        }
+        const hasReloaded = sessionStorage.getItem('ap_chunk_auto_reload');
+        if (!hasReloaded) {
+          sessionStorage.setItem('ap_chunk_auto_reload', '1');
+          window.location.reload();
+        }
+      }
+    }
   }, [error]);
+
+  const handleRetry = () => {
+    if (typeof window !== 'undefined') {
+      if ('caches' in window) {
+        caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+      }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((regs) => {
+          regs.forEach((r) => r.unregister());
+        });
+      }
+      window.location.reload();
+      return;
+    }
+    reset();
+  };
 
   return (
     <div
@@ -99,7 +142,7 @@ export default function GlobalError({
         >
           <button
             type="button"
-            onClick={() => reset()}
+            onClick={handleRetry}
             className="glass-btn"
             style={{
               padding: '12px 28px',
