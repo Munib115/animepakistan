@@ -213,6 +213,11 @@ export default function WatchContainer({
       if (isShieldActive) {
         adblockShield.recordStreamSession(activeMirror);
       }
+      // Safety auto-dismiss: ensure loading spinner never blocks the user from watching
+      const timer = setTimeout(() => {
+        setIsIframeLoaded(true);
+      }, 2500);
+      return () => clearTimeout(timer);
     }
   }, [activeMirror, isShieldActive]);
 
@@ -782,9 +787,11 @@ export default function WatchContainer({
                   alignItems: 'center',
                   justifyContent: 'center',
                   background: 'linear-gradient(135deg, #010c05 0%, #031c0e 100%)',
-                  zIndex: 4,
+                  zIndex: 3,
                   gap: '12px',
                   color: '#ffffff',
+                  pointerEvents: 'none',
+                  transition: 'opacity 0.3s ease',
                 }}>
                   <div style={{
                     width: '46px',
@@ -960,6 +967,86 @@ export default function WatchContainer({
           </div>
         </div>
       </div>
+
+      {/* Stream Servers Selector Bar (Multi-Server Mirrors + AnimeSalt Backup) */}
+      {validStreamSources.length > 1 && (
+        <div
+          className="server-selector-card"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '8px',
+            padding: '10px 14px',
+            background: 'var(--glass-bg)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            borderRadius: '16px',
+            border: '1px solid var(--glass-border)',
+            boxShadow: 'var(--glass-shadow)',
+            position: 'relative',
+            zIndex: 2,
+          }}
+        >
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            marginRight: '6px',
+            fontSize: '0.8rem',
+            fontWeight: 800,
+            color: 'var(--text-secondary)',
+          }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>
+              dns
+            </span>
+            <span>{language === 'ur' ? 'سرور تبدیل کریں:' : 'Switch Server:'}</span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', flex: 1 }}>
+            {validStreamSources.map((source, idx) => {
+              const isSelected = selectedServerIndex === idx;
+              const isBackup = source.label.toLowerCase().includes('backup') || source.url.includes('as-cdn');
+              return (
+                <button
+                  key={`${source.url}-${idx}`}
+                  type="button"
+                  onClick={() => {
+                    sound.pop();
+                    setSelectedServerIndex(idx);
+                    setIframeKey((prev) => prev + 1);
+                    setIsIframeLoaded(false);
+                  }}
+                  className={isSelected ? 'glass-badge active' : 'glass-btn-secondary'}
+                  style={{
+                    padding: '6px 14px',
+                    borderRadius: '999px',
+                    fontSize: '0.75rem',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    border: isSelected ? '1px solid var(--color-glow)' : '1px solid var(--glass-border)',
+                    background: isSelected ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.05)',
+                    color: isSelected ? '#ffffff' : 'var(--text-primary)',
+                    boxShadow: isSelected ? '0 2px 8px rgba(0, 102, 51, 0.35)' : 'none',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontSize: '14px', color: isSelected ? '#00ff66' : isBackup ? '#f59e0b' : 'var(--text-secondary)' }}
+                  >
+                    {isSelected ? 'play_arrow' : isBackup ? 'cloud_off' : 'videocam'}
+                  </span>
+                  <span>{source.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Player Navigation Bar — Previous / Next Episode */}
       {!isMovie && (
