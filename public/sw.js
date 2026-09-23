@@ -69,10 +69,10 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const requestUrl = new URL(event.request.url);
 
-  // Avoid non-GET requests or hot reloads
+  // Avoid non-GET requests or Next.js internal/Turbopack chunks
   if (
     event.request.method !== 'GET' ||
-    requestUrl.pathname.startsWith('/_next/webpack-hmr') ||
+    requestUrl.pathname.startsWith('/_next/') ||
     requestUrl.pathname.includes('hot-update')
   ) {
     return;

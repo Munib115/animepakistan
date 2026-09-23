@@ -89,26 +89,42 @@ export default async function EpisodeWatchPage(props: PageProps) {
   // Resolve streams cleanly using unified resolver-server
   let sources: StreamSource[] = [];
   const saltSlug = (anime as any).saltSlug || anime.slug;
+  const toonSlug = (anime as any).toonSlug;
   const epNumber = episode.number || 1;
   const epSeason: number = (episode as any).season ?? (() => {
     const m = episode.slug.match(/(\d+)x\d+/i);
     return m ? parseInt(m[1], 10) : 1;
   })();
 
-  const episodeTargetUrl = episode.url && episode.url.startsWith('http')
-    ? episode.url
-    : `https://animesalt.cx/episode/${saltSlug}-${epSeason}x${epNumber}/`;
+  // 1. Instant check for pre-cached streamSources on episode
+  if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
+    sources = (episode as any).streamSources;
+  } else if ((episode as any).toonStreamUrl || episode.streamUrl) {
+    const streamToUse = (episode as any).toonStreamUrl || episode.streamUrl;
+    sources = [{ label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(streamToUse), isMultiAudio: true }];
+    if ((episode as any).saltStreamUrl) {
+      sources.push({ label: 'AnimeSalt (Backup)', url: sanitizeStreamUrl((episode as any).saltStreamUrl), isMultiAudio: true });
+    }
+  }
 
-  try {
-    const resolved = await resolveStreamSources(
-      episodeTargetUrl,
-      epNumber,
-      epSeason
-    );
-    sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));
-  } catch (e) {
-    console.error('Failed to resolve episode stream sources:', e);
-    sources = [];
+  // 2. Fallback to dynamic resolution if not pre-cached
+  if (sources.length === 0) {
+    const episodeTargetUrl = (episode as any).toonUrl
+      || (episode.url && episode.url.includes('toonstream') ? episode.url : null)
+      || (toonSlug ? `https://toonstream.us/episode/${toonSlug}-${epSeason}x${epNumber}/` : null)
+      || (episode.url && episode.url.startsWith('http') ? episode.url : `https://animesalt.cx/episode/${saltSlug}-${epSeason}x${epNumber}/`);
+
+    try {
+      const resolved = await resolveStreamSources(
+        episodeTargetUrl,
+        epNumber,
+        epSeason
+      );
+      sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));
+    } catch (e) {
+      console.error('Failed to resolve episode stream sources:', e);
+      sources = [];
+    }
   }
 
   return (

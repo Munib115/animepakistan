@@ -99,43 +99,36 @@ export default async function MovieWatchPage(props: PageProps) {
   }
 
   // Resolve streams with priority:
-  // 1. Pre-cached streamUrl on the anime object
-  // 2. New animesalt-stream API (saltSlug, no episode number → first/only stream)
-  // 3. General resolver (legacy fallback)
+  // 1. Pre-cached streamSources / toonStreamUrl on the anime object
+  // 2. AnimeSalt streamUrl (preserved as backup)
+  // 3. Dynamic serverless resolution fallback
   let sources: StreamSource[] = [];
 
-  if (anime.streamUrl) {
-    if (anime.streamUrl.includes('multi-lang-plyr/player.php?data=')) {
-      try {
-        const urlObj = new URL(anime.streamUrl);
-        const dataParam = urlObj.searchParams.get('data');
-        if (dataParam) {
-          const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
-          const parsed = JSON.parse(decodedStr);
-          if (Array.isArray(parsed)) {
-            sources = parsed.map((item: any) => ({
-              label: `Abyss (${item.language || 'HD'})`,
-              url: sanitizeStreamUrl(item.link),
-              isMultiAudio: false
-            }));
-          }
-        }
-      } catch (e) {
-        sources = [{ label: 'HD-1 (Hindi)', url: anime.streamUrl, isMultiAudio: true }];
-      }
-    } else {
-      sources = [{ label: 'HD-1 (Hindi)', url: anime.streamUrl, isMultiAudio: true }];
+  if ((anime as any).streamSources && (anime as any).streamSources.length > 0) {
+    sources = (anime as any).streamSources;
+  } else if ((anime as any).toonStreamUrl || anime.streamUrl) {
+    const streamToUse = (anime as any).toonStreamUrl || anime.streamUrl;
+    sources = [{ label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(streamToUse), isMultiAudio: true }];
+    if ((anime as any).saltStreamUrl) {
+      sources.push({
+        label: 'AnimeSalt (Backup)',
+        url: sanitizeStreamUrl((anime as any).saltStreamUrl),
+        isMultiAudio: true
+      });
     }
   }
 
   if (sources.length === 0) {
     const saltSlug = anime.saltSlug || anime.slug;
+    const toonSlug = (anime as any).toonSlug;
+    const targetUrl = (anime as any).toonUrl
+      || (anime.url && anime.url.includes('toonstream') ? anime.url : null)
+      || (toonSlug ? `https://toonstream.us/movies/${toonSlug}` : null)
+      || (anime.url && anime.url.startsWith('http') ? anime.url : `https://animesalt.cx/movies/${saltSlug}/`);
 
     // Directly resolve stream sources with in-memory caching
     try {
-      const resolved = await resolveStreamSources(
-        anime.url && anime.url.startsWith('http') ? anime.url : `https://animesalt.cx/movies/${saltSlug}/`
-      );
+      const resolved = await resolveStreamSources(targetUrl);
       sources = resolved.filter(s => s.url && isValidStreamEmbedUrl(s.url));
     } catch (e) {
       sources = [];

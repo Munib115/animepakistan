@@ -8,9 +8,13 @@ export default function PWARegister() {
       return;
     }
 
-    // In development mode, unregister active service workers and clear caches
-    // to prevent stale chunks, Turbopack factory mismatches, and HMR breaking on localhost.
-    if (process.env.NODE_ENV === 'development') {
+    // In development mode or on localhost, unregister active service workers and clear caches
+    // to prevent stale chunks, cross-project worker collisions, and Turbopack factory mismatches.
+    if (
+      process.env.NODE_ENV === 'development' ||
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1'
+    ) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         for (const reg of registrations) {
           reg.unregister().then(() => {

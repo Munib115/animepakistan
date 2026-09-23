@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "scrape:new": "node scripts/scrape_all_new_episodes.js",
-    "scrape": "node scripts/scrape_all_new_episodes.js"
+    "scrape:new": "node scripts/auto_sync_toonstream.js",
+    "sync:auto": "node scripts/auto_sync_toonstream.js",
+    "scrape:toonstream": "node scripts/sync_toonstream.js",
+    "scrape": "node scripts/auto_sync_toonstream.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

@@ -196,12 +196,26 @@ export async function resolveStreamSources(
     if (epSlug) {
       for (const anime of db) {
         if (!anime.episodes) continue;
-        const foundEp = anime.episodes.find(e => e.slug === epSlug || (e.url && e.url.includes(epSlug)));
-        if (foundEp && (foundEp as any).streamUrl) {
-          const parsedSources = parseStreamUrlToSources((foundEp as any).streamUrl);
-          if (parsedSources.length > 0) {
-            await enrichSourcesWithDirectStreams(parsedSources);
-            return parsedSources;
+        const foundEp = anime.episodes.find(e =>
+          e.slug === epSlug ||
+          (e as any).toonSlug === epSlug ||
+          (e.url && e.url.includes(epSlug)) ||
+          ((e as any).toonUrl && (e as any).toonUrl.includes(epSlug))
+        );
+        if (foundEp) {
+          if ((foundEp as any).streamSources && (foundEp as any).streamSources.length > 0) {
+            return (foundEp as any).streamSources;
+          }
+          if ((foundEp as any).toonStreamUrl || (foundEp as any).streamUrl) {
+            const streamToParse = (foundEp as any).toonStreamUrl || (foundEp as any).streamUrl;
+            const parsedSources = parseStreamUrlToSources(streamToParse);
+            if (parsedSources.length > 0) {
+              await enrichSourcesWithDirectStreams(parsedSources);
+              return parsedSources;
+            }
+          }
+          if ((foundEp as any).toonUrl) {
+            cleanTarget = (foundEp as any).toonUrl;
           }
         }
       }
@@ -213,12 +227,24 @@ export async function resolveStreamSources(
     const movieSlugMatch = cleanTarget.match(/\/movies\/([^/]+)/);
     const movieSlug = movieSlugMatch ? movieSlugMatch[1] : '';
     if (movieSlug) {
-      const anime = db.find(a => (a.saltSlug === movieSlug || a.slug === movieSlug) && a.type === 'movie');
-      if (anime && anime.streamUrl) {
-        const parsedSources = parseStreamUrlToSources(anime.streamUrl);
-        if (parsedSources.length > 0) {
-          await enrichSourcesWithDirectStreams(parsedSources);
-          return parsedSources;
+      const anime = db.find(a =>
+        (a.saltSlug === movieSlug || a.slug === movieSlug || (a as any).toonSlug === movieSlug) &&
+        a.type === 'movie'
+      );
+      if (anime) {
+        if ((anime as any).streamSources && (anime as any).streamSources.length > 0) {
+          return (anime as any).streamSources;
+        }
+        if ((anime as any).toonStreamUrl || anime.streamUrl) {
+          const streamToParse = (anime as any).toonStreamUrl || anime.streamUrl;
+          const parsedSources = parseStreamUrlToSources(streamToParse);
+          if (parsedSources.length > 0) {
+            await enrichSourcesWithDirectStreams(parsedSources);
+            return parsedSources;
+          }
+        }
+        if ((anime as any).toonUrl) {
+          cleanTarget = (anime as any).toonUrl;
         }
       }
     }
@@ -231,7 +257,10 @@ export async function resolveStreamSources(
     const slug = match ? match[2] : cleanTarget.replace(/^.*\/(series|tv)\//, '').split('/')[0];
     
     if (slug) {
-      const anime = db.find(a => (a.saltSlug === slug || a.slug === slug) && a.type === 'series');
+      const anime = db.find(a =>
+        (a.saltSlug === slug || a.slug === slug || (a as any).toonSlug === slug) &&
+        a.type === 'series'
+      );
       const epNum = episodeNumber || 1;
       const epSeason = seasonNumber;
 
@@ -250,20 +279,23 @@ export async function resolveStreamSources(
         return true;
       });
 
-      // If episode has a pre-cached streamUrl, parse and return instantly!
-      if (episode && (episode as any).streamUrl) {
-        const parsedSources = parseStreamUrlToSources((episode as any).streamUrl);
-        if (parsedSources.length > 0) {
-          await enrichSourcesWithDirectStreams(parsedSources);
-          return parsedSources;
+      if (episode) {
+        if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
+          return (episode as any).streamSources;
         }
-      }
-
-      if (episode && episode.url && episode.url.startsWith('http')) {
-        cleanTarget = episode.url.replace(/animesalt\.(link|me)/gi, 'animesalt.cx');
-      } else {
-        const eSeason = episode?.season ?? epSeason ?? 1;
-        cleanTarget = `https://animesalt.cx/episode/${slug}-${eSeason}x${epNum}/`;
+        if ((episode as any).toonStreamUrl || (episode as any).streamUrl) {
+          const streamToParse = (episode as any).toonStreamUrl || (episode as any).streamUrl;
+          const parsedSources = parseStreamUrlToSources(streamToParse);
+          if (parsedSources.length > 0) {
+            await enrichSourcesWithDirectStreams(parsedSources);
+            return parsedSources;
+          }
+        }
+        if ((episode as any).toonUrl) {
+          cleanTarget = (episode as any).toonUrl;
+        } else if (episode.url && episode.url.startsWith('http')) {
+          cleanTarget = episode.url;
+        }
       }
     }
   }
@@ -282,10 +314,11 @@ export async function resolveStreamSources(
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 12000); // 12s timeout for reliable serverless fetches
 
+    const isToonStream = cleanTarget.includes('toonstream.us');
     const res = await fetch(cleanTarget, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Referer': 'https://animesalt.cx/',
+        'Referer': isToonStream ? 'https://toonstream.us/' : 'https://animesalt.cx/',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.9',
       },
@@ -377,10 +410,16 @@ export async function resolveStreamSources(
   // Filter out any source that is not a valid stream embed (strictly reject third-party website pages and dead shorteners)
   const validSources = sources.filter(s => s.url && isValidStreamEmbedUrl(s.url));
 
-  // Sort as-cdn sources first
+  // Prioritize active working ToonStream servers, keep AnimeSalt (as-cdn) as backup at the end
+  validSources.forEach(s => {
+    if (s.url.includes('as-cdn') && !s.label.includes('Backup')) {
+      s.label = 'AnimeSalt (Backup)';
+    }
+  });
+
   validSources.sort((a, b) => {
-    const aIsCdn = a.url.includes('as-cdn') ? -1 : 1;
-    const bIsCdn = b.url.includes('as-cdn') ? -1 : 1;
+    const aIsCdn = a.url.includes('as-cdn') ? 1 : -1;
+    const bIsCdn = b.url.includes('as-cdn') ? 1 : -1;
     return aIsCdn - bIsCdn;
   });
 

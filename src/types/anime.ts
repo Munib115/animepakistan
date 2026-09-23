@@ -1,3 +1,9 @@
+export interface StreamMirrorSource {
+  label: string;
+  url: string;
+  isMultiAudio?: boolean;
+}
+
 export interface Episode {
   number: number;
   season?: number;
@@ -5,8 +11,18 @@ export interface Episode {
   slug: string;
   url: string;
   thumbnail: string;
-  /** Pre-cached stream embed URL from animesalt.me */
+  /** Active working stream embed URL */
   streamUrl?: string;
+  /** Preserved AnimeSalt stream embed URL (backup) */
+  saltStreamUrl?: string;
+  /** Preserved AnimeSalt episode page URL */
+  saltUrl?: string;
+  /** ToonStream stream embed URL */
+  toonStreamUrl?: string;
+  /** ToonStream episode page URL */
+  toonUrl?: string;
+  /** Pre-parsed working stream sources/mirrors */
+  streamSources?: StreamMirrorSource[];
 }
 
 export interface AnilistMetadata {
@@ -27,9 +43,15 @@ export interface AnilistMetadata {
 export interface AnimeItem {
   title: string;
   slug: string;
-  /** The animesalt.me /tv/{saltSlug}/ page slug (may differ from local slug) */
+  /** The animesalt.me /tv/{saltSlug}/ page slug */
   saltSlug?: string;
+  /** The toonstream.us /series/{toonSlug}/ page slug */
+  toonSlug?: string;
   url: string;
+  /** Preserved AnimeSalt URL */
+  saltUrl?: string;
+  /** ToonStream series or movie URL */
+  toonUrl?: string;
   type: 'movie' | 'series';
   poster: string;
   backdrop?: string;
@@ -39,7 +61,14 @@ export interface AnimeItem {
   episodes?: Episode[];
   episodeCount?: number;
   anilist?: AnilistMetadata | null;
-  /** Pre-cached stream embed URL (for movies) */
+  /** Active working stream embed URL (for movies) */
   streamUrl?: string;
+  /** Preserved AnimeSalt stream embed URL (backup) */
+  saltStreamUrl?: string;
+  /** ToonStream stream embed URL */
+  toonStreamUrl?: string;
+  /** Pre-parsed working stream sources/mirrors */
+  streamSources?: StreamMirrorSource[];
+  source?: string;
 }
 
