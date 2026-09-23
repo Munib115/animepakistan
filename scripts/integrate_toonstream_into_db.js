@@ -18,8 +18,11 @@ if (fs.existsSync(epStreamPath)) {
 
 function normalize(str) {
   return (str || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
-    .replace(/\b(season\s*\d+|part\s*\d+|s\d+|cour\s*\d+|dub|sub)\b/gi, '')
+    .replace(/\[.*?\]|\(.*?\)/g, '')
+    .replace(/\b(hindi|tamil|telugu|dub|sub|season\s*\d+|part\s*\d+|s\d+|cour\s*\d+)\b/gi, '')
     .replace(/[^\w\s]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
@@ -43,18 +46,36 @@ for (const item of db) {
 
 function findDbMatch(item) {
   const bySlug = dbBySlug.get(item.slug.toLowerCase());
-  if (bySlug) return bySlug;
+  if (bySlug && bySlug.type === item.type) return bySlug;
 
   const norm = normalize(item.title);
-  if (dbByNormTitle.has(norm)) return dbByNormTitle.get(norm);
+  if (dbByNormTitle.has(norm)) {
+    const direct = dbByNormTitle.get(norm);
+    if (direct.type === item.type) return direct;
+  }
 
-  // Partial match fallback
+  // Exact title match with same type
   for (const [dNorm, dItem] of dbByNormTitle.entries()) {
-    if (dNorm.length > 5 && (dNorm.includes(norm) || norm.includes(dNorm))) {
+    if (dItem.type === item.type && dNorm === norm) {
       return dItem;
     }
   }
-  return null;
+
+  // Partial match fallback with same type
+  let bestMatch = null;
+  let bestDiff = 9999;
+  for (const [dNorm, dItem] of dbByNormTitle.entries()) {
+    if (dItem.type === item.type && dNorm.length > 4) {
+      if (dNorm.includes(norm) || norm.includes(dNorm)) {
+        const diff = Math.abs(dNorm.length - norm.length);
+        if (diff < bestDiff) {
+          bestDiff = diff;
+          bestMatch = dItem;
+        }
+      }
+    }
+  }
+  return bestMatch;
 }
 
 // 1. Process Movies
@@ -212,6 +233,31 @@ for (const series of seriesMeta) {
     dbBySlug.set(newSeriesEntry.slug.toLowerCase(), newSeriesEntry);
     dbByNormTitle.set(normalize(newSeriesEntry.title), newSeriesEntry);
     newSeriesAdded++;
+  }
+}
+
+// 3. Cross-share working streams between title variants (e.g. naruto-shippuden & naruto-shippuden-hindi-dub)
+let crossSharedEps = 0;
+for (const s of db) {
+  if (s.type !== 'series' || !s.episodes) continue;
+  const sNorm = normalize(s.title);
+
+  const partner = db.find(p => p !== s && p.type === 'series' && normalize(p.title) === sNorm && p.episodes?.some(e => e.streamSources && e.streamSources.length > 0));
+  if (partner) {
+    for (const ep of s.episodes) {
+      if (!ep.toonStreamUrl || !ep.streamSources || ep.streamSources.length === 0) {
+        const pEp = partner.episodes.find(pe => pe.number === ep.number && (pe.season === ep.season || !pe.season));
+        if (pEp && pEp.streamSources && pEp.streamSources.length > 0) {
+          if (!ep.saltStreamUrl && ep.streamUrl?.includes('as-cdn')) {
+            ep.saltStreamUrl = ep.streamUrl;
+          }
+          ep.streamUrl = pEp.streamUrl;
+          ep.toonStreamUrl = pEp.toonStreamUrl;
+          ep.streamSources = pEp.streamSources;
+          crossSharedEps++;
+        }
+      }
+    }
   }
 }
 

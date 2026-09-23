@@ -809,7 +809,7 @@ export default function WatchContainer({
                 loading="eager"
                 onLoad={() => setIsIframeLoaded(true)}
                 referrerPolicy="origin-when-cross-origin"
-                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen"
+                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-forms"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 style={{
                   position: 'absolute',
