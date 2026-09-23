@@ -44,6 +44,9 @@ const BLOCKED_DOMAINS = [
   'thaudray', 'asg', 'hilltop', 'vidoomy', 'popmyads', 'ad-score', 'adkernel',
   'realsrv', 'tsyndicate', 'ad-delivery', 'adskeeper', 'rtbmark', 'adsco.re',
   'wigetmedia', 'tsyndicate', 'syndication.exoclick', 'syndication.realsrv',
+  // Specific ToonStream / Video Embed Ad Networks
+  'manehprizes', 'endlesshandbaglinked', 'technocosmos', 'decafeligiblyhad',
+  'streamruby.com/premium', 'vidmolyadblocktest', 'fembed-ads', 'gounlimited',
 
   // Rogue Redirects & Gambling/Spam
   '1xbet', 'bet365', 'betway', 'parimatch', 'melbet', 'mostbet', 'linebet',
@@ -488,18 +491,45 @@ class AdBlockEngine {
   private installWindowGuards() {
     if (typeof window === 'undefined') return;
 
-    // Ghostery Anti-Anti-AdBlock Defuser
+    // Ghostery & uBlock Origin Anti-Anti-AdBlock Defuser
     try {
       (window as any).canRunAds = true;
       (window as any).isAdBlockActive = false;
       (window as any).adsBlocked = false;
       (window as any).adblocker = false;
+
+      // Defuse FuckAdBlock / BlockAdBlock / IAB adblock detectors used by AbyssPlayer and Vidmoly
+      const dummyFab = {
+        onDetected: () => dummyFab,
+        onNotDetected: (cb: any) => {
+          if (typeof cb === 'function') setTimeout(cb, 20);
+          return dummyFab;
+        },
+        check: () => false,
+        clearEvent: () => {},
+        setOption: () => dummyFab,
+      };
+      (window as any).fuckAdBlock = dummyFab;
+      (window as any).FuckAdBlock = dummyFab;
+      (window as any).blockAdBlock = dummyFab;
+      (window as any).BlockAdBlock = dummyFab;
+      (window as any).snackBar = { show: () => {} };
+      (window as any).adblockDetector = {
+        init: () => {},
+        addEvent: (type: string, cb: any) => {
+          if (type === 'noAdBlock' && typeof cb === 'function') setTimeout(cb, 20);
+        }
+      };
     } catch (e) {}
 
-    // Detect iframe focus-stealing popunder tricks
+    // Detect iframe focus-stealing popunder tricks and reclaim focus immediately
     window.addEventListener('blur', () => {
       if (this.enabled && document.activeElement && document.activeElement.tagName === 'IFRAME') {
         this.recordBlocked('popup', 'iframe-focus-trap');
+        // Instantly force focus back to AnimePakistan window so background tabs can't steal the screen
+        setTimeout(() => {
+          window.focus();
+        }, 30);
       }
     });
 

@@ -65,9 +65,55 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Known ad networks, popunder scripts, and telemetry beacons
+const BLOCKED_AD_PATTERNS = [
+  'manehprizes',
+  'endlesshandbaglinked',
+  'technocosmos',
+  'decafeligiblyhad',
+  'popads',
+  'popcash',
+  'propellerads',
+  'monetag',
+  'onclickunder',
+  'onclickmega',
+  'adsterra',
+  'clickadu',
+  'galaksion',
+  'ezmob',
+  'hilltopads',
+  'richpush',
+  'admaven',
+  'adcash',
+  'yllix',
+  'deloton',
+  'alwingulla',
+  'gloaphoo',
+  'thaudray',
+  'highcpmgate',
+  'paviliongiddy',
+  'histats.com',
+  'whos.amung.us',
+  'statcounter.com',
+  'syndication.exoclick',
+  'syndication.realsrv',
+  'linkvertise',
+];
+
 // Fetch Event
 self.addEventListener('fetch', (event) => {
   const requestUrl = new URL(event.request.url);
+
+  // Network-level ad & popunder interception (defuse ad scripts before they execute)
+  if (BLOCKED_AD_PATTERNS.some((pat) => requestUrl.hostname.includes(pat) || requestUrl.pathname.includes(pat))) {
+    event.respondWith(
+      new Response('/* defused by AnimePakistan AdShield */', {
+        status: 200,
+        headers: { 'Content-Type': 'application/javascript' }
+      })
+    );
+    return;
+  }
 
   // Avoid non-GET requests or Next.js internal/Turbopack chunks
   if (
