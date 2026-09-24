@@ -13,6 +13,7 @@ import { isInWatchlist, toggleWatchlist } from '@/lib/watchlist';
 import { shareContent } from '@/lib/shareHelper';
 import { adblockShield } from '@/lib/adblockShield';
 import EpisodeComments from './EpisodeComments';
+import NativeHlsPlayer from './NativeHlsPlayer';
 
 
 interface WatchContainerProps {
@@ -193,6 +194,46 @@ export default function WatchContainer({
 
   const [iframeKey, setIframeKey] = useState(0);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+
+  // Direct HLS Player State (Phase 2 Clean Player Engine)
+  const [directHlsStream, setDirectHlsStream] = useState<string | null>(null);
+  const [useDirectPlayer, setUseDirectPlayer] = useState<boolean>(true);
+  const [isResolvingDirectHls, setIsResolvingDirectHls] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!activeMirror) {
+      setDirectHlsStream(null);
+      return;
+    }
+
+    let isCancelled = false;
+    setIsResolvingDirectHls(true);
+
+    fetch(`/api/stream/direct?url=${encodeURIComponent(activeMirror)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isCancelled && data.success && data.streamUrl) {
+          setDirectHlsStream(data.streamUrl);
+          setUseDirectPlayer(true);
+        } else if (!isCancelled) {
+          setDirectHlsStream(null);
+          setUseDirectPlayer(false);
+        }
+      })
+      .catch(() => {
+        if (!isCancelled) {
+          setDirectHlsStream(null);
+          setUseDirectPlayer(false);
+        }
+      })
+      .finally(() => {
+        if (!isCancelled) setIsResolvingDirectHls(false);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [activeMirror]);
 
   // Resume prompt state
   const [savedProgress, setSavedProgress] = useState<WatchProgressItem | null>(null);
@@ -821,7 +862,43 @@ export default function WatchContainer({
             transform: 'translate3d(0,0,0)',
           }}
         >
-          {activeMirror ? (
+          {useDirectPlayer && directHlsStream ? (
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 2,
+            }}>
+              <NativeHlsPlayer
+                streamUrl={directHlsStream}
+                title={displayName}
+                poster={resolvedPoster}
+                initialTime={savedProgress?.currentTime || 0}
+                onError={() => {
+                  console.warn('[WatchContainer] Direct HLS playback issue, falling back to shielded mirror');
+                  setUseDirectPlayer(false);
+                }}
+                onTimeUpdate={(curr, dur) => {
+                  if (curr > 3) {
+                    saveWatchProgress({
+                      animeSlug: anime.slug,
+                      animeTitle: displayName,
+                      epSlug: currentEpisode?.slug,
+                      epTitle: currentEpisode?.title,
+                      epNumber: currentEpisode?.number,
+                      currentTime: Math.floor(curr),
+                      duration: Math.floor(dur),
+                      progressPercent: dur > 0 ? Math.round((curr / dur) * 100) : 0,
+                      poster: resolvedPoster,
+                      type: isMovie ? 'movie' : 'series',
+                    });
+                  }
+                }}
+              />
+            </div>
+          ) : activeMirror ? (
             <>
               {/* Sleek Liquid Glass Loader until iframe is ready */}
               {!isIframeLoaded && (
@@ -865,7 +942,7 @@ export default function WatchContainer({
                 loading="eager"
                 onLoad={() => setIsIframeLoaded(true)}
                 referrerPolicy="origin-when-cross-origin"
-                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-forms allow-pointer-lock allow-orientation-lock allow-modals"
+                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-forms allow-pointer-lock allow-orientation-lock"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 style={{
                   position: 'absolute',
@@ -992,6 +1069,33 @@ export default function WatchContainer({
             </span>
           </div>
 
+          {/* 100% AD-FREE Direct HLS Indicator */}
+          {useDirectPlayer && directHlsStream && (
+            <div style={{
+              position: 'absolute',
+              top: '12px',
+              right: '124px',
+              zIndex: 10,
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              background: 'rgba(0, 204, 102, 0.25)',
+              border: '1px solid rgba(0, 255, 102, 0.4)',
+              backdropFilter: 'blur(8px)',
+              padding: '3px 10px',
+              borderRadius: '999px',
+              fontSize: '0.62rem',
+              fontWeight: 800,
+              color: '#00ff66',
+              letterSpacing: '0.04em',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+            }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '13px' }}>verified_user</span>
+              <span>100% AD-FREE</span>
+            </div>
+          )}
+
           {/* Top Right Live Streaming Status Indicator */}
           <div style={{
             position: 'absolute',
@@ -1016,6 +1120,62 @@ export default function WatchContainer({
           </div>
         </div>
       </div>
+
+      {/* Player Mode Switcher — Seamless Clean HLS vs Shielded Embed toggle */}
+      {directHlsStream && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          margin: '8px 0',
+          flexWrap: 'wrap',
+        }}>
+          <button
+            type="button"
+            onClick={() => setUseDirectPlayer(true)}
+            style={{
+              padding: '6px 14px',
+              borderRadius: '999px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              border: 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              backgroundColor: useDirectPlayer ? '#00ff66' : 'rgba(255,255,255,0.08)',
+              color: useDirectPlayer ? '#000000' : '#ffffff',
+              boxShadow: useDirectPlayer ? '0 0 12px rgba(0,255,102,0.35)' : 'none',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>shield</span>
+            <span>Clean Player (Ad-Free)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setUseDirectPlayer(false)}
+            style={{
+              padding: '6px 14px',
+              borderRadius: '999px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              border: 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              backgroundColor: !useDirectPlayer ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)',
+              color: !useDirectPlayer ? '#ffffff' : '#94a3b8',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>open_in_browser</span>
+            <span>Mirror Embed</span>
+          </button>
+        </div>
+      )}
 
       {/* Server switching is handled internally — no UI exposed to keep the experience clean */}
 
