@@ -100,34 +100,28 @@ export default async function EpisodeWatchPage(props: PageProps) {
   if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
     const valid = (episode as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
     if (valid.length > 0) {
-      sources = valid.map((s: any) => {
-        if (s.label?.includes('(Backup)')) {
-          return { ...s, label: s.label.replace(' (Backup)', ' (HD)') };
-        }
-        return s;
-      }).sort((a: any, b: any) => {
-        const aIsSalt = (a.label?.includes('AnimeSalt') || a.url?.includes('abyssplayer') || a.url?.includes('animesalt')) ? -1 : 1;
-        const bIsSalt = (b.label?.includes('AnimeSalt') || b.url?.includes('abyssplayer') || b.url?.includes('animesalt')) ? -1 : 1;
+      sources = valid.sort((a: any, b: any) => {
+        const aIsSalt = a.label?.includes('AnimeSalt') ? 1 : -1;
+        const bIsSalt = b.label?.includes('AnimeSalt') ? 1 : -1;
         return aIsSalt - bIsSalt;
       });
     }
   }
 
-  if (sources.length === 0 && ((episode as any).saltStreamUrl || episode.streamUrl || (episode as any).toonStreamUrl)) {
-    const saltCandidate = (episode as any).saltStreamUrl || episode.streamUrl;
-    if (saltCandidate && isValidStreamEmbedUrl(saltCandidate)) {
-      sources.push({ label: 'AnimeSalt (HD)', url: sanitizeStreamUrl(saltCandidate), isMultiAudio: true });
+  if (sources.length === 0 && ((episode as any).toonStreamUrl || episode.streamUrl || (episode as any).saltStreamUrl)) {
+    const streamToUse = (episode as any).toonStreamUrl || episode.streamUrl;
+    if (streamToUse && isValidStreamEmbedUrl(streamToUse)) {
+      sources.push({ label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(streamToUse), isMultiAudio: true });
     }
-    if ((episode as any).toonStreamUrl && (episode as any).toonStreamUrl !== episode.streamUrl && isValidStreamEmbedUrl((episode as any).toonStreamUrl)) {
-      sources.push({ label: 'ToonStream (Mirror)', url: sanitizeStreamUrl((episode as any).toonStreamUrl), isMultiAudio: true });
+    if ((episode as any).saltStreamUrl && isValidStreamEmbedUrl((episode as any).saltStreamUrl)) {
+      sources.push({ label: 'AnimeSalt (Backup)', url: sanitizeStreamUrl((episode as any).saltStreamUrl), isMultiAudio: true });
     }
   }
 
-  // 2. Fallback to dynamic resolution if not pre-cached (Prioritize AnimeSalt)
+  // 2. Fallback to dynamic resolution if not pre-cached (Prioritize ToonStream)
   if (sources.length === 0) {
-    const episodeTargetUrl = (episode.url && episode.url.includes('animesalt') ? episode.url : null)
-      || (saltSlug ? `https://animesalt.cx/episode/${saltSlug}-${epSeason}x${epNumber}/` : null)
-      || (episode as any).toonUrl
+    const episodeTargetUrl = (episode as any).toonUrl
+      || (episode.url && episode.url.includes('toonstream') ? episode.url : null)
       || (toonSlug ? `https://toonstream.us/episode/${toonSlug}-${epSeason}x${epNumber}/` : null)
       || (episode.url && episode.url.startsWith('http') ? episode.url : `https://animesalt.cx/episode/${saltSlug}-${epSeason}x${epNumber}/`);
 
