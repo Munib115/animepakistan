@@ -43,13 +43,23 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
     return false;
   }
 
+  // NEVER embed dead as-cdn top-level player (throws Cloudflare Error 522)
+  if (lower.includes('as-cdn') && lower.includes('.top')) {
+    return false;
+  }
+
+  // ALLOW AnimeSalt multi-language player clone
+  if (lower.includes('multi-lang-plyr') || lower.includes('as-cdn/clone/')) {
+    return true;
+  }
+
   // NEVER embed third-party website pages inside the video player
   if (
     lower.includes('animesalt.cx/episode') ||
     lower.includes('animesalt.cx/series') ||
     lower.includes('animesalt.cx/movies') ||
     lower.includes('animesalt.cx/tv') ||
-    (lower.includes('animesalt.cx') && !lower.includes('player.php'))
+    (lower.includes('animesalt.cx') && !lower.includes('player') && !lower.includes('plyr'))
   ) {
     return false;
   }

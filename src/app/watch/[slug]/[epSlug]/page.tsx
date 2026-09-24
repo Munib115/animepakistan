@@ -96,25 +96,29 @@ export default async function EpisodeWatchPage(props: PageProps) {
     return m ? parseInt(m[1], 10) : 1;
   })();
 
-  // 1. Instant check for pre-cached streamSources on episode
+  // 1. Instant check for pre-cached streamSources on episode (filtering out dead as-cdn.top links)
   if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
-    // Ensure AnimeSalt is placed first as Server 1 / HD
-    sources = [...(episode as any).streamSources].map((s: any) => {
-      if (s.label?.includes('(Backup)')) {
-        return { ...s, label: s.label.replace(' (Backup)', ' (HD)') };
-      }
-      return s;
-    }).sort((a: any, b: any) => {
-      const aIsSalt = (a.label?.includes('AnimeSalt') || a.url?.includes('as-cdn') || a.url?.includes('animesalt')) ? -1 : 1;
-      const bIsSalt = (b.label?.includes('AnimeSalt') || b.url?.includes('as-cdn') || b.url?.includes('animesalt')) ? -1 : 1;
-      return aIsSalt - bIsSalt;
-    });
-  } else if ((episode as any).saltStreamUrl || episode.streamUrl || (episode as any).toonStreamUrl) {
-    if ((episode as any).saltStreamUrl || episode.streamUrl) {
-      const saltStream = (episode as any).saltStreamUrl || episode.streamUrl;
-      sources.push({ label: 'AnimeSalt (HD)', url: sanitizeStreamUrl(saltStream), isMultiAudio: true });
+    const valid = (episode as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
+    if (valid.length > 0) {
+      sources = valid.map((s: any) => {
+        if (s.label?.includes('(Backup)')) {
+          return { ...s, label: s.label.replace(' (Backup)', ' (HD)') };
+        }
+        return s;
+      }).sort((a: any, b: any) => {
+        const aIsSalt = (a.label?.includes('AnimeSalt') || a.url?.includes('abyssplayer') || a.url?.includes('animesalt')) ? -1 : 1;
+        const bIsSalt = (b.label?.includes('AnimeSalt') || b.url?.includes('abyssplayer') || b.url?.includes('animesalt')) ? -1 : 1;
+        return aIsSalt - bIsSalt;
+      });
     }
-    if ((episode as any).toonStreamUrl && (episode as any).toonStreamUrl !== episode.streamUrl) {
+  }
+
+  if (sources.length === 0 && ((episode as any).saltStreamUrl || episode.streamUrl || (episode as any).toonStreamUrl)) {
+    const saltCandidate = (episode as any).saltStreamUrl || episode.streamUrl;
+    if (saltCandidate && isValidStreamEmbedUrl(saltCandidate)) {
+      sources.push({ label: 'AnimeSalt (HD)', url: sanitizeStreamUrl(saltCandidate), isMultiAudio: true });
+    }
+    if ((episode as any).toonStreamUrl && (episode as any).toonStreamUrl !== episode.streamUrl && isValidStreamEmbedUrl((episode as any).toonStreamUrl)) {
       sources.push({ label: 'ToonStream (Mirror)', url: sanitizeStreamUrl((episode as any).toonStreamUrl), isMultiAudio: true });
     }
   }

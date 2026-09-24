@@ -11,33 +11,8 @@ function isBadUrl(u: string): boolean {
   return !isValidStreamEmbedUrl(u);
 }
 
-/** Resolves direct HLS m3u8 source from as-cdn26.top via its internal getVideo API */
+/** Resolves direct HLS m3u8 source (disabled: as-cdn26.top is down with Error 522) */
 export async function resolveAsCdnDirectStream(embedUrl: string): Promise<string | null> {
-  if (!embedUrl) return null;
-  const hashMatch = embedUrl.match(/\/video\/([a-f0-9]+)/i);
-  if (!hashMatch) return null;
-  const hash = hashMatch[1];
-  try {
-    const body = new URLSearchParams();
-    body.append('hash', hash);
-    body.append('r', 'https://animesalt.cx/');
-    const res = await fetch(`https://as-cdn26.top/player/index.php?data=${hash}&do=getVideo`, {
-      method: 'POST',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer': `https://as-cdn26.top/video/${hash}`,
-        'Origin': 'https://as-cdn26.top',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'X-Requested-With': 'XMLHttpRequest'
-      },
-      body: body.toString(),
-      signal: AbortSignal.timeout(6000)
-    });
-    if (res.ok) {
-      const data = await res.json();
-      return data.videoSource || data.securedLink || null;
-    }
-  } catch (e) {}
   return null;
 }
 
@@ -100,8 +75,8 @@ export async function resolveToonStreamNested(embedUrl: string): Promise<string 
 function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
   if (!streamUrl || !isValidStreamEmbedUrl(streamUrl)) return [];
 
-  // Reject dead shorteners immediately
-  if (streamUrl.includes('short.icu') || streamUrl.includes('short.link')) return [];
+  // Reject dead shorteners and dead as-cdn top-level player (throws Cloudflare Error 522)
+  if (streamUrl.includes('short.icu') || streamUrl.includes('short.link') || (streamUrl.includes('as-cdn') && streamUrl.includes('.top'))) return [];
 
   // Dedicated MegaPlay handler for Sub and Dub (Boruto, etc.)
   if (streamUrl.includes('megaplay.buzz/stream/')) {
@@ -353,7 +328,8 @@ export async function resolveStreamSources(
         );
         if (foundEp) {
           if ((foundEp as any).streamSources && (foundEp as any).streamSources.length > 0) {
-            return (foundEp as any).streamSources;
+            const valid = (foundEp as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
+            if (valid.length > 0) return valid;
           }
           if ((foundEp as any).toonStreamUrl || (foundEp as any).streamUrl) {
             const streamToParse = (foundEp as any).toonStreamUrl || (foundEp as any).streamUrl;
@@ -363,7 +339,9 @@ export async function resolveStreamSources(
               return parsedSources;
             }
           }
-          if ((foundEp as any).toonUrl) {
+          if ((foundEp as any).url && (foundEp as any).url.includes('animesalt')) {
+            cleanTarget = (foundEp as any).url;
+          } else if ((foundEp as any).toonUrl) {
             cleanTarget = (foundEp as any).toonUrl;
           }
         }
@@ -418,7 +396,8 @@ export async function resolveStreamSources(
 
       if (episode) {
         if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
-          return (episode as any).streamSources;
+          const valid = (episode as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
+          if (valid.length > 0) return valid;
         }
         if ((episode as any).toonStreamUrl || (episode as any).streamUrl) {
           const streamToParse = (episode as any).toonStreamUrl || (episode as any).streamUrl;

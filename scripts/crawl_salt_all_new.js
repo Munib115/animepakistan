@@ -529,19 +529,29 @@ async function main() {
     try {
       const { episodes } = await scrapeFullSeriesEpisodes(target.url);
       if (episodes.length > previousCount) {
-        // Map existing pre-cached stream URLs
+        // Map existing pre-cached stream URLs and sources
         const existingStreamMap = new Map();
+        const existingSourcesMap = new Map();
         if (item.episodes) {
           for (const oldEp of item.episodes) {
-            if (oldEp.streamUrl) {
+            if (oldEp.streamSources && oldEp.streamSources.length > 0) {
+              const cleanSources = oldEp.streamSources.filter(s => !(s.url && s.url.includes('as-cdn') && s.url.includes('.top')));
+              existingSourcesMap.set(oldEp.slug, cleanSources);
+              existingSourcesMap.set(`${oldEp.season}-${oldEp.number}`, cleanSources);
+            }
+            if (oldEp.streamUrl && !(oldEp.streamUrl.includes('as-cdn') && oldEp.streamUrl.includes('.top'))) {
               existingStreamMap.set(oldEp.slug, oldEp.streamUrl);
               existingStreamMap.set(`${oldEp.season}-${oldEp.number}`, oldEp.streamUrl);
             }
           }
         }
 
-        // Apply preserved streamUrls
+        // Apply preserved streamSources and streamUrls
         for (const newEp of episodes) {
+          const preservedSources = existingSourcesMap.get(newEp.slug) || existingSourcesMap.get(`${newEp.season}-${newEp.number}`);
+          if (preservedSources && preservedSources.length > 0) {
+            newEp.streamSources = preservedSources;
+          }
           const preserved = existingStreamMap.get(newEp.slug) || existingStreamMap.get(`${newEp.season}-${newEp.number}`);
           if (preserved && !newEp.streamUrl) {
             newEp.streamUrl = preserved;
