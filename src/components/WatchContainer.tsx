@@ -627,36 +627,6 @@ export default function WatchContainer({
             </span>
           </button>
 
-          {/* AdShield Instant Clean Stream Reload */}
-          <button
-            type="button"
-            onClick={() => {
-              sound.click();
-              setIframeKey((prev) => prev + 1);
-              setIsIframeLoaded(false);
-              adblockShield.recordStreamSession(activeMirror);
-            }}
-            title={language === 'ur' ? 'ایڈ شیلڈ فعال ہے (پلیئر صاف ریفریش کریں)' : 'AdShield Active (Clean Stream Reload)'}
-            aria-label="AdShield Clean Stream"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '34px',
-              height: '34px',
-              borderRadius: '50%',
-              border: '1.5px solid #00ff66',
-              background: 'rgba(0, 102, 51, 0.22)',
-              color: '#00ff66',
-              cursor: 'pointer',
-              boxShadow: '0 0 10px rgba(0, 255, 102, 0.25)',
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-              verified_user
-            </span>
-          </button>
 
           {/* Background Download Button */}
           {streamSources.length > 0 && (

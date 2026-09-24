@@ -118,7 +118,7 @@ function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
     return [{ label: 'Server 1 (HD)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
   }
 
-  if (streamUrl.includes('multi-lang-plyr/player.php?data=')) {
+  if (streamUrl.includes('multi-lang-plyr') && streamUrl.includes('data=')) {
     try {
       const urlObj = new URL(streamUrl);
       const dataParam = urlObj.searchParams.get('data');
@@ -129,7 +129,7 @@ function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
           const valid = parsed
             .filter((item: any) => item.link && isValidStreamEmbedUrl(item.link))
             .map((item: any) => ({
-              label: `Server (${item.language || 'HD'})`,
+              label: `AnimeSalt (${item.language || 'HD'})`,
               url: sanitizeStreamUrl(item.link),
               isMultiAudio: false,
             }));
@@ -182,72 +182,79 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
 export async function resolveMovieStreamSources(anime: any): Promise<StreamSource[]> {
   if (!anime) return [];
 
-  // 1. If pre-cached streamSources exists and has active toonstream sources
-  if (anime.streamSources && anime.streamSources.length > 0) {
-    const hasToon = anime.streamSources.some((s: any) => s.label?.includes('ToonStream') || !s.url?.includes('as-cdn'));
-    if (hasToon) return anime.streamSources;
-  }
-
-  // 2. If toonStreamUrl is present
-  if (anime.toonStreamUrl && isValidStreamEmbedUrl(anime.toonStreamUrl)) {
-    const sources: StreamSource[] = [
-      { label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(anime.toonStreamUrl), isMultiAudio: true }
-    ];
-    if (anime.saltStreamUrl && isValidStreamEmbedUrl(anime.saltStreamUrl)) {
-      sources.push({ label: 'AnimeSalt (Backup)', url: sanitizeStreamUrl(anime.saltStreamUrl), isMultiAudio: true });
+  // 1. If AnimeSalt stream exists on the anime object (or saltStreamUrl)
+  const saltCandidate = anime.saltStreamUrl || anime.streamUrl;
+  if (saltCandidate && isValidStreamEmbedUrl(saltCandidate)) {
+    const saltSources = parseStreamUrlToSources(saltCandidate);
+    if (saltSources.length > 0) {
+      if (anime.toonStreamUrl && isValidStreamEmbedUrl(anime.toonStreamUrl)) {
+        saltSources.push({ label: 'ToonStream (Mirror)', url: sanitizeStreamUrl(anime.toonStreamUrl), isMultiAudio: true });
+      }
+      return saltSources;
     }
-    return sources;
   }
 
-  // 3. Dynamic fetch from ToonStream candidate URLs
-  const candidateUrls: string[] = [];
-  if (anime.toonUrl) candidateUrls.push(anime.toonUrl);
-  if (anime.toonSlug) candidateUrls.push(`https://toonstream.us/movies/${anime.toonSlug}/`);
-  const cleanTitleSlug = (anime.title || '').toLowerCase().replace(/['":!?()&]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  candidateUrls.push(`https://toonstream.us/movies/${cleanTitleSlug}/`);
-  candidateUrls.push(`https://toonstream.us/movies/${anime.slug}/`);
-  if (anime.saltSlug) candidateUrls.push(`https://toonstream.us/movies/${anime.saltSlug}/`);
+  // 2. If pre-cached streamSources exists, ensure AnimeSalt is prioritized first
+  if (anime.streamSources && anime.streamSources.length > 0) {
+    const reordered = [...anime.streamSources].map((s: any) => {
+      if (s.label?.includes('(Backup)')) {
+        return { ...s, label: s.label.replace(' (Backup)', ' (HD)') };
+      }
+      return s;
+    }).sort((a: any, b: any) => {
+      const aIsSalt = (a.label?.includes('AnimeSalt') || a.url?.includes('as-cdn') || a.url?.includes('animesalt')) ? -1 : 1;
+      const bIsSalt = (b.label?.includes('AnimeSalt') || b.url?.includes('as-cdn') || b.url?.includes('animesalt')) ? -1 : 1;
+      return aIsSalt - bIsSalt;
+    });
+    return reordered;
+  }
 
-  for (const url of [...new Set(candidateUrls)]) {
+  // 3. Dynamic scrape from AnimeSalt movie page first!
+  const saltMovieUrls: string[] = [];
+  if (anime.saltSlug) saltMovieUrls.push(`https://animesalt.cx/movies/${anime.saltSlug}/`);
+  if (anime.slug) saltMovieUrls.push(`https://animesalt.cx/movies/${anime.slug}/`);
+  if (anime.url && anime.url.includes('animesalt.cx/movies/')) saltMovieUrls.push(anime.url);
+
+  for (const url of [...new Set(saltMovieUrls)]) {
     try {
       const res = await fetch(url, {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
-          'Referer': 'https://toonstream.us/',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': 'https://animesalt.cx/'
         },
-        signal: AbortSignal.timeout(6000),
+        signal: AbortSignal.timeout(6000)
       });
       if (res.ok) {
         const html = await res.text();
-        if (html.length > 5000) {
-          const $ = cheerio.load(html);
-          const streams: string[] = [];
-          $('iframe').each((_, el) => {
-            let s = $(el).attr('src') || $(el).attr('data-src') || '';
-            if (s.startsWith('//')) s = 'https:' + s;
-            if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
-          });
-          const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
-          if (active.length > 0) {
-            const resultSources: StreamSource[] = active.map((s, i) => ({
-              label: i === 0 ? 'ToonStream 1 (HD)' : `ToonStream ${i + 1} (Mirror)`,
+        const $ = cheerio.load(html);
+        const streams: StreamSource[] = [];
+        $('iframe').each((_, el) => {
+          let s = $(el).attr('src') || $(el).attr('data-src') || '';
+          if (s.startsWith('//')) s = 'https:' + s;
+          if (s.includes('multi-lang-plyr') && s.includes('data=')) {
+            const parsed = parseStreamUrlToSources(s);
+            streams.push(...parsed);
+          } else if (isValidStreamEmbedUrl(s)) {
+            streams.push({
+              label: streams.length === 0 ? 'AnimeSalt (HD)' : `AnimeSalt Mirror ${streams.length + 1}`,
               url: sanitizeStreamUrl(s),
-              isMultiAudio: true,
-            }));
-            if (anime.saltStreamUrl || (anime.streamUrl && anime.streamUrl.includes('as-cdn'))) {
-              const salt = anime.saltStreamUrl || anime.streamUrl;
-              if (isValidStreamEmbedUrl(salt)) {
-                resultSources.push({ label: 'AnimeSalt (Backup)', url: sanitizeStreamUrl(salt), isMultiAudio: true });
-              }
-            }
-            anime.toonStreamUrl = active[0];
-            anime.streamSources = resultSources;
-            anime.toonUrl = url;
-            return resultSources;
+              isMultiAudio: true
+            });
           }
+        });
+        if (streams.length > 0) {
+          if (anime.toonStreamUrl && isValidStreamEmbedUrl(anime.toonStreamUrl)) {
+            streams.push({ label: 'ToonStream (Mirror)', url: sanitizeStreamUrl(anime.toonStreamUrl), isMultiAudio: true });
+          }
+          return streams;
         }
       }
     } catch (e) {}
+  }
+
+  // 4. If toonStreamUrl is present as fallback
+  if (anime.toonStreamUrl && isValidStreamEmbedUrl(anime.toonStreamUrl)) {
+    return [{ label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(anime.toonStreamUrl), isMultiAudio: true }];
   }
 
   // 4. Try searching ToonStream
@@ -478,7 +485,7 @@ export async function resolveStreamSources(
         if (rawSrc) {
           let fullSrc = rawSrc.startsWith('//') ? 'https:' + rawSrc : rawSrc;
           
-          if (fullSrc.includes('multi-lang-plyr/player.php?data=')) {
+          if (fullSrc.includes('multi-lang-plyr') && fullSrc.includes('data=')) {
             try {
               const urlObj = new URL(fullSrc);
               const dataParam = urlObj.searchParams.get('data');
@@ -487,9 +494,9 @@ export async function resolveStreamSources(
                 const parsed = JSON.parse(decodedStr);
                 if (Array.isArray(parsed)) {
                   for (const item of parsed) {
-                    if (item.link) {
+                    if (item.link && isValidStreamEmbedUrl(item.link)) {
                       sources.push({
-                        label: `Abyss (${item.language || 'HD'})`,
+                        label: `AnimeSalt (${item.language || 'HD'})`,
                         url: sanitizeStreamUrl(item.link),
                         isMultiAudio: false
                       });
@@ -540,17 +547,22 @@ export async function resolveStreamSources(
   // Filter out any source that is not a valid stream embed (strictly reject third-party website pages and dead shorteners)
   const validSources = sources.filter(s => s.url && isValidStreamEmbedUrl(s.url));
 
-  // Prioritize active working ToonStream servers, keep AnimeSalt (as-cdn) as backup at the end
+  // Prioritize AnimeSalt (Server 1 / HD), followed by ToonStream mirrors
   validSources.forEach(s => {
-    if (s.url.includes('as-cdn') && !s.label.includes('Backup')) {
-      s.label = 'AnimeSalt (Backup)';
+    if (s.url.includes('as-cdn') || s.url.includes('animesalt')) {
+      if (s.label.includes('(Backup)')) {
+        s.label = s.label.replace(' (Backup)', ' (HD)');
+      } else if (!s.label.includes('AnimeSalt')) {
+        s.label = 'AnimeSalt (HD)';
+      }
     }
   });
 
+  // Sort AnimeSalt / Abyssplayer multi-lang streams first
   validSources.sort((a, b) => {
-    const aIsCdn = a.url.includes('as-cdn') ? 1 : -1;
-    const bIsCdn = b.url.includes('as-cdn') ? 1 : -1;
-    return aIsCdn - bIsCdn;
+    const aIsSalt = (a.label.includes('AnimeSalt') || a.url.includes('as-cdn') || a.url.includes('animesalt')) ? -1 : 1;
+    const bIsSalt = (b.label.includes('AnimeSalt') || b.url.includes('as-cdn') || b.url.includes('animesalt')) ? -1 : 1;
+    return aIsSalt - bIsSalt;
   });
 
   // Attach direct API stream and un-nest any players

@@ -277,14 +277,26 @@ async function main() {
     if (item.title) titleMap.set(normalize(item.title), idx);
   });
 
-  // Pages to crawl
+  // Pages to crawl (broad sweep across homepage, series, movies, and cartoon/kids categories)
   const crawlUrls = [
     { url: 'https://animesalt.cx/', type: 'home' },
     { url: 'https://animesalt.cx/series/', type: 'series' },
     { url: 'https://animesalt.cx/series/page/2/', type: 'series' },
     { url: 'https://animesalt.cx/series/page/3/', type: 'series' },
+    { url: 'https://animesalt.cx/series/page/4/', type: 'series' },
+    { url: 'https://animesalt.cx/series/page/5/', type: 'series' },
+    { url: 'https://animesalt.cx/series/page/6/', type: 'series' },
+    { url: 'https://animesalt.cx/series/page/7/', type: 'series' },
+    { url: 'https://animesalt.cx/series/page/8/', type: 'series' },
+    { url: 'https://animesalt.cx/series/page/9/', type: 'series' },
+    { url: 'https://animesalt.cx/series/page/10/', type: 'series' },
     { url: 'https://animesalt.cx/movies/', type: 'movie' },
-    { url: 'https://animesalt.cx/movies/page/2/', type: 'movie' }
+    { url: 'https://animesalt.cx/movies/page/2/', type: 'movie' },
+    { url: 'https://animesalt.cx/movies/page/3/', type: 'movie' },
+    { url: 'https://animesalt.cx/movies/page/4/', type: 'movie' },
+    { url: 'https://animesalt.cx/movies/page/5/', type: 'movie' },
+    { url: 'https://animesalt.cx/category/kids/', type: 'series' },
+    { url: 'https://animesalt.cx/category/animation/', type: 'series' }
   ];
 
   const discoveredSeries = new Map(); // slug -> { title, url, type }
@@ -563,14 +575,16 @@ async function main() {
   // Regenerate anime-catalog.json
   console.log('Regenerating anime-catalog.json for instant frontend loading...');
   const catalog = db.map(item => ({
-    id: item.id || item.slug,
+    id: item.id || `ap-${item.slug}`,
     title: item.title,
     slug: item.slug,
-    saltSlug: item.saltSlug || item.slug,
+    saltSlug: item.saltSlug || undefined,
+    toonSlug: item.toonSlug || undefined,
     type: item.type || 'series',
     poster: item.poster || '',
     backdrop: item.backdrop || item.poster || '',
     genres: item.genres || ['Anime'],
+    audioLanguages: item.audioLanguages || ['Hindi'],
     rating: item.rating || 8.0,
     year: item.year || 2024,
     episodeCount: item.type === 'movie' ? 1 : (item.episodes ? item.episodes.length : 1),

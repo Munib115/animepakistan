@@ -98,19 +98,32 @@ export default async function EpisodeWatchPage(props: PageProps) {
 
   // 1. Instant check for pre-cached streamSources on episode
   if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
-    sources = (episode as any).streamSources;
-  } else if ((episode as any).toonStreamUrl || episode.streamUrl) {
-    const streamToUse = (episode as any).toonStreamUrl || episode.streamUrl;
-    sources = [{ label: 'ToonStream 1 (HD)', url: sanitizeStreamUrl(streamToUse), isMultiAudio: true }];
-    if ((episode as any).saltStreamUrl) {
-      sources.push({ label: 'AnimeSalt (Backup)', url: sanitizeStreamUrl((episode as any).saltStreamUrl), isMultiAudio: true });
+    // Ensure AnimeSalt is placed first as Server 1 / HD
+    sources = [...(episode as any).streamSources].map((s: any) => {
+      if (s.label?.includes('(Backup)')) {
+        return { ...s, label: s.label.replace(' (Backup)', ' (HD)') };
+      }
+      return s;
+    }).sort((a: any, b: any) => {
+      const aIsSalt = (a.label?.includes('AnimeSalt') || a.url?.includes('as-cdn') || a.url?.includes('animesalt')) ? -1 : 1;
+      const bIsSalt = (b.label?.includes('AnimeSalt') || b.url?.includes('as-cdn') || b.url?.includes('animesalt')) ? -1 : 1;
+      return aIsSalt - bIsSalt;
+    });
+  } else if ((episode as any).saltStreamUrl || episode.streamUrl || (episode as any).toonStreamUrl) {
+    if ((episode as any).saltStreamUrl || episode.streamUrl) {
+      const saltStream = (episode as any).saltStreamUrl || episode.streamUrl;
+      sources.push({ label: 'AnimeSalt (HD)', url: sanitizeStreamUrl(saltStream), isMultiAudio: true });
+    }
+    if ((episode as any).toonStreamUrl && (episode as any).toonStreamUrl !== episode.streamUrl) {
+      sources.push({ label: 'ToonStream (Mirror)', url: sanitizeStreamUrl((episode as any).toonStreamUrl), isMultiAudio: true });
     }
   }
 
-  // 2. Fallback to dynamic resolution if not pre-cached
+  // 2. Fallback to dynamic resolution if not pre-cached (Prioritize AnimeSalt)
   if (sources.length === 0) {
-    const episodeTargetUrl = (episode as any).toonUrl
-      || (episode.url && episode.url.includes('toonstream') ? episode.url : null)
+    const episodeTargetUrl = (episode.url && episode.url.includes('animesalt') ? episode.url : null)
+      || (saltSlug ? `https://animesalt.cx/episode/${saltSlug}-${epSeason}x${epNumber}/` : null)
+      || (episode as any).toonUrl
       || (toonSlug ? `https://toonstream.us/episode/${toonSlug}-${epSeason}x${epNumber}/` : null)
       || (episode.url && episode.url.startsWith('http') ? episode.url : `https://animesalt.cx/episode/${saltSlug}-${epSeason}x${epNumber}/`);
 

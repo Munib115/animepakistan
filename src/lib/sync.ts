@@ -35,16 +35,16 @@ function buildStreamSources(streams: string[]): StreamMirrorSource[] {
   const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('youtube'));
   const salt = streams.filter(s => s.includes('as-cdn'));
   const sources: StreamMirrorSource[] = [];
-  active.forEach((s, idx) => {
+  salt.forEach((s, idx) => {
     sources.push({
-      label: idx === 0 ? 'ToonStream 1 (HD)' : `ToonStream ${idx + 1} (Mirror)`,
+      label: idx === 0 ? 'AnimeSalt (HD)' : `AnimeSalt Mirror ${idx + 1}`,
       url: sanitizeStreamUrl(s),
       isMultiAudio: true,
     });
   });
-  salt.forEach(s => {
+  active.forEach((s, idx) => {
     sources.push({
-      label: 'AnimeSalt (Backup)',
+      label: idx === 0 ? 'ToonStream 1 (Mirror)' : `ToonStream ${idx + 1} (Mirror)`,
       url: sanitizeStreamUrl(s),
       isMultiAudio: true,
     });

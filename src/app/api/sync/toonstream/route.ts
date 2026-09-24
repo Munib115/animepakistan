@@ -48,11 +48,11 @@ function extractStreams(html: string): string[] {
 }
 
 function buildSources(streams: string[]) {
-  const active = streams.filter(s => !s.includes('as-cdn'));
-  const salt = streams.filter(s => s.includes('as-cdn'));
+  const active = streams.filter(s => !s.includes('as-cdn') && !s.includes('animesalt'));
+  const salt = streams.filter(s => s.includes('as-cdn') || s.includes('animesalt'));
   const sources: any[] = [];
-  active.forEach((s, i) => sources.push({ label: i === 0 ? 'Server 1' : `Server ${i + 1}`, url: s, isMultiAudio: true }));
-  salt.forEach(s => sources.push({ label: 'AnimeSalt (Backup)', url: s, isMultiAudio: true }));
+  salt.forEach((s, i) => sources.push({ label: i === 0 ? 'AnimeSalt (HD)' : `AnimeSalt Mirror ${i + 1}`, url: s, isMultiAudio: true }));
+  active.forEach((s, i) => sources.push({ label: i === 0 ? 'ToonStream (Mirror)' : `ToonStream Mirror ${i + 1}`, url: s, isMultiAudio: true }));
   return sources;
 }
 
