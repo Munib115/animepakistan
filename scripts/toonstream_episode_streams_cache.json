@@ -354089,5 +354089,97 @@
         "isMultiAudio": true
       }
     ]
+  },
+  "https://toonstream.us/episode/jojos-bizarre-adventure-6x1/": {
+    "streamUrl": "https://rubystm.com/e/5imknp037iyl.html",
+    "toonStreamUrl": "https://rubystm.com/e/5imknp037iyl.html",
+    "streamSources": [
+      {
+        "label": "ToonStream 1 (HD)",
+        "url": "https://rubystm.com/e/5imknp037iyl.html",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 2 (Fast)",
+        "url": "https://filesforever.link/embed/p4da8f5",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 3 (Fast)",
+        "url": "https://filesforever.link/embed/gy52axd",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Fast)",
+        "url": "https://filesforever.link/embed/wfeff8i",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 5 (Fast)",
+        "url": "https://cloudy.upns.one/#6lw3ur",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 6 (Fast)",
+        "url": "https://vidmoly.net/embed-2y8maacv2iil.html",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 7 (Fast)",
+        "url": "https://abyssplayer.com/zvbdJ6H1j",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Fast)",
+        "url": "https://emturbovid.com/t/69bc16168858f",
+        "isMultiAudio": true
+      }
+    ]
+  },
+  "https://toonstream.us/episode/bleach-dub-2x47/": {
+    "streamUrl": "https://rubystm.com/e/nyqegl1hy60f.html",
+    "toonStreamUrl": "https://rubystm.com/e/nyqegl1hy60f.html",
+    "streamSources": [
+      {
+        "label": "ToonStream 1 (HD)",
+        "url": "https://rubystm.com/e/nyqegl1hy60f.html",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 2 (Fast)",
+        "url": "https://filesforever.link/embed/hnxjrv0",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 3 (Fast)",
+        "url": "https://filesforever.link/embed/kirjxsi",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Fast)",
+        "url": "https://filesforever.link/embed/xxifhxe",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 5 (Fast)",
+        "url": "https://cloudy.upns.one/#naqqmn",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 6 (Fast)",
+        "url": "https://vidmoly.net/embed-s9lgr2nn65pa.html",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 7 (Fast)",
+        "url": "https://abyssplayer.com/AVrrUOo8W",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Fast)",
+        "url": "https://emturbovid.com/t/6ab14744aa6b1",
+        "isMultiAudio": true
+      }
+    ]
   }
 }
