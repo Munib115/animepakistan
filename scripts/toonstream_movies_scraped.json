@@ -206,78 +206,38 @@
     "url": "https://toonstream.us/movies/doraemon-nobitas-three-visionary-swordsmen",
     "slug": "doraemon-nobitas-three-visionary-swordsmen",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/oCQtdezF7Ap5wm8ICiB3Pzx6wM4.jpg",
-    "rating": 7.6,
+    "poster": "https://image.tmdb.org/t/p/w500/oCQtdezF7Ap5wm8ICiB3Pzx6wM4.jpg",
+    "rating": 7.4,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-Japanese",
+    "description": "Nobita is exhausted from having constant nightmares and pleads Doraemon to arrange a dream machine that will enable him to dream of anything he wishes for. As Nobita dreams of him and his friends in the roles of gallant musketeers, the dream world starts to break down due to a dark force, and Nobita will have to put his fantasy to the test and become a hero, both in the real world and imagined.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/0d3uel52h2li.html",
-    "toonStreamUrl": "https://rubystm.com/e/0d3uel52h2li.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/ahgq1db",
+    "toonStreamUrl": "https://filesforever.link/embed/ahgq1db",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/0d3uel52h2li.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/ahgq1db",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/va6s5ea",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/tybbe6e",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/pF49-JUd5",
         "isMultiAudio": true
       },
       {
@@ -287,20 +247,35 @@
       },
       {
         "label": "ToonStream 6 (Mirror)",
-        "url": "https://abyssplayer.com/pF49-JUd5",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 7 (Mirror)",
         "url": "https://vidstreaming.xyz/v/G2QaZVrjv6iz/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 7 (Mirror)",
         "url": "https://emturbovid.com/t/67f691eb95514",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/0d3uel52h2li.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-three-visionary-swordsmen",
+    "toonSlug": "doraemon-nobitas-three-visionary-swordsmen",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-three-visionary-swordsmen",
+    "backdrop": "https://image.tmdb.org/t/p/original/j0IwNIMXOKmEQ16h4a8lOTBxQQ.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 1994,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Spookiz: The Movie",
@@ -1540,79 +1515,38 @@
     "url": "https://toonstream.us/movies/doraemon-the-movie-nobitas-little-star-wars-2021",
     "slug": "doraemon-the-movie-nobitas-little-star-wars-2021",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/u5sFU0Uw3qtFOeWNvnhLAt9JzbA.jpg",
-    "rating": 6.6,
+    "poster": "https://image.tmdb.org/t/p/w500/u5sFU0Uw3qtFOeWNvnhLAt9JzbA.jpg",
+    "rating": 6.5,
     "category": "anime",
     "description": "During summer vacation Nobita picks up a small rocket containing Papi, a palm-sized alien president escaping rebels on his home planet Pirika.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/r7828hi71o8j.html",
-    "toonStreamUrl": "https://rubystm.com/e/r7828hi71o8j.html",
-    "saltStreamUrl": "https://as-cdn26.top/video/235e750be0043b6784a3f0d91f4bbd23",
+    "streamUrl": "https://filesforever.link/embed/tdiu07i",
+    "toonStreamUrl": "https://filesforever.link/embed/tdiu07i",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/r7828hi71o8j.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/tdiu07i",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/gql21ji",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/shkyvu6",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/LE8n-sSks",
         "isMultiAudio": true
       },
       {
@@ -1627,20 +1561,30 @@
       },
       {
         "label": "ToonStream 7 (Mirror)",
-        "url": "https://abyssplayer.com/LE8n-sSks",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 8 (Mirror)",
         "url": "https://emturbovid.com/t/6a1c0bb613f7b",
         "isMultiAudio": true
       },
       {
-        "label": "AnimeSalt (Backup)",
-        "url": "https://as-cdn26.top/video/235e750be0043b6784a3f0d91f4bbd23",
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/r7828hi71o8j.html",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-the-movie-nobitas-little-star-wars-2021",
+    "toonSlug": "doraemon-the-movie-nobitas-little-star-wars-2021",
+    "toonUrl": "https://toonstream.us/movies/doraemon-the-movie-nobitas-little-star-wars-2021",
+    "backdrop": "https://image.tmdb.org/t/p/original/iflKt34Ck2JpY2PY9wW1zwdJgJi.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2022,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Buddha 2: The Endless Journey",
@@ -6702,181 +6646,109 @@
     "url": "https://toonstream.us/movies/doraemon-nobita-and-the-new-steel-troops-winged-angels",
     "slug": "doraemon-nobita-and-the-new-steel-troops-winged-angels",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/57ighjFjXpRwg7VeQ1GN6nf4OZH.jpg",
-    "rating": 7.365,
+    "poster": "https://image.tmdb.org/t/p/w500/57ighjFjXpRwg7VeQ1GN6nf4OZH.jpg",
+    "rating": 7.4,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-Japanese",
+    "description": "Nobita and Doraemon find a giant robot in pieces which they later assemble. It turns out to be a destructive weapon and the gang must save Earth from an imminent invasion.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/7hd65j72f9kt.html",
-    "toonStreamUrl": "https://rubystm.com/e/7hd65j72f9kt.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/rpiw039",
+    "toonStreamUrl": "https://filesforever.link/embed/rpiw039",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/7hd65j72f9kt.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
-        "url": "https:/hd./gdmirrorbot.nl/embed/tcdq0gf",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/rpiw039",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/lc4k7n1",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 5 (Mirror)",
-        "url": "https://cloudy.upns.one/#n81q5t",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 6 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://abyssplayer.com/mPviw9Fkc",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 7 (Mirror)",
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://cloudy.upns.one/#n81q5t",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 5 (Mirror)",
         "url": "https://vidstreaming.xyz/v/kRVJNYdtzkoJ/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 6 (Mirror)",
         "url": "https://emturbovid.com/t/67f53ac3aadf7",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 7 (Mirror)",
+        "url": "https://rubystm.com/e/7hd65j72f9kt.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobita-and-the-new-steel-troops-winged-angels",
+    "toonSlug": "doraemon-nobita-and-the-new-steel-troops-winged-angels",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobita-and-the-new-steel-troops-winged-angels",
+    "backdrop": "https://image.tmdb.org/t/p/original/vA4T6wydyu8xpcN7ZB7YhTbCfig.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2011,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita and the Space Heroes",
     "url": "https://toonstream.us/movies/doraemon-nobita-and-the-space-heroes",
     "slug": "doraemon-nobita-and-the-space-heroes",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/pYVJgcuCU9swa7GEujygsRdkSQd.jpg",
-    "rating": 6.4,
+    "poster": "https://image.tmdb.org/t/p/w500/pYVJgcuCU9swa7GEujygsRdkSQd.jpg",
+    "rating": 6.3,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-Japanese",
+    "description": "Nobita and friends decide to make a movie inspired by the space adventures of their heroes, but their fiction turns into a reality.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/1sonqvv6k5je.html",
-    "toonStreamUrl": "https://rubystm.com/e/1sonqvv6k5je.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/w83o6xr",
+    "toonStreamUrl": "https://filesforever.link/embed/w83o6xr",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/1sonqvv6k5je.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/w83o6xr",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/cenck0u",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/zt45pp0",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/wz4cDhPHw",
         "isMultiAudio": true
       },
       {
@@ -6886,98 +6758,73 @@
       },
       {
         "label": "ToonStream 6 (Mirror)",
-        "url": "https://abyssplayer.com/wz4cDhPHw",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 7 (Mirror)",
         "url": "https://vidstreaming.xyz/v/QME5YodplLJw/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 7 (Mirror)",
         "url": "https://emturbovid.com/t/67f53ac4d1a6d",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/1sonqvv6k5je.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobita-and-the-space-heroes",
+    "toonSlug": "doraemon-nobita-and-the-space-heroes",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobita-and-the-space-heroes",
+    "backdrop": "https://image.tmdb.org/t/p/original/zy1laRytpaHGv5LTcU2xFh6KsGI.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2015,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita in the Wan-Nyan Spacetime Odyssey",
     "url": "https://toonstream.us/movies/doraemon-nobita-in-the-wan-nyan-spacetime-odyssey",
     "slug": "doraemon-nobita-in-the-wan-nyan-spacetime-odyssey",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/gBYEK5Kv8uVZGoTbBcovIcWjKNI.jpg",
-    "rating": 7.3,
+    "poster": "https://image.tmdb.org/t/p/w500/8XUr6xYoUofkmCIASCHXXeTIguR.jpg",
+    "rating": 7.4,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-Japanese",
+    "description": "Nobita, believing he and Doraemon had done a good deed by saving stray cats and dogs and sending them back in time by 300 million years, discover that the usage of Doraemon's Ray of Evolution had created a cat-and-dog-person society equal to Nobita's time. When an asteroid attack is set to hit the city, Nobita and his friends must save Doraemon and ease tensions between the two sides.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/dfu17woowopg.html",
-    "toonStreamUrl": "https://rubystm.com/e/dfu17woowopg.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/qho0ncs",
+    "toonStreamUrl": "https://filesforever.link/embed/qho0ncs",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/dfu17woowopg.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/qho0ncs",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/kwxqz1c",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/adp8hui",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/ScriYRymk",
         "isMultiAudio": true
       },
       {
@@ -6987,185 +6834,134 @@
       },
       {
         "label": "ToonStream 6 (Mirror)",
-        "url": "https://abyssplayer.com/ScriYRymk",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 7 (Mirror)",
         "url": "https://vidstreaming.xyz/v/ySmXg3USaBCk/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 7 (Mirror)",
         "url": "https://emturbovid.com/t/67f53ac77c3d9",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/dfu17woowopg.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobita-in-the-wan-nyan-spacetime-odyssey",
+    "toonSlug": "doraemon-nobita-in-the-wan-nyan-spacetime-odyssey",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobita-in-the-wan-nyan-spacetime-odyssey",
+    "backdrop": "https://image.tmdb.org/t/p/original/rP4Ux34xGxabCeumL1wHNxZSxNr.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2004,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita's Chronicle of the Moon Exploration",
     "url": "https://toonstream.us/movies/doraemon-nobitas-chronicle-of-the-moon-exploration",
     "slug": "doraemon-nobitas-chronicle-of-the-moon-exploration",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/urC3np6cAiyxzuamNMtmZRl2Dr0.jpg",
-    "rating": 7.7,
+    "poster": "https://image.tmdb.org/t/p/w500/zAZ43208e643rB3pcx8jsLqc6B9.jpg",
+    "rating": 7.3,
     "category": "anime",
-    "description": "Language:\n          Hungama TVLanguage:Japanese – Tamil – Telugu –HindiQuality:1080p FHD | 720p HD | 480p BDRipRelease Date:22 January 2023 (India)",
+    "description": "After being mocked for believing that rabbits live on the Moon, Nobita uses one of Doraemon’s gadgets to create a hidden lunar kingdom. Accompanied by a mysterious new classmate named Luca, Nobita and his friends travel to the Moon’s far side, where they discover children with extraordinary powers and become drawn into a dangerous conflict that reaches far beyond Earth.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/embed-s1q6iwmptywe.html",
-    "toonStreamUrl": "https://rubystm.com/embed-s1q6iwmptywe.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://vidstreaming.xyz/v/StCyXO9365cM/",
+    "toonStreamUrl": "https://vidstreaming.xyz/v/StCyXO9365cM/",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/embed-s1q6iwmptywe.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://vidstreaming.xyz/v/StCyXO9365cM/",
         "isMultiAudio": true
       },
       {
+        "label": "ToonStream 2 (Fast)",
+        "url": "https://byselapuix.com/e/ruwlxncrwhph/_Toonhub4u__Doraemon_The_Movie_Nobita_Chala_Chand_Pe__40_2019_41__in_Multi_Audio_480p_.mp4",
+        "isMultiAudio": true
+      },
+      {
         "label": "ToonStream 3 (Mirror)",
-        "url": "https://wishfast.top/e/gjigyddjjvqx",
+        "url": "https://rubystm.com/embed-s1q6iwmptywe.html",
         "isMultiAudio": true
       },
       {
         "label": "ToonStream 4 (Mirror)",
-        "url": "https://filelions.online/v/ziuxkmw3b8qj",
+        "url": "https://wishfast.top/e/gjigyddjjvqx",
         "isMultiAudio": true
       },
       {
         "label": "ToonStream 5 (Mirror)",
-        "url": "https://byselapuix.com/e/ruwlxncrwhph/_Toonhub4u__Doraemon_The_Movie_Nobita_Chala_Chand_Pe__40_2019_41__in_Multi_Audio_480p_.mp4",
+        "url": "https://filelions.online/v/ziuxkmw3b8qj",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-chronicle-of-the-moon-exploration",
+    "toonSlug": "doraemon-nobitas-chronicle-of-the-moon-exploration",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-chronicle-of-the-moon-exploration",
+    "backdrop": "https://image.tmdb.org/t/p/original/9AmRLvf2xpVQ5vf2zouIwcGMz6n.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2019,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita's Diary on the Creation of the World",
     "url": "https://toonstream.us/movies/doraemon-nobitas-diary-on-the-creation-of-the-world",
     "slug": "doraemon-nobitas-diary-on-the-creation-of-the-world",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/qemtaCXwo9sP6bYO8Hqc0o96JIy.jpg",
-    "rating": 7.6,
+    "poster": "https://image.tmdb.org/t/p/w500/qemtaCXwo9sP6bYO8Hqc0o96JIy.jpg",
+    "rating": 7.4,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-Japanese",
+    "description": "To help him with his summer vacation project, Doraemon gives Nobita a kit which allows him to create a new world. The duo and their friends then go on a journey to witness the evolution of life.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/tlju5be4720p.html",
-    "toonStreamUrl": "https://rubystm.com/e/tlju5be4720p.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/ymfr8uz",
+    "toonStreamUrl": "https://filesforever.link/embed/ymfr8uz",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/tlju5be4720p.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/ymfr8uz",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/w0edkxe",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/zlvtsvx",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/wx6IlQlr6",
         "isMultiAudio": true
       },
       {
@@ -7175,98 +6971,73 @@
       },
       {
         "label": "ToonStream 6 (Mirror)",
-        "url": "https://abyssplayer.com/wx6IlQlr6",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 7 (Mirror)",
         "url": "https://vidstreaming.xyz/v/9bQ7yfGyNVGu/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 7 (Mirror)",
         "url": "https://emturbovid.com/t/67f53ac8ef9ad",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/tlju5be4720p.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-diary-on-the-creation-of-the-world",
+    "toonSlug": "doraemon-nobitas-diary-on-the-creation-of-the-world",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-diary-on-the-creation-of-the-world",
+    "backdrop": "https://image.tmdb.org/t/p/original/cpBarSyvJSf8xeZbfeL0w4CUcKg.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 1995,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita's Great Adventure in the South Seas",
     "url": "https://toonstream.us/movies/doraemon-nobitas-great-adventure-in-the-south-seas",
     "slug": "doraemon-nobitas-great-adventure-in-the-south-seas",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/4gGIYi40x3G6UPm1IMGqdseK0Ro.jpg",
-    "rating": 6.603,
+    "poster": "https://image.tmdb.org/t/p/w500/4gGIYi40x3G6UPm1IMGqdseK0Ro.jpg",
+    "rating": 6.5,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-English-Japanese",
+    "description": "Nobita coaxes his friends to join him for a treasure hunt but an eerie event transports them to the past. However, their hunt for treasure is not easy as they come face-to-face with pirates.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/zpiaxa8btshi.html",
-    "toonStreamUrl": "https://rubystm.com/e/zpiaxa8btshi.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/vvytj9b",
+    "toonStreamUrl": "https://filesforever.link/embed/vvytj9b",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/zpiaxa8btshi.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/vvytj9b",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/hmohg39",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/zmrugt1",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/-WJoY2KBd",
         "isMultiAudio": true
       },
       {
@@ -7276,99 +7047,73 @@
       },
       {
         "label": "ToonStream 6 (Mirror)",
-        "url": "https://abyssplayer.com/-WJoY2KBd",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 7 (Mirror)",
         "url": "https://vidstreaming.xyz/v/9Z4YBk5fRjkv/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 7 (Mirror)",
         "url": "https://emturbovid.com/t/67ee031861839",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/zpiaxa8btshi.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-great-adventure-in-the-south-seas",
+    "toonSlug": "doraemon-nobitas-great-adventure-in-the-south-seas",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-great-adventure-in-the-south-seas",
+    "backdrop": "https://image.tmdb.org/t/p/original/jrxJ3RB4DQcHphoTmWbVa9WHTMd.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 1998,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita's New Dinosaur",
     "url": "https://toonstream.us/movies/doraemon-nobitas-new-dinosaur",
     "slug": "doraemon-nobitas-new-dinosaur",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/wxCZmXRJa8hSv1Tpih8TBSR4o6b.jpg",
-    "rating": 7.382,
+    "poster": "https://image.tmdb.org/t/p/w500/wxCZmXRJa8hSv1Tpih8TBSR4o6b.jpg",
+    "rating": 7.3,
     "category": "anime",
-    "description": "Language:\n          Hindi – Tamil – Telugu – English – Japanese",
+    "description": "Nobita accidentally finds a fossil dinosaur egg mixed with rocks in the dinosaur fossil exhibition site that he had visited before. He returns it to its original state with the 'time blanket'.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Series",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/ig5vac0ycc5x.html",
-    "toonStreamUrl": "https://rubystm.com/e/ig5vac0ycc5x.html",
-    "saltStreamUrl": "https://as-cdn26.top/video/15709800bdacf685676ca21dad559a45",
+    "streamUrl": "https://filesforever.link/embed/sij9oga",
+    "toonStreamUrl": "https://filesforever.link/embed/sij9oga",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/ig5vac0ycc5x.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/sij9oga",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/k4b9v4y",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/joc3qcr",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/0O9tHFiOy",
         "isMultiAudio": true
       },
       {
@@ -7383,93 +7128,63 @@
       },
       {
         "label": "ToonStream 7 (Mirror)",
-        "url": "https://abyssplayer.com/0O9tHFiOy",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 8 (Mirror)",
-        "url": "https://strmup.to/ae592d5582ff",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 9 (Mirror)",
         "url": "https://emturbovid.com/t/694d19ff269ff",
         "isMultiAudio": true
       },
       {
-        "label": "AnimeSalt (Backup)",
-        "url": "https://as-cdn26.top/video/15709800bdacf685676ca21dad559a45",
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/ig5vac0ycc5x.html",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 9 (Mirror)",
+        "url": "https://strmup.to/ae592d5582ff",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-new-dinosaur",
+    "toonSlug": "doraemon-nobitas-new-dinosaur",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-new-dinosaur",
+    "backdrop": "https://image.tmdb.org/t/p/original/9aWXBrBe9ZnejsgGvDuN70prKEG.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2020,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita's Treasure Island",
     "url": "https://toonstream.us/movies/doraemon-nobitas-treasure-island",
     "slug": "doraemon-nobitas-treasure-island",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/xiLRClQmKSVAbiu6rgCRzNQjcSX.jpg",
+    "poster": "https://image.tmdb.org/t/p/w500/t1YkpYAxzD1lxNbjoZBpvYWkucO.jpg",
     "rating": 7,
     "category": "anime",
-    "description": "Language:\n          Hindi [Hungama TV Dubbed]+ Tamil + Telugu + JapneseQuality:1080p FHD | 720p HD | 480p BDRipRunning time:1hour 48min",
+    "description": "Upon hearing about the story of Treasure Island, Nobita dreams of discovering and exploring his own treasure island, despite the fact all of the Earth has been mapped already.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Action & Adventure"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://byselapuix.com/e/j4vx0b0ru9vz/_Toonhub4u__Doraemon_Nobita_39_s_Treasure_Island__40_2018_41__Multi_Audio_720p_HD_BluRay.mp4",
-    "toonStreamUrl": "https://byselapuix.com/e/j4vx0b0ru9vz/_Toonhub4u__Doraemon_Nobita_39_s_Treasure_Island__40_2018_41__Multi_Audio_720p_HD_BluRay.mp4",
-    "saltStreamUrl": "",
+    "streamUrl": "https://vidstreaming.xyz/v/PQ4rauntIwLi/",
+    "toonStreamUrl": "https://vidstreaming.xyz/v/PQ4rauntIwLi/",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://byselapuix.com/e/j4vx0b0ru9vz/_Toonhub4u__Doraemon_Nobita_39_s_Treasure_Island__40_2018_41__Multi_Audio_720p_HD_BluRay.mp4",
+        "url": "https://vidstreaming.xyz/v/PQ4rauntIwLi/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 2 (Mirror)",
-        "url": "https://vidstreaming.xyz/v/PQ4rauntIwLi/",
+        "label": "ToonStream 2 (Fast)",
+        "url": "https://byselapuix.com/e/j4vx0b0ru9vz/_Toonhub4u__Doraemon_Nobita_39_s_Treasure_Island__40_2018_41__Multi_Audio_720p_HD_BluRay.mp4",
         "isMultiAudio": true
       },
       {
@@ -7482,86 +7197,60 @@
         "url": "https://filepress.online/video/6352646d8576d3b521015101",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-treasure-island",
+    "toonSlug": "doraemon-nobitas-treasure-island",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-treasure-island",
+    "backdrop": "https://image.tmdb.org/t/p/original/anb6GDkC5dOnBDkGehxZdPdUrfr.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2018,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon the Movie: Nobita's Earth Symphony",
     "url": "https://toonstream.us/movies/doraemon-the-movie-nobitas-earth-symphony",
     "slug": "doraemon-the-movie-nobitas-earth-symphony",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/1W5Kg4K27U3dx9Kxb8DaE6WFLHI.jpg",
-    "rating": 6.8,
+    "poster": "https://image.tmdb.org/t/p/w500/1W5Kg4K27U3dx9Kxb8DaE6WFLHI.jpg",
+    "rating": 6.7,
     "category": "anime",
-    "description": "Language:\n          Hindi – Tamil – Telugu – Japanese",
+    "description": "When a malevolent entity intent on eradicating music from the world surfaces, Nobita and his friends must unite with supernatural companions to safeguard the planet.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Music"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/z3n8j8r1ikt7.html",
-    "toonStreamUrl": "https://rubystm.com/e/z3n8j8r1ikt7.html",
-    "saltStreamUrl": "https://as-cdn26.top/video/d9ab9cc1bf456f1db82299d1226553e4",
+    "streamUrl": "https://filesforever.link/embed/w725udt",
+    "toonStreamUrl": "https://filesforever.link/embed/w725udt",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/z3n8j8r1ikt7.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/w725udt",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/kgrq4mj",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/arhd08o",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/wnAGBZHwB",
         "isMultiAudio": true
       },
       {
@@ -7576,104 +7265,73 @@
       },
       {
         "label": "ToonStream 7 (Mirror)",
-        "url": "https://abyssplayer.com/wnAGBZHwB",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 8 (Mirror)",
-        "url": "https://strmup.to/SIglBU4RFJvb9",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 9 (Mirror)",
         "url": "https://emturbovid.com/t/69174cb5a61d6",
         "isMultiAudio": true
       },
       {
-        "label": "AnimeSalt (Backup)",
-        "url": "https://as-cdn26.top/video/d9ab9cc1bf456f1db82299d1226553e4",
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/z3n8j8r1ikt7.html",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 9 (Mirror)",
+        "url": "https://strmup.to/SIglBU4RFJvb9",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-the-movie-nobitas-earth-symphony",
+    "toonSlug": "doraemon-the-movie-nobitas-earth-symphony",
+    "toonUrl": "https://toonstream.us/movies/doraemon-the-movie-nobitas-earth-symphony",
+    "backdrop": "https://image.tmdb.org/t/p/original/Z3mSxuPRNiFYxf1LBoGz3YrJzC.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2024,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon the Movie: Nobita's Sky Utopia",
     "url": "https://toonstream.us/movies/doraemon-the-movie-nobitas-sky-utopia",
     "slug": "doraemon-the-movie-nobitas-sky-utopia",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/uux6M8z3hxLDkq8LXSzq8528mrq.jpg",
-    "rating": 7.014,
+    "poster": "https://image.tmdb.org/t/p/w500/uux6M8z3hxLDkq8LXSzq8528mrq.jpg",
+    "rating": 7.1,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Japanese",
+    "description": "Doraemon, Nobita and his friends go to find Utopia, a perfect land in the sky where everyone lives with happiness, using an airship having a time warp function.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/r4h8mi1y8hvh.html",
-    "toonStreamUrl": "https://rubystm.com/e/r4h8mi1y8hvh.html",
-    "saltStreamUrl": "https://as-cdn26.top/video/34cd5b26e973507b09fb7d4216b75a9e",
+    "streamUrl": "https://filesforever.link/embed/r78lx8r",
+    "toonStreamUrl": "https://filesforever.link/embed/r78lx8r",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/r4h8mi1y8hvh.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/r78lx8r",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/tz9okat",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/iaz72w4",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/e_OjJ-6lV",
         "isMultiAudio": true
       },
       {
@@ -7688,99 +7346,68 @@
       },
       {
         "label": "ToonStream 7 (Mirror)",
-        "url": "https://abyssplayer.com/e_OjJ-6lV",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 8 (Mirror)",
         "url": "https://emturbovid.com/t/6817b5e6e7ab3",
         "isMultiAudio": true
       },
       {
-        "label": "AnimeSalt (Backup)",
-        "url": "https://as-cdn26.top/video/34cd5b26e973507b09fb7d4216b75a9e",
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/r4h8mi1y8hvh.html",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-the-movie-nobitas-sky-utopia",
+    "toonSlug": "doraemon-the-movie-nobitas-sky-utopia",
+    "toonUrl": "https://toonstream.us/movies/doraemon-the-movie-nobitas-sky-utopia",
+    "backdrop": "https://image.tmdb.org/t/p/original/zaAo7ytwAIaQZxIPBC4kfRSPlM0.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2023,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: The Record of Nobita's Parallel Journey to the West",
     "url": "https://toonstream.us/movies/doraemon-the-record-of-nobitas-parallel-journey-to-the-west",
     "slug": "doraemon-the-record-of-nobitas-parallel-journey-to-the-west",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/sEL1XbKs3UezQfApuy5CchuQn6W.jpg",
-    "rating": 7.5,
+    "poster": "https://image.tmdb.org/t/p/w500/sEL1XbKs3UezQfApuy5CchuQn6W.jpg",
+    "rating": 7.2,
     "category": "anime",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-Japanese",
+    "description": "As Nobita, Shizuka, Gian, and Suneo are auditioning for a role in their school's play based on \"Journey to the West\", the coveted role of Son Goku is hotly contested. After suggesting that the real Great Sage Equal to Heaven should play himself, knowing that the story is only a legend, Nobita and Doraemon go back in time to find their own fake Monkey King, but arrive in present day with the story's demons having taken over the world. The only way for things to go back to normal is for Nobita and pals to reenact the tale...for real!",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/e/wd4ro53jqm9c.html",
-    "toonStreamUrl": "https://rubystm.com/e/wd4ro53jqm9c.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/qy3nwy3",
+    "toonStreamUrl": "https://filesforever.link/embed/qy3nwy3",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/e/wd4ro53jqm9c.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/qy3nwy3",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/wcgrryk",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/j8y4l8m",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/xVNbf2K0r",
         "isMultiAudio": true
       },
       {
@@ -7790,20 +7417,35 @@
       },
       {
         "label": "ToonStream 6 (Mirror)",
-        "url": "https://abyssplayer.com/xVNbf2K0r",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 7 (Mirror)",
         "url": "https://vidstreaming.xyz/v/r4Q4WL7581mM/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 7 (Mirror)",
         "url": "https://emturbovid.com/t/67eec31b56981",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/e/wd4ro53jqm9c.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-the-record-of-nobitas-parallel-journey-to-the-west",
+    "toonSlug": "doraemon-the-record-of-nobitas-parallel-journey-to-the-west",
+    "toonUrl": "https://toonstream.us/movies/doraemon-the-record-of-nobitas-parallel-journey-to-the-west",
+    "backdrop": "https://image.tmdb.org/t/p/original/8PQ9LIbaWBNElvNfdjbHl6LXxkH.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 1988,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Dragon Ball Super: Broly",
@@ -14589,64 +14231,23 @@
     ]
   },
   {
-    "title": "Stand by Me Doraemon 2 (2020)",
+    "title": "Stand by Me Doraemon 2",
     "url": "https://toonstream.us/movies/stand-by-me-doraemon-2",
     "slug": "stand-by-me-doraemon-2",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/vBv8iOFPLnXmtELUjcFc7OKHsR4.jpg",
-    "rating": 7.7,
+    "poster": "https://image.tmdb.org/t/p/w500/vBv8iOFPLnXmtELUjcFc7OKHsR4.jpg",
+    "rating": 7.8,
     "category": "anime",
-    "description": "Language:\n          Japanese – English – HindiQuality:1080p FHD | 720p HD | 480pRunning time:1h 36min",
+    "description": "Nobita travels to the future to show his beloved grandma his bride, but adult Nobita has fled his own wedding.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
     "streamUrl": "https://vidstreaming.xyz/v/oAvQd0QOy3Wx/",
     "toonStreamUrl": "https://vidstreaming.xyz/v/oAvQd0QOy3Wx/",
-    "saltStreamUrl": "https://as-cdn26.top/video/50abc3e730e36b387ca8e02c26dc0a22",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
@@ -14654,7 +14255,7 @@
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 2 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://byselapuix.com/e/zwogym6v3zsw/Toonhub4u__Stand_by_Me_Doraemon_2__40_2020_41__in_Multi_Audio_480p.mp4",
         "isMultiAudio": true
       },
@@ -14662,100 +14263,69 @@
         "label": "ToonStream 3 (Mirror)",
         "url": "https://streamsb.net/e/756j0klxx42d.html",
         "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 4 (Mirror)",
-        "url": "https://streamhide.to/e/y4bf04vlgwli",
-        "isMultiAudio": true
-      },
-      {
-        "label": "AnimeSalt (Backup)",
-        "url": "https://as-cdn26.top/video/50abc3e730e36b387ca8e02c26dc0a22",
-        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "stand-by-me-doraemon-2",
+    "toonSlug": "stand-by-me-doraemon-2",
+    "toonUrl": "https://toonstream.us/movies/stand-by-me-doraemon-2",
+    "backdrop": "https://image.tmdb.org/t/p/original/fStC0dSCRQslE9NzXa36EyOom81.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2020,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Stand by Me Doraemon",
     "url": "https://toonstream.us/movies/stand-by-me-doraemon",
     "slug": "stand-by-me-doraemon",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/jArnRnllnxbvE2CEV8jc2hhwweS.jpg",
-    "rating": 7.3,
+    "poster": "https://image.tmdb.org/t/p/w500/wc7XQbfx6EIQqCuvmBMt3aisb2Y.jpg",
+    "rating": 7.4,
     "category": "anime",
-    "description": "Quality:\n        1080p FHD | 720p HD | 480p",
+    "description": "Sewashi and Doraemon find themselves way back in time and meet Nobita. It is up to Doraemon to take care of Nobita or else he will not return to the present.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Anime Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://streamhide.to/ew/swywnzo66lpq",
-    "toonStreamUrl": "https://streamhide.to/ew/swywnzo66lpq",
-    "saltStreamUrl": "",
+    "streamUrl": "https://vidstreaming.xyz/v/mohgdatFn1Zu/",
+    "toonStreamUrl": "https://vidstreaming.xyz/v/mohgdatFn1Zu/",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://streamhide.to/ew/swywnzo66lpq",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://vidstreaming.xyz/v/mohgdatFn1Zu/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
-        "url": "https://byselapuix.com/e/dgzjmfrzdula/_Toonhub4u__Stand_By_Me_Doraemon__40_2014_41__in__Tamil_-_Hindi_-_Eng__720p_HD.mp4",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://streamsb.net/e/g5msoqi06n6r.html",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "stand-by-me-doraemon",
+    "toonSlug": "stand-by-me-doraemon",
+    "toonUrl": "https://toonstream.us/movies/stand-by-me-doraemon",
+    "backdrop": "https://image.tmdb.org/t/p/original/1aABIiqBY7yoQESE8qWvR0w9bJZ.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2014,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Summer Ghost",
@@ -23451,79 +23021,38 @@
     "url": "https://toonstream.us/movies/doraemon-nobita-and-the-green-giant-legend",
     "slug": "doraemon-nobita-and-the-green-giant-legend",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/jY2c8s4s8YyGxuxX8ymmzGUdnwZ.jpg",
+    "poster": "https://image.tmdb.org/t/p/w500/jY2c8s4s8YyGxuxX8ymmzGUdnwZ.jpg",
     "rating": 6.8,
     "category": "cartoon",
-    "description": "Language:\n          Hindi-Tamil-Telugu-Kannada-English-Japanese",
+    "description": "A sapling Nobita discovers is turned into a plant-boy with help from Doraemon, and becomes Earth's only hope at passing judgment from the dryadic aliens of the Green Planet.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Animation & Cartoon Movies",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/embed-rgcohxb59le4.html",
-    "toonStreamUrl": "https://rubystm.com/embed-rgcohxb59le4.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/d42m5zz",
+    "toonStreamUrl": "https://filesforever.link/embed/d42m5zz",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/embed-rgcohxb59le4.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/d42m5zz",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/swnisdm",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/xad68d1",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://abyssplayer.com/eEasT3KwZ",
         "isMultiAudio": true
       },
       {
@@ -23533,252 +23062,175 @@
       },
       {
         "label": "ToonStream 6 (Mirror)",
-        "url": "https://abyssplayer.com/eEasT3KwZ",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 7 (Mirror)",
         "url": "https://vidstreaming.xyz/v/hkkjyCozYJvi/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 8 (Mirror)",
+        "label": "ToonStream 7 (Mirror)",
         "url": "https://emturbovid.com/t/67ecbf6b77a0c",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 8 (Mirror)",
+        "url": "https://rubystm.com/embed-rgcohxb59le4.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobita-and-the-green-giant-legend",
+    "toonSlug": "doraemon-nobita-and-the-green-giant-legend",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobita-and-the-green-giant-legend",
+    "backdrop": "https://image.tmdb.org/t/p/original/9kRAyJHknHsNUnavRAFC29OSy7C.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 2008,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita and the Tin Labyrinth",
     "url": "https://toonstream.us/movies/doraemon-nobita-and-the-tin-labyrinth",
     "slug": "doraemon-nobita-and-the-tin-labyrinth",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/bkIR641RQyqk7hBlk0hui70dkz9.jpg",
-    "rating": 7.4,
+    "poster": "https://image.tmdb.org/t/p/w500/x0v7xiBYCl1oaujtpkbF6YtglUw.jpg",
+    "rating": 7.1,
     "category": "cartoon",
-    "description": "Language:\n          English – Tamil – Telugu – Hindi",
+    "description": "Nobita and his friends find a portal to a mysterious resort filled with metal buildings. They soon discover that the person who opened the portal for them has an ulterior motive.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Animation & Cartoon Series",
-      "TV Movie"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/embed-6cdgh6krhhsa.html",
-    "toonStreamUrl": "https://rubystm.com/embed-6cdgh6krhhsa.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/h6kaf15",
+    "toonStreamUrl": "https://filesforever.link/embed/h6kaf15",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/embed-6cdgh6krhhsa.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/h6kaf15",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://filesforever.link/embed/gjjndg5",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 4 (Mirror)",
+        "label": "ToonStream 3 (Mirror)",
         "url": "https://filesforever.link/embed/e7khlj2",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 5 (Mirror)",
+        "label": "ToonStream 4 (Mirror)",
         "url": "https://vidstreaming.xyz/v/DRvtczt4h9wK/",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 5 (Mirror)",
+        "url": "https://rubystm.com/embed-6cdgh6krhhsa.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobita-and-the-tin-labyrinth",
+    "toonSlug": "doraemon-nobita-and-the-tin-labyrinth",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobita-and-the-tin-labyrinth",
+    "backdrop": "https://image.tmdb.org/t/p/original/j3pr1JEpKmDL3n6h6CQwXHY0gkU.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 1993,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita's Dorabian Nights",
     "url": "https://toonstream.us/movies/doraemon-nobitas-dorabian-nights",
     "slug": "doraemon-nobitas-dorabian-nights",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/giVXnXLOJ3cgoCc9xLyIpqPBfg4.jpg",
-    "rating": 7.5,
+    "poster": "https://image.tmdb.org/t/p/w500/gJL5GgPWOvtcGo8ozEXCkFv3ub0.jpg",
+    "rating": 7,
     "category": "cartoon",
-    "description": "Language:\n          English – Tamil – Telugu – Hindi",
+    "description": "Shizuka ends up in the fantasy world of the 'Arabian Nights' story. However, Doraemon, Nobita, Suneo, and Jyaian must find her from the imaginary Middle East and bring her back to the real life.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Animation & Cartoon Series",
-      "TV Movie"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://rubystm.com/embed-z4hmdw4ukkl4.html",
-    "toonStreamUrl": "https://rubystm.com/embed-z4hmdw4ukkl4.html",
-    "saltStreamUrl": "",
+    "streamUrl": "https://filesforever.link/embed/gnmqdi9",
+    "toonStreamUrl": "https://filesforever.link/embed/gnmqdi9",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://rubystm.com/embed-z4hmdw4ukkl4.html",
-        "isMultiAudio": true
-      },
-      {
-        "label": "ToonStream 2 (Mirror)",
         "url": "https://filesforever.link/embed/gnmqdi9",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 3 (Mirror)",
+        "label": "ToonStream 2 (Fast)",
         "url": "https://vidstreaming.xyz/v/rrQAaU6QOTpq/",
         "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 3 (Mirror)",
+        "url": "https://rubystm.com/embed-z4hmdw4ukkl4.html",
+        "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-dorabian-nights",
+    "toonSlug": "doraemon-nobitas-dorabian-nights",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-dorabian-nights",
+    "backdrop": "https://image.tmdb.org/t/p/original/zPeMn87CADz6hWLUGrkp1NFephH.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 1991,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Doraemon: Nobita's Little Star Wars",
     "url": "https://toonstream.us/movies/doraemon-nobitas-little-star-wars",
     "slug": "doraemon-nobitas-little-star-wars",
     "type": "movie",
-    "poster": "https://image.tmdb.org/t/p/w780/oLXqorJ3CtXkR90wCBkg4WnITL3.jpg",
-    "rating": 6.9,
+    "poster": "https://image.tmdb.org/t/p/w500/b5RSPr3gP808eP10UKPsFpYRZdt.jpg",
+    "rating": 7.2,
     "category": "cartoon",
-    "description": "Language:\n          Japanese – Tamil – Telugu – HindiQuality:1080p FHD | 720p HD | 480pRunning time:1h 36min",
+    "description": "As Nobita, Gian, Shizuka, and Suneo are making their own space movie, a fleeing bug-sized alien president makes his way to Earth, and needs the help of the kids and Doraemon to stop an oppressive dictatorship threatening his democracy.",
     "genres": [
-      "Animation & Cartoon",
-      "Networks",
-      "Crunchyroll",
-      "ETV Bal Bharti",
-      "Hungama",
-      "NetFlix",
-      "Nickelodean",
-      "Cartoon Network",
-      "Kinds Zone Pluse",
-      "Disney",
-      "Sony Yay",
-      "Genre",
-      "Action",
-      "Adventure",
       "Animation",
       "Comedy",
-      "Crime",
-      "Drama",
-      "Family",
-      "Fantasy",
-      "Horror",
-      "Kids",
-      "Martial ART",
-      "Mystery",
-      "Romance",
-      "Sci-fi",
-      "Sci-Fi & Fantasy",
-      "Superhero",
-      "Thriller",
-      "War",
-      "Language",
-      "Hindi",
-      "Tamil",
-      "Telugu",
-      "Fan Hindi",
-      "Malyalam",
-      "Kannada",
-      "Bengali",
-      "Marathi",
-      "English",
-      "Japaneses",
-      "Korean",
-      "Chinese",
-      "Science Fiction"
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
     ],
-    "streamUrl": "https://byselapuix.com/e/ca2nyt2nw5p5/_Toonhub4u__Doraemon__Nobita_s_Little_Star_Wars__40_1985_41__in_Multi_Audio_480pp.mp4",
-    "toonStreamUrl": "https://byselapuix.com/e/ca2nyt2nw5p5/_Toonhub4u__Doraemon__Nobita_s_Little_Star_Wars__40_1985_41__in_Multi_Audio_480pp.mp4",
-    "saltStreamUrl": "",
+    "streamUrl": "https://vidstreaming.xyz/v/2V2TJUTlpmqV/",
+    "toonStreamUrl": "https://vidstreaming.xyz/v/2V2TJUTlpmqV/",
     "streamSources": [
       {
         "label": "ToonStream 1 (HD)",
-        "url": "https://byselapuix.com/e/ca2nyt2nw5p5/_Toonhub4u__Doraemon__Nobita_s_Little_Star_Wars__40_1985_41__in_Multi_Audio_480pp.mp4",
+        "url": "https://vidstreaming.xyz/v/2V2TJUTlpmqV/",
         "isMultiAudio": true
       },
       {
-        "label": "ToonStream 2 (Mirror)",
-        "url": "https://vidstreaming.xyz/v/2V2TJUTlpmqV/",
+        "label": "ToonStream 2 (Fast)",
+        "url": "https://byselapuix.com/e/ca2nyt2nw5p5/_Toonhub4u__Doraemon__Nobita_s_Little_Star_Wars__40_1985_41__in_Multi_Audio_480pp.mp4",
         "isMultiAudio": true
       },
       {
@@ -23791,7 +23243,22 @@
         "url": "https://filepress.lol/video/639b6d656e410a848a8c8f17",
         "isMultiAudio": true
       }
-    ]
+    ],
+    "saltSlug": "doraemon-nobitas-little-star-wars",
+    "toonSlug": "doraemon-nobitas-little-star-wars",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-little-star-wars",
+    "backdrop": "https://image.tmdb.org/t/p/original/wBBONMlfnrU2GxxN7X2pFDdZuRB.jpg",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "year": 1985,
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   },
   {
     "title": "Dragon Rider",
@@ -44256,5 +43723,120 @@
         "isMultiAudio": true
       }
     ]
+  },
+  {
+    "title": "Doraemon: Nobita's Great Adventure in the Antarctic Kachi Kochi",
+    "slug": "doraemon-nobitas-great-adventure-in-the-antarctic-kachi-kochi",
+    "saltSlug": "doraemon-nobitas-great-adventure-in-the-antarctic-kachi-kochi",
+    "toonSlug": "doraemon-nobitas-great-adventure-in-the-antarctic-kachi-kochi",
+    "url": "https://toonstream.us/movies/doraemon-nobitas-great-adventure-in-the-antarctic-kachi-kochi",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-great-adventure-in-the-antarctic-kachi-kochi",
+    "type": "movie",
+    "poster": "https://image.tmdb.org/t/p/w500/hcydn0Lr3DAixZFOaUmjoqoIFU6.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/3W2I33pTXWMiH8py382Zg86OB9Q.jpg",
+    "description": "Doraemon and Nobita discover a mysterious golden ring far beneath the ice in Antarctica, leading them to uncover an ancient, ruined city.",
+    "genres": [
+      "Animation",
+      "Comedy",
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "rating": 6.5,
+    "year": 2017,
+    "streamUrl": "https://vidstreaming.xyz/v/5BlaaTVwfuaC/",
+    "toonStreamUrl": "https://vidstreaming.xyz/v/5BlaaTVwfuaC/",
+    "streamSources": [
+      {
+        "label": "ToonStream 1 (HD)",
+        "url": "https://vidstreaming.xyz/v/5BlaaTVwfuaC/",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 2 (Fast)",
+        "url": "https://byselapuix.com/e/6ku40oar7o2o/1-KJaPZvfPdOz-j0-SiliLFCulMfvMKxg.mp4",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 3 (Mirror)",
+        "url": "https://streamsb.net/e/27sjjwvlg35c.html",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://filepress.online/video/63525d638576d3b521007737",
+        "isMultiAudio": true
+      }
+    ],
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
+  },
+  {
+    "title": "Doraemon: Nobita's Secret Gadget Museum",
+    "slug": "doraemon-nobitas-secret-gadget-museum",
+    "saltSlug": "doraemon-nobitas-secret-gadget-museum",
+    "toonSlug": "doraemon-nobitas-secret-gadget-museum",
+    "url": "https://toonstream.us/movies/doraemon-nobitas-secret-gadget-museum",
+    "toonUrl": "https://toonstream.us/movies/doraemon-nobitas-secret-gadget-museum",
+    "type": "movie",
+    "poster": "https://image.tmdb.org/t/p/w500/2GdSk2j7pbuEnuyJibH7YLKHwos.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/uaB1DimUo578ETyDsfturtmUZbi.jpg",
+    "description": "Doraemon and his friends travel to the 22nd century to look for his golden bell, which was stolen by a notorious thief called Kaito DX.",
+    "genres": [
+      "Animation",
+      "Comedy",
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "Tamil",
+      "Telugu"
+    ],
+    "rating": 6.5,
+    "year": 2013,
+    "streamUrl": "https://abyssplayer.com/SaEiMYObB",
+    "toonStreamUrl": "https://abyssplayer.com/SaEiMYObB",
+    "streamSources": [
+      {
+        "label": "ToonStream 1 (HD)",
+        "url": "https://abyssplayer.com/SaEiMYObB",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 2 (Fast)",
+        "url": "https://abyssplayer.com/WbU3DXQh5",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 3 (Mirror)",
+        "url": "https://vidstreaming.xyz/v/gjv9EFtYd6Cd/",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 4 (Mirror)",
+        "url": "https://vidstreaming.xyz/v/gCQncgSnNOOG/",
+        "isMultiAudio": true
+      },
+      {
+        "label": "ToonStream 5 (Mirror)",
+        "url": "https://vidstreaming.xyz/v/ofVuaXYWGbzx/",
+        "isMultiAudio": true
+      }
+    ],
+    "source": "toonstream",
+    "episodeCount": 1,
+    "episodesCount": 1
   }
 ]

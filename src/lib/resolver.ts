@@ -43,8 +43,8 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
     return false;
   }
 
-  // NEVER embed dead as-cdn top-level player (throws Cloudflare Error 522)
-  if (lower.includes('as-cdn') && lower.includes('.top')) {
+  // NEVER embed dead as-cdn top-level player (throws Cloudflare Error 522) or dead streamhide
+  if ((lower.includes('as-cdn') && lower.includes('.top')) || lower.includes('streamhide.')) {
     return false;
   }
 

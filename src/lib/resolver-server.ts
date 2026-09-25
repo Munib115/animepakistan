@@ -232,50 +232,104 @@ export async function resolveMovieStreamSources(anime: any): Promise<StreamSourc
     } catch (e) {}
   }
 
-  // 4. Try searching ToonStream
+  // 4. Try searching ToonStream via live API and search page
   try {
-    const searchUrl = `https://toonstream.us/?s=${encodeURIComponent(anime.title || '')}`;
-    const searchRes = await fetch(searchUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer': 'https://toonstream.us/',
-      },
-      signal: AbortSignal.timeout(6000),
-    });
-    if (searchRes.ok) {
-      const searchHtml = await searchRes.text();
-      const $ = cheerio.load(searchHtml);
-      const movieLink = $('a[href*="/movies/"]').first().attr('href');
-      if (movieLink) {
-        const fullLink = movieLink.startsWith('http') ? movieLink : `https://toonstream.us${movieLink}`;
-        const pageRes = await fetch(fullLink, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Referer': 'https://toonstream.us/',
-          },
-          signal: AbortSignal.timeout(6000),
+    const cleanTitle = (anime.title || '')
+      .replace(/^(Movie|Series|Watch|Free)\s*[:\-]?\s*/gi, '')
+      .replace(/\s*\((Hindi|Urdu|Dubbed|Season|Sub|Dual Audio|English|\d{4})[^)]*\)/gi, '')
+      .replace(/Hindi Dubbed|Urdu Dubbed|Dual Audio/gi, '')
+      .trim();
+
+    let movieLink: string | null = null;
+
+    // A. Query search/all API
+    try {
+      const apiRes = await fetch(`https://toonstream.us/search/all?q=${encodeURIComponent(cleanTitle)}`, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': 'https://toonstream.us/home',
+        },
+        signal: AbortSignal.timeout(6000),
+      });
+      if (apiRes.ok) {
+        const json = await apiRes.json();
+        const movieItem = (json.data || []).find((x: any) => x.type === 'movie' || x.url?.includes('/movies/'));
+        if (movieItem?.url) {
+          movieLink = movieItem.url;
+        }
+      }
+    } catch (e) {}
+
+    // B. Fallback to /s?q=... search page
+    if (!movieLink) {
+      const searchUrl = `https://toonstream.us/s?q=${encodeURIComponent(cleanTitle)}&type=movie`;
+      const searchRes = await fetch(searchUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': 'https://toonstream.us/home',
+        },
+        signal: AbortSignal.timeout(6000),
+      });
+      if (searchRes.ok) {
+        const searchHtml = await searchRes.text();
+        const $ = cheerio.load(searchHtml);
+        movieLink = $('a[href*="/movies/"]').first().attr('href') || null;
+      }
+    }
+
+    if (movieLink) {
+      const fullLink = movieLink.startsWith('http') ? movieLink : `https://toonstream.us${movieLink}`;
+      const pageRes = await fetch(fullLink, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': 'https://toonstream.us/',
+        },
+        signal: AbortSignal.timeout(7000),
+      });
+      if (pageRes.ok) {
+        const pageHtml = await pageRes.text();
+        const $$ = cheerio.load(pageHtml);
+        const streams: string[] = [];
+        $$('iframe').each((_, el) => {
+          let s = $$(el).attr('src') || $$(el).attr('data-src') || '';
+          if (s.startsWith('//')) s = 'https:' + s;
+          if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
         });
-        if (pageRes.ok) {
-          const pageHtml = await pageRes.text();
-          const $$ = cheerio.load(pageHtml);
-          const streams: string[] = [];
-          $$('iframe').each((_, el) => {
-            let s = $$(el).attr('src') || $$(el).attr('data-src') || '';
-            if (s.startsWith('//')) s = 'https:' + s;
-            if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
-          });
-          const active = streams.filter(s => !s.includes('youtube'));
-          if (active.length > 0) {
-            const resultSources: StreamSource[] = active.map((s, i) => ({
-              label: i === 0 ? 'ToonStream 1 (HD)' : `ToonStream ${i + 1} (Mirror)`,
-              url: sanitizeStreamUrl(s),
-              isMultiAudio: true,
-            }));
-            anime.toonStreamUrl = active[0];
-            anime.streamSources = resultSources;
-            anime.toonUrl = fullLink;
-            return resultSources;
-          }
+        $$('[data-player], [data-embed], .playex, [data-url]').each((_, el) => {
+          let s = $$(el).attr('data-player') || $$(el).attr('data-embed') || $$(el).attr('data-url') || $$(el).attr('data-src') || '';
+          if (s.startsWith('//')) s = 'https:' + s;
+          if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
+        });
+
+        // Rank fast reliable mirrors first
+        const priorityOrder = (url: string) => {
+          const l = url.toLowerCase();
+          if (l.includes('filesforever.link')) return 1;
+          if (l.includes('abyssplayer.com')) return 2;
+          if (l.includes('cloudy.upns.one')) return 3;
+          if (l.includes('vidstreaming.xyz')) return 4;
+          if (l.includes('vidmoly.net')) return 5;
+          if (l.includes('emturbovid.com')) return 6;
+          if (l.includes('byselapuix.com')) return 7;
+          if (l.includes('streamsb.net')) return 8;
+          if (l.includes('rubystm.com')) return 9;
+          return 10;
+        };
+
+        const active = streams
+          .filter(s => isValidStreamEmbedUrl(s))
+          .sort((a, b) => priorityOrder(a) - priorityOrder(b));
+
+        if (active.length > 0) {
+          const resultSources: StreamSource[] = active.map((s, i) => ({
+            label: i === 0 ? 'ToonStream 1 (HD)' : i === 1 ? 'ToonStream 2 (Fast)' : `ToonStream ${i + 1} (Mirror)`,
+            url: sanitizeStreamUrl(s),
+            isMultiAudio: true,
+          }));
+          anime.toonStreamUrl = active[0];
+          anime.streamSources = resultSources;
+          anime.toonUrl = fullLink;
+          return resultSources;
         }
       }
     }
