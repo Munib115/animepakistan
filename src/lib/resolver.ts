@@ -59,7 +59,8 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
     lower.includes('animesalt.cx/series') ||
     lower.includes('animesalt.cx/movies') ||
     lower.includes('animesalt.cx/tv') ||
-    (lower.includes('animesalt.cx') && !lower.includes('player') && !lower.includes('plyr'))
+    (lower.includes('animesalt.cx') && !lower.includes('player') && !lower.includes('plyr')) ||
+    (lower.includes('hindianimeszone.com') && !lower.includes('playonline.php') && !lower.includes('player'))
   ) {
     return false;
   }

@@ -72,6 +72,39 @@ export async function resolveToonStreamNested(embedUrl: string): Promise<string 
   return null;
 }
 
+/** Resolves HindiAnimesZone playonline.php player page to direct clean embeds (p2pplay, abyssplayer, strmup) */
+export async function resolveHazPlayOnline(embedUrl: string): Promise<string[]> {
+  if (!embedUrl || !embedUrl.includes('playonline.php')) return [];
+  try {
+    const res = await fetch(embedUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://hindianimeszone.com/'
+      },
+      signal: AbortSignal.timeout(6000)
+    });
+    if (res.ok) {
+      const html = await res.text();
+      const results: string[] = [];
+      // 1. servers array
+      const serverMatch = html.match(/servers\s*=\s*\[([\s\S]*?)\];/);
+      if (serverMatch) {
+        const matches = [...serverMatch[1].matchAll(/"([^"]+)"/g)].map(m => m[1].replace(/\\\//g, '/').trim());
+        matches.forEach(m => {
+          if (m.startsWith('http') && !results.includes(m)) results.push(m);
+        });
+      }
+      // 2. iframes
+      const iframes = [...html.matchAll(/<iframe[^>]+src="([^"]+)"/gi)].map(m => m[1].trim());
+      iframes.forEach(i => {
+        if (i.startsWith('http') && !results.includes(i) && !i.includes('cloudflare')) results.push(i);
+      });
+      return results.filter(u => isValidStreamEmbedUrl(u)).map(sanitizeStreamUrl);
+    }
+  } catch (e) {}
+  return [];
+}
+
 function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
   if (!streamUrl || !isValidStreamEmbedUrl(streamUrl)) return [];
 
@@ -90,7 +123,16 @@ function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
 
   // Clean unnested direct player mirrors
   if (streamUrl.includes('gdmirrorbot') || streamUrl.includes('abyssplayer')) {
-    return [{ label: 'Server 1 (HD)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+    return [{ label: 'Abyss (Multi Audio)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+  }
+  if (streamUrl.includes('p2pplay.online')) {
+    return [{ label: 'HAZ Player (Hindi HD)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+  }
+  if (streamUrl.includes('strmup.')) {
+    return [{ label: 'StrmUp (Multi Audio)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
+  }
+  if (streamUrl.includes('playonline.php')) {
+    return [{ label: 'HAZ (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
   }
 
   if (streamUrl.includes('multi-lang-plyr') && streamUrl.includes('data=')) {
@@ -121,6 +163,7 @@ function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
 
 /** Enriches stream sources by un-nesting embedded players and fetching high-speed direct API streams */
 async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
+  const extraSources: StreamSource[] = [];
   for (let i = 0; i < sourcesList.length; i++) {
     const s = sourcesList[i];
     // Un-nest any toon-stream nested embeds
@@ -128,6 +171,23 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
       try {
         const unnested = await resolveToonStreamNested(s.url);
         if (unnested) s.url = unnested;
+      } catch (e) {}
+    }
+    // Un-nest any HindiAnimesZone playonline.php embeds
+    if (s.url.includes('playonline.php')) {
+      try {
+        const unnestedList = await resolveHazPlayOnline(s.url);
+        if (unnestedList.length > 0) {
+          s.url = unnestedList[0];
+          s.label = unnestedList[0].includes('abyss') ? 'Abyss (Multi Audio)' : 'HAZ Player (Hindi HD)';
+          for (let k = 1; k < unnestedList.length; k++) {
+            extraSources.push({
+              label: unnestedList[k].includes('abyss') ? 'Abyss Mirror (Multi)' : `HAZ Mirror ${k + 1}`,
+              url: unnestedList[k],
+              isMultiAudio: true
+            });
+          }
+        }
       } catch (e) {}
     }
     // Attach direct as-cdn HLS stream if available
@@ -144,6 +204,9 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
         if (direct) s.directApiStream = direct;
       } catch (e) {}
     }
+  }
+  if (extraSources.length > 0) {
+    sourcesList.push(...extraSources);
   }
 }
 

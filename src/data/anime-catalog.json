@@ -42,7 +42,10 @@
       "Hindi",
       "Urdu",
       "English",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -67,7 +70,10 @@
       "Hindi",
       "Urdu",
       "English",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 9.2,
     "year": 2023,
@@ -95,7 +101,12 @@
     ],
     "audioLanguages": [
       "English",
-      "Japanese"
+      "Japanese",
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -119,7 +130,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -143,7 +158,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -192,7 +212,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -217,7 +241,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -601,7 +631,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -653,7 +687,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Bengali",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -1559,7 +1599,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -1637,7 +1682,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -1663,7 +1713,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -1791,7 +1846,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -2949,7 +3010,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -3372,7 +3437,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -3852,7 +3921,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -3959,7 +4032,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -3985,7 +4062,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -4011,7 +4091,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -4039,7 +4122,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -4092,7 +4176,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -4469,7 +4556,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -4618,7 +4708,9 @@
       "English",
       "Korean",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Hindi",
+      "Japanese"
     ],
     "rating": 8,
     "year": 2024,
@@ -6008,7 +6100,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6117,7 +6212,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6143,7 +6241,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6271,7 +6372,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6320,7 +6425,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6396,7 +6507,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean",
+      "Kannada",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -6495,7 +6612,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6522,7 +6643,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6549,7 +6674,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6573,7 +6702,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6598,7 +6731,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6645,13 +6782,18 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 8,
     "episodesCount": 8,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -6671,13 +6813,20 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 8,
     "episodesCount": 8,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -6768,7 +6917,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6816,7 +6969,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6840,7 +6998,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6864,7 +7026,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -6888,7 +7054,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean",
+      "Malayalam",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -7111,7 +7283,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -7185,7 +7363,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7212,7 +7394,14 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7236,7 +7425,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7263,7 +7457,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7290,7 +7488,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7317,7 +7519,11 @@
     ],
     "audioLanguages": [
       "English",
-      "Japanese"
+      "Japanese",
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7342,12 +7548,16 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 26,
-    "episodesCount": 26,
+    "episodeCount": 27,
+    "episodesCount": 27,
     "hasStreams": true,
     "source": "hybrid"
   },
@@ -7369,7 +7579,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7394,7 +7608,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7419,7 +7637,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7473,7 +7695,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7497,7 +7723,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7521,7 +7752,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7545,7 +7780,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7569,7 +7808,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7593,7 +7836,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7617,7 +7864,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7643,13 +7894,17 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 8,
     "episodesCount": 8,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -7667,7 +7922,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7691,7 +7950,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Bengali",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7718,7 +7983,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -7742,7 +8013,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7766,7 +8043,14 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7814,7 +8098,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7838,7 +8127,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7865,7 +8158,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7892,7 +8189,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7919,12 +8220,16 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 127,
-    "episodesCount": 127,
+    "episodeCount": 128,
+    "episodesCount": 128,
     "hasStreams": true,
     "source": "hybrid"
   },
@@ -7973,7 +8278,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -7997,7 +8306,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8021,7 +8334,14 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -8046,7 +8366,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8102,7 +8426,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8129,7 +8457,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8156,7 +8488,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8204,7 +8540,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8282,7 +8622,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8309,7 +8653,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8333,7 +8682,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -8360,7 +8714,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8384,7 +8742,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8409,7 +8771,14 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8434,7 +8803,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8463,7 +8836,11 @@
     ],
     "audioLanguages": [
       "English",
-      "Japanese"
+      "Japanese",
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8487,7 +8864,13 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8514,7 +8897,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8541,7 +8928,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8568,7 +8959,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8592,7 +8987,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -8619,7 +9019,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8644,7 +9048,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8671,7 +9079,12 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8703,7 +9116,14 @@
     ],
     "audioLanguages": [
       "English",
-      "Japanese"
+      "Japanese",
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean",
+      "Kannada",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -8733,7 +9153,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8792,7 +9213,9 @@
       "Japanese",
       "Kannada",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8823,7 +9246,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8852,7 +9276,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8882,7 +9308,9 @@
       "Japanese",
       "Malayalam",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8909,7 +9337,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -8937,7 +9366,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -8968,7 +9403,12 @@
       "English",
       "Hindi",
       "Japanese",
-      "Urdu"
+      "Urdu",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -8994,7 +9434,12 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9024,7 +9469,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9052,7 +9501,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9083,7 +9536,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9112,7 +9566,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9143,7 +9600,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -9173,7 +9632,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9226,7 +9688,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9257,7 +9722,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9287,7 +9755,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9318,7 +9787,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -9349,7 +9821,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9377,7 +9852,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9410,7 +9887,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9438,7 +9916,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9466,7 +9946,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9520,7 +10004,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9551,7 +10036,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9579,7 +10065,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9608,7 +10097,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9640,7 +10130,11 @@
     "audioLanguages": [
       "Chinese",
       "English",
-      "Hindi"
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9666,7 +10160,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9698,7 +10195,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9725,7 +10223,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9753,7 +10254,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9780,7 +10284,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -9808,7 +10317,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9836,7 +10349,12 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9864,7 +10382,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9898,12 +10419,14 @@
       "Kannada",
       "Malayalam",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 171,
-    "episodesCount": 171,
+    "episodeCount": 173,
+    "episodesCount": 173,
     "hasStreams": true,
     "source": "hybrid"
   },
@@ -9926,7 +10449,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9956,7 +10483,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -9986,7 +10516,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10015,7 +10546,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10045,7 +10577,11 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10075,7 +10611,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10104,7 +10642,11 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10132,7 +10674,11 @@
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10162,7 +10708,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10193,7 +10742,11 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10220,7 +10773,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10275,7 +10829,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10332,7 +10889,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10360,13 +10918,16 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 39,
-    "episodesCount": 39,
-    "hasStreams": false,
+    "episodeCount": 40,
+    "episodesCount": 40,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -10391,7 +10952,8 @@
       "Kannada",
       "Malayalam",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10419,7 +10981,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10446,7 +11011,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10478,7 +11046,8 @@
       "Kannada",
       "Malayalam",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10506,7 +11075,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10538,7 +11111,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -10596,7 +11171,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10624,7 +11202,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10652,7 +11233,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10712,13 +11294,16 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 12,
     "episodesCount": 12,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -10767,7 +11352,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10792,13 +11380,18 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 12,
     "episodesCount": 12,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -10820,7 +11413,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10846,13 +11442,17 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 26,
     "episodesCount": 26,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -10871,7 +11471,12 @@
       "Reincarnation"
     ],
     "audioLanguages": [
-      "Japanese"
+      "Japanese",
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10900,7 +11505,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10929,7 +11537,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10954,7 +11563,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -10981,7 +11595,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11009,7 +11627,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11038,7 +11662,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11090,7 +11715,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11120,13 +11748,17 @@
     ],
     "audioLanguages": [
       "English",
-      "Japanese"
+      "Japanese",
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 0,
-    "episodesCount": 0,
-    "hasStreams": false,
+    "episodeCount": 24,
+    "episodesCount": 24,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -11146,7 +11778,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11172,7 +11807,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11201,7 +11839,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11230,7 +11872,13 @@
     "audioLanguages": [
       "Hindi",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean",
+      "Malayalam",
+      "Bengali",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -11256,7 +11904,13 @@
     "audioLanguages": [
       "Hindi",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11313,7 +11967,9 @@
       "Hindi",
       "Malayalam",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11368,7 +12024,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11396,7 +12057,9 @@
       "Japanese",
       "Kannada",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11426,7 +12089,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11454,7 +12118,11 @@
     ],
     "audioLanguages": [
       "English",
-      "Hindi"
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11482,7 +12150,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11508,7 +12181,14 @@
     ],
     "audioLanguages": [
       "English",
-      "Hindi"
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Japanese",
+      "Korean",
+      "Kannada",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -11564,7 +12244,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -11591,12 +12274,17 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 38,
-    "episodesCount": 38,
+    "episodeCount": 41,
+    "episodesCount": 41,
     "hasStreams": true,
     "source": "hybrid"
   },
@@ -11622,7 +12310,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -11704,7 +12397,11 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -12811,7 +13508,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -12920,7 +13622,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13203,7 +13908,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13231,7 +13939,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13261,7 +13972,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13291,7 +14003,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -13319,7 +14033,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13346,7 +14061,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13380,7 +14098,8 @@
       "Kannada",
       "Malayalam",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13440,7 +14159,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13467,7 +14187,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -13546,7 +14270,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13637,7 +14362,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13665,7 +14391,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13695,7 +14422,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13726,7 +14454,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13752,7 +14481,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13810,7 +14541,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13839,7 +14571,9 @@
       "English",
       "Hindi",
       "Japanese",
-      "Korean"
+      "Korean",
+      "Tamil",
+      "Telugu"
     ],
     "rating": 8,
     "year": 2024,
@@ -13871,7 +14605,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13902,7 +14638,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13932,7 +14671,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -13960,7 +14702,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14018,7 +14762,9 @@
       "English",
       "Hindi",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14047,7 +14793,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Malayalam",
+      "Bengali",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -14103,7 +14855,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -14134,7 +14890,11 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -14164,7 +14924,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -14190,7 +14952,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14218,7 +14983,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -14245,7 +15016,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14276,7 +15051,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14304,7 +15080,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14333,7 +15114,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14358,7 +15140,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14384,7 +15169,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14410,7 +15200,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14441,13 +15234,15 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 12,
     "episodesCount": 12,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -14496,7 +15291,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14560,7 +15356,10 @@
       "Japanese",
       "Kannada",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -14614,7 +15413,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14642,7 +15445,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14669,7 +15474,9 @@
       "English",
       "Hindi",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14698,7 +15505,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14725,7 +15533,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14754,7 +15565,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14784,7 +15598,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14813,7 +15628,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8,
     "year": 2024,
@@ -14873,7 +15690,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -14901,7 +15721,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14930,7 +15754,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14958,7 +15783,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -14984,7 +15815,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15013,7 +15848,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15038,7 +15876,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15066,7 +15907,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15093,7 +15935,11 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15122,7 +15968,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15149,7 +16001,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15178,7 +16036,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15206,7 +16065,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15237,7 +16099,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15265,13 +16130,16 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 42,
     "episodesCount": 42,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -15293,7 +16161,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15322,7 +16193,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15351,7 +16225,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15383,7 +16260,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15412,7 +16290,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15439,7 +16320,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15468,7 +16352,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15496,7 +16383,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15525,7 +16415,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15555,7 +16448,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15581,7 +16475,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15607,7 +16504,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15635,7 +16536,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15660,7 +16562,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15690,7 +16596,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15719,7 +16626,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam"
     ],
     "rating": 8,
     "year": 2024,
@@ -15749,7 +16661,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15777,7 +16692,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15805,7 +16723,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15835,7 +16756,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15891,7 +16815,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15918,7 +16845,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15945,7 +16875,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -15972,7 +16905,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16000,13 +16937,16 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
-    "episodeCount": 12,
-    "episodesCount": 12,
-    "hasStreams": false,
+    "episodeCount": 14,
+    "episodesCount": 14,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -16028,7 +16968,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16058,7 +17001,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16083,7 +17031,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16107,7 +17059,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16134,13 +17091,17 @@
       "English",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Hindi",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 12,
     "episodesCount": 12,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -16160,7 +17121,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16186,7 +17151,11 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16213,7 +17182,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16238,7 +17210,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16267,7 +17243,10 @@
       "Japanese",
       "Kannada",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -16320,7 +17299,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -17041,7 +18021,9 @@
       "Japanese",
       "Kannada",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -17067,7 +18049,13 @@
     ],
     "audioLanguages": [
       "English",
-      "Hindi"
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Japanese",
+      "Korean",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -17124,7 +18112,14 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Korean",
+      "Kannada",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -17748,7 +18743,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -17776,13 +18772,14 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 12,
     "episodesCount": 12,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -17803,13 +18800,14 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 13,
     "episodesCount": 13,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -17866,7 +18864,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -17895,7 +18894,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -17923,7 +18925,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -17951,7 +18954,9 @@
       "Hindi",
       "Japanese",
       "Malayalam",
-      "Tamil"
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -17978,13 +18983,15 @@
       "English",
       "Hindi",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
     "episodeCount": 12,
     "episodesCount": 12,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "hybrid"
   },
   {
@@ -18033,7 +19040,9 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18056,7 +19065,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18081,7 +19094,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18107,7 +19123,13 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean",
+      "Kannada",
+      "Malayalam",
+      "Bengali"
     ],
     "rating": 8,
     "year": 2024,
@@ -18135,7 +19157,10 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18161,7 +19186,12 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18191,7 +19221,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18216,7 +19247,10 @@
     "audioLanguages": [
       "English",
       "Hindi",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18247,7 +19281,8 @@
       "Hindi",
       "Japanese",
       "Tamil",
-      "Telugu"
+      "Telugu",
+      "Korean"
     ],
     "rating": 8,
     "year": 2024,
@@ -18505,7 +19540,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2026,
@@ -18666,7 +19705,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2018,
@@ -18758,7 +19801,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2026,
@@ -19124,7 +20171,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2014,
@@ -19192,7 +20243,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2024,
@@ -19375,7 +20430,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2025,
@@ -19740,7 +20799,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2007,
@@ -19763,7 +20826,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2020,
@@ -21185,7 +22252,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2021,
@@ -21851,12 +22922,16 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2020,
-    "episodeCount": 13,
-    "episodesCount": 13,
+    "episodeCount": 24,
+    "episodesCount": 24,
     "hasStreams": true,
     "source": "toon-stream"
   },
@@ -21943,7 +23018,13 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2020,
@@ -22242,7 +23323,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2023,
@@ -22747,7 +23832,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2022,
@@ -23046,7 +24135,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2022,
@@ -23069,7 +24162,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.2,
     "year": 2022,
@@ -23092,12 +24189,17 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean",
+      "Malayalam"
     ],
     "rating": 8.3,
     "year": 1996,
-    "episodeCount": 23,
-    "episodesCount": 23,
+    "episodeCount": 64,
+    "episodesCount": 64,
     "hasStreams": true,
     "source": "toon-stream"
   },
@@ -23321,7 +24423,12 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 1999,
@@ -23436,12 +24543,17 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2012,
-    "episodeCount": 12,
-    "episodesCount": 12,
+    "episodeCount": 25,
+    "episodesCount": 25,
     "hasStreams": true,
     "source": "toon-stream"
   },
@@ -23597,7 +24709,13 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean",
+      "Kannada",
+      "Bengali"
     ],
     "rating": 8.3,
     "year": 2004,
@@ -23689,7 +24807,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2021,
@@ -24171,7 +25293,13 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2012,
@@ -24240,7 +25368,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2012,
@@ -24608,7 +25740,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2012,
@@ -24630,7 +25766,12 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean",
+      "Kannada"
     ],
     "rating": 8.3,
     "year": 2022,
@@ -24744,7 +25885,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2004,
@@ -25318,7 +26463,12 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2021,
@@ -25410,7 +26560,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2023,
@@ -25456,7 +26610,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2022,
@@ -25684,7 +26842,13 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2023,
@@ -25844,7 +27008,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2023,
@@ -25913,7 +27081,11 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 8.3,
     "year": 2023,
@@ -29668,7 +30840,10 @@
       "Hindi",
       "Urdu",
       "English",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 8.034,
     "year": 2024,
@@ -32702,7 +33877,10 @@
       "Hindi",
       "Urdu",
       "English",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 7.5,
     "year": 2024,
@@ -32839,7 +34017,12 @@
       "Hindi",
       "Urdu",
       "English",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Bengali",
+      "Korean"
     ],
     "rating": 6.7,
     "year": 2024,
@@ -32907,7 +34090,10 @@
       "Hindi",
       "Urdu",
       "English",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Korean"
     ],
     "rating": 7.293,
     "year": 2024,
@@ -34532,13 +35718,17 @@
       "Hindi",
       "Urdu",
       "English",
-      "Japanese"
+      "Japanese",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Korean"
     ],
     "rating": 7.5,
     "year": 2024,
     "episodeCount": 8,
     "episodesCount": 8,
-    "hasStreams": false,
+    "hasStreams": true,
     "source": "toonstream"
   },
   {
@@ -35677,7 +36867,12 @@
     ],
     "audioLanguages": [
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
     ],
     "rating": 6.9,
     "year": 2024,
@@ -36977,5 +38172,1674 @@
     "episodesCount": 1,
     "hasStreams": true,
     "source": "animesalt"
+  },
+  {
+    "id": "haz-trapped-in-a-dating-sim-season-2-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Trapped in a Dating Sim Season 2 Multi Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "trapped-in-a-dating-sim-season-2-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/qF1Vc2FX/web-optimized-1785175537-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/qF1Vc2FX/web-optimized-1785175537-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 8,
+    "episodesCount": 8,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-a-galaxy-next-door-season-1-bluray-english-japanese-480p-720p-1080p-hd",
+    "title": "A Galaxy Next Door Season 1 Bluray English-Japanese 480p, 720p & 1080p HD",
+    "slug": "a-galaxy-next-door-season-1-bluray-english-japanese-480p-720p-1080p-hd",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/QF8YM0XC/web-optimized-1788872630-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/QF8YM0XC/web-optimized-1788872630-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-shiki-2010-season-1-bluray-english-japanese-480p-720p-1080p-hd",
+    "title": "Shiki Season 1 Bluray English-Japanese 480p, 720p & 1080p HD",
+    "slug": "shiki-2010-season-1-bluray-english-japanese-480p-720p-1080p-hd",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/RpYNSH4n/web-optimized-1788520079-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/RpYNSH4n/web-optimized-1788520079-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 24,
+    "episodesCount": 24,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-hensuki-season-1-english-japanese-480p-720p-1080p-hd",
+    "title": "Hensuki Season 1 English-Japanese 480p, 720p & 1080p HD",
+    "slug": "hensuki-season-1-english-japanese-480p-720p-1080p-hd",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/twhWHZJ9/web-optimized-1788477249-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/twhWHZJ9/web-optimized-1788477249-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-code-geass-lelouch-of-the-re-surrection-2019-movie-english-japanese-480p-720p-1080p-hd-bluray",
+    "title": "Code Geass: Lelouch of the Re;surrection Movie 480p, 720p & 1080p HD Bluray",
+    "slug": "code-geass-lelouch-of-the-re-surrection-2019-movie-english-japanese-480p-720p-1080p-hd-bluray",
+    "type": "movie",
+    "poster": "https://i0.wp.com/i.ibb.co/LXgf9qd0/web-optimized-1788433162-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/LXgf9qd0/web-optimized-1788433162-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-though-i-am-an-inept-villainess-season-1-episodes-english-jpn-480p-720p-1080p-hd",
+    "title": "Though I Am an Inept Villainess Season 1 Episodes 480p, 720p & 1080p HD",
+    "slug": "though-i-am-an-inept-villainess-season-1-episodes-english-jpn-480p-720p-1080p-hd",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/8nj7sTLS/web-optimized-1788389026-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/8nj7sTLS/web-optimized-1788389026-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 6,
+    "episodesCount": 6,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-kaiju-girl-caramelise-season-1-dual-audio-english-japanese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Kaiju Girl Caramelise Season 1 Dual Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "kaiju-girl-caramelise-season-1-dual-audio-english-japanese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/B5x3M2hG/web-optimized-1786288930-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/B5x3M2hG/web-optimized-1786288930-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 7,
+    "episodesCount": 7,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-a-mortals-journey-2020-season-1-dual-audio-hindi-chinese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "A Mortal's Journey Season 1 Dual Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "a-mortals-journey-2020-season-1-dual-audio-hindi-chinese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/QjCvxJj0/web-optimized-1785990348-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/QjCvxJj0/web-optimized-1785990348-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 21,
+    "episodesCount": 21,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-arifureta-season-3-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Arifureta Season 3 Multi Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "arifureta-season-3-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/nNpW54Jn/web-optimized-1779731028-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/nNpW54Jn/web-optimized-1779731028-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 16,
+    "episodesCount": 16,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-marriagetoxin-season-1-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Marriagetoxin Season 1 Multi Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "marriagetoxin-season-1-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/gLKK4cB6/web-optimized-1777388215-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/gLKK4cB6/web-optimized-1777388215-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-and-you-thought-there-is-never-a-girl-online-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "And You Thought There Is Never a Girl Online? Season 1 Bluray Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "and-you-thought-there-is-never-a-girl-online-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/C5GK2n0h/web-optimized-1783603906-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/C5GK2n0h/web-optimized-1783603906-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-wonder-egg-priority-season-1-bluray-dual-audio-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Wonder Egg Priority Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "wonder-egg-priority-season-1-bluray-dual-audio-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/Qj8865YD/web-optimized-1782489458-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/Qj8865YD/web-optimized-1782489458-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-elfen-lied-season-1-bluray-dual-audio-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Elfen Lied Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "elfen-lied-season-1-bluray-dual-audio-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/5gdydky7/web-optimized-1782404004-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/5gdydky7/web-optimized-1782404004-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 14,
+    "episodesCount": 14,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-higehiro-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Higehiro Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "higehiro-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/W4Q3W9hx/web-optimized-1781286927-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/W4Q3W9hx/web-optimized-1781286927-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-arifureta-season-1-bluray-hindi-tamil-telugu-eng-jap-multi-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Arifureta Season 1 BluRay Multi Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "arifureta-season-1-bluray-hindi-tamil-telugu-eng-jap-multi-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/cSSzQHTd/web-optimized-1779636327-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/cSSzQHTd/web-optimized-1779636327-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-arifureta-season-2-bluray-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Arifureta Season 2 BluRay Multi Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "arifureta-season-2-bluray-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/Xf7JvF1w/web-optimized-1779604933-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/Xf7JvF1w/web-optimized-1779604933-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-my-first-girlfriend-is-a-gal-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub-uncensored",
+    "title": "My First Girlfriend Is a Gal Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "my-first-girlfriend-is-a-gal-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub-uncensored",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/HD08ZHqL/web-optimized-1779253161-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/HD08ZHqL/web-optimized-1779253161-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 11,
+    "episodesCount": 11,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-trigun-stargaze-season-2-hindi-tamil-telugu-english-dub-download-480p-720p-1080p-hd-web-dl",
+    "title": "Trigun Stargaze Season 2 Hindi , Tamil, Telugu, English Dub Download – 480p, 720p & 1080p HD WEB-DL",
+    "slug": "trigun-stargaze-season-2-hindi-tamil-telugu-english-dub-download-480p-720p-1080p-hd-web-dl",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/DPv27CwJ/web-optimized-1769868070-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/DPv27CwJ/web-optimized-1769868070-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-rooster-fighter-season-1-dual-audio-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Rooster Fighter Season 1 Dual Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "rooster-fighter-season-1-dual-audio-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/39ccHr69/web-optimized-1774795781-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/39ccHr69/web-optimized-1774795781-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 3,
+    "episodesCount": 3,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-hero-without-a-class-season-1-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Hero Without a Class Season 1 Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "hero-without-a-class-season-1-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/7MzZBs9/web-optimized-1774025709-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/7MzZBs9/web-optimized-1774025709-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-disney-twisted-wonderland-the-animation-season-1-dual-audio-english-japanese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Disney Twisted-Wonderland The Animation Season 1 Dual Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "disney-twisted-wonderland-the-animation-season-1-dual-audio-english-japanese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/spYLQ0B2/web-optimized-1773349784-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/spYLQ0B2/web-optimized-1773349784-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 8,
+    "episodesCount": 8,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-miss-caretaker-of-sunohara-sou-season-1-dual-audio-eng-jpn-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Miss Caretaker of Sunohara-sou Season 1 Dual Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "miss-caretaker-of-sunohara-sou-season-1-dual-audio-eng-jpn-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/d4c6b52r/web-optimized-1772656288-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/d4c6b52r/web-optimized-1772656288-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-code-geass-season-2-dual-audio-english-japanese-480p-720p-1080p-hevc-x265-10bit-esub",
+    "title": "Code Geass Season 2 Dual Audio 480p | 720p | 1080p HEVC x265 10bit Esub",
+    "slug": "code-geass-season-2-dual-audio-english-japanese-480p-720p-1080p-hevc-x265-10bit-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/jvzdR12M/web-optimized-1772555677-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/jvzdR12M/web-optimized-1772555677-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 25,
+    "episodesCount": 25,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-engage-kiss-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Engage Kiss Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "engage-kiss-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/xKpmsCWh/web-optimized-1772118350-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/xKpmsCWh/web-optimized-1772118350-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-call-of-the-night-season-1-2-bluray-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Call of the Night Season 1 & 2 Bluray 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "call-of-the-night-season-1-2-bluray-eng-jap-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/j9TXPspG/web-optimized-1772286157-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/j9TXPspG/web-optimized-1772286157-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 25,
+    "episodesCount": 25,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-mysterious-girlfriend-x-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Mysterious Girlfriend X Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "mysterious-girlfriend-x-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/VcKthj5k/web-optimized-1771840834-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/VcKthj5k/web-optimized-1771840834-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 14,
+    "episodesCount": 14,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-prison-school-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Prison School Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "prison-school-season-1-bluray-eng-jap-dual-audio-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/tP2fBrZ5/web-optimized-1771596314-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/tP2fBrZ5/web-optimized-1771596314-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-mieruko-chan-season-1-dual-audio-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "title": "Mieruko-chan Season 1 Dual Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "mieruko-chan-season-1-dual-audio-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/nTmQwyn/web-optimized-1771148338-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/nTmQwyn/web-optimized-1771148338-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-yandere-dark-elf-season-1-dual-audio-english-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub-uncensored",
+    "title": "Yandere Dark Elf Season 1 Dual Audio 480p, 720p & 1080p HD WEB-DL | 10bit HEVC ESub",
+    "slug": "yandere-dark-elf-season-1-dual-audio-english-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub-uncensored",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/GfSZt3dY/web-optimized-1770623815-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/GfSZt3dY/web-optimized-1770623815-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-fate-stay-night-heavens-feel-trilogy-all-3-movies-bluray-dual-audio-english-japanese-480p-720p-1080p-hd-10bit-hevc-esubs",
+    "title": "Fate/stay night: Heaven's Feel Trilogy BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESubs",
+    "slug": "fate-stay-night-heavens-feel-trilogy-all-3-movies-bluray-dual-audio-english-japanese-480p-720p-1080p-hd-10bit-hevc-esubs",
+    "type": "movie",
+    "poster": "https://i0.wp.com/i.ibb.co/DH101LWf/web-optimized-1770364684-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/DH101LWf/web-optimized-1770364684-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-fate-zero-2011-season-12-bluray-dual-audio-english-japanese-480p-720p-1080p-hd-10bit-hevc-esubs",
+    "title": "Fate/Zero Season 1&2 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESubs",
+    "slug": "fate-zero-2011-season-12-bluray-dual-audio-english-japanese-480p-720p-1080p-hd-10bit-hevc-esubs",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/Wj9mych/web-optimized-1770362170-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/Wj9mych/web-optimized-1770362170-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 25,
+    "episodesCount": 25,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-yosuga-no-sora-season-1-english-subbed-480p-720p-1080p-web-dl-10bit-hevc-jpn-audio-esub",
+    "title": "Yosuga no Sora Season 1 English Subbed 10bit HEVC | JPN Audio | ESub",
+    "slug": "yosuga-no-sora-season-1-english-subbed-480p-720p-1080p-web-dl-10bit-hevc-jpn-audio-esub",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/LhZx6yjt/web-optimized-1770312126-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/LhZx6yjt/web-optimized-1770312126-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-dark-gathering-season-1-bluray-hindi-fan-audio-english-japanese-dubbed",
+    "title": "Dark Gathering Season 1 Bluray English-Japanese Dubbed",
+    "slug": "dark-gathering-season-1-bluray-hindi-fan-audio-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/VYMsYqYN/29db8562a932c5020f1848e1c6636eeca2466a3d74f5cb8111e1534e8858c287.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/VYMsYqYN/29db8562a932c5020f1848e1c6636eeca2466a3d74f5cb8111e1534e8858c287.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 25,
+    "episodesCount": 25,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-the-future-diary-season-1-bluray-dual-audio-english-japanese-480p-720p-1080p-hd-10bit-hevc-esubs",
+    "title": "The Future Diary Season 1 BluRay Dual Audio 480p, 720p & 1080p HD | 10bit HEVC ESubs",
+    "slug": "the-future-diary-season-1-bluray-dual-audio-english-japanese-480p-720p-1080p-hd-10bit-hevc-esubs",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/8Dvrd475/web-optimized-1769965689-webp.webp",
+    "backdrop": "https://i0.wp.com/i.ibb.co/8Dvrd475/web-optimized-1769965689-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 27,
+    "episodesCount": 27,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-blue-spring-ride-season-1-hindiunofficial-jap-dubbed",
+    "title": "Blue Spring Ride Season 1 Hindi-Jap Dubbed",
+    "slug": "blue-spring-ride-season-1-hindiunofficial-jap-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/FLSLgQG8/Blue-Spring-Ride-Season-1-Hindi-unofficial-Jap-Dubbed.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/FLSLgQG8/Blue-Spring-Ride-Season-1-Hindi-unofficial-Jap-Dubbed.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-vermeil-in-gold-season-1-bluray-english-japanese-dubbed",
+    "title": "Vermeil in Gold Season 1 Bluray English-Japanese Dubbed",
+    "slug": "vermeil-in-gold-season-1-bluray-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/9kDvYhMh/62183d8e9457b31f27334ebbd9881ee295215432b93daafbab54a633e765d67e.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/9kDvYhMh/62183d8e9457b31f27334ebbd9881ee295215432b93daafbab54a633e765d67e.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-please-teacher-season-1-bluray-english-jap-dubbed",
+    "title": "Please Teacher! Season 1 Bluray English-Jap Dubbed",
+    "slug": "please-teacher-season-1-bluray-english-jap-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/8D4mjwtH/8150ead275e6d1e74bef75c645a04cea.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/8D4mjwtH/8150ead275e6d1e74bef75c645a04cea.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-cosmic-princess-kaguya-2026-movie-english-japanese-dubbed",
+    "title": "Cosmic Princess Kaguya! Movie English-Japanese Dubbed",
+    "slug": "cosmic-princess-kaguya-2026-movie-english-japanese-dubbed",
+    "type": "movie",
+    "poster": "https://i0.wp.com/i.ibb.co/MDR2MJ9S/cosmin.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/MDR2MJ9S/cosmin.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-taisho-era-contract-marriage-season-1-hindi-tamil-telugu-kannada-jap-dubbed-uncensored",
+    "title": "Taisho Era Contract Marriage Season 1 Hindi-Tamil-Telugu-Kannada-Jap Dubbed",
+    "slug": "taisho-era-contract-marriage-season-1-hindi-tamil-telugu-kannada-jap-dubbed-uncensored",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/HDqc7xQY/06f3913e904aca66d5ec92c36b9b2d7cdb921625696bb9b58b9720f9aaf370e0.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/HDqc7xQY/06f3913e904aca66d5ec92c36b9b2d7cdb921625696bb9b58b9720f9aaf370e0.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 16,
+    "episodesCount": 16,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-theatre-of-darkness-yamishibai-season-1-hindi-japanese-dubbed",
+    "title": "Theatre of Darkness Season 1 Hindi-Japanese Dubbed",
+    "slug": "theatre-of-darkness-yamishibai-season-1-hindi-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/JWvCVYLn/23bcaec5b4977a0fed1f611bdfb4273069f4baae8e8bb583a41fa9793a80cea1.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/JWvCVYLn/23bcaec5b4977a0fed1f611bdfb4273069f4baae8e8bb583a41fa9793a80cea1.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-devilman-crybaby-season-1-bluray-english-japanese-dubbed",
+    "title": "Devilman Crybaby Season 1 Bluray English-Japanese Dubbed",
+    "slug": "devilman-crybaby-season-1-bluray-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/QjrZPFR7/8-Xqkgwnriw82bqr-Ylwmt5-F9-Kryx.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/QjrZPFR7/8-Xqkgwnriw82bqr-Ylwmt5-F9-Kryx.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 10,
+    "episodesCount": 10,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-the-fragrant-flower-blooms-with-dignity-season-1-english-japanese-dubbed",
+    "title": "The Fragrant Flower Blooms with Dignity Season 1 English-Japanese Dubbed",
+    "slug": "the-fragrant-flower-blooms-with-dignity-season-1-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/Kx7LvhPJ/photo-2026-01-19-13-22-03.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/Kx7LvhPJ/photo-2026-01-19-13-22-03.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-suraj-the-rising-star-season-1-hindi-dubbed",
+    "title": "Suraj: The Rising Star Season 1 Hindi Dubbed",
+    "slug": "suraj-the-rising-star-season-1-hindi-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/kgDVCxNB/f0b7f009bbebcfd1e265f92af200568b09d72865e5523af25c4ac67fea89a58e.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/kgDVCxNB/f0b7f009bbebcfd1e265f92af200568b09d72865e5523af25c4ac67fea89a58e.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 26,
+    "episodesCount": 26,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-hells-paradise-jigokuraku-season-1-english-japanese-dubbed",
+    "title": "Hell's Paradise: Jigokuraku Season 1 English-Japanese Dubbed",
+    "slug": "hells-paradise-jigokuraku-season-1-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/xKvny55g/4d79ae401c93ecfef612a5f0bb0928f3.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/xKvny55g/4d79ae401c93ecfef612a5f0bb0928f3.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 13,
+    "episodesCount": 13,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-dororo-season-1-english-japanese-dubbed",
+    "title": "Dororo Season 1 English-Japanese Dubbed",
+    "slug": "dororo-season-1-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/9HfBXGCH/ba700bf2d0206e5556526033823ae2941665430711-main.png",
+    "backdrop": "https://i0.wp.com/i.ibb.co/9HfBXGCH/ba700bf2d0206e5556526033823ae2941665430711-main.png",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 24,
+    "episodesCount": 24,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-chained-soldier-season-1-english-japanese-dubbed",
+    "title": "Chained Soldier Season 1 English-Japanese Dubbed",
+    "slug": "chained-soldier-season-1-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/84QwmQCG/e84fad02c4e436fc5f608a4a18011f19cc75e9a4ca89b6cf3f764acf1a49bd52.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/84QwmQCG/e84fad02c4e436fc5f608a4a18011f19cc75e9a4ca89b6cf3f764acf1a49bd52.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-ranma-1-2-2024-season-2-hindi-english-japanese-dubbed",
+    "title": "Ranma 1/2 Season 2 Hindi-English-Japanese Dubbed",
+    "slug": "ranma-1-2-2024-season-2-hindi-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/LXsr2VMd/season-2.png",
+    "backdrop": "https://i0.wp.com/i.ibb.co/LXsr2VMd/season-2.png",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-children-who-chase-lost-voices-2011-movie-english-japanese-dubbed",
+    "title": "Children Who Chase Lost Voices Movie English-Japanese Dubbed",
+    "slug": "children-who-chase-lost-voices-2011-movie-english-japanese-dubbed",
+    "type": "movie",
+    "poster": "https://i0.wp.com/i.ibb.co/Wv1CbstW/v-A9-BHb-H6-Ik-Sx-E7z-ZUFd5w2-Q9-CBu.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/Wv1CbstW/v-A9-BHb-H6-Ik-Sx-E7z-ZUFd5w2-Q9-CBu.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-the-place-promised-in-our-early-days-2004-movie-english-japanese-dubbed",
+    "title": "The Place Promised in Our Early Days Movie English-Japanese Dubbed",
+    "slug": "the-place-promised-in-our-early-days-2004-movie-english-japanese-dubbed",
+    "type": "movie",
+    "poster": "https://i0.wp.com/i.ibb.co/1Wq2351/w1-KF1v-T8z-Dbvnc8-Px0-Mqpe42alc.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/1Wq2351/w1-KF1v-T8z-Dbvnc8-Px0-Mqpe42alc.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Bengali",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-witch-watch-season-1-english-japanese-dubbed",
+    "title": "Witch Watch Season 1 English-Japanese Dubbed",
+    "slug": "witch-watch-season-1-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://m.media-amazon.com/images/S/pv-target-images/bd2c0ac273c785e197c8b4a86929a898bb47f62abf6c6a2880b3256bebf2631a.jpg",
+    "backdrop": "https://m.media-amazon.com/images/S/pv-target-images/bd2c0ac273c785e197c8b4a86929a898bb47f62abf6c6a2880b3256bebf2631a.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 25,
+    "episodesCount": 25,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-why-the-hell-are-you-here-teacher-season-1-english-dubbed-uncensored",
+    "title": "Why the Hell Are You Here, Teacher!? Season 1 English Dubbed",
+    "slug": "why-the-hell-are-you-here-teacher-season-1-english-dubbed-uncensored",
+    "type": "series",
+    "poster": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2025/06/Unofficial.png",
+    "backdrop": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2025/06/Unofficial.png",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-summer-pockets-season-1-hindi-subbed",
+    "title": "Summer Pockets Season 1 Hindi Subbed",
+    "slug": "summer-pockets-season-1-hindi-subbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/mrGKjyPx/3943e263379ddcf07696102a61fd39fdb9fea7533ae881fcd0e1d4fe4bfadd9a.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/mrGKjyPx/3943e263379ddcf07696102a61fd39fdb9fea7533ae881fcd0e1d4fe4bfadd9a.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 26,
+    "episodesCount": 26,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-dandadan-season-2-hindi-tamil-telugu-english-jap-dubbed",
+    "title": "Dandadan Season 2 Hindi-Tamil-Telugu-English-Jap Dubbed",
+    "slug": "dandadan-season-2-hindi-tamil-telugu-english-jap-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/v4m3Lcgp/HINDI-TAMIL-TELUGU.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/v4m3Lcgp/HINDI-TAMIL-TELUGU.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-the-water-magician-season-1-english-dubbed",
+    "title": "The Water Magician Season 1 English Dubbed",
+    "slug": "the-water-magician-season-1-english-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/TDtV758f/369c511ca74e9300eefc9a9ac80aef9c0fe1ecf1ccaaa38b1e520658f9060734.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/TDtV758f/369c511ca74e9300eefc9a9ac80aef9c0fe1ecf1ccaaa38b1e520658f9060734.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-ghost-in-the-shell-the-new-movie-2015-bluray-multi-audio-hindi-tamil-telugu-eng-jap-ddp2-0-480p-720p-1080p-hd-10bit-hevc-esub",
+    "title": "Ghost in the Shell: The New Movie BluRay Multi Audio DDP2.0 480p, 720p & 1080p HD | 10bit HEVC ESub",
+    "slug": "ghost-in-the-shell-the-new-movie-2015-bluray-multi-audio-hindi-tamil-telugu-eng-jap-ddp2-0-480p-720p-1080p-hd-10bit-hevc-esub",
+    "type": "movie",
+    "poster": "https://i0.wp.com/i.ibb.co/HLySs5FP/6a599b0431c34a31e6fb48d7c932e736bf816a18d8e5f7e4dd4ffd2e53b3f540.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/HLySs5FP/6a599b0431c34a31e6fb48d7c932e736bf816a18d8e5f7e4dd4ffd2e53b3f540.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-dandadan-season-1-hindi-tamil-telugu-english-jap-dubbed",
+    "title": "Dandadan Season 1 Hindi-Tamil-Telugu-English-Jap Dubbed",
+    "slug": "dandadan-season-1-hindi-tamil-telugu-english-jap-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/zV2qV1m1/dandadan-key-art-wide.png",
+    "backdrop": "https://i0.wp.com/i.ibb.co/zV2qV1m1/dandadan-key-art-wide.png",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-goodbye-dragon-life-season-1-hindi-tamil-telugu-japanese-dubbed",
+    "title": "Goodbye, Dragon Life Season 1 Hindi-Tamil-Telugu-Japanese Dubbed",
+    "slug": "goodbye-dragon-life-season-1-hindi-tamil-telugu-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2026/08/web-optimized-1787483470-webp.webp",
+    "backdrop": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2026/08/web-optimized-1787483470-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-ranma-1-2-2024-season-1-hindi-english-japanese-dubbed",
+    "title": "Ranma 1/2 Season 1 Hindi-English-Japanese Dubbed",
+    "slug": "ranma-1-2-2024-season-1-hindi-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://hindianimeszone.com/wp-content/uploads/2025/06/ranma.avif",
+    "backdrop": "https://hindianimeszone.com/wp-content/uploads/2025/06/ranma.avif",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-alya-sometimes-hides-her-feelings-russian-season-1-in-hindi-tamil-telugu-english-jap-dubbed",
+    "title": "Alya Sometimes Hides Her Feelings Russian Season 1 in Hindi-Tamil-Telugu-English-Jap Dubbed",
+    "slug": "alya-sometimes-hides-her-feelings-russian-season-1-in-hindi-tamil-telugu-english-jap-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2026/08/web-optimized-1787483470-webp.webp",
+    "backdrop": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2026/08/web-optimized-1787483470-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-an-archdemons-dilemma-how-to-love-your-elf-bride-season-1-hindi-tamil-telugu-english-jap-dubbed",
+    "title": "An Archdemon's Dilemma: How to Love Your Elf Bride Season 1 Hindi-Tamil-Telugu-English-Jap Dubbed",
+    "slug": "an-archdemons-dilemma-how-to-love-your-elf-bride-season-1-hindi-tamil-telugu-english-jap-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2026/08/web-optimized-1787483470-webp.webp",
+    "backdrop": "https://i0.wp.com/hindianimeszone.com/wp-content/uploads/2026/08/web-optimized-1787483470-webp.webp",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "hasStreams": true,
+    "source": "hybrid"
+  },
+  {
+    "id": "haz-code-geass-season-1-hindi-english-japanese-dubbed",
+    "title": "Code Geass Season 1 Hindi-English-Japanese Dubbed",
+    "slug": "code-geass-season-1-hindi-english-japanese-dubbed",
+    "type": "series",
+    "poster": "https://i0.wp.com/i.ibb.co/ccH8YJ8g/2665866f77df431d4eda72f26ec921126c016456d5778b196449c95669eefafe.jpg",
+    "backdrop": "https://i0.wp.com/i.ibb.co/ccH8YJ8g/2665866f77df431d4eda72f26ec921126c016456d5778b196449c95669eefafe.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Anime"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Tamil",
+      "Telugu",
+      "English",
+      "Japanese",
+      "Korean"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodeCount": 25,
+    "episodesCount": 25,
+    "hasStreams": true,
+    "source": "hybrid"
   }
 ]
