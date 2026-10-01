@@ -940,9 +940,8 @@ export default function WatchContainer({
                 title={displayName}
                 allowFullScreen
                 loading="eager"
-                onLoad={() => setIsIframeLoaded(true)}
-                referrerPolicy="origin-when-cross-origin"
-                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-forms allow-pointer-lock allow-orientation-lock"
+                referrerPolicy="no-referrer"
+                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-forms allow-pointer-lock allow-orientation-lock allow-popups allow-popups-to-escape-sandbox allow-downloads"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 style={{
                   position: 'absolute',

@@ -101,7 +101,8 @@ export default async function MovieWatchPage(props: PageProps) {
   // Resolve streams with priority:
   // 1. Dedicated ToonStream movie resolver (pre-cached or on-demand fetch)
   // 2. Fallback to general stream source resolution
-  let sources: StreamSource[] = await resolveMovieStreamSources(anime);
+  let sources: StreamSource[] = (await resolveMovieStreamSources(anime))
+    .filter(s => isValidStreamEmbedUrl(s.url));
 
   if (sources.length === 0) {
     const saltSlug = anime.saltSlug || anime.slug;

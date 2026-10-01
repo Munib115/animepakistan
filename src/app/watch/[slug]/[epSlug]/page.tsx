@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
 import { redirect } from 'next/navigation';
 import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
-import { resolveStreamSources } from '@/lib/resolver-server';
+import { resolveStreamSources, getMirrorPriority } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
 
 interface PageProps {
@@ -100,11 +100,7 @@ export default async function EpisodeWatchPage(props: PageProps) {
   if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
     const valid = (episode as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
     if (valid.length > 0) {
-      sources = valid.sort((a: any, b: any) => {
-        const aIsSalt = a.label?.includes('AnimeSalt') ? 1 : -1;
-        const bIsSalt = b.label?.includes('AnimeSalt') ? 1 : -1;
-        return aIsSalt - bIsSalt;
-      });
+      sources = valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
     }
   }
 

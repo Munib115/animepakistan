@@ -23,11 +23,12 @@
     "scrape:haz": "node scripts/scrape_haz_master.js",
     "fetch:haz": "node scripts/scrape_haz_master.js",
     "streams:haz": "node scripts/resolve_all_haz_streams.js",
-    "fetch:all": "node scripts/scrape_haz_master.js && node scripts/resolve_all_haz_streams.js && node scripts/scrape_animesalt_master.js && node scripts/scrape_all_salt_streams.js",
-    "streams:ensure-all": "node scripts/scrape_all_salt_streams.js",
+    "streams:clean": "node scripts/clean_and_prioritize_all_streams.js",
+    "fetch:all": "node scripts/scrape_haz_master.js && node scripts/resolve_all_haz_streams.js && node scripts/clean_and_prioritize_all_streams.js",
+    "streams:ensure-all": "node scripts/clean_and_prioritize_all_streams.js",
     "streams:salt-movies": "node scripts/scrape_all_salt_streams.js --movies",
     "streams:salt-series": "node scripts/scrape_all_salt_streams.js --series",
-    "streams:full-refresh": "node scripts/refresh_toonstream_catalog.js && node scripts/patch_all_toonstream_streams.js"
+    "streams:full-refresh": "node scripts/clean_and_prioritize_all_streams.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

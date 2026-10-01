@@ -210,6 +210,20 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
   }
 }
 
+export function getMirrorPriority(url: string): number {
+  if (!url || typeof url !== 'string') return 99;
+  const l = url.toLowerCase();
+  if (l.includes('abyssplayer.com')) return 1;
+  if (l.includes('p2pplay.online') || l.includes('strp2p.live')) return 2;
+  if (l.includes('cloudy.upns.one')) return 3;
+  if (l.includes('filesforever.link') || l.includes('iqsmartgames.com')) return 4;
+  if (l.includes('vidmoly.net')) return 5;
+  if (l.includes('vidstreaming.xyz')) return 6;
+  if (l.includes('emturbovid.com') || l.includes('turbonewvid.com')) return 7;
+  if (l.includes('strmup.to') || l.includes('strmup.cc')) return 8;
+  return 10;
+}
+
 /**
  * Dedicated movie stream resolver:
  * 1. Checks pre-cached streamSources on anime object
@@ -220,16 +234,11 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
 export async function resolveMovieStreamSources(anime: any): Promise<StreamSource[]> {
   if (!anime) return [];
 
-  // 1. If pre-cached streamSources exists and has active toonstream sources
+  // 1. If pre-cached streamSources exists and has active sources
   if (anime.streamSources && anime.streamSources.length > 0) {
     const valid = anime.streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
-    const hasToon = valid.some((s: any) => s.label?.includes('ToonStream') || !s.label?.includes('AnimeSalt'));
-    if (hasToon) {
-      return valid.sort((a: any, b: any) => {
-        const aIsSalt = a.label?.includes('AnimeSalt') ? 1 : -1;
-        const bIsSalt = b.label?.includes('AnimeSalt') ? 1 : -1;
-        return aIsSalt - bIsSalt;
-      });
+    if (valid.length > 0) {
+      return valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
     }
   }
 
@@ -364,24 +373,9 @@ export async function resolveMovieStreamSources(anime: any): Promise<StreamSourc
           if (isValidStreamEmbedUrl(s) && !streams.includes(s)) streams.push(s);
         });
 
-        // Rank fast reliable mirrors first
-        const priorityOrder = (url: string) => {
-          const l = url.toLowerCase();
-          if (l.includes('filesforever.link')) return 1;
-          if (l.includes('abyssplayer.com')) return 2;
-          if (l.includes('cloudy.upns.one')) return 3;
-          if (l.includes('vidstreaming.xyz')) return 4;
-          if (l.includes('vidmoly.net')) return 5;
-          if (l.includes('emturbovid.com')) return 6;
-          if (l.includes('byselapuix.com')) return 7;
-          if (l.includes('streamsb.net')) return 8;
-          if (l.includes('rubystm.com')) return 9;
-          return 10;
-        };
-
         const active = streams
           .filter(s => isValidStreamEmbedUrl(s))
-          .sort((a, b) => priorityOrder(a) - priorityOrder(b));
+          .sort((a, b) => getMirrorPriority(a) - getMirrorPriority(b));
 
         if (active.length > 0) {
           const resultSources: StreamSource[] = active.map((s, i) => ({
@@ -447,7 +441,9 @@ export async function resolveStreamSources(
         if (foundEp) {
           if ((foundEp as any).streamSources && (foundEp as any).streamSources.length > 0) {
             const valid = (foundEp as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
-            if (valid.length > 0) return valid;
+            if (valid.length > 0) {
+              return valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
+            }
           }
           if ((foundEp as any).toonStreamUrl || (foundEp as any).streamUrl) {
             const streamToParse = (foundEp as any).toonStreamUrl || (foundEp as any).streamUrl;
@@ -515,7 +511,9 @@ export async function resolveStreamSources(
       if (episode) {
         if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
           const valid = (episode as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
-          if (valid.length > 0) return valid;
+          if (valid.length > 0) {
+            return valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
+          }
         }
         if ((episode as any).toonStreamUrl || (episode as any).streamUrl) {
           const streamToParse = (episode as any).toonStreamUrl || (episode as any).streamUrl;

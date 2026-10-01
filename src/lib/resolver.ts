@@ -43,26 +43,32 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
     return false;
   }
 
-  // NEVER embed dead as-cdn top-level player (throws Cloudflare Error 522) or dead streamhide
-  if ((lower.includes('as-cdn') && lower.includes('.top')) || lower.includes('streamhide.')) {
+  // NEVER embed dead as-cdn top-level player (Error 522), dead streamhide, or dead rubystm (Error 522)
+  if (
+    (lower.includes('as-cdn') && lower.includes('.top')) ||
+    lower.includes('streamhide.') ||
+    lower.includes('rubystm.com') ||
+    lower.includes('streamruby.com')
+  ) {
+    return false;
+  }
+
+  // NEVER embed third-party website pages or SAMEORIGIN playonline wrappers inside the video player
+  if (
+    lower.includes('playonline.php') ||
+    lower.includes('hindianimeszone.com') ||
+    lower.includes('animesalt.cx/episode') ||
+    lower.includes('animesalt.cx/series') ||
+    lower.includes('animesalt.cx/movies') ||
+    lower.includes('animesalt.cx/tv') ||
+    (lower.includes('animesalt.cx') && !lower.includes('player') && !lower.includes('plyr'))
+  ) {
     return false;
   }
 
   // ALLOW AnimeSalt multi-language player clone
   if (lower.includes('multi-lang-plyr') || lower.includes('as-cdn/clone/')) {
     return true;
-  }
-
-  // NEVER embed third-party website pages inside the video player
-  if (
-    lower.includes('animesalt.cx/episode') ||
-    lower.includes('animesalt.cx/series') ||
-    lower.includes('animesalt.cx/movies') ||
-    lower.includes('animesalt.cx/tv') ||
-    (lower.includes('animesalt.cx') && !lower.includes('player') && !lower.includes('plyr')) ||
-    (lower.includes('hindianimeszone.com') && !lower.includes('playonline.php') && !lower.includes('player'))
-  ) {
-    return false;
   }
 
   // Block ad/tracking/garbage URLs
