@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import WatchContainer from '@/components/WatchContainer';
 import { redirect } from 'next/navigation';
-import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from '@/lib/resolver';
+import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl, unpackAnimeSaltDataUrl } from '@/lib/resolver';
 import { resolveStreamSources, getMirrorPriority } from '@/lib/resolver-server';
 import { getAnimeDb } from '@/lib/db';
 
@@ -98,9 +98,22 @@ export default async function EpisodeWatchPage(props: PageProps) {
 
   // 1. Instant check for pre-cached streamSources on episode (filtering out dead as-cdn.top links)
   if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
-    const valid = (episode as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
-    if (valid.length > 0) {
-      sources = valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
+    let unpackedSources: StreamSource[] = [];
+    for (const s of (episode as any).streamSources) {
+      if (s.url && s.url.includes('data=') && (s.url.includes('plyr') || s.url.includes('player') || s.url.includes('animesalt'))) {
+        const unpacked = unpackAnimeSaltDataUrl(s.url);
+        if (unpacked.length > 0) {
+          unpackedSources.push(...unpacked);
+          continue;
+        }
+      }
+      const sanitized = sanitizeStreamUrl(s.url);
+      if (isValidStreamEmbedUrl(sanitized)) {
+        unpackedSources.push({ ...s, url: sanitized });
+      }
+    }
+    if (unpackedSources.length > 0) {
+      sources = unpackedSources.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
     }
   }
 

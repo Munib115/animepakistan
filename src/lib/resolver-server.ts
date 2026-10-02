@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl } from './resolver';
+import { StreamSource, sanitizeStreamUrl, isValidStreamEmbedUrl, unpackAnimeSaltDataUrl } from './resolver';
 import { getAnimeDb } from './db';
 
 // In-Memory Stream Cache (24 Hour TTL for ultra-fast instant playback on return visits)
@@ -135,26 +135,9 @@ function parseStreamUrlToSources(streamUrl: string): StreamSource[] {
     return [{ label: 'HAZ (Hindi)', url: sanitizeStreamUrl(streamUrl), isMultiAudio: true }];
   }
 
-  if (streamUrl.includes('multi-lang-plyr') && streamUrl.includes('data=')) {
-    try {
-      const urlObj = new URL(streamUrl);
-      const dataParam = urlObj.searchParams.get('data');
-      if (dataParam) {
-        const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
-        const parsed = JSON.parse(decodedStr);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          const valid = parsed
-            .filter((item: any) => item.link && isValidStreamEmbedUrl(item.link))
-            .map((item: any) => ({
-              label: `AnimeSalt (${item.language || 'HD'})`,
-              url: sanitizeStreamUrl(item.link),
-              isMultiAudio: false,
-            }));
-          if (valid.length > 0) return valid;
-        }
-      }
-    } catch (e) {}
-    // If multi-lang-plyr only had dead links, do NOT return it!
+  if (streamUrl.includes('data=') && (streamUrl.includes('plyr') || streamUrl.includes('player') || streamUrl.includes('animesalt'))) {
+    const unpacked = unpackAnimeSaltDataUrl(streamUrl);
+    if (unpacked.length > 0) return unpacked;
     return [];
   }
 
@@ -219,8 +202,9 @@ export function getMirrorPriority(url: string): number {
   if (l.includes('filesforever.link') || l.includes('iqsmartgames.com')) return 4;
   if (l.includes('vidmoly.net')) return 5;
   if (l.includes('vidstreaming.xyz')) return 6;
-  if (l.includes('emturbovid.com') || l.includes('turbonewvid.com')) return 7;
+  if (l.includes('turbonewvid.com')) return 7;
   if (l.includes('strmup.to') || l.includes('strmup.cc')) return 8;
+  if (l.includes('vexal.top')) return 15;
   return 10;
 }
 
@@ -236,9 +220,22 @@ export async function resolveMovieStreamSources(anime: any): Promise<StreamSourc
 
   // 1. If pre-cached streamSources exists and has active sources
   if (anime.streamSources && anime.streamSources.length > 0) {
-    const valid = anime.streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
-    if (valid.length > 0) {
-      return valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
+    let unpackedSources: StreamSource[] = [];
+    for (const s of anime.streamSources) {
+      if (s.url && s.url.includes('data=') && (s.url.includes('plyr') || s.url.includes('player') || s.url.includes('animesalt'))) {
+        const unpacked = unpackAnimeSaltDataUrl(s.url);
+        if (unpacked.length > 0) {
+          unpackedSources.push(...unpacked);
+          continue;
+        }
+      }
+      const sanitized = sanitizeStreamUrl(s.url);
+      if (isValidStreamEmbedUrl(sanitized)) {
+        unpackedSources.push({ ...s, url: sanitized });
+      }
+    }
+    if (unpackedSources.length > 0) {
+      return unpackedSources.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
     }
   }
 
@@ -395,10 +392,15 @@ export async function resolveMovieStreamSources(anime: any): Promise<StreamSourc
   // 5. Fallback if AnimeSalt had a stream and nothing else was found
   if (anime.saltStreamUrl || anime.streamUrl) {
     const saltUrl = anime.saltStreamUrl || anime.streamUrl;
-    if (isValidStreamEmbedUrl(saltUrl)) {
+    if (saltUrl.includes('data=')) {
+      const unpacked = unpackAnimeSaltDataUrl(saltUrl);
+      if (unpacked.length > 0) return unpacked;
+    }
+    const sanitized = sanitizeStreamUrl(saltUrl);
+    if (isValidStreamEmbedUrl(sanitized)) {
       return [{
         label: 'AnimeSalt (Backup)',
-        url: sanitizeStreamUrl(saltUrl),
+        url: sanitized,
         isMultiAudio: true,
       }];
     }
@@ -440,9 +442,22 @@ export async function resolveStreamSources(
         );
         if (foundEp) {
           if ((foundEp as any).streamSources && (foundEp as any).streamSources.length > 0) {
-            const valid = (foundEp as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
-            if (valid.length > 0) {
-              return valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
+            let unpackedSources: StreamSource[] = [];
+            for (const s of (foundEp as any).streamSources) {
+              if (s.url && s.url.includes('data=') && (s.url.includes('plyr') || s.url.includes('player') || s.url.includes('animesalt'))) {
+                const unpacked = unpackAnimeSaltDataUrl(s.url);
+                if (unpacked.length > 0) {
+                  unpackedSources.push(...unpacked);
+                  continue;
+                }
+              }
+              const sanitized = sanitizeStreamUrl(s.url);
+              if (isValidStreamEmbedUrl(sanitized)) {
+                unpackedSources.push({ ...s, url: sanitized });
+              }
+            }
+            if (unpackedSources.length > 0) {
+              return unpackedSources.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
             }
           }
           if ((foundEp as any).toonStreamUrl || (foundEp as any).streamUrl) {
@@ -510,9 +525,22 @@ export async function resolveStreamSources(
 
       if (episode) {
         if ((episode as any).streamSources && (episode as any).streamSources.length > 0) {
-          const valid = (episode as any).streamSources.filter((s: any) => isValidStreamEmbedUrl(s.url));
-          if (valid.length > 0) {
-            return valid.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
+          let unpackedSources: StreamSource[] = [];
+          for (const s of (episode as any).streamSources) {
+            if (s.url && s.url.includes('data=') && (s.url.includes('plyr') || s.url.includes('player') || s.url.includes('animesalt'))) {
+              const unpacked = unpackAnimeSaltDataUrl(s.url);
+              if (unpacked.length > 0) {
+                unpackedSources.push(...unpacked);
+                continue;
+              }
+            }
+            const sanitized = sanitizeStreamUrl(s.url);
+            if (isValidStreamEmbedUrl(sanitized)) {
+              unpackedSources.push({ ...s, url: sanitized });
+            }
+          }
+          if (unpackedSources.length > 0) {
+            return unpackedSources.sort((a: any, b: any) => getMirrorPriority(a.url) - getMirrorPriority(b.url));
           }
         }
         if ((episode as any).toonStreamUrl || (episode as any).streamUrl) {
@@ -576,31 +604,20 @@ export async function resolveStreamSources(
 
       // Parse all iframes on the page
       $('iframe').each((_, el) => {
-        const rawSrc = $(el).attr('src') || $(el).attr('data-src') || '';
+        const rawSrc = $(el).attr('data-src') || $(el).attr('src') || '';
         if (rawSrc) {
           let fullSrc = rawSrc.startsWith('//') ? 'https:' + rawSrc : rawSrc;
+          fullSrc = sanitizeStreamUrl(fullSrc);
           
-          if (fullSrc.includes('multi-lang-plyr') && fullSrc.includes('data=')) {
+          if (fullSrc.includes('data=') && (fullSrc.includes('plyr') || fullSrc.includes('player') || fullSrc.includes('animesalt'))) {
             try {
-              const urlObj = new URL(fullSrc);
-              const dataParam = urlObj.searchParams.get('data');
-              if (dataParam) {
-                const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
-                const parsed = JSON.parse(decodedStr);
-                if (Array.isArray(parsed)) {
-                  for (const item of parsed) {
-                    if (item.link && isValidStreamEmbedUrl(item.link)) {
-                      sources.push({
-                        label: `AnimeSalt (${item.language || 'HD'})`,
-                        url: sanitizeStreamUrl(item.link),
-                        isMultiAudio: false
-                      });
-                    }
-                  }
-                }
+              const unpacked = unpackAnimeSaltDataUrl(fullSrc);
+              if (unpacked.length > 0) {
+                sources.push(...unpacked);
+                return;
               }
             } catch (e) {
-              console.error('Failed to parse multi-lang player data:', e);
+              console.error('Failed to parse AnimeSalt player data:', e);
             }
           } else if (!isBadUrl(fullSrc)) {
             let label = serverLabels[sources.length] || `Server ${sources.length + 1}`;
@@ -611,7 +628,7 @@ export async function resolveStreamSources(
             }
             sources.push({
               label,
-              url: sanitizeStreamUrl(fullSrc),
+              url: fullSrc,
               isMultiAudio: true
             });
           }

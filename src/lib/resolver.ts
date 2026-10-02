@@ -5,14 +5,21 @@ export interface StreamSource {
   directApiStream?: string;
 }
 
-/** Normalize any legacy CDN or protocol issues */
+/** Normalize any legacy CDN or protocol issues and convert legacy shorteners to direct players */
 export function sanitizeStreamUrl(url: string): string {
-  if (!url) return '';
-  return url
+  if (!url || typeof url !== 'string') return '';
+  let clean = url
     .replace(/^http:\/\//i, 'https://')
     .replace(/as-cdn2[0-5]\.top/gi, 'as-cdn26.top')
     .replace(/animesalt\.(link|me)/gi, 'animesalt.cx')
     .trim();
+
+  // Convert legacy short.icu links directly into working abyssplayer embeds
+  if (clean.includes('short.icu/')) {
+    clean = clean.replace(/https?:\/\/short\.icu\/([a-zA-Z0-9_\-]+)/gi, 'https://player.abyssplayer.com/$1');
+  }
+
+  return clean;
 }
 
 /** Decode HTML entities like &quot; &#39; &amp; */
@@ -27,11 +34,53 @@ export function decodeHtmlEntities(str: string): string {
     .replace(/\\"/g, '"');
 }
 
+/** Unpack AnimeSalt plyr / multi-lang player base64 data parameter into individual clean language streams */
+export function unpackAnimeSaltDataUrl(url: string): StreamSource[] {
+  if (!url || typeof url !== 'string') return [];
+  if (!url.includes('data=') || (!url.includes('plyr') && !url.includes('player') && !url.includes('animesalt'))) {
+    return [];
+  }
+  try {
+    const urlObj = new URL(url);
+    const dataParam = urlObj.searchParams.get('data');
+    if (!dataParam) return [];
+    const decodedStr = Buffer.from(dataParam, 'base64').toString('utf8');
+    const parsed = JSON.parse(decodedStr);
+    if (!Array.isArray(parsed) || parsed.length === 0) return [];
+
+    const results: StreamSource[] = [];
+    for (const item of parsed) {
+      if (!item || !item.link) continue;
+      const clean = sanitizeStreamUrl(item.link);
+      if (clean && isValidStreamEmbedUrl(clean)) {
+        results.push({
+          label: `Abyss (${item.language || 'HD'})`,
+          url: clean,
+          isMultiAudio: true,
+        });
+      }
+    }
+    return results;
+  } catch (e) {
+    return [];
+  }
+}
+
 /** Check if a URL is a legitimate video player embed and NOT a full website webpage or dead shortener */
 export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
   if (!url || typeof url !== 'string') return false;
   const lower = url.toLowerCase().trim();
   if (!lower.startsWith('http://') && !lower.startsWith('https://')) return false;
+
+  // Reject malformed host strings from legacy regex scrapers
+  if (
+    lower.includes('://sd.') ||
+    lower.includes('://hd.') ||
+    lower.includes('blakiteapi1xyz') ||
+    lower.includes('sd,gdmirrorbot')
+  ) {
+    return false;
+  }
 
   // NEVER embed dead shorteners or broken shortener proxies
   if (
@@ -43,12 +92,28 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
     return false;
   }
 
-  // NEVER embed dead as-cdn top-level player (Error 522), dead streamhide, or dead rubystm (Error 522)
+  // NEVER embed dead hosts verified to return Error 522, ENOTFOUND, or 404
   if (
-    (lower.includes('as-cdn') && lower.includes('.top')) ||
-    lower.includes('streamhide.') ||
+    lower.includes('raretoonsindia.co') ||
+    lower.includes('emturbovid.com') ||
+    lower.includes('emturbovid.dev') ||
     lower.includes('rubystm.com') ||
-    lower.includes('streamruby.com')
+    lower.includes('stmruby.com') ||
+    lower.includes('rubyvid.com') ||
+    lower.includes('streamruby.com') ||
+    lower.includes('multimovies.cloud') ||
+    lower.includes('streamsb.net') ||
+    lower.includes('sstreamsb.net') ||
+    lower.includes('sttreamsb.net') ||
+    lower.includes('sytramsb.net') ||
+    lower.includes('watchsb.com') ||
+    lower.includes('bullstream.xyz') ||
+    lower.includes('vidxstream.xyz') ||
+    lower.includes('fhdgdmirrorbot.nl') ||
+    lower.includes('gdmirrorbot.nl') ||
+    lower.includes('deaddrive.icu') ||
+    (lower.includes('as-cdn') && lower.includes('.top')) ||
+    lower.includes('streamhide.')
   ) {
     return false;
   }
@@ -66,8 +131,11 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
     return false;
   }
 
-  // ALLOW AnimeSalt multi-language player clone
-  if (lower.includes('multi-lang-plyr') || lower.includes('as-cdn/clone/')) {
+  // ALLOW AnimeSalt multi-language player wrappers
+  if (
+    (lower.includes('data=') && (lower.includes('plyr') || lower.includes('player') || lower.includes('animesalt'))) ||
+    lower.includes('as-cdn/clone/')
+  ) {
     return true;
   }
 
@@ -85,4 +153,5 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
 
   return true;
 }
+
 
