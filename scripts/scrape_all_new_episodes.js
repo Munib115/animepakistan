@@ -157,6 +157,9 @@ function parseEpisodesFromHtml($, seasonNum = 1) {
       });
     }
   });
+  return episodes;
+}
+
 function isValidStreamEmbed(url) {
   if (!url || typeof url !== 'string') return false;
   const lower = url.toLowerCase().trim();
