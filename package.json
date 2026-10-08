@@ -29,7 +29,8 @@
     "streams:ensure-all": "node scripts/clean_and_prioritize_all_streams.js",
     "streams:salt-movies": "node scripts/scrape_all_salt_streams.js --movies",
     "streams:salt-series": "node scripts/scrape_all_salt_streams.js --series",
-    "streams:full-refresh": "node scripts/clean_and_prioritize_all_streams.js"
+    "streams:full-refresh": "node scripts/clean_and_prioritize_all_streams.js",
+    "movie:upload:supabase": "node scripts/upload_movie_to_supabase.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

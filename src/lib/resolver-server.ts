@@ -196,6 +196,7 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
 export function getMirrorPriority(url: string): number {
   if (!url || typeof url !== 'string') return 99;
   const l = url.toLowerCase();
+  if (l.includes('supabase.co/storage') || l.includes('/api/stream/supabase-movie')) return 0;
   if (l.startsWith('/videos/')) return 0;
   if (l.includes('/api/stream/local-video')) return 1;
   if (l.includes('abyssplayer.com')) return 1;

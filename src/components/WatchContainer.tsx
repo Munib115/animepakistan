@@ -195,9 +195,18 @@ export default function WatchContainer({
   const [iframeKey, setIframeKey] = useState(0);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
-  // Direct HLS Player State (Phase 2 Clean Player Engine)
+  // Check if this anime is the special featured movie
+  const isThisCustomMovie = useMemo(() => {
+    return (
+      anime?.slug === 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil' ||
+      Boolean((anime as any)?.isCustomLocal) ||
+      (anime as any)?.source === 'local'
+    );
+  }, [anime?.slug]);
+
+  // Direct Player State (Strictly active ONLY for this movie)
   const [directHlsStream, setDirectHlsStream] = useState<string | null>(null);
-  const [useDirectPlayer, setUseDirectPlayer] = useState<boolean>(true);
+  const [useDirectPlayer, setUseDirectPlayer] = useState<boolean>(false);
   const [isResolvingDirectHls, setIsResolvingDirectHls] = useState<boolean>(false);
 
   useEffect(() => {
@@ -206,46 +215,19 @@ export default function WatchContainer({
       return;
     }
 
-    // Instantly use our custom video player for local MP4 videos
-    if (
-      activeMirror.includes('/api/stream/local-video') ||
-      activeMirror.toLowerCase().includes('.mp4') ||
-      activeMirror.startsWith('/videos/')
-    ) {
+    // Custom Video Player is strictly and ONLY for this specific movie
+    if (isThisCustomMovie) {
       setDirectHlsStream(activeMirror);
       setUseDirectPlayer(true);
       setIsResolvingDirectHls(false);
       return;
     }
 
-    let isCancelled = false;
-    setIsResolvingDirectHls(true);
-
-    fetch(`/api/stream/direct?url=${encodeURIComponent(activeMirror)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (!isCancelled && data.success && data.streamUrl) {
-          setDirectHlsStream(data.streamUrl);
-          setUseDirectPlayer(true);
-        } else if (!isCancelled) {
-          setDirectHlsStream(null);
-          setUseDirectPlayer(false);
-        }
-      })
-      .catch(() => {
-        if (!isCancelled) {
-          setDirectHlsStream(null);
-          setUseDirectPlayer(false);
-        }
-      })
-      .finally(() => {
-        if (!isCancelled) setIsResolvingDirectHls(false);
-      });
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [activeMirror]);
+    // For all other anime series and other movies, keep default player without touching them
+    setDirectHlsStream(null);
+    setUseDirectPlayer(false);
+    setIsResolvingDirectHls(false);
+  }, [activeMirror, isThisCustomMovie]);
 
   // Resume prompt state
   const [savedProgress, setSavedProgress] = useState<WatchProgressItem | null>(null);
@@ -1143,61 +1125,7 @@ export default function WatchContainer({
         </div>
       </div>
 
-      {/* Player Mode Switcher — Seamless Clean HLS vs Shielded Embed toggle */}
-      {directHlsStream && (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          margin: '8px 0',
-          flexWrap: 'wrap',
-        }}>
-          <button
-            type="button"
-            onClick={() => setUseDirectPlayer(true)}
-            style={{
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: useDirectPlayer ? '#00ff66' : 'rgba(255,255,255,0.08)',
-              color: useDirectPlayer ? '#000000' : '#ffffff',
-              boxShadow: useDirectPlayer ? '0 0 12px rgba(0,255,102,0.35)' : 'none',
-              transition: 'all 0.2s ease',
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>shield</span>
-            <span>Clean Player (Ad-Free)</span>
-          </button>
 
-          <button
-            type="button"
-            onClick={() => setUseDirectPlayer(false)}
-            style={{
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: !useDirectPlayer ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)',
-              color: !useDirectPlayer ? '#ffffff' : '#94a3b8',
-              transition: 'all 0.2s ease',
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>open_in_browser</span>
-            <span>Mirror Embed</span>
-          </button>
-        </div>
-      )}
 
       {/* Server switching is handled internally — no UI exposed to keep the experience clean */}
 

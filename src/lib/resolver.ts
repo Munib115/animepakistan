@@ -72,8 +72,13 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
   if (!url || typeof url !== 'string') return false;
   const lower = url.toLowerCase().trim();
 
-  // Allow internal local streaming API and direct videos
-  if (lower.startsWith('/api/stream/local-video') || lower.startsWith('/videos/')) {
+  // Allow internal local streaming API, Supabase Storage streams, and direct videos
+  if (
+    lower.startsWith('/api/stream/local-video') ||
+    lower.startsWith('/api/stream/supabase-movie') ||
+    lower.startsWith('/videos/') ||
+    lower.includes('supabase.co/storage/v1/object/')
+  ) {
     return true;
   }
 
