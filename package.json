@@ -14,6 +14,7 @@
     "scrape:salt:master": "node scripts/scrape_animesalt_master.js",
     "scrape:salt:discover": "node scripts/scrape_animesalt_master.js --discover",
     "scrape:salt:merge": "node scripts/scrape_animesalt_master.js --merge-only",
+    "scrape:doraemon": "node scripts/scrape_animesalt_doraemon_and_cartoons.js",
     "scrape": "node scripts/scrape_and_inject_toonstream.js",
     "sync:auto": "node scripts/scrape_and_inject_toonstream.js",
     "catalog:refresh": "node scripts/refresh_toonstream_catalog.js",
