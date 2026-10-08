@@ -21,11 +21,12 @@ export default function HeroSlider({ items }: HeroSliderProps) {
 
   const featured = useMemo(() => {
     if (!items || items.length === 0) return [];
-    if (items.length <= 8) return items;
-    return items
-      .filter((item) => item.backdrop || item.anilist?.bannerImage)
+    const undersea = items.find((i) => i.slug === 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil');
+    const others = items
+      .filter((item) => item.slug !== 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil' && (item.backdrop || item.anilist?.bannerImage))
       .sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0))
-      .slice(0, 8);
+      .slice(0, undersea ? 7 : 8);
+    return undersea ? [undersea, ...others] : others;
   }, [items]);
 
   const nextSlide = useCallback(() => {

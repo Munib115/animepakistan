@@ -889,6 +889,17 @@ export default function WatchContainer({
                 poster={resolvedPoster}
                 initialTime={savedProgress?.currentTime || 0}
                 onError={() => {
+                  const isLocal = activeMirror.includes('/api/stream/local-video') ||
+                    activeMirror.toLowerCase().includes('.mp4') ||
+                    activeMirror.startsWith('/videos/') ||
+                    (anime as any)?.isCustomLocal;
+                  if (isLocal) {
+                    console.warn('[WatchContainer] Local stream issue; keeping direct player active');
+                    if (activeMirror.includes('/api/stream/local-video')) {
+                      setDirectHlsStream('/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4');
+                    }
+                    return;
+                  }
                   console.warn('[WatchContainer] Direct HLS playback issue, falling back to shielded mirror');
                   setUseDirectPlayer(false);
                 }}

@@ -23,18 +23,18 @@ const newMovie = {
       season: 1,
       title: 'Full Movie (1080p Full HD)',
       slug: 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil-movie',
-      url: '/api/stream/local-video?movie=doraemon-undersea-devil',
+      url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
       thumbnail: 'https://image.tmdb.org/t/p/original/pxd9rc03EMMln3tVFdfd427Fpsi.jpg',
-      streamUrl: '/api/stream/local-video?movie=doraemon-undersea-devil',
+      streamUrl: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
       streamSources: [
         {
-          label: 'Custom Player (1080p Full HD)',
-          url: '/api/stream/local-video?movie=doraemon-undersea-devil',
+          label: 'Direct Full HD (Recommended)',
+          url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
           isMultiAudio: true
         },
         {
-          label: 'Direct Stream (Full HD)',
-          url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
+          label: 'Fast Stream Server 2 (Full HD)',
+          url: '/api/stream/local-video?movie=doraemon-undersea-devil',
           isMultiAudio: true
         }
       ]
@@ -42,16 +42,16 @@ const newMovie = {
   ],
   episodeCount: 1,
   episodesCount: 1,
-  streamUrl: '/api/stream/local-video?movie=doraemon-undersea-devil',
+  streamUrl: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
   streamSources: [
     {
-      label: 'Custom Player (1080p Full HD)',
-      url: '/api/stream/local-video?movie=doraemon-undersea-devil',
+      label: 'Direct Full HD (Recommended)',
+      url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
       isMultiAudio: true
     },
     {
-      label: 'Direct Stream (Full HD)',
-      url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
+      label: 'Fast Stream Server 2 (Full HD)',
+      url: '/api/stream/local-video?movie=doraemon-undersea-devil',
       isMultiAudio: true
     }
   ],
