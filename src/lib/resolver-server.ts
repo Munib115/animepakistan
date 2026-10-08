@@ -196,6 +196,7 @@ async function enrichSourcesWithDirectStreams(sourcesList: StreamSource[]) {
 export function getMirrorPriority(url: string): number {
   if (!url || typeof url !== 'string') return 99;
   const l = url.toLowerCase();
+  if (l.includes('/api/stream/local-video') || l.startsWith('/videos/')) return 0;
   if (l.includes('abyssplayer.com')) return 1;
   if (l.includes('p2pplay.online') || l.includes('strp2p.live')) return 2;
   if (l.includes('cloudy.upns.one')) return 3;

@@ -48,3 +48,6 @@ next-env.d.ts
 .dev.vars
 *.apk
 Dragonball Z - Supersonic Warriors GBA*
+*.mp4
+/public/videos/
+temp_latest.zip

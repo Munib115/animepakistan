@@ -206,6 +206,18 @@ export default function WatchContainer({
       return;
     }
 
+    // Instantly use our custom video player for local MP4 videos
+    if (
+      activeMirror.includes('/api/stream/local-video') ||
+      activeMirror.toLowerCase().includes('.mp4') ||
+      activeMirror.startsWith('/videos/')
+    ) {
+      setDirectHlsStream(activeMirror);
+      setUseDirectPlayer(true);
+      setIsResolvingDirectHls(false);
+      return;
+    }
+
     let isCancelled = false;
     setIsResolvingDirectHls(true);
 

@@ -39,11 +39,14 @@ export default async function HomePage(props: PageProps) {
     );
   }
 
-  // Top 8 featured items for Hero Banner (only send 8 items to client component)
-  const featured = items
-    .filter((item) => item.backdrop || item.anilist?.bannerImage)
+  // Top 8 featured items for Hero Banner (Doraemon New Nobita and the Castle of the Undersea Devil pinned to position 0)
+  const underseaMovie = items.find((i) => i.slug === 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil');
+  const otherFeatured = items
+    .filter((item) => (item.backdrop || item.anilist?.bannerImage) && item.slug !== 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil')
     .sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0))
-    .slice(0, 8);
+    .slice(0, underseaMovie ? 7 : 8);
+
+  const featured = underseaMovie ? [underseaMovie, ...otherFeatured] : otherFeatured;
 
   // Categorize items for Landing Page
   const movies = items.filter((i) => i.type === 'movie');
@@ -63,16 +66,23 @@ export default async function HomePage(props: PageProps) {
     })
     .slice(0, 16);
 
-  // Popular movies
-  const popularMovies = movies.slice(0, 16);
+  // Popular movies with new Doraemon movie pinned at the top
+  const popularMovies = [
+    ...(underseaMovie ? [underseaMovie] : []),
+    ...movies.filter(m => m.slug !== 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil').slice(0, underseaMovie ? 15 : 16)
+  ];
 
-  // Cartoons & Classics
-  const cartoons = items.filter((i) => {
-    const t = i.title.toLowerCase();
-    return t.includes('ben 10') || t.includes('shinchan') || t.includes('doraemon') || 
-           t.includes('pokemon') || t.includes('avatar') || t.includes('transformers') ||
-           t.includes('miraculous') || t.includes('slugterra') || t.includes('avengers');
-  }).slice(0, 16);
+  // Cartoons & Classics with new Doraemon movie at the top
+  const cartoons = [
+    ...(underseaMovie ? [underseaMovie] : []),
+    ...items.filter((i) => {
+      if (i.slug === 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil') return false;
+      const t = i.title.toLowerCase();
+      return t.includes('ben 10') || t.includes('shinchan') || t.includes('doraemon') || 
+             t.includes('pokemon') || t.includes('avatar') || t.includes('transformers') ||
+             t.includes('miraculous') || t.includes('slugterra') || t.includes('avengers');
+    }).slice(0, underseaMovie ? 15 : 16)
+  ];
 
   const itemListSchema = {
     '@context': 'https://schema.org',

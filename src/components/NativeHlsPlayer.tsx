@@ -55,12 +55,55 @@ export default function NativeHlsPlayer({
     }, 3200);
   }, [isPlaying]);
 
-  // Initialize HLS Stream
+  // Initialize Stream (MP4 or HLS)
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !streamUrl) return;
 
     setIsBuffering(true);
+
+    const isDirectMp4 =
+      streamUrl.toLowerCase().includes('.mp4') ||
+      streamUrl.includes('/api/stream/local-video') ||
+      streamUrl.startsWith('/videos/');
+
+    if (isDirectMp4) {
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+        hlsRef.current = null;
+      }
+      video.src = streamUrl;
+      const onLoaded = () => {
+        setIsBuffering(false);
+        setDuration(video.duration || 0);
+        setQualities([{ id: 0, height: 1080, name: '1080p Full HD' }]);
+        setCurrentQuality(0);
+        if (initialTime > 0) {
+          video.currentTime = initialTime;
+        }
+        video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      };
+      const onCanPlay = () => setIsBuffering(false);
+      const onWaiting = () => setIsBuffering(true);
+      const onPlaying = () => setIsBuffering(false);
+      const onErrorEvt = () => {
+        if (onError) onError();
+      };
+
+      video.addEventListener('loadedmetadata', onLoaded);
+      video.addEventListener('canplay', onCanPlay);
+      video.addEventListener('waiting', onWaiting);
+      video.addEventListener('playing', onPlaying);
+      video.addEventListener('error', onErrorEvt);
+
+      return () => {
+        video.removeEventListener('loadedmetadata', onLoaded);
+        video.removeEventListener('canplay', onCanPlay);
+        video.removeEventListener('waiting', onWaiting);
+        video.removeEventListener('playing', onPlaying);
+        video.removeEventListener('error', onErrorEvt);
+      };
+    }
 
     if (Hls.isSupported()) {
       if (hlsRef.current) {

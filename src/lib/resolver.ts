@@ -8,6 +8,7 @@ export interface StreamSource {
 /** Normalize any legacy CDN or protocol issues and convert legacy shorteners to direct players */
 export function sanitizeStreamUrl(url: string): string {
   if (!url || typeof url !== 'string') return '';
+  if (url.startsWith('/')) return url.trim();
   let clean = url
     .replace(/^http:\/\//i, 'https://')
     .replace(/as-cdn2[0-5]\.top/gi, 'as-cdn26.top')
@@ -70,6 +71,12 @@ export function unpackAnimeSaltDataUrl(url: string): StreamSource[] {
 export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
   if (!url || typeof url !== 'string') return false;
   const lower = url.toLowerCase().trim();
+
+  // Allow internal local streaming API and direct videos
+  if (lower.startsWith('/api/stream/local-video') || lower.startsWith('/videos/')) {
+    return true;
+  }
+
   if (!lower.startsWith('http://') && !lower.startsWith('https://')) return false;
 
   // Reject malformed host strings from legacy regex scrapers
