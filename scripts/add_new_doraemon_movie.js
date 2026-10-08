@@ -23,18 +23,18 @@ const newMovie = {
       season: 1,
       title: 'Full Movie (1080p Full HD)',
       slug: 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil-movie',
-      url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
+      url: 'https://www.terabox.app/sharing/embed?surl=sxJCF-XP7RYBR4DU_sYgwA',
       thumbnail: 'https://image.tmdb.org/t/p/original/pxd9rc03EMMln3tVFdfd427Fpsi.jpg',
-      streamUrl: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
+      streamUrl: 'https://www.terabox.app/sharing/embed?surl=sxJCF-XP7RYBR4DU_sYgwA',
       streamSources: [
         {
-          label: 'Direct Full HD (Recommended)',
-          url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
+          label: 'TeraBox Cloud (Full HD)',
+          url: 'https://www.terabox.app/sharing/embed?surl=sxJCF-XP7RYBR4DU_sYgwA',
           isMultiAudio: true
         },
         {
-          label: 'Fast Stream Server 2 (Full HD)',
-          url: '/api/stream/local-video?movie=doraemon-undersea-devil',
+          label: 'Direct Full HD (Local Server)',
+          url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
           isMultiAudio: true
         }
       ]
@@ -42,16 +42,16 @@ const newMovie = {
   ],
   episodeCount: 1,
   episodesCount: 1,
-  streamUrl: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
+  streamUrl: 'https://www.terabox.app/sharing/embed?surl=sxJCF-XP7RYBR4DU_sYgwA',
   streamSources: [
     {
-      label: 'Direct Full HD (Recommended)',
-      url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
+      label: 'TeraBox Cloud (Full HD)',
+      url: 'https://www.terabox.app/sharing/embed?surl=sxJCF-XP7RYBR4DU_sYgwA',
       isMultiAudio: true
     },
     {
-      label: 'Fast Stream Server 2 (Full HD)',
-      url: '/api/stream/local-video?movie=doraemon-undersea-devil',
+      label: 'Direct Full HD (Local Server)',
+      url: '/videos/doraemon-nobita-and-the-castle-of-the-undersea-devil.mp4',
       isMultiAudio: true
     }
   ],

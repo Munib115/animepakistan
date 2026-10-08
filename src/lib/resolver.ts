@@ -20,6 +20,14 @@ export function sanitizeStreamUrl(url: string): string {
     clean = clean.replace(/https?:\/\/short\.icu\/([a-zA-Z0-9_\-]+)/gi, 'https://player.abyssplayer.com/$1');
   }
 
+  // Convert TeraBox share link to embed player
+  if (clean.includes('terabox.com/s/') || clean.includes('1024terabox.com/s/') || clean.includes('1024tera.com/sharing/link?surl=')) {
+    const m = clean.match(/(?:s\/1?|surl=)([a-zA-Z0-9_\-]+)/i);
+    if (m && m[1]) {
+      clean = `https://www.terabox.app/sharing/embed?surl=${m[1].replace(/^1/, '')}`;
+    }
+  }
+
   return clean;
 }
 
@@ -77,7 +85,9 @@ export function isValidStreamEmbedUrl(url: string | undefined | null): boolean {
     lower.startsWith('/api/stream/local-video') ||
     lower.startsWith('/api/stream/supabase-movie') ||
     lower.startsWith('/videos/') ||
-    lower.includes('supabase.co/storage/v1/object/')
+    lower.includes('supabase.co/storage/v1/object/') ||
+    lower.includes('terabox') ||
+    lower.includes('1024tera')
   ) {
     return true;
   }

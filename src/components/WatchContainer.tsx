@@ -217,8 +217,19 @@ export default function WatchContainer({
 
     // Custom Video Player is strictly and ONLY for this specific movie
     if (isThisCustomMovie) {
-      setDirectHlsStream(activeMirror);
-      setUseDirectPlayer(true);
+      const isDirectVideo =
+        activeMirror.includes('/api/stream/local-video') ||
+        activeMirror.toLowerCase().includes('.mp4') ||
+        activeMirror.startsWith('/videos/') ||
+        activeMirror.includes('supabase.co');
+
+      if (isDirectVideo) {
+        setDirectHlsStream(activeMirror);
+        setUseDirectPlayer(true);
+      } else {
+        setDirectHlsStream(null);
+        setUseDirectPlayer(false);
+      }
       setIsResolvingDirectHls(false);
       return;
     }
@@ -946,7 +957,7 @@ export default function WatchContainer({
                 allowFullScreen
                 loading="eager"
                 referrerPolicy="no-referrer"
-                sandbox="allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-forms allow-pointer-lock allow-orientation-lock allow-popups allow-popups-to-escape-sandbox allow-downloads"
+                sandbox={activeMirror.includes('terabox') || activeMirror.includes('1024tera') ? undefined : "allow-scripts allow-same-origin allow-presentation allow-fullscreen allow-forms allow-pointer-lock allow-orientation-lock allow-popups allow-popups-to-escape-sandbox allow-downloads"}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 style={{
                   position: 'absolute',
