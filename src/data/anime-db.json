@@ -1,5 +1,30 @@
 [
   {
+    "title": "Jaadugar: A Witch in Mongolia",
+    "slug": "jaadugar:-a-witch-in-mongolia",
+    "url": "/series/jaadugar:-a-witch-in-mongolia",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/723NT7KY9xBFLYNNBaEEREbLaPC.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/6AoGMlKo2DUsYWiF5zzjdRERCVi.jpg",
+    "description": "After losing her mother and her homeland, Sitara’s despair transforms into determination with the power of knowledge. New possibilities unfold when a family of scholars takes her in, deepening her education. Meanwhile, Genghis Khan’s Mongol Empire conquers nation after nation, nearing Sitara’s new home. After the Fourth Prince of the empire takes her captive, a flame of revenge is ignited.",
+    "genres": [
+      "Animation",
+      "Anime",
+      "Adventure"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 8.1,
+    "year": 2026,
+    "episodes": [],
+    "episodeCount": 0,
+    "episodesCount": 0,
+    "source": "animesalt"
+  },
+  {
     "id": "ap-doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil",
     "title": "Doraemon the Movie: New Nobita and the Castle of the Undersea Devil",
     "slug": "doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil",
@@ -942447,8 +942472,8 @@
     ],
     "url": "https://toonstream.us/series/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life",
     "toonUrl": "https://toonstream.us/series/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life",
-    "episodeCount": 1,
-    "episodesCount": 1,
+    "episodeCount": 13,
+    "episodesCount": 13,
     "episodes": [
       {
         "number": 1,
@@ -942502,7 +942527,198 @@
             "url": "https://voe.sx/e/4nkq5c0m0cra",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "/episode/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1/"
+      },
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: Episode 1",
+        "slug": "the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1",
+        "url": "https://toonstream.us/episode/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1/",
+        "toonUrl": "https://toonstream.us/episode/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1/",
+        "toonSlug": "the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1",
+        "thumbnail": "https://image.tmdb.org/t/p/w780//jFGqk1PzNzDarkoMDkKYJUtJY0f.jpg",
+        "streamUrl": "https://abyssplayer.com/lKnKg6ya6",
+        "toonStreamUrl": "https://filesforever.link/embed/h0zdyu7",
+        "streamSources": [
+          {
+            "label": "Abyss (Multi Audio)",
+            "url": "https://abyssplayer.com/lKnKg6ya6",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/h0zdyu7",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/f5d73gb",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/e44ksce",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Vidmoly (Mirror)",
+            "url": "https://vidmoly.net/embed-4lvchfxavwzx.html",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 4 (Fast)",
+            "url": "https://vidc.upns.pro/#6uhwu8",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 7 (Fast)",
+            "url": "https://ravok.buzz/video/c414093ef0e52a9437267acfcb481dbe",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 8 (Fast)",
+            "url": "https://voe.sx/e/4nkq5c0m0cra",
+            "isMultiAudio": true
+          }
+        ],
+        "saltUrl": "/episode/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1/"
+      },
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: Episode 1",
+        "slug": "the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1",
+        "url": "https://toonstream.us/episode/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1/",
+        "toonUrl": "https://toonstream.us/episode/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1/",
+        "toonSlug": "the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1",
+        "thumbnail": "https://image.tmdb.org/t/p/w780//jFGqk1PzNzDarkoMDkKYJUtJY0f.jpg",
+        "streamUrl": "https://abyssplayer.com/lKnKg6ya6",
+        "toonStreamUrl": "https://filesforever.link/embed/h0zdyu7",
+        "streamSources": [
+          {
+            "label": "Abyss (Multi Audio)",
+            "url": "https://abyssplayer.com/lKnKg6ya6",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/h0zdyu7",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/f5d73gb",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/e44ksce",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Vidmoly (Mirror)",
+            "url": "https://vidmoly.net/embed-4lvchfxavwzx.html",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 4 (Fast)",
+            "url": "https://vidc.upns.pro/#6uhwu8",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 7 (Fast)",
+            "url": "https://ravok.buzz/video/c414093ef0e52a9437267acfcb481dbe",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 8 (Fast)",
+            "url": "https://voe.sx/e/4nkq5c0m0cra",
+            "isMultiAudio": true
+          }
+        ],
+        "saltUrl": "/episode/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life-1x1/"
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: The 100 Girlfriends Who Really, Really, Really, Really, REALLY Love You",
+        "slug": "the-100-girlfriends-who-really-really-really-really-really-love-you",
+        "url": "/series/the-100-girlfriends-who-really-really-really-really-really-love-you",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/kBiPU7I7TEJdDXu8tHgVrgL5zAU.jpg"
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: Bleach Dub",
+        "slug": "bleach-dub",
+        "url": "/series/bleach-dub",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/xAiiPhRm1zOyPwBLjcA2RsFtG8G.jpgfV.jpg"
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: Iron Man",
+        "slug": "iron-man-2",
+        "url": "/series/iron-man-2",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/nTQWWH6CFtl37x1nPx8HRwbwvGn.jpg"
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: FAIRY TAIL 100 YEARS QUEST",
+        "slug": "fairy-tail-100-years-quest",
+        "url": "/series/fairy-tail-100-years-quest",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/wj5i6YgZj7LltRE3yE6VTgfdbK0.jpg"
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: Justice League",
+        "slug": "justice-league",
+        "url": "/series/justice-league",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/caIAQIoM9NLZofT8fz8t47W1gYe.jpg"
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: Tomo-chan Is a Girl!",
+        "slug": "tomo-chan-is-a-girl",
+        "url": "/series/tomo-chan-is-a-girl",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/h9TN2BltJ9Q7FZ5BYGQcHfYfEGp.jpg"
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: The Dangers in My Heart",
+        "slug": "the-dangers-in-my-heart",
+        "url": "/series/the-dangers-in-my-heart",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/mKhMmREBOKXtp3tlv9rnLRxZec5.jpg"
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: Power Rangers Zeo S4",
+        "slug": "power-rangers-zeo",
+        "url": "/series/power-rangers-zeo",
+        "thumbnail": "https://i.ibb.co/9VZNmrz/image.png"
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: Miss Kuroitsu From the Monster Development Department",
+        "slug": "miss-kuroitsu-from-the-monster-development-department",
+        "url": "/series/miss-kuroitsu-from-the-monster-development-department",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/yP0gRkxo9puHGAc9PgwUj9Ym0h.jpg"
+      },
+      {
+        "number": 13,
+        "season": 1,
+        "title": "S1 E13: Summer Time Rendering",
+        "slug": "summer-time-rendering",
+        "url": "/series/summer-time-rendering",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/9qFqCxPr1ebHbOmZ1vEmPAHLIM4.jpg"
       }
     ],
     "source": "toonstream"
@@ -942572,8 +942788,8 @@
     ],
     "url": "https://toonstream.us/series/overgeared",
     "toonUrl": "https://toonstream.us/series/overgeared",
-    "episodeCount": 2,
-    "episodesCount": 2,
+    "episodeCount": 14,
+    "episodesCount": 14,
     "episodes": [
       {
         "number": 1,
@@ -942627,66 +942843,253 @@
             "url": "https://ravok.buzz/video/62613c47c3a7f9155e2ff2dbf6e5f4a7",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "/episode/overgeared-1x1/"
       },
       {
-        "number": 2,
+        "number": 1,
         "season": 1,
-        "title": "S1 E2: Episode 2",
-        "slug": "overgeared-1x2",
-        "url": "https://toonstream.us/episode/overgeared-1x2/",
-        "toonUrl": "https://toonstream.us/episode/overgeared-1x2/",
-        "toonSlug": "overgeared-1x2",
+        "title": "S1 E1: Episode 1",
+        "slug": "overgeared-1x1",
+        "url": "https://toonstream.us/episode/overgeared-1x1/",
+        "toonUrl": "https://toonstream.us/episode/overgeared-1x1/",
+        "toonSlug": "overgeared-1x1",
         "thumbnail": "https://image.tmdb.org/t/p/w780/94GLmulA9qVGsuo9kLpVKi01E2Z.jpg",
-        "streamUrl": "https://abyssplayer.com/53yFoiWbs",
-        "toonStreamUrl": "https://filesforever.link/embed/lfer7w0",
+        "streamUrl": "https://abyssplayer.com/awwIjEz_a",
+        "toonStreamUrl": "https://rubystm.com/e/nojoitequkej.html",
         "streamSources": [
           {
             "label": "Abyss (Multi Audio)",
-            "url": "https://abyssplayer.com/53yFoiWbs",
+            "url": "https://abyssplayer.com/awwIjEz_a",
             "isMultiAudio": true
           },
           {
             "label": "FilesForever (Mirror)",
-            "url": "https://filesforever.link/embed/lfer7w0",
+            "url": "https://filesforever.link/embed/x8qeny8",
             "isMultiAudio": true
           },
           {
             "label": "FilesForever (Mirror)",
-            "url": "https://filesforever.link/embed/ycuu3ma",
+            "url": "https://filesforever.link/embed/ccd2di5",
             "isMultiAudio": true
           },
           {
             "label": "FilesForever (Mirror)",
-            "url": "https://filesforever.link/embed/jba6kcn",
+            "url": "https://filesforever.link/embed/k1rd2ue",
             "isMultiAudio": true
           },
           {
             "label": "Vidmoly (Mirror)",
-            "url": "https://vidmoly.net/embed-l0933jnjbn3y.html",
-            "isMultiAudio": true
-          },
-          {
-            "label": "ToonStream 4 (Fast)",
-            "url": "https://vidc.upns.pro/#u3rzj5",
-            "isMultiAudio": true
-          },
-          {
-            "label": "ToonStream 7 (Fast)",
-            "url": "https://ravok.buzz/video/0dd94870032028c3e946fab7a07a912d",
-            "isMultiAudio": true
-          },
-          {
-            "label": "ToonStream 8 (Fast)",
-            "url": "https://voe.sx/e/ytx80ns7qwkm",
+            "url": "https://vidmoly.net/embed-73wq6tqherfz.html",
             "isMultiAudio": true
           },
           {
             "label": "ToonStream 9 (Fast)",
-            "url": "https://vidara.to/e/pA5XlSqb85Di",
+            "url": "https://turbonewvid.com/t/6ab941ef26424",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 5 (Fast)",
+            "url": "https://vidc.upns.pro/#6ue5w6",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 8 (Fast)",
+            "url": "https://ravok.buzz/video/62613c47c3a7f9155e2ff2dbf6e5f4a7",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "/episode/overgeared-1x1/"
+      },
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: Episode 1",
+        "slug": "overgeared-1x1",
+        "url": "https://toonstream.us/episode/overgeared-1x1/",
+        "toonUrl": "https://toonstream.us/episode/overgeared-1x1/",
+        "toonSlug": "overgeared-1x1",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/94GLmulA9qVGsuo9kLpVKi01E2Z.jpg",
+        "streamUrl": "https://abyssplayer.com/awwIjEz_a",
+        "toonStreamUrl": "https://rubystm.com/e/nojoitequkej.html",
+        "streamSources": [
+          {
+            "label": "Abyss (Multi Audio)",
+            "url": "https://abyssplayer.com/awwIjEz_a",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/x8qeny8",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/ccd2di5",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/k1rd2ue",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Vidmoly (Mirror)",
+            "url": "https://vidmoly.net/embed-73wq6tqherfz.html",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 9 (Fast)",
+            "url": "https://turbonewvid.com/t/6ab941ef26424",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 5 (Fast)",
+            "url": "https://vidc.upns.pro/#6ue5w6",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 8 (Fast)",
+            "url": "https://ravok.buzz/video/62613c47c3a7f9155e2ff2dbf6e5f4a7",
+            "isMultiAudio": true
+          }
+        ],
+        "saltUrl": "/episode/overgeared-1x1/"
+      },
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: Episode 1",
+        "slug": "overgeared-1x1",
+        "url": "https://toonstream.us/episode/overgeared-1x1/",
+        "toonUrl": "https://toonstream.us/episode/overgeared-1x1/",
+        "toonSlug": "overgeared-1x1",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/94GLmulA9qVGsuo9kLpVKi01E2Z.jpg",
+        "streamUrl": "https://abyssplayer.com/awwIjEz_a",
+        "toonStreamUrl": "https://rubystm.com/e/nojoitequkej.html",
+        "streamSources": [
+          {
+            "label": "Abyss (Multi Audio)",
+            "url": "https://abyssplayer.com/awwIjEz_a",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/x8qeny8",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/ccd2di5",
+            "isMultiAudio": true
+          },
+          {
+            "label": "FilesForever (Mirror)",
+            "url": "https://filesforever.link/embed/k1rd2ue",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Vidmoly (Mirror)",
+            "url": "https://vidmoly.net/embed-73wq6tqherfz.html",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 9 (Fast)",
+            "url": "https://turbonewvid.com/t/6ab941ef26424",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 5 (Fast)",
+            "url": "https://vidc.upns.pro/#6ue5w6",
+            "isMultiAudio": true
+          },
+          {
+            "label": "ToonStream 8 (Fast)",
+            "url": "https://ravok.buzz/video/62613c47c3a7f9155e2ff2dbf6e5f4a7",
+            "isMultiAudio": true
+          }
+        ],
+        "saltUrl": "/episode/overgeared-1x1/"
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: Fullmetal Alchemist",
+        "slug": "fullmetal-alchemist",
+        "url": "/series/fullmetal-alchemist",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/kKOQbCKbGB75h1d3Jlx9Gy4ZTfv.jpg"
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: Pokémon XY Kalos Quest",
+        "slug": "pokemon-xy-kalos-quest",
+        "url": "/series/pokemon-xy-kalos-quest",
+        "thumbnail": "https://i.ibb.co/XDc3MK7/image.png"
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: As a Reincarnated Aristocrat",
+        "slug": "as-a-reincarnated-aristocrat",
+        "url": "/series/as-a-reincarnated-aristocrat",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/54Dj5enfCkGPxnxjRx9i01zPXbd.jpg"
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: Agent Ali",
+        "slug": "agent-ali",
+        "url": "/series/agent-ali",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/pC7MTsEjJVXlCEaTRFWhVUS113i.jpg"
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: The Strongest Sage With the Weakest Crest (Eng-Jap)",
+        "slug": "the-strongest-sage-with-the-weakest-crest-eng-jap",
+        "url": "/series/the-strongest-sage-with-the-weakest-crest-eng-jap",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/55IKEC0Q0w50iKlygeHCdldTMse.jpg"
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: Hokkaido Gals Are Super Adorable!",
+        "slug": "hokkaido-gals-are-super-adorable",
+        "url": "/series/hokkaido-gals-are-super-adorable",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/nCJKNJ3rtgLDAhAN5S881z8PHKU.jpg"
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: Ameku M.D.: Doctor Detective",
+        "slug": "ameku-m-d-doctor-detective",
+        "url": "/series/ameku-m-d-doctor-detective",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/mjTuJbgOssPGzCVGuqGxbnwS6iA.jpg"
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: Power Rangers Season 10 Wild Force",
+        "slug": "power-rangers-wild-force",
+        "url": "/series/power-rangers-wild-force",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/eE4N0OTNuF9c9YNEoT23h6bB8bj.jpg"
+      },
+      {
+        "number": 13,
+        "season": 1,
+        "title": "S1 E13: Gaju Bhai",
+        "slug": "gaju-bhai",
+        "url": "/series/gaju-bhai",
+        "thumbnail": "https://i.ibb.co/R0ZQCBg/image.png"
+      },
+      {
+        "number": 14,
+        "season": 1,
+        "title": "S1 E14: The Perils of Penelope Pitstop",
+        "slug": "the-perils-of-penelope-pitstop",
+        "url": "/series/the-perils-of-penelope-pitstop",
+        "thumbnail": "https://image.tmdb.org/t/p/w780/tEyhRt3ZlBdrIV03pdiK0OW4oZD.jpg"
       }
     ],
     "source": "toonstream"
