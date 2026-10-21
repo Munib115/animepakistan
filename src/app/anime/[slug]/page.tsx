@@ -13,7 +13,21 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const anime = getAnimeDb().find((item) => item.slug.toLowerCase() === decodeURIComponent(slug).toLowerCase());
+  const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
+  const anime = getAnimeDb().find((item) => {
+    const itemSlug = item.slug.toLowerCase().trim();
+    const decodedItemSlug = decodeURIComponent(item.slug).toLowerCase().trim();
+    const saltSlug = item.saltSlug?.toLowerCase().trim();
+    const toonSlug = item.toonSlug?.toLowerCase().trim();
+    return (
+      itemSlug === decodedSlug ||
+      decodedItemSlug === decodedSlug ||
+      itemSlug === decodedSlug.replace(/\/$/, '') ||
+      saltSlug === decodedSlug ||
+      toonSlug === decodedSlug ||
+      (item.url ? item.url.toLowerCase().includes(`/${decodedSlug}/`) : false)
+    );
+  });
   if (!anime) return { title: 'Anime Not Found', robots: { index: false, follow: false } };
 
   const name = animeName(anime);
@@ -38,7 +52,19 @@ export default async function AnimeDetailPage(props: PageProps) {
   const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
   const anime = items.find((item) => {
     const itemSlug = item.slug.toLowerCase().trim();
-    return itemSlug === decodedSlug || itemSlug === decodedSlug.replace(/\/$/, '') || item.url.includes(`/${decodedSlug}/`);
+    const decodedItemSlug = decodeURIComponent(item.slug).toLowerCase().trim();
+    const saltSlug = item.saltSlug?.toLowerCase().trim();
+    const toonSlug = item.toonSlug?.toLowerCase().trim();
+    return (
+      itemSlug === decodedSlug ||
+      decodedItemSlug === decodedSlug ||
+      itemSlug === decodedSlug.replace(/\/$/, '') ||
+      saltSlug === decodedSlug ||
+      toonSlug === decodedSlug ||
+      (item.url ? item.url.toLowerCase().includes(`/${decodedSlug}/`) : false) ||
+      (item.saltUrl ? item.saltUrl.toLowerCase().includes(`/${decodedSlug}/`) : false) ||
+      (item.toonUrl ? item.toonUrl.toLowerCase().includes(`/${decodedSlug}/`) : false)
+    );
   });
 
   if (!anime) {

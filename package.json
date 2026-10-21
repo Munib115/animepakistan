@@ -11,6 +11,7 @@
     "scrape:new": "node scripts/scrape_and_inject_toonstream.js",
     "scrape:toonstream": "node scripts/scrape_and_inject_toonstream.js",
     "scrape:salt": "node scripts/scrape_animesalt_master.js",
+    "scrape:salt:new": "node scripts/scrape_animesalt_new_drops.js",
     "scrape:salt:master": "node scripts/scrape_animesalt_master.js",
     "scrape:salt:discover": "node scripts/scrape_animesalt_master.js --discover",
     "scrape:salt:merge": "node scripts/scrape_animesalt_master.js --merge-only",

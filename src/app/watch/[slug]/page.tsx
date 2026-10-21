@@ -20,8 +20,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const db = getAnimeDb();
   const anime = db.find((item) => {
     const itemSlug = item.slug.toLowerCase().trim();
+    const decodedItemSlug = decodeURIComponent(item.slug).toLowerCase().trim();
     const saltSlug = item.saltSlug?.toLowerCase().trim();
-    return itemSlug === decodedSlug || itemSlug === decodedSlug.replace(/\/$/, '') || saltSlug === decodedSlug || item.url?.includes(`/${decodedSlug}/`);
+    const toonSlug = item.toonSlug?.toLowerCase().trim();
+    return (
+      itemSlug === decodedSlug ||
+      decodedItemSlug === decodedSlug ||
+      itemSlug === decodedSlug.replace(/\/$/, '') ||
+      saltSlug === decodedSlug ||
+      toonSlug === decodedSlug ||
+      (item.url ? item.url.toLowerCase().includes(`/${decodedSlug}/`) : false)
+    );
   });
 
   if (!anime) return { title: 'Anime Not Found', robots: { index: false, follow: false } };
@@ -48,12 +57,16 @@ export default async function MovieWatchPage(props: PageProps) {
   const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
   const anime = items.find((item) => {
     const itemSlug = item.slug.toLowerCase().trim();
+    const decodedItemSlug = decodeURIComponent(item.slug).toLowerCase().trim();
     const saltSlug = item.saltSlug?.toLowerCase().trim();
+    const toonSlug = item.toonSlug?.toLowerCase().trim();
     return (
       itemSlug === decodedSlug ||
+      decodedItemSlug === decodedSlug ||
       itemSlug === decodedSlug.replace(/\/$/, '') ||
       saltSlug === decodedSlug ||
-      item.url?.includes(`/${decodedSlug}/`)
+      toonSlug === decodedSlug ||
+      (item.url ? item.url.toLowerCase().includes(`/${decodedSlug}/`) : false)
     ) && item.type === 'movie';
   });
 
@@ -61,12 +74,16 @@ export default async function MovieWatchPage(props: PageProps) {
     // Check if this slug belongs to a series, and seamlessly redirect to its watch page!
     const series = items.find((item) => {
       const itemSlug = item.slug.toLowerCase().trim();
+      const decodedItemSlug = decodeURIComponent(item.slug).toLowerCase().trim();
       const saltSlug = item.saltSlug?.toLowerCase().trim();
+      const toonSlug = item.toonSlug?.toLowerCase().trim();
       return (
         itemSlug === decodedSlug ||
+        decodedItemSlug === decodedSlug ||
         itemSlug === decodedSlug.replace(/\/$/, '') ||
         saltSlug === decodedSlug ||
-        item.url?.includes(`/${decodedSlug}/`)
+        toonSlug === decodedSlug ||
+        (item.url ? item.url.toLowerCase().includes(`/${decodedSlug}/`) : false)
       ) && item.type === 'series';
     });
 

@@ -80,7 +80,7 @@
     },
     "source": "local",
     "isCustomLocal": true,
-    "isFeaturedHero": true
+    "isFeaturedHero": false
   },
   {
     "title": "Kaiju No. 8 Original Short Anime \"Narumi's Week at Work\"",
@@ -88,22 +88,22 @@
     "saltSlug": "kaiju-no-8-original-short-anime-narumis-week-at-work",
     "url": "https://animesalt.cx/series/kaiju-no-8-original-short-anime-narumis-week-at-work/",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w500/8VpgX5oPxoYkQoHd4HW5zBGBxyK.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/original/swtTU46Qt0Zw2OTnwkhqO4dcuc2.jpg",
-    "description": "An official original short anime spin-off of Kaiju No. 8, spotlighting Gen Narumi — captain of the Defense Force's First Division and hailed as Japan's strongest anti-kaiju fighter. Overwhelmingly powerful and utterly insufferable about it, Narumi skips meetings, dodges paperwork, and spends every spare second gaming online. But even the strongest man on earth gets humbled now and then by the most unexpected counterattacks. A four-episode bite-size comedy about the strongest man's anything-but-peaceful everyday life.",
+    "poster": "https://image.tmdb.org/t/p/original/83yDUQVpdhv8ePy3nbTRzFaKYuQ.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/htGeuCcNhlBe8GTx3izKOsd8frw.jpg",
+    "description": "In a world invaded by devastating Kaiju, Kafka Hibino gains the monstrous ability to transform into Kaiju No. 8 and fights alongside the Defense Force to protect humanity.",
     "genres": [
       "Action",
-      "Anime",
+      "Sci-Fi",
+      "Supernatural",
       "Animation"
     ],
     "audioLanguages": [
       "Hindi",
       "Urdu",
-      "English",
       "Japanese"
     ],
-    "rating": 8,
-    "year": 2026,
+    "rating": 8.6,
+    "year": 2024,
     "episodes": [
       {
         "number": 1,
@@ -436,7 +436,9 @@
     "toonSlug": "kaiju-no-8",
     "toonUrl": "https://toonstream.us/series/kaiju-no-8",
     "episodesCount": 7,
-    "saltUrl": "https://animesalt.cx/series/kaiju-no-8-original-short-anime-narumis-week-at-work/"
+    "saltUrl": "https://animesalt.cx/series/kaiju-no-8-original-short-anime-narumis-week-at-work/",
+    "isFeaturedHero": true,
+    "heroRank": 8
   },
   {
     "title": "The Frontier Lord Begins with Zero Subjects",
@@ -580,14 +582,67 @@
             "url": "https://ravok.buzz/video/74b72ae2ee96f9be8900a13e80fb63ac",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-frontier-lord-begins-with-zero-subjects-1x3/"
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: The Frontier Lord Begins with Zero Subjects 1x4",
+        "slug": "the-frontier-lord-begins-with-zero-subjects-1x4",
+        "url": "https://animesalt.cx/episode/the-frontier-lord-begins-with-zero-subjects-1x4/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/91be0e18777ce6c751271fcc00d93d87",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/91be0e18777ce6c751271fcc00d93d87",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/vNCPxKo41",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/XLnl365fJ",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: The Frontier Lord Begins with Zero Subjects 1x5",
+        "slug": "the-frontier-lord-begins-with-zero-subjects-1x5",
+        "url": "https://animesalt.cx/episode/the-frontier-lord-begins-with-zero-subjects-1x5/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/3e019581fb114fb0708e3f0b5429744d",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/3e019581fb114fb0708e3f0b5429744d",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/b93857SSh",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/buKUVs7a5",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "source": "animesalt",
     "toonUrl": "https://toonstream.us/series/the-frontier-lord-begins-with-zero-subjects",
     "toonSlug": "the-frontier-lord-begins-with-zero-subjects",
-    "episodeCount": 3,
-    "episodesCount": 3,
+    "episodeCount": 5,
+    "episodesCount": 5,
     "saltUrl": "https://animesalt.cx/series/the-frontier-lord-begins-with-zero-subjects/",
     "hazUrl": "https://hindianimeszone.com/the-frontier-lord-begins-with-zero-subjects-season-1-dual-audio/"
   },
@@ -3157,6 +3212,54 @@
             "url": "https://ravok.buzz/video/721bc4c80edbce69921f70cb2d1920f1",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x8/"
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: Jaadugar: A Witch in Mongolia 1x9",
+        "slug": "jaadugar-a-witch-in-mongolia-1x9",
+        "url": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x9/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/2555b8e9861b4b0e141181b725fb1b3b",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/2555b8e9861b4b0e141181b725fb1b3b",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/hsFj6l-vJ",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/o4MJiLGaL",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/euJsmOPWt",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: Jaadugar: A Witch in Mongolia 1x10",
+        "slug": "jaadugar-a-witch-in-mongolia-1x10",
+        "url": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x10/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/188e30ebbc769aeda748b09cec89f0bb",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/188e30ebbc769aeda748b09cec89f0bb",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
@@ -3179,8 +3282,8 @@
     },
     "toonUrl": "https://toonstream.us/series/jaadugar:-a-witch-in-mongolia",
     "toonSlug": "jaadugar:-a-witch-in-mongolia",
-    "episodeCount": 8,
-    "episodesCount": 8,
+    "episodeCount": 10,
+    "episodesCount": 10,
     "saltUrl": "https://animesalt.cx/series/jaadugar-a-witch-in-mongolia/",
     "hazUrl": "https://hindianimeszone.com/jaadugar-a-witch-in-mongolia-season-1-dual-audio-english-japanese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub/"
   },
@@ -3506,6 +3609,69 @@
             "url": "https://ravok.buzz/video/799d3f5de8680c081517920476881764",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/black-torch-1x6/"
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: BLACK TORCH 1x7",
+        "slug": "black-torch-1x7",
+        "url": "https://animesalt.cx/episode/black-torch-1x7/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/c6b674f5588228036011778df458d756",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/c6b674f5588228036011778df458d756",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/2QPNniMSG",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/68PcpxB-P",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/17UZi_wph",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: BLACK TORCH 1x8",
+        "slug": "black-torch-1x8",
+        "url": "https://animesalt.cx/episode/black-torch-1x8/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/57198de0fd9b28665ba93b8c07ccbae3",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/57198de0fd9b28665ba93b8c07ccbae3",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/DpuXzdzOA",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/sY9nAMdZab",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/WmKBUzcMe",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
@@ -3531,8 +3697,8 @@
     },
     "toonUrl": "https://toonstream.us/series/black-torch",
     "toonSlug": "black-torch",
-    "episodeCount": 6,
-    "episodesCount": 6,
+    "episodeCount": 8,
+    "episodesCount": 8,
     "saltUrl": "https://animesalt.cx/series/black-torch/",
     "hazUrl": "https://hindianimeszone.com/black-torch-season-1-multi-audio-hindi-eng-jpn/"
   },
@@ -52594,14 +52760,72 @@
             "url": "https://ravok.buzz/video/78e2010baad1af028423f6b9db642f53",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-exiled-heavy-knight-knows-how-to-game-the-system-1x11/"
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: The Exiled Heavy Knight Knows How to Game the System 1x12",
+        "slug": "the-exiled-heavy-knight-knows-how-to-game-the-system-1x12",
+        "url": "https://animesalt.cx/episode/the-exiled-heavy-knight-knows-how-to-game-the-system-1x12/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/1424a2874fbe1b99f48b836ca8952541",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/1424a2874fbe1b99f48b836ca8952541",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "season": 1,
+        "title": "S1 E13: The Exiled Heavy Knight Knows How to Game the System 1x13",
+        "slug": "the-exiled-heavy-knight-knows-how-to-game-the-system-1x13",
+        "url": "https://animesalt.cx/episode/the-exiled-heavy-knight-knows-how-to-game-the-system-1x13/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/1135230be8c1d1853111db00c02d48bb",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/1135230be8c1d1853111db00c02d48bb",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/YdwsBVm8I",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Tamil)",
+            "url": "https://player.abyssplayer.com/Uxga3cR4l",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Telugu)",
+            "url": "https://player.abyssplayer.com/I3vlsY5UN",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/8R9q6VVmB",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/5VShvyLHr",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/the-exiled-heavy-knight-knows-how-to-game-the-system",
     "toonSlug": "the-exiled-heavy-knight-knows-how-to-game-the-system",
-    "episodeCount": 11,
-    "episodesCount": 11,
+    "episodeCount": 13,
+    "episodesCount": 13,
     "saltSlug": "the-exiled-heavy-knight-knows-how-to-game-the-system",
     "saltUrl": "https://animesalt.cx/series/the-exiled-heavy-knight-knows-how-to-game-the-system/",
     "hazUrl": "https://hindianimeszone.com/the-exiled-heavy-knight-knows-how-to-game-the-system-season-1-episodes-hindi-eng-jap-multi-audio-480p-720p-1080p-hd-10bit-hevc-esub-anime-times-dub/"
@@ -63777,7 +64001,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/TyzPnGNFV",
-        "toonStreamUrl": "https://player.abyssplayer.com/TyzPnGNFV"
+        "toonStreamUrl": "https://player.abyssplayer.com/TyzPnGNFV",
+        "saltUrl": "https://animesalt.cx/episode/grand-blue-dreaming-3x5/"
       },
       {
         "number": 6,
@@ -63831,14 +64056,57 @@
             "url": "https://voe.sx/e/p7xqhnn6g0ql",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/grand-blue-dreaming-3x6/"
+      },
+      {
+        "number": 7,
+        "season": 3,
+        "title": "S3 E7: Grand Blue Dreaming 3x7",
+        "slug": "grand-blue-dreaming-3x7",
+        "url": "https://animesalt.cx/episode/grand-blue-dreaming-3x7/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/a570ce8ae1bfa0a0956b71327be50ce3",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/a570ce8ae1bfa0a0956b71327be50ce3",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/OHIXXaEOm",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/TLN0VzXbP",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 3,
+        "title": "S3 E8: Grand Blue Dreaming 3x8",
+        "slug": "grand-blue-dreaming-3x8",
+        "url": "https://animesalt.cx/episode/grand-blue-dreaming-3x8/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/fd068634f56443e7ef424870db309a61",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/fd068634f56443e7ef424870db309a61",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/grand-blue-dreaming",
     "toonSlug": "grand-blue-dreaming",
-    "episodeCount": 30,
-    "episodesCount": 29,
+    "episodeCount": 32,
+    "episodesCount": 32,
     "saltSlug": "grand-blue-dreaming",
     "saltUrl": "https://animesalt.cx/series/grand-blue-dreaming/",
     "hazUrl": "https://hindianimeszone.com/grand-blue-dreaming-season-1-dual-audio-hindi-jap-480p-720p-and-1080p-hd-10bit-hevc-esub/"
@@ -95509,7 +95777,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/O5mr3czwW",
-        "toonStreamUrl": "https://player.abyssplayer.com/O5mr3czwW"
+        "toonStreamUrl": "https://player.abyssplayer.com/O5mr3czwW",
+        "saltUrl": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x9/"
       },
       {
         "number": 10,
@@ -95558,14 +95827,72 @@
             "url": "https://ravok.buzz/video/982e5bfb1002e50e4c0cb2d3d144b55a",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x10/"
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: Hanaori-san Still Wants to Fight in the Next Life 1x11",
+        "slug": "hanaori-san-still-wants-to-fight-in-the-next-life-1x11",
+        "url": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x11/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/b9648e4dc6a5ad47bea0c9023e810dfd",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b9648e4dc6a5ad47bea0c9023e810dfd",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/Z6Hc-z0yi",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Tamil)",
+            "url": "https://player.abyssplayer.com/pUrtihvR8",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Telugu)",
+            "url": "https://player.abyssplayer.com/j2Eh-wLH9p",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/5bn3admd3",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/VF4W99u8w",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: Hanaori-san Still Wants to Fight in the Next Life 1x12",
+        "slug": "hanaori-san-still-wants-to-fight-in-the-next-life-1x12",
+        "url": "https://animesalt.cx/episode/hanaori-san-still-wants-to-fight-in-the-next-life-1x12/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/90ee95b54c20d0991531360036611c37",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/90ee95b54c20d0991531360036611c37",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/hanaori-san-still-wants-to-fight-in-the-next-life",
     "toonSlug": "hanaori-san-still-wants-to-fight-in-the-next-life",
-    "episodeCount": 10,
-    "episodesCount": 10,
+    "episodeCount": 12,
+    "episodesCount": 12,
     "saltSlug": "hanaori-san-still-wants-to-fight-in-the-next-life",
     "saltUrl": "https://animesalt.cx/series/hanaori-san-still-wants-to-fight-in-the-next-life/",
     "hazUrl": "https://hindianimeszone.com/hanaori-san-still-wants-to-fight-in-the-next-life-season-1-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub/"
@@ -96770,14 +97097,72 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/V7hDD1MPO",
-        "toonStreamUrl": "https://player.abyssplayer.com/V7hDD1MPO"
+        "toonStreamUrl": "https://player.abyssplayer.com/V7hDD1MPO",
+        "saltUrl": "https://animesalt.cx/episode/chainsmoker-cat-1x10/"
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: Chainsmoker Cat 1x11",
+        "slug": "chainsmoker-cat-1x11",
+        "url": "https://animesalt.cx/episode/chainsmoker-cat-1x11/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/23c84f1d392d1453b7a1e380bd6acd0a",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/23c84f1d392d1453b7a1e380bd6acd0a",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/yqjBiAOV4",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Tamil)",
+            "url": "https://player.abyssplayer.com/8BbRqWtok",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Telugu)",
+            "url": "https://player.abyssplayer.com/FP3HF1Cg6",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/Zrc6qVZWUm",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/3KRLQ8l7l",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: Chainsmoker Cat 1x12",
+        "slug": "chainsmoker-cat-1x12",
+        "url": "https://animesalt.cx/episode/chainsmoker-cat-1x12/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/79976930d5b363b51b6e7557ac2dafd2",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/79976930d5b363b51b6e7557ac2dafd2",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/chainsmoker-cat",
     "toonSlug": "chainsmoker-cat",
-    "episodeCount": 10,
-    "episodesCount": 10,
+    "episodeCount": 12,
+    "episodesCount": 12,
     "saltSlug": "chainsmoker-cat",
     "saltUrl": "https://animesalt.cx/series/chainsmoker-cat/",
     "hazUrl": "https://hindianimeszone.com/chainsmoker-cat-season-1-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub/"
@@ -97950,7 +98335,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/hNQ1xONFr",
-        "toonStreamUrl": "https://player.abyssplayer.com/hNQ1xONFr"
+        "toonStreamUrl": "https://player.abyssplayer.com/hNQ1xONFr",
+        "saltUrl": "https://animesalt.cx/episode/i-became-a-legend-after-my-10-year-long-last-stand-1x10/"
       },
       {
         "number": 11,
@@ -97999,14 +98385,41 @@
             "url": "https://ravok.buzz/video/8a0ee38fc64016dbd30c621b3aa655e0",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/i-became-a-legend-after-my-10-year-long-last-stand-1x11/"
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: I Became a Legend After My 10 Year-Long Last Stand 1x12",
+        "slug": "i-became-a-legend-after-my-10-year-long-last-stand-1x12",
+        "url": "https://animesalt.cx/episode/i-became-a-legend-after-my-10-year-long-last-stand-1x12/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/ec69afac0d09f2914d811fa665d06e54",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/ec69afac0d09f2914d811fa665d06e54",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/YBg8v6JA7",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/9dP-IT6m0",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/i-became-a-legend-after-my-10-year-long-last-stand",
     "toonSlug": "i-became-a-legend-after-my-10-year-long-last-stand",
-    "episodeCount": 11,
-    "episodesCount": 11,
+    "episodeCount": 12,
+    "episodesCount": 12,
     "saltSlug": "i-became-a-legend-after-my-10-year-long-last-stand",
     "saltUrl": "https://animesalt.cx/series/i-became-a-legend-after-my-10-year-long-last-stand/",
     "hazUrl": "https://hindianimeszone.com/i-became-a-legend-after-my-10-year-long-last-stand-season-1-dual-audio-hindi-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub/"
@@ -116186,7 +116599,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/w5IEns9RB",
-        "toonStreamUrl": "https://player.abyssplayer.com/w5IEns9RB"
+        "toonStreamUrl": "https://player.abyssplayer.com/w5IEns9RB",
+        "saltUrl": "https://animesalt.cx/episode/liar-game-1x23/"
       },
       {
         "number": 24,
@@ -116240,14 +116654,72 @@
             "url": "https://voe.sx/e/iv7nceboxzys",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/liar-game-1x24/"
+      },
+      {
+        "number": 25,
+        "season": 1,
+        "title": "S1 E25: LIAR GAME 1x25",
+        "slug": "liar-game-1x25",
+        "url": "https://animesalt.cx/episode/liar-game-1x25/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/ccd9cd148bbec8a9c3bfea662aef81ce",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/ccd9cd148bbec8a9c3bfea662aef81ce",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/j75BlUp5S",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Tamil)",
+            "url": "https://player.abyssplayer.com/C-SKrhVOB",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Telugu)",
+            "url": "https://player.abyssplayer.com/x0TROAC81",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/ixMRXDdGT",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/dWBYZ82kT",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "season": 1,
+        "title": "S1 E26: LIAR GAME 1x26",
+        "slug": "liar-game-1x26",
+        "url": "https://animesalt.cx/episode/liar-game-1x26/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/f0bc49a48370642aac2e13d6db960830",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/f0bc49a48370642aac2e13d6db960830",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/liar-game",
     "toonSlug": "liar-game",
-    "episodeCount": 24,
-    "episodesCount": 23,
+    "episodeCount": 26,
+    "episodesCount": 26,
     "saltSlug": "liar-game",
     "saltUrl": "https://animesalt.cx/series/liar-game/",
     "hazUrl": "https://hindianimeszone.com/liar-game-season-1-multi-audio-hindi-tamil-telugu-eng-jap-480p-720p-1080p-hd-web-dl-10bit-hevc-esub/"
@@ -165939,9 +166411,9 @@
     "slug": "naruto-shippuden",
     "url": "https://animesalt.cx/series/naruto-shippuden/",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w342/kV27j3Nz4d5z8u6mN3EJw9RiLg2.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w1280/z0YhJvomqedHF85bplUJEotkN5l.jpg",
-    "description": "",
+    "poster": "https://image.tmdb.org/t/p/original/kV27j3Nz4d5z8u6mN3EJw9RiLg2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/z0YhJvomqedHF85bplUJEotkN5l.jpg",
+    "description": "After two and a half years of training with Jiraiya, Naruto Uzumaki returns to Konoha stronger than ever, ready to face the Akatsuki and bring Sasuke back home.",
     "genres": [
       "Action",
       "Adventure",
@@ -165949,15 +166421,9 @@
       "Shounen"
     ],
     "audioLanguages": [
-      "Bengali",
-      "English",
       "Hindi",
-      "Japanese",
-      "Malayalam",
-      "Tamil",
-      "Telugu",
-      "Kannada",
-      "Korean"
+      "Urdu",
+      "Japanese"
     ],
     "episodes": [
       {
@@ -186332,7 +186798,11 @@
     "saltUrl": "https://animesalt.cx/series/naruto-shippuden/",
     "episodeCount": 500,
     "episodesCount": 500,
-    "hazUrl": "https://hindianimeszone.com/naruto-shippuden-season-1-episodes-bluray-hindi-multi-audio/"
+    "hazUrl": "https://hindianimeszone.com/naruto-shippuden-season-1-episodes-bluray-hindi-multi-audio/",
+    "rating": 8.7,
+    "year": 2017,
+    "isFeaturedHero": true,
+    "heroRank": 6
   },
   {
     "title": "If My Favorite Pop Idol Made It to the Budokan, I Would Die",
@@ -259542,9 +260012,9 @@
     "slug": "one-piece",
     "url": "https://animesalt.cx/series/one-piece/",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w342/uiIB9ctqZFbfRXXimtpmZb5dusi.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w1280/4Mt7WHox67uJ1yErwTBFcV8KWgG.jpg",
-    "description": "",
+    "poster": "https://image.tmdb.org/t/p/original/dB4EDhre2dsC2kxYDavyKWqLQwi.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/v38qp4bySLTXYu3MF8r5GD51FN3.jpg",
+    "description": "Monkey D. Luffy sets sail with his crew of Straw Hat Pirates through treacherous seas to find the legendary treasure ‘One Piece’ and claim the title of the King of the Pirates.",
     "genres": [
       "Action",
       "Adventure",
@@ -259553,14 +260023,9 @@
       "Shounen"
     ],
     "audioLanguages": [
-      "English",
       "Hindi",
-      "Japanese",
-      "Kannada",
-      "Malayalam",
-      "Tamil",
-      "Telugu",
-      "Korean"
+      "Urdu",
+      "Japanese"
     ],
     "episodes": [
       {
@@ -291873,7 +292338,11 @@
     "episodesCount": 1155,
     "saltSlug": "one-piece",
     "saltUrl": "https://animesalt.cx/series/one-piece/",
-    "hazUrl": "https://hindianimeszone.com/one-piece-the-movie-2000-movie-in-hindi-tamil-telugu-malayalam-kannada-dubbed/"
+    "hazUrl": "https://hindianimeszone.com/one-piece-the-movie-2000-movie-in-hindi-tamil-telugu-malayalam-kannada-dubbed/",
+    "rating": 8.9,
+    "year": 2024,
+    "isFeaturedHero": true,
+    "heroRank": 4
   },
   {
     "title": "Fairy Tail: 100 Years Quest",
@@ -305860,7 +306329,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/LYirWydA3"
+        "streamUrl": "https://abyssplayer.com/LYirWydA3",
+        "saltUrl": "https://animesalt.cx/episode/private-jojos-bizarre-adventure-1x1/"
       },
       {
         "number": 2,
@@ -305906,7 +306376,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/TUAP2sknF"
+        "streamUrl": "https://abyssplayer.com/TUAP2sknF",
+        "saltUrl": "https://animesalt.cx/episode/private-jojos-bizarre-adventure-1x2/"
       },
       {
         "number": 3,
@@ -305952,7 +306423,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/TYS_8ewmC"
+        "streamUrl": "https://abyssplayer.com/TYS_8ewmC",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x3/"
       },
       {
         "number": 4,
@@ -305998,7 +306470,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/h_jTQBKBc"
+        "streamUrl": "https://abyssplayer.com/h_jTQBKBc",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x4/"
       },
       {
         "number": 5,
@@ -306044,7 +306517,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/kANAqj0qy"
+        "streamUrl": "https://abyssplayer.com/kANAqj0qy",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x5/"
       },
       {
         "number": 6,
@@ -306090,7 +306564,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/hYlX1F4x4"
+        "streamUrl": "https://abyssplayer.com/hYlX1F4x4",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x6/"
       },
       {
         "number": 7,
@@ -306136,7 +306611,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/v3AAudGrl"
+        "streamUrl": "https://abyssplayer.com/v3AAudGrl",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x7/"
       },
       {
         "number": 8,
@@ -306182,7 +306658,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/TC-ejunlJ"
+        "streamUrl": "https://abyssplayer.com/TC-ejunlJ",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x8/"
       },
       {
         "number": 9,
@@ -306228,7 +306705,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/_jmE6GhZJ"
+        "streamUrl": "https://abyssplayer.com/_jmE6GhZJ",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x9/"
       },
       {
         "number": 10,
@@ -306274,7 +306752,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/cgb8ROydf"
+        "streamUrl": "https://abyssplayer.com/cgb8ROydf",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x10/"
       },
       {
         "number": 11,
@@ -306320,7 +306799,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/VUo7emtuH"
+        "streamUrl": "https://abyssplayer.com/VUo7emtuH",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x11/"
       },
       {
         "number": 12,
@@ -306366,7 +306846,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/3AWM2hA06"
+        "streamUrl": "https://abyssplayer.com/3AWM2hA06",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x12/"
       },
       {
         "number": 13,
@@ -306412,7 +306893,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/TOvDHLKkp"
+        "streamUrl": "https://abyssplayer.com/TOvDHLKkp",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x13/"
       },
       {
         "number": 14,
@@ -306458,7 +306940,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/qG92-IXSQ"
+        "streamUrl": "https://abyssplayer.com/qG92-IXSQ",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x14/"
       },
       {
         "number": 15,
@@ -306504,7 +306987,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/4ZTWqWz1M"
+        "streamUrl": "https://abyssplayer.com/4ZTWqWz1M",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x15/"
       },
       {
         "number": 16,
@@ -306550,7 +307034,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/bFSxXHB5N"
+        "streamUrl": "https://abyssplayer.com/bFSxXHB5N",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x16/"
       },
       {
         "number": 17,
@@ -306596,7 +307081,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/QjsSc7pra"
+        "streamUrl": "https://abyssplayer.com/QjsSc7pra",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x17/"
       },
       {
         "number": 18,
@@ -306642,7 +307128,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/Cn9yZX8-g"
+        "streamUrl": "https://abyssplayer.com/Cn9yZX8-g",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x18/"
       },
       {
         "number": 19,
@@ -306688,7 +307175,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/HKzxa6Mw1"
+        "streamUrl": "https://abyssplayer.com/HKzxa6Mw1",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x19/"
       },
       {
         "number": 20,
@@ -306734,7 +307222,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/xC09PlzWfX"
+        "streamUrl": "https://abyssplayer.com/xC09PlzWfX",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x20/"
       },
       {
         "number": 21,
@@ -306780,7 +307269,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/QEOvi5UcP"
+        "streamUrl": "https://abyssplayer.com/QEOvi5UcP",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x21/"
       },
       {
         "number": 22,
@@ -306826,7 +307316,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/JEdwxYqHA"
+        "streamUrl": "https://abyssplayer.com/JEdwxYqHA",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x22/"
       },
       {
         "number": 23,
@@ -306872,7 +307363,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/gNJHtRRdO"
+        "streamUrl": "https://abyssplayer.com/gNJHtRRdO",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x23/"
       },
       {
         "number": 24,
@@ -306918,7 +307410,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/1EQUMWWI7"
+        "streamUrl": "https://abyssplayer.com/1EQUMWWI7",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x24/"
       },
       {
         "number": 25,
@@ -306964,7 +307457,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/BwS-GJhRB"
+        "streamUrl": "https://abyssplayer.com/BwS-GJhRB",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x25/"
       },
       {
         "number": 26,
@@ -307010,7 +307504,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://abyssplayer.com/J7qe5Z0om"
+        "streamUrl": "https://abyssplayer.com/J7qe5Z0om",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-1x26/"
       },
       {
         "number": 1,
@@ -307041,7 +307536,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/EoSuKz6ck"
+        "streamUrl": "https://player.abyssplayer.com/EoSuKz6ck",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x1/"
       },
       {
         "number": 2,
@@ -307072,7 +307568,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/j08HEVZMh"
+        "streamUrl": "https://player.abyssplayer.com/j08HEVZMh",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x2/"
       },
       {
         "number": 3,
@@ -307103,7 +307600,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/RENVCQQ7v"
+        "streamUrl": "https://player.abyssplayer.com/RENVCQQ7v",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x3/"
       },
       {
         "number": 4,
@@ -307134,7 +307632,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/9h-260hEz"
+        "streamUrl": "https://player.abyssplayer.com/9h-260hEz",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x4/"
       },
       {
         "number": 5,
@@ -307165,7 +307664,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/h4WvYXPod"
+        "streamUrl": "https://player.abyssplayer.com/h4WvYXPod",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x5/"
       },
       {
         "number": 6,
@@ -307196,7 +307696,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/gSVzNCy-f"
+        "streamUrl": "https://player.abyssplayer.com/gSVzNCy-f",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x6/"
       },
       {
         "number": 7,
@@ -307227,7 +307728,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/fjcV3Uq7w"
+        "streamUrl": "https://player.abyssplayer.com/fjcV3Uq7w",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x7/"
       },
       {
         "number": 8,
@@ -307258,7 +307760,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/S84U9gClF"
+        "streamUrl": "https://player.abyssplayer.com/S84U9gClF",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x8/"
       },
       {
         "number": 9,
@@ -307289,7 +307792,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/pl5L0cYLv"
+        "streamUrl": "https://player.abyssplayer.com/pl5L0cYLv",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x9/"
       },
       {
         "number": 10,
@@ -307320,7 +307824,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/GwdYNdHku"
+        "streamUrl": "https://player.abyssplayer.com/GwdYNdHku",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x10/"
       },
       {
         "number": 11,
@@ -307351,7 +307856,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/-S_Pi10dA"
+        "streamUrl": "https://player.abyssplayer.com/-S_Pi10dA",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x11/"
       },
       {
         "number": 12,
@@ -307382,7 +307888,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/8eA3k7ayx"
+        "streamUrl": "https://player.abyssplayer.com/8eA3k7ayx",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x12/"
       },
       {
         "number": 13,
@@ -307413,7 +307920,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/A8hufqAii"
+        "streamUrl": "https://player.abyssplayer.com/A8hufqAii",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x13/"
       },
       {
         "number": 14,
@@ -307444,7 +307952,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/UoteERyfa"
+        "streamUrl": "https://player.abyssplayer.com/UoteERyfa",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x14/"
       },
       {
         "number": 15,
@@ -307475,7 +307984,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/Tqb8XV58Z"
+        "streamUrl": "https://player.abyssplayer.com/Tqb8XV58Z",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x15/"
       },
       {
         "number": 16,
@@ -307506,7 +308016,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/4SaNJZEVW"
+        "streamUrl": "https://player.abyssplayer.com/4SaNJZEVW",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x16/"
       },
       {
         "number": 17,
@@ -307537,7 +308048,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/BG7ArMl6W"
+        "streamUrl": "https://player.abyssplayer.com/BG7ArMl6W",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x17/"
       },
       {
         "number": 18,
@@ -307568,7 +308080,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/XM0KRBSf0"
+        "streamUrl": "https://player.abyssplayer.com/XM0KRBSf0",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x18/"
       },
       {
         "number": 19,
@@ -307599,7 +308112,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/NHc-t3hOn"
+        "streamUrl": "https://player.abyssplayer.com/NHc-t3hOn",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x19/"
       },
       {
         "number": 20,
@@ -307630,7 +308144,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/Da1jaRHiq"
+        "streamUrl": "https://player.abyssplayer.com/Da1jaRHiq",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x20/"
       },
       {
         "number": 21,
@@ -307661,7 +308176,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/7X1YA2oh2"
+        "streamUrl": "https://player.abyssplayer.com/7X1YA2oh2",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x21/"
       },
       {
         "number": 22,
@@ -307692,7 +308208,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/98y3Si6Ja"
+        "streamUrl": "https://player.abyssplayer.com/98y3Si6Ja",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x22/"
       },
       {
         "number": 23,
@@ -307723,7 +308240,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/5vGQzaa6A"
+        "streamUrl": "https://player.abyssplayer.com/5vGQzaa6A",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x23/"
       },
       {
         "number": 24,
@@ -307754,7 +308272,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/sX1_i7oIF"
+        "streamUrl": "https://player.abyssplayer.com/sX1_i7oIF",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x24/"
       },
       {
         "number": 25,
@@ -307785,7 +308304,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/dgDiOZjnC"
+        "streamUrl": "https://player.abyssplayer.com/dgDiOZjnC",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x25/"
       },
       {
         "number": 26,
@@ -307816,7 +308336,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/-J7HAqNoL"
+        "streamUrl": "https://player.abyssplayer.com/-J7HAqNoL",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x26/"
       },
       {
         "number": 27,
@@ -307847,7 +308368,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/wzatqXzBu"
+        "streamUrl": "https://player.abyssplayer.com/wzatqXzBu",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x27/"
       },
       {
         "number": 28,
@@ -307878,7 +308400,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/7rxjdMg8j1"
+        "streamUrl": "https://player.abyssplayer.com/7rxjdMg8j1",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x28/"
       },
       {
         "number": 29,
@@ -307909,7 +308432,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/YCcoicpQb"
+        "streamUrl": "https://player.abyssplayer.com/YCcoicpQb",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x29/"
       },
       {
         "number": 30,
@@ -307940,7 +308464,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/ONOdU9ktH"
+        "streamUrl": "https://player.abyssplayer.com/ONOdU9ktH",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x30/"
       },
       {
         "number": 31,
@@ -307971,7 +308496,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/mNRRhNPzk"
+        "streamUrl": "https://player.abyssplayer.com/mNRRhNPzk",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x31/"
       },
       {
         "number": 32,
@@ -308002,7 +308528,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/3wQ0Zs7CGw"
+        "streamUrl": "https://player.abyssplayer.com/3wQ0Zs7CGw",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x32/"
       },
       {
         "number": 33,
@@ -308033,7 +308560,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/zUGXakbbk"
+        "streamUrl": "https://player.abyssplayer.com/zUGXakbbk",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x33/"
       },
       {
         "number": 34,
@@ -308064,7 +308592,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/UuIJDDLd-"
+        "streamUrl": "https://player.abyssplayer.com/UuIJDDLd-",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x34/"
       },
       {
         "number": 35,
@@ -308095,7 +308624,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/mzkVbaj3T"
+        "streamUrl": "https://player.abyssplayer.com/mzkVbaj3T",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x35/"
       },
       {
         "number": 36,
@@ -308126,7 +308656,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/EyyHt83DBo"
+        "streamUrl": "https://player.abyssplayer.com/EyyHt83DBo",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x36/"
       },
       {
         "number": 37,
@@ -308157,7 +308688,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/Z4y8b4__D"
+        "streamUrl": "https://player.abyssplayer.com/Z4y8b4__D",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x37/"
       },
       {
         "number": 38,
@@ -308188,7 +308720,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/iwMUz90_Nb"
+        "streamUrl": "https://player.abyssplayer.com/iwMUz90_Nb",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x38/"
       },
       {
         "number": 39,
@@ -308219,7 +308752,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/ubHrgLfNr"
+        "streamUrl": "https://player.abyssplayer.com/ubHrgLfNr",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x39/"
       },
       {
         "number": 40,
@@ -308250,7 +308784,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/np0fgrFyg"
+        "streamUrl": "https://player.abyssplayer.com/np0fgrFyg",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x40/"
       },
       {
         "number": 41,
@@ -308281,7 +308816,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/WD5i4BjLG"
+        "streamUrl": "https://player.abyssplayer.com/WD5i4BjLG",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x41/"
       },
       {
         "number": 42,
@@ -308312,7 +308848,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/_2xAlje0P"
+        "streamUrl": "https://player.abyssplayer.com/_2xAlje0P",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x42/"
       },
       {
         "number": 43,
@@ -308343,7 +308880,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/WfOVTQnkz"
+        "streamUrl": "https://player.abyssplayer.com/WfOVTQnkz",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x43/"
       },
       {
         "number": 44,
@@ -308374,7 +308912,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/wyIE43TGn"
+        "streamUrl": "https://player.abyssplayer.com/wyIE43TGn",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x44/"
       },
       {
         "number": 45,
@@ -308405,7 +308944,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/RlZDuqIZ7"
+        "streamUrl": "https://player.abyssplayer.com/RlZDuqIZ7",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x45/"
       },
       {
         "number": 46,
@@ -308436,7 +308976,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/ReUMQ-BHA"
+        "streamUrl": "https://player.abyssplayer.com/ReUMQ-BHA",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x46/"
       },
       {
         "number": 47,
@@ -308467,7 +309008,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/6csH7KPRc"
+        "streamUrl": "https://player.abyssplayer.com/6csH7KPRc",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x47/"
       },
       {
         "number": 48,
@@ -308498,7 +309040,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/MNGLdvd_1L"
+        "streamUrl": "https://player.abyssplayer.com/MNGLdvd_1L",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-2x48/"
       },
       {
         "number": 1,
@@ -308529,7 +309072,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/H1qLkUIoq3"
+        "streamUrl": "https://player.abyssplayer.com/H1qLkUIoq3",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x1/"
       },
       {
         "number": 2,
@@ -308560,7 +309104,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/nyxL7T6Tz"
+        "streamUrl": "https://player.abyssplayer.com/nyxL7T6Tz",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x2/"
       },
       {
         "number": 3,
@@ -308591,7 +309136,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/mKtnrIiNj"
+        "streamUrl": "https://player.abyssplayer.com/mKtnrIiNj",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x3/"
       },
       {
         "number": 4,
@@ -308622,7 +309168,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/r5YlYVOBv"
+        "streamUrl": "https://player.abyssplayer.com/r5YlYVOBv",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x4/"
       },
       {
         "number": 5,
@@ -308638,7 +309185,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://vexal.top/video/53d49d481da5aed1facef3cb5d3e52b9"
+        "streamUrl": "https://vexal.top/video/53d49d481da5aed1facef3cb5d3e52b9",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x5/"
       },
       {
         "number": 6,
@@ -308669,7 +309217,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/qWQDHS532"
+        "streamUrl": "https://player.abyssplayer.com/qWQDHS532",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x6/"
       },
       {
         "number": 7,
@@ -308700,7 +309249,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/sKwJmzEjw"
+        "streamUrl": "https://player.abyssplayer.com/sKwJmzEjw",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x7/"
       },
       {
         "number": 8,
@@ -308731,7 +309281,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/KoVqR280b"
+        "streamUrl": "https://player.abyssplayer.com/KoVqR280b",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x8/"
       },
       {
         "number": 9,
@@ -308747,7 +309298,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://vexal.top/video/8bed24e4704ee937ecd84b814bc58b6a"
+        "streamUrl": "https://vexal.top/video/8bed24e4704ee937ecd84b814bc58b6a",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x9/"
       },
       {
         "number": 10,
@@ -308763,7 +309315,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://vexal.top/video/b6084eee5942341bee5b666423d284dc"
+        "streamUrl": "https://vexal.top/video/b6084eee5942341bee5b666423d284dc",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x10/"
       },
       {
         "number": 11,
@@ -308794,7 +309347,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/nvqgURzr7"
+        "streamUrl": "https://player.abyssplayer.com/nvqgURzr7",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x11/"
       },
       {
         "number": 12,
@@ -308825,7 +309379,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/Nkov-28PQ"
+        "streamUrl": "https://player.abyssplayer.com/Nkov-28PQ",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x12/"
       },
       {
         "number": 13,
@@ -308856,7 +309411,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/TOiJ1hB7j"
+        "streamUrl": "https://player.abyssplayer.com/TOiJ1hB7j",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x13/"
       },
       {
         "number": 14,
@@ -308887,7 +309443,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/7_RzYgzeI"
+        "streamUrl": "https://player.abyssplayer.com/7_RzYgzeI",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x14/"
       },
       {
         "number": 15,
@@ -308918,7 +309475,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/6H3992XpB"
+        "streamUrl": "https://player.abyssplayer.com/6H3992XpB",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x15/"
       },
       {
         "number": 16,
@@ -308949,7 +309507,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/9ypCGOw-4"
+        "streamUrl": "https://player.abyssplayer.com/9ypCGOw-4",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x16/"
       },
       {
         "number": 17,
@@ -308980,7 +309539,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/p2iksQBea"
+        "streamUrl": "https://player.abyssplayer.com/p2iksQBea",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x17/"
       },
       {
         "number": 18,
@@ -309011,7 +309571,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/qv4hysKtP"
+        "streamUrl": "https://player.abyssplayer.com/qv4hysKtP",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x18/"
       },
       {
         "number": 19,
@@ -309042,7 +309603,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/TmZ9q3yEM"
+        "streamUrl": "https://player.abyssplayer.com/TmZ9q3yEM",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x19/"
       },
       {
         "number": 20,
@@ -309073,7 +309635,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/AeZO_FDTI"
+        "streamUrl": "https://player.abyssplayer.com/AeZO_FDTI",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x20/"
       },
       {
         "number": 21,
@@ -309104,7 +309667,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/hiOZQdljY"
+        "streamUrl": "https://player.abyssplayer.com/hiOZQdljY",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x21/"
       },
       {
         "number": 22,
@@ -309135,7 +309699,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/qzpFMLPGx"
+        "streamUrl": "https://player.abyssplayer.com/qzpFMLPGx",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x22/"
       },
       {
         "number": 23,
@@ -309166,7 +309731,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/lkuvwlICm"
+        "streamUrl": "https://player.abyssplayer.com/lkuvwlICm",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x23/"
       },
       {
         "number": 24,
@@ -309197,7 +309763,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/jKQFCEh4n"
+        "streamUrl": "https://player.abyssplayer.com/jKQFCEh4n",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x24/"
       },
       {
         "number": 25,
@@ -309228,7 +309795,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/OjZGpRaoN"
+        "streamUrl": "https://player.abyssplayer.com/OjZGpRaoN",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x25/"
       },
       {
         "number": 26,
@@ -309259,7 +309827,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/qB3Zmg29u"
+        "streamUrl": "https://player.abyssplayer.com/qB3Zmg29u",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x26/"
       },
       {
         "number": 27,
@@ -309290,7 +309859,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/xIN5yL9z0"
+        "streamUrl": "https://player.abyssplayer.com/xIN5yL9z0",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x27/"
       },
       {
         "number": 28,
@@ -309321,7 +309891,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/eygXtUhMV"
+        "streamUrl": "https://player.abyssplayer.com/eygXtUhMV",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x28/"
       },
       {
         "number": 29,
@@ -309352,7 +309923,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/1NF7NFUy-"
+        "streamUrl": "https://player.abyssplayer.com/1NF7NFUy-",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x29/"
       },
       {
         "number": 30,
@@ -309383,7 +309955,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/F9SGJrlQD"
+        "streamUrl": "https://player.abyssplayer.com/F9SGJrlQD",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x30/"
       },
       {
         "number": 31,
@@ -309414,7 +309987,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/G4lsqxyaf"
+        "streamUrl": "https://player.abyssplayer.com/G4lsqxyaf",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x31/"
       },
       {
         "number": 32,
@@ -309430,7 +310004,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://ravok.buzz/video/8002c5f27890e62ed13bb7ace69db2e6"
+        "streamUrl": "https://ravok.buzz/video/8002c5f27890e62ed13bb7ace69db2e6",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x32/"
       },
       {
         "number": 33,
@@ -309461,7 +310036,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/BJ1MSW7lk"
+        "streamUrl": "https://player.abyssplayer.com/BJ1MSW7lk",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x33/"
       },
       {
         "number": 34,
@@ -309492,7 +310068,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/-70VG1Ds1"
+        "streamUrl": "https://player.abyssplayer.com/-70VG1Ds1",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x34/"
       },
       {
         "number": 35,
@@ -309523,7 +310100,8 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/CoG-5R4-R"
+        "streamUrl": "https://player.abyssplayer.com/CoG-5R4-R",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x35/"
       },
       {
         "number": 36,
@@ -309554,14 +310132,108 @@
             "isMultiAudio": true
           }
         ],
-        "streamUrl": "https://player.abyssplayer.com/9PyoEb5cV"
+        "streamUrl": "https://player.abyssplayer.com/9PyoEb5cV",
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x36/"
+      },
+      {
+        "number": 37,
+        "season": 3,
+        "title": "S3 E37: JoJo's Bizarre Adventure 3x37",
+        "slug": "jojos-bizarre-adventure-3x37",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x37/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/84648eaca6a7fc8394fbdb9cf07fd236",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/84648eaca6a7fc8394fbdb9cf07fd236",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/NCSGV4YKT_",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/_IvTCJo8u",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/T-JTd-QfS",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "season": 3,
+        "title": "S3 E38: JoJo's Bizarre Adventure 3x38",
+        "slug": "jojos-bizarre-adventure-3x38",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x38/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/d855ef37fb3c07f657a489eab125fc3e",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/d855ef37fb3c07f657a489eab125fc3e",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/qkYuuursx",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/xCFiol3s3",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/AfKEC-igm",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 39,
+        "season": 3,
+        "title": "S3 E39: JoJo's Bizarre Adventure 3x39",
+        "slug": "jojos-bizarre-adventure-3x39",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x39/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/6edf4b8ea5fb8603fcf25f2438205094",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/6edf4b8ea5fb8603fcf25f2438205094",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/n18NldePc",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/NELMsjrPU",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/91AgLMzUZ",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/jojos-bizarre-adventure",
     "toonSlug": "jojos-bizarre-adventure",
-    "episodeCount": 107,
-    "episodesCount": 107,
+    "episodeCount": 113,
+    "episodesCount": 113,
     "saltSlug": "jojos-bizarre-adventure",
     "saltUrl": "https://animesalt.cx/series/jojos-bizarre-adventure/",
     "hazUrl": "https://hindianimeszone.com/jojos-bizarre-adventure-season-1-hindi-multi-audio/"
@@ -529553,24 +530225,20 @@
     "slug": "solo-leveling",
     "url": "https://animesalt.cx/series/solo-leveling/",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w342/rsOApVLbIQEcNkqSlOxNPyg3FyI.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w1280/8j8kuMcdJKMVFoNJysNlXFDjY7s.jpg",
-    "description": "",
+    "poster": "https://image.tmdb.org/t/p/original/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/xMNH87maNLt9n2bMDYeI6db5VFm.jpg",
+    "description": "They say whatever doesn’t kill you makes you stronger, but that wasn’t the case for the world’s weakest hunter Sung Jinwoo. After being slaughtered in a dual dungeon, Jinwoo awakens with the mysterious System, leveling him up in every way as he uncovers the dungeon’s deepest secrets.",
     "genres": [
       "Action",
-      "Adult Cast",
-      "Adventure",
       "Fantasy",
+      "Adventure",
       "Super Power"
     ],
     "audioLanguages": [
-      "English",
       "Hindi",
+      "Urdu",
       "Japanese",
-      "Tamil",
-      "Telugu",
-      "Korean",
-      "Kannada"
+      "English"
     ],
     "episodes": [
       {
@@ -531017,7 +531685,11 @@
     "episodesCount": 25,
     "saltSlug": "solo-leveling",
     "saltUrl": "https://animesalt.cx/series/solo-leveling/",
-    "hazUrl": "https://hindianimeszone.com/solo-leveling-season-2-hindi-multi-audio/"
+    "hazUrl": "https://hindianimeszone.com/solo-leveling-season-2-hindi-multi-audio/",
+    "rating": 8.9,
+    "year": 2024,
+    "isFeaturedHero": true,
+    "heroRank": 1
   },
   {
     "title": "Haikyu!!",
@@ -563857,7 +564529,8 @@
             "url": "https://emturbovid.com/t/6a943dd76cf60",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x1/"
       },
       {
         "number": 2,
@@ -563911,7 +564584,8 @@
             "url": "https://emturbovid.com/t/6a943dd9582de",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x2/"
       },
       {
         "number": 3,
@@ -563965,7 +564639,8 @@
             "url": "https://emturbovid.com/t/6a943ddb5ad52",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x3/"
       },
       {
         "number": 4,
@@ -564019,7 +564694,8 @@
             "url": "https://emturbovid.com/t/6a943ffc1f5bb",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x4/"
       },
       {
         "number": 5,
@@ -564073,7 +564749,8 @@
             "url": "https://emturbovid.com/t/6a943dde642a6",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x5/"
       },
       {
         "number": 6,
@@ -564127,7 +564804,8 @@
             "url": "https://emturbovid.com/t/6a943ffe91cfd",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x6/"
       },
       {
         "number": 7,
@@ -564181,7 +564859,8 @@
             "url": "https://emturbovid.com/t/6a943de166884",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x7/"
       },
       {
         "number": 8,
@@ -564235,7 +564914,8 @@
             "url": "https://emturbovid.com/t/6a943de35cc58",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x8/"
       },
       {
         "number": 9,
@@ -564289,7 +564969,8 @@
             "url": "https://emturbovid.com/t/6a943de56d7a2",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x9/"
       },
       {
         "number": 10,
@@ -564343,7 +565024,8 @@
             "url": "https://emturbovid.com/t/6a944000577d4",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x10/"
       },
       {
         "number": 11,
@@ -564397,7 +565079,8 @@
             "url": "https://emturbovid.com/t/6a94400264c46",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x11/"
       },
       {
         "number": 12,
@@ -564451,7 +565134,8 @@
             "url": "https://emturbovid.com/t/6a944004a7e8f",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x12/"
       },
       {
         "number": 13,
@@ -564505,7 +565189,8 @@
             "url": "https://emturbovid.com/t/6a943ded25ee6",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x13/"
       },
       {
         "number": 14,
@@ -564559,7 +565244,8 @@
             "url": "https://emturbovid.com/t/6a943def6149f",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x14/"
       },
       {
         "number": 15,
@@ -564613,7 +565299,8 @@
             "url": "https://emturbovid.com/t/6a943df12527e",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x15/"
       },
       {
         "number": 16,
@@ -564667,7 +565354,8 @@
             "url": "https://emturbovid.com/t/6a9440065e56f",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x16/"
       },
       {
         "number": 17,
@@ -564721,7 +565409,8 @@
             "url": "https://emturbovid.com/t/6a943df53325c",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x17/"
       },
       {
         "number": 18,
@@ -564775,7 +565464,8 @@
             "url": "https://emturbovid.com/t/6a943df75ed93",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x18/"
       },
       {
         "number": 19,
@@ -564829,7 +565519,8 @@
             "url": "https://emturbovid.com/t/6a943df92ea33",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x19/"
       },
       {
         "number": 20,
@@ -564883,7 +565574,8 @@
             "url": "https://emturbovid.com/t/6a943dfb27d27",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x20/"
       },
       {
         "number": 21,
@@ -564937,7 +565629,8 @@
             "url": "https://emturbovid.com/t/6a943dfd28c69",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x21/"
       },
       {
         "number": 22,
@@ -564991,7 +565684,8 @@
             "url": "https://emturbovid.com/t/6a943dff2ad08",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x22/"
       },
       {
         "number": 23,
@@ -565045,7 +565739,8 @@
             "url": "https://emturbovid.com/t/6a94400837854",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x23/"
       },
       {
         "number": 24,
@@ -565099,7 +565794,8 @@
             "url": "https://emturbovid.com/t/6a943e032d65d",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-1x24/"
       },
       {
         "number": 1,
@@ -565130,7 +565826,8 @@
             "url": "https://ravok.buzz/video/47a658229eb2368a99f1d032c8848542",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x1/"
       },
       {
         "number": 2,
@@ -565161,7 +565858,8 @@
             "url": "https://ravok.buzz/video/fd2c5e4680d9a01dba3aada5ece22270",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x2/"
       },
       {
         "number": 3,
@@ -565192,7 +565890,8 @@
             "url": "https://ravok.buzz/video/7c9d0b1f96aebd7b5eca8c3edaa19ebb",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x3/"
       },
       {
         "number": 4,
@@ -565223,7 +565922,8 @@
             "url": "https://ravok.buzz/video/fd06b8ea02fe5b1c2496fe1700e9d16c",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x4/"
       },
       {
         "number": 5,
@@ -565254,7 +565954,8 @@
             "url": "https://ravok.buzz/video/571e0f7e2d992e738adff8b1bd43a521",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x5/"
       },
       {
         "number": 6,
@@ -565285,7 +565986,8 @@
             "url": "https://ravok.buzz/video/fe709c654eac84d5239d1a12a4f71877",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x6/"
       },
       {
         "number": 7,
@@ -565316,7 +566018,8 @@
             "url": "https://ravok.buzz/video/4a213d37242bdcad8e7300e202e7caa4",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x7/"
       },
       {
         "number": 8,
@@ -565347,7 +566050,8 @@
             "url": "https://ravok.buzz/video/69a5b5995110b36a9a347898d97a610e",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x8/"
       },
       {
         "number": 9,
@@ -565378,7 +566082,8 @@
             "url": "https://ravok.buzz/video/3fe78a8acf5fda99de95303940a2420c",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x9/"
       },
       {
         "number": 10,
@@ -565409,7 +566114,8 @@
             "url": "https://ravok.buzz/video/678a1491514b7f1006d605e9161946b1",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x10/"
       },
       {
         "number": 11,
@@ -565445,7 +566151,8 @@
             "url": "https://cybervynx.com/e/pxxjael7ay4n",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x11/"
       },
       {
         "number": 12,
@@ -565476,7 +566183,8 @@
             "url": "https://ravok.buzz/video/c21002f464c5fc5bee3b98ced83963b8",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x12/"
       },
       {
         "number": 13,
@@ -565507,7 +566215,8 @@
             "url": "https://ravok.buzz/video/c7635bfd99248a2cdef8249ef7bfbef4",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x13/"
       },
       {
         "number": 14,
@@ -565538,7 +566247,8 @@
             "url": "https://ravok.buzz/video/2cfd4560539f887a5e420412b370b361",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x14/"
       },
       {
         "number": 15,
@@ -565569,7 +566279,8 @@
             "url": "https://ravok.buzz/video/3b712de48137572f3849aabd5666a4e3",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x15/"
       },
       {
         "number": 16,
@@ -565600,7 +566311,8 @@
             "url": "https://ravok.buzz/video/3a15c7d0bbe60300a39f76f8a5ba6896",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x16/"
       },
       {
         "number": 17,
@@ -565636,7 +566348,8 @@
             "url": "https://cybervynx.com/e/wucw3w56ektr",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x17/"
       },
       {
         "number": 18,
@@ -565667,7 +566380,8 @@
             "url": "https://ravok.buzz/video/8597a6cfa74defcbde3047c891d78f90",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x18/"
       },
       {
         "number": 19,
@@ -565698,7 +566412,8 @@
             "url": "https://ravok.buzz/video/c60d060b946d6dd6145dcbad5c4ccf6f",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x19/"
       },
       {
         "number": 20,
@@ -565729,7 +566444,8 @@
             "url": "https://ravok.buzz/video/0eec27c419d0fe24e53c90338cdc8bc6",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x20/"
       },
       {
         "number": 21,
@@ -565765,7 +566481,8 @@
             "url": "https://cybervynx.com/e/hgen621scoeo",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x21/"
       },
       {
         "number": 22,
@@ -565796,7 +566513,8 @@
             "url": "https://ravok.buzz/video/e19347e1c3ca0c0b97de5fb3b690855a",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x22/"
       },
       {
         "number": 23,
@@ -565827,7 +566545,8 @@
             "url": "https://ravok.buzz/video/2cbca44843a864533ec05b321ae1f9d1",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x23/"
       },
       {
         "number": 24,
@@ -565858,7 +566577,8 @@
             "url": "https://ravok.buzz/video/8f1d43620bc6bb580df6e80b0dc05c48",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x24/"
       },
       {
         "number": 25,
@@ -565889,7 +566609,8 @@
             "url": "https://vexal.top/video/b9d487a30398d42ecff55c228ed5652b",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-2x25/"
       },
       {
         "number": 1,
@@ -565920,7 +566641,8 @@
             "url": "https://ravok.buzz/video/b7f0b1c1761095727bb5513df24a3302",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x1/"
       },
       {
         "number": 2,
@@ -565951,7 +566673,8 @@
             "url": "https://ravok.buzz/video/383a2a1e8e4bf855f4149671967161bb",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x2/"
       },
       {
         "number": 3,
@@ -565967,7 +566690,8 @@
             "url": "https://ravok.buzz/video/7377f47f95a1202ea8d330061b674dea",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x3/"
       },
       {
         "number": 4,
@@ -565998,7 +566722,8 @@
             "url": "https://ravok.buzz/video/604ed2b8703ee490b93a502ef83743ce",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x4/"
       },
       {
         "number": 5,
@@ -566029,7 +566754,8 @@
             "url": "https://vexal.top/video/bbc57478f9bdc47a0126f9e93343346d",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x5/"
       },
       {
         "number": 6,
@@ -566060,14 +566786,72 @@
             "url": "https://ravok.buzz/video/fbba25691bea73e74b93b6f510b74033",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x6/"
+      },
+      {
+        "number": 7,
+        "season": 3,
+        "title": "S3 E7: Mushoku Tensei: Jobless Reincarnation 3x7",
+        "slug": "mushoku-tensei-jobless-reincarnation-3x7",
+        "url": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x7/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/c7550aa992da57915ff925bf923825fa",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/c7550aa992da57915ff925bf923825fa",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/EcBmNEFE3",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Tamil)",
+            "url": "https://player.abyssplayer.com/D6bQLT6Dh",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Telugu)",
+            "url": "https://player.abyssplayer.com/uLYkz0MHW",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/xbNVCmT7k",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/So34PZNZ1",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 3,
+        "title": "S3 E8: Mushoku Tensei: Jobless Reincarnation 3x8",
+        "slug": "mushoku-tensei-jobless-reincarnation-3x8",
+        "url": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x8/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/65da3129d9d71cc4ae2dc09b9b3a43ea",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/65da3129d9d71cc4ae2dc09b9b3a43ea",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/mushoku-tensei-jobless-reincarnation",
     "toonSlug": "mushoku-tensei-jobless-reincarnation",
-    "episodeCount": 55,
-    "episodesCount": 55,
+    "episodeCount": 57,
+    "episodesCount": 57,
     "saltSlug": "mushoku-tensei-jobless-reincarnation",
     "saltUrl": "https://animesalt.cx/series/mushoku-tensei-jobless-reincarnation/",
     "hazUrl": "https://hindianimeszone.com/mushoku-tensei-jobless-reincarnation-season-1-bluray-hindi-english-jap-multi-audio-480p-720p-and-1080p-hd-10bit-hevc-esub-uncensored/"
@@ -601744,13 +602528,75 @@
         "saltUrl": "https://animesalt.cx/episode/re-zero-starting-life-in-another-world-4x11/",
         "streamUrl": "https://player.abyssplayer.com/Pw16hkyX1",
         "toonStreamUrl": "https://player.abyssplayer.com/Pw16hkyX1"
+      },
+      {
+        "number": 12,
+        "season": 4,
+        "title": "S4 E12: Re Zero - Starting Life in Another World 4x12",
+        "slug": "re-zero-starting-life-in-another-world-4x12",
+        "url": "https://animesalt.cx/episode/re-zero-starting-life-in-another-world-4x12/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/9c10d235bc6941125446942ec2c0d999",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9c10d235bc6941125446942ec2c0d999",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/ztgHZ15gw",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/mEUstWSni",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/YM_zYDwH6",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "season": 4,
+        "title": "S4 E13: Re Zero - Starting Life in Another World 4x13",
+        "slug": "re-zero-starting-life-in-another-world-4x13",
+        "url": "https://animesalt.cx/episode/re-zero-starting-life-in-another-world-4x13/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/019059823f48e01d3dc9e864a371605f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/019059823f48e01d3dc9e864a371605f",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/c5ehY9t5_",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/NLr3yNxLH",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/rYjQDNt58",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "toonSlug": "rezero-starting-life-in-another-world",
     "toonUrl": "https://toonstream.us/series/rezero-starting-life-in-another-world",
-    "episodeCount": 77,
-    "episodesCount": 77,
+    "episodeCount": 79,
+    "episodesCount": 79,
     "saltSlug": "re-zero-starting-life-in-another-world",
     "saltUrl": "https://animesalt.cx/series/re-zero-starting-life-in-another-world/"
   },
@@ -601759,27 +602605,21 @@
     "slug": "attack-on-titan",
     "url": "https://animesalt.cx/series/attack-on-titan/",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w342/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w1280/yvKrycViRMQcIgdnjsM5JGNWU4Q.jpg",
-    "description": "",
+    "poster": "https://image.tmdb.org/t/p/original/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/rqbCbjB19amtOtFQbb3K2lgm2zv.jpg",
+    "description": "After his hometown is destroyed and his mother is devoured by monstrous Titans, Eren Yeager enlists in the Scout Regiment, vowing to eradicate every single Titan from existence.",
     "genres": [
       "Action",
       "Drama",
       "Fantasy",
       "Mystery",
-      "Shounen",
-      "Suspense"
+      "Shounen"
     ],
     "audioLanguages": [
-      "English",
       "Hindi",
+      "Urdu",
       "Japanese",
-      "Kannada",
-      "Tamil",
-      "Telugu",
-      "Korean",
-      "Malayalam",
-      "Bengali"
+      "English"
     ],
     "episodes": [
       {
@@ -606457,7 +607297,11 @@
     "episodesCount": 97,
     "saltSlug": "attack-on-titan",
     "saltUrl": "https://animesalt.cx/series/attack-on-titan/",
-    "hazUrl": "https://hindianimeszone.com/attack-on-titan-season-1-in-hindi-multi-audio/"
+    "hazUrl": "https://hindianimeszone.com/attack-on-titan-season-1-in-hindi-multi-audio/",
+    "rating": 9,
+    "year": 2023,
+    "isFeaturedHero": true,
+    "heroRank": 5
   },
   {
     "title": "An Archdemon's Dilemma: How to Love Your Elf Bride",
@@ -655307,22 +656151,19 @@
     "slug": "bleach-thousand-year-blood-war",
     "url": "https://animesalt.cx/series/bleach-thousand-year-blood-war/",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w342/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w1280/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
-    "description": "",
+    "poster": "https://image.tmdb.org/t/p/original/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
+    "description": "The Soul Society faces total annihilation as the Wandenreich, an unseen army of Quincies led by Yhwach, emerges from the shadows to conquer both the Living World and Soul Society.",
     "genres": [
       "Action",
       "Adventure",
-      "Shounen",
-      "Supernatural"
+      "Supernatural",
+      "Shounen"
     ],
     "audioLanguages": [
-      "English",
       "Hindi",
-      "Japanese",
-      "Tamil",
-      "Telugu",
-      "Korean"
+      "Urdu",
+      "Japanese"
     ],
     "episodes": [
       {
@@ -667110,7 +667951,11 @@
     "episodesCount": 400,
     "saltSlug": "bleach-thousand-year-blood-war",
     "saltUrl": "https://animesalt.cx/series/bleach-thousand-year-blood-war/",
-    "hazUrl": "https://hindianimeszone.com/bleach-thousand-year-blood-war-episodes-bluray-hindi-eng-jap-multi-audio-480p-720p-and-1080p-hd-10bit-hevc-esub/"
+    "hazUrl": "https://hindianimeszone.com/bleach-thousand-year-blood-war-episodes-bluray-hindi-eng-jap-multi-audio-480p-720p-and-1080p-hd-10bit-hevc-esub/",
+    "rating": 8.8,
+    "year": 2024,
+    "isFeaturedHero": true,
+    "heroRank": 7
   },
   {
     "title": "Mobile Suit Gundam: The Witch from Mercury",
@@ -758013,7 +758858,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/cjLhzpN75",
-        "toonStreamUrl": "https://player.abyssplayer.com/cjLhzpN75"
+        "toonStreamUrl": "https://player.abyssplayer.com/cjLhzpN75",
+        "saltUrl": "https://animesalt.cx/episode/that-time-i-got-reincarnated-as-a-slime-4x18/"
       },
       {
         "number": 19,
@@ -758062,14 +758908,97 @@
             "url": "https://ravok.buzz/video/3f332c6d5115412c25d90fb4b5028a18",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/that-time-i-got-reincarnated-as-a-slime-4x19/"
+      },
+      {
+        "number": 20,
+        "season": 4,
+        "title": "S4 E20: That Time I Got Reincarnated as a Slime 4x20",
+        "slug": "that-time-i-got-reincarnated-as-a-slime-4x20",
+        "url": "https://animesalt.cx/episode/that-time-i-got-reincarnated-as-a-slime-4x20/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/4d951e4a84953a9cbd85cfcbede14509",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/4d951e4a84953a9cbd85cfcbede14509",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/T2E3d5Rnb",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Tamil)",
+            "url": "https://player.abyssplayer.com/tpUVpvVlu",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Telugu)",
+            "url": "https://player.abyssplayer.com/T1GV0pUJT",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/5DuC7c_VI",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/jwOOm8M-n",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 21,
+        "season": 4,
+        "title": "S4 E21: That Time I Got Reincarnated as a Slime 4x21",
+        "slug": "that-time-i-got-reincarnated-as-a-slime-4x21",
+        "url": "https://animesalt.cx/episode/that-time-i-got-reincarnated-as-a-slime-4x21/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/d252374cef7c9c687b095cc8f7fac721",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/d252374cef7c9c687b095cc8f7fac721",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/x4n3OhjxO",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Tamil)",
+            "url": "https://player.abyssplayer.com/1u8UvJD1a",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Telugu)",
+            "url": "https://player.abyssplayer.com/HaDWc-hz6",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (English)",
+            "url": "https://player.abyssplayer.com/MDnDpPDHQb",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/LZ0LJRyy5",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/that-time-i-got-reincarnated-as-a-slime",
     "toonSlug": "that-time-i-got-reincarnated-as-a-slime",
-    "episodeCount": 91,
-    "episodesCount": 91,
+    "episodeCount": 93,
+    "episodesCount": 93,
     "saltSlug": "that-time-i-got-reincarnated-as-a-slime",
     "saltUrl": "https://animesalt.cx/series/that-time-i-got-reincarnated-as-a-slime/",
     "hazUrl": "https://hindianimeszone.com/that-time-i-got-reincarnated-as-a-slime-season-3-hindi-multi-audio/"
@@ -758079,24 +759008,20 @@
     "slug": "jujutsu-kaisen",
     "url": "https://animesalt.cx/series/jujutsu-kaisen/",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w342/fHpKWq9ayzSk8nSwqRuaAUemRKh.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w1280/gmECX1DvFgdUPjtio2zaL8BPYPu.jpg",
-    "description": "",
+    "poster": "https://image.tmdb.org/t/p/original/6qQzMJG27XOJsyAEEIisoJB45j2.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/qpin8cASXEVtwhzNsprHYFiOAGk.jpg",
+    "description": "Yuji Itadori swallows a legendary cursed talisman—the finger of Ryomen Sukuna—becoming host to the King of Curses. Guided by the strongest sorcerer Satoru Gojo, he enrolls at Tokyo Jujutsu High to exorcise terrifying curses.",
     "genres": [
       "Action",
-      "School",
-      "Shounen",
-      "Supernatural"
+      "Fantasy",
+      "Supernatural",
+      "Shounen"
     ],
     "audioLanguages": [
-      "English",
       "Hindi",
+      "Urdu",
       "Japanese",
-      "Tamil",
-      "Telugu",
-      "Kannada",
-      "Bengali",
-      "Korean"
+      "English"
     ],
     "episodes": [
       {
@@ -761496,7 +762421,11 @@
     "episodesCount": 59,
     "saltSlug": "jujutsu-kaisen",
     "saltUrl": "https://animesalt.cx/series/jujutsu-kaisen/",
-    "hazUrl": "https://hindianimeszone.com/jujutsu-kaisen-season-1-hindi-tamil-telugu-jap-sony-yay-dubbed-uncut/"
+    "hazUrl": "https://hindianimeszone.com/jujutsu-kaisen-season-1-hindi-tamil-telugu-jap-sony-yay-dubbed-uncut/",
+    "rating": 8.8,
+    "year": 2024,
+    "isFeaturedHero": true,
+    "heroRank": 3
   },
   {
     "title": "Banished from the Hero's Party I Decided to Live a Quiet Life in the Countryside",
@@ -772110,7 +773039,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/CXCxVd6_5",
-        "toonStreamUrl": "https://player.abyssplayer.com/CXCxVd6_5"
+        "toonStreamUrl": "https://player.abyssplayer.com/CXCxVd6_5",
+        "saltUrl": "https://animesalt.cx/episode/the-elusive-samurai-2x8/"
       },
       {
         "number": 9,
@@ -772159,14 +773089,57 @@
             "url": "https://ravok.buzz/video/bfd1269f6ca371debca250799daabb02",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-elusive-samurai-2x9/"
+      },
+      {
+        "number": 10,
+        "season": 2,
+        "title": "S2 E10: The Elusive Samurai 2x10",
+        "slug": "the-elusive-samurai-2x10",
+        "url": "https://animesalt.cx/episode/the-elusive-samurai-2x10/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/2da37507d2177cbb5af17795db30fd1e",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/2da37507d2177cbb5af17795db30fd1e",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Hindi)",
+            "url": "https://player.abyssplayer.com/7xjU2jbPD",
+            "isMultiAudio": true
+          },
+          {
+            "label": "Abyss (Japanese)",
+            "url": "https://player.abyssplayer.com/cGteHjX8x",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "season": 2,
+        "title": "S2 E11: The Elusive Samurai 2x11",
+        "slug": "the-elusive-samurai-2x11",
+        "url": "https://animesalt.cx/episode/the-elusive-samurai-2x11/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/92a05f3584af93d17968cc842716fd4c",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/92a05f3584af93d17968cc842716fd4c",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/the-elusive-samurai",
     "toonSlug": "the-elusive-samurai",
-    "episodeCount": 21,
-    "episodesCount": 21,
+    "episodeCount": 23,
+    "episodesCount": 23,
     "saltSlug": "the-elusive-samurai",
     "saltUrl": "https://animesalt.cx/series/the-elusive-samurai/",
     "hazUrl": "https://hindianimeszone.com/the-elusive-samurai-season-1-hindi-dual-audio/"
@@ -814779,15 +815752,17 @@
     "title": "Demon Slayer: Kimetsu no Yaiba",
     "slug": "demon-slayer-kimetsu-no-yaiba",
     "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w780/ctR9Kv2MNhuIjgb96wARbT1BNts.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w780/ctR9Kv2MNhuIjgb96wARbT1BNts.jpg",
-    "description": "Language:\n          Japanese – Eng – Hindi [Org. CR Audio]Runningtime: 25minQuality:1080p FHD | 720p HD | 480p BDRip",
+    "poster": "https://image.tmdb.org/t/p/original/xUfRZu2mi8jH6SzQEJGP6tjBuYj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/3GQKYh6Trm8pxd2AypovoYQf4Ay.jpg",
+    "description": "After a demon attack leaves his family slain and his sister Nezuko cursed, Tanjiro Kamado embarks upon a perilous journey to become a Demon Slayer, cure his sister, and defeat the demon king Muzan Kibutsuji.",
     "genres": [
-      "Anime",
-      "Action"
+      "Action",
+      "Fantasy",
+      "Historical",
+      "Supernatural"
     ],
-    "rating": 8.3,
-    "year": 2019,
+    "rating": 8.8,
+    "year": 2024,
     "episodes": [
       {
         "number": 1,
@@ -815801,7 +816776,15 @@
     ],
     "source": "toon-stream",
     "toonUrl": "https://toonstream.us/series/demon-slayer-kimetsu-no-yaiba",
-    "toonSlug": "demon-slayer-kimetsu-no-yaiba"
+    "toonSlug": "demon-slayer-kimetsu-no-yaiba",
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese",
+      "English"
+    ],
+    "isFeaturedHero": true,
+    "heroRank": 2
   },
   {
     "id": "ts-the-canterville-ghost",

@@ -28,12 +28,16 @@ export default async function EpisodeWatchPage(props: PageProps) {
   const decodedSlug = decodeURIComponent(slug).toLowerCase().trim();
   const anime = items.find((item) => {
     const itemSlug = item.slug.toLowerCase().trim();
+    const decodedItemSlug = decodeURIComponent(item.slug).toLowerCase().trim();
     const saltSlug = item.saltSlug?.toLowerCase().trim();
+    const toonSlug = item.toonSlug?.toLowerCase().trim();
     return (
       itemSlug === decodedSlug ||
+      decodedItemSlug === decodedSlug ||
       itemSlug === decodedSlug.replace(/\/$/, '') ||
       saltSlug === decodedSlug ||
-      item.url?.includes(`/${decodedSlug}/`)
+      toonSlug === decodedSlug ||
+      (item.url ? item.url.toLowerCase().includes(`/${decodedSlug}/`) : false)
     ) && item.type === 'series';
   });
 
@@ -41,12 +45,16 @@ export default async function EpisodeWatchPage(props: PageProps) {
     // Check if this slug is actually a movie, and redirect to movie watch page!
     const movie = items.find((item) => {
       const itemSlug = item.slug.toLowerCase().trim();
+      const decodedItemSlug = decodeURIComponent(item.slug).toLowerCase().trim();
       const saltSlug = item.saltSlug?.toLowerCase().trim();
+      const toonSlug = item.toonSlug?.toLowerCase().trim();
       return (
         itemSlug === decodedSlug ||
+        decodedItemSlug === decodedSlug ||
         itemSlug === decodedSlug.replace(/\/$/, '') ||
         saltSlug === decodedSlug ||
-        item.url?.includes(`/${decodedSlug}/`)
+        toonSlug === decodedSlug ||
+        (item.url ? item.url.toLowerCase().includes(`/${decodedSlug}/`) : false)
       ) && item.type === 'movie';
     });
 

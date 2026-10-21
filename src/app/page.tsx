@@ -39,50 +39,56 @@ export default async function HomePage(props: PageProps) {
     );
   }
 
-  // Top 8 featured items for Hero Banner (Doraemon New Nobita and the Castle of the Undersea Devil pinned to position 0)
-  const underseaMovie = items.find((i) => i.slug === 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil');
-  const otherFeatured = items
-    .filter((item) => (item.backdrop || item.anilist?.bannerImage) && item.slug !== 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil')
-    .sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0))
-    .slice(0, underseaMovie ? 7 : 8);
+  // Top 8 featured blockbuster anime for Hero Banner
+  const heroRankMap: Record<string, number> = {
+    'solo-leveling': 1,
+    'demon-slayer-kimetsu-no-yaiba': 2,
+    'jujutsu-kaisen': 3,
+    'one-piece': 4,
+    'attack-on-titan': 5,
+    'naruto-shippuden': 6,
+    'bleach-thousand-year-blood-war': 7,
+    'kaiju-no-8-original-short-anime-narumis-week-at-work': 8,
+  };
 
-  const featured = underseaMovie ? [underseaMovie, ...otherFeatured] : otherFeatured;
+  const heroItems = items.filter((item) => heroRankMap[item.slug]);
+  heroItems.sort((a, b) => (heroRankMap[a.slug] || 99) - (heroRankMap[b.slug] || 99));
+
+  const otherFeatured = items
+    .filter((item) => (item.backdrop || item.anilist?.bannerImage) && !heroRankMap[item.slug] && item.slug !== 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil')
+    .sort((a, b) => ((b.rating || b.anilist?.rating || 0) - (a.rating || a.anilist?.rating || 0)))
+    .slice(0, Math.max(0, 8 - heroItems.length));
+
+  const featured = [...heroItems, ...otherFeatured].slice(0, 8);
 
   // Categorize items for Landing Page
   const movies = items.filter((i) => i.type === 'movie');
   const series = items.filter((i) => i.type === 'series');
 
   // Top rated items
-  const topRated = [...items].sort((a, b) => (b.anilist?.rating || 0) - (a.anilist?.rating || 0)).slice(0, 16);
+  const topRated = [...items].sort((a, b) => ((b.rating || b.anilist?.rating || 0) - (a.rating || a.anilist?.rating || 0))).slice(0, 16);
 
-  // Keep a broadly popular title at the front of the Trending row
+  // Keep broadly popular titles at the front of the Trending row
   const trendingSeries = [...series]
     .sort((a, b) => {
+      if (a.slug === 'solo-leveling') return -1;
+      if (b.slug === 'solo-leveling') return 1;
       if (a.slug === 'one-piece') return -1;
       if (b.slug === 'one-piece') return 1;
-      if (a.slug === 'rascal-does-not-dream-of-bunny-girl-senpai') return 1;
-      if (b.slug === 'rascal-does-not-dream-of-bunny-girl-senpai') return -1;
       return 0;
     })
     .slice(0, 16);
 
-  // Popular movies with new Doraemon movie pinned at the top
-  const popularMovies = [
-    ...(underseaMovie ? [underseaMovie] : []),
-    ...movies.filter(m => m.slug !== 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil').slice(0, underseaMovie ? 15 : 16)
-  ];
+  // Popular movies
+  const popularMovies = movies.slice(0, 16);
 
-  // Cartoons & Classics with new Doraemon movie at the top
-  const cartoons = [
-    ...(underseaMovie ? [underseaMovie] : []),
-    ...items.filter((i) => {
-      if (i.slug === 'doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil') return false;
-      const t = i.title.toLowerCase();
-      return t.includes('ben 10') || t.includes('shinchan') || t.includes('doraemon') || 
-             t.includes('pokemon') || t.includes('avatar') || t.includes('transformers') ||
-             t.includes('miraculous') || t.includes('slugterra') || t.includes('avengers');
-    }).slice(0, underseaMovie ? 15 : 16)
-  ];
+  // Cartoons & Classics
+  const cartoons = items.filter((i) => {
+    const t = i.title.toLowerCase();
+    return t.includes('ben 10') || t.includes('shinchan') || t.includes('doraemon') || 
+           t.includes('pokemon') || t.includes('avatar') || t.includes('transformers') ||
+           t.includes('miraculous') || t.includes('slugterra') || t.includes('avengers');
+  }).slice(0, 16);
 
   const itemListSchema = {
     '@context': 'https://schema.org',
