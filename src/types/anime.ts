@@ -68,8 +68,14 @@ export interface AnimeItem {
   saltStreamUrl?: string;
   /** ToonStream stream embed URL */
   toonStreamUrl?: string;
+  /** Google Drive stream embed URL */
+  driveUrl?: string;
   /** Pre-parsed working stream sources/mirrors */
   streamSources?: StreamMirrorSource[];
   source?: string;
+  rating?: number;
+  year?: number;
+  hasStreams?: boolean;
+  heroRanking?: number;
 }
 

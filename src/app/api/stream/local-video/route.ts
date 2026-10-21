@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 
   let filePath = '';
   for (const p of candidatePaths) {
-    if (fs.existsSync(p)) {
+    if (fs.existsSync(/*turbopackIgnore: true*/ p)) {
       filePath = p;
       break;
     }
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse('Video file not found', { status: 404 });
   }
 
-  const stat = fs.statSync(filePath);
+  const stat = fs.statSync(/*turbopackIgnore: true*/ filePath);
   const fileSize = stat.size;
   const range = req.headers.get('range');
 
@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
     }
 
     const chunksize = end - start + 1;
-    const nodeStream = fs.createReadStream(filePath, { start, end });
+    const nodeStream = fs.createReadStream(/*turbopackIgnore: true*/ filePath, { start, end });
     const webStream = Readable.toWeb(nodeStream) as ReadableStream;
 
     return new NextResponse(webStream, {
@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Full file request
-  const nodeStream = fs.createReadStream(filePath);
+  const nodeStream = fs.createReadStream(/*turbopackIgnore: true*/ filePath);
   const webStream = Readable.toWeb(nodeStream) as ReadableStream;
 
   return new NextResponse(webStream, {
