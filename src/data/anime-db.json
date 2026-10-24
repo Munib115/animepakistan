@@ -1,30 +1,5 @@
 [
   {
-    "title": "Jaadugar: A Witch in Mongolia",
-    "slug": "jaadugar:-a-witch-in-mongolia",
-    "url": "/series/jaadugar:-a-witch-in-mongolia",
-    "type": "series",
-    "poster": "https://image.tmdb.org/t/p/w500/723NT7KY9xBFLYNNBaEEREbLaPC.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/original/6AoGMlKo2DUsYWiF5zzjdRERCVi.jpg",
-    "description": "After losing her mother and her homeland, Sitara’s despair transforms into determination with the power of knowledge. New possibilities unfold when a family of scholars takes her in, deepening her education. Meanwhile, Genghis Khan’s Mongol Empire conquers nation after nation, nearing Sitara’s new home. After the Fourth Prince of the empire takes her captive, a flame of revenge is ignited.",
-    "genres": [
-      "Animation",
-      "Anime",
-      "Adventure"
-    ],
-    "audioLanguages": [
-      "Hindi",
-      "Urdu",
-      "Japanese"
-    ],
-    "rating": 8.1,
-    "year": 2026,
-    "episodes": [],
-    "episodeCount": 0,
-    "episodesCount": 0,
-    "source": "animesalt"
-  },
-  {
     "id": "ap-doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil",
     "title": "Doraemon the Movie: New Nobita and the Castle of the Undersea Devil",
     "slug": "doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil",
@@ -634,7 +609,8 @@
             "url": "https://player.abyssplayer.com/XLnl365fJ",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-frontier-lord-begins-with-zero-subjects-1x4/"
       },
       {
         "number": 5,
@@ -660,14 +636,31 @@
             "url": "https://player.abyssplayer.com/buKUVs7a5",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-frontier-lord-begins-with-zero-subjects-1x5/"
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: The Frontier Lord Begins with Zero Subjects 1x6",
+        "slug": "the-frontier-lord-begins-with-zero-subjects-1x6",
+        "url": "https://animesalt.cx/episode/the-frontier-lord-begins-with-zero-subjects-1x6/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/deabeaf0bc00589d890fa81d23f56bf5",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/deabeaf0bc00589d890fa81d23f56bf5",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "source": "animesalt",
     "toonUrl": "https://toonstream.us/series/the-frontier-lord-begins-with-zero-subjects",
     "toonSlug": "the-frontier-lord-begins-with-zero-subjects",
-    "episodeCount": 5,
-    "episodesCount": 5,
+    "episodeCount": 6,
+    "episodesCount": 6,
     "saltUrl": "https://animesalt.cx/series/the-frontier-lord-begins-with-zero-subjects/",
     "hazUrl": "https://hindianimeszone.com/the-frontier-lord-begins-with-zero-subjects-season-1-dual-audio/"
   },
@@ -52802,7 +52795,8 @@
             "url": "https://ravok.buzz/video/1424a2874fbe1b99f48b836ca8952541",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-exiled-heavy-knight-knows-how-to-game-the-system-1x12/"
       },
       {
         "number": 13,
@@ -52843,14 +52837,31 @@
             "url": "https://player.abyssplayer.com/5VShvyLHr",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-exiled-heavy-knight-knows-how-to-game-the-system-1x13/"
+      },
+      {
+        "number": 14,
+        "season": 1,
+        "title": "S1 E14: The Exiled Heavy Knight Knows How to Game the System 1x14",
+        "slug": "the-exiled-heavy-knight-knows-how-to-game-the-system-1x14",
+        "url": "https://animesalt.cx/episode/the-exiled-heavy-knight-knows-how-to-game-the-system-1x14/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/aae14bda33aa45a1d45d45011529b806",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/aae14bda33aa45a1d45d45011529b806",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/the-exiled-heavy-knight-knows-how-to-game-the-system",
     "toonSlug": "the-exiled-heavy-knight-knows-how-to-game-the-system",
-    "episodeCount": 13,
-    "episodesCount": 13,
+    "episodeCount": 14,
+    "episodesCount": 14,
     "saltSlug": "the-exiled-heavy-knight-knows-how-to-game-the-system",
     "saltUrl": "https://animesalt.cx/series/the-exiled-heavy-knight-knows-how-to-game-the-system/",
     "hazUrl": "https://hindianimeszone.com/the-exiled-heavy-knight-knows-how-to-game-the-system-season-1-episodes-hindi-eng-jap-multi-audio-480p-720p-1080p-hd-10bit-hevc-esub-anime-times-dub/"
@@ -97699,7 +97710,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/soYSlEUUY",
-        "toonStreamUrl": "https://player.abyssplayer.com/soYSlEUUY"
+        "toonStreamUrl": "https://player.abyssplayer.com/soYSlEUUY",
+        "saltUrl": "https://animesalt.cx/episode/tomb-raider-king-1x9/"
       },
       {
         "number": 10,
@@ -97741,7 +97753,8 @@
           }
         ],
         "streamUrl": "https://player.abyssplayer.com/6VuEaeccN",
-        "toonStreamUrl": "https://player.abyssplayer.com/6VuEaeccN"
+        "toonStreamUrl": "https://player.abyssplayer.com/6VuEaeccN",
+        "saltUrl": "https://animesalt.cx/episode/tomb-raider-king-1x10/"
       },
       {
         "number": 11,
@@ -97800,14 +97813,31 @@
             "url": "https://vidara.to/e/FnInZHNYaMgf",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/tomb-raider-king-1x11/"
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: Tomb Raider King 1x12",
+        "slug": "tomb-raider-king-1x12",
+        "url": "https://animesalt.cx/episode/tomb-raider-king-1x12/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/9328e04d817959832ffcde1199d5ad40",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9328e04d817959832ffcde1199d5ad40",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/tomb-raider-king",
     "toonSlug": "tomb-raider-king",
-    "episodeCount": 11,
-    "episodesCount": 10,
+    "episodeCount": 12,
+    "episodesCount": 12,
     "saltSlug": "tomb-raider-king",
     "saltUrl": "https://animesalt.cx/series/tomb-raider-king/",
     "hazUrl": "https://hindianimeszone.com/tomb-raider-king-season-1-multi-audio-hindi-tamil-telugu-eng-kor-480p-720p-1080p-hd-web-dl-10bit-hevc-esub/"
@@ -315195,7 +315225,9 @@
         ],
         "hazStreamUrl": "https://abyssplayer.com/MRzBrq9-0",
         "streamUrl": "https://abyssplayer.com/MRzBrq9-0",
-        "toonStreamUrl": "https://abyssplayer.com/MRzBrq9-0"
+        "toonStreamUrl": "https://abyssplayer.com/MRzBrq9-0",
+        "saltUrl": "https://animesalt.cx/series/toilet-bound-hanako-kun/",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/iehq6tSUylg5kFkOxndNYZWjzNu.jpg"
       },
       {
         "number": 2,
@@ -315215,7 +315247,9 @@
         ],
         "hazStreamUrl": "https://abyssplayer.com/WhTfVpbPo",
         "streamUrl": "https://abyssplayer.com/WhTfVpbPo",
-        "toonStreamUrl": "https://abyssplayer.com/WhTfVpbPo"
+        "toonStreamUrl": "https://abyssplayer.com/WhTfVpbPo",
+        "saltUrl": "https://animesalt.cx/series/future-avengers/",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/buxBvftqx3g57FTYtdrfGSHlWfQ.jpg"
       },
       {
         "number": 3,
@@ -315235,7 +315269,9 @@
         ],
         "hazStreamUrl": "https://abyssplayer.com/4EKJSTpI_W",
         "streamUrl": "https://abyssplayer.com/4EKJSTpI_W",
-        "toonStreamUrl": "https://abyssplayer.com/4EKJSTpI_W"
+        "toonStreamUrl": "https://abyssplayer.com/4EKJSTpI_W",
+        "saltUrl": "https://animesalt.cx/series/lets-play/",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/aLzTaEle2w6W4rKKbIrF6WYWw9w.jpg"
       },
       {
         "number": 4,
@@ -315255,14 +315291,17 @@
         ],
         "hazStreamUrl": "https://abyssplayer.com/V8xoLgcN5",
         "streamUrl": "https://abyssplayer.com/V8xoLgcN5",
-        "toonStreamUrl": "https://abyssplayer.com/V8xoLgcN5"
+        "toonStreamUrl": "https://abyssplayer.com/V8xoLgcN5",
+        "saltUrl": "https://animesalt.cx/series/teogonia/",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/zGHrnnFc0p5Pf25qUaAv95JpnJC.jpg"
       }
     ],
     "anilist": null,
-    "episodeCount": 0,
+    "episodeCount": 4,
     "saltSlug": "akame-ga-kill",
     "saltUrl": "https://animesalt.cx/series/akame-ga-kill/",
-    "hazUrl": "https://hindianimeszone.com/akame-ga-kill-season-1-bluray-english-dual-audio/"
+    "hazUrl": "https://hindianimeszone.com/akame-ga-kill-season-1-bluray-english-dual-audio/",
+    "episodesCount": 4
   },
   {
     "title": "I Parry Everything",
@@ -602583,7 +602622,8 @@
             "url": "https://player.abyssplayer.com/YM_zYDwH6",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/re-zero-starting-life-in-another-world-4x12/"
       },
       {
         "number": 13,
@@ -602614,14 +602654,31 @@
             "url": "https://player.abyssplayer.com/rYjQDNt58",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/re-zero-starting-life-in-another-world-4x13/"
+      },
+      {
+        "number": 14,
+        "season": 4,
+        "title": "S4 E14: Re Zero - Starting Life in Another World 4x14",
+        "slug": "re-zero-starting-life-in-another-world-4x14",
+        "url": "https://animesalt.cx/episode/re-zero-starting-life-in-another-world-4x14/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/b769f92a201bb18dd58e514e7c2e8f05",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b769f92a201bb18dd58e514e7c2e8f05",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonSlug": "rezero-starting-life-in-another-world",
     "toonUrl": "https://toonstream.us/series/rezero-starting-life-in-another-world",
-    "episodeCount": 79,
-    "episodesCount": 79,
+    "episodeCount": 80,
+    "episodesCount": 80,
     "saltSlug": "re-zero-starting-life-in-another-world",
     "saltUrl": "https://animesalt.cx/series/re-zero-starting-life-in-another-world/"
   },
@@ -758975,7 +759032,8 @@
             "url": "https://player.abyssplayer.com/jwOOm8M-n",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/that-time-i-got-reincarnated-as-a-slime-4x20/"
       },
       {
         "number": 21,
@@ -759016,14 +759074,31 @@
             "url": "https://player.abyssplayer.com/LZ0LJRyy5",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/that-time-i-got-reincarnated-as-a-slime-4x21/"
+      },
+      {
+        "number": 22,
+        "season": 4,
+        "title": "S4 E22: That Time I Got Reincarnated as a Slime 4x22",
+        "slug": "that-time-i-got-reincarnated-as-a-slime-4x22",
+        "url": "https://animesalt.cx/episode/that-time-i-got-reincarnated-as-a-slime-4x22/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/3ff55afdf16fea13cf00f29dddc53948",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/3ff55afdf16fea13cf00f29dddc53948",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/that-time-i-got-reincarnated-as-a-slime",
     "toonSlug": "that-time-i-got-reincarnated-as-a-slime",
-    "episodeCount": 93,
-    "episodesCount": 93,
+    "episodeCount": 94,
+    "episodesCount": 94,
     "saltSlug": "that-time-i-got-reincarnated-as-a-slime",
     "saltUrl": "https://animesalt.cx/series/that-time-i-got-reincarnated-as-a-slime/",
     "hazUrl": "https://hindianimeszone.com/that-time-i-got-reincarnated-as-a-slime-season-3-hindi-multi-audio/"
@@ -773141,7 +773216,8 @@
             "url": "https://player.abyssplayer.com/cGteHjX8x",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-elusive-samurai-2x10/"
       },
       {
         "number": 11,
@@ -773157,14 +773233,31 @@
             "url": "https://ravok.buzz/video/92a05f3584af93d17968cc842716fd4c",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-elusive-samurai-2x11/"
+      },
+      {
+        "number": 12,
+        "season": 2,
+        "title": "S2 E12: The Elusive Samurai 2x12",
+        "slug": "the-elusive-samurai-2x12",
+        "url": "https://animesalt.cx/episode/the-elusive-samurai-2x12/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/8a8da2b4f4dda685a0fa2635e3bb3e96",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/8a8da2b4f4dda685a0fa2635e3bb3e96",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/the-elusive-samurai",
     "toonSlug": "the-elusive-samurai",
-    "episodeCount": 23,
-    "episodesCount": 23,
+    "episodeCount": 24,
+    "episodesCount": 24,
     "saltSlug": "the-elusive-samurai",
     "saltUrl": "https://animesalt.cx/series/the-elusive-samurai/",
     "hazUrl": "https://hindianimeszone.com/the-elusive-samurai-season-1-hindi-dual-audio/"

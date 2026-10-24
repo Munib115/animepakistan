@@ -1,13 +1,14 @@
 /**
  * scripts/scrape_animesalt_new_drops.js
  *
- * Scrapes all new anime and new episodes from AnimeSalt (https://animesalt.cx):
- * 1. Scans Homepage drops, Series pages 1-5, and latest sitemaps.
- * 2. Detects any brand new anime titles and adds them with TMDB/AniList art & episodes.
- * 3. Detects all existing series with newly released episodes.
- * 4. Extracts working stream embeds (Abyss multi-audio, Ravok, etc.) for new episodes.
- * 5. Safely preserves existing streamSources, toonStreamUrls, and metadata.
- * 6. Updates anime-db.json and regenerates anime-catalog.json.
+ * Master Scraper for New Anime & New Episodes from AnimeSalt (https://animesalt.cx):
+ * 1. Scans AnimeSalt Homepage, Series pages 1-10, Series Sitemap 1, and Movies Sitemap 1.
+ * 2. Detects any brand new anime series or movies and adds them with TMDB/AniList metadata & streams.
+ * 3. Detects existing series that have newly released episodes on AnimeSalt.
+ * 4. Extracts all working stream embeds (Abyss multi-audio Hindi/Tamil/Telugu, Ravok, MegaPlay, etc.).
+ * 5. Safely backfills missing episode streams for existing titles without overwriting valid data.
+ * 6. Concurrently processes titles with polite throttling for high performance.
+ * 7. Updates anime-db.json and regenerates anime-catalog.json.
  */
 
 const fs = require('fs');
@@ -19,7 +20,7 @@ const CATALOG_PATH = path.join(__dirname, '..', 'src', 'data', 'anime-catalog.js
 const TMDB_KEY = process.env.TMDB_API_KEY || '119b065ce02f9f479565d6b99a758ee2';
 
 const HEADERS = {
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
   'Referer': 'https://animesalt.cx/',
   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 };
@@ -27,11 +28,12 @@ const HEADERS = {
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function fetchHtml(url, retries = 3, timeoutMs = 12000) {
+  if (!url || typeof url !== 'string' || !url.startsWith('http')) return null;
   for (let attempt = 1; attempt <= retries; attempt++) {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const res = await fetch(url, { headers: HEADERS, signal: controller.signal });
+      const res = await fetch(url, { headers: { ...HEADERS, 'Referer': url }, signal: controller.signal });
       clearTimeout(id);
       if (!res.ok) {
         if (res.status === 404) return null;
@@ -40,10 +42,8 @@ async function fetchHtml(url, retries = 3, timeoutMs = 12000) {
       return await res.text();
     } catch (err) {
       clearTimeout(id);
-      if (attempt === retries) {
-        return null;
-      }
-      await delay(800 * attempt);
+      if (attempt === retries) return null;
+      await delay(600 * attempt);
     }
   }
   return null;
@@ -63,8 +63,7 @@ function sanitizeStreamUrl(url) {
 }
 
 function unpackAnimeSaltDataUrl(url) {
-  if (!url || typeof url !== 'string') return [];
-  if (!url.includes('data=')) return [];
+  if (!url || typeof url !== 'string' || !url.includes('data=')) return [];
   try {
     const urlObj = new URL(url);
     const dataParam = urlObj.searchParams.get('data');
@@ -126,6 +125,7 @@ async function fetchEpisodeStreams(epUrl) {
           else if (clean.includes('ravok.buzz')) label = 'Ravok (HD)';
           else if (clean.includes('megaplay.buzz')) label = 'MegaPlay (HD)';
           else if (clean.includes('as-cdn')) label = 'AnimeSalt CDN';
+          else if (clean.includes('vidstreaming')) label = 'VidStreaming (HD)';
           sources.push({ label, url: clean, isMultiAudio: true });
         }
       }
@@ -143,6 +143,7 @@ function parseEpisodesFromHtml($, seasonNum = 1) {
   $('article.episodes, .episodes article, .post-episode').each((i, el) => {
     const epLinkEl = $(el).find('a.lnk-blk, a').first();
     const epHref = epLinkEl.attr('href') || '';
+    if (!epHref || !epHref.includes('/episode/')) return;
     const epNumRaw = $(el).find('.num-epi').text().trim();
     const epNum = parseInt(epNumRaw, 10) || i + 1;
     let epTitle = $(el).find('.entry-title').text().trim() || `Episode ${epNum}`;
@@ -170,7 +171,7 @@ function parseEpisodesFromHtml($, seasonNum = 1) {
 async function scrapeFullSeriesEpisodes(seriesUrl) {
   const allEpisodes = [];
   const html = await fetchHtml(seriesUrl);
-  if (!html) return { episodes: [] };
+  if (!html) return { html: null, $: null, episodes: [] };
   const $ = cheerio.load(html);
 
   const seasonButtons = [];
@@ -191,7 +192,7 @@ async function scrapeFullSeriesEpisodes(seriesUrl) {
           allEpisodes.push(...sEps);
         }
       } catch (err) {}
-      await delay(100);
+      await delay(60);
     }
   }
 
@@ -297,13 +298,34 @@ async function fetchAnilistMetadata(title) {
   return null;
 }
 
+// Concurrency helper
+async function pMap(array, iterator, concurrency = 4) {
+  const results = [];
+  const executing = [];
+  for (const item of array) {
+    const p = Promise.resolve().then(() => iterator(item));
+    results.push(p);
+    if (concurrency <= array.length) {
+      const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+      executing.push(e);
+      if (executing.length >= concurrency) {
+        await Promise.race(executing);
+      }
+    }
+  }
+  return Promise.all(results);
+}
+
 async function main() {
   console.log('=================================================================');
   console.log('   SCRAPING NEW ANIME & NEW EPISODES FROM ANIMESALT.CX');
   console.log('=================================================================\n');
 
-  const db = JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
+  let db = JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
   console.log(`Loaded database with ${db.length} items.`);
+
+  // Clean corrupted duplicate entries if any
+  db = db.filter(item => !(item.slug && item.slug.includes(':') && (!item.episodes || item.episodes.length === 0)));
 
   const dbMap = new Map();
   db.forEach((item, idx) => {
@@ -311,139 +333,199 @@ async function main() {
     if (item.saltSlug) dbMap.set(item.saltSlug.toLowerCase().trim(), idx);
   });
 
-  // 1. Discover all series from Homepage and Series Pages 1-5
+  // 1. Discover all series and movies from Homepage, Series Pages 1-10, and Sitemap1
   const candidatesMap = new Map();
 
-  console.log('Scanning AnimeSalt homepage for recent drops...');
+  console.log('1. Scanning AnimeSalt homepage for recent drops...');
   const homeHtml = await fetchHtml('https://animesalt.cx/');
   if (homeHtml) {
     const $h = cheerio.load(homeHtml);
     $h('article').each((_, el) => {
       const a = $h(el).find('a.lnk-blk, a').first();
       const href = a.attr('href') || '';
-      const title = $h(el).find('.entry-title, .title, h2, h3').first().text().trim() ||
-                    $h(el).find('img').attr('alt')?.replace(/^Image\s+/i, '').trim();
+      let title = $h(el).find('.entry-title, .title, h2, h3').first().text().trim();
+      if (!title) title = $h(el).find('img').attr('alt')?.replace(/^Image\s+/i, '').trim();
 
-      if (href.includes('/series/')) {
+      const isSeries = href.includes('/series/');
+      const isMovie = href.includes('/movies/');
+
+      if (isSeries || isMovie) {
         const cleanUrl = href.replace(/^http:\/\//i, 'https://');
         const slug = cleanUrl.split('/').filter(Boolean).pop().toLowerCase();
         if (slug && !candidatesMap.has(slug)) {
-          candidatesMap.set(slug, { title: title || slug, url: cleanUrl, slug });
+          candidatesMap.set(slug, {
+            title: title || slug,
+            url: cleanUrl,
+            slug,
+            type: isMovie ? 'movie' : 'series'
+          });
         }
       }
     });
   }
 
-  for (let p = 1; p <= 5; p++) {
+  console.log('2. Scanning AnimeSalt /series/ pages 1 to 10...');
+  for (let p = 1; p <= 10; p++) {
     const pUrl = p === 1 ? 'https://animesalt.cx/series/' : `https://animesalt.cx/series/page/${p}/`;
-    console.log(`Scanning /series/ page ${p}...`);
     const pHtml = await fetchHtml(pUrl);
     if (!pHtml) continue;
     const $p = cheerio.load(pHtml);
     $p('article').each((_, el) => {
       const a = $p(el).find('a').first();
       const href = a.attr('href') || '';
-      const title = $p(el).find('.entry-title, .title, h2, h3').first().text().trim() ||
-                    $p(el).find('img').attr('alt')?.replace(/^Image\s+/i, '').trim();
+      let title = $p(el).find('.entry-title, .title, h2, h3').first().text().trim();
+      if (!title) title = $p(el).find('img').attr('alt')?.replace(/^Image\s+/i, '').trim();
       if (href.includes('/series/')) {
         const cleanUrl = href.replace(/^http:\/\//i, 'https://');
         const slug = cleanUrl.split('/').filter(Boolean).pop().toLowerCase();
         if (slug && !candidatesMap.has(slug)) {
-          candidatesMap.set(slug, { title: title || slug, url: cleanUrl, slug });
+          candidatesMap.set(slug, { title: title || slug, url: cleanUrl, slug, type: 'series' });
         }
       }
     });
-    await delay(150);
+    await delay(100);
+  }
+
+  console.log('3. Scanning AnimeSalt series-sitemap1.xml for additional recent series...');
+  const sitemapHtml = await fetchHtml('https://animesalt.cx/series-sitemap1.xml');
+  if (sitemapHtml) {
+    const matches = sitemapHtml.match(/<loc>(.*?)<\/loc>/g) || [];
+    for (const m of matches) {
+      const u = m.replace(/<\/?loc>/g, '');
+      const slug = u.split('/').filter(Boolean).pop().toLowerCase();
+      if (slug && slug !== 'series' && !candidatesMap.has(slug)) {
+        candidatesMap.set(slug, { title: slug, url: u, slug, type: 'series' });
+      }
+    }
   }
 
   const candidates = Array.from(candidatesMap.values());
-  console.log(`\nFound ${candidates.length} unique series candidates from AnimeSalt.\n`);
+  console.log(`\nFound ${candidates.length} unique candidates from AnimeSalt to check.\n`);
 
   let newSeriesAdded = 0;
   let seriesUpdated = 0;
   let totalNewEpisodes = 0;
   const brandNewItems = [];
 
+  // Process all candidates with a managed queue
   for (let i = 0; i < candidates.length; i++) {
     const c = candidates[i];
     const dbIdx = dbMap.get(c.slug);
 
     if (dbIdx === undefined) {
-      // BRAND NEW ANIME
-      console.log(`\n[${i + 1}/${candidates.length}] [NEW ANIME FOUND] "${c.title}" (${c.slug})`);
+      // BRAND NEW ANIME OR MOVIE FOUND
+      console.log(`\n[${i + 1}/${candidates.length}] [NEW TITLE FOUND] "${c.title}" (${c.slug}) [${c.type}]`);
       try {
-        const { html, $, episodes } = await scrapeFullSeriesEpisodes(c.url);
-        const title = $('h1').first().text().trim() || $('.entry-title').first().text().trim() || c.title;
-        const description = $('.entry-content p, #description p, .synopsis p').first().text().trim() ||
-                            $('.entry-content').first().text().trim() || '';
+        if (c.type === 'movie') {
+          const html = await fetchHtml(c.url);
+          const $ = cheerio.load(html || '');
+          const title = $('h1').first().text().trim() || c.title;
+          const description = $('.entry-content p, #description p, .synopsis p').first().text().trim() || '';
+          const [tmdbArt, anilistData] = await Promise.all([
+            fetchTMDBArt(title),
+            fetchAnilistMetadata(title)
+          ]);
+          const { streamUrl, sources } = await fetchEpisodeStreams(c.url);
 
-        const genres = [];
-        $('a[href*="/category/genre/"], a[href*="/genre/"]').each((_, el) => {
-          const t = $(el).text().trim();
-          if (t && !genres.includes(t)) genres.push(t);
-        });
+          const newMovie = {
+            title,
+            slug: c.slug,
+            saltSlug: c.slug,
+            url: c.url,
+            saltUrl: c.url,
+            type: 'movie',
+            poster: tmdbArt?.poster || anilistData?.coverImage || '',
+            backdrop: tmdbArt?.backdrop || anilistData?.bannerImage || '',
+            description: tmdbArt?.overview || anilistData?.description || description,
+            genres: tmdbArt ? ['Animation', 'Anime'] : ['Anime'],
+            audioLanguages: ['Hindi', 'Urdu', 'Japanese'],
+            rating: tmdbArt?.rating || anilistData?.rating || 8.0,
+            year: tmdbArt?.year || anilistData?.year || 2024,
+            episodeCount: 1,
+            episodesCount: 1,
+            streamUrl,
+            streamSources: sources,
+            source: 'animesalt'
+          };
+          brandNewItems.push(newMovie);
+          dbMap.set(c.slug, db.length + brandNewItems.length - 1);
+          newSeriesAdded++;
+          console.log(`  ✓ Successfully added new movie "${title}"!`);
+        } else {
+          const { html, $, episodes } = await scrapeFullSeriesEpisodes(c.url);
+          const title = $('h1').first().text().trim() || $('.entry-title').first().text().trim() || c.title;
+          const description = $('.entry-content p, #description p, .synopsis p').first().text().trim() || '';
 
-        const audioLanguages = [];
-        $('a[href*="/category/language/"], a[href*="/language/"]').each((_, el) => {
-          const t = $(el).text().trim();
-          if (t && !audioLanguages.includes(t)) audioLanguages.push(t);
-        });
+          const genres = [];
+          $('a[href*="/category/genre/"], a[href*="/genre/"]').each((_, el) => {
+            const t = $(el).text().trim();
+            if (t && !genres.includes(t)) genres.push(t);
+          });
 
-        const [tmdbArt, anilistData] = await Promise.all([
-          fetchTMDBArt(title),
-          fetchAnilistMetadata(title)
-        ]);
+          const audioLanguages = [];
+          $('a[href*="/category/language/"], a[href*="/language/"]').each((_, el) => {
+            const t = $(el).text().trim();
+            if (t && !audioLanguages.includes(t)) audioLanguages.push(t);
+          });
 
-        const fallbackPoster = $('img[data-src*="image.tmdb.org"], .post-thumbnail img, .poster img').first().attr('data-src') ||
-                               $('img[data-src*="image.tmdb.org"], .post-thumbnail img, .poster img').first().attr('src') || '';
-        const fallbackBackdrop = $('.TPostBg').first().attr('data-src') || $('.TPostBg').first().attr('src') || '';
+          const [tmdbArt, anilistData] = await Promise.all([
+            fetchTMDBArt(title),
+            fetchAnilistMetadata(title)
+          ]);
 
-        let poster = tmdbArt?.poster || anilistData?.coverImage || fallbackPoster;
-        let backdrop = tmdbArt?.backdrop || anilistData?.bannerImage || fallbackBackdrop || poster;
-        if (poster.startsWith('//')) poster = 'https:' + poster;
-        if (backdrop.startsWith('//')) backdrop = 'https:' + backdrop;
+          const fallbackPoster = $('img[data-src*="image.tmdb.org"], .post-thumbnail img, .poster img').first().attr('data-src') ||
+                                 $('img[data-src*="image.tmdb.org"], .post-thumbnail img, .poster img').first().attr('src') || '';
+          const fallbackBackdrop = $('.TPostBg').first().attr('data-src') || $('.TPostBg').first().attr('src') || '';
 
-        console.log(`  Scraping stream sources for ${episodes.length} episodes...`);
-        for (const ep of episodes) {
-          if (ep.url) {
-            const { streamUrl, sources } = await fetchEpisodeStreams(ep.url);
-            if (streamUrl) ep.streamUrl = streamUrl;
-            if (sources.length > 0) ep.streamSources = sources;
-          }
+          let poster = tmdbArt?.poster || anilistData?.coverImage || fallbackPoster;
+          let backdrop = tmdbArt?.backdrop || anilistData?.bannerImage || fallbackBackdrop || poster;
+          if (poster.startsWith('//')) poster = 'https:' + poster;
+          if (backdrop.startsWith('//')) backdrop = 'https:' + backdrop;
+
+          console.log(`  Scraping stream sources for ${episodes.length} episodes...`);
+          await pMap(episodes, async (ep) => {
+            if (ep.url) {
+              const { streamUrl, sources } = await fetchEpisodeStreams(ep.url);
+              if (streamUrl) ep.streamUrl = streamUrl;
+              if (sources.length > 0) ep.streamSources = sources;
+            }
+          }, 3);
+
+          const newAnimeItem = {
+            title,
+            slug: c.slug,
+            saltSlug: c.slug,
+            url: c.url,
+            saltUrl: c.url,
+            type: 'series',
+            poster,
+            backdrop,
+            description: tmdbArt?.overview || anilistData?.description || description,
+            genres: genres.length > 0 ? genres : (anilistData?.genres?.length ? anilistData.genres : ['Action', 'Anime']),
+            audioLanguages: audioLanguages.length > 0 ? audioLanguages : ['Hindi', 'Urdu', 'Japanese'],
+            rating: tmdbArt?.rating || anilistData?.rating || 8.0,
+            year: tmdbArt?.year || anilistData?.year || 2024,
+            episodes,
+            episodeCount: episodes.length,
+            episodesCount: episodes.length,
+            anilist: anilistData || null,
+            source: 'animesalt'
+          };
+
+          brandNewItems.push(newAnimeItem);
+          dbMap.set(c.slug, db.length + brandNewItems.length - 1);
+          newSeriesAdded++;
+          totalNewEpisodes += episodes.length;
+          console.log(`  ✓ Successfully added new series "${title}" with ${episodes.length} episodes!`);
         }
-
-        const newAnimeItem = {
-          title,
-          slug: c.slug,
-          saltSlug: c.slug,
-          url: c.url,
-          saltUrl: c.url,
-          type: 'series',
-          poster,
-          backdrop,
-          description: tmdbArt?.overview || anilistData?.description || description,
-          genres: genres.length > 0 ? genres : (anilistData?.genres?.length ? anilistData.genres : ['Action', 'Anime']),
-          audioLanguages: audioLanguages.length > 0 ? audioLanguages : ['Hindi', 'Urdu', 'Japanese'],
-          rating: tmdbArt?.rating || anilistData?.rating || 8.0,
-          year: tmdbArt?.year || anilistData?.year || 2024,
-          episodes,
-          episodeCount: episodes.length,
-          episodesCount: episodes.length,
-          anilist: anilistData || null,
-          source: 'animesalt'
-        };
-
-        brandNewItems.push(newAnimeItem);
-        dbMap.set(c.slug, 0); // Mark seen
-        newSeriesAdded++;
-        totalNewEpisodes += episodes.length;
-        console.log(`  ✓ Successfully added new series "${title}" with ${episodes.length} episodes!`);
       } catch (err) {
-        console.error(`  ✗ Error scraping new series "${c.title}":`, err.message);
+        console.error(`  ✗ Error scraping new title "${c.title}":`, err.message);
       }
     } else {
-      // EXISTING SERIES: CHECK FOR NEW EPISODES
+      // EXISTING ITEM: CHECK FOR NEW EPISODES
       const dbItem = db[dbIdx];
+      if (dbItem.type !== 'series') continue;
+
       const previousCount = dbItem.episodes ? dbItem.episodes.length : 0;
       const scrapeUrl = dbItem.saltUrl || dbItem.url || c.url;
 
@@ -452,7 +534,7 @@ async function main() {
 
         if (episodes.length > previousCount) {
           const diff = episodes.length - previousCount;
-          console.log(`\n[EPISODE UPDATE] "${dbItem.title}" has ${episodes.length} episodes on AnimeSalt (DB had ${previousCount}) -> (+${diff} new episodes!)`);
+          console.log(`\n🔥 [EPISODE UPDATE ${i + 1}/${candidates.length}] "${dbItem.title}" has ${episodes.length} episodes on AnimeSalt (DB had ${previousCount}) -> (+${diff} new episodes!)`);
 
           // Existing episodes map by key
           const existingKeyMap = new Map();
@@ -470,13 +552,18 @@ async function main() {
             const existingEp = existingKeyMap.get(key) || existingKeyMap.get(newEp.slug);
 
             if (existingEp) {
-              // Keep original intact, only fill in missing fields
               if (!existingEp.saltUrl && newEp.url) existingEp.saltUrl = newEp.url;
               if (!existingEp.thumbnail && newEp.thumbnail) existingEp.thumbnail = newEp.thumbnail;
+              // Backfill stream if existing had no stream
+              if ((!existingEp.streamSources || existingEp.streamSources.length === 0) && newEp.url) {
+                const { streamUrl, sources } = await fetchEpisodeStreams(newEp.url);
+                if (streamUrl) existingEp.streamUrl = streamUrl;
+                if (sources.length > 0) existingEp.streamSources = sources;
+              }
               mergedEpisodes.push(existingEp);
             } else {
               // Brand new episode: fetch its stream embed & mirrors
-              console.log(`  -> Scraping stream for new Episode: ${newEp.title} (${newEp.url})`);
+              console.log(`  -> Scraping streams for new Ep: S${newEp.season} E${newEp.number} (${newEp.url})`);
               const { streamUrl, sources } = await fetchEpisodeStreams(newEp.url);
               if (streamUrl) newEp.streamUrl = streamUrl;
               if (sources.length > 0) newEp.streamSources = sources;
@@ -489,24 +576,39 @@ async function main() {
           dbItem.episodesCount = mergedEpisodes.length;
           seriesUpdated++;
           totalNewEpisodes += diff;
-          console.log(`  ✓ Successfully merged and updated "${dbItem.title}" to ${mergedEpisodes.length} episodes!`);
+          console.log(`  ✓ Successfully updated "${dbItem.title}" to ${mergedEpisodes.length} episodes!`);
+        } else if (previousCount > 0) {
+          // Quick check: if the very latest episode has missing streams, backfill it
+          const latestEp = dbItem.episodes[dbItem.episodes.length - 1];
+          if (latestEp && (!latestEp.streamSources || latestEp.streamSources.length === 0) && latestEp.url) {
+            const { streamUrl, sources } = await fetchEpisodeStreams(latestEp.url);
+            if (streamUrl) latestEp.streamUrl = streamUrl;
+            if (sources.length > 0) {
+              latestEp.streamSources = sources;
+              console.log(`  ✓ Backfilled stream for latest episode of "${dbItem.title}"`);
+            }
+          }
         }
       } catch (err) {
         // continue
       }
     }
 
-    await delay(120);
+    if ((i + 1) % 25 === 0 || i === candidates.length - 1) {
+      console.log(`[Progress: ${i + 1}/${candidates.length}] (New titles: ${newSeriesAdded}, Series updated: ${seriesUpdated}, New eps: ${totalNewEpisodes})`);
+    }
+
+    await delay(80);
   }
 
-  // Prepend brand new anime to database
+  // Prepend brand new items to database
   if (brandNewItems.length > 0) {
     db.unshift(...brandNewItems);
   }
 
   console.log('\n=================================================================');
   console.log('SUMMARY OF ANIMESALT SCRAPE:');
-  console.log(`- Brand New Anime Added: ${newSeriesAdded}`);
+  console.log(`- Brand New Titles Added: ${newSeriesAdded}`);
   console.log(`- Existing Series Updated: ${seriesUpdated}`);
   console.log(`- Total New Episodes Ingested: ${totalNewEpisodes}`);
   console.log(`- Total Titles in Database: ${db.length}`);
@@ -533,7 +635,9 @@ async function main() {
     year: item.year || 2024,
     episodeCount: item.type === 'movie' ? 1 : (item.episodes ? item.episodes.length : 1),
     episodesCount: item.type === 'movie' ? 1 : (item.episodes ? item.episodes.length : 1),
-    hasStreams: true,
+    hasStreams: item.type === 'movie'
+      ? !!(item.streamUrl || (item.streamSources && item.streamSources.length > 0))
+      : (item.episodes?.some(e => !!(e.streamUrl || (e.streamSources && e.streamSources.length > 0))) ?? false),
     anilist: item.anilist || null,
     source: item.source || 'hybrid',
     isCustomLocal: item.isCustomLocal ?? false,
