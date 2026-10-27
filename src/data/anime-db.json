@@ -1,5 +1,1008 @@
 [
   {
+    "title": "PSYREN",
+    "slug": "psyren",
+    "saltSlug": "psyren",
+    "url": "https://animesalt.cx/series/psyren/",
+    "saltUrl": "https://animesalt.cx/series/psyren/",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/3imj2VLU77bLOyJ4aPnEUlpJZDX.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/o8jHdRwB9GZtkdZjmMoFJyC7eDZ.jpg",
+    "description": "One day, high schooler Ageha Yoshina picks up a mysterious red phone card. Days later, his childhood friend, Sakurako Amamiya, who possessed the same card, suddenly vanishes. In search of her, he's drawn into rumors of a nationwide string of mysterious disappearances by a secret organization known as Psyren. When he accesses the group, a deadly game that changes his fate forever begins.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 7.2,
+    "year": 2026,
+    "episodes": [
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: PSYREN 1x1",
+        "slug": "psyren-1x1",
+        "url": "https://animesalt.cx/episode/psyren-1x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2596_s1e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/3594cda47af1cb8ae0c461a6a0afc9cc",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/3594cda47af1cb8ae0c461a6a0afc9cc",
+            "isMultiAudio": true
+          }
+        ]
+      }
+    ],
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "anilist": {
+      "id": 204011,
+      "coverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx204011-j45RZoqYbdZK.jpg",
+      "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/204011-hBOwte9MzykA.jpg",
+      "description": "One day, high schooler Ageha Yoshina picks up a mysterious “red phone card” left behind in a public telephone booth.\nA few days later, his childhood friend and classmate, Sakurako Amamiya—who possessed the same card—suddenly vanishes without a trace. In search of her, Ageha finds himself drawn into the rumors surrounding a nationwide string of mysterious disappearances, said to be the work of a secret organization known only as “Psyren.”\nWhen he accesses the group, a deadly game begins—one that will change his fate forever.\n\n(Source: PSYЯEN Official Site)",
+      "rating": 6.9,
+      "year": 2026,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Sci-Fi"
+      ]
+    },
+    "source": "animesalt"
+  },
+  {
+    "title": "First Dragon",
+    "slug": "first-dragon",
+    "saltSlug": "first-dragon",
+    "url": "https://animesalt.cx/series/first-dragon/",
+    "saltUrl": "https://animesalt.cx/series/first-dragon/",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/j7Rtqr5BR0XrqNShMBAPjze43qo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/9CY6mGaeBRRFACUCt2lzj0b86Er.jpg",
+    "description": "Special forces operative Wang Sheng transmigrated into the world of Yuanhun (Origin Spirits). There, he was possessed by a useless spirit —a carp—, becoming infamous trash in the world of Origin Spirits! In this world filled with experts, Wang Sheng used the knowledge he acquires to surmount all difficulties, even finding a way to evolve his useless spirit carp! From a sparrow to a Phoenix, from a carp to a Dragon! In this sinister and vicious world full of disputes, he will make his own path towards success! Legends say that a carp who leaps over the Dragon’s Gate will become a dragon itself. Through effort and courage, even an insignificant carp can defy its own fate and become a legend.",
+    "genres": [
+      "Comedy",
+      "Drama"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 6,
+    "year": 2020,
+    "episodes": [
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: First Dragon 1x1",
+        "slug": "first-dragon-1x1",
+        "url": "https://animesalt.cx/episode/first-dragon-1x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/1abdec9e557dd71f742a5cfd35fb85f5",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/1abdec9e557dd71f742a5cfd35fb85f5",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 1,
+        "title": "S1 E2: First Dragon 1x2",
+        "slug": "first-dragon-1x2",
+        "url": "https://animesalt.cx/episode/first-dragon-1x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e2.jpg",
+        "streamUrl": "https://ravok.buzz/video/3f69007029477e4dd8624e50c3cf4b44",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/3f69007029477e4dd8624e50c3cf4b44",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 1,
+        "title": "S1 E3: First Dragon 1x3",
+        "slug": "first-dragon-1x3",
+        "url": "https://animesalt.cx/episode/first-dragon-1x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e3.jpg",
+        "streamUrl": "https://ravok.buzz/video/5c10d595f3dfb3c6605a34f0c1a4c5b6",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/5c10d595f3dfb3c6605a34f0c1a4c5b6",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: First Dragon 1x4",
+        "slug": "first-dragon-1x4",
+        "url": "https://animesalt.cx/episode/first-dragon-1x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e4.jpg",
+        "streamUrl": "https://ravok.buzz/video/fc43ae19277e37478bca2828bc6dffd3",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/fc43ae19277e37478bca2828bc6dffd3",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: First Dragon 1x5",
+        "slug": "first-dragon-1x5",
+        "url": "https://animesalt.cx/episode/first-dragon-1x5/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e5.jpg",
+        "streamUrl": "https://ravok.buzz/video/acf7c66123cd145d39a062ded3aafd6b",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/acf7c66123cd145d39a062ded3aafd6b",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: First Dragon 1x6",
+        "slug": "first-dragon-1x6",
+        "url": "https://animesalt.cx/episode/first-dragon-1x6/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e6.jpg",
+        "streamUrl": "https://ravok.buzz/video/b82e68e6366d4177332acdf3fa4d1e3a",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b82e68e6366d4177332acdf3fa4d1e3a",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: First Dragon 1x7",
+        "slug": "first-dragon-1x7",
+        "url": "https://animesalt.cx/episode/first-dragon-1x7/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e7.jpg",
+        "streamUrl": "https://ravok.buzz/video/4dd26a77cf6ac49c33aca7213c1d29e5",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/4dd26a77cf6ac49c33aca7213c1d29e5",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: First Dragon 1x8",
+        "slug": "first-dragon-1x8",
+        "url": "https://animesalt.cx/episode/first-dragon-1x8/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e8.jpg",
+        "streamUrl": "https://ravok.buzz/video/761477e659cec3fb2fd546672b0d6280",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/761477e659cec3fb2fd546672b0d6280",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: First Dragon 1x9",
+        "slug": "first-dragon-1x9",
+        "url": "https://animesalt.cx/episode/first-dragon-1x9/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e9.jpg",
+        "streamUrl": "https://ravok.buzz/video/9b54f9ea8a55918aa6204ae8f3234329",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9b54f9ea8a55918aa6204ae8f3234329",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: First Dragon 1x10",
+        "slug": "first-dragon-1x10",
+        "url": "https://animesalt.cx/episode/first-dragon-1x10/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e10.jpg",
+        "streamUrl": "https://ravok.buzz/video/b276d5b499aa50a632efddf40bbdd75b",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b276d5b499aa50a632efddf40bbdd75b",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: First Dragon 1x11",
+        "slug": "first-dragon-1x11",
+        "url": "https://animesalt.cx/episode/first-dragon-1x11/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e11.jpg",
+        "streamUrl": "https://ravok.buzz/video/d64676745e6f99d0a8ab6c90160c438b",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/d64676745e6f99d0a8ab6c90160c438b",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: First Dragon 1x12",
+        "slug": "first-dragon-1x12",
+        "url": "https://animesalt.cx/episode/first-dragon-1x12/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e12.jpg",
+        "streamUrl": "https://ravok.buzz/video/871c97e4e4732049f0e08079646b1f27",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/871c97e4e4732049f0e08079646b1f27",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "season": 1,
+        "title": "S1 E13: First Dragon 1x13",
+        "slug": "first-dragon-1x13",
+        "url": "https://animesalt.cx/episode/first-dragon-1x13/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e13.jpg",
+        "streamUrl": "https://ravok.buzz/video/0e46c9990c6daf3876b5166b2bc79fdc",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/0e46c9990c6daf3876b5166b2bc79fdc",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "season": 1,
+        "title": "S1 E14: First Dragon 1x14",
+        "slug": "first-dragon-1x14",
+        "url": "https://animesalt.cx/episode/first-dragon-1x14/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e14.jpg",
+        "streamUrl": "https://ravok.buzz/video/4027eb61381d305455b47f9404266be3",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/4027eb61381d305455b47f9404266be3",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "season": 1,
+        "title": "S1 E15: First Dragon 1x15",
+        "slug": "first-dragon-1x15",
+        "url": "https://animesalt.cx/episode/first-dragon-1x15/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e15.jpg",
+        "streamUrl": "https://ravok.buzz/video/18daa83afcf39c61b9ddd9c817054d64",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/18daa83afcf39c61b9ddd9c817054d64",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "season": 1,
+        "title": "S1 E16: First Dragon 1x16",
+        "slug": "first-dragon-1x16",
+        "url": "https://animesalt.cx/episode/first-dragon-1x16/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2557_s1e16.jpg",
+        "streamUrl": "https://ravok.buzz/video/84b077a6d1ec15291624d4ccdfd9dd77",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/84b077a6d1ec15291624d4ccdfd9dd77",
+            "isMultiAudio": true
+          }
+        ]
+      }
+    ],
+    "episodeCount": 16,
+    "episodesCount": 16,
+    "anilist": {
+      "id": 120320,
+      "coverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx120320-wrER3lg65tiC.png",
+      "bannerImage": "",
+      "description": "Special forces operative Wang Sheng was transported into the world of Yuanhun (Origin Spirits). There, he was possessed by a useless spirit: a carp, becoming an infamous trash in the world of Origin Spirits! \n\nIn this world filled with experts, Wang Sheng used the knowledges he acquires to surmount all difficulties, even finding a way to evolve his useless spirit carp! From a sparrow to a Phoenix, from a carp to a Dragon! In this sinister and vicious world full of disputes, he will make his own path towards success! \n\nLegends says that a carp who leaps over the the Dragon’s gate will become a dragon itself. Through effort and courage, even an insignificant carp can defy its own fate and become a legend. \n\n(Source: Chinese Publisher, translated)",
+      "rating": 6.9,
+      "year": 2024,
+      "genres": [
+        "Fantasy"
+      ]
+    },
+    "source": "animesalt"
+  },
+  {
+    "title": "KONOSUBA – An Explosion on This Wonderful World!",
+    "slug": "konosuba-an-explosion-on-this-wonderful-world",
+    "saltSlug": "konosuba-an-explosion-on-this-wonderful-world",
+    "url": "https://animesalt.cx/series/konosuba-an-explosion-on-this-wonderful-world/",
+    "saltUrl": "https://animesalt.cx/series/konosuba-an-explosion-on-this-wonderful-world/",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w342/68rh8l8RaGujTDF6k87yykxixIy.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/w1280/3g8fsosj03C2rl0Jfeermtu0rCR.jpg",
+    "description": "",
+    "genres": [
+      "Comedy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 8,
+    "year": 2024,
+    "episodes": [
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: KONOSUBA – An Explosion on This Wonderful World! 1x1",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x1",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x1/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/tnFG9R7OpRBk4ZuAEVkbSGsPHcx.jpg",
+        "streamUrl": "https://ravok.buzz/video/0c3d19d60c40941a6705f3d06e366c3f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/0c3d19d60c40941a6705f3d06e366c3f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 1,
+        "title": "S1 E2: KONOSUBA – An Explosion on This Wonderful World! 1x2",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x2",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x2/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/ggrY7nkZfJocSUz5JxQKjDcgU3D.jpg",
+        "streamUrl": "https://ravok.buzz/video/aa52fe4473729124230024795fc530df",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/aa52fe4473729124230024795fc530df",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 1,
+        "title": "S1 E3: KONOSUBA – An Explosion on This Wonderful World! 1x3",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x3",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x3/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/3d527dY6NRy2EvJpjxYgemAfGEG.jpg",
+        "streamUrl": "https://ravok.buzz/video/9c9fd5e2abffc80d2d3299f8d969e570",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9c9fd5e2abffc80d2d3299f8d969e570",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: KONOSUBA – An Explosion on This Wonderful World! 1x4",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x4",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x4/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/2dvGRrM93r85rXyCBkC6Hyt8bah.jpg",
+        "streamUrl": "https://ravok.buzz/video/f2669241f7cca3f1306082b7a9f458ed",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/f2669241f7cca3f1306082b7a9f458ed",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: KONOSUBA – An Explosion on This Wonderful World! 1x5",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x5",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x5/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/rhQJhnO7GeGBwnVxKHEKDBVRBFP.jpg",
+        "streamUrl": "https://ravok.buzz/video/87d52253feff68bc7834aa348a032c5a",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/87d52253feff68bc7834aa348a032c5a",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: KONOSUBA – An Explosion on This Wonderful World! 1x6",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x6",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x6/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/cZb98JT9rncZCFhylNzOEjgBJ8M.jpg",
+        "streamUrl": "https://ravok.buzz/video/f25319e832341516c2a618ef2a314932",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/f25319e832341516c2a618ef2a314932",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: KONOSUBA – An Explosion on This Wonderful World! 1x7",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x7",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x7/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/qiEdZbtqDYvySSMSBowDvkUcvnB.jpg",
+        "streamUrl": "https://ravok.buzz/video/c8c83f959021e1042efa4c5146754409",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/c8c83f959021e1042efa4c5146754409",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: KONOSUBA – An Explosion on This Wonderful World! 1x8",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x8",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x8/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/iA2dUnXLiXAoK07hrJdYcuXsFp4.jpg",
+        "streamUrl": "https://ravok.buzz/video/0aed2c2987b59ebb30db214d5c448a39",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/0aed2c2987b59ebb30db214d5c448a39",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: KONOSUBA – An Explosion on This Wonderful World! 1x9",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x9",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x9/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/xy9EH0CD9SXqihX7uvzRi4jYlt8.jpg",
+        "streamUrl": "https://ravok.buzz/video/30075533571c1a82bb8f1b810203cd57",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/30075533571c1a82bb8f1b810203cd57",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: KONOSUBA – An Explosion on This Wonderful World! 1x10",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x10",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x10/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/xfCZgEM3Ur6dgDY8l7kLK7gKFzO.jpg",
+        "streamUrl": "https://ravok.buzz/video/e6e20a281ef337d524062368acecd1c4",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/e6e20a281ef337d524062368acecd1c4",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: KONOSUBA – An Explosion on This Wonderful World! 1x11",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x11",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x11/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/dkarbUAXFmL1KAlpVptSNNW61bp.jpg",
+        "streamUrl": "https://ravok.buzz/video/2dc9601268d52ded117f265cd7148e4f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/2dc9601268d52ded117f265cd7148e4f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: KONOSUBA – An Explosion on This Wonderful World! 1x12",
+        "slug": "konosuba-an-explosion-on-this-wonderful-world-1x12",
+        "url": "https://animesalt.cx/episode/konosuba-an-explosion-on-this-wonderful-world-1x12/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/5WynK3VbklZKeQhMyMbzYxFnxnC.jpg",
+        "streamUrl": "https://ravok.buzz/video/7a42cee5beade943c792c4a9f5fe2a63",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7a42cee5beade943c792c4a9f5fe2a63",
+            "isMultiAudio": true
+          }
+        ]
+      }
+    ],
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "anilist": null,
+    "source": "animesalt"
+  },
+  {
+    "title": "The Drops of God",
+    "slug": "the-drops-of-god",
+    "saltSlug": "the-drops-of-god",
+    "url": "https://animesalt.cx/series/the-drops-of-god/",
+    "saltUrl": "https://animesalt.cx/series/the-drops-of-god/",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/e0HIphKTbM0YjWCASdCsjYtESHG.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/dWhXUMlQuSoASikDLbUfKyPtGeB.jpg",
+    "description": "When world-renowned wine critic Toyotaka Kanzaki passes away, he leaves behind an enviable collection. The will promises his estate to whoever correctly guesses the brand and year of the 12 greatest wines he selected, and the legendary wine that stands atop them all, \"Drops of God.\" The challengers are Toyotaka's son, Shizuku Kanzaki, and a young critic, Issei Tomine, who was adopted by Toyotaka.",
+    "genres": [
+      "Drama",
+      "Mystery"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 6.7,
+    "year": 2026,
+    "episodes": [
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: The Drops of God 1x1",
+        "slug": "the-drops-of-god-1x1",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x1/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/AaSmc2HRQv2PnJzmzbvSR6qUZz0.jpg",
+        "streamUrl": "https://ravok.buzz/video/f4ac478bae86d281167b40a3fddae173",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/f4ac478bae86d281167b40a3fddae173",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 1,
+        "title": "S1 E2: The Drops of God 1x2",
+        "slug": "the-drops-of-god-1x2",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x2/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/6iV76CHjXZGkz2qwluBKnM2Q7E6.jpg",
+        "streamUrl": "https://ravok.buzz/video/60d2d5e1fc6ed532f175d633240b2075",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/60d2d5e1fc6ed532f175d633240b2075",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 1,
+        "title": "S1 E3: The Drops of God 1x3",
+        "slug": "the-drops-of-god-1x3",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x3/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/5DcLrLFu51LkaneOWuM46zBbQY3.jpg",
+        "streamUrl": "https://ravok.buzz/video/5fc4d0155cf2d4d93bdbdf4b8dc54da8",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/5fc4d0155cf2d4d93bdbdf4b8dc54da8",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: The Drops of God 1x4",
+        "slug": "the-drops-of-god-1x4",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x4/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/wAWTSG1eboNm63ADbrD7w7YiId3.jpg",
+        "streamUrl": "https://ravok.buzz/video/be4643feaaae118029d54ad7d18803bf",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/be4643feaaae118029d54ad7d18803bf",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "season": 1,
+        "title": "S1 E5: The Drops of God 1x5",
+        "slug": "the-drops-of-god-1x5",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x5/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/xQoEriMOKPtmlIo8Hjsb0WoOSvt.jpg",
+        "streamUrl": "https://ravok.buzz/video/fc08e88c689b903532df9465c4e21cab",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/fc08e88c689b903532df9465c4e21cab",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "season": 1,
+        "title": "S1 E6: The Drops of God 1x6",
+        "slug": "the-drops-of-god-1x6",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x6/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/z1cuVkZMPbmcuyidUwkWOvvteqO.jpg",
+        "streamUrl": "https://ravok.buzz/video/21b452141d91ebbd2774644b136a494f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/21b452141d91ebbd2774644b136a494f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "season": 1,
+        "title": "S1 E7: The Drops of God 1x7",
+        "slug": "the-drops-of-god-1x7",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x7/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/3c5a24mbpKPouDo9glUZJ9nEcwZ.jpg",
+        "streamUrl": "https://ravok.buzz/video/cfe1bae9441470f7d25f0ea2c29fce2d",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/cfe1bae9441470f7d25f0ea2c29fce2d",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 1,
+        "title": "S1 E8: The Drops of God 1x8",
+        "slug": "the-drops-of-god-1x8",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x8/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/tsG5ERIpMver0MmN4ldS5y6oFBu.jpg",
+        "streamUrl": "https://ravok.buzz/video/1dc6d927cb8ec9838ad96a48af31ea4c",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/1dc6d927cb8ec9838ad96a48af31ea4c",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: The Drops of God 1x9",
+        "slug": "the-drops-of-god-1x9",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x9/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/tC6TJiIeMn1PnwQOBbqDIgH8Sx2.jpg",
+        "streamUrl": "https://ravok.buzz/video/8ac65b1061ec1e8b4ebdebc5b98e5c9d",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/8ac65b1061ec1e8b4ebdebc5b98e5c9d",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "season": 1,
+        "title": "S1 E10: The Drops of God 1x10",
+        "slug": "the-drops-of-god-1x10",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x10/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/r93O9LoAVDd68CTCr73jPxoXDDc.jpg",
+        "streamUrl": "https://ravok.buzz/video/3506709108e107543aa9fcf845daf0a6",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/3506709108e107543aa9fcf845daf0a6",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: The Drops of God 1x11",
+        "slug": "the-drops-of-god-1x11",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x11/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/MSGckI4AhtMZo15zWtTlqJoQu7.jpg",
+        "streamUrl": "https://ravok.buzz/video/a9f0aa050b0e0029545e79138ec549f8",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/a9f0aa050b0e0029545e79138ec549f8",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "season": 1,
+        "title": "S1 E12: The Drops of God 1x12",
+        "slug": "the-drops-of-god-1x12",
+        "url": "https://animesalt.cx/episode/the-drops-of-god-1x12/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/riFEkSfFgtKeWAKFNJtv8q7jCwA.jpg",
+        "streamUrl": "https://ravok.buzz/video/6158cdc6f0b5626d7f9b407adf4bb89b",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/6158cdc6f0b5626d7f9b407adf4bb89b",
+            "isMultiAudio": true
+          }
+        ]
+      }
+    ],
+    "episodeCount": 12,
+    "episodesCount": 12,
+    "anilist": {
+      "id": 202508,
+      "coverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx202508-dk6LEyevJYUY.jpg",
+      "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/202508-K276v0truxE0.jpg",
+      "description": "World-renowned wine critic Yutaka Kanzaki has passed away, leaving behind a wine collection worth over 12 billion yen. His will states that his collection will be given to the one who can identify the origin and year of twelve wines he’s chosen, the “Twelve Apostles”, and one that’s superior even to them, “The Drops of God”. \nCompeting for the prize are Yutaka’s son, Shizuku, who received a world-class education in wine but rebelled against his father and has never drank a drop, and Issei Tomine, a young charismatic wine critic whom Yutaka had recently adopted as his son. \nWhat is wine? What is a parent and a child? What is life?\nThe complex and fragrant battle surrounding the legendary ”Drops of God” is about to begin… \n(Source: Pony Canyon)",
+      "rating": 5.8,
+      "year": 2026,
+      "genres": [
+        "Drama",
+        "Mystery",
+        "Slice of Life"
+      ]
+    },
+    "source": "animesalt"
+  },
+  {
+    "title": "The Seven Knights of the Marronnier Kingdom",
+    "slug": "the-seven-knights-of-the-marronnier-kingdom",
+    "saltSlug": "the-seven-knights-of-the-marronnier-kingdom",
+    "url": "https://animesalt.cx/series/the-seven-knights-of-the-marronnier-kingdom/",
+    "saltUrl": "https://animesalt.cx/series/the-seven-knights-of-the-marronnier-kingdom/",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/rYB2YdEaZKL08Bi91uZfZnCq8vv.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/59oBbiLeG3jeDOUmx6zF6Qfmea3.jpg",
+    "description": "At the heart of a continent of eight kingdoms lies the Marronnier Kingdom. Its general, Baribara, has seven sons, each with a unique gift and serving as a knight commander. Bound by a single noble cause of heroically rescuing a princess someday, the brothers set out as goodwill ambassadors to the seven neighboring kingdoms. What encounters, trials, and destinies await them in these unknown lands?",
+    "genres": [
+      "Comedy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 8,
+    "year": 2026,
+    "episodes": [
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: The Seven Knights of the Marronnier Kingdom 1x1",
+        "slug": "the-seven-knights-of-the-marronnier-kingdom-1x1",
+        "url": "https://animesalt.cx/episode/the-seven-knights-of-the-marronnier-kingdom-1x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2552_s1e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/c1b8c48c660ae44b22e250b32acae44f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/c1b8c48c660ae44b22e250b32acae44f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 1,
+        "title": "S1 E2: The Seven Knights of the Marronnier Kingdom 1x2",
+        "slug": "the-seven-knights-of-the-marronnier-kingdom-1x2",
+        "url": "https://animesalt.cx/episode/the-seven-knights-of-the-marronnier-kingdom-1x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2552_s1e2.jpg",
+        "streamUrl": "https://ravok.buzz/video/ae9950b87ffc3b372739ad468bb2a676",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/ae9950b87ffc3b372739ad468bb2a676",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 1,
+        "title": "S1 E3: The Seven Knights of the Marronnier Kingdom 1x3",
+        "slug": "the-seven-knights-of-the-marronnier-kingdom-1x3",
+        "url": "https://animesalt.cx/episode/the-seven-knights-of-the-marronnier-kingdom-1x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2552_s1e3.jpg",
+        "streamUrl": "https://ravok.buzz/video/aa92f6f6672f194117f62fb5babddf3f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/aa92f6f6672f194117f62fb5babddf3f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 1,
+        "title": "S1 E4: The Seven Knights of the Marronnier Kingdom 1x4",
+        "slug": "the-seven-knights-of-the-marronnier-kingdom-1x4",
+        "url": "https://animesalt.cx/episode/the-seven-knights-of-the-marronnier-kingdom-1x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2552_s1e4.jpg",
+        "streamUrl": "https://ravok.buzz/video/04ab1f885b52adc7a11278073b3c4f74",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/04ab1f885b52adc7a11278073b3c4f74",
+            "isMultiAudio": true
+          }
+        ]
+      }
+    ],
+    "episodeCount": 4,
+    "episodesCount": 4,
+    "anilist": {
+      "id": 212799,
+      "coverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx212799-n7WDdic7IL1z.png",
+      "bannerImage": "",
+      "description": "At the heart of a continent of eight kingdoms lies the Marronnier Kingdom. Its general, Baribara, has seven sons, each with a unique gift and serving as a knight commander. Bound by a single noble cause of heroically rescuing a princess someday, the brothers set out as goodwill ambassadors to the seven neighboring kingdoms. What encounters, trials, and destinies await them in these unknown lands?\n\n(Source: Amazon Prime Video)",
+      "rating": 6.6,
+      "year": 2026,
+      "genres": [
+        "Comedy",
+        "Fantasy",
+        "Romance"
+      ]
+    },
+    "source": "animesalt"
+  },
+  {
+    "title": "Even Though I'm a Super Timid Noble Girl, I Accepted the Bet from My Cunning Fiancé",
+    "slug": "even-though-im-a-super-timid-noble-girl-i-accepted-the-bet-from-my-cunning-fiance",
+    "saltSlug": "even-though-im-a-super-timid-noble-girl-i-accepted-the-bet-from-my-cunning-fiance",
+    "url": "https://animesalt.cx/series/even-though-im-a-super-timid-noble-girl-i-accepted-the-bet-from-my-cunning-fiance/",
+    "saltUrl": "https://animesalt.cx/series/even-though-im-a-super-timid-noble-girl-i-accepted-the-bet-from-my-cunning-fiance/",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/deFPIrhtwbVp1juu0b5Vi94DVLN.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/6tdkrWkbHlNZ8ZGn5blye4KTm57.jpg",
+    "description": "Pia Rockwell is a minor villainess in the game Caroline and the Rainbow Magic Sweets. At the end of the game, she's destined to be judged at her graduation party, see her engagement broken off, and be banished from the kingdom. Realizing she's doomed, Pia offers to end her engagement with Rufus Stan…but this only inspires the proud chancellor’s son to make a bet with her about their future!",
+    "genres": [
+      "Comedy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 10,
+    "year": 2026,
+    "episodes": [
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: Even Though I'm a Super Timid Noble Girl, I Accepted the Bet from My Cunning Fiancé 1x1",
+        "slug": "even-though-im-a-super-timid-noble-girl-i-accepted-the-bet-from-my-cunning-fiance-1x1",
+        "url": "https://animesalt.cx/episode/even-though-im-a-super-timid-noble-girl-i-accepted-the-bet-from-my-cunning-fiance-1x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2549_s1e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/e8a6f9224cc383ba6023c1a20c3fa846",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/e8a6f9224cc383ba6023c1a20c3fa846",
+            "isMultiAudio": true
+          }
+        ]
+      }
+    ],
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "anilist": null,
+    "source": "animesalt"
+  },
+  {
+    "title": "Suppose a Kid from the Last Dungeon Boonies Moved to a Starter Town?",
+    "slug": "suppose-a-kid-from-the-last-dungeon-boonies-moved-to-a-starter-town",
+    "saltSlug": "suppose-a-kid-from-the-last-dungeon-boonies-moved-to-a-starter-town",
+    "url": "https://animesalt.cx/series/suppose-a-kid-from-the-last-dungeon-boonies-moved-to-a-starter-town/",
+    "saltUrl": "https://animesalt.cx/series/suppose-a-kid-from-the-last-dungeon-boonies-moved-to-a-starter-town/",
+    "type": "series",
+    "poster": "https://image.tmdb.org/t/p/w500/mvsIMKsSlAu4XgnTsPYQf41Im0H.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/hvGXW3nISHm2ELwGhWcsSwTYfIi.jpg",
+    "description": "Lloyd is a novice adventurer whose dream is to discover “true strength” in the capital he’s always admired, despite growing up with neighbors who always considered him weak. The story starts with him departing from his hometown, which just so happens to be located right next to…one of the most dangerous dungeons in the world?!",
+    "genres": [
+      "Comedy"
+    ],
+    "audioLanguages": [
+      "Hindi",
+      "Urdu",
+      "Japanese"
+    ],
+    "rating": 7.2,
+    "year": 2021,
+    "episodes": [
+      {
+        "number": 1,
+        "season": 1,
+        "title": "S1 E1: Suppose a Kid from the Last Dungeon Boonies Moved to a Starter Town? 1x1",
+        "slug": "suppose-a-kid-from-the-last-dungeon-boonies-moved-to-a-starter-town-1x1",
+        "url": "https://animesalt.cx/episode/suppose-a-kid-from-the-last-dungeon-boonies-moved-to-a-starter-town-1x1/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/7PNwkrXm5fmIfoe8euKJpCnPSwS.jpg",
+        "streamUrl": "https://ravok.buzz/video/fe1af53ee47e534ba67bbc0dbb6c2f67",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/fe1af53ee47e534ba67bbc0dbb6c2f67",
+            "isMultiAudio": true
+          }
+        ]
+      }
+    ],
+    "episodeCount": 1,
+    "episodesCount": 1,
+    "anilist": {
+      "id": 112649,
+      "coverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx112649-Wdcxo6cQZbhx.jpg",
+      "bannerImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/112649-jonCCVLHopXa.jpg",
+      "description": "The story follows Lloyd, a budding adventurer who just wants to get stronger. His plan? Head to the capital and discover his true power, even though he grew up being considered a weakling. So Lloyd heads out from his hometown, which interestingly exists directly next to the most dangerous dungeon. He might not think of himself as strong, but he’ll soon learn that there’s even more of a difference between him and other starting adventurers.\n\nYou know, because he grew up next to a deadly dungeon. He’s much stronger than he realizes.\n\n(Source: Funimation)",
+      "rating": 6.2,
+      "year": 2021,
+      "genres": [
+        "Adventure",
+        "Comedy",
+        "Fantasy"
+      ]
+    },
+    "source": "animesalt"
+  },
+  {
     "id": "ap-doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil",
     "title": "Doraemon the Movie: New Nobita and the Castle of the Undersea Devil",
     "slug": "doraemon-the-movie-new-nobita-and-the-castle-of-the-undersea-devil",
@@ -2785,13 +3788,189 @@
           }
         ],
         "saltStreamUrl": "https://as-cdn26.top/video/05b755ace5b49029e32c3b90fb494edc"
+      },
+      {
+        "number": 1,
+        "season": 3,
+        "title": "S3 E1: KONOSUBA - God's blessing on this wonderful world! 3x1",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x1",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x1/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/jOUJPe0wfg8GS2QLG8xCr3L2kZD.jpg",
+        "streamUrl": "https://ravok.buzz/video/7be547d16da724a9dbba124efbab0a44",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7be547d16da724a9dbba124efbab0a44",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 3,
+        "title": "S3 E2: KONOSUBA - God's blessing on this wonderful world! 3x2",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x2",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x2/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/jJM8mQknHdLSWrvN0NnUiannIAL.jpg",
+        "streamUrl": "https://ravok.buzz/video/cf1f249ab7ce26315cf395fd2f794620",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/cf1f249ab7ce26315cf395fd2f794620",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 3,
+        "title": "S3 E3: KONOSUBA - God's blessing on this wonderful world! 3x3",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x3",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x3/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/vnjnJGpJwRzC8agrYhxLnaEcFvn.jpg",
+        "streamUrl": "https://ravok.buzz/video/7f169e8ba2553717e869803364c15ee7",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7f169e8ba2553717e869803364c15ee7",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 3,
+        "title": "S3 E4: KONOSUBA - God's blessing on this wonderful world! 3x4",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x4",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x4/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/hEGbqP0rLz0mtbapdzhidT0Nhre.jpg",
+        "streamUrl": "https://ravok.buzz/video/f9423e68b6d0a7bf46aca6b07d4d2f32",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/f9423e68b6d0a7bf46aca6b07d4d2f32",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "season": 3,
+        "title": "S3 E5: KONOSUBA - God's blessing on this wonderful world! 3x5",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x5",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x5/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/x0dROPxjKquGl3VTQ9zAt2vcbRD.jpg",
+        "streamUrl": "https://ravok.buzz/video/fb8e1ea7fbbebead5af0ca4db35408d0",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/fb8e1ea7fbbebead5af0ca4db35408d0",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "season": 3,
+        "title": "S3 E6: KONOSUBA - God's blessing on this wonderful world! 3x6",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x6",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x6/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/a4fdVIXtgt4OFaxlTZ48aqEJj64.jpg",
+        "streamUrl": "https://ravok.buzz/video/6a1180bdc37c178d34c04ef0bcc2eedf",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/6a1180bdc37c178d34c04ef0bcc2eedf",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "season": 3,
+        "title": "S3 E7: KONOSUBA - God's blessing on this wonderful world! 3x7",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x7",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x7/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/1cicdwcTUTdJGtSdofZ0X5Jhw87.jpg",
+        "streamUrl": "https://ravok.buzz/video/1cac95aacfc0287c62317431963e431b",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/1cac95aacfc0287c62317431963e431b",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 3,
+        "title": "S3 E8: KONOSUBA - God's blessing on this wonderful world! 3x8",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x8",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x8/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/ssRvgkGubVUF4TB4q870VCPMwIt.jpg",
+        "streamUrl": "https://ravok.buzz/video/a4b1edb90cdf6ea8dea00c6d463b7ffe",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/a4b1edb90cdf6ea8dea00c6d463b7ffe",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "season": 3,
+        "title": "S3 E9: KONOSUBA - God's blessing on this wonderful world! 3x9",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x9",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x9/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/xXiVMqzhvnZJe7qMtdqPASTPm8v.jpg",
+        "streamUrl": "https://ravok.buzz/video/9248a959405836566e6ba694aaa884a6",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9248a959405836566e6ba694aaa884a6",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "season": 3,
+        "title": "S3 E10: KONOSUBA - God's blessing on this wonderful world! 3x10",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x10",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x10/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/5wuv4j5LvdYFifhk9tsNfK9kVFV.jpg",
+        "streamUrl": "https://ravok.buzz/video/d717e27d7f1bd9dca3fbbdcebacb121c",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/d717e27d7f1bd9dca3fbbdcebacb121c",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "season": 3,
+        "title": "S3 E11: KONOSUBA - God's blessing on this wonderful world! 3x11",
+        "slug": "konosuba-gods-blessing-on-this-wonderful-world-3x11",
+        "url": "https://animesalt.cx/episode/konosuba-gods-blessing-on-this-wonderful-world-3x11/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/nh7VQYNLw9oCT7oqIFoGIzYDmIE.jpg",
+        "streamUrl": "https://ravok.buzz/video/78e3b5ca79e1d3688b73c13540b5c261",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/78e3b5ca79e1d3688b73c13540b5c261",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/konosuba---god's-blessing-on-this-wonderful-world!",
     "toonSlug": "konosuba---god's-blessing-on-this-wonderful-world!",
-    "episodeCount": 20,
-    "episodesCount": 20,
+    "episodeCount": 31,
+    "episodesCount": 31,
     "saltUrl": "https://animesalt.cx/series/konosuba-gods-blessing-on-this-wonderful-world/",
     "hazUrl": "https://hindianimeszone.com/konosuba-gods-blessing-on-this-wonderful-world-season-1-bluray-multi-audio/"
   },
@@ -3262,7 +4441,8 @@
             "url": "https://player.abyssplayer.com/euJsmOPWt",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x9/"
       },
       {
         "number": 10,
@@ -3276,6 +4456,23 @@
           {
             "label": "Ravok (HD)",
             "url": "https://ravok.buzz/video/188e30ebbc769aeda748b09cec89f0bb",
+            "isMultiAudio": true
+          }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x10/"
+      },
+      {
+        "number": 11,
+        "season": 1,
+        "title": "S1 E11: Jaadugar: A Witch in Mongolia 1x11",
+        "slug": "jaadugar-a-witch-in-mongolia-1x11",
+        "url": "https://animesalt.cx/episode/jaadugar-a-witch-in-mongolia-1x11/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/23a5896c4fb3b725e29567adc0779f10",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/23a5896c4fb3b725e29567adc0779f10",
             "isMultiAudio": true
           }
         ]
@@ -3300,8 +4497,8 @@
     },
     "toonUrl": "https://toonstream.us/series/jaadugar:-a-witch-in-mongolia",
     "toonSlug": "jaadugar:-a-witch-in-mongolia",
-    "episodeCount": 10,
-    "episodesCount": 10,
+    "episodeCount": 11,
+    "episodesCount": 11,
     "saltUrl": "https://animesalt.cx/series/jaadugar-a-witch-in-mongolia/",
     "hazUrl": "https://hindianimeszone.com/jaadugar-a-witch-in-mongolia-season-1-dual-audio-english-japanese-480p-720p-1080p-hd-web-dl-10bit-hevc-esub/"
   },
@@ -3659,7 +4856,8 @@
             "url": "https://player.abyssplayer.com/17UZi_wph",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/black-torch-1x7/"
       },
       {
         "number": 8,
@@ -3690,6 +4888,23 @@
             "url": "https://player.abyssplayer.com/WmKBUzcMe",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/black-torch-1x8/"
+      },
+      {
+        "number": 9,
+        "season": 1,
+        "title": "S1 E9: BLACK TORCH 1x9",
+        "slug": "black-torch-1x9",
+        "url": "https://animesalt.cx/episode/black-torch-1x9/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/5a22ca17654264e74c81ce3a4c4901e3",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/5a22ca17654264e74c81ce3a4c4901e3",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
@@ -3715,8 +4930,8 @@
     },
     "toonUrl": "https://toonstream.us/series/black-torch",
     "toonSlug": "black-torch",
-    "episodeCount": 8,
-    "episodesCount": 8,
+    "episodeCount": 9,
+    "episodesCount": 9,
     "saltUrl": "https://animesalt.cx/series/black-torch/",
     "hazUrl": "https://hindianimeszone.com/black-torch-season-1-multi-audio-hindi-eng-jpn/"
   },
@@ -64119,7 +65334,8 @@
             "url": "https://player.abyssplayer.com/TLN0VzXbP",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/grand-blue-dreaming-3x7/"
       },
       {
         "number": 8,
@@ -64135,14 +65351,31 @@
             "url": "https://ravok.buzz/video/fd068634f56443e7ef424870db309a61",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/grand-blue-dreaming-3x8/"
+      },
+      {
+        "number": 9,
+        "season": 3,
+        "title": "S3 E9: Grand Blue Dreaming 3x9",
+        "slug": "grand-blue-dreaming-3x9",
+        "url": "https://animesalt.cx/episode/grand-blue-dreaming-3x9/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/9a25e1349277003c72c0b7a53ca515fe",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9a25e1349277003c72c0b7a53ca515fe",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/grand-blue-dreaming",
     "toonSlug": "grand-blue-dreaming",
-    "episodeCount": 32,
-    "episodesCount": 32,
+    "episodeCount": 33,
+    "episodesCount": 33,
     "saltSlug": "grand-blue-dreaming",
     "saltUrl": "https://animesalt.cx/series/grand-blue-dreaming/",
     "hazUrl": "https://hindianimeszone.com/grand-blue-dreaming-season-1-dual-audio-hindi-jap-480p-720p-and-1080p-hd-10bit-hevc-esub/"
@@ -65492,14 +66725,63 @@
             "url": "https://ravok.buzz/video/acc1fc2a7746c567f63c3c0490c35ddc",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/blue-box-2x1/"
+      },
+      {
+        "number": 2,
+        "season": 2,
+        "title": "S2 E2: Blue Box 2x2",
+        "slug": "blue-box-2x2",
+        "url": "https://animesalt.cx/episode/blue-box-2x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2356_s2e2.jpg",
+        "streamUrl": "https://ravok.buzz/video/b5839f3b37f86762f4e300e32db051ea",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b5839f3b37f86762f4e300e32db051ea",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 2,
+        "title": "S2 E3: Blue Box 2x3",
+        "slug": "blue-box-2x3",
+        "url": "https://animesalt.cx/episode/blue-box-2x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2356_s2e3.jpg",
+        "streamUrl": "https://ravok.buzz/video/a36f6b9d583ea08a055977ee4eb06264",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/a36f6b9d583ea08a055977ee4eb06264",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 2,
+        "title": "S2 E4: Blue Box 2x4",
+        "slug": "blue-box-2x4",
+        "url": "https://animesalt.cx/episode/blue-box-2x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2356_s2e4.jpg",
+        "streamUrl": "https://ravok.buzz/video/9a2645cb664378e50626065996e58791",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9a2645cb664378e50626065996e58791",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/blue-box",
     "toonSlug": "blue-box",
-    "episodeCount": 26,
-    "episodesCount": 26,
+    "episodeCount": 29,
+    "episodesCount": 29,
     "saltSlug": "blue-box",
     "saltUrl": "https://animesalt.cx/series/blue-box/",
     "hazUrl": "https://hindianimeszone.com/blue-box-season-1-in-hindi-subbed/"
@@ -104266,6 +105548,38 @@
         ]
       },
       {
+        "number": 14,
+        "season": 2,
+        "title": "S2 E14: Arifureta: From Commonplace to World's Strongest 2x14",
+        "slug": "arifureta-from-commonplace-to-worlds-strongest-2x14",
+        "url": "https://animesalt.cx/episode/arifureta-from-commonplace-to-worlds-strongest-2x14/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/e18455e21cdc9ba50c301e0bc99b56e7",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/e18455e21cdc9ba50c301e0bc99b56e7",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "season": 2,
+        "title": "S2 E15: Arifureta: From Commonplace to World's Strongest 2x15",
+        "slug": "arifureta-from-commonplace-to-worlds-strongest-2x15",
+        "url": "https://animesalt.cx/episode/arifureta-from-commonplace-to-worlds-strongest-2x15/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/48bb58ad9fad2df3441cd4452f9d24a6",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/48bb58ad9fad2df3441cd4452f9d24a6",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
         "number": 1,
         "season": 3,
         "title": "S3 E1: Arifureta: From Commonplace to World's Strongest 3x1",
@@ -104983,8 +106297,8 @@
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/arifureta:-from-commonplace-to-world's-strongest",
     "toonSlug": "arifureta:-from-commonplace-to-world's-strongest",
-    "episodeCount": 42,
-    "episodesCount": 42,
+    "episodeCount": 44,
+    "episodesCount": 44,
     "saltSlug": "arifureta-from-commonplace-to-worlds-strongest",
     "saltUrl": "https://animesalt.cx/series/arifureta-from-commonplace-to-worlds-strongest/",
     "hazUrl": "https://hindianimeszone.com/arifuretafrom-commonplace-to-worlds-strongest-season-2-in-hindi-dubbed-unofficial-2/"
@@ -111707,14 +113021,63 @@
             "url": "https://ravok.buzz/video/f8e022748d5214eb5ce98d3f69a0036c",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/the-ramparts-of-ice-2x1/"
+      },
+      {
+        "number": 2,
+        "season": 2,
+        "title": "S2 E2: The Ramparts of Ice 2x2",
+        "slug": "the-ramparts-of-ice-2x2",
+        "url": "https://animesalt.cx/episode/the-ramparts-of-ice-2x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2318_s2e2.jpg",
+        "streamUrl": "https://ravok.buzz/video/a88525dde7ce809d7678fa53a4720012",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/a88525dde7ce809d7678fa53a4720012",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 2,
+        "title": "S2 E3: The Ramparts of Ice 2x3",
+        "slug": "the-ramparts-of-ice-2x3",
+        "url": "https://animesalt.cx/episode/the-ramparts-of-ice-2x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2318_s2e3.jpg",
+        "streamUrl": "https://ravok.buzz/video/2f5c46338278558ac0bee2e0529fc305",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/2f5c46338278558ac0bee2e0529fc305",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 2,
+        "title": "S2 E4: The Ramparts of Ice 2x4",
+        "slug": "the-ramparts-of-ice-2x4",
+        "url": "https://animesalt.cx/episode/the-ramparts-of-ice-2x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2318_s2e4.jpg",
+        "streamUrl": "https://ravok.buzz/video/7b5bdfc3463973353c96415d45663cc4",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7b5bdfc3463973353c96415d45663cc4",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/the-ramparts-of-ice",
     "toonSlug": "the-ramparts-of-ice",
-    "episodeCount": 15,
-    "episodesCount": 15,
+    "episodeCount": 18,
+    "episodesCount": 18,
     "saltSlug": "the-ramparts-of-ice",
     "saltUrl": "https://animesalt.cx/series/the-ramparts-of-ice/",
     "hazUrl": "https://hindianimeszone.com/the-ramparts-of-ice-season-1-multi-audio/"
@@ -162607,13 +163970,77 @@
         "saltUrl": "https://animesalt.cx/episode/ranma-%c2%bd-2024-2x12/",
         "streamUrl": "https://player.abyssplayer.com/wv6wcDVEF",
         "toonStreamUrl": "https://player.abyssplayer.com/wv6wcDVEF"
+      },
+      {
+        "number": 1,
+        "season": 3,
+        "title": "S3 E1: Ranma ½ (2024) 3x1",
+        "slug": "ranma-%c2%bd-2024-3x1",
+        "url": "https://animesalt.cx/episode/ranma-%c2%bd-2024-3x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1082_s3e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/60f24162e3a72b51963ce5956bda2ab4",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/60f24162e3a72b51963ce5956bda2ab4",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 3,
+        "title": "S3 E2: Ranma ½ (2024) 3x2",
+        "slug": "ranma-%c2%bd-2024-3x2",
+        "url": "https://animesalt.cx/episode/ranma-%c2%bd-2024-3x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1082_s3e2.jpg",
+        "streamUrl": "https://ravok.buzz/video/b4c740208036d64c467b9cb682edb0c5",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b4c740208036d64c467b9cb682edb0c5",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 3,
+        "title": "S3 E3: Ranma ½ (2024) 3x3",
+        "slug": "ranma-%c2%bd-2024-3x3",
+        "url": "https://animesalt.cx/episode/ranma-%c2%bd-2024-3x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1082_s3e3.jpg",
+        "streamUrl": "https://ravok.buzz/video/042b0f3dc6ef1da5755f972bcce7c1cc",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/042b0f3dc6ef1da5755f972bcce7c1cc",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 3,
+        "title": "S3 E4: Ranma ½ (2024) 3x4",
+        "slug": "ranma-%c2%bd-2024-3x4",
+        "url": "https://animesalt.cx/episode/ranma-%c2%bd-2024-3x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1082_s3e4.jpg",
+        "streamUrl": "https://ravok.buzz/video/e3023cb26ee1da6bcc0c72ebd9a4524d",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/e3023cb26ee1da6bcc0c72ebd9a4524d",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "saltSlug": "ranma-%c2%bd-2024",
     "saltUrl": "https://animesalt.cx/series/ranma-%c2%bd-2024/",
-    "episodeCount": 24,
-    "episodesCount": 24
+    "episodeCount": 28,
+    "episodesCount": 28
   },
   {
     "title": "Let This Grieving Soul Retire",
@@ -166450,13 +167877,45 @@
           }
         ],
         "hazStreamUrl": "https://002.hindianimeszone.com/playonline.php?code=SSN6B6IT"
+      },
+      {
+        "number": 1,
+        "season": 2,
+        "title": "S2 E1: A Wild Last Boss Appeared! 2x1",
+        "slug": "a-wild-last-boss-appeared-2x1",
+        "url": "https://animesalt.cx/episode/a-wild-last-boss-appeared-2x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2148_s2e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/5f04cbcc7f0a335ed1517e9f24ffb30e",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/5f04cbcc7f0a335ed1517e9f24ffb30e",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 2,
+        "title": "S2 E2: A Wild Last Boss Appeared! 2x2",
+        "slug": "a-wild-last-boss-appeared-2x2",
+        "url": "https://animesalt.cx/episode/a-wild-last-boss-appeared-2x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_2148_s2e2.jpg",
+        "streamUrl": "https://ravok.buzz/video/484cc97087d1d8aaf81262a30d94851f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/484cc97087d1d8aaf81262a30d94851f",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/a-wild-last-boss-appeared",
     "toonSlug": "a-wild-last-boss-appeared",
-    "episodeCount": 12,
-    "episodesCount": 12,
+    "episodeCount": 14,
+    "episodesCount": 14,
     "saltSlug": "a-wild-last-boss-appeared",
     "saltUrl": "https://animesalt.cx/series/a-wild-last-boss-appeared/",
     "hazUrl": "https://hindianimeszone.com/a-wild-last-boss-appeared-season-1-hindi-multi-audio/"
@@ -310219,7 +311678,8 @@
             "url": "https://player.abyssplayer.com/T-JTd-QfS",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x37/"
       },
       {
         "number": 38,
@@ -310250,7 +311710,8 @@
             "url": "https://player.abyssplayer.com/AfKEC-igm",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x38/"
       },
       {
         "number": 39,
@@ -310281,14 +311742,367 @@
             "url": "https://player.abyssplayer.com/91AgLMzUZ",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/jojos-bizarre-adventure-3x39/"
+      },
+      {
+        "number": 1,
+        "season": 4,
+        "title": "S4 E1: JoJo's Bizarre Adventure 4x1",
+        "slug": "jojos-bizarre-adventure-4x1",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/938a56471d1a3fb0f01f1b04ad30f398",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/938a56471d1a3fb0f01f1b04ad30f398",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 4,
+        "title": "S4 E2: JoJo's Bizarre Adventure 4x2",
+        "slug": "jojos-bizarre-adventure-4x2",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x2/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e2.jpg",
+        "streamUrl": "https://ravok.buzz/video/073f5b456a1406f710aaf3cbcb0016b6",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/073f5b456a1406f710aaf3cbcb0016b6",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 4,
+        "title": "S4 E3: JoJo's Bizarre Adventure 4x3",
+        "slug": "jojos-bizarre-adventure-4x3",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e3.jpg",
+        "streamUrl": "https://ravok.buzz/video/e91cc44798f02debded730aaf2453fe5",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/e91cc44798f02debded730aaf2453fe5",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 4,
+        "title": "S4 E4: JoJo's Bizarre Adventure 4x4",
+        "slug": "jojos-bizarre-adventure-4x4",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e4.jpg",
+        "streamUrl": "https://ravok.buzz/video/dcb5060fba0123ff56d253331f28db6a",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/dcb5060fba0123ff56d253331f28db6a",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "season": 4,
+        "title": "S4 E5: JoJo's Bizarre Adventure 4x5",
+        "slug": "jojos-bizarre-adventure-4x5",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x5/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e5.jpg",
+        "streamUrl": "https://ravok.buzz/video/cf13d0708d43d18fdba8f98bfc6ab42b",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/cf13d0708d43d18fdba8f98bfc6ab42b",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "season": 4,
+        "title": "S4 E6: JoJo's Bizarre Adventure 4x6",
+        "slug": "jojos-bizarre-adventure-4x6",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x6/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e6.jpg",
+        "streamUrl": "https://ravok.buzz/video/0a2f057963744e807fd6cc070fb617df",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/0a2f057963744e807fd6cc070fb617df",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "season": 4,
+        "title": "S4 E7: JoJo's Bizarre Adventure 4x7",
+        "slug": "jojos-bizarre-adventure-4x7",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x7/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e7.jpg",
+        "streamUrl": "https://ravok.buzz/video/934c067da2d96551704cd45a18266210",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/934c067da2d96551704cd45a18266210",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "season": 4,
+        "title": "S4 E8: JoJo's Bizarre Adventure 4x8",
+        "slug": "jojos-bizarre-adventure-4x8",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x8/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e8.jpg",
+        "streamUrl": "https://ravok.buzz/video/8a2615b001a598aff6001e09a5f20221",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/8a2615b001a598aff6001e09a5f20221",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "season": 4,
+        "title": "S4 E9: JoJo's Bizarre Adventure 4x9",
+        "slug": "jojos-bizarre-adventure-4x9",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x9/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e9.jpg",
+        "streamUrl": "https://ravok.buzz/video/806107639381a3c77b34ee5128f7430f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/806107639381a3c77b34ee5128f7430f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "season": 4,
+        "title": "S4 E10: JoJo's Bizarre Adventure 4x10",
+        "slug": "jojos-bizarre-adventure-4x10",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x10/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e10.jpg",
+        "streamUrl": "https://ravok.buzz/video/e801f99c957ec0bf9dab6f11df89778c",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/e801f99c957ec0bf9dab6f11df89778c",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "season": 4,
+        "title": "S4 E11: JoJo's Bizarre Adventure 4x11",
+        "slug": "jojos-bizarre-adventure-4x11",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x11/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e11.jpg",
+        "streamUrl": "https://ravok.buzz/video/35b729b42782ce151f53d08c954284dd",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/35b729b42782ce151f53d08c954284dd",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "season": 4,
+        "title": "S4 E12: JoJo's Bizarre Adventure 4x12",
+        "slug": "jojos-bizarre-adventure-4x12",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x12/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e12.jpg",
+        "streamUrl": "https://ravok.buzz/video/b2a223f097589a3682d3221d102fc52e",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b2a223f097589a3682d3221d102fc52e",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "season": 4,
+        "title": "S4 E13: JoJo's Bizarre Adventure 4x13",
+        "slug": "jojos-bizarre-adventure-4x13",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x13/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e13.jpg",
+        "streamUrl": "https://ravok.buzz/video/5d785002be68f41c87a4ba51760dcaf9",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/5d785002be68f41c87a4ba51760dcaf9",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "season": 4,
+        "title": "S4 E14: JoJo's Bizarre Adventure 4x14",
+        "slug": "jojos-bizarre-adventure-4x14",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x14/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e14.jpg",
+        "streamUrl": "https://ravok.buzz/video/83575ac3b1da0569ebbbea825b9346a3",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/83575ac3b1da0569ebbbea825b9346a3",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 15,
+        "season": 4,
+        "title": "S4 E15: JoJo's Bizarre Adventure 4x15",
+        "slug": "jojos-bizarre-adventure-4x15",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x15/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e15.jpg",
+        "streamUrl": "https://ravok.buzz/video/a0ca286f9ea237a167da3a27f20fd560",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/a0ca286f9ea237a167da3a27f20fd560",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 16,
+        "season": 4,
+        "title": "S4 E16: JoJo's Bizarre Adventure 4x16",
+        "slug": "jojos-bizarre-adventure-4x16",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-4x16/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s4e16.jpg",
+        "streamUrl": "https://ravok.buzz/video/1ed013af9f67744751dc13861ebeea2f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/1ed013af9f67744751dc13861ebeea2f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "season": 6,
+        "title": "S6 E1: JoJo's Bizarre Adventure 6x1",
+        "slug": "jojos-bizarre-adventure-6x1",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-6x1/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/4ATJwDwspxLCYEZaRbCpIyxd7Wo.jpg",
+        "streamUrl": "https://ravok.buzz/video/f0d65c0d56a5c7ff1c5bd9f9909f1c54",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/f0d65c0d56a5c7ff1c5bd9f9909f1c54",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "season": 6,
+        "title": "S6 E2: JoJo's Bizarre Adventure 6x2",
+        "slug": "jojos-bizarre-adventure-6x2",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-6x2/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/nVjUqzoZXDGXajjged1ZhUpj1jr.jpg",
+        "streamUrl": "https://ravok.buzz/video/7d108ef7d0b18baf658a5795cbd26931",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7d108ef7d0b18baf658a5795cbd26931",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "season": 6,
+        "title": "S6 E3: JoJo's Bizarre Adventure 6x3",
+        "slug": "jojos-bizarre-adventure-6x3",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-6x3/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s6e3.jpg",
+        "streamUrl": "https://ravok.buzz/video/9c7eae0c470302045fc7e20c147b1929",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/9c7eae0c470302045fc7e20c147b1929",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "season": 6,
+        "title": "S6 E4: JoJo's Bizarre Adventure 6x4",
+        "slug": "jojos-bizarre-adventure-6x4",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-6x4/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s6e4.jpg",
+        "streamUrl": "https://ravok.buzz/video/87ae9f68b3b1afa507a7bf4fd7e3144e",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/87ae9f68b3b1afa507a7bf4fd7e3144e",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "season": 6,
+        "title": "S6 E5: JoJo's Bizarre Adventure 6x5",
+        "slug": "jojos-bizarre-adventure-6x5",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-6x5/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s6e5.jpg",
+        "streamUrl": "https://ravok.buzz/video/8f63b73373003ffea6758a58b79a010f",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/8f63b73373003ffea6758a58b79a010f",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "season": 6,
+        "title": "S6 E6: JoJo's Bizarre Adventure 6x6",
+        "slug": "jojos-bizarre-adventure-6x6",
+        "url": "https://animesalt.cx/episode/jojos-bizarre-adventure-6x6/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1652_s6e6.jpg",
+        "streamUrl": "https://ravok.buzz/video/60b997fd68261ce70cadaf6c8226c042",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/60b997fd68261ce70cadaf6c8226c042",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/jojos-bizarre-adventure",
     "toonSlug": "jojos-bizarre-adventure",
-    "episodeCount": 113,
-    "episodesCount": 113,
+    "episodeCount": 135,
+    "episodesCount": 135,
     "saltSlug": "jojos-bizarre-adventure",
     "saltUrl": "https://animesalt.cx/series/jojos-bizarre-adventure/",
     "hazUrl": "https://hindianimeszone.com/jojos-bizarre-adventure-season-1-hindi-multi-audio/"
@@ -527403,6 +529217,22 @@
         ]
       },
       {
+        "number": 12,
+        "season": 2,
+        "title": "S2 E12: Dr. STONE 2x12",
+        "slug": "dr-stone-2x12",
+        "url": "https://animesalt.cx/episode/dr-stone-2x12/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/iYLB5J6Z5g4NyHQ9cwmR07B2PtQ.jpg",
+        "streamUrl": "https://ravok.buzz/video/b55605adca99dc4269d91ddc16de78d8",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/b55605adca99dc4269d91ddc16de78d8",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
         "number": 1,
         "season": 3,
         "title": "S3 E1: Dr. STONE 3x1",
@@ -530278,8 +532108,8 @@
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/dr-stone",
     "toonSlug": "dr-stone",
-    "episodeCount": 94,
-    "episodesCount": 94,
+    "episodeCount": 95,
+    "episodesCount": 95,
     "saltSlug": "dr-stone",
     "saltUrl": "https://animesalt.cx/series/dr-stone/",
     "hazUrl": "https://hindianimeszone.com/dr-stone-season-2-hindi-multi-audio/"
@@ -566892,7 +568722,8 @@
             "url": "https://player.abyssplayer.com/So34PZNZ1",
             "isMultiAudio": true
           }
-        ]
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x7/"
       },
       {
         "number": 8,
@@ -566908,14 +568739,31 @@
             "url": "https://ravok.buzz/video/65da3129d9d71cc4ae2dc09b9b3a43ea",
             "isMultiAudio": true
           }
+        ],
+        "saltUrl": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x8/"
+      },
+      {
+        "number": 9,
+        "season": 3,
+        "title": "S3 E9: Mushoku Tensei: Jobless Reincarnation 3x9",
+        "slug": "mushoku-tensei-jobless-reincarnation-3x9",
+        "url": "https://animesalt.cx/episode/mushoku-tensei-jobless-reincarnation-3x9/",
+        "thumbnail": "https://animesalt.cx/wp-content/themes/torofilm/public/img/cnt/noimg-episode.png",
+        "streamUrl": "https://ravok.buzz/video/87dc59c69fc99cd1ad09d4777f5b4c13",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/87dc59c69fc99cd1ad09d4777f5b4c13",
+            "isMultiAudio": true
+          }
         ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/mushoku-tensei-jobless-reincarnation",
     "toonSlug": "mushoku-tensei-jobless-reincarnation",
-    "episodeCount": 57,
-    "episodesCount": 57,
+    "episodeCount": 58,
+    "episodesCount": 58,
     "saltSlug": "mushoku-tensei-jobless-reincarnation",
     "saltUrl": "https://animesalt.cx/series/mushoku-tensei-jobless-reincarnation/",
     "hazUrl": "https://hindianimeszone.com/mushoku-tensei-jobless-reincarnation-season-1-bluray-hindi-english-jap-multi-audio-480p-720p-and-1080p-hd-10bit-hevc-esub-uncensored/"
@@ -620609,13 +622457,29 @@
             "isMultiAudio": true
           }
         ]
+      },
+      {
+        "number": 1,
+        "season": 3,
+        "title": "S3 E1: The Apothecary Diaries 3x1",
+        "slug": "the-apothecary-diaries-3x1",
+        "url": "https://animesalt.cx/episode/the-apothecary-diaries-3x1/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1266_s3e1.jpg",
+        "streamUrl": "https://ravok.buzz/video/7f7884a41d8cd08c91314fce7f13dd1c",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7f7884a41d8cd08c91314fce7f13dd1c",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/the-apothecary-diaries",
     "toonSlug": "the-apothecary-diaries",
-    "episodeCount": 48,
-    "episodesCount": 48,
+    "episodeCount": 49,
+    "episodesCount": 49,
     "saltSlug": "the-apothecary-diaries",
     "saltUrl": "https://animesalt.cx/series/the-apothecary-diaries/",
     "hazUrl": "https://hindianimeszone.com/the-apothecary-diaries-season-2-hindi-tamil-telugu-english-jap-dubbed/"
@@ -641963,13 +643827,77 @@
             "isMultiAudio": true
           }
         ]
+      },
+      {
+        "number": 9,
+        "season": 2,
+        "title": "S2 E9: Trapped in a Dating Sim: The World of Otome Games Is Tough for Mobs 2x9",
+        "slug": "trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x9",
+        "url": "https://animesalt.cx/episode/trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x9/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/z605BW0wQPK0P86p5RaDsuRSQhV.jpg",
+        "streamUrl": "https://ravok.buzz/video/6c9401f2e592de95c20042ebcc16a102",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/6c9401f2e592de95c20042ebcc16a102",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "season": 2,
+        "title": "S2 E10: Trapped in a Dating Sim: The World of Otome Games Is Tough for Mobs 2x10",
+        "slug": "trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x10",
+        "url": "https://animesalt.cx/episode/trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x10/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/imqi39UxhBYXbsAkl93mYuu9Dli.jpg",
+        "streamUrl": "https://ravok.buzz/video/c61020b12cf805b7c3f39937118fffd3",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/c61020b12cf805b7c3f39937118fffd3",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "season": 2,
+        "title": "S2 E11: Trapped in a Dating Sim: The World of Otome Games Is Tough for Mobs 2x11",
+        "slug": "trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x11",
+        "url": "https://animesalt.cx/episode/trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x11/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1338_s2e11.jpg",
+        "streamUrl": "https://ravok.buzz/video/cb82282534f79f13c66d289839bbf022",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/cb82282534f79f13c66d289839bbf022",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "season": 2,
+        "title": "S2 E12: Trapped in a Dating Sim: The World of Otome Games Is Tough for Mobs 2x12",
+        "slug": "trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x12",
+        "url": "https://animesalt.cx/episode/trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs-2x12/",
+        "thumbnail": "https://img.animesalt.cx/images-unified/thumb_1338_s2e12.jpg",
+        "streamUrl": "https://ravok.buzz/video/af5c4b7bf58c31737588e1fd4adcec9a",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/af5c4b7bf58c31737588e1fd4adcec9a",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "toonUrl": "https://toonstream.us/series/trapped-in-a-dating-sim-the-world-of-otome",
     "toonSlug": "trapped-in-a-dating-sim-the-world-of-otome",
-    "episodeCount": 20,
-    "episodesCount": 20,
+    "episodeCount": 24,
+    "episodesCount": 24,
     "saltSlug": "trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs",
     "saltUrl": "https://animesalt.cx/series/trapped-in-a-dating-sim-the-world-of-otome-games-is-tough-for-mobs/",
     "hazUrl": "https://hindianimeszone.com/trapped-in-a-dating-sim-season-1-hindi-multi-audio/"
@@ -734105,13 +736033,237 @@
         "saltUrl": "https://animesalt.cx/episode/digimon-adventure-1x24/",
         "streamUrl": "https://player.abyssplayer.com/TrYVQDAkM",
         "toonStreamUrl": "https://player.abyssplayer.com/TrYVQDAkM"
+      },
+      {
+        "number": 25,
+        "season": 1,
+        "title": "S1 E25: Digimon Adventure: 1x25",
+        "slug": "digimon-adventure-1x25",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x25/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/912oMMIqzJn151olBsSc5WNfiip.jpg",
+        "streamUrl": "https://ravok.buzz/video/2bbc1cc8fd0e5f9e0b91f01828c87814",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/2bbc1cc8fd0e5f9e0b91f01828c87814",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 26,
+        "season": 1,
+        "title": "S1 E26: Digimon Adventure: 1x26",
+        "slug": "digimon-adventure-1x26",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x26/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/qqe9FcPttiskXSRm49GGFxFt3Lk.jpg",
+        "streamUrl": "https://ravok.buzz/video/81f89eda54f8e14777eddd0812aea85d",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/81f89eda54f8e14777eddd0812aea85d",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 27,
+        "season": 1,
+        "title": "S1 E27: Digimon Adventure: 1x27",
+        "slug": "digimon-adventure-1x27",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x27/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/wAc5JOtJ4eAtduD7VCUxBHLVEPn.jpg",
+        "streamUrl": "https://ravok.buzz/video/73a863f2ad41c7702ef74788571bf68a",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/73a863f2ad41c7702ef74788571bf68a",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 28,
+        "season": 1,
+        "title": "S1 E28: Digimon Adventure: 1x28",
+        "slug": "digimon-adventure-1x28",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x28/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/bPuLoPlz5HDIIgHCosCI3jMLltS.jpg",
+        "streamUrl": "https://ravok.buzz/video/159a09c517c606c8d96a6b18c6e2e4d9",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/159a09c517c606c8d96a6b18c6e2e4d9",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 29,
+        "season": 1,
+        "title": "S1 E29: Digimon Adventure: 1x29",
+        "slug": "digimon-adventure-1x29",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x29/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/7wB40aqy2Dv4rrvAeChewzmoxfl.jpg",
+        "streamUrl": "https://ravok.buzz/video/d8b4cbcdeaa0e0c5d89b174b22d501f2",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/d8b4cbcdeaa0e0c5d89b174b22d501f2",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 30,
+        "season": 1,
+        "title": "S1 E30: Digimon Adventure: 1x30",
+        "slug": "digimon-adventure-1x30",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x30/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/zzDZAItZB9k148kjqf7Cg3DS4i.jpg",
+        "streamUrl": "https://ravok.buzz/video/48fd3e91841d8619c84400e661895675",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/48fd3e91841d8619c84400e661895675",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 31,
+        "season": 1,
+        "title": "S1 E31: Digimon Adventure: 1x31",
+        "slug": "digimon-adventure-1x31",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x31/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/yHdzSLmYtHBc4rVOUE1zZ8xd4FO.jpg",
+        "streamUrl": "https://ravok.buzz/video/7ba5e3d6037b3d9c096399fbd3426023",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7ba5e3d6037b3d9c096399fbd3426023",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 32,
+        "season": 1,
+        "title": "S1 E32: Digimon Adventure: 1x32",
+        "slug": "digimon-adventure-1x32",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x32/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/vo65JogUpMxiYSeogdX2c3I6UZE.jpg",
+        "streamUrl": "https://ravok.buzz/video/4cc574cdc8da2b49b46e9bed5255cece",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/4cc574cdc8da2b49b46e9bed5255cece",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 33,
+        "season": 1,
+        "title": "S1 E33: Digimon Adventure: 1x33",
+        "slug": "digimon-adventure-1x33",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x33/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/p5L3yA4DtVpTlLdS9zgEntadC65.jpg",
+        "streamUrl": "https://ravok.buzz/video/757deb22acbb6b1e217fc378ac78b2a4",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/757deb22acbb6b1e217fc378ac78b2a4",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 34,
+        "season": 1,
+        "title": "S1 E34: Digimon Adventure: 1x34",
+        "slug": "digimon-adventure-1x34",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x34/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/m3zoHPTONrZe4i9FWgoh7lBhH2d.jpg",
+        "streamUrl": "https://ravok.buzz/video/8f94eafb14366ce488946e40d8b4694e",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/8f94eafb14366ce488946e40d8b4694e",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 35,
+        "season": 1,
+        "title": "S1 E35: Digimon Adventure: 1x35",
+        "slug": "digimon-adventure-1x35",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x35/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/aA4HYuUJtntNP89ttPOIKIJast.jpg",
+        "streamUrl": "https://ravok.buzz/video/bb01f00daaeac676313d2031dfd1e419",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/bb01f00daaeac676313d2031dfd1e419",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 36,
+        "season": 1,
+        "title": "S1 E36: Digimon Adventure: 1x36",
+        "slug": "digimon-adventure-1x36",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x36/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/5OYzF0dwRewxko2gyozg99WmJdH.jpg",
+        "streamUrl": "https://ravok.buzz/video/7cf68b210274ef46d38b0cd76e059af6",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/7cf68b210274ef46d38b0cd76e059af6",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 37,
+        "season": 1,
+        "title": "S1 E37: Digimon Adventure: 1x37",
+        "slug": "digimon-adventure-1x37",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x37/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/whlggUYF40vlF7Gwgfvl9VT10I9.jpg",
+        "streamUrl": "https://ravok.buzz/video/d90d801833a681b169e4f86c64784cdd",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/d90d801833a681b169e4f86c64784cdd",
+            "isMultiAudio": true
+          }
+        ]
+      },
+      {
+        "number": 38,
+        "season": 1,
+        "title": "S1 E38: Digimon Adventure: 1x38",
+        "slug": "digimon-adventure-1x38",
+        "url": "https://animesalt.cx/episode/digimon-adventure-1x38/",
+        "thumbnail": "https://image.tmdb.org/t/p/w185/tLT0Kk5CLHyLTvStsnanWpD9SGx.jpg",
+        "streamUrl": "https://ravok.buzz/video/a6ed9258d53b17bac9cfd263432af8fa",
+        "streamSources": [
+          {
+            "label": "Ravok (HD)",
+            "url": "https://ravok.buzz/video/a6ed9258d53b17bac9cfd263432af8fa",
+            "isMultiAudio": true
+          }
+        ]
       }
     ],
     "anilist": null,
     "saltSlug": "digimon-adventure",
     "saltUrl": "https://animesalt.cx/series/digimon-adventure/",
-    "episodeCount": 24,
-    "episodesCount": 24
+    "episodeCount": 38,
+    "episodesCount": 38
   },
   {
     "title": "TRON: Uprising",
@@ -782108,7 +784260,9 @@
     "toonUrl": "https://toonstream.us/series/x-men",
     "toonSlug": "x-men",
     "episodeCount": 12,
-    "episodesCount": 12
+    "episodesCount": 12,
+    "saltUrl": "https://animesalt.cx/series/x-men/",
+    "saltSlug": "x-men"
   },
   {
     "id": "ts-power-rangers-wild-force",
@@ -851922,7 +854076,9 @@
       "English",
       "Japanese",
       "Korean"
-    ]
+    ],
+    "saltUrl": "https://animesalt.cx/series/high-school-dxd/",
+    "saltSlug": "high-school-dxd"
   },
   {
     "id": "ts-horimiya-the-missing-pieces",
@@ -855122,7 +857278,9 @@
     "toonUrl": "https://toonstream.us/series/the-legend-of-karna",
     "toonSlug": "the-legend-of-karna",
     "episodeCount": 2,
-    "episodesCount": 2
+    "episodesCount": 2,
+    "saltUrl": "https://animesalt.cx/series/the-legend-of-karna/",
+    "saltSlug": "the-legend-of-karna"
   },
   {
     "id": "ts-i-parry-everything-esub",
@@ -902641,7 +904799,9 @@
     "toonUrl": "https://toonstream.us/series/wolverine",
     "toonSlug": "wolverine",
     "episodeCount": 12,
-    "episodesCount": 12
+    "episodesCount": 12,
+    "saltUrl": "https://animesalt.cx/series/wolverine/",
+    "saltSlug": "wolverine"
   },
   {
     "id": "ts-yo-kai-watch",
@@ -920180,7 +922340,9 @@
     "episodeCount": 13,
     "source": "toonstream",
     "episodesCount": 13,
-    "hazUrl": "https://hindianimeszone.com/legend-of-exorcism-season-1-dual-audio/"
+    "hazUrl": "https://hindianimeszone.com/legend-of-exorcism-season-1-dual-audio/",
+    "saltUrl": "https://animesalt.cx/series/legend-of-exorcism/",
+    "saltSlug": "legend-of-exorcism"
   },
   {
     "title": "The Brilliant Healer's New Life in the Shadows",
@@ -934058,7 +936220,9 @@
     "episodeCount": 8,
     "source": "toonstream",
     "episodesCount": 8,
-    "hazUrl": "https://hindianimeszone.com/yoasobi-gurashi-season-1-hindi-multi-audio/"
+    "hazUrl": "https://hindianimeszone.com/yoasobi-gurashi-season-1-hindi-multi-audio/",
+    "saltUrl": "https://animesalt.cx/series/yoasobi-gurashi/",
+    "saltSlug": "yoasobi-gurashi"
   },
   {
     "title": "The Witch and the Beast",
@@ -942814,7 +944978,9 @@
         "thumbnail": "https://image.tmdb.org/t/p/w780/9qFqCxPr1ebHbOmZ1vEmPAHLIM4.jpg"
       }
     ],
-    "source": "toonstream"
+    "source": "toonstream",
+    "saltUrl": "https://animesalt.cx/series/the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life/",
+    "saltSlug": "the-laid-off-cheat-granting-mage-enjoys-a-second-lease-on-life"
   },
   {
     "id": "ap-overgeared",
@@ -943185,7 +945351,9 @@
         "thumbnail": "https://image.tmdb.org/t/p/w780/tEyhRt3ZlBdrIV03pdiK0OW4oZD.jpg"
       }
     ],
-    "source": "toonstream"
+    "source": "toonstream",
+    "saltUrl": "https://animesalt.cx/series/overgeared/",
+    "saltSlug": "overgeared"
   },
   {
     "id": "ap-lego-one-piece",
@@ -943354,7 +945522,9 @@
         ]
       }
     ],
-    "source": "toonstream"
+    "source": "toonstream",
+    "saltUrl": "https://animesalt.cx/series/lego-one-piece/",
+    "saltSlug": "lego-one-piece"
   },
   {
     "id": "ap-bob-the-builder",

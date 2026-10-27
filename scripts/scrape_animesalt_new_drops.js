@@ -116,7 +116,11 @@ async function fetchEpisodeStreams(epUrl) {
         src.includes('cloudy') ||
         src.includes('vidstreaming') ||
         src.includes('filesforever') ||
-        src.includes('emturbovid')
+        src.includes('emturbovid') ||
+        src.includes('terabox') ||
+        src.includes('streamtape') ||
+        src.includes('dood') ||
+        src.includes('streamwish')
       ) {
         const clean = sanitizeStreamUrl(src);
         if (clean && !sources.some(s => s.url === clean)) {
@@ -126,6 +130,8 @@ async function fetchEpisodeStreams(epUrl) {
           else if (clean.includes('megaplay.buzz')) label = 'MegaPlay (HD)';
           else if (clean.includes('as-cdn')) label = 'AnimeSalt CDN';
           else if (clean.includes('vidstreaming')) label = 'VidStreaming (HD)';
+          else if (clean.includes('terabox')) label = 'TeraBox Cloud (HD)';
+          else if (clean.includes('streamwish')) label = 'StreamWish (HD)';
           sources.push({ label, url: clean, isMultiAudio: true });
         }
       }
@@ -168,18 +174,32 @@ function parseEpisodesFromHtml($, seasonNum = 1) {
   return episodes;
 }
 
-async function scrapeFullSeriesEpisodes(seriesUrl) {
+async function scrapeFullSeriesEpisodes(seriesUrl, expectedEpisodesCount = 0) {
   const allEpisodes = [];
   const html = await fetchHtml(seriesUrl);
-  if (!html) return { html: null, $: null, episodes: [] };
+  if (!html) return { html: null, $: null, episodes: [], totalFound: 0, upToDate: false };
   const $ = cheerio.load(html);
 
   const seasonButtons = [];
+  let parsedTotal = 0;
   $('a.season-btn, .season-btn').each((_, el) => {
     const s = $(el).attr('data-season');
     const p = $(el).attr('data-post');
-    if (s && p) seasonButtons.push({ season: parseInt(s, 10), post: p });
+    const txt = $(el).text();
+    const m = txt.match(/\((\d+)\)/);
+    const count = m ? parseInt(m[1], 10) : 0;
+    parsedTotal += count;
+    if (s && p) seasonButtons.push({ season: parseInt(s, 10), post: p, count });
   });
+
+  if (seasonButtons.length === 0) {
+    parsedTotal = $('article.episodes, .episodes article, .post-episode').length;
+  }
+
+  // Fast path: if the DB already has all (or more) episodes on AnimeSalt, skip redundant AJAX requests
+  if (expectedEpisodesCount > 0 && parsedTotal > 0 && parsedTotal <= expectedEpisodesCount) {
+    return { html, $, episodes: [], totalFound: parsedTotal, upToDate: true };
+  }
 
   if (seasonButtons.length > 0) {
     for (const sb of seasonButtons) {
@@ -192,7 +212,7 @@ async function scrapeFullSeriesEpisodes(seriesUrl) {
           allEpisodes.push(...sEps);
         }
       } catch (err) {}
-      await delay(60);
+      await delay(50);
     }
   }
 
@@ -213,7 +233,7 @@ async function scrapeFullSeriesEpisodes(seriesUrl) {
     return a.number - b.number;
   });
 
-  return { html, $, episodes: finalEpisodes };
+  return { html, $, episodes: finalEpisodes, totalFound: finalEpisodes.length, upToDate: false };
 }
 
 async function fetchTMDBArt(query) {
@@ -331,9 +351,17 @@ async function main() {
   db.forEach((item, idx) => {
     if (item.slug) dbMap.set(item.slug.toLowerCase().trim(), idx);
     if (item.saltSlug) dbMap.set(item.saltSlug.toLowerCase().trim(), idx);
+    if (item.saltUrl) {
+      const s = item.saltUrl.split('/').filter(Boolean).pop()?.toLowerCase();
+      if (s) dbMap.set(s, idx);
+    }
+    if (item.url && item.url.includes('animesalt')) {
+      const s = item.url.split('/').filter(Boolean).pop()?.toLowerCase();
+      if (s) dbMap.set(s, idx);
+    }
   });
 
-  // 1. Discover all series and movies from Homepage, Series Pages 1-10, and Sitemap1
+  // 1. Discover all series and movies from Homepage, Series Pages 1-10, and Sitemaps
   const candidatesMap = new Map();
 
   console.log('1. Scanning AnimeSalt homepage for recent drops...');
@@ -383,18 +411,33 @@ async function main() {
         }
       }
     });
-    await delay(100);
+    await delay(80);
   }
 
-  console.log('3. Scanning AnimeSalt series-sitemap1.xml for additional recent series...');
-  const sitemapHtml = await fetchHtml('https://animesalt.cx/series-sitemap1.xml');
-  if (sitemapHtml) {
-    const matches = sitemapHtml.match(/<loc>(.*?)<\/loc>/g) || [];
+  console.log('3. Scanning AnimeSalt series-sitemap1.xml and series-sitemap2.xml...');
+  for (const smUrl of ['https://animesalt.cx/series-sitemap1.xml', 'https://animesalt.cx/series-sitemap2.xml']) {
+    const sitemapHtml = await fetchHtml(smUrl);
+    if (sitemapHtml) {
+      const matches = sitemapHtml.match(/<loc>(.*?)<\/loc>/g) || [];
+      for (const m of matches) {
+        const u = m.replace(/<\/?loc>/g, '');
+        const slug = u.split('/').filter(Boolean).pop().toLowerCase();
+        if (slug && slug !== 'series' && !candidatesMap.has(slug)) {
+          candidatesMap.set(slug, { title: slug, url: u, slug, type: 'series' });
+        }
+      }
+    }
+  }
+
+  console.log('4. Scanning AnimeSalt movies-sitemap1.xml for additional recent movies...');
+  const movieSitemapHtml = await fetchHtml('https://animesalt.cx/movies-sitemap1.xml');
+  if (movieSitemapHtml) {
+    const matches = movieSitemapHtml.match(/<loc>(.*?)<\/loc>/g) || [];
     for (const m of matches) {
       const u = m.replace(/<\/?loc>/g, '');
       const slug = u.split('/').filter(Boolean).pop().toLowerCase();
-      if (slug && slug !== 'series' && !candidatesMap.has(slug)) {
-        candidatesMap.set(slug, { title: slug, url: u, slug, type: 'series' });
+      if (slug && slug !== 'movies' && !candidatesMap.has(slug)) {
+        candidatesMap.set(slug, { title: slug, url: u, slug, type: 'movie' });
       }
     }
   }
@@ -527,10 +570,31 @@ async function main() {
       if (dbItem.type !== 'series') continue;
 
       const previousCount = dbItem.episodes ? dbItem.episodes.length : 0;
-      const scrapeUrl = dbItem.saltUrl || dbItem.url || c.url;
+      const scrapeUrl = dbItem.saltUrl || (c.url.includes('animesalt') ? c.url : (dbItem.url || c.url));
+      if (!dbItem.saltUrl && c.url.includes('animesalt')) {
+        dbItem.saltUrl = c.url;
+        dbItem.saltSlug = c.slug;
+      }
 
       try {
-        const { episodes } = await scrapeFullSeriesEpisodes(scrapeUrl);
+        const { episodes, upToDate } = await scrapeFullSeriesEpisodes(scrapeUrl, previousCount);
+
+        if (upToDate) {
+          // Series already up to date on AnimeSalt; quick backfill check on latest episode if missing streams
+          if (previousCount > 0) {
+            const latestEp = dbItem.episodes[dbItem.episodes.length - 1];
+            const epUrl = latestEp?.url || latestEp?.saltUrl;
+            if (latestEp && (!latestEp.streamSources || latestEp.streamSources.length === 0) && epUrl) {
+              const { streamUrl, sources } = await fetchEpisodeStreams(epUrl);
+              if (streamUrl) latestEp.streamUrl = streamUrl;
+              if (sources.length > 0) {
+                latestEp.streamSources = sources;
+                console.log(`  ✓ Backfilled stream for latest episode of "${dbItem.title}"`);
+              }
+            }
+          }
+          continue;
+        }
 
         if (episodes.length > previousCount) {
           const diff = episodes.length - previousCount;
@@ -555,8 +619,9 @@ async function main() {
               if (!existingEp.saltUrl && newEp.url) existingEp.saltUrl = newEp.url;
               if (!existingEp.thumbnail && newEp.thumbnail) existingEp.thumbnail = newEp.thumbnail;
               // Backfill stream if existing had no stream
-              if ((!existingEp.streamSources || existingEp.streamSources.length === 0) && newEp.url) {
-                const { streamUrl, sources } = await fetchEpisodeStreams(newEp.url);
+              const epUrl = newEp.url || existingEp.url || existingEp.saltUrl;
+              if ((!existingEp.streamSources || existingEp.streamSources.length === 0) && epUrl) {
+                const { streamUrl, sources } = await fetchEpisodeStreams(epUrl);
                 if (streamUrl) existingEp.streamUrl = streamUrl;
                 if (sources.length > 0) existingEp.streamSources = sources;
               }
@@ -580,8 +645,9 @@ async function main() {
         } else if (previousCount > 0) {
           // Quick check: if the very latest episode has missing streams, backfill it
           const latestEp = dbItem.episodes[dbItem.episodes.length - 1];
-          if (latestEp && (!latestEp.streamSources || latestEp.streamSources.length === 0) && latestEp.url) {
-            const { streamUrl, sources } = await fetchEpisodeStreams(latestEp.url);
+          const epUrl = latestEp?.url || latestEp?.saltUrl;
+          if (latestEp && (!latestEp.streamSources || latestEp.streamSources.length === 0) && epUrl) {
+            const { streamUrl, sources } = await fetchEpisodeStreams(epUrl);
             if (streamUrl) latestEp.streamUrl = streamUrl;
             if (sources.length > 0) {
               latestEp.streamSources = sources;
